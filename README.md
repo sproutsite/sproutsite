@@ -313,3 +313,16 @@ The validator checks directory association, YAML fields, file names, tones, dupl
 Accessibility testing automates axe, visible keyboard focus, and mobile overflow checks. It does not replace a complete WCAG 2.2 AA conformance assessment or editorial review of headings and link text.
 
 Future npm extraction still needs a defined public package surface, an installation test in a consumer project, package metadata/publishing, a project generator, and optional extensions. These capabilities are explicitly outside the scope of this milestone.
+
+## License
+
+Sproutsite is licensed under the Apache License, Version 2.0.
+
+Copyright © 2026 Björn Hempel.
+
+See [LICENSE](LICENSE) for the full license text and
+[NOTICE](NOTICE) for attribution information.
+
+This declaration covers first-party source code. Third-party software and fonts retain their own licenses. Existing visual assets with unverified provenance are not relicensed by this change; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the asset scope, retained notices, and outstanding checks before redistribution.
+
+The software license does not grant general trademark rights to the Sproutsite name, domain, or logos; see Section 6 of the license. No visible Sproutsite attribution in a generated website's footer is required by Apache 2.0.

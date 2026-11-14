@@ -2,6 +2,8 @@
     "name": "sproutsite",
     "version": "0.4.4",
     "private": true,
+    "license": "Apache-2.0",
+    "author": "Björn Hempel",
     "description": "Agent-ready, Markdown-first Static CMS powered by Astro and TypeScript.",
     "homepage": "https://sproutsite.dev",
     "repository": {
@@ -13,7 +15,11 @@
         "src/lib/sproutsite/",
         "src/package/",
         "src/themes/default/",
-        "README.md"
+        "README.md",
+        "LICENSE",
+        "NOTICE",
+        "THIRD_PARTY_NOTICES.md",
+        "third-party-licenses/"
     ],
     "exports": {
         ".": "./src/package/index.ts",

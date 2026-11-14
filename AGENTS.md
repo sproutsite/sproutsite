@@ -311,6 +311,18 @@ These rules are behavior instructions, not a technical sandbox. Do not claim tha
 - Release workflows prepare a release; run `npm publish`, create a GitHub release, tag, or push only with an explicit request.
 - The publishable version must match in `package.json`, `VERSION`, and `CHANGELOG.md`. The changelog follows Keep a Changelog and SemVer.
 
+### Licensing
+
+- Sproutsite is licensed under Apache License 2.0.
+- Preserve all applicable copyright, license, and NOTICE information.
+- New first-party source code follows the project's Apache-2.0 license unless explicitly stated otherwise.
+- Do not remove or overwrite third-party license notices.
+- Do not introduce dependencies or assets with incompatible licensing without review.
+- The software license does not grant trademark rights.
+- Do not add attribution requirements beyond Apache 2.0.
+
+Existing asset provenance exceptions and pending checks are documented in `THIRD_PARTY_NOTICES.md`; do not assume that the source-code license clears these assets. Keep official and third-party license texts unchanged and include the applicable notices when preparing distribution archives.
+
 ## Verification and Documentation
 
 Provide at least these commands:
