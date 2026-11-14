@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.4] - 2026-11-14
+
+### Added
+
+- Added English default content and German localized content, site settings, and routes under `/de/`, with Astro i18n configuration and theme message files.
+- Added optional hero claims, primary and secondary actions, taglines, and title highlighting with validated frontmatter and the existing Button component.
+
+### Changed
+
+- Refined the homepage hero hierarchy and highlighted the wordmark to strengthen the Sproutsite brand presentation.
+- Regenerated logo, favicon, app icon, and social preview assets with darker layer gradients, a horizontal stem gradient, and subtle leaf veins. Small favicons and monochrome variants retain simplified artwork.
+
+### Fixed
+
+- Aligned the logo layers to shared outer edges and equal spacing, centered the sprout, and refined the upper notch and lower layer thickness.
+
 ## [0.4.3] - 2026-11-12
 
 ### Changed
