@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-11-14
+
+### Added
+
+- Added the official Apache License 2.0 text and a NOTICE recording Björn Hempel's authorship and the project's origin.
+- Documented third-party licenses, retained font notices, and unresolved provenance checks for existing visual assets; included MIT license texts for the theme's CSS dependencies.
+
+### Changed
+
+- Declared Apache-2.0 licensing and author metadata in the package, included license and notice files in npm archives, and documented licensing and trademark scope in the README and agent guidelines.
+
 ## [0.4.4] - 2026-11-14
 
 ### Added
