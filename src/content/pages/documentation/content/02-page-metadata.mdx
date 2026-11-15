@@ -4,16 +4,16 @@ tone: muted
 
 import { Eyebrow } from 'sproutsite/components';
 
-<Eyebrow>Routing und Metadaten</Eyebrow>
+<Eyebrow>Routing and metadata</Eyebrow>
 
-## Seitenmetadaten und URLs
+## Page metadata and URLs
 
-Ein Ordner mit `page.yaml` definiert eine Seite. Ohne `url` wird sein Ordnerpfad zur URL. Mit einem optionalen `url`-Segment bleibt die öffentliche URL unabhängig vom englischen Quellpfad: `documentation/content/page.yaml` mit `url: dokumentation` und `url: inhalte` erzeugt `/documentation/content/`.
+A directory containing `page.yaml` defines a page. Without `url`, its directory path determines the URL. The optional `url` field replaces only that directory's URL segment. For example, a German parent configuration with `url: dokumentation` and a child with `url: inhalte` produces `/de/dokumentation/inhalte/`; the English files can keep `/documentation/content/` without overrides.
 
 ```yaml
-title: Inhalte und Frontmatter
-description: Der Inhaltsvertrag von Sproutsite für globale Einstellungen, Seiten, Heroes und Sections.
+title: Content and frontmatter
+description: Sproutsite's content contract for global settings, pages, heroes, and sections.
 url: inhalte
 ```
 
-`title` und `description` werden für den HTML-Titel und die Meta-Description verwendet. Ohne `hero.md` erscheint `title` zusätzlich als sichtbare H1.
+`title` and `description` provide the HTML title and meta description. Without `hero.md`, `title` also becomes the visible H1.

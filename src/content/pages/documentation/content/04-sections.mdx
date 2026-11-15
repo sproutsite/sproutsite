@@ -4,11 +4,11 @@ tone: muted
 
 import { Eyebrow } from 'sproutsite/components';
 
-<Eyebrow>Dateibasierter Aufbau</Eyebrow>
+<Eyebrow>File-based structure</Eyebrow>
 
-## Sections in numerischer Reihenfolge
+## Sections in numeric order
 
-Jede Datei `NN-name.md` oder `NN-name.mdx` direkt im Seitenordner wird als Section gerendert. Das numerische Präfix bestimmt die Reihenfolge und die Datei beginnt mit einer H2.
+Each `NN-name.md` or `NN-name.mdx` file directly inside a page directory renders as a section. The numeric prefix determines its order, and the content starts with an H2.
 
 ```yaml
 ---
@@ -17,6 +17,6 @@ fullWidth: true
 ---
 ```
 
-`tone` wählt `default`, `muted` oder `brand`. `fullWidth: true` hebt nur die innere Lesebreite auf; die äußere `site-shell` bleibt bestehen.
+`tone` selects `default`, `muted`, or `brand`. `fullWidth: true` removes only the inner reading-width constraint; the outer `site-shell` remains.
 
-Externe Weblinks erhalten automatisch `target="_blank"` und `rel="noopener noreferrer"`. Das gilt auch für Referenzlinks in Markdown sowie für Links in Header und Footer. Maßgeblich ist die Produktionsadresse aus `site.yaml`: Weblinks zu einem anderen Ursprung öffnen in einem neuen Tab. Interne Links, Sprungziele sowie E-Mail- und Telefonlinks behalten ihr normales Verhalten.
+External web links automatically receive `target="_blank"` and `rel="noopener noreferrer"`. This also applies to Markdown reference links and links in the header and footer. A link is external when its origin differs from the production URL in `site.yaml`. Internal links, fragments, email links, and telephone links retain their normal behavior.

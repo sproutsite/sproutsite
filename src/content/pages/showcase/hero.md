@@ -1,7 +1,7 @@
 ---
 title: Sproutsite Showcase
-eyebrow: Bausteine im Einsatz
+eyebrow: Components in use
 tone: brand
 ---
 
-Entdecke die verfügbaren Bausteine des Standard-Themes. Jede Unterseite zeigt einen Bereich mit konkreten, direkt wiederverwendbaren Beispielen.
+Explore the components available in the default theme. Each page covers one area with practical examples you can reuse.

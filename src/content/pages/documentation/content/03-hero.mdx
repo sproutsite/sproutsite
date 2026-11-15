@@ -4,37 +4,37 @@ tone: default
 
 import { Eyebrow } from 'sproutsite/components';
 
-<Eyebrow>Seiteneinstieg</Eyebrow>
+<Eyebrow>Page introduction</Eyebrow>
 
-## Seiteneinstieg mit hero.md
+## Introduce a page with hero.md
 
-Ein `hero.md` aktiviert den gemeinsamen Hero und liefert dessen sichtbare H1, Eyebrow, Tone und Markdown-Einführung. Optional ergänzt `claim` eine hervorgehobene Zeile unter der H1; `actions` ergänzen ein oder zwei Buttons, `tagline` erscheint dezent darunter.
+A `hero.md` file activates the shared hero and provides its visible H1, eyebrow, tone, and Markdown introduction. The optional `claim` adds a prominent line below the H1; `actions` adds one or two buttons, and `tagline` appears below them.
 
 ```yaml
 ---
-title: Seitentitel im Hero
-titleHighlight: Hero
-eyebrow: Einordnung
+title: Page title in the hero
+titleHighlight: hero
+eyebrow: Context
 tone: brand
 background-image: ./_assets/hero-visual.png
-claim: Eine einprägsame Aussage.
+claim: A memorable statement.
 actions:
-    - label: Einstieg öffnen
+    - label: Get started
       href: /documentation/getting-started/
       variant: primary
-tagline: Ein kurzer unterstützender Claim.
+tagline: A short supporting tagline.
 ---
 ```
 
-`background-image` verweist auf ein lokales Bild relativ zu `hero.md`. Astro validiert und optimiert die Datei; das Standard-Theme behandelt sie als dekorativen Hintergrund und legt automatisch ein kontrastreiches Overlay für die Hero-Typografie darüber. Inhalte, die inhaltlich erklärt werden müssen, gehören stattdessen als reguläres Bild mit Alternativtext in eine Section.
+`background-image` references a local image relative to `hero.md`. Astro validates and optimizes the file. The default theme treats it as decoration and adds an overlay to preserve text contrast. Images that convey information belong in a regular section with alternative text instead.
 
-### Klassen lokal überschreiben oder entfernen
+### Override or remove classes for one page
 
-`classes` als Liste überschreibt `hero-classes` aus `site.yaml`. Mit `classes: null` entfernt eine Seite die globalen Klassen bewusst.
+A `classes` list replaces `hero-classes` from `site.yaml`. Set `classes: null` to deliberately remove the global classes on one page.
 
-### Aktionen im Hero
+### Hero actions
 
-Jede Aktion benötigt einen nicht leeren `label`, einen internen oder externen `href` und `variant: primary` oder `secondary`. Der Hero verwendet dafür die gemeinsame Button-Komponente. Interne Ziele bleiben root-relativ und werden wie andere Content-Links mit `base` ausgeliefert.
+Each action requires a non-empty `label`, an internal or external `href`, and `variant: primary` or `secondary`. The hero renders the shared Button component. Internal targets remain root-relative and receive the deployment `base` like other content links.
 
 ```yaml
 classes: null

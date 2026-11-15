@@ -9,8 +9,13 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Added
 
+- Added complete English showcase and documentation content alongside the German localized files, including translated metadata, image descriptions, and code examples.
 - Integrated local Lucide SVG icons through the default theme's accessible Icon atom, validated MDX usage, a bilingual showcase page, and Storybook examples.
 - Retained Lucide's ISC and Feather-derived MIT notices with the distributed third-party licenses.
+
+### Fixed
+
+- Updated accessibility checks to discover every generated page and exercise English and German component examples, corrected localized anchor links and theme reference values, and localized shared navigation and foundation specimens.
 
 ## [0.5.0] - 2026-11-14
 

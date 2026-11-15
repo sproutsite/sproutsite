@@ -7,24 +7,24 @@ import { Alert } from 'sproutsite/components';
 import { Eyebrow } from 'sproutsite/components';
 import { Tabs, Tab } from 'sproutsite/components';
 
-<Eyebrow>Status und Hinweise</Eyebrow>
+<Eyebrow>Status and notices</Eyebrow>
 
 ## Alerts
 
-Alerts heben Hinweise, Informationen und Statusmeldungen hervor. Jedes Beispiel zeigt zunächst die Vorschau. Unter „Code“ findest du den passenden MDX-Code mit dem benötigten Import. Farbvarianten und Darstellungsstile werden über die Props `variant` und `style` gewählt; die Meldung bleibt normales Markdown.
+Alerts highlight notices, information, and status messages. Each example opens with a preview; the Code tab provides the matching MDX and required import. Select color variants and visual styles with `variant` and `style`; the message remains ordinary Markdown.
 
 **Atomic Design:** Molecule `Alert`.
 
-Komponentenpfad unter `src/themes/default/components/`: `molecules/Alert/`.
+Component path within `src/themes/default/components/`: `molecules/Alert/`.
 
-### Neutraler Hinweis
+### Neutral notice
 
-Ohne Farbvariante eignet sich der Alert für allgemeine Hinweise.
+An alert without a color variant is suitable for general notices.
 
-<Tabs label="Neutraler Hinweis: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Neutral notice: Preview and code" variant="border">
+    <Tab title="Preview">
         <Alert>
-            **Alert:** Eine neutrale Meldung ohne zusätzliche Farbvariante.
+            **Alert:** A neutral message without an additional color variant.
         </Alert>
     </Tab>
     <Tab title="Code">
@@ -32,7 +32,7 @@ Ohne Farbvariante eignet sich der Alert für allgemeine Hinweise.
         import { Alert } from 'sproutsite/components';
 
         <Alert>
-            **Alert:** Eine neutrale Meldung ohne zusätzliche Farbvariante.
+            **Alert:** A neutral message without an additional color variant.
         </Alert>
         ```
     </Tab>
@@ -41,12 +41,12 @@ Ohne Farbvariante eignet sich der Alert für allgemeine Hinweise.
 
 ### Information
 
-Eine ergänzende Information zum aktuellen Inhalt.
+Additional information about the current content.
 
-<Tabs label="Information: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Information: Preview and code" variant="border">
+    <Tab title="Preview">
         <Alert variant="info">
-            **Info:** Diese Seite zeigt aktuell verfügbare Sproutsite-Bausteine.
+            **Info:** This page shows the currently available Sproutsite components.
         </Alert>
     </Tab>
     <Tab title="Code">
@@ -54,21 +54,21 @@ Eine ergänzende Information zum aktuellen Inhalt.
         import { Alert } from 'sproutsite/components';
 
         <Alert variant="info">
-            **Info:** Diese Seite zeigt aktuell verfügbare Sproutsite-Bausteine.
+            **Info:** This page shows the currently available Sproutsite components.
         </Alert>
         ```
     </Tab>
 
 </Tabs>
 
-### Erfolgsmeldung
+### Success message
 
-Bestätigt einen erfolgreich abgeschlossenen Vorgang.
+Confirms that an operation completed successfully.
 
-<Tabs label="Erfolgsmeldung: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Success message: Preview and code" variant="border">
+    <Tab title="Preview">
         <Alert variant="success">
-            **Success:** Der statische Build wurde erfolgreich erstellt.
+            **Success:** The static build completed successfully.
         </Alert>
     </Tab>
     <Tab title="Code">
@@ -76,21 +76,21 @@ Bestätigt einen erfolgreich abgeschlossenen Vorgang.
         import { Alert } from 'sproutsite/components';
 
         <Alert variant="success">
-            **Success:** Der statische Build wurde erfolgreich erstellt.
+            **Success:** The static build completed successfully.
         </Alert>
         ```
     </Tab>
 
 </Tabs>
 
-### Warnung
+### Warning
 
-Lenkt die Aufmerksamkeit auf einen notwendigen Prüfschritt.
+Draws attention to a required check.
 
-<Tabs label="Warnung: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Warning: Preview and code" variant="border">
+    <Tab title="Preview">
         <Alert variant="warning">
-            **Warning:** Prüfe Inhalte und Links vor einer Veröffentlichung.
+            **Warning:** Check content and links before publishing.
         </Alert>
     </Tab>
     <Tab title="Code">
@@ -98,21 +98,21 @@ Lenkt die Aufmerksamkeit auf einen notwendigen Prüfschritt.
         import { Alert } from 'sproutsite/components';
 
         <Alert variant="warning">
-            **Warning:** Prüfe Inhalte und Links vor einer Veröffentlichung.
+            **Warning:** Check content and links before publishing.
         </Alert>
         ```
     </Tab>
 
 </Tabs>
 
-### Fehlermeldung
+### Error message
 
-Kennzeichnet ein Problem, das Aufmerksamkeit erfordert.
+Identifies a problem that needs attention.
 
-<Tabs label="Fehlermeldung: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Error message: Preview and code" variant="border">
+    <Tab title="Preview">
         <Alert variant="error">
-            **Error:** Dieses Beispiel demonstriert eine Fehlermeldung ohne echte Störung.
+            **Error:** This example demonstrates an error message without an actual failure.
         </Alert>
     </Tab>
     <Tab title="Code">
@@ -120,21 +120,21 @@ Kennzeichnet ein Problem, das Aufmerksamkeit erfordert.
         import { Alert } from 'sproutsite/components';
 
         <Alert variant="error">
-            **Error:** Dieses Beispiel demonstriert eine Fehlermeldung ohne echte Störung.
+            **Error:** This example demonstrates an error message without an actual failure.
         </Alert>
         ```
     </Tab>
 
 </Tabs>
 
-### Sanfte Fläche: Soft
+### Subtle surface: Soft
 
-Eine zurückhaltende Hintergrundfläche für weniger dominante Hinweise.
+A subdued background for less prominent notices.
 
-<Tabs label="Sanfte Fläche: Soft: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Subtle surface: Soft: Preview and code" variant="border">
+    <Tab title="Preview">
         <Alert variant="info" style="soft">
-            **Info, soft:** Eine zurückhaltende Informationsmeldung.
+            **Info, soft:** A low-emphasis information message.
         </Alert>
     </Tab>
     <Tab title="Code">
@@ -142,21 +142,21 @@ Eine zurückhaltende Hintergrundfläche für weniger dominante Hinweise.
         import { Alert } from 'sproutsite/components';
 
         <Alert variant="info" style="soft">
-            **Info, soft:** Eine zurückhaltende Informationsmeldung.
+            **Info, soft:** A low-emphasis information message.
         </Alert>
         ```
     </Tab>
 
 </Tabs>
 
-### Klare Kontur: Outline
+### Clear border: Outline
 
-Ein Rahmen betont die Meldung, während die Fläche dezent bleibt.
+A border emphasizes the message while keeping the background subtle.
 
-<Tabs label="Klare Kontur: Outline: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Clear border: Outline: Preview and code" variant="border">
+    <Tab title="Preview">
         <Alert variant="success" style="outline">
-            **Success, outline:** Eine erfolgreiche Aktion mit klarer Kontur.
+            **Success, outline:** A successful action with a clear outline.
         </Alert>
     </Tab>
     <Tab title="Code">
@@ -164,21 +164,21 @@ Ein Rahmen betont die Meldung, während die Fläche dezent bleibt.
         import { Alert } from 'sproutsite/components';
 
         <Alert variant="success" style="outline">
-            **Success, outline:** Eine erfolgreiche Aktion mit klarer Kontur.
+            **Success, outline:** A successful action with a clear outline.
         </Alert>
         ```
     </Tab>
 
 </Tabs>
 
-### Gestrichelter Rahmen: Dash
+### Dashed border: Dash
 
-Eine alternative Rahmengestaltung für optisch abgesetzte Hinweise.
+An alternative border style that visually separates a notice.
 
-<Tabs label="Gestrichelter Rahmen: Dash: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Dashed border: Dash: Preview and code" variant="border">
+    <Tab title="Preview">
         <Alert variant="warning" style="dash">
-            **Warning, dash:** Eine Warnung mit gestricheltem Rahmen.
+            **Warning, dash:** A warning with a dashed border.
         </Alert>
     </Tab>
     <Tab title="Code">
@@ -186,7 +186,7 @@ Eine alternative Rahmengestaltung für optisch abgesetzte Hinweise.
         import { Alert } from 'sproutsite/components';
 
         <Alert variant="warning" style="dash">
-            **Warning, dash:** Eine Warnung mit gestricheltem Rahmen.
+            **Warning, dash:** A warning with a dashed border.
         </Alert>
         ```
     </Tab>

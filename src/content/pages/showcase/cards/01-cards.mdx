@@ -9,27 +9,27 @@ import { Card, CardActions } from 'sproutsite/components';
 import { Eyebrow } from 'sproutsite/components';
 import { Tabs, Tab } from 'sproutsite/components';
 
-<Eyebrow>Wiederverwendbare Container</Eyebrow>
+<Eyebrow>Reusable containers</Eyebrow>
 
 ## Cards
 
-Cards fassen Bild, Markdown-Inhalt und einen optionalen nächsten Schritt in einem wiederverwendbaren Baustein zusammen. Jedes Beispiel zeigt zunächst die Vorschau. Im Reiter „Code“ findest du den dazugehörigen MDX-Code einschließlich der benötigten Imports. Die relativen Bildpfade beziehen sich auf diese Showcase-Datei; für eigene Seiten passt du sie an den Speicherort deiner Bilder an.
+Cards combine an image, Markdown content, and an optional next step in one reusable component. Each example opens with a preview; the Code tab contains the matching MDX and imports. Relative image paths are based on this showcase file. Adjust them to the location of your images on other pages.
 
-**Atomic Design:** Molecules `Card` und `CardActions`.
+**Atomic Design:** Molecules `Card` and `CardActions`.
 
-Komponentenpfade unter `src/themes/default/components/`: `molecules/Card/` und `molecules/CardActions/`.
+Component paths within `src/themes/default/components/`: `molecules/Card/` and `molecules/CardActions/`.
 
-### Bildkarte mit weiterführendem Link
+### Image card with a navigation link
 
-<Tabs label="Bildkarte mit weiterführendem Link: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
-        <Card image={layoutLandscape} imageAlt="Abstrakte blaue Darstellung eines modularen Website-Layouts" shadow="lg">
-            #### Mit Bild, Titel und Action
+<Tabs label="Image card with a navigation link: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Card image={layoutLandscape} imageAlt="Abstract blue illustration of a modular website layout" shadow="lg">
+            #### Image, title, and action
 
-            Die erste Überschrift der Card wird als Titel gestaltet. Das Bild wird innerhalb eines `figure`-Elements als optimiertes WebP ausgegeben. Mit `shadow="lg"` erhält diese Card eine stärkere räumliche Betonung.
+            The card's first heading is styled as its title. The image renders as an optimized WebP inside a `figure` element. `shadow="lg"` gives this card a more pronounced sense of depth.
 
             <CardActions>
-                [Mehr zum Konzept](/info/)
+                [More about the concept](/info/)
             </CardActions>
         </Card>
     </Tab>
@@ -38,13 +38,13 @@ Komponentenpfade unter `src/themes/default/components/`: `molecules/Card/` und `
         import layoutLandscape from '../_assets/layout-landscape.png';
         import { Card, CardActions } from 'sproutsite/components';
 
-        <Card image={layoutLandscape} imageAlt="Abstrakte blaue Darstellung eines modularen Website-Layouts" shadow="lg">
-            #### Mit Bild, Titel und Action
+        <Card image={layoutLandscape} imageAlt="Abstract blue illustration of a modular website layout" shadow="lg">
+            #### Image, title, and action
 
-            Die erste Überschrift der Card wird als Titel gestaltet. Das Bild wird innerhalb eines `figure`-Elements als optimiertes WebP ausgegeben. Mit `shadow="lg"` erhält diese Card eine stärkere räumliche Betonung.
+            The card's first heading is styled as its title. The image renders as an optimized WebP inside a `figure` element. `shadow="lg"` gives this card a more pronounced sense of depth.
 
             <CardActions>
-                [Mehr zum Konzept](/info/)
+                [More about the concept](/info/)
             </CardActions>
         </Card>
         ```
@@ -52,19 +52,19 @@ Komponentenpfade unter `src/themes/default/components/`: `molecules/Card/` und `
 
 </Tabs>
 
-### Textkarte mit mehreren Links
+### Text card with multiple links
 
-<Tabs label="Textkarte mit mehreren Links: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Text card with multiple links: Preview and code" variant="border">
+    <Tab title="Preview">
         <Card>
-            #### Ohne Bild mit mehreren Actions
+            #### No image, multiple actions
 
-            Der Body unterstützt gewöhnliches Markdown mit mehreren Absätzen.
+            The body supports ordinary Markdown with multiple paragraphs.
 
-            Inhalt und Darstellung bleiben dabei voneinander getrennt.
+            Content and presentation remain separate.
 
             <CardActions>
-                [FAQ](/faq/) [Kontakt](/contact/)
+                [FAQ](/faq/) [Contact](/contact/)
             </CardActions>
         </Card>
     </Tab>
@@ -73,14 +73,14 @@ Komponentenpfade unter `src/themes/default/components/`: `molecules/Card/` und `
         import { Card, CardActions } from 'sproutsite/components';
 
         <Card>
-            #### Ohne Bild mit mehreren Actions
+            #### No image, multiple actions
 
-            Der Body unterstützt gewöhnliches Markdown mit mehreren Absätzen.
+            The body supports ordinary Markdown with multiple paragraphs.
 
-            Inhalt und Darstellung bleiben dabei voneinander getrennt.
+            Content and presentation remain separate.
 
             <CardActions>
-                [FAQ](/faq/) [Kontakt](/contact/)
+                [FAQ](/faq/) [Contact](/contact/)
             </CardActions>
         </Card>
         ```
@@ -88,14 +88,14 @@ Komponentenpfade unter `src/themes/default/components/`: `molecules/Card/` und `
 
 </Tabs>
 
-### Bildkarte ohne Titel und Links
+### Image card without a title or links
 
-<Tabs label="Bildkarte ohne Titel und Links: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
-        <Card image={layoutPortrait} imageAlt="Editorial-Darstellung von modularen Inhaltsblöcken">
-            Diese Card beginnt ohne Überschrift und hat keinen Actions-Bereich.
+<Tabs label="Image card without a title or links: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Card image={layoutPortrait} imageAlt="Editorial illustration of modular content blocks">
+            This card has no heading or actions area.
 
-            So bleibt sie für rein visuelle oder ergänzende Inhalte bewusst schlicht.
+            This keeps the presentation simple for visual or supplementary content.
         </Card>
     </Tab>
     <Tab title="Code">
@@ -103,10 +103,10 @@ Komponentenpfade unter `src/themes/default/components/`: `molecules/Card/` und `
         import layoutPortrait from '../_assets/layout-portrait.png';
         import { Card } from 'sproutsite/components';
 
-        <Card image={layoutPortrait} imageAlt="Editorial-Darstellung von modularen Inhaltsblöcken">
-            Diese Card beginnt ohne Überschrift und hat keinen Actions-Bereich.
+        <Card image={layoutPortrait} imageAlt="Editorial illustration of modular content blocks">
+            This card has no heading or actions area.
 
-            So bleibt sie für rein visuelle oder ergänzende Inhalte bewusst schlicht.
+            This keeps the presentation simple for visual or supplementary content.
         </Card>
         ```
     </Tab>

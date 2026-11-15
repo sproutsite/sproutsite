@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { loadSiteConfig } from '../src/lib/sproutsite/site-config.js';
 import { canonicalUrl, withBase } from '../src/lib/sproutsite/urls.js';
@@ -82,6 +82,57 @@ if (!home.includes(`href="${withBase('/faq/', site.base)}"`))
     throw new Error(
         'Base-prefixed internal links are missing from built output',
     );
+
+// Check localized page targets and anchors against the actual static output.
+const htmlFiles = readdirSync('dist', { recursive: true }).filter(
+    (file): file is string =>
+        typeof file === 'string' &&
+        (file === 'index.html' || file.endsWith('/index.html')),
+);
+const htmlByFile = new Map(
+    htmlFiles.map((file) => [
+        join('dist', file),
+        readFileSync(join('dist', file), 'utf8'),
+    ]),
+);
+for (const [file, html] of htmlByFile) {
+    const route = file.slice('dist/'.length).replace(/index\.html$/, '');
+    const pageUrl = new URL(withBase(`/${route}`, site.base), site.url);
+    for (const match of html.matchAll(/<a\b[^>]*\shref="([^"]+)"/g)) {
+        const target = new URL(match[1]!.replaceAll('&amp;', '&'), pageUrl);
+        if (
+            !['http:', 'https:'].includes(target.protocol) ||
+            target.origin !== pageUrl.origin
+        )
+            continue;
+        if (!target.pathname.startsWith(site.base)) {
+            // Explicit production URLs may intentionally point outside a demo deployment.
+            if (/^https?:\/\//i.test(match[1]!)) continue;
+            throw new Error(
+                `${file}: link misses deployment base: ${match[1]}`,
+            );
+        }
+        const relativeTarget = decodeURIComponent(
+            target.pathname.slice(site.base.length),
+        );
+        if (relativeTarget.split('/').includes('..'))
+            throw new Error(`${file}: invalid link target: ${match[1]}`);
+        let targetFile = join('dist', relativeTarget);
+        if (existsSync(targetFile) && statSync(targetFile).isDirectory())
+            targetFile = join(targetFile, 'index.html');
+        if (!existsSync(targetFile))
+            throw new Error(`${file}: missing internal target: ${match[1]}`);
+        if (target.hash && targetFile.endsWith('.html')) {
+            const targetHtml =
+                htmlByFile.get(targetFile) ?? readFileSync(targetFile, 'utf8');
+            const ids = new Set(
+                [...targetHtml.matchAll(/\sid="([^"]+)"/g)].map((id) => id[1]),
+            );
+            if (!ids.has(decodeURIComponent(target.hash.slice(1))))
+                throw new Error(`${file}: missing fragment: ${match[1]}`);
+        }
+    }
+}
 console.log(
     'Built pages, metadata, sitemap, and base-prefixed links verified.',
 );

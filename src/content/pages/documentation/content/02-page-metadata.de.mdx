@@ -8,7 +8,7 @@ import { Eyebrow } from 'sproutsite/components';
 
 ## Seitenmetadaten und URLs
 
-Ein Ordner mit `page.yaml` definiert eine Seite. Ohne `url` wird sein Ordnerpfad zur URL. Mit einem optionalen `url`-Segment bleibt die öffentliche URL unabhängig vom englischen Quellpfad: `documentation/content/page.yaml` mit `url: dokumentation` und `url: inhalte` erzeugt `/dokumentation/inhalte/`.
+Ein Ordner mit `page.yaml` definiert eine Seite. Ohne `url` wird sein Ordnerpfad zur URL. Das optionale `url` ersetzt nur das Segment des eigenen Ordners. Für die deutsche Variante legt `documentation/page.de.yaml` mit `url: dokumentation` das übergeordnete Segment fest; `documentation/content/page.de.yaml` mit `url: inhalte` ergibt darunter `/de/dokumentation/inhalte/`. Die englischen Dateien ergeben ohne Überschreibungen `/documentation/content/`.
 
 ```yaml
 title: Inhalte und Frontmatter

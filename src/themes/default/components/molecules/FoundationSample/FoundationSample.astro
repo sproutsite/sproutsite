@@ -1,4 +1,6 @@
 ---
+import { t } from '../../../i18n/index.js';
+const locale = Astro.currentLocale === 'de' ? 'de' : 'en';
 const kinds = [
     'colors',
     'type',
@@ -20,36 +22,36 @@ if (!kinds.includes(kind))
     );
 
 const colors = [
-    ['base-100', 'Standardfläche'],
-    ['base-200', 'Gedämpfte Fläche'],
-    ['base-300', 'Rahmenfarbe'],
-    ['base-content', 'Textfarbe'],
-    ['primary', 'Primärfarbe'],
-    ['secondary', 'Sekundärfarbe'],
-    ['accent', 'Akzentfarbe'],
-    ['neutral', 'Neutral'],
-    ['info', 'Information'],
-    ['success', 'Erfolg'],
-    ['warning', 'Warnung'],
-    ['error', 'Fehler'],
+    ['base-100', t(locale, 'foundationDefault')],
+    ['base-200', t(locale, 'foundationMuted')],
+    ['base-300', t(locale, 'foundationBorder')],
+    ['base-content', t(locale, 'foundationText')],
+    ['primary', t(locale, 'foundationPrimary')],
+    ['secondary', t(locale, 'foundationSecondary')],
+    ['accent', t(locale, 'foundationAccent')],
+    ['neutral', t(locale, 'foundationNeutral')],
+    ['info', t(locale, 'foundationInfo')],
+    ['success', t(locale, 'foundationSuccess')],
+    ['warning', t(locale, 'foundationWarning')],
+    ['error', t(locale, 'foundationError')],
 ] as const;
 const spaces = [
-    ['1', '0,25rem'],
-    ['2', '0,5rem'],
+    ['1', '0.25rem'],
+    ['2', '0.5rem'],
     ['4', '1rem'],
-    ['6', '1,5rem'],
+    ['6', '1.5rem'],
     ['8', '2rem'],
 ] as const;
 const radii = [
-    ['none', 'Eckig', '0'],
-    ['field', 'Felder', '--radius-field'],
-    ['box', 'Boxen', '--radius-box'],
+    ['none', t(locale, 'foundationSquare'), '0'],
+    ['field', t(locale, 'foundationFields'), '--radius-field'],
+    ['box', t(locale, 'foundationBoxes'), '--radius-box'],
 ] as const;
 const shadows = [
-    ['none', 'Ohne Schatten', 'none'],
-    ['sm', 'Klein', '--shadow-sm'],
-    ['soft', 'Weich', '--shadow-soft'],
-    ['raised', 'Angehoben', '--shadow-raised'],
+    ['none', t(locale, 'foundationNoShadow'), 'none'],
+    ['sm', t(locale, 'foundationSmall'), '--shadow-sm'],
+    ['soft', t(locale, 'foundationSoft'), '--shadow-soft'],
+    ['raised', t(locale, 'foundationRaised'), '--shadow-raised'],
 ] as const;
 ---
 
@@ -79,16 +81,23 @@ const shadows = [
     )}
     {kind === 'type' && (
         <div class="ss-foundation-sample__type">
-            <p class="ss-foundation-sample__label">Nunito · große Schrift</p>
-            <p class="ss-foundation-sample__display">Klare Gedanken.</p>
-            <p class="ss-foundation-sample__label">Nunito · mittlere Schrift</p>
-            <p class="ss-foundation-sample__heading">
-                Eine gemeinsame Formensprache.
+            <p class="ss-foundation-sample__label">
+                {t(locale, 'foundationDisplayLabel')}
             </p>
-            <p class="ss-foundation-sample__label">Systemschrift · Fließtext</p>
+            <p class="ss-foundation-sample__display">
+                {t(locale, 'foundationDisplay')}
+            </p>
+            <p class="ss-foundation-sample__label">
+                {t(locale, 'foundationHeadingLabel')}
+            </p>
+            <p class="ss-foundation-sample__heading">
+                {t(locale, 'foundationHeading')}
+            </p>
+            <p class="ss-foundation-sample__label">
+                {t(locale, 'foundationBodyLabel')}
+            </p>
             <p class="ss-foundation-sample__body">
-                Gut lesbare Texte geben Inhalten Raum. Die Systemschrift ergänzt
-                die weicheren Formen der Überschrift.
+                {t(locale, 'foundationBody')}
             </p>
         </div>
     )}
@@ -96,7 +105,9 @@ const shadows = [
         <ul class="ss-foundation-sample__spaces">
             {spaces.map(([step, size]) => (
                 <li class="ss-foundation-sample__space-row">
-                    <span>{size}</span>
+                    <span>
+                        {locale === 'de' ? size.replace('.', ',') : size}
+                    </span>
                     <div class="ss-foundation-sample__track" aria-hidden="true">
                         <span
                             class:list={[
@@ -145,13 +156,9 @@ const shadows = [
     )}
     {kind === 'focus' && (
         <div class="ss-foundation-sample__focus-area">
-            <p>
-                Wechsle mit der Tabulatortaste zum Link. Die Kontur zeigt das
-                aktive Tastaturziel; der Link führt zum Hauptinhalt dieser
-                Seite.
-            </p>
+            <p>{t(locale, 'foundationFocus')}</p>
             <a class="ss-foundation-sample__focus" href="#main-content">
-                Zum Hauptinhalt
+                {t(locale, 'foundationFocusLink')}
             </a>
         </div>
     )}

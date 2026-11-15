@@ -8,22 +8,22 @@ import { Card } from 'sproutsite/components';
 import { Eyebrow } from 'sproutsite/components';
 import { Tabs, Tab } from 'sproutsite/components';
 
-<Eyebrow>Status und Kategorien</Eyebrow>
+<Eyebrow>Status and categories</Eyebrow>
 
 ## Badges
 
-Badges markieren kurze Statuswerte, Kategorien oder Mengen. Sie ergänzen den Inhalt, ersetzen aber keine Erklärung: Für wichtige Informationen bleibt eine verständliche Beschriftung im Fließtext erforderlich.
+Badges identify short status values, categories, or counts. They supplement content rather than replace an explanation. Important information still needs a clear description in the surrounding text.
 
 **Atomic Design:** Atom `Badge`.
 
-Komponentenpfad unter `src/themes/default/components/`: `atoms/Badge/`.
+Component path within `src/themes/default/components/`: `atoms/Badge/`.
 
-### Farbvarianten
+### Color variants
 
-Die Varianten verwenden die gleichen semantischen Theme-Farben wie andere DaisyUI-Bausteine.
+The variants use the same semantic theme colors as other DaisyUI components.
 
-<Tabs label="Farbvarianten: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Color variants: Preview and code" variant="border">
+    <Tab title="Preview">
         <Badge>Default</Badge>
         <Badge variant="primary">Primary</Badge>
         <Badge variant="secondary">Secondary</Badge>
@@ -48,12 +48,12 @@ Die Varianten verwenden die gleichen semantischen Theme-Farben wie andere DaisyU
 
 </Tabs>
 
-### Größen und Stile
+### Sizes and styles
 
-Größe und Stil können unabhängig von der Farbvariante gewählt werden.
+Choose size and style independently of the color variant.
 
-<Tabs label="Größen und Stile: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Sizes and styles: Preview and code" variant="border">
+    <Tab title="Preview">
         <Badge size="xs">XS</Badge>
         <Badge size="sm">SM</Badge>
         <Badge size="md">MD</Badge>
@@ -77,33 +77,34 @@ Größe und Stil können unabhängig von der Farbvariante gewählt werden.
 
 </Tabs>
 
-### In Listen und Cards
+### In lists and cards
 
-Badges lassen sich innerhalb normaler Markdown-Inhalte verwenden. Der umgebende Text erklärt jeweils, was der Status bedeutet.
+Use badges within ordinary Markdown content. The surrounding text explains what each status means.
 
-<Tabs label="Badges in Listen und Cards: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
-        - Statischer Build <Badge variant="success">erfolgreich</Badge>
-        - Inhaltliche Prüfung <Badge variant="info" style="soft">ausstehend</Badge>
-        - Veröffentlichung <Badge variant="warning">prüfen</Badge>
+<Tabs label="Badges in lists and cards: Preview and code" variant="border">
+    <Tab title="Preview">
+        - Static build <Badge variant="success">successful</Badge>
+        - Content review <Badge variant="info" style="soft">pending</Badge>
+        - Publication <Badge variant="warning">check</Badge>
 
         <Card>
-            ### Paketstatus
+            ### Package status
 
-            Diese Demo wird lokal entwickelt. <Badge variant="primary" style="outline">Entwicklung</Badge>
+            This demo is developed locally. <Badge variant="primary" style="outline">Development</Badge>
         </Card>
     </Tab>
     <Tab title="Code">
         ```mdx
-        import { Badge, Card } from 'sproutsite/components';
+        import { Badge } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
 
-        - Statischer Build <Badge variant="success">erfolgreich</Badge>
-        - Inhaltliche Prüfung <Badge variant="info" style="soft">ausstehend</Badge>
+        - Static build <Badge variant="success">successful</Badge>
+        - Content review <Badge variant="info" style="soft">pending</Badge>
 
         <Card>
-            ### Paketstatus
+            ### Package status
 
-            Diese Demo wird lokal entwickelt. <Badge variant="primary" style="outline">Entwicklung</Badge>
+            This demo is developed locally. <Badge variant="primary" style="outline">Development</Badge>
         </Card>
         ```
     </Tab>

@@ -8,28 +8,28 @@ import { Card } from 'sproutsite/components';
 import { Eyebrow } from 'sproutsite/components';
 import { Tabs, Tab } from 'sproutsite/components';
 
-<Eyebrow>Responsive Struktur</Eyebrow>
+<Eyebrow>Responsive structure</Eyebrow>
 
-## Ein Raster, unterschiedliche Aufteilungen
+## One grid, different layouts
 
-Jede Karte macht einen Spaltenbereich sichtbar. Ab 64rem Bildschirmbreite stehen zwölf Rasterspalten zur Verfügung. Darunter werden alle Bereiche in ihrer Lesereihenfolge untereinander angezeigt. Verkleinere das Browserfenster, um den Wechsel zu sehen. Jedes Beispiel zeigt zunächst die Vorschau. Unter „Code“ findest du den vollständigen MDX-Code der jeweiligen Aufteilung einschließlich der benötigten Imports.
+Each card represents a column area. At viewport widths of 64rem and above, the grid has twelve columns. Below that breakpoint, areas stack in reading order. Resize the browser to see the change. Each example opens with a preview; the Code tab provides the complete MDX layout and required imports.
 
-**Atomic Design:** Technische Layout-Primitiven `Columns` und `Column` in der ergänzenden Kategorie `layout`.
+**Atomic Design:** Technical layout primitives `Columns` and `Column` in the additional `layout` category.
 
-Komponentenpfade unter `src/themes/default/components/`: `layout/Columns/` und `layout/Column/`.
+Component paths within `src/themes/default/components/`: `layout/Columns/` and `layout/Column/`.
 
-### Volle Breite: 12
+### Full width: 12
 
-Ohne `span` nutzt eine Spalte die gesamte Inhaltsbreite.
+Without `span`, a column takes the full content width.
 
-<Tabs label="Volle Breite: 12: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Full width: 12: Preview and code" variant="border">
+    <Tab title="Preview">
         <Columns>
             <Column>
                 <Card>
-                    #### 12 von 12
+                    #### 12 of 12
 
-                    Platz für einen Überblick oder einen längeren Inhalt. Die Breite endet am gemeinsamen Inhaltsrand der Seite.
+                    Space for an overview or longer content. The column ends at the page's shared outer content edge.
                 </Card>
             </Column>
 
@@ -43,9 +43,9 @@ Ohne `span` nutzt eine Spalte die gesamte Inhaltsbreite.
         <Columns>
             <Column>
                 <Card>
-                    #### 12 von 12
+                    #### 12 of 12
 
-                    Platz für einen Überblick oder einen längeren Inhalt. Die Breite endet am gemeinsamen Inhaltsrand der Seite.
+                    Space for an overview or longer content. The column ends at the page's shared outer content edge.
                 </Card>
             </Column>
 
@@ -55,25 +55,25 @@ Ohne `span` nutzt eine Spalte die gesamte Inhaltsbreite.
 
 </Tabs>
 
-### Zwei gleiche Bereiche: 6 + 6
+### Two equal areas: 6 + 6
 
-Beide Karten teilen sich eine Reihe. Überschrift und Text bleiben innerhalb jeder Spalte untereinander.
+Both cards share one row. Each column keeps its heading above its text.
 
-<Tabs label="Zwei gleiche Bereiche: 6 + 6: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Two equal areas: 6 + 6: Preview and code" variant="border">
+    <Tab title="Preview">
         <Columns>
             <Column span={6}>
                 <Card>
-                    #### Linke Hälfte
+                    #### Left half
 
-                    `span={6}` belegt die ersten sechs Rasterspalten.
+                    `span={6}` occupies the first six grid columns.
                 </Card>
             </Column>
             <Column span={6}>
                 <Card>
-                    #### Rechte Hälfte
+                    #### Right half
 
-                    `span={6}` belegt die übrigen sechs Rasterspalten.
+                    `span={6}` occupies the remaining six grid columns.
                 </Card>
             </Column>
 
@@ -87,16 +87,16 @@ Beide Karten teilen sich eine Reihe. Überschrift und Text bleiben innerhalb jed
         <Columns>
             <Column span={6}>
                 <Card>
-                    #### Linke Hälfte
+                    #### Left half
 
-                    `span={6}` belegt die ersten sechs Rasterspalten.
+                    `span={6}` occupies the first six grid columns.
                 </Card>
             </Column>
             <Column span={6}>
                 <Card>
-                    #### Rechte Hälfte
+                    #### Right half
 
-                    `span={6}` belegt die übrigen sechs Rasterspalten.
+                    `span={6}` occupies the remaining six grid columns.
                 </Card>
             </Column>
 
@@ -106,32 +106,32 @@ Beide Karten teilen sich eine Reihe. Überschrift und Text bleiben innerhalb jed
 
 </Tabs>
 
-### Drei gleiche Bereiche: 4 + 4 + 4
+### Three equal areas: 4 + 4 + 4
 
-Drei Karten stehen nebeneinander. Die Abstände zwischen ihnen bleiben genauso groß wie bei zwei Spalten.
+Three cards sit side by side. Their gaps match those of the two-column layout.
 
-<Tabs label="Drei gleiche Bereiche: 4 + 4 + 4: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Three equal areas: 4 + 4 + 4: Preview and code" variant="border">
+    <Tab title="Preview">
         <Columns>
             <Column span={4}>
                 <Card>
-                    #### Erstes Drittel
+                    #### First third
 
-                    `span={4}` eignet sich beispielsweise für einen Vorteil.
+                    `span={4}` can hold a benefit, for example.
                 </Card>
             </Column>
             <Column span={4}>
                 <Card>
-                    #### Zweites Drittel
+                    #### Second third
 
-                    Auch mit etwas mehr Text bleibt die Karte innerhalb ihrer Spalte. Die Karten einer Reihe werden auf dieselbe Höhe gestreckt.
+                    Even with more text, the card stays inside its column. Cards in the same row stretch to equal heights.
                 </Card>
             </Column>
             <Column span={4}>
                 <Card>
-                    #### Drittes Drittel
+                    #### Third third
 
-                    Die Reihe ist mit zwölf Rasterspalten vollständig gefüllt.
+                    All twelve grid columns in the row are occupied.
                 </Card>
             </Column>
 
@@ -145,23 +145,23 @@ Drei Karten stehen nebeneinander. Die Abstände zwischen ihnen bleiben genauso g
         <Columns>
             <Column span={4}>
                 <Card>
-                    #### Erstes Drittel
+                    #### First third
 
-                    `span={4}` eignet sich beispielsweise für einen Vorteil.
+                    `span={4}` can hold a benefit, for example.
                 </Card>
             </Column>
             <Column span={4}>
                 <Card>
-                    #### Zweites Drittel
+                    #### Second third
 
-                    Auch mit etwas mehr Text bleibt die Karte innerhalb ihrer Spalte. Die Karten einer Reihe werden auf dieselbe Höhe gestreckt.
+                    Even with more text, the card stays inside its column. Cards in the same row stretch to equal heights.
                 </Card>
             </Column>
             <Column span={4}>
                 <Card>
-                    #### Drittes Drittel
+                    #### Third third
 
-                    Die Reihe ist mit zwölf Rasterspalten vollständig gefüllt.
+                    All twelve grid columns in the row are occupied.
                 </Card>
             </Column>
 
@@ -171,37 +171,37 @@ Drei Karten stehen nebeneinander. Die Abstände zwischen ihnen bleiben genauso g
 
 </Tabs>
 
-### Vier gleiche Bereiche: 3 + 3 + 3 + 3
+### Four equal areas: 3 + 3 + 3 + 3
 
-Viertel eignen sich für kurze Inhalte. Auf kleinen Bildschirmen erhalten auch diese Karten die volle Inhaltsbreite.
+Quarter-width areas suit short content. On small screens, these cards also take the full content width.
 
-<Tabs label="Vier gleiche Bereiche: 3 + 3 + 3 + 3: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Four equal areas: 3 + 3 + 3 + 3: Preview and code" variant="border">
+    <Tab title="Preview">
         <Columns>
             <Column span={3}>
                 <Card>
-                    #### Viertel 1
+                    #### Quarter 1
 
                     `span={3}`
                 </Card>
             </Column>
             <Column span={3}>
                 <Card>
-                    #### Viertel 2
+                    #### Quarter 2
 
                     `span={3}`
                 </Card>
             </Column>
             <Column span={3}>
                 <Card>
-                    #### Viertel 3
+                    #### Quarter 3
 
                     `span={3}`
                 </Card>
             </Column>
             <Column span={3}>
                 <Card>
-                    #### Viertel 4
+                    #### Quarter 4
 
                     `span={3}`
                 </Card>
@@ -217,28 +217,28 @@ Viertel eignen sich für kurze Inhalte. Auf kleinen Bildschirmen erhalten auch d
         <Columns>
             <Column span={3}>
                 <Card>
-                    #### Viertel 1
+                    #### Quarter 1
 
                     `span={3}`
                 </Card>
             </Column>
             <Column span={3}>
                 <Card>
-                    #### Viertel 2
+                    #### Quarter 2
 
                     `span={3}`
                 </Card>
             </Column>
             <Column span={3}>
                 <Card>
-                    #### Viertel 3
+                    #### Quarter 3
 
                     `span={3}`
                 </Card>
             </Column>
             <Column span={3}>
                 <Card>
-                    #### Viertel 4
+                    #### Quarter 4
 
                     `span={3}`
                 </Card>
@@ -250,25 +250,25 @@ Viertel eignen sich für kurze Inhalte. Auf kleinen Bildschirmen erhalten auch d
 
 </Tabs>
 
-### Unterschiedliche Breiten: 8 + 4
+### Different widths: 8 + 4
 
-Ein Hauptbereich erhält zwei Drittel der Breite, ein ergänzender Bereich ein Drittel. Auf mobilen Ansichten steht der Hauptbereich zuerst.
+The main area receives two thirds of the width and the supporting area one third. The main area comes first on mobile.
 
-<Tabs label="Unterschiedliche Breiten: 8 + 4: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Different widths: 8 + 4: Preview and code" variant="border">
+    <Tab title="Preview">
         <Columns>
             <Column span={8}>
                 <Card>
-                    #### Hauptinhalt: 8 von 12
+                    #### Main content: 8 of 12
 
-                    Der breitere Bereich bietet Platz für ausführliche Erklärungen. Die Aufteilung entsteht allein durch `span={8}`.
+                    The wider area provides space for detailed explanations. The layout is defined entirely by `span={8}`.
                 </Card>
             </Column>
             <Column span={4}>
                 <Card>
-                    #### Ergänzung: 4 von 12
+                    #### Supporting content: 4 of 12
 
-                    `span={4}` schafft Platz für einen begleitenden Hinweis.
+                    `span={4}` provides space for a supporting note.
                 </Card>
             </Column>
 
@@ -282,16 +282,16 @@ Ein Hauptbereich erhält zwei Drittel der Breite, ein ergänzender Bereich ein D
         <Columns>
             <Column span={8}>
                 <Card>
-                    #### Hauptinhalt: 8 von 12
+                    #### Main content: 8 of 12
 
-                    Der breitere Bereich bietet Platz für ausführliche Erklärungen. Die Aufteilung entsteht allein durch `span={8}`.
+                    The wider area provides space for detailed explanations. The layout is defined entirely by `span={8}`.
                 </Card>
             </Column>
             <Column span={4}>
                 <Card>
-                    #### Ergänzung: 4 von 12
+                    #### Supporting content: 4 of 12
 
-                    `span={4}` schafft Platz für einen begleitenden Hinweis.
+                    `span={4}` provides space for a supporting note.
                 </Card>
             </Column>
 
@@ -301,46 +301,46 @@ Ein Hauptbereich erhält zwei Drittel der Breite, ein ergänzender Bereich ein D
 
 </Tabs>
 
-### Automatischer Umbruch: fünf Karten in einem Block
+### Automatic wrapping: five cards in one block
 
-Alle fünf Karten gehören zum selben `Columns`-Block und verwenden `span={4}`. Nach der dritten Karte beginnt automatisch eine neue Reihe. Die letzten beiden Karten bleiben linksbündig und behalten ihre Breite; der letzte Platz bleibt frei.
+All five cards share one `Columns` block and use `span={4}`. A new row starts automatically after the third card. The last two cards stay left-aligned at the same width, leaving the last position empty.
 
-<Tabs label="Automatischer Umbruch: fünf Karten in einem Block: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Automatic wrapping: five cards in one block: Preview and code" variant="border">
+    <Tab title="Preview">
         <Columns>
             <Column span={4}>
                 <Card>
-                    #### Karte 1
+                    #### Card 1
 
-                    Erste Reihe, erster Platz.
+                    First row, first position.
                 </Card>
             </Column>
             <Column span={4}>
                 <Card>
-                    #### Karte 2
+                    #### Card 2
 
-                    Erste Reihe, zweiter Platz.
+                    First row, second position.
                 </Card>
             </Column>
             <Column span={4}>
                 <Card>
-                    #### Karte 3
+                    #### Card 3
 
-                    Erste Reihe, dritter Platz. Die zwölf Rasterspalten sind belegt.
+                    First row, third position. All twelve grid columns are occupied.
                 </Card>
             </Column>
             <Column span={4}>
                 <Card>
-                    #### Karte 4
+                    #### Card 4
 
-                    Zweite Reihe, erster Platz. Der Umbruch benötigt keinen weiteren Layout-Block.
+                    Second row, first position. Wrapping needs no additional layout block.
                 </Card>
             </Column>
             <Column span={4}>
                 <Card>
-                    #### Karte 5
+                    #### Card 5
 
-                    Zweite Reihe, zweiter Platz. Der Abstand zur oberen Reihe entspricht dem Abstand zwischen den Spalten.
+                    Second row, second position. The row gap matches the column gap.
                 </Card>
             </Column>
 
@@ -354,37 +354,37 @@ Alle fünf Karten gehören zum selben `Columns`-Block und verwenden `span={4}`. 
         <Columns>
             <Column span={4}>
                 <Card>
-                    #### Karte 1
+                    #### Card 1
 
-                    Erste Reihe, erster Platz.
+                    First row, first position.
                 </Card>
             </Column>
             <Column span={4}>
                 <Card>
-                    #### Karte 2
+                    #### Card 2
 
-                    Erste Reihe, zweiter Platz.
+                    First row, second position.
                 </Card>
             </Column>
             <Column span={4}>
                 <Card>
-                    #### Karte 3
+                    #### Card 3
 
-                    Erste Reihe, dritter Platz. Die zwölf Rasterspalten sind belegt.
+                    First row, third position. All twelve grid columns are occupied.
                 </Card>
             </Column>
             <Column span={4}>
                 <Card>
-                    #### Karte 4
+                    #### Card 4
 
-                    Zweite Reihe, erster Platz. Der Umbruch benötigt keinen weiteren Layout-Block.
+                    Second row, first position. Wrapping needs no additional layout block.
                 </Card>
             </Column>
             <Column span={4}>
                 <Card>
-                    #### Karte 5
+                    #### Card 5
 
-                    Zweite Reihe, zweiter Platz. Der Abstand zur oberen Reihe entspricht dem Abstand zwischen den Spalten.
+                    Second row, second position. The row gap matches the column gap.
                 </Card>
             </Column>
 

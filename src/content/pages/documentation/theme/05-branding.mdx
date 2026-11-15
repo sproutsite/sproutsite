@@ -4,37 +4,37 @@ tone: muted
 
 import { Eyebrow } from 'sproutsite/components';
 
-<Eyebrow>Wiedererkennbare Identität</Eyebrow>
+<Eyebrow>Recognizable identity</Eyebrow>
 
-## Logo und Browser-Icons
+## Logo and browser icons
 
-Das Sproutsite-Symbol verbindet zwei grüne Blätter mit drei übereinanderliegenden Ebenen in Türkis, Cyan und Blau. Die Wortmarke verwendet die lokal eingebundene Schrift Nunito. Im transparenten Header ist sie weiß, nach dem Scrollen und im Footer dunkel. Name, Navigation und bestehende Seitenfarben bleiben unabhängig davon konfigurierbar.
+The Sproutsite symbol combines two green leaves with three stacked turquoise, cyan, and blue layers. The wordmark uses locally bundled Nunito outlines. BrandLogo inherits the text color of the header or footer: white on dark surfaces and dark on light surfaces. The site name, navigation, and page colors remain independently configurable.
 
-Alle Dateien liegen unter `src/themes/default/assets/branding/`:
+All files live in the default theme's `assets/branding/` directory:
 
-| Datei                                                         | Verwendung                                                     |
-| ------------------------------------------------------------- | -------------------------------------------------------------- |
-| `logo.svg`                                                    | Symbol und dunkle Wortmarke auf hellen Flächen                 |
-| `logo-dark.svg`                                               | Symbol und weiße Wortmarke auf dunklen Flächen                 |
-| `logo-monochrome.svg`                                         | Einfarbige Variante für Druck und reduzierte Darstellung       |
-| `icon.svg`, `icon-monochrome.svg`                             | Quadratisches Symbol ohne Wortmarke                            |
-| `favicon.svg`, `favicon.ico`                                  | Browser-Tab; das ICO enthält 16, 32 und 48 Pixel               |
-| `favicon-16x16.png`, `favicon-32x32.png`, `favicon-48x48.png` | Kleine Rastervarianten                                         |
-| `apple-touch-icon.png`                                        | Apple Touch Icon mit 180 × 180 Pixeln                          |
-| `icon-192x192.png`, `icon-512x512.png`                        | Web-App-Icons auf Navy-Hintergrund                             |
-| `social-card.png`                                             | Social-Media-Vorschau der Produktwebsite mit 1200 × 630 Pixeln |
+| File                                                          | Usage                                                      |
+| ------------------------------------------------------------- | ---------------------------------------------------------- |
+| `logo.svg`                                                    | Symbol and dark wordmark on light backgrounds              |
+| `logo-dark.svg`                                               | Symbol and white wordmark on dark backgrounds              |
+| `logo-monochrome.svg`                                         | Single-color variant for print and simplified presentation |
+| `icon.svg`, `icon-monochrome.svg`                             | Square symbol without the wordmark                         |
+| `favicon.svg`, `favicon.ico`                                  | Browser tab; the ICO includes 16, 32, and 48 pixel sizes   |
+| `favicon-16x16.png`, `favicon-32x32.png`, `favicon-48x48.png` | Small raster variants                                      |
+| `apple-touch-icon.png`                                        | Apple touch icon at 180 × 180 pixels                       |
+| `icon-192x192.png`, `icon-512x512.png`                        | Web app icons on a navy background                         |
+| `social-card.png`                                             | Product website social preview at 1200 × 630 pixels        |
 
-Die SVGs enthalten echte Vektorpfade, auch für die Schrift. Sie benötigen keine externen Schriften oder Bilddaten. Die monochromen SVGs verwenden `currentColor`; als eigenständige Bilddatei ist die Standardfarbe Schwarz. Für weiße Druckvorlagen kann die Farbe im SVG gesetzt werden.
+The SVGs contain actual vector paths, including the lettering. They require no external fonts or embedded image data. Monochrome SVGs use `currentColor`; standalone images default to black. Set the color in the SVG for white print artwork.
 
-`PageLayout` verknüpft Favicons und Touch-Icon automatisch. Die Standardkonfiguration ergänzt `/site.webmanifest` als statisch erzeugten Astro-Endpunkt mit Website-Name, Sprache und den beiden App-Icons. Auch ein Deployment unter einem Unterpfad wird berücksichtigt. Daraus entsteht keine Offline-App; ein Service Worker wird nicht eingebunden.
+`PageLayout` links favicons and the touch icon automatically. The default configuration adds `/site.webmanifest` as a prerendered Astro endpoint containing the site name, language, and both app icons. Deployment under a subpath is supported. This does not create an offline app or install a service worker.
 
-### Markenfarben und Pflege
+### Brand colors and maintenance
 
-Die Markenfarben stehen als `--color-brand-*` in `styles/foundation/tokens.css`. Sie ergänzen die semantischen UI-Farben, ersetzen diese aber nicht. Grün und Türkis sind Symbolfarben und keine automatisch geeigneten Textfarben auf Weiß.
+Brand colors are defined as `--color-brand-*` tokens in `styles/foundation/tokens.css`. They complement the semantic UI colors without replacing them. Green and turquoise are symbol colors and are not automatically suitable for text on white.
 
 ```sh
 npm run branding:generate
 npm run format
 ```
 
-Der Generator `scripts/generate-branding.ts` erzeugt alle Varianten aus denselben Formen und Farben. Die Quelldatei der Schrift und ihre SIL Open Font License liegen unter `scripts/assets/`. Ein normaler Build nutzt die bereits vorhandenen Dateien und lädt keine Schriften oder Logos herunter. Bei einem eigenen Consumer-Theme sollten neben dem Logo auch die Standard-Favicons und App-Icons ersetzt werden.
+The generator `scripts/generate-branding.ts` produces all variants from shared shapes and colors. The source font and its SIL Open Font License live under `scripts/assets/`. A normal build uses the committed assets and downloads no fonts or logos. Consumer themes should replace the default favicons and app icons along with the logo.

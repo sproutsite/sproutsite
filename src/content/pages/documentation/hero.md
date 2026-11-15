@@ -1,7 +1,7 @@
 ---
-title: Sproutsite-Dokumentation
-eyebrow: Alles an einem Ort
+title: Sproutsite Documentation
+eyebrow: Everything in one place
 tone: brand
 ---
 
-Diese Dokumentation gehört zur Demo selbst. Sie erklärt, wie Sproutsite eingerichtet, inhaltlich gepflegt, gestaltet und geprüft wird.
+This documentation is part of the demo itself. It explains how to set up Sproutsite, maintain content, customize the theme, and verify the result.

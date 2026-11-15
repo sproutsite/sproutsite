@@ -1,4 +1,4 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
 import { extname, join, relative, resolve } from 'node:path';
@@ -59,38 +59,17 @@ const port = await new Promise<number>((resolvePort, reject) => {
     });
 });
 const baseUrl = `http://127.0.0.1:${port}`;
-const routes = [
-    '/showcase/tabellen/',
-    '/showcase/tabs/',
-    '/',
-    '/faq/',
-    '/info/',
-    '/kontakt/',
-    '/dokumentation/',
-    '/dokumentation/einstieg/',
-    '/dokumentation/inhalte/',
-    '/dokumentation/layout/',
-    '/dokumentation/theme/',
-    '/dokumentation/pruefen/',
-    '/dokumentation/paket/',
-    '/dokumentation/storybook/',
-    '/blog/',
-    '/blog/project-foundation/',
-    '/blog/content-collections/',
-    '/blog/component-system/',
-    '/blog/quality-workshop/',
-    '/showcase/',
-    '/showcase/foundations/',
-    '/showcase/layout/',
-    '/showcase/typografie/',
-    '/showcase/navigation/',
-    '/showcase/sections/',
-    '/showcase/alerts/',
-    '/showcase/badges/',
-    '/showcase/buttons/',
-    '/showcase/images/',
-    '/showcase/cards/',
-] as const;
+// Inspect every generated content page, including localized routes and new pages.
+const routes = (await readdir(distDirectory, { recursive: true }))
+    .filter((file) => file === 'index.html' || file.endsWith('/index.html'))
+    .map((file) => `/${file.slice(0, -'index.html'.length)}`)
+    .sort();
+const requestedRoutes = process.env.SPROUTSITE_A11Y_ROUTES?.split(',');
+if (requestedRoutes) {
+    for (const route of requestedRoutes)
+        assert.ok(routes.includes(route), `Unknown test route: ${route}`);
+}
+const testedRoutes = requestedRoutes ?? routes;
 
 async function waitForServer(): Promise<void> {
     for (let attempt = 0; attempt < 40; attempt += 1) {
@@ -112,9 +91,25 @@ try {
         { width: 1440, height: 900, name: 'desktop' },
     ]) {
         const context = await browser.newContext({ viewport });
-        for (const route of routes) {
+        for (const route of testedRoutes) {
+            const german = route.startsWith('/de/');
+            const previewLabel = german ? 'Vorschau' : 'Preview';
+            const tokenHeading = german
+                ? 'Token-Referenz des Default-Themes'
+                : 'Default theme token reference';
             const page = await context.newPage();
-            await page.goto(`${baseUrl}${route}`, { waitUntil: 'networkidle' });
+            const response = await page.goto(`${baseUrl}${route}`, {
+                waitUntil: 'networkidle',
+            });
+            assert.equal(
+                response?.status(),
+                200,
+                `${route}: missing content page`,
+            );
+            assert.equal(
+                await page.locator('html').getAttribute('lang'),
+                german ? 'de' : 'en',
+            );
             const header = page.locator('.ss-header');
             const initialHeaderPosition = await header.evaluate(
                 (element) => getComputedStyle(element).position,
@@ -140,12 +135,14 @@ try {
                 throw new Error(
                     `${viewport.name} ${route}: viewport overflows horizontally`,
                 );
-            if (route === '/showcase/tabellen/') {
+            if (
+                ['/showcase/tables/', '/de/showcase/tabellen/'].includes(route)
+            ) {
                 const examples = page.locator('.content-prose > .ss-tabs');
                 assert.equal(await examples.count(), 7);
                 const basic = examples.first();
                 const basicPreview = basic.getByRole('tab', {
-                    name: 'Vorschau',
+                    name: previewLabel,
                     exact: true,
                 });
                 const basicCode = basic.getByRole('tab', {
@@ -173,7 +170,7 @@ try {
                     .getByRole('tabpanel')
                     .locator('pre[data-language="markdown"]')
                     .innerText();
-                assert(markdown.includes('| Inhalt'));
+                assert(markdown.includes(german ? '| Inhalt' : '| Content'));
                 assert(
                     !markdown.includes('ContentTable') &&
                         !markdown.includes('import '),
@@ -199,7 +196,7 @@ try {
                 for (let index = 0; index < 6; index += 1) {
                     const group = groups.nth(index);
                     const preview = group.getByRole('tab', {
-                        name: 'Vorschau',
+                        name: previewLabel,
                         exact: true,
                     });
                     const code = group.getByRole('tab', {
@@ -273,7 +270,11 @@ try {
                             'tbody tr[data-highlighted]',
                         );
                         assert.equal(await marked.count(), 1);
-                        assert((await marked.innerText()).includes('Aktuell'));
+                        assert(
+                            (await marked.innerText()).includes(
+                                german ? 'Aktuell' : 'Current',
+                            ),
+                        );
                         assert.equal(
                             await table
                                 .locator('tbody tr')
@@ -372,7 +373,7 @@ try {
                     fullPage: true,
                 });
             }
-            if (route === '/showcase/tabs/') {
+            if (['/showcase/tabs/', '/de/showcase/tabs/'].includes(route)) {
                 const examples = page.locator('.content-prose > .ss-tabs');
                 assert.equal(await examples.count(), 3);
                 assert.equal(await page.locator('.ss-tabs').count(), 6);
@@ -486,7 +487,8 @@ try {
                     }).analyze();
                     assert.deepEqual(
                         activeResults.violations.map(
-                            (violation) => violation.id,
+                            (violation) =>
+                                `${violation.id}: ${violation.nodes.map((node) => `${node.target.join(' ')} ${node.failureSummary}`).join('; ')}`,
                         ),
                         [],
                     );
@@ -508,7 +510,11 @@ try {
                             "import { Tabs, Tab } from 'sproutsite/components';",
                         ),
                     );
-                    assert(!source.includes('Vorschau und Code'));
+                    assert(
+                        !source.includes(
+                            german ? 'Vorschau und Code' : 'Preview and code',
+                        ),
+                    );
                     if (index === 0)
                         assert(
                             source.includes('```sh'),
@@ -554,7 +560,12 @@ try {
                 assert.equal(new Set(ids).size, ids.length);
                 await page.evaluate(() => window.scrollTo(0, 0));
             }
-            if (route === '/showcase/foundations/') {
+            if (
+                [
+                    '/showcase/foundations/',
+                    '/de/showcase/foundations/',
+                ].includes(route)
+            ) {
                 const kinds = [
                     'colors',
                     'type',
@@ -578,7 +589,7 @@ try {
                 for (let index = 0; index < kinds.length; index += 1) {
                     const group = groups.nth(index);
                     const preview = group.getByRole('tab', {
-                        name: 'Vorschau',
+                        name: previewLabel,
                         exact: true,
                     });
                     const code = group.getByRole('tab', {
@@ -609,7 +620,7 @@ try {
                                         getComputedStyle(element)
                                             .backgroundColor,
                                 ),
-                            'rgb(30, 90, 168)',
+                            'rgb(19, 75, 112)',
                         );
                     }
                     if (index === 1) {
@@ -681,7 +692,9 @@ try {
                         );
                         await page.keyboard.press('Tab');
                         const link = sample.getByRole('link', {
-                            name: 'Zum Hauptinhalt',
+                            name: german
+                                ? 'Zum Hauptinhalt'
+                                : 'Go to main content',
                         });
                         assert(
                             await link.evaluate(
@@ -752,11 +765,15 @@ try {
                     fullPage: true,
                 });
             }
-            if (route === '/dokumentation/theme/') {
+            if (
+                ['/documentation/theme/', '/de/dokumentation/theme/'].includes(
+                    route,
+                )
+            ) {
                 assert.equal(
                     await page
                         .getByRole('heading', {
-                            name: 'Token-Referenz des Default-Themes',
+                            name: tokenHeading,
                             exact: true,
                         })
                         .count(),
@@ -766,7 +783,7 @@ try {
                     .locator('main section.ss-section')
                     .filter({
                         has: page.getByRole('heading', {
-                            name: 'Token-Referenz des Default-Themes',
+                            name: tokenHeading,
                             exact: true,
                         }),
                     });
@@ -776,7 +793,11 @@ try {
                     0,
                 );
             }
-            if (route === '/showcase/sections/') {
+            if (
+                ['/showcase/sections/', '/de/showcase/sections/'].includes(
+                    route,
+                )
+            ) {
                 const groups = page.locator('.ss-tabs');
                 const tones = ['default', 'muted', 'brand', 'muted', 'default'];
                 const fullWidths = [true, true, true, false, true];
@@ -785,7 +806,7 @@ try {
                 for (let index = 0; index < tones.length; index += 1) {
                     const group = groups.nth(index);
                     const preview = group.getByRole('tab', {
-                        name: 'Vorschau',
+                        name: previewLabel,
                         exact: true,
                     });
                     const code = group.getByRole('tab', {
@@ -876,6 +897,7 @@ try {
                 throw new Error(
                     `${viewport.name} ${route}: header does not use the fixed glass state after scrolling`,
                 );
+            console.log(`PASS ${viewport.name} ${route}`);
             await page.close();
         }
         await context.close();
@@ -897,7 +919,7 @@ try {
         await staticPage.locator('.ss-foundation-sample:visible').count(),
         6,
     );
-    await staticPage.goto(`${baseUrl}/showcase/tabellen/`);
+    await staticPage.goto(`${baseUrl}/showcase/tables/`);
     assert.equal(
         await staticPage.locator('.ss-content-table:visible').count(),
         6,
@@ -906,7 +928,7 @@ try {
     await staticContext.close();
     await browser.close();
     console.log(
-        `Axe, keyboard-focus, and viewport-overflow checks passed for ${routes.length} routes on mobile and desktop.`,
+        `Axe, keyboard-focus, and viewport-overflow checks passed for ${testedRoutes.length} routes on mobile and desktop.`,
     );
 } finally {
     await new Promise<void>((resolveClose, reject) => {

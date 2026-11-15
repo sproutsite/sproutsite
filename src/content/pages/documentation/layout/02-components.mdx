@@ -4,53 +4,53 @@ tone: muted
 
 import { Eyebrow } from 'sproutsite/components';
 
-<Eyebrow>Öffentliche Bausteine</Eyebrow>
+<Eyebrow>Public components</Eyebrow>
 
-## Verfügbare Komponenten
+## Available components
 
-Sproutsite exportiert geprüfte Komponenten aus `sproutsite/components`. Aktuell gehören dazu `Columns`, `Column`, `Eyebrow`, `Alert`, `ContentImage`, `ContentTable`, `Card`, `CardActions`, `Tabs`, `Tab` und `FoundationSample`.
+Sproutsite exports tested components from `sproutsite/components`: `Columns`, `Column`, `Eyebrow`, `Alert`, `Badge`, `Button`, `Icon`, `ContentImage`, `ContentTable`, `Card`, `CardActions`, `Tabs`, `Tab`, and `FoundationSample`.
 
-### Eyebrow vor einer Überschrift
+### An eyebrow before a heading
 
-`Eyebrow` ergänzt eine Überschrift um eine kurze Einordnung. Die Komponente nimmt keine Props entgegen und ihr Text sollte die Überschrift präzisieren, statt sie zu wiederholen.
+`Eyebrow` adds brief context before a heading. It accepts no props. Its text should clarify the heading rather than repeat it.
 
 ```mdx
 import { Eyebrow } from 'sproutsite/components';
 
-<Eyebrow>Einordnung</Eyebrow>
+<Eyebrow>Context</Eyebrow>
 
-## Die eigentliche Überschrift
+## The main section heading
 ```
 
-### Inhalte mit Tabs gliedern
+### Organize content with tabs
 
-`Tabs` enthält direkt einen oder mehrere `Tab`-Bausteine mit Markdown-Inhalten. Die Gruppe benötigt ein beschreibendes `label`, jeder Reiter einen `title`. Optional wählt `variant` zwischen `border` (Standard), `box` und `lift`; `initial` bestimmt den anfangs geöffneten Reiter, ab eins gezählt.
+`Tabs` contains one or more direct `Tab` children with Markdown content. The group requires a descriptive `label`, and each tab needs a `title`. The optional `variant` selects `border` (default), `box`, or `lift`; `initial` selects the initially open tab using a one-based index.
 
 ```mdx
 import { Tabs, Tab } from 'sproutsite/components';
 
-<Tabs label="Informationen" variant="box" initial={1}>
-    <Tab title="Überblick">
+<Tabs label="Information" variant="box" initial={1}>
+    <Tab title="Overview">
 
-        Ein kurzer **Überblick**.
+        A brief **overview**.
 
     </Tab>
     <Tab title="Details">
 
-        Die ausführliche Erklärung.
+        The detailed explanation.
 
     </Tab>
 
 </Tabs>
 ```
 
-Die Reiter sind mit Pfeiltasten sowie Pos1 und Ende bedienbar. Ohne JavaScript bleiben die Inhalte untereinander sichtbar. Die [Tabs-Beispiele](/showcase/tabs/) zeigen alle drei Darstellungen.
+Use the arrow keys, Home, and End to navigate tabs. Without JavaScript, all panels remain visible in sequence. The [tab examples](/showcase/tabs/) demonstrate all three styles.
 
-Der [Showcase](/showcase/) zeigt alle verfügbaren Varianten als sichtbare Beispiele. Neue Komponenten werden dort ergänzt, bevor sie als dokumentierter MDX-Baustein verwendet werden.
+The [showcase](/showcase/) provides live examples of the available variants. New components are added there before they are used as documented MDX components.
 
-### Gestaltungsproben für Foundations
+### Foundation specimens
 
-`FoundationSample` zeigt die Gestaltung des aktiven Default-Themes. Die erforderliche Prop `kind` wählt eine fest definierte Probe: `colors`, `type`, `spacing`, `radius`, `shadow` oder `focus`. Der Baustein nimmt keine weiteren Props und keine Kinder entgegen. Er dient der visuellen Theme-Vorschau und ist kein allgemeiner Layout-Baustein.
+`FoundationSample` displays the active default theme. Its required `kind` prop selects a fixed specimen: `colors`, `type`, `spacing`, `radius`, `shadow`, or `focus`. It accepts no other props or children. It previews the theme rather than providing a general-purpose layout component.
 
 ```mdx
 import { FoundationSample } from 'sproutsite/components';
@@ -58,25 +58,25 @@ import { FoundationSample } from 'sproutsite/components';
 <FoundationSample kind="colors" />
 ```
 
-Die [Foundations-Seite](/showcase/foundations/) zeigt alle sechs Proben mit Einbindungscode und den zugehörigen CSS-Ausschnitten.
+The [foundations page](/showcase/foundations/) shows all six specimens with usage examples and related CSS excerpts.
 
-### Tabellen mit Beschriftung und Varianten
+### Tables with captions and variants
 
-`ContentTable` enthält genau eine normale Markdown-Tabelle. `caption` ist eine erforderliche, sichtbare Tabellenbeschriftung. Optional sind `variant="plain|striped"`, `density="comfortable|compact"`, die boolesche Prop `wide` und `highlight={2}` zum Hervorheben einer vorhandenen Datenzeile. Datenzeilen zählen ab eins; die Kopfzeile zählt nicht mit.
+`ContentTable` contains exactly one standard Markdown table. `caption` is a required visible caption. Optional props are `variant="plain|striped"`, `density="comfortable|compact"`, the boolean `wide` flag, and `highlight={2}` to highlight an existing data row. Row numbers start at one and exclude the header.
 
 ```mdx
 import { ContentTable } from 'sproutsite/components';
 
 <ContentTable caption="Beispielprojekte" variant="striped">
 
-    | Projekt | Status | Seiten |
+    | Project | Status | Pages |
     | :--- | :---: | ---: |
-    | Nord | In Arbeit | 12 |
-    | Süd | Geprüft | 8 |
+    | North | In progress | 12 |
+    | South | Reviewed | 8 |
 
 </ContentTable>
 ```
 
-Leerzeilen vor und nach der Tabelle trennen das Markdown vom MDX-Baustein. Die Markdown-Trennzeile steuert die Spaltenausrichtung. Eine kleine Transformation im bestehenden Markdown-AST ergänzt die native Beschriftung, `scope="col"` für die Kopfzellen und gegebenenfalls die Zeilenmarkierung. Der Baustein setzt Sproutsites MDX-Konfiguration voraus; ein eigener Tabellenparser wird nicht verwendet.
+Blank lines before and after the table separate Markdown from the MDX component. The Markdown delimiter row controls column alignment. A small transform of the existing Markdown AST adds the native caption, `scope="col"` for header cells, and an optional row marker. The component requires Sproutsite's MDX configuration; it does not use a custom table parser.
 
-Mit `wide` bleibt die Tabelle mindestens 60rem breit und lässt sich innerhalb ihres fokussierbaren Bereichs horizontal scrollen. Der Seiteninhalt selbst wird nicht verbreitert. Die [Tabellen-Beispiele](/showcase/tables/) zeigen alle Varianten mit Vorschau und vollständigem Code.
+With `wide`, the table stays at least 60rem wide and scrolls horizontally inside its focusable region. The page itself does not become wider. The [table examples](/showcase/tables/) show every variant with previews and complete code.

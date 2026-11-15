@@ -6,46 +6,46 @@ fullWidth: true
 import { Tabs, Tab } from 'sproutsite/components';
 import { Eyebrow } from 'sproutsite/components';
 
-<Eyebrow>Inhalte umschalten</Eyebrow>
+<Eyebrow>Switch between content panels</Eyebrow>
 
 ## Tabs
 
-Reiter zeigen zusammengehörige Inhalte abwechselnd an. Jedes Beispiel ist in eine eigene Vorschau/Code-Gruppe eingebettet: Die Vorschau ist anfangs geöffnet, unter „Code“ findest du das vollständige MDX-Beispiel mit Import. Probiere die drei Darstellungen aus: Jeder Block arbeitet unabhängig, der Inhalt bleibt normales Markdown. Mit der Tabulatortaste erreichst du den ausgewählten Reiter, mit den Pfeiltasten links und rechts wechselst du ihn. Pos1 und Ende springen zum ersten und letzten Reiter.
+Tabs switch between related content panels. Each example has its own preview/code group: Preview opens first, and Code provides the complete MDX example and import. Try all three styles. Each group works independently and its content remains Markdown. Press Tab to reach the selected tab, use Left and Right to switch tabs, and Home or End to reach the first or last tab.
 
-**Atomic Design:** Molecule `Tabs` mit dem Atom `Tab` für die einzelnen Inhaltsbereiche.
+**Atomic Design:** Molecule `Tabs` with the atom `Tab` for each content panel.
 
-Komponentenpfade unter `src/themes/default/components/`: `molecules/Tabs/` und `atoms/Tab/`.
+Component paths within `src/themes/default/components/`: `molecules/Tabs/` and `atoms/Tab/`.
 
-### Linie
+### Border
 
-Eine dezente Linie markiert den ausgewählten Reiter. Dies ist die Standarddarstellung.
+A subtle line marks the selected tab. This is the default style.
 
-<Tabs label="Linie: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
-        <Tabs label="Arbeitsablauf">
-            <Tab title="Inhalte">
-                #### Inhalte pflegen
+<Tabs label="Border: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Tabs label="Workflow">
+            <Tab title="Content">
+                #### Maintain content
 
-                Seiten entstehen aus `page.yaml` und nummerierten Markdown-Dateien.
+                Pages are assembled from `page.yaml` and numbered Markdown files.
 
-                - Texte lokal bearbeiten
-                - Änderungen in der Vorschau prüfen
-                - Inhalte gemeinsam versionieren
+                - Edit text locally
+                - Check changes in the preview
+                - Version content together
             </Tab>
-            <Tab title="Prüfen">
-                #### Qualität prüfen
+            <Tab title="Check">
+                #### Check quality
 
-                Vor der Veröffentlichung prüfen die vorhandenen Befehle Inhalte und Ausgabe:
+                Before publishing, use the existing commands to check content and output:
 
                 ```sh
                 npm run check
                 npm run build
                 ```
             </Tab>
-            <Tab title="Weiterlesen">
-                #### Mehr erfahren
+            <Tab title="Further reading">
+                #### Learn more
 
-                Die [Dokumentation](/documentation/) erklärt den Aufbau. Für einen schnellen Start führt der [Einstieg](/documentation/getting-started/) durch die Einrichtung.
+                The [documentation](/documentation/) explains the structure. The [getting-started guide](/documentation/getting-started/) walks you through setup.
             </Tab>
 
         </Tabs>
@@ -54,30 +54,30 @@ Eine dezente Linie markiert den ausgewählten Reiter. Dies ist die Standarddarst
         ````mdx
         import { Tabs, Tab } from 'sproutsite/components';
 
-        <Tabs label="Arbeitsablauf">
-            <Tab title="Inhalte">
-                #### Inhalte pflegen
+        <Tabs label="Workflow">
+            <Tab title="Content">
+                #### Maintain content
 
-                Seiten entstehen aus `page.yaml` und nummerierten Markdown-Dateien.
+                Pages are assembled from `page.yaml` and numbered Markdown files.
 
-                - Texte lokal bearbeiten
-                - Änderungen in der Vorschau prüfen
-                - Inhalte gemeinsam versionieren
+                - Edit text locally
+                - Check changes in the preview
+                - Version content together
             </Tab>
-            <Tab title="Prüfen">
-                #### Qualität prüfen
+            <Tab title="Check">
+                #### Check quality
 
-                Vor der Veröffentlichung prüfen die vorhandenen Befehle Inhalte und Ausgabe:
+                Before publishing, use the existing commands to check content and output:
 
                 ```sh
                 npm run check
                 npm run build
                 ```
             </Tab>
-            <Tab title="Weiterlesen">
-                #### Mehr erfahren
+            <Tab title="Further reading">
+                #### Learn more
 
-                Die [Dokumentation](/documentation/) erklärt den Aufbau. Für einen schnellen Start führt der [Einstieg](/documentation/getting-started/) durch die Einrichtung.
+                The [documentation](/documentation/) explains the structure. The [getting-started guide](/documentation/getting-started/) walks you through setup.
             </Tab>
 
         </Tabs>
@@ -88,25 +88,25 @@ Eine dezente Linie markiert den ausgewählten Reiter. Dies ist die Standarddarst
 
 ### Box
 
-Die Reiter stehen auf einer gemeinsamen Fläche. Hier ist anfangs der zweite Reiter ausgewählt.
+The tabs share a background surface. In this example, the second tab is initially selected.
 
-<Tabs label="Box: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
-        <Tabs label="Vorteile des Frameworks" variant="box" initial={2}>
-            <Tab title="Für Autoren">
-                #### Vertraute Dateien
+<Tabs label="Box: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Tabs label="Framework benefits" variant="box" initial={2}>
+            <Tab title="For authors">
+                #### Familiar files
 
-                Markdown für Texte, YAML für Einstellungen. Ein CMS-Backend ist nicht erforderlich.
+                Markdown for text, YAML for settings. No CMS administration backend is required.
             </Tab>
-            <Tab title="Für Entwickler">
-                #### Geprüfte Bausteine
+            <Tab title="For developers">
+                #### Tested components
 
-                Astro-Komponenten bilden das Layout. Autoren setzen die dokumentierten Bausteine in MDX ein.
+                Astro components provide the layout. Authors use documented components in MDX.
             </Tab>
-            <Tab title="Für Besucher">
-                #### Statische Seiten
+            <Tab title="For visitors">
+                #### Static pages
 
-                Links und Inhalte werden als HTML ausgeliefert. Ohne JavaScript bleiben alle Tab-Inhalte untereinander lesbar.
+                Links and content are delivered as HTML. Without JavaScript, all tab panels remain readable in sequence.
             </Tab>
 
         </Tabs>
@@ -115,21 +115,21 @@ Die Reiter stehen auf einer gemeinsamen Fläche. Hier ist anfangs der zweite Rei
         ````mdx
         import { Tabs, Tab } from 'sproutsite/components';
 
-        <Tabs label="Vorteile des Frameworks" variant="box" initial={2}>
-            <Tab title="Für Autoren">
-                #### Vertraute Dateien
+        <Tabs label="Framework benefits" variant="box" initial={2}>
+            <Tab title="For authors">
+                #### Familiar files
 
-                Markdown für Texte, YAML für Einstellungen. Ein CMS-Backend ist nicht erforderlich.
+                Markdown for text, YAML for settings. No CMS administration backend is required.
             </Tab>
-            <Tab title="Für Entwickler">
-                #### Geprüfte Bausteine
+            <Tab title="For developers">
+                #### Tested components
 
-                Astro-Komponenten bilden das Layout. Autoren setzen die dokumentierten Bausteine in MDX ein.
+                Astro components provide the layout. Authors use documented components in MDX.
             </Tab>
-            <Tab title="Für Besucher">
-                #### Statische Seiten
+            <Tab title="For visitors">
+                #### Static pages
 
-                Links und Inhalte werden als HTML ausgeliefert. Ohne JavaScript bleiben alle Tab-Inhalte untereinander lesbar.
+                Links and content are delivered as HTML. Without JavaScript, all tab panels remain readable in sequence.
             </Tab>
 
         </Tabs>
@@ -138,27 +138,27 @@ Die Reiter stehen auf einer gemeinsamen Fläche. Hier ist anfangs der zweite Rei
 
 </Tabs>
 
-### Angehoben
+### Lifted
 
-Die aktive Registerkarte hebt sich optisch von den anderen Reitern ab. Bei wenig Platz lässt sich die Reiterleiste horizontal scrollen.
+The active tab is visually raised above the others. The tab list scrolls horizontally when space is limited.
 
-<Tabs label="Angehoben: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
-        <Tabs label="Darstellung und Bedienung" variant="lift">
-            <Tab title="Desktop und Mobil">
-                #### Platz für den Inhalt
+<Tabs label="Lifted: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Tabs label="Presentation and interaction" variant="lift">
+            <Tab title="Desktop and mobile">
+                #### Room for content
 
-                Die Panels nutzen die verfügbare Breite. Lange Reiterleisten scrollen innerhalb des Bausteins, ohne die gesamte Seite zu verbreitern.
+                Panels use the available width. Long tab lists scroll inside the component without widening the page.
             </Tab>
-            <Tab title="Tastaturbedienung">
-                #### Ohne Maus wechseln
+            <Tab title="Keyboard interaction">
+                #### Switch without a mouse
 
-                Pfeiltasten wählen den benachbarten Reiter. Nach dem letzten folgt wieder der erste. Die Tabulatortaste führt anschließend in das aktive Panel und zu seinen Links.
+                Arrow keys select the neighboring tab, wrapping from the last back to the first. Tab then moves focus into the active panel and its links.
             </Tab>
-            <Tab title="Markdown und Links">
-                #### Inhalt wie gewohnt
+            <Tab title="Markdown and links">
+                #### Content as usual
 
-                **Hervorhebungen**, Listen, Code und [interne Links](/showcase/layout/) können in jedem Panel verwendet werden.
+                Use **emphasis**, lists, code, and [internal links](/showcase/layout/) in every panel.
             </Tab>
 
         </Tabs>
@@ -167,21 +167,21 @@ Die aktive Registerkarte hebt sich optisch von den anderen Reitern ab. Bei wenig
         ````mdx
         import { Tabs, Tab } from 'sproutsite/components';
 
-        <Tabs label="Darstellung und Bedienung" variant="lift">
-            <Tab title="Desktop und Mobil">
-                #### Platz für den Inhalt
+        <Tabs label="Presentation and interaction" variant="lift">
+            <Tab title="Desktop and mobile">
+                #### Room for content
 
-                Die Panels nutzen die verfügbare Breite. Lange Reiterleisten scrollen innerhalb des Bausteins, ohne die gesamte Seite zu verbreitern.
+                Panels use the available width. Long tab lists scroll inside the component without widening the page.
             </Tab>
-            <Tab title="Tastaturbedienung">
-                #### Ohne Maus wechseln
+            <Tab title="Keyboard interaction">
+                #### Switch without a mouse
 
-                Pfeiltasten wählen den benachbarten Reiter. Nach dem letzten folgt wieder der erste. Die Tabulatortaste führt anschließend in das aktive Panel und zu seinen Links.
+                Arrow keys select the neighboring tab, wrapping from the last back to the first. Tab then moves focus into the active panel and its links.
             </Tab>
-            <Tab title="Markdown und Links">
-                #### Inhalt wie gewohnt
+            <Tab title="Markdown and links">
+                #### Content as usual
 
-                **Hervorhebungen**, Listen, Code und [interne Links](/showcase/layout/) können in jedem Panel verwendet werden.
+                Use **emphasis**, lists, code, and [internal links](/showcase/layout/) in every panel.
             </Tab>
 
         </Tabs>

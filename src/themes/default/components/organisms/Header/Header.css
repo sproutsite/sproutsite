@@ -43,6 +43,7 @@
         }
 
         &.ss-header--scrolled {
+            --ss-brand-highlight: var(--color-primary);
             @apply fixed border-base-300 bg-base-100/40 text-base-content shadow-sm backdrop-blur-md;
 
             .ss-header__inner {

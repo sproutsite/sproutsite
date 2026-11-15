@@ -7,60 +7,60 @@ import { Eyebrow } from 'sproutsite/components';
 import { Tabs, Tab } from 'sproutsite/components';
 import { ContentTable } from 'sproutsite/components';
 
-<Eyebrow>Daten verständlich darstellen</Eyebrow>
+<Eyebrow>Present data clearly</Eyebrow>
 
-## Tabellen vergleichen und einbinden
+## Compare and use tables
 
-Tabellen machen vergleichbare Informationen übersichtlich. `ContentTable` ergänzt eine normale Markdown-Tabelle um Beschriftung und Darstellungsvarianten. Breite Tabellen lassen sich im eigenen Bereich horizontal scrollen. Die Vorschau ist jeweils anfangs geöffnet; unter „Code“ steht der passende Markdown- oder MDX-Ausschnitt. Die Komponentenbeispiele enthalten auch den benötigten Import.
+Tables organize comparable information. `ContentTable` adds a caption and visual variants to a standard Markdown table. Wide tables scroll horizontally within their own region. Each example opens with a preview; the Code tab provides the matching Markdown or MDX. Component examples include the required import.
 
-Das erste Beispiel zeigt eine einfache Tabelle mit [normalem Markdown](/showcase/typography/). Danach folgen die erweiterten Möglichkeiten mit `ContentTable`. Alle Beispiele enthalten bewusst Beispieldaten.
+The first example uses [standard Markdown](/showcase/typography/). The following examples demonstrate the additional options provided by `ContentTable`. All examples use sample data.
 
-**Atomic Design:** Molecule `ContentTable`. Die einfache Markdown-Tabelle gehört zur allgemeinen Inhaltstypografie.
+**Atomic Design:** Molecule `ContentTable`. Plain Markdown tables belong to the shared content typography.
 
-Komponentenpfad unter `src/themes/default/components/`: `molecules/ContentTable/`.
+Component path within `src/themes/default/components/`: `molecules/ContentTable/`.
 
-### Einfache Markdown-Tabelle
+### Plain Markdown table
 
-Für diese Tabelle brauchst du weder eine Komponente noch einen Import. Sie verwendet die allgemeine Markdown-Typografie und lässt sich in `.md`- und `.mdx`-Inhalte einfügen. Die Daten sind identisch mit der anschließenden beschrifteten Basistabelle.
+This table needs no component or import. It uses shared Markdown typography and works in both `.md` and `.mdx` content. Its data matches the captioned basic table below.
 
-<Tabs label="Einfache Markdown-Tabelle: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Plain Markdown table: Preview and code" variant="border">
+    <Tab title="Preview">
 
-        | Inhalt | Datei |
+        | Content | File |
         | --- | --- |
-        | Seiteneinstellungen | `page.yaml` |
+        | Page settings | `page.yaml` |
         | Hero | `hero.md` |
-        | Abschnitt | `01-einleitung.md` |
+        | Section | `01-introduction.md` |
 
     </Tab>
     <Tab title="Code">
 
         ````markdown
-        | Inhalt | Datei |
+        | Content | File |
         | --- | --- |
-        | Seiteneinstellungen | `page.yaml` |
+        | Page settings | `page.yaml` |
         | Hero | `hero.md` |
-        | Abschnitt | `01-einleitung.md` |
+        | Section | `01-introduction.md` |
         ````
 
     </Tab>
 
 </Tabs>
 
-### Beschriftete Basistabelle
+### Basic captioned table
 
-Eine sichtbare Tabellenbeschriftung benennt den Inhalt. Die erste Zeile enthält die Spaltenüberschriften; diese werden auch für assistive Technologien als Spaltenköpfe ausgezeichnet.
+A visible caption identifies the table's content. The first row contains column headings, marked as column headers for assistive technology as well.
 
-<Tabs label="Beschriftete Basistabelle: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Basic captioned table: Preview and code" variant="border">
+    <Tab title="Preview">
 
-        <ContentTable caption="Dateien im Seitenverzeichnis">
+        <ContentTable caption="Files in the page directory">
 
-        | Inhalt | Datei |
+        | Content | File |
         | --- | --- |
-        | Seiteneinstellungen | `page.yaml` |
+        | Page settings | `page.yaml` |
         | Hero | `hero.md` |
-        | Abschnitt | `01-einleitung.md` |
+        | Section | `01-introduction.md` |
 
         </ContentTable>
 
@@ -70,13 +70,13 @@ Eine sichtbare Tabellenbeschriftung benennt den Inhalt. Die erste Zeile enthält
         ````mdx
         import { ContentTable } from 'sproutsite/components';
 
-        <ContentTable caption="Dateien im Seitenverzeichnis">
+        <ContentTable caption="Files in the page directory">
 
-        | Inhalt | Datei |
+        | Content | File |
         | --- | --- |
-        | Seiteneinstellungen | `page.yaml` |
+        | Page settings | `page.yaml` |
         | Hero | `hero.md` |
-        | Abschnitt | `01-einleitung.md` |
+        | Section | `01-introduction.md` |
 
         </ContentTable>
         ````
@@ -85,20 +85,20 @@ Eine sichtbare Tabellenbeschriftung benennt den Inhalt. Die erste Zeile enthält
 
 </Tabs>
 
-### Spalten passend ausrichten
+### Align columns appropriately
 
-Die Doppelpunkte in der Markdown-Trennzeile bestimmen die Ausrichtung: links für Namen, mittig für kurze Statusangaben und rechts für Zahlen.
+Colons in the Markdown delimiter row control alignment: left for names, centered for short status values, and right for numbers.
 
-<Tabs label="Spalten passend ausrichten: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Align columns appropriately: Preview and code" variant="border">
+    <Tab title="Preview">
 
-        <ContentTable caption="Beispielprojekte und Seitenumfang">
+        <ContentTable caption="Sample projects and page counts">
 
-        | Projekt | Status | Seiten |
+        | Project | Status | Pages |
         | :--- | :---: | ---: |
-        | Nord | In Arbeit | 12 |
-        | Süd | Geprüft | 8 |
-        | West | Geplant | 3 |
+        | North | In progress | 12 |
+        | South | Reviewed | 8 |
+        | West | Planned | 3 |
 
         </ContentTable>
 
@@ -108,13 +108,13 @@ Die Doppelpunkte in der Markdown-Trennzeile bestimmen die Ausrichtung: links fü
         ````mdx
         import { ContentTable } from 'sproutsite/components';
 
-        <ContentTable caption="Beispielprojekte und Seitenumfang">
+        <ContentTable caption="Sample projects and page counts">
 
-        | Projekt | Status | Seiten |
+        | Project | Status | Pages |
         | :--- | :---: | ---: |
-        | Nord | In Arbeit | 12 |
-        | Süd | Geprüft | 8 |
-        | West | Geplant | 3 |
+        | North | In progress | 12 |
+        | South | Reviewed | 8 |
+        | West | Planned | 3 |
 
         </ContentTable>
         ````
@@ -123,21 +123,21 @@ Die Doppelpunkte in der Markdown-Trennzeile bestimmen die Ausrichtung: links fü
 
 </Tabs>
 
-### Abwechselnde Zeilenflächen
+### Alternating row backgrounds
 
-Dezente Streifen erleichtern es, einer Zeile über mehrere Spalten zu folgen. Die Daten und ihre Reihenfolge bleiben unverändert.
+Subtle stripes make a row easier to follow across several columns. Data and row order stay unchanged.
 
-<Tabs label="Abwechselnde Zeilenflächen: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Alternating row backgrounds: Preview and code" variant="border">
+    <Tab title="Preview">
 
-        <ContentTable caption="Arbeitsschritte im Überblick" variant="striped">
+        <ContentTable caption="Workflow overview" variant="striped">
 
-        | Schritt | Aufgabe |
+        | Step | Task |
         | --- | --- |
-        | Planen | Themen und Zuständigkeiten festlegen |
-        | Schreiben | Inhalte in Markdown pflegen |
-        | Prüfen | Links und Ausgabe kontrollieren |
-        | Freigeben | Ergebnis gemeinsam bewerten |
+        | Plan | Define topics and responsibilities |
+        | Write | Maintain content in Markdown |
+        | Check | Check links and output |
+        | Approve | Review the result together |
 
         </ContentTable>
 
@@ -147,14 +147,14 @@ Dezente Streifen erleichtern es, einer Zeile über mehrere Spalten zu folgen. Di
         ````mdx
         import { ContentTable } from 'sproutsite/components';
 
-        <ContentTable caption="Arbeitsschritte im Überblick" variant="striped">
+        <ContentTable caption="Workflow overview" variant="striped">
 
-        | Schritt | Aufgabe |
+        | Step | Task |
         | --- | --- |
-        | Planen | Themen und Zuständigkeiten festlegen |
-        | Schreiben | Inhalte in Markdown pflegen |
-        | Prüfen | Links und Ausgabe kontrollieren |
-        | Freigeben | Ergebnis gemeinsam bewerten |
+        | Plan | Define topics and responsibilities |
+        | Write | Maintain content in Markdown |
+        | Check | Check links and output |
+        | Approve | Review the result together |
 
         </ContentTable>
         ````
@@ -163,20 +163,20 @@ Dezente Streifen erleichtern es, einer Zeile über mehrere Spalten zu folgen. Di
 
 </Tabs>
 
-### Eine Datenzeile hervorheben
+### Highlight a data row
 
-highlight zählt Datenzeilen ab eins, ohne die Kopfzeile. Die zweite Zeile erhält hier eine betonte Fläche und eine seitliche Markierung. Der ausgeschriebene Status macht die Bedeutung zusätzlich verständlich.
+highlight counts data rows from one, excluding the header. Here the second row receives a stronger background and an edge marker. The written status also explains its meaning.
 
-<Tabs label="Eine Datenzeile hervorheben: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Highlight a data row: Preview and code" variant="border">
+    <Tab title="Preview">
 
-        <ContentTable caption="Bearbeitungsstand – Beispieldaten" highlight={2}>
+        <ContentTable caption="Editing progress – sample data" highlight={2}>
 
-        | Bereich | Status | Nächster Schritt |
+        | Area | Status | Next step |
         | --- | --- | --- |
-        | Startseite | Erledigt | Ergebnis prüfen |
-        | Info | **Aktuell** | Details überarbeiten |
-        | FAQ | Offen | Fragen sammeln |
+        | Home | Done | Review the result |
+        | Info | **Current** | Revise details |
+        | FAQ | Open | Collect questions |
 
         </ContentTable>
 
@@ -186,13 +186,13 @@ highlight zählt Datenzeilen ab eins, ohne die Kopfzeile. Die zweite Zeile erhä
         ````mdx
         import { ContentTable } from 'sproutsite/components';
 
-        <ContentTable caption="Bearbeitungsstand – Beispieldaten" highlight={2}>
+        <ContentTable caption="Editing progress – sample data" highlight={2}>
 
-        | Bereich | Status | Nächster Schritt |
+        | Area | Status | Next step |
         | --- | --- | --- |
-        | Startseite | Erledigt | Ergebnis prüfen |
-        | Info | **Aktuell** | Details überarbeiten |
-        | FAQ | Offen | Fragen sammeln |
+        | Home | Done | Review the result |
+        | Info | **Current** | Revise details |
+        | FAQ | Open | Collect questions |
 
         </ContentTable>
         ````
@@ -201,20 +201,20 @@ highlight zählt Datenzeilen ab eins, ohne die Kopfzeile. Die zweite Zeile erhä
 
 </Tabs>
 
-### Kompakte Darstellung
+### Compact layout
 
-Weniger Zellabstand schafft Platz für größere Datenmengen. Inhalt und Beschriftung folgen denselben Regeln wie in der Basistabelle.
+Reduced cell padding leaves room for more data. Content and captions follow the same rules as the basic table.
 
-<Tabs label="Kompakte Darstellung: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Compact layout: Preview and code" variant="border">
+    <Tab title="Preview">
 
-        <ContentTable caption="Dateien im Seitenverzeichnis – kompakt" density="compact">
+        <ContentTable caption="Files in the page directory – compact" density="compact">
 
-        | Inhalt | Datei |
+        | Content | File |
         | --- | --- |
-        | Seiteneinstellungen | `page.yaml` |
+        | Page settings | `page.yaml` |
         | Hero | `hero.md` |
-        | Abschnitt | `01-einleitung.md` |
+        | Section | `01-introduction.md` |
 
         </ContentTable>
 
@@ -224,13 +224,13 @@ Weniger Zellabstand schafft Platz für größere Datenmengen. Inhalt und Beschri
         ````mdx
         import { ContentTable } from 'sproutsite/components';
 
-        <ContentTable caption="Dateien im Seitenverzeichnis – kompakt" density="compact">
+        <ContentTable caption="Files in the page directory – compact" density="compact">
 
-        | Inhalt | Datei |
+        | Content | File |
         | --- | --- |
-        | Seiteneinstellungen | `page.yaml` |
+        | Page settings | `page.yaml` |
         | Hero | `hero.md` |
-        | Abschnitt | `01-einleitung.md` |
+        | Section | `01-introduction.md` |
 
         </ContentTable>
         ````
@@ -239,20 +239,20 @@ Weniger Zellabstand schafft Platz für größere Datenmengen. Inhalt und Beschri
 
 </Tabs>
 
-### Breite Tabellen auf kleinen Bildschirmen
+### Wide tables on small screens
 
-Die Tabelle behält ihre Spaltenbreite und scrollt innerhalb ihres eigenen Bereichs. Auf Mobilgeräten kannst du horizontal wischen. Mit der Tabulatortaste erreichst du den Tabellenbereich und kannst ihn mit den Pfeiltasten horizontal bewegen.
+The table keeps its column widths and scrolls within its own region. Swipe horizontally on mobile, or press Tab to focus the region and use the arrow keys to scroll.
 
-<Tabs label="Breite Tabellen auf kleinen Bildschirmen: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Wide tables on small screens: Preview and code" variant="border">
+    <Tab title="Preview">
 
-        <ContentTable caption="Redaktionsplan – Beispieldaten" variant="striped" density="compact" wide>
+        <ContentTable caption="Editorial plan – sample data" variant="striped" density="compact" wide>
 
-        | Seite | Zuständigkeit | Status | Sprache | Planung | Prüfung | Freigabe | Hinweis |
+        | Page | Responsibility | Status | Language | Schedule | Review | Approval | Note |
         | --- | --- | --- | --- | --- | --- | --- | --- |
-        | Startseite | Redaktion | Entwurf | Deutsch | Woche 1 | Redaktion | Team | Einstieg überarbeiten |
-        | Info | Entwicklung | In Arbeit | Deutsch | Woche 2 | Entwicklung | Team | Beispiele ergänzen |
-        | FAQ | Redaktion | Geplant | Deutsch | Woche 3 | Redaktion | Team | Häufige Fragen sammeln |
+        | Home | Editorial | Draft | English | Week 1 | Editorial | Team | Revise the introduction |
+        | Info | Development | In progress | English | Week 2 | Development | Team | Add examples |
+        | FAQ | Editorial | Planned | English | Week 3 | Editorial | Team | Collect frequently asked questions |
 
         </ContentTable>
 
@@ -262,13 +262,13 @@ Die Tabelle behält ihre Spaltenbreite und scrollt innerhalb ihres eigenen Berei
         ````mdx
         import { ContentTable } from 'sproutsite/components';
 
-        <ContentTable caption="Redaktionsplan – Beispieldaten" variant="striped" density="compact" wide>
+        <ContentTable caption="Editorial plan – sample data" variant="striped" density="compact" wide>
 
-        | Seite | Zuständigkeit | Status | Sprache | Planung | Prüfung | Freigabe | Hinweis |
+        | Page | Responsibility | Status | Language | Schedule | Review | Approval | Note |
         | --- | --- | --- | --- | --- | --- | --- | --- |
-        | Startseite | Redaktion | Entwurf | Deutsch | Woche 1 | Redaktion | Team | Einstieg überarbeiten |
-        | Info | Entwicklung | In Arbeit | Deutsch | Woche 2 | Entwicklung | Team | Beispiele ergänzen |
-        | FAQ | Redaktion | Geplant | Deutsch | Woche 3 | Redaktion | Team | Häufige Fragen sammeln |
+        | Home | Editorial | Draft | English | Week 1 | Editorial | Team | Revise the introduction |
+        | Info | Development | In progress | English | Week 2 | Development | Team | Add examples |
+        | FAQ | Editorial | Planned | English | Week 3 | Editorial | Team | Collect frequently asked questions |
 
         </ContentTable>
         ````

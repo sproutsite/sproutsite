@@ -7,133 +7,133 @@ import { Eyebrow } from 'sproutsite/components';
 import { Tabs, Tab } from 'sproutsite/components';
 import { Card, CardActions } from 'sproutsite/components';
 
-<Eyebrow>Verbindungen im Projekt</Eyebrow>
+<Eyebrow>Connections within the project</Eyebrow>
 
-## Navigation und Links
+## Navigation and links
 
-Header und Footer werden zentral in `site.yaml` gepflegt und auf allen Seiten ausgegeben. Im Header ist ein Link aktiv, wenn sein Ziel genau der aktuellen Seitenadresse entspricht; auf `/showcase/` wird beispielsweise „Showcase“ markiert. Unterseiten erhalten keine automatische Markierung ihres übergeordneten Navigationspunkts.
+Maintain the shared header and footer centrally in `site.yaml`. A header link is active when its target exactly matches the current page URL; for example, “Showcase” is marked on `/showcase/`. Child pages do not automatically activate the parent navigation item.
 
-Die folgenden Beispiele zeigen Links innerhalb des Seiteninhalts. Die Vorschau ist jeweils anfangs geöffnet; unter „Code“ steht der passende Markdown- oder MDX-Ausschnitt für eine bestehende Inhaltsdatei. Das MDX-Beispiel enthält auch den benötigten Import.
+The examples below show links within page content. Each opens with a preview; the Code tab provides the matching Markdown or MDX for an existing content file. The MDX example includes its required import.
 
-**Atomic Design:** Organisms `Header` und `Footer` für den gemeinsamen Seitenrahmen. Die Linkbeispiele im Inhalt verwenden Markdown.
+**Atomic Design:** Organisms `Header` and `Footer` provide the shared page frame. The content link examples use Markdown.
 
-Komponentenpfade unter `src/themes/default/components/`: `organisms/Header/` und `organisms/Footer/`.
+Component paths within `src/themes/default/components/`: `organisms/Header/` and `organisms/Footer/`.
 
-### Direkte Seitenlinks
+### Direct page links
 
-Eine kurze Liste bietet direkte Einstiege zu wichtigen Seiten. Interne Ziele werden ohne Deployment-Unterpfad geschrieben; Sproutsite ergänzt ihn automatisch.
+A short list provides direct access to key pages. Write internal targets without a deployment subpath; Sproutsite adds it automatically.
 
-<Tabs label="Direkte Seitenlinks: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Direct page links: Preview and code" variant="border">
+    <Tab title="Preview">
 
-        - [Antworten auf häufige Fragen](/faq/)
-        - [Das Sproutsite-Konzept kennenlernen](/info/)
-        - [Kontakt aufnehmen](/contact/)
+        - [Answers to frequently asked questions](/faq/)
+        - [Learn about the Sproutsite concept](/info/)
+        - [Get in touch](/contact/)
 
     </Tab>
     <Tab title="Code">
         ````markdown
-        - [Antworten auf häufige Fragen](/faq/)
-        - [Das Sproutsite-Konzept kennenlernen](/info/)
-        - [Kontakt aufnehmen](/contact/)
+        - [Answers to frequently asked questions](/faq/)
+        - [Learn about the Sproutsite concept](/info/)
+        - [Get in touch](/contact/)
         ````
     </Tab>
 
 </Tabs>
 
-### Verlinktes Inhaltsverzeichnis
+### Linked table of contents
 
-Fragmentlinks führen zu einer Überschrift auf derselben Seite. Sproutsite setzt den Dateinamen vor die Überschriften-ID. Der Code bezieht sich auf diese Datei, 01-navigation.mdx; bei einem anderen Dateinamen muss der Präfix angepasst werden.
+Fragment links lead to a heading on the same page. Sproutsite prefixes heading IDs with the source filename. This example refers to 01-navigation.mdx; change the prefix when using another filename.
 
-<Tabs label="Verlinktes Inhaltsverzeichnis: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Linked table of contents: Preview and code" variant="border">
+    <Tab title="Preview">
 
-        #### Einstieg in das Beispiel
+        #### Start of the example
 
-        [Zu den weiteren Informationen](#01-navigation-weitere-informationen)
+        [Go to further information](#01-navigation-further-information)
 
-        #### Weitere Informationen
+        #### Further information
 
-        Überschriften erhalten eindeutige IDs. Das Sprungziel liegt hier im selben Vorschau-Panel.
+        Headings receive unique IDs. The target here is in the same preview panel.
 
-        [Zurück zum Einstieg](#01-navigation-einstieg-in-das-beispiel)
+        [Back to the start](#01-navigation-start-of-the-example)
 
     </Tab>
     <Tab title="Code">
         ````markdown
-        #### Einstieg in das Beispiel
+        #### Start of the example
 
-        [Zu den weiteren Informationen](#01-navigation-weitere-informationen)
+        [Go to further information](#01-navigation-further-information)
 
-        #### Weitere Informationen
+        #### Further information
 
-        Überschriften erhalten eindeutige IDs. Das Sprungziel liegt hier im selben Vorschau-Panel.
+        Headings receive unique IDs. The target here is in the same preview panel.
 
-        [Zurück zum Einstieg](#01-navigation-einstieg-in-das-beispiel)
+        [Back to the start](#01-navigation-start-of-the-example)
         ````
     </Tab>
 
 </Tabs>
 
-### Links mit Zusatzparametern
+### Links with query parameters
 
-Links können zusätzliche Parameter enthalten. Das Seitenziel bleibt gleich; Query-Parameter bleiben beim Ergänzen des Basispfads erhalten.
+Links can include query parameters. The page target stays the same, and adding the base path preserves the query string.
 
-<Tabs label="Links mit Zusatzparametern: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Links with query parameters: Preview and code" variant="border">
+    <Tab title="Preview">
 
-        [FAQ aus dem Showcase öffnen](/faq/?ref=showcase)
+        [Open the FAQ from the showcase](/faq/?ref=showcase)
 
-        [Info mit Herkunftsparameter öffnen](/info/?ref=navigation)
+        [Open Info with a referral parameter](/info/?ref=navigation)
 
     </Tab>
     <Tab title="Code">
         ````markdown
-        [FAQ aus dem Showcase öffnen](/faq/?ref=showcase)
+        [Open the FAQ from the showcase](/faq/?ref=showcase)
 
-        [Info mit Herkunftsparameter öffnen](/info/?ref=navigation)
+        [Open Info with a referral parameter](/info/?ref=navigation)
         ````
     </Tab>
 
 </Tabs>
 
-### Externe Links und E-Mail
+### External links and email
 
-Externe Weblinks behalten ihre vollständige Adresse und öffnen in einem neuen Browser-Tab. Ein E-Mail-Link öffnet das Mailprogramm; kontakt@example.com ist hier eine Beispieladresse.
+External web links retain their full URL and open in a new browser tab. An email link opens the mail application; contact@example.com is an example address.
 
-<Tabs label="Externe Links und E-Mail: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="External links and email: Preview and code" variant="border">
+    <Tab title="Preview">
 
-        Die [offizielle Astro-Dokumentation](https://docs.astro.build/) ergänzt die projektspezifischen Informationen.
+        The [official Astro documentation](https://docs.astro.build/) complements the project-specific information.
 
-        [An die Beispieladresse schreiben](mailto:kontakt@example.com)
+        [Email the example address](mailto:contact@example.com)
 
     </Tab>
     <Tab title="Code">
         ````markdown
-        Die [offizielle Astro-Dokumentation](https://docs.astro.build/) ergänzt die projektspezifischen Informationen.
+        The [official Astro documentation](https://docs.astro.build/) complements the project-specific information.
 
-        [An die Beispieladresse schreiben](mailto:kontakt@example.com)
+        [Email the example address](mailto:contact@example.com)
         ````
     </Tab>
 
 </Tabs>
 
-### Weiterführende Aktionen
+### Further actions
 
-CardActions stellt Navigationslinks innerhalb einer Card als Schaltflächen dar. Da sie zu anderen Seiten führen, bleiben es semantisch Links.
+CardActions displays navigation links inside a card as buttons. They remain semantic links because they lead to other pages.
 
-<Tabs label="Weiterführende Aktionen: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Further actions: Preview and code" variant="border">
+    <Tab title="Preview">
 
         <Card>
-            #### Das Layout kennenlernen
+            #### Explore the layout
 
-            Entdecke die Spaltenaufteilungen im Showcase oder lies die Dokumentation zu den Bausteinen.
+            Explore column layouts in the showcase or read the component documentation.
 
             <CardActions>
-                [Layout ansehen](/showcase/layout/)
-                [Komponenten verstehen](/documentation/layout/)
+                [View layouts](/showcase/layout/)
+                [Understand the components](/documentation/layout/)
             </CardActions>
         </Card>
 
@@ -143,13 +143,13 @@ CardActions stellt Navigationslinks innerhalb einer Card als Schaltflächen dar.
         import { Card, CardActions } from 'sproutsite/components';
 
         <Card>
-            #### Das Layout kennenlernen
+            #### Explore the layout
 
-            Entdecke die Spaltenaufteilungen im Showcase oder lies die Dokumentation zu den Bausteinen.
+            Explore column layouts in the showcase or read the component documentation.
 
             <CardActions>
-                [Layout ansehen](/showcase/layout/)
-                [Komponenten verstehen](/documentation/layout/)
+                [View layouts](/showcase/layout/)
+                [Understand the components](/documentation/layout/)
             </CardActions>
         </Card>
         ````

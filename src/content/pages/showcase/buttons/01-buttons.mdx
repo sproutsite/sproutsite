@@ -7,22 +7,22 @@ import { Button } from 'sproutsite/components';
 import { Eyebrow } from 'sproutsite/components';
 import { Tabs, Tab } from 'sproutsite/components';
 
-<Eyebrow>Links und Aktionen</Eyebrow>
+<Eyebrow>Links and actions</Eyebrow>
 
 ## Buttons
 
-Buttons machen eine Aktion oder einen weiterführenden Link sichtbar. `Button` rendert mit `href` ein semantisches `a`-Element für Navigation; ohne `href` entsteht ein echtes `button`-Element. Varianten, Größen und Darstellungsstile bleiben klar typisiert und von DaisyUI umgesetzt.
+Buttons emphasize an action or a navigation link. With `href`, `Button` renders a semantic `a` element for navigation; without it, it renders a native `button`. Sproutsite types the color, size, and style props; DaisyUI provides their presentation.
 
 **Atomic Design:** Atom `Button`.
 
-Komponentenpfad unter `src/themes/default/components/`: `atoms/Button/`.
+Component path within `src/themes/default/components/`: `atoms/Button/`.
 
-### Farbvarianten
+### Color variants
 
-Die semantischen Theme-Farben stehen als Varianten zur Verfügung.
+Semantic theme colors are available as variants.
 
-<Tabs label="Farbvarianten: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Color variants: Preview and code" variant="border">
+    <Tab title="Preview">
         <Button>Primary</Button>
         <Button variant="secondary">Secondary</Button>
         <Button variant="accent">Accent</Button>
@@ -49,38 +49,38 @@ Die semantischen Theme-Farben stehen als Varianten zur Verfügung.
 
 </Tabs>
 
-### Größen
+### Sizes
 
-Fünf Größen helfen, die visuelle Gewichtung an den Kontext anzupassen. Die mittlere Größe ist der Standard.
+Five sizes adapt the visual emphasis to the context. Medium is the default.
 
-<Tabs label="Größen: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
-        <Button size="xs">Extra klein</Button>
-        <Button size="sm">Klein</Button>
-        <Button size="md">Mittel</Button>
-        <Button size="lg">Groß</Button>
-        <Button size="xl">Extra groß</Button>
+<Tabs label="Sizes: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Button size="xs">Extra small</Button>
+        <Button size="sm">Small</Button>
+        <Button size="md">Medium</Button>
+        <Button size="lg">Large</Button>
+        <Button size="xl">Extra large</Button>
     </Tab>
     <Tab title="Code">
         ```mdx
         import { Button } from 'sproutsite/components';
 
-        <Button size="xs">Extra klein</Button>
-        <Button size="sm">Klein</Button>
-        <Button size="md">Mittel</Button>
-        <Button size="lg">Groß</Button>
-        <Button size="xl">Extra groß</Button>
+        <Button size="xs">Extra small</Button>
+        <Button size="sm">Small</Button>
+        <Button size="md">Medium</Button>
+        <Button size="lg">Large</Button>
+        <Button size="xl">Extra large</Button>
         ```
     </Tab>
 
 </Tabs>
 
-### Darstellungsstile
+### Visual styles
 
-Outline, Soft, Ghost und Link setzen unterschiedliche Gewichtungen, ohne die semantische Farbvariante zu ändern.
+Outline, Soft, Ghost, and Link provide different levels of emphasis without changing the semantic color variant.
 
-<Tabs label="Darstellungsstile: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Visual styles: Preview and code" variant="border">
+    <Tab title="Preview">
         <Button variant="secondary" style="outline">Outline</Button>
         <Button variant="info" style="soft">Soft</Button>
         <Button variant="neutral" style="ghost">Ghost</Button>
@@ -99,23 +99,23 @@ Outline, Soft, Ghost und Link setzen unterschiedliche Gewichtungen, ohne die sem
 
 </Tabs>
 
-### Link, Aktion und deaktivierter Zustand
+### Links, actions, and disabled states
 
-Ein Link führt zu einer anderen Adresse; ein Button löst eine Aktion aus. Ohne JavaScript bleibt der Aktions-Button hier bewusst ohne Seiteneffekt.
+A link navigates to another address; a button triggers an action. The action button in this example intentionally has no effect without JavaScript.
 
-<Tabs label="Link, Aktion und deaktivierter Zustand: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
-        <Button href="/showcase/">Zum Showcase</Button>
-        <Button type="button" variant="secondary">Aktion ausführen</Button>
-        <Button variant="primary" disabled>Derzeit nicht verfügbar</Button>
+<Tabs label="Links, actions, and disabled states: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Button href="/showcase/">Open showcase</Button>
+        <Button type="button" variant="secondary">Run action</Button>
+        <Button variant="primary" disabled>Currently unavailable</Button>
     </Tab>
     <Tab title="Code">
         ```mdx
         import { Button } from 'sproutsite/components';
 
-        <Button href="/showcase/">Zum Showcase</Button>
-        <Button type="button" variant="secondary">Aktion ausführen</Button>
-        <Button variant="primary" disabled>Derzeit nicht verfügbar</Button>
+        <Button href="/showcase/">Open showcase</Button>
+        <Button type="button" variant="secondary">Run action</Button>
+        <Button variant="primary" disabled>Currently unavailable</Button>
         ```
     </Tab>
 

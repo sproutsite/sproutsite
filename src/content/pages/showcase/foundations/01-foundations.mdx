@@ -7,24 +7,24 @@ import { Eyebrow } from 'sproutsite/components';
 import { Tabs, Tab } from 'sproutsite/components';
 import { FoundationSample } from 'sproutsite/components';
 
-<Eyebrow>Gestaltung sehen und ausprobieren</Eyebrow>
+<Eyebrow>Explore the design</Eyebrow>
 
 ## Design Foundations
 
-Wie wirken die Farben, Schriften, Abstände, Ecken und Schatten des Themes? Die folgenden Proben machen die gemeinsamen Gestaltungsgrundlagen sichtbar. Unter „Code“ findest du die MDX-Einbindung und einen passenden CSS-Ausschnitt aus dem Baustein. Die CSS-Ausschnitte erklären die Darstellung; die fertige Komponente bringt ihre Styles bereits mit.
+Compare the theme's colors, fonts, spacing, corners, and shadows using the specimens below. The Code tab provides the MDX usage and a related CSS excerpt. The excerpts explain the presentation; the component already includes its styles.
 
-Die vollständigen Tokenwerte, Quelldateien und Verwendungsdetails stehen in der [Theme-Dokumentation](/documentation/theme/). Die Detailseiten für [Cards](/showcase/cards/), [Alerts](/showcase/alerts/) und [Layout](/showcase/layout/) zeigen die Anwendung der fertigen Bausteine.
+The [theme documentation](/documentation/theme/) lists complete token values, source files, and usage details. Detail pages for [cards](/showcase/cards/), [alerts](/showcase/alerts/), and [layout](/showcase/layout/) show the components in use.
 
-**Atomic Design:** Die Gestaltungsgrundlagen gelten für alle Ebenen. Die sichtbaren Proben rendert das Molecule `FoundationSample`.
+**Atomic Design:** Design foundations apply across all levels. The molecule `FoundationSample` renders these visual specimens.
 
-Komponentenpfad unter `src/themes/default/components/`: `molecules/FoundationSample/`.
+Component path within `src/themes/default/components/`: `molecules/FoundationSample/`.
 
-### Farben sehen und vergleichen
+### Compare colors
 
-Die Palette zeigt neutrale Flächen, Markenfarben und Statusfarben direkt nebeneinander. Jede Farbfläche ist beschriftet; ihre Farbe kommt aus dem Theme.
+The palette places neutral surfaces, brand colors, and status colors side by side. Each swatch has a label and uses a theme color.
 
-<Tabs label="Farben sehen und vergleichen: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Compare colors: Preview and code" variant="border">
+    <Tab title="Preview">
         <FoundationSample kind="colors" />
     </Tab>
     <Tab title="Code">
@@ -34,7 +34,7 @@ Die Palette zeigt neutrale Flächen, Markenfarben und Statusfarben direkt nebene
         <FoundationSample kind="colors" />
         ````
 
-        Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
+        The presentation uses CSS such as this excerpt:
 
         ````css
         .ss-foundation-sample__swatch--primary {
@@ -53,12 +53,12 @@ Die Palette zeigt neutrale Flächen, Markenfarben und Statusfarben direkt nebene
 
 </Tabs>
 
-### Schrift und Größen erleben
+### Compare type and sizes
 
-Die weicheren Formen von Nunito und die Systemschrift lassen sich direkt vergleichen. Die große Schrift passt sich an die Bildschirmbreite an. Die Proben sind Textabsätze, damit die Überschriftenhierarchie der Seite erhalten bleibt.
+Compare Nunito's softer shapes with the system font. Display text scales with the viewport width. The specimens are paragraphs so the page's heading hierarchy stays intact.
 
-<Tabs label="Schrift und Größen erleben: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Compare type and sizes: Preview and code" variant="border">
+    <Tab title="Preview">
         <FoundationSample kind="type" />
     </Tab>
     <Tab title="Code">
@@ -68,7 +68,7 @@ Die weicheren Formen von Nunito und die Systemschrift lassen sich direkt verglei
         <FoundationSample kind="type" />
         ````
 
-        Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
+        The presentation uses CSS such as this excerpt:
 
         ````css
         .ss-foundation-sample__display {
@@ -94,12 +94,12 @@ Die weicheren Formen von Nunito und die Systemschrift lassen sich direkt verglei
 
 </Tabs>
 
-### Abstände in Originalgröße
+### Spacing at actual size
 
-Die blauen Balken zeigen fünf Größen der gemeinsamen Abstandsskala. Ihre Breite entspricht dem angegebenen Wert; sie werden nicht zur Veranschaulichung vergrößert.
+The blue bars show five steps in the shared spacing scale. Each bar's width matches the stated value without being enlarged for illustration.
 
-<Tabs label="Abstände in Originalgröße: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Spacing at actual size: Preview and code" variant="border">
+    <Tab title="Preview">
         <FoundationSample kind="spacing" />
     </Tab>
     <Tab title="Code">
@@ -109,7 +109,7 @@ Die blauen Balken zeigen fünf Größen der gemeinsamen Abstandsskala. Ihre Brei
         <FoundationSample kind="spacing" />
         ````
 
-        Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
+        The presentation uses CSS such as this excerpt:
 
         ````css
         .ss-foundation-sample__space--1 {
@@ -136,12 +136,12 @@ Die blauen Balken zeigen fünf Größen der gemeinsamen Abstandsskala. Ihre Brei
 
 </Tabs>
 
-### Ecken und Radien vergleichen
+### Compare corners and radii
 
-Drei gleich große Flächen zeigen den Unterschied zwischen eckigen Kanten und den Rundungen für Felder und Boxen.
+Three equally sized surfaces compare square corners with the radii used for fields and boxes.
 
-<Tabs label="Ecken und Radien vergleichen: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Compare corners and radii: Preview and code" variant="border">
+    <Tab title="Preview">
         <FoundationSample kind="radius" />
     </Tab>
     <Tab title="Code">
@@ -151,7 +151,7 @@ Drei gleich große Flächen zeigen den Unterschied zwischen eckigen Kanten und d
         <FoundationSample kind="radius" />
         ````
 
-        Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
+        The presentation uses CSS such as this excerpt:
 
         ````css
         .ss-foundation-sample__shape--none {
@@ -170,12 +170,12 @@ Drei gleich große Flächen zeigen den Unterschied zwischen eckigen Kanten und d
 
 </Tabs>
 
-### Schatten und Tiefe
+### Shadows and depth
 
-Gleich große Flächen machen die Wirkung unterschiedlicher Schatten sichtbar. Neben dem kleinen Schatten lassen sich die weichere und die stärker angehobene Variante des Themes vergleichen.
+Equally sized surfaces demonstrate different shadows. Compare the small shadow with the theme's soft and raised variants.
 
-<Tabs label="Schatten und Tiefe: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Shadows and depth: Preview and code" variant="border">
+    <Tab title="Preview">
         <FoundationSample kind="shadow" />
     </Tab>
     <Tab title="Code">
@@ -185,7 +185,7 @@ Gleich große Flächen machen die Wirkung unterschiedlicher Schatten sichtbar. N
         <FoundationSample kind="shadow" />
         ````
 
-        Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
+        The presentation uses CSS such as this excerpt:
 
         ````css
         .ss-foundation-sample__elevation--none {
@@ -208,12 +208,12 @@ Gleich große Flächen machen die Wirkung unterschiedlicher Schatten sichtbar. N
 
 </Tabs>
 
-### Tastaturfokus ausprobieren
+### Try keyboard focus
 
-Wähle den Vorschau-Reiter und drücke zweimal die Tabulatortaste: zuerst zum Panel, dann zum Link. Die sichtbare Kontur zeigt das aktive Tastaturziel. Mit Enter lässt sich der Link bedienen.
+Select the Preview tab and press Tab twice: first to focus the panel, then the link. The visible outline identifies the keyboard target. Press Enter to follow the link.
 
-<Tabs label="Tastaturfokus ausprobieren: Vorschau und Code" variant="border">
-    <Tab title="Vorschau">
+<Tabs label="Try keyboard focus: Preview and code" variant="border">
+    <Tab title="Preview">
         <FoundationSample kind="focus" />
     </Tab>
     <Tab title="Code">
@@ -223,7 +223,7 @@ Wähle den Vorschau-Reiter und drücke zweimal die Tabulatortaste: zuerst zum Pa
         <FoundationSample kind="focus" />
         ````
 
-        Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
+        The presentation uses CSS such as this excerpt:
 
         ````css
         .ss-foundation-sample__focus {

@@ -4,11 +4,11 @@ tone: default
 
 import { Eyebrow } from 'sproutsite/components';
 
-<Eyebrow>Entwicklungsumgebung</Eyebrow>
+<Eyebrow>Development environment</Eyebrow>
 
-## Projekt lokal starten
+## Run the project locally
 
-Sproutsite benötigt Node.js 24 LTS oder neuer. Die im Repository enthaltene `.nvmrc` legt die getestete Node-Version fest.
+Sproutsite requires Node.js 24 LTS or later. The repository's `.nvmrc` specifies the tested Node.js version.
 
 ```sh
 nvm use
@@ -16,11 +16,11 @@ npm install
 npm run dev
 ```
 
-Danach ist die Demo unter der vom Astro-Dev-Server ausgegebenen lokalen Adresse verfügbar. Der Entwicklungsserver startet mit `--force`, damit Änderungen an Collections und MDX-Bausteinen zuverlässig neu eingelesen werden.
+The demo is then available at the local address printed by Astro's development server. The server starts with `--force` so changes to collections and MDX components are reloaded reliably.
 
-### Die wichtigsten Ordner
+### Key directories
 
-- `src/content/` enthält Website-Konfiguration und Seiteninhalte.
-- `src/themes/default/` enthält das Standard-Theme und seine Komponenten.
-- `src/lib/sproutsite/` enthält die kleine Inhalts-, URL- und Validierungslogik.
-- `src/package/` bildet die spätere öffentliche Paketoberfläche ab.
+- `src/content/` contains website configuration and page content.
+- `src/themes/default/` contains the default theme and its components.
+- `src/lib/sproutsite/` contains shared content, URL, and validation logic.
+- `src/package/` defines the intended public package surface.

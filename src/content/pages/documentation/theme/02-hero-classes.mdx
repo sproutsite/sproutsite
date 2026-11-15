@@ -4,14 +4,14 @@ tone: muted
 
 import { Eyebrow } from 'sproutsite/components';
 
-<Eyebrow>Gestaltungsvarianten</Eyebrow>
+<Eyebrow>Visual variants</Eyebrow>
 
-## Hero-Varianten im Theme
+## Hero variants in the theme
 
-Hero-Klassen beginnen mit `ss-` und werden im Theme gestylt. `ss-hero--theme-1` ergänzt einen tiefen Navy-Hintergrund mit organischen Wellen in Blau und Teal. Die linke Seite bleibt für den Text ruhig; auf kleinen Bildschirmen werden die Wellen zusätzlich zurückgenommen. Der semantische Tone bleibt unverändert. Die Startseite übernimmt diese globale Hero-Klasse aus `site.yaml`, ohne ein zusätzliches Hintergrundbild.
+Hero class names start with `ss-` and are styled in the theme. `ss-hero--theme-1` adds a deep navy background with organic blue and teal waves. The left side stays quiet for text, and the waves become more subdued on small screens. The semantic tone stays unchanged. The homepage inherits this global hero class from `site.yaml` without adding a background image.
 
-Die Gestaltung liegt zusammenhängend in `components/organisms/Hero/Hero.css`, die Vektorformen in `assets/hero-waves.svg`. Die Farbtokens `--color-hero-*` stehen in `styles/foundation/tokens.css`; die eigenständige SVG-Datei verwendet dieselbe Palette für ihre Verläufe. Bei einer Änderung der Wellenfarben werden beide Stellen angepasst. Die Wellen sind rein dekorativ und enthalten keine zusätzlichen Texte oder Logos.
+The styling lives in `components/organisms/Hero/Hero.css`, and the vector shapes live in `assets/hero-waves.svg`. The `--color-hero-*` tokens are defined in `styles/foundation/tokens.css`; the standalone SVG uses the same palette for its gradients. Update both when changing wave colors. The waves are decorative and contain no additional text or logos.
 
-Die obere Welle ist als großzügige Bézier-Kontur angelegt. Ein lokal begrenzter radialer Verlauf ergänzt dort Grün; darunter liegen unterschiedlich geschwungene blaue Ebenen. Auf Desktop füllt das SVG den Hero proportional mit `cover` und wird rechts unten ausgerichtet. So reichen die Wellen bis in die mittlere Bildhälfte; der grüne Verlauf ist auf den dabei entstehenden Ausschnitt abgestimmt. Sanfte dunkle Überblendungen schützen den linken Textbereich und die Navigation. Auf Tablets und Smartphones wird das SVG auf die volle Hero-Höhe skaliert und seine Deckkraft reduziert. Die Wellenpfade bleiben in allen Ansichten unverändert.
+The upper wave follows a broad Bézier curve with a localized radial green gradient. Differently curved blue layers sit underneath. On desktop, the SVG fills the hero proportionally with `cover` and is aligned to the top. The waves extend toward the center, with the green gradient positioned for this crop. Soft dark overlays protect the left text area and navigation. On tablets and phones, the SVG scales to the hero's full height with reduced opacity. The wave paths remain unchanged at every screen size.
 
-Zusammengehörige Block-, Element- und Modifier-Regeln liegen in der CSS-Datei verschachtelt. So bleiben Varianten wie `ss-hero--theme-1` samt Pseudoelementen direkt zusammen editierbar.
+Related block, element, and modifier rules use native CSS nesting. Variants such as `ss-hero--theme-1` and their pseudo-elements can therefore be edited together.

@@ -4,19 +4,19 @@ tone: default
 
 import { Eyebrow } from 'sproutsite/components';
 
-<Eyebrow>Arbeitskopie nutzen</Eyebrow>
+<Eyebrow>Use a working copy</Eyebrow>
 
-## Framework lokal testen
+## Test the framework locally
 
-Für die Entwicklung kann ein anderes Astro-Projekt die lokale Arbeitskopie direkt installieren.
+During development, another Astro project can install the local working copy directly.
 
 ```sh
-cd /pfad/zum/verbraucherprojekt
+cd /path/to/consumer-project
 npm install ../sproutsite
 ```
 
-Nach Änderungen an Sproutsite genügt normalerweise ein Neustart des Verbraucher-Dev-Servers. Bei einer bewussten Paketprüfung erstellt `npm pack` einen Tarball, der sich anschließend im Verbraucherprojekt installieren lässt.
+After changing Sproutsite, restarting the consumer's development server is usually sufficient. For an explicit packaging check, `npm pack` creates a tarball that can be installed in the consumer project.
 
-### Noch kein Registry-Release
+### Not yet published to the registry
 
-Sproutsite ist aktuell ein lokales, privates Paket. Ein npm-Publish, ein GitHub-Release oder ein Tag erfolgen nur als bewusster separater Schritt.
+Sproutsite is currently a local, private package. Publishing to npm, creating a GitHub release, or adding a tag is a separate, explicit step.

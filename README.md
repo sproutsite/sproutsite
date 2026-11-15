@@ -323,6 +323,10 @@ Another theme can replace these components and the technical CSS integration wit
 
 ## Validation and Limitations
 
+The demo keeps English showcase and documentation sources in the standard files and German translations in their `.de.md`, `.de.mdx`, and `page.de.yaml` counterparts. English routes use `/showcase/` and `/documentation/`; German routes use `/de/showcase/` and `/de/dokumentation/`, including localized URL segments. Keep both versions up to date when editing examples, labels, image descriptions, or metadata. Markdown links use the source file's locale, and Button applies the active locale and deployment base exactly once. Theme messages are bundled from the local YAML files using Vite raw imports; they are not read from paths relative to generated build chunks.
+
+The accessibility script discovers all generated page routes and checks both languages on mobile and desktop. To investigate specific pages, set `SPROUTSITE_A11Y_ROUTES` to a comma-separated list of generated routes before running `node --import tsx scripts/test-a11y.ts`; omit it for the complete run. Build verification also checks internal page and fragment targets in both languages, including under `/demo/`.
+
 The validator checks directory association, YAML fields, file names, tones, duplicate section numbers, Markdown hierarchy, raw HTML, disallowed link protocols, internal link targets, and generated heading IDs. The build checks all generated pages, metadata, canonicals, the sitemap, and base prefixes. Project-owned program logic is TypeScript only; `npm run test:source` checks this too.
 
 Accessibility testing automates axe, visible keyboard focus, and mobile overflow checks. It does not replace a complete WCAG 2.2 AA conformance assessment or editorial review of headings and link text.

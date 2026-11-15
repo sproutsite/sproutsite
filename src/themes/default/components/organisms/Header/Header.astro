@@ -1,5 +1,6 @@
 ---
 import BrandLogo from '../../atoms/BrandLogo/BrandLogo.astro';
+import { t } from '../../../i18n/index.js';
 import type { Link, SiteConfig } from '../../../../../lib/sproutsite/types.js';
 import {
     contentHref,
@@ -19,7 +20,13 @@ const isActive = (link: Link) => link.href === route;
         <a class="ss-header__brand" href={contentHref('/', site)}>
             <BrandLogo name={site.name} />
         </a>
-        <nav class="ss-header__nav" aria-label="Hauptnavigation">
+        <nav
+            class="ss-header__nav"
+            aria-label={t(
+                site.language === 'de' ? 'de' : 'en',
+                'primaryNavigation',
+            )}
+        >
             <ul class="ss-header__links">
                 {site.header.links.map((link) => {
                     const external = isExternalWebLink(link.href, site.url);

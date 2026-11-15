@@ -16,7 +16,7 @@
         }
 
         .ss-brand-logo__highlight {
-            color: var(--color-hero-cyan);
+            color: var(--ss-brand-highlight, var(--color-hero-cyan));
         }
     }
 }

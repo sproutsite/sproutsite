@@ -1,6 +1,7 @@
 ---
 import '../../styles/theme.css';
 import Header from '../../components/organisms/Header/Header.astro';
+import { t } from '../../i18n/index.js';
 import Footer from '../../components/organisms/Footer/Footer.astro';
 import type { SiteConfig } from '../../../../lib/sproutsite/types.js';
 import { canonicalUrl, withBase } from '../../../../lib/sproutsite/urls.js';
@@ -80,7 +81,7 @@ const socialImage = new URL(socialCard.src, site.url).href;
     </head>
     <body class:list={{ 'ss-page--landing': layout === 'landing' }}>
         <a class="ss-skip-link" href="#main-content">
-            Zum Inhalt springen
+            {t(site.language === 'de' ? 'de' : 'en', 'skipToContent')}
         </a>
         {layout !== 'landing' && <Header site={site} route={route} />}
         <main id="main-content">

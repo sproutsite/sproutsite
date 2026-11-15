@@ -2,3 +2,30 @@ skipToContent: Skip to content
 primaryNavigation: Primary navigation
 footerNavigation: Footer navigation
 home: Home
+foundationDefault: Default surface
+foundationMuted: Muted surface
+foundationBorder: Border color
+foundationText: Text color
+foundationPrimary: Primary color
+foundationSecondary: Secondary color
+foundationAccent: Accent color
+foundationNeutral: Neutral
+foundationInfo: Information
+foundationSuccess: Success
+foundationWarning: Warning
+foundationError: Error
+foundationSquare: Square
+foundationFields: Fields
+foundationBoxes: Boxes
+foundationNoShadow: No shadow
+foundationSmall: Small
+foundationSoft: Soft
+foundationRaised: Raised
+foundationDisplayLabel: Nunito · display text
+foundationDisplay: Clear thoughts.
+foundationHeadingLabel: Nunito · heading text
+foundationHeading: A shared visual language.
+foundationBodyLabel: System font · body text
+foundationBody: Readable text gives content room. The system font complements the softer shapes of the heading.
+foundationFocus: Press Tab to reach the link. The outline identifies the keyboard target; the link leads to this page's main content.
+foundationFocusLink: Go to main content

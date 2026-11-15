@@ -1,5 +1,6 @@
 ---
-import { withBase } from '../../../../../lib/sproutsite/urls.js';
+import { contentHref } from '../../../../../lib/sproutsite/urls.js';
+import { loadSiteConfig } from '../../../../../lib/sproutsite/site-config.js';
 
 type ButtonVariant =
     | 'primary'
@@ -38,6 +39,7 @@ const {
     type = 'button',
     disabled = false,
 } = Astro.props;
+const site = loadSiteConfig(Astro.currentLocale === 'de' ? 'de' : 'en');
 
 if (href && disabled)
     throw new Error('Sproutsite Button links cannot be disabled.');
@@ -77,7 +79,7 @@ const classes = [
 ---
 
 {href ? (
-    <a class:list={classes} href={withBase(href, import.meta.env.BASE_URL)}>
+    <a class:list={classes} href={contentHref(href, site)}>
         {/* @slot Button label or other inline content. */}
         <slot />
     </a>

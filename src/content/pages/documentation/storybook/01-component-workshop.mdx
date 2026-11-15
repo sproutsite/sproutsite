@@ -4,28 +4,28 @@ tone: default
 
 import { Eyebrow } from 'sproutsite/components';
 
-<Eyebrow>Komponentenwerkstatt</Eyebrow>
+<Eyebrow>Component workshop</Eyebrow>
 
-## Komponenten isoliert entwickeln
+## Develop components in isolation
 
-Storybook zeigt die vorhandenen Sproutsite-Komponenten unabhängig von den Inhaltsseiten. Das ist besonders hilfreich, um Varianten, responsive Darstellung und Zustände einer Komponente zu vergleichen, bevor sie im Showcase oder in einer Website verwendet wird.
+Storybook displays Sproutsite components independently of content pages. Use it to compare variants, responsive layouts, and component states before using them in the showcase or a website.
 
-Storybook ist ein lokales Entwicklungswerkzeug. Es gehört nicht zur veröffentlichten Sproutsite-Website und wird nicht automatisch bereitgestellt.
+Storybook is a local development tool. It is separate from the published Sproutsite website and is not deployed automatically.
 
-### Storybook starten
+### Start Storybook
 
 ```sh
 nvm use
 npm run storybook
 ```
 
-Danach ist die Komponentenwerkstatt unter [http://localhost:6006](http://localhost:6006) verfügbar. Eine globale Storybook-Installation ist nicht nötig: Das Projekt verwendet die lokale Entwicklungsabhängigkeit.
+The component workshop is then available at [http://localhost:6006](http://localhost:6006). No global Storybook installation is needed; the project uses its local development dependency.
 
-### Vorhandene Stories
+### Existing stories
 
-Die ersten Stories zeigen die Komponenten `Button`, `Badge`, `Alert`, `Card` und `ContentImage`. Sie verwenden die echten `.astro`-Komponenten und das Standard-Theme. Änderungen an Komponente oder CSS werden dadurch unmittelbar in derselben Darstellung überprüfbar.
+Stories cover components including `Button`, `Badge`, `Alert`, `Card`, `ContentImage`, and `Icon`. They use the actual `.astro` components and the default theme, so component and CSS changes can be checked directly in the same presentation.
 
-Neue Stories liegen neben den bestehenden Beispielen unter `stories/components/`. Eine Story importiert immer die vorhandene Komponente; sie erstellt keine parallele TSX-Variante.
+Add new stories alongside the existing examples under `stories/components/`. A story imports the existing component rather than creating a parallel TSX version.
 
 ```ts
 import Button from '../../../src/themes/default/components/atoms/Button/Button.astro';
@@ -39,24 +39,24 @@ export default {
 export const Primary = {
     args: {
         slots: {
-            default: 'Weiter',
+            default: 'Continue',
         },
     },
 };
 ```
 
-Ergänze eine Story, wenn eine wiederverwendbare Komponente oder eine bedeutende Variante hinzukommt. Die Story sollte klar benennen, welchen Zustand oder welche Gestaltung sie überprüft.
+Add a story whenever you introduce a reusable component or a meaningful variant. Give it a clear name describing the state or appearance it demonstrates.
 
-### Responsive Varianten prüfen
+### Check responsive variants
 
-Die Toolbar enthält vier fest konfigurierte Standardgrößen: **Small mobile** (320 px), **Large mobile** (414 px), **Tablet** (834 px) und **Desktop** (1280 px). Wähle sie für jede relevante Story nacheinander aus. Prüfe insbesondere Umbrüche, ausreichende Touch-Ziele, Bildausschnitte sowie horizontales Überlaufen.
+The toolbar provides four standard viewports: **Small mobile** (320 px), **Large mobile** (414 px), **Tablet** (834 px), and **Desktop** (1280 px). Check each relevant story at these sizes. Pay attention to wrapping, touch target sizes, image crops, and horizontal overflow.
 
-Die Stories für `Card` und `Columns` enthalten gezielte responsive Beispiele. Ihre Breite wird nicht im Code festgesetzt, damit sie über die Viewport-Toolbar frei kontrolliert werden kann.
+The `Card` and `Columns` stories include dedicated responsive examples. Their widths are not fixed in code, so the viewport toolbar can resize them freely.
 
-### Statischen Storybook-Build prüfen
+### Verify the static Storybook build
 
 ```sh
 npm run build:storybook
 ```
 
-Der Befehl erzeugt eine statische Vorschau in `storybook-static/`. Dieser generierte Ordner ist in `.gitignore` ausgeschlossen. Der Build ist eine lokale Qualitätsprüfung und veröffentlicht nichts.
+This command writes a static preview to `storybook-static/`. The generated directory is excluded by `.gitignore`. The build is a local quality check and does not publish anything.
