@@ -11,6 +11,8 @@ interface Props {
     divider?: boolean;
     /** Decorative Lucide icon between columns; takes precedence over divider. */
     separator?: ComponentProps<typeof Icon>['name'];
+    /** Desktop alignment: column center or the first vertical Feature icon. */
+    separatorAlign?: 'centered' | 'top';
     /** Optional CSS hex color; otherwise use the theme's subtle gray. */
     dividerColor?: `#${string}`;
     /** Named spacing preset; md is the default (6rem total gap). */
@@ -22,10 +24,15 @@ interface Props {
 const {
     divider = false,
     separator,
+    separatorAlign = 'centered',
     dividerColor,
     dividerGap = 'md',
     dividerGapMobile,
 } = Astro.props;
+if (!['centered', 'top'].includes(separatorAlign))
+    throw new Error(
+        'Sproutsite Columns separatorAlign must be centered or top.',
+    );
 if (
     separator !== undefined &&
     (typeof separator !== 'string' || !/^[A-Z][A-Za-z0-9]*$/.test(separator))
@@ -50,6 +57,7 @@ if (
         'ss-columns',
         divider && !separator && 'ss-columns--divider',
         separator && 'ss-columns--separator',
+        separator && `ss-columns--separator-${separatorAlign}`,
         separated && `ss-columns--divider-gap-${dividerGap}`,
         separated &&
             dividerGapMobile &&
@@ -103,6 +111,12 @@ if (
                 );
                 const bounds = grid.getBoundingClientRect();
                 const desktop = window.matchMedia('(min-width: 64rem)').matches;
+                const topAligned = grid.classList.contains(
+                    'ss-columns--separator-top',
+                );
+                const rootFontSize = parseFloat(
+                    getComputedStyle(document.documentElement).fontSize,
+                );
                 columns.forEach((column, index) => {
                     const current = positions[index]!;
                     const previous = positions[index - 1];
@@ -113,8 +127,20 @@ if (
                     const separator = separators[index - 1];
                     if (!separator || !previous) return;
                     separator.hidden = desktop && !sameRow;
+                    const featureIcon = topAligned
+                        ? column
+                              .querySelector<HTMLElement>(
+                                  ':scope > .ss-feature--vertical > .ss-feature__icon',
+                              )
+                              ?.getBoundingClientRect()
+                        : undefined;
+                    const desktopY = topAligned
+                        ? featureIcon
+                            ? (featureIcon.top + featureIcon.bottom) / 2
+                            : current.top + 1.75 * rootFontSize
+                        : (current.top + current.bottom) / 2;
                     separator.style.left = `${(desktop ? (previous.right + current.left) / 2 : (current.left + current.right) / 2) - bounds.left}px`;
-                    separator.style.top = `${(desktop ? (current.top + current.bottom) / 2 : (previous.bottom + current.top) / 2) - bounds.top}px`;
+                    separator.style.top = `${(desktop ? desktopY : (previous.bottom + current.top) / 2) - bounds.top}px`;
                 });
             };
             const observer = new ResizeObserver(update);

@@ -554,6 +554,9 @@ function validateMdxLayout(
                 const separator = attributes.find(
                     (attribute) => attribute.name === 'separator',
                 );
+                const separatorAlign = attributes.find(
+                    (attribute) => attribute.name === 'separatorAlign',
+                );
                 const invalidGap = attributes
                     .filter((attribute) =>
                         ['dividerGap', 'dividerGapMobile'].includes(
@@ -577,6 +580,7 @@ function validateMdxLayout(
                             ![
                                 'divider',
                                 'separator',
+                                'separatorAlign',
                                 'dividerColor',
                                 'dividerGap',
                                 'dividerGapMobile',
@@ -597,6 +601,11 @@ function validateMdxLayout(
                     (separator !== undefined &&
                         (typeof separator.value !== 'string' ||
                             !/^[A-Z][A-Za-z0-9]*$/.test(separator.value))) ||
+                    (separatorAlign !== undefined &&
+                        (typeof separatorAlign.value !== 'string' ||
+                            !['centered', 'top'].includes(
+                                separatorAlign.value,
+                            ))) ||
                     invalidGap ||
                     columns.length < 1 ||
                     columns.some((column) => column.name !== 'Column')
@@ -604,7 +613,7 @@ function validateMdxLayout(
                     fail(
                         contentRoot,
                         path,
-                        'Columns must contain at least one direct Column component; optional divider must be boolean, separator must be a canonical PascalCase Lucide name, dividerColor must be a CSS hex color, and dividerGap and dividerGapMobile must be xs, sm, md, lg, or xl',
+                        'Columns must contain at least one direct Column component; optional divider must be boolean, separator must be a canonical PascalCase Lucide name, separatorAlign must be centered or top, dividerColor must be a CSS hex color, and dividerGap and dividerGapMobile must be xs, sm, md, lg, or xl',
                     );
                 columns.forEach((column) => {
                     validatedColumns.add(column);

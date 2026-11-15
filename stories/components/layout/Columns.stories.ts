@@ -12,6 +12,7 @@ export default {
     tags: ['autodocs'],
     argTypes: {
         divider: { control: 'boolean' },
+        separatorAlign: { control: 'select', options: ['centered', 'top'] },
         separator: {
             control: 'text',
             description:

@@ -285,3 +285,90 @@ import { Column, Columns } from 'sproutsite/components';
     </Tab>
 
 </Tabs>
+
+### Pfeile auf Icon-Höhe
+
+Mit `separatorAlign="top"` liegt die Pfeilmitte auf Desktop auf Höhe des Icons eines direkten vertikalen Features. Bei anderem Inhalt liegt sie 1,75 rem unter dem oberen Spaltenrand. `centered` ist der Standard und zentriert den Pfeil zur gesamten Spalte. Mobil bleibt der Pfeil mittig zwischen den gestapelten Bereichen.
+
+<Tabs label="Pfeile auf Icon-Höhe" variant="border">
+    <Tab title="Vorschau">
+
+<Columns separator="MoveRight" separatorAlign="top">
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Schreiben"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Inhalte in Markdown erstellen.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Layers"
+            title="Generieren"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Mit Astro eine statische Website generieren.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Veröffentlichen"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Flexibel bereitstellen – etwa bei Vercel, Netlify oder auf dem
+            eigenen Server.
+        </Feature>
+    </Column>
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+import { Feature } from 'sproutsite/components';
+
+<Columns separator="MoveRight" separatorAlign="top">
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Schreiben"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Inhalte in Markdown erstellen.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Layers"
+            title="Generieren"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Mit Astro eine statische Website generieren.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Veröffentlichen"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Flexibel bereitstellen – etwa bei Vercel, Netlify oder auf dem
+            eigenen Server.
+        </Feature>
+    </Column>
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>

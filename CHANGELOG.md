@@ -33,6 +33,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Added
 
+- Added centered and top alignment for Columns icon separators, including vertical Feature icon alignment and bilingual showcase examples.
+
 - Added interchangeable Lucide icon separators to Columns, with responsive direction, row-boundary handling, existing spacing/color controls, bilingual showcase examples, and Storybook stories.
 
 - Added a vertical Feature layout with centered content, preserving the horizontal default, plus bilingual showcase examples and Storybook controls.

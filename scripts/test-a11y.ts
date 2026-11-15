@@ -363,7 +363,7 @@ try {
             }
             if (route.endsWith('/showcase/layout/')) {
                 const iconGroups = page.locator('.ss-columns--separator');
-                assert.equal(await iconGroups.count(), 3);
+                assert.equal(await iconGroups.count(), 4);
                 for (const [index, group] of (
                     await iconGroups.all()
                 ).entries()) {
@@ -383,6 +383,13 @@ try {
                             const bounds = icon.getBoundingClientRect();
                             const desktop =
                                 matchMedia('(min-width: 64rem)').matches;
+                            const featureIcon =
+                                columns[index + 1]!.querySelector(
+                                    '.ss-feature__icon',
+                                )?.getBoundingClientRect();
+                            const topAligned = element.classList.contains(
+                                'ss-columns--separator-top',
+                            );
                             const rotation = new DOMMatrixReadOnly(
                                 getComputedStyle(icon).transform,
                             );
@@ -397,7 +404,11 @@ try {
                                     ? (previous.right + current.left) / 2
                                     : (current.left + current.right) / 2,
                                 expectedY: desktop
-                                    ? (current.top + current.bottom) / 2
+                                    ? topAligned && featureIcon
+                                        ? (featureIcon.top +
+                                              featureIcon.bottom) /
+                                          2
+                                        : (current.top + current.bottom) / 2
                                     : (previous.bottom + current.top) / 2,
                                 rotation: rotation.b,
                                 decorative: icon.getAttribute('aria-hidden'),
