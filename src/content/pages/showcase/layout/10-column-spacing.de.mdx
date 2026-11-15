@@ -1,0 +1,183 @@
+---
+tone:
+    odd: muted
+    even: default
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Platz zwischen den Inhalten</Eyebrow>
+
+## Abstände ohne Trennlinie
+
+Mit `gap` stellst du den Abstand zwischen Spalten und Reihen ein, auch ohne `divider` oder `separator`. `md` entspricht den bisherigen 2 rem. Ohne Angabe bleibt das Layout unverändert. Mit `gapMobile` kannst du unter 64 rem eine andere Größe wählen. Ohne Trennelement übernimmt mobil `gap` den gleichen Wert; mit Linie oder Icon bleibt die bisherige automatische Halbierung erhalten, sofern kein mobiler Abstand angegeben ist.
+
+| Größe | Abstand |
+| ----- | ------- |
+| `xs`  | 0.5rem  |
+| `sm`  | 1rem    |
+| `md`  | 2rem    |
+| `lg`  | 4rem    |
+| `xl`  | 6rem    |
+
+<Tabs label="Standardabstand ohne Linie" variant="border">
+    <Tab title="Vorschau">
+
+<Columns gap="md">
+    <Column span={4}>
+        <Card>
+
+            ### Bereich 1
+
+            Der Abstand wird vom Spaltenlayout bestimmt.
+
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+
+            ### Bereich 2
+
+            Der Abstand wird vom Spaltenlayout bestimmt.
+
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+
+            ### Bereich 3
+
+            Der Abstand wird vom Spaltenlayout bestimmt.
+
+        </Card>
+    </Column>
+
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+
+<Columns gap="md">
+    <Column span={4}>
+        <Card>
+
+            ### Bereich 1
+
+            Der Abstand wird vom Spaltenlayout bestimmt.
+
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+
+            ### Bereich 2
+
+            Der Abstand wird vom Spaltenlayout bestimmt.
+
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+
+            ### Bereich 3
+
+            Der Abstand wird vom Spaltenlayout bestimmt.
+
+        </Card>
+    </Column>
+
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>
+
+Das zweite Beispiel verwendet auf Desktop 6 rem und mobil 1 rem.
+
+<Tabs label="Großer Abstand mit mobiler Anpassung" variant="border">
+    <Tab title="Vorschau">
+
+<Columns gap="xl" gapMobile="sm">
+    <Column span={4}>
+        <Card>
+
+            ### Bereich 1
+
+            Der Abstand wird vom Spaltenlayout bestimmt.
+
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+
+            ### Bereich 2
+
+            Der Abstand wird vom Spaltenlayout bestimmt.
+
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+
+            ### Bereich 3
+
+            Der Abstand wird vom Spaltenlayout bestimmt.
+
+        </Card>
+    </Column>
+
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+
+<Columns gap="xl" gapMobile="sm">
+    <Column span={4}>
+        <Card>
+
+            ### Bereich 1
+
+            Der Abstand wird vom Spaltenlayout bestimmt.
+
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+
+            ### Bereich 2
+
+            Der Abstand wird vom Spaltenlayout bestimmt.
+
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+
+            ### Bereich 3
+
+            Der Abstand wird vom Spaltenlayout bestimmt.
+
+        </Card>
+    </Column>
+
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>
+
+Mit `divider` oder `separator` wird derselbe Zwischenraum genutzt. Eine Linie oder ein Icon fügt keinen weiteren Abstand hinzu. Die bisherigen `dividerGap`-Optionen bleiben für vorhandene Inhalte erhalten; `gap` und `gapMobile` haben für die jeweilige Richtung Vorrang.

@@ -7,6 +7,10 @@ const gapSizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 type GapSize = (typeof gapSizes)[number];
 
 interface Props {
+    /** Shared spacing preset; unseparated columns default to md (2rem). */
+    gap?: GapSize;
+    /** Optional independent spacing preset below 64rem. */
+    gapMobile?: GapSize;
     /** Draw separators between adjacent columns, horizontal when stacked. */
     divider?: boolean;
     /** Decorative Lucide icon between columns; takes precedence over divider. */
@@ -22,6 +26,8 @@ interface Props {
 }
 
 const {
+    gap,
+    gapMobile,
     divider = false,
     separator,
     separatorAlign = 'centered',
@@ -41,20 +47,26 @@ if (
         'Sproutsite Columns separator must be a canonical Lucide name, such as MoveRight or Plus.',
     );
 const separated = divider || separator !== undefined;
+const customGap = gap !== undefined || gapMobile !== undefined;
 if (
     typeof divider !== 'boolean' ||
+    (gap !== undefined && !gapSizes.includes(gap)) ||
+    (gapMobile !== undefined && !gapSizes.includes(gapMobile)) ||
     (dividerColor !== undefined && !isHexColor(dividerColor)) ||
     !gapSizes.includes(dividerGap) ||
     (dividerGapMobile !== undefined && !gapSizes.includes(dividerGapMobile))
 )
     throw new Error(
-        'Sproutsite Columns: divider must be boolean, dividerColor must be a CSS hex color, and dividerGap and dividerGapMobile must be xs, sm, md, lg, or xl.',
+        'Sproutsite Columns: divider must be boolean, dividerColor must be a CSS hex color, and gap, gapMobile, dividerGap, and dividerGapMobile must be xs, sm, md, lg, or xl.',
     );
 ---
 
 <div
     class:list={[
         'ss-columns',
+        customGap && !separated && 'ss-columns--spaced',
+        gap && `ss-columns--gap-${gap}`,
+        gapMobile && `ss-columns--gap-mobile-${gapMobile}`,
         divider && !separator && 'ss-columns--divider',
         separator && 'ss-columns--separator',
         separator && `ss-columns--separator-${separatorAlign}`,

@@ -570,9 +570,12 @@ function validateMdxLayout(
                 );
                 const invalidGap = attributes
                     .filter((attribute) =>
-                        ['dividerGap', 'dividerGapMobile'].includes(
-                            attribute.name ?? '',
-                        ),
+                        [
+                            'gap',
+                            'gapMobile',
+                            'dividerGap',
+                            'dividerGapMobile',
+                        ].includes(attribute.name ?? ''),
                     )
                     .some((attribute) => {
                         const value = attribute.value;
@@ -590,6 +593,8 @@ function validateMdxLayout(
                             attribute.type !== 'mdxJsxAttribute' ||
                             ![
                                 'divider',
+                                'gap',
+                                'gapMobile',
                                 'separator',
                                 'separatorAlign',
                                 'dividerColor',
@@ -624,7 +629,7 @@ function validateMdxLayout(
                     fail(
                         contentRoot,
                         path,
-                        'Columns must contain at least one direct Column component; optional divider must be boolean, separator must be a canonical PascalCase Lucide name, separatorAlign must be centered or top, dividerColor must be a CSS hex color, and dividerGap and dividerGapMobile must be xs, sm, md, lg, or xl',
+                        'Columns must contain at least one direct Column component; optional divider must be boolean, separator must be a canonical PascalCase Lucide name, separatorAlign must be centered or top, dividerColor must be a CSS hex color, and gap, gapMobile, dividerGap, and dividerGapMobile must be xs, sm, md, lg, or xl',
                     );
                 columns.forEach((column) => {
                     validatedColumns.add(column);

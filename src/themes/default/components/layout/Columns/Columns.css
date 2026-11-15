@@ -3,7 +3,8 @@
         @apply grid grid-cols-1 gap-8 lg:grid-cols-12;
 
         &.ss-columns--divider,
-        &.ss-columns--separator {
+        &.ss-columns--separator,
+        &.ss-columns--spaced {
             --ss-columns-divider-color: rgb(226, 232, 240);
             --ss-columns-divider-gap: 6rem;
             --ss-columns-divider-gap-mobile: calc(
@@ -40,6 +41,47 @@
                 --ss-columns-divider-gap-mobile: 4rem;
             }
             &.ss-columns--divider-gap-mobile-xl {
+                --ss-columns-divider-gap-mobile: 6rem;
+            }
+
+            &.ss-columns--spaced {
+                --ss-columns-divider-gap: 2rem;
+                --ss-columns-divider-gap-mobile: var(--ss-columns-divider-gap);
+
+                > .ss-column::before {
+                    content: none;
+                }
+            }
+
+            /* Shared presets replace the gap; they never add to divider spacing. */
+            &.ss-columns--gap-xs {
+                --ss-columns-divider-gap: 0.5rem;
+            }
+            &.ss-columns--gap-sm {
+                --ss-columns-divider-gap: 1rem;
+            }
+            &.ss-columns--gap-md {
+                --ss-columns-divider-gap: 2rem;
+            }
+            &.ss-columns--gap-lg {
+                --ss-columns-divider-gap: 4rem;
+            }
+            &.ss-columns--gap-xl {
+                --ss-columns-divider-gap: 6rem;
+            }
+            &.ss-columns--gap-mobile-xs {
+                --ss-columns-divider-gap-mobile: 0.5rem;
+            }
+            &.ss-columns--gap-mobile-sm {
+                --ss-columns-divider-gap-mobile: 1rem;
+            }
+            &.ss-columns--gap-mobile-md {
+                --ss-columns-divider-gap-mobile: 2rem;
+            }
+            &.ss-columns--gap-mobile-lg {
+                --ss-columns-divider-gap-mobile: 4rem;
+            }
+            &.ss-columns--gap-mobile-xl {
                 --ss-columns-divider-gap-mobile: 6rem;
             }
 

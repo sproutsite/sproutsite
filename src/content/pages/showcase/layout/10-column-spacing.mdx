@@ -1,0 +1,183 @@
+---
+tone:
+    odd: muted
+    even: default
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Room between content areas</Eyebrow>
+
+## Spacing without dividers
+
+Use `gap` to control spacing between columns and rows, including layouts without a divider or separator. `md` matches the existing 2rem gap. Omitting the prop leaves existing layouts unchanged. Use `gapMobile` to select another size below 64rem. Without a separator, mobile inherits the same gap; with a line or icon, the existing automatic half-sized mobile gap remains unless a mobile override is provided.
+
+| Size | Gap    |
+| ---- | ------ |
+| `xs` | 0.5rem |
+| `sm` | 1rem   |
+| `md` | 2rem   |
+| `lg` | 4rem   |
+| `xl` | 6rem   |
+
+<Tabs label="Default gap without a line" variant="border">
+    <Tab title="Preview">
+
+<Columns gap="md">
+    <Column span={4}>
+        <Card>
+
+            ### Area 1
+
+            The column layout controls the spacing.
+
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+
+            ### Area 2
+
+            The column layout controls the spacing.
+
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+
+            ### Area 3
+
+            The column layout controls the spacing.
+
+        </Card>
+    </Column>
+
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+
+<Columns gap="md">
+    <Column span={4}>
+        <Card>
+
+            ### Area 1
+
+            The column layout controls the spacing.
+
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+
+            ### Area 2
+
+            The column layout controls the spacing.
+
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+
+            ### Area 3
+
+            The column layout controls the spacing.
+
+        </Card>
+    </Column>
+
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>
+
+The second example uses 6rem on desktop and 1rem on mobile.
+
+<Tabs label="Wide gap with a mobile override" variant="border">
+    <Tab title="Preview">
+
+<Columns gap="xl" gapMobile="sm">
+    <Column span={4}>
+        <Card>
+
+            ### Area 1
+
+            The column layout controls the spacing.
+
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+
+            ### Area 2
+
+            The column layout controls the spacing.
+
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+
+            ### Area 3
+
+            The column layout controls the spacing.
+
+        </Card>
+    </Column>
+
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+
+<Columns gap="xl" gapMobile="sm">
+    <Column span={4}>
+        <Card>
+
+            ### Area 1
+
+            The column layout controls the spacing.
+
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+
+            ### Area 2
+
+            The column layout controls the spacing.
+
+        </Card>
+    </Column>
+    <Column span={4}>
+        <Card>
+
+            ### Area 3
+
+            The column layout controls the spacing.
+
+        </Card>
+    </Column>
+
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>
+
+A divider or separator uses the same gap without adding extra spacing. The existing dividerGap options remain available for existing content; gap and gapMobile take precedence for their respective axis.

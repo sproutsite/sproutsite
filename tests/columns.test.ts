@@ -48,6 +48,10 @@ test('validates divider flags and custom hex colors without accepting arbitrary 
             'divider',
             'divider={true}',
             'divider={false}',
+            'gap="md"',
+            'gap="xl" gapMobile="sm"',
+            'divider gap="lg"',
+            'separator="MoveRight" gap="md"',
             'separator="MoveRight"',
             'separator="MoveRight" separatorAlign="top"',
             'separator="MoveRight" separatorAlign="centered"',
@@ -65,6 +69,8 @@ test('validates divider flags and custom hex colors without accepting arbitrary 
             assert.doesNotThrow(() => validate(props));
         }
         for (const size of ['xs', 'sm', 'md', 'lg', 'xl']) {
+            assert.doesNotThrow(() => validate(`gap="${size}"`));
+            assert.doesNotThrow(() => validate(`gapMobile="${size}"`));
             assert.doesNotThrow(() => validate(`divider dividerGap="${size}"`));
             assert.doesNotThrow(() =>
                 validate(`divider dividerGapMobile="${size}"`),
@@ -72,6 +78,10 @@ test('validates divider flags and custom hex colors without accepting arbitrary 
         }
         for (const props of [
             'divider="true"',
+            'gap="unknown"',
+            'gap={2}',
+            'gapMobile="unknown"',
+            'gapMobile={"md"}',
             'separator=""',
             'separatorAlign="bottom"',
             'separatorAlign={"top"}',

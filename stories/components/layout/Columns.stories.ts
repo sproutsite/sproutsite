@@ -12,6 +12,16 @@ export default {
     tags: ['autodocs'],
     argTypes: {
         divider: { control: 'boolean' },
+        gap: {
+            control: 'select',
+            options: ['xs', 'sm', 'md', 'lg', 'xl'],
+            description: 'Shared gap: 0.5, 1, 2, 4, or 6rem.',
+        },
+        gapMobile: {
+            control: 'select',
+            options: ['xs', 'sm', 'md', 'lg', 'xl'],
+            description: 'Optional independent mobile gap.',
+        },
         separatorAlign: { control: 'select', options: ['centered', 'top'] },
         separator: {
             control: 'text',
@@ -119,4 +129,15 @@ export const WrappedIconSeparators = {
         dividerGap: 'sm',
         slots: { default: columns([4, 4, 4, 4, 4]) },
     },
+};
+
+export const WideGapWithoutDivider = {
+    args: {
+        gap: 'xl',
+        gapMobile: 'sm',
+        slots: { default: columns([4, 4, 4]) },
+    },
+};
+export const CompactGapWithoutDivider = {
+    args: { gap: 'sm', slots: { default: columns([4, 4, 4]) } },
 };

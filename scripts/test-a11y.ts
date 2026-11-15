@@ -415,6 +415,37 @@ try {
                 );
             }
             if (route.endsWith('/showcase/layout/')) {
+                const plainGroups = page.locator('.ss-columns--spaced');
+                assert.equal(await plainGroups.count(), 2);
+                for (const [index, group] of (
+                    await plainGroups.all()
+                ).entries()) {
+                    const measured = await group.evaluate((element) => {
+                        const first =
+                            element.children[0]!.getBoundingClientRect();
+                        const second =
+                            element.children[1]!.getBoundingClientRect();
+                        return {
+                            gap: matchMedia('(min-width:64rem)').matches
+                                ? second.left - first.right
+                                : second.top - first.bottom,
+                            pseudo: getComputedStyle(
+                                element.children[0]!,
+                                '::before',
+                            ).content,
+                            rem: parseFloat(
+                                getComputedStyle(document.documentElement)
+                                    .fontSize,
+                            ),
+                        };
+                    });
+                    const expected =
+                        index === 0 ? 2 : viewport.name === 'desktop' ? 6 : 1;
+                    assert.ok(
+                        Math.abs(measured.gap - expected * measured.rem) < 1,
+                    );
+                    assert.equal(measured.pseudo, 'none');
+                }
                 const iconGroups = page.locator('.ss-columns--separator');
                 assert.equal(await iconGroups.count(), 4);
                 for (const [index, group] of (

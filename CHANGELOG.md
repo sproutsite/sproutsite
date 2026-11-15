@@ -35,6 +35,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Added
 
+- Added shared Columns gap and gapMobile presets for layouts with or without separators, retaining existing layout defaults and legacy divider spacing options.
+
 - Added explicit Feature icon background colors and applied muted green and teal hex palettes to the homepage workflow.
 
 - Added a large Feature icon size that doubles the symbol and background box, with bilingual column examples and a Storybook story.
