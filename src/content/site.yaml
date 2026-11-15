@@ -24,6 +24,7 @@ header:
           href: /blog/
         - type: separator
         - type: cta
+          icon: Mail
           variant: primary
           label: Contact
           href: /contact/

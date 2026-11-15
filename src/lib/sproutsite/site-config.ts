@@ -8,6 +8,15 @@ const linkSchema = z.object({
     label: z.string().trim().min(1),
     href: z.string().trim().min(1),
 });
+const headerLinkSchema = linkSchema.extend({
+    icon: z
+        .string()
+        .regex(
+            /^[A-Z][A-Za-z0-9]*$/,
+            'must be a canonical PascalCase Lucide name',
+        )
+        .optional(),
+});
 const heroClass = z.string().regex(/^ss-[a-z0-9][a-z0-9_-]*$/, {
     message:
         'must start with ss- and contain only lowercase letters, digits, underscores, or hyphens',
@@ -40,7 +49,7 @@ const siteSchema = z.object({
             .array(
                 z.union([
                     z.object({ type: z.literal('separator') }).strict(),
-                    linkSchema
+                    headerLinkSchema
                         .extend({
                             type: z.literal('cta'),
                             variant: z
@@ -57,7 +66,7 @@ const siteSchema = z.object({
                                 .default('primary'),
                         })
                         .strict(),
-                    linkSchema
+                    headerLinkSchema
                         .extend({ type: z.literal('link').optional() })
                         .strict(),
                 ]),

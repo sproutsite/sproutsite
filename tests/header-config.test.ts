@@ -36,6 +36,16 @@ test('validates header links, separators, and CTA variants', () => {
         assert.deepEqual(configure([{ ...link, type: 'link' }]), [
             { ...link, type: 'link' },
         ]);
+        assert.deepEqual(
+            configure([
+                { ...link, icon: 'Sprout' },
+                { ...cta, icon: 'Mail' },
+            ]),
+            [
+                { ...link, icon: 'Sprout' },
+                { ...cta, icon: 'Mail', variant: 'primary' },
+            ],
+        );
         for (const variant of [
             'primary',
             'secondary',
@@ -57,6 +67,10 @@ test('validates header links, separators, and CTA variants', () => {
             [{ ...link, variant: 'primary' }],
             [{ type: 'separator' }],
             ['|'],
+            [{ ...link, icon: '' }],
+            [{ ...cta, icon: 'mail' }],
+            [{ ...cta, icon: 123 }],
+            [link, { type: 'separator', icon: 'Mail' }],
         ]) {
             assert.throws(() => configure(invalid), /header.links/);
         }

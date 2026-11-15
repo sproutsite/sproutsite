@@ -1,6 +1,8 @@
 ---
 import BrandLogo from '../../atoms/BrandLogo/BrandLogo.astro';
 import Button from '../../atoms/Button/Button.astro';
+import Icon from '../../atoms/Icon/Icon.astro';
+import type { ComponentProps } from 'astro/types';
 import { t } from '../../../i18n/index.js';
 import type { Link, SiteConfig } from '../../../../../lib/sproutsite/types.js';
 import {
@@ -39,6 +41,9 @@ const isActive = (link: Link) => link.href === route;
                         );
                     }
                     const external = isExternalWebLink(link.href, site.url);
+                    // Icon validates configured names against Lucide at render time.
+                    const icon = link.icon as
+                        ComponentProps<typeof Icon>['name'] | undefined;
                     if (link.type === 'cta') {
                         return (
                             <li class="ss-header__cta">
@@ -56,6 +61,7 @@ const isActive = (link: Link) => link.href === route;
                                         isActive(link) ? 'page' : undefined
                                     }
                                 >
+                                    {icon && <Icon name={icon} size={20} />}
                                     {link.label}
                                 </Button>
                             </li>
@@ -74,6 +80,7 @@ const isActive = (link: Link) => link.href === route;
                                     isActive(link) ? 'page' : undefined
                                 }
                             >
+                                {icon && <Icon name={icon} size={20} />}
                                 {link.label}
                             </a>
                         </li>

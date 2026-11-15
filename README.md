@@ -123,12 +123,15 @@ header:
           href: /blog/
         - type: separator
         - type: cta
+          icon: Mail
           variant: primary
           label: Contact
           href: /contact/
 ```
 
 Header links use `type: link` by default; it may be omitted. Set `type: cta` to render a navigation link with the shared Button component. Its optional `variant` defaults to `primary` and accepts `primary`, `secondary`, `accent`, `neutral`, `info`, `success`, `warning`, or `error`. CTA entries retain normal link behavior, locale and base handling, and the active page indication. `variant` applies only to CTA entries; separators use only `type: separator`.
+
+Both regular header links and CTAs accept an optional `icon`, using a canonical PascalCase Lucide name such as `Mail`, `BookOpen`, or `Sprout`. The icon appears before the label and inherits its color. It is decorative for screen readers because the visible label already names the link. Omit `icon` for a text-only entry. Unknown names stop the build; separators do not accept icons.
 
 Every page is a directory under `src/content/pages/`:
 

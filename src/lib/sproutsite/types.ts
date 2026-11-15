@@ -7,9 +7,10 @@ export interface Link {
 }
 
 export type HeaderItem =
-    | (Link & { type?: 'link' })
+    | (Link & { type?: 'link'; icon?: string })
     | (Link & {
           type: 'cta';
+          icon?: string;
           variant?:
               | 'primary'
               | 'secondary'

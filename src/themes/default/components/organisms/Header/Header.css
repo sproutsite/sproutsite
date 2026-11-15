@@ -33,7 +33,12 @@
             }
 
             .ss-header__link {
-                @apply relative !text-lg !text-primary-content no-underline hover:no-underline;
+                @apply relative !gap-2.5 !text-lg !text-primary-content no-underline hover:no-underline;
+
+                .ss-icon {
+                    display: block;
+                    align-self: center;
+                }
 
                 &:hover {
                     --btn-bg: color-mix(
