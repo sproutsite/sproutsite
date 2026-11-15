@@ -6,6 +6,7 @@ import {
 } from '../../../../../lib/sproutsite/urls.js';
 import type { SiteConfig } from '../../../../../lib/sproutsite/types.js';
 import PageLayout from '../../../layouts/PageLayout/PageLayout.astro';
+import { t } from '../../../i18n/index.js';
 import Card from '../../molecules/Card/Card.astro';
 import CardActions from '../../molecules/CardActions/CardActions.astro';
 import PageTitle from '../PageTitle/PageTitle.astro';
@@ -16,17 +17,18 @@ interface Props {
 }
 
 const { posts, site } = Astro.props;
+const locale = site.language === 'de' ? 'de' : 'en';
 const blog = site.blog ?? {
     title: 'Blog',
-    description:
-        'Projektfortschritt, Entscheidungen und Meilensteine auf dem Weg zu einem dateibasierten Content-Framework.',
-    eyebrow: 'Projektjournal',
-    heading: 'Sproutsite im Fortschritt',
+    description: t(locale, 'blogDescription'),
+    eyebrow: t(locale, 'blogEyebrow'),
+    heading: t(locale, 'blogHeading'),
 };
 const dateFormatter = new Intl.DateTimeFormat(site.language, {
     day: '2-digit',
     month: 'long',
     year: 'numeric',
+    timeZone: 'UTC',
 });
 ---
 
@@ -66,12 +68,13 @@ const dateFormatter = new Intl.DateTimeFormat(site.language, {
                             <p>{post.data.description}</p>
                             <CardActions>
                                 <a
+                                    aria-label={`${t(locale, 'readMore')}: ${post.data.title}`}
                                     href={contentHref(
                                         blogRouteFromId(post.id),
                                         site,
                                     )}
                                 >
-                                    Mehr erfahren
+                                    {t(locale, 'readMore')}
                                 </a>
                             </CardActions>
                         </Card>

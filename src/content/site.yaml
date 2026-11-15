@@ -7,6 +7,11 @@ locales:
     - de
 hero-classes:
     - ss-hero--theme-1
+blog:
+    title: Blog
+    eyebrow: Project journal
+    description: Project updates, decisions, and milestones in building Sproutsite, an agent-ready, Markdown-first static CMS.
+    heading: Sproutsite development journal
 header:
     links:
         - label: Home
