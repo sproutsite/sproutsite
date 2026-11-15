@@ -29,6 +29,14 @@ const isActive = (link: Link) => link.href === route;
         >
             <ul class="ss-header__links">
                 {site.header.links.map((link) => {
+                    if ('type' in link) {
+                        return (
+                            <li
+                                class="ss-header__separator"
+                                aria-hidden="true"
+                            />
+                        );
+                    }
                     const external = isExternalWebLink(link.href, site.url);
                     return (
                         <li>

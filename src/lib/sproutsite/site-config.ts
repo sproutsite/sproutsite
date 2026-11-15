@@ -35,7 +35,19 @@ const siteSchema = z.object({
             heading: z.string().trim().min(1),
         })
         .optional(),
-    header: z.object({ links: z.array(linkSchema).min(1) }),
+    header: z.object({
+        links: z
+            .array(
+                z.union([
+                    z.object({ type: z.literal('separator') }).strict(),
+                    linkSchema,
+                ]),
+            )
+            .min(1)
+            .refine((items) => items.some((item) => 'href' in item), {
+                message: 'must contain at least one navigation link',
+            }),
+    }),
     footer: z.object({
         text: z.string().trim().min(1),
         links: z.array(linkSchema),

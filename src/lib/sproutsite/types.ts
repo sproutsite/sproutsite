@@ -19,6 +19,6 @@ export interface SiteConfig {
         eyebrow: string;
         heading: string;
     };
-    header: { links: Link[] };
+    header: { links: (Link | { type: 'separator' })[] };
     footer: { text: string; links: Link[] };
 }

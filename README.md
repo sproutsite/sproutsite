@@ -114,7 +114,19 @@ Brand colors are separate `--color-brand-*` tokens in `styles/foundation/tokens.
 
 For a compact QR or advertising entry page, set `layout: landing` in `page.yaml`, omit `hero.md`, and supply exactly one visible H1 in the section content. The content can start with an image. This layout omits the header and automatic title area; the normal footer and shared components remain available. All other pages use `layout: default` automatically.
 
-`src/content/site.yaml` contains the name, production URL, base path, language, navigation, and footer. Every page is a directory under `src/content/pages/`:
+`src/content/site.yaml` contains the name, production URL, base path, language, navigation, and footer. In `header.links`, add an entry with `type: separator` between links to display a decorative vertical line styled with CSS. Separators inherit the navigation text color, including after scrolling, and are hidden from assistive technology. Localized navigation in `site.de.yaml` supports the same syntax:
+
+```yaml
+header:
+    links:
+        - label: Blog
+          href: /blog/
+        - type: separator
+        - label: Contact
+          href: /contact/
+```
+
+Every page is a directory under `src/content/pages/`:
 
 ```text
 pages/

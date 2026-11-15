@@ -22,6 +22,7 @@ header:
           href: /documentation/
         - label: Blog
           href: /blog/
+        - type: separator
         - label: Contact
           href: /contact/
 footer:

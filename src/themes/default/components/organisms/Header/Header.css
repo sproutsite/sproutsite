@@ -14,6 +14,12 @@
                 @apply flex flex-wrap items-center gap-x-2 gap-y-1;
             }
 
+            .ss-header__separator {
+                @apply mx-2 h-5 w-px shrink-0;
+                background-color: currentColor;
+                opacity: 0.4;
+            }
+
             .ss-header__link {
                 @apply relative !text-lg !text-primary-content no-underline hover:no-underline;
 
