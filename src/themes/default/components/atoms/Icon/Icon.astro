@@ -19,6 +19,16 @@ interface Props {
         | 'success'
         | 'warning'
         | 'error';
+    /** Optional semantic background for a padded square with rounded corners. */
+    background?:
+        | 'primary'
+        | 'secondary'
+        | 'accent'
+        | 'neutral'
+        | 'info'
+        | 'success'
+        | 'warning'
+        | 'error';
     /** Accessible name for meaningful standalone icons; omit beside visible text. */
     label?: string;
 }
@@ -28,6 +38,7 @@ const {
     size = 24,
     strokeWidth = 2,
     color = 'inherit',
+    background,
     label,
 } = Astro.props;
 if (!Object.hasOwn(icons, name)) {
@@ -52,7 +63,14 @@ const LucideIcon = icons[name];
 ---
 
 <LucideIcon
-    class:list={['ss-icon', `ss-icon--${color}`]}
+    class:list={[
+        'ss-icon',
+        `ss-icon--${color}`,
+        background && [
+            'ss-icon--background',
+            `ss-icon--background-${background}`,
+        ],
+    ]}
     size={size}
     stroke-width={strokeWidth}
     focusable="false"

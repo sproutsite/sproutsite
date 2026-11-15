@@ -225,6 +225,9 @@ function validateMdxLayout(
                 const color = attributes.find(
                     (attribute) => attribute.name === 'color',
                 );
+                const background = attributes.find(
+                    (attribute) => attribute.name === 'background',
+                );
                 const numbersValid = attributes
                     .filter((attribute) =>
                         ['size', 'strokeWidth'].includes(attribute.name ?? ''),
@@ -248,6 +251,7 @@ function validateMdxLayout(
                                 'size',
                                 'strokeWidth',
                                 'color',
+                                'background',
                                 'label',
                             ].includes(attribute.name ?? ''),
                     ) ||
@@ -269,6 +273,17 @@ function validateMdxLayout(
                             'warning',
                             'error',
                         ].includes(String(color.value))) ||
+                    (background &&
+                        ![
+                            'primary',
+                            'secondary',
+                            'accent',
+                            'neutral',
+                            'info',
+                            'success',
+                            'warning',
+                            'error',
+                        ].includes(String(background.value))) ||
                     !numbersValid ||
                     (mdxNode.children ?? []).some(
                         (child) => child.type !== 'text' || child.value?.trim(),
@@ -277,7 +292,7 @@ function validateMdxLayout(
                     fail(
                         contentRoot,
                         path,
-                        'Icon requires a canonical PascalCase name; optional size and strokeWidth are positive numeric literals, color is inherit or a semantic theme color, label is non-empty, and children are not allowed',
+                        'Icon requires a canonical PascalCase name; optional size and strokeWidth are positive numeric literals, color is inherit or a semantic theme color, background is a semantic theme color, label is non-empty, and children are not allowed',
                     );
             } else if (mdxNode.name === 'ContentTable') {
                 contentTableCount += 1;

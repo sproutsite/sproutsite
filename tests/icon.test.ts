@@ -21,6 +21,8 @@ test('validates Icon content and rejects executable or unsupported props', () =>
         };
         for (const component of [
             '<Icon name="Sprout" />',
+            '<Icon name="Sprout" size={32} background="primary" label="Growth" />',
+            '<Icon name="Layers" background="neutral" />',
             '<Icon name="CircleCheck" size={32} strokeWidth={1.5} color="success" label="Published" />',
             '<Button href="/contact/"><Icon name="ArrowRight" size={20} /> Contact</Button>',
         ])
@@ -36,6 +38,9 @@ test('validates Icon content and rejects executable or unsupported props', () =>
             '<Icon name="Sprout" strokeWidth={-1} />',
             '<Icon name="Sprout" label=" " />',
             '<Icon name="Sprout" color="pink" />',
+            '<Icon name="Sprout" background="pink" />',
+            '<Icon name="Sprout" background={"primary"} />',
+            '<Icon name="Sprout" background="inherit" />',
             '<Icon name="Sprout" class="custom" />',
             '<Icon name="Sprout" name="Check" />',
             '<Icon name="Sprout">Unexpected content</Icon>',

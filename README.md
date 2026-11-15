@@ -304,9 +304,12 @@ import { Icon } from 'sproutsite/components';
 
 <Icon name="Sprout" size={24} />
 <Icon name="CircleCheck" color="success" label="Published" />
+<Icon name="Sprout" size={32} background="primary" label="Growth" />
 ```
 
 The local `@lucide/astro` dependency renders inline SVGs without browser JavaScript, icon fonts, or CDN requests. `name` uses the canonical PascalCase component name from the [Lucide catalog](https://lucide.dev/icons/), such as `ArrowRight`; unknown names stop rendering with an error. Optional `size` (default `24`) and `strokeWidth` (default `2`) are positive numbers. `color` defaults to inherited text color; supported theme colors are `primary`, `secondary`, `accent`, `info`, `success`, `warning`, and `error`.
+
+Set `background` to `primary`, `secondary`, `accent`, `neutral`, `info`, `success`, `warning`, or `error` for a padded square with slightly rounded corners. The matching content color is applied automatically unless `color` explicitly overrides it. `size` controls the symbol's dimensions; padding increases the outer square. Without `background`, the icon remains unboxed.
 
 Omit `label` beside explanatory text: the icon is then decorative (`aria-hidden`). For meaningful standalone icons, provide a non-empty `label` to render an accessible image name. Icons do not provide interactive behavior. In MDX, only these documented props are accepted; children, arbitrary classes, and executable expressions are rejected. The wrapper resolves the registry during the build; it does not ship the registry to browsers. Direct individual Lucide imports in theme `.astro` files remain available when build-time tree-shaking is preferred. See `/showcase/icons/` (German: `/de/showcase/icons/`) for previews and copyable examples. Lucide's separate license notices are retained in `third-party-licenses/lucide-LICENSE`.
 

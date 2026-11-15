@@ -35,6 +35,22 @@ export default {
             description:
                 'Optional accessible name. Leave unset for decorative icons.',
         },
+        background: {
+            control: 'select',
+            options: [
+                undefined,
+                'primary',
+                'secondary',
+                'accent',
+                'neutral',
+                'info',
+                'success',
+                'warning',
+                'error',
+            ],
+            description:
+                'Optional background with automatic contrasting icon color.',
+        },
     },
 };
 
@@ -44,4 +60,7 @@ export const Meaningful = {
 };
 export const Large = {
     args: { name: 'Layers', size: 48, strokeWidth: 1.5, color: 'primary' },
+};
+export const WithBackground = {
+    args: { name: 'Sprout', size: 32, background: 'primary', label: 'Growth' },
 };
