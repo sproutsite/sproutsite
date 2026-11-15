@@ -28,6 +28,7 @@
 @import '../components/atoms/Button/Button.css';
 @import '../components/atoms/ContentImage/ContentImage.css';
 @import '../components/atoms/Eyebrow/Eyebrow.css';
+@import '../components/atoms/Icon/Icon.css';
 @import '../components/atoms/Tab/Tab.css';
 @import '../components/molecules/FoundationSample/FoundationSample.css';
 @import '../components/molecules/Tabs/Tabs.css';

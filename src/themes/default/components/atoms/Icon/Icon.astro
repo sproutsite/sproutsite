@@ -1,0 +1,62 @@
+---
+import { icons } from '@lucide/astro';
+
+/** A locally rendered Lucide SVG; decorative unless a label is provided. */
+interface Props {
+    /** Canonical Lucide component name, for example Sprout or ArrowRight. */
+    name: keyof typeof icons;
+    /** Width and height in pixels. */
+    size?: number;
+    /** Stroke width in the icon's 24 × 24 coordinate system. */
+    strokeWidth?: number;
+    /** Inherit the surrounding text color or use a semantic theme color. */
+    color?:
+        | 'inherit'
+        | 'primary'
+        | 'secondary'
+        | 'accent'
+        | 'info'
+        | 'success'
+        | 'warning'
+        | 'error';
+    /** Accessible name for meaningful standalone icons; omit beside visible text. */
+    label?: string;
+}
+
+const {
+    name,
+    size = 24,
+    strokeWidth = 2,
+    color = 'inherit',
+    label,
+} = Astro.props;
+if (!Object.hasOwn(icons, name)) {
+    throw new Error(
+        `Sproutsite Icon: unknown Lucide name "${name}". Use a canonical component name such as Sprout or ArrowRight.`,
+    );
+}
+if (
+    !Number.isFinite(size) ||
+    size <= 0 ||
+    !Number.isFinite(strokeWidth) ||
+    strokeWidth <= 0
+) {
+    throw new Error(
+        'Sproutsite Icon: size and strokeWidth must be positive finite numbers.',
+    );
+}
+if (label !== undefined && !label.trim()) {
+    throw new Error('Sproutsite Icon: label must be non-empty when provided.');
+}
+const LucideIcon = icons[name];
+---
+
+<LucideIcon
+    class:list={['ss-icon', `ss-icon--${color}`]}
+    size={size}
+    stroke-width={strokeWidth}
+    focusable="false"
+    aria-hidden={label ? undefined : 'true'}
+    role={label ? 'img' : undefined}
+    aria-label={label?.trim()}
+/>

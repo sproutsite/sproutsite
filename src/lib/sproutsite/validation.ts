@@ -93,6 +93,8 @@ const buttonComponentImport =
     /^import\s*\{\s*Button\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const badgeComponentImport =
     /^import\s*\{\s*Badge\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
+const iconComponentImport =
+    /^import\s*\{\s*Icon\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const localImageImport =
     /^import\s+([A-Za-z_$][\w$]*)\s+from\s+['"](?:\.\.\/|\.\/)[a-z0-9_][a-z0-9._/-]*\.(?:avif|jpe?g|png|webp)['"];?$/i;
 const imageExtensions = new Set(['.avif', '.jpeg', '.jpg', '.png', '.webp']);
@@ -162,6 +164,7 @@ function validateMdxLayout(
     let eyebrowCount = 0;
     let buttonCount = 0;
     let badgeCount = 0;
+    let iconCount = 0;
     const localImageImports = new Set<string>();
     const validatedColumns = new Set<MdxNode>();
     const validatedTabs = new Set<MdxNode>();
@@ -190,7 +193,8 @@ function validateMdxLayout(
                     !foundationSampleImport.test(importValue) &&
                     !contentTableImport.test(importValue) &&
                     !buttonComponentImport.test(importValue) &&
-                    !badgeComponentImport.test(importValue)
+                    !badgeComponentImport.test(importValue) &&
+                    !iconComponentImport.test(importValue)
                 )
                     fail(
                         contentRoot,
@@ -209,7 +213,73 @@ function validateMdxLayout(
             mdxNode.type === 'mdxJsxFlowElement' ||
             mdxNode.type === 'mdxJsxTextElement'
         ) {
-            if (mdxNode.name === 'ContentTable') {
+            if (mdxNode.name === 'Icon') {
+                iconCount += 1;
+                const attributes = mdxNode.attributes ?? [];
+                const name = attributes.find(
+                    (attribute) => attribute.name === 'name',
+                );
+                const label = attributes.find(
+                    (attribute) => attribute.name === 'label',
+                );
+                const color = attributes.find(
+                    (attribute) => attribute.name === 'color',
+                );
+                const numbersValid = attributes
+                    .filter((attribute) =>
+                        ['size', 'strokeWidth'].includes(attribute.name ?? ''),
+                    )
+                    .every((attribute) => {
+                        const value = attribute.value;
+                        return (
+                            value !== null &&
+                            typeof value === 'object' &&
+                            /^\d+(?:\.\d+)?$/.test(value.value ?? '') &&
+                            Number(value.value) > 0 &&
+                            Number.isFinite(Number(value.value))
+                        );
+                    });
+                if (
+                    attributes.some(
+                        (attribute) =>
+                            attribute.type !== 'mdxJsxAttribute' ||
+                            ![
+                                'name',
+                                'size',
+                                'strokeWidth',
+                                'color',
+                                'label',
+                            ].includes(attribute.name ?? ''),
+                    ) ||
+                    new Set(attributes.map((attribute) => attribute.name))
+                        .size !== attributes.length ||
+                    typeof name?.value !== 'string' ||
+                    !/^[A-Z][A-Za-z0-9]*$/.test(name.value) ||
+                    (label &&
+                        (typeof label.value !== 'string' ||
+                            !label.value.trim())) ||
+                    (color &&
+                        ![
+                            'inherit',
+                            'primary',
+                            'secondary',
+                            'accent',
+                            'info',
+                            'success',
+                            'warning',
+                            'error',
+                        ].includes(String(color.value))) ||
+                    !numbersValid ||
+                    (mdxNode.children ?? []).some(
+                        (child) => child.type !== 'text' || child.value?.trim(),
+                    )
+                )
+                    fail(
+                        contentRoot,
+                        path,
+                        'Icon requires a canonical PascalCase name; optional size and strokeWidth are positive numeric literals, color is inherit or a semantic theme color, label is non-empty, and children are not allowed',
+                    );
+            } else if (mdxNode.name === 'ContentTable') {
                 contentTableCount += 1;
                 const attributes = mdxNode.attributes ?? [];
                 const caption = attributes.find(
@@ -767,7 +837,8 @@ function validateMdxLayout(
             cardCount === 0 &&
             eyebrowCount === 0 &&
             buttonCount === 0 &&
-            badgeCount === 0)
+            badgeCount === 0 &&
+            iconCount === 0)
     )
         fail(
             contentRoot,

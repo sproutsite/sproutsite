@@ -277,6 +277,21 @@ Tabs progressively enhance static panels: all content remains readable without J
 
 Fenced code blocks use Astro's built-in Shiki highlighter. Specify the language after the opening fence, for example `mdx`, `typescript`, `yaml`, or `css`. The configuration preloads MDX and its embedded TSX grammar so imports, components, attributes, and Markdown receive their respective syntax colors. Highlighting runs at build time and needs no browser library. Restart the development server after changing the shared Astro configuration.
 
+## Icons
+
+Use the default theme's `Icon` atom in MDX or Astro:
+
+```mdx
+import { Icon } from 'sproutsite/components';
+
+<Icon name="Sprout" size={24} />
+<Icon name="CircleCheck" color="success" label="Published" />
+```
+
+The local `@lucide/astro` dependency renders inline SVGs without browser JavaScript, icon fonts, or CDN requests. `name` uses the canonical PascalCase component name from the [Lucide catalog](https://lucide.dev/icons/), such as `ArrowRight`; unknown names stop rendering with an error. Optional `size` (default `24`) and `strokeWidth` (default `2`) are positive numbers. `color` defaults to inherited text color; supported theme colors are `primary`, `secondary`, `accent`, `info`, `success`, `warning`, and `error`.
+
+Omit `label` beside explanatory text: the icon is then decorative (`aria-hidden`). For meaningful standalone icons, provide a non-empty `label` to render an accessible image name. Icons do not provide interactive behavior. In MDX, only these documented props are accepted; children, arbitrary classes, and executable expressions are rejected. The wrapper resolves the registry during the build; it does not ship the registry to browsers. Direct individual Lucide imports in theme `.astro` files remain available when build-time tree-shaking is preferred. See `/showcase/icons/` (German: `/de/showcase/icons/`) for previews and copyable examples. Lucide's separate license notices are retained in `third-party-licenses/lucide-LICENSE`.
+
 ## Structure and Theme
 
 External HTTP(S) links automatically receive `target="_blank"` and `rel="noopener noreferrer"`, including Markdown reference/autolinks and header/footer links. External means a different origin from the validated production URL in `site.yaml`, so preview builds use the same classification. Internal/same-origin links, fragments, `mailto:`, and `tel:` retain their normal behavior. Authors do not add link attributes in content.

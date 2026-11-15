@@ -1,6 +1,6 @@
 # Third-party notices and asset licensing status
 
-Review date: 2026-11-14.
+Review date: 2026-11-15.
 
 The root [LICENSE](LICENSE) and [NOTICE](NOTICE) license Sproutsite's first-party source code under Apache-2.0 and identify its original author. They do not replace third-party licenses or establish rights to reference material. This file records the scope of the repository review and outstanding asset checks; it adds no conditions to Apache-2.0.
 
@@ -18,6 +18,8 @@ Nunito is third-party font software licensed under the SIL Open Font License 1.1
 Both existing `OFL.txt` files are retained unchanged. The source font is from the [official Nunito distribution](https://github.com/google/fonts/tree/main/ofl/nunito). Apache-2.0 does not replace the OFL. Outlining the wordmark in the logo generator does not resolve the separate reference-image provenance question below.
 
 ## Dependency licenses and notices
+
+Lucide icons are rendered from `@lucide/astro` 1.73.0. Its full, unmodified [license text](third-party-licenses/lucide-LICENSE) is included with the npm package: ISC for Lucide, plus the upstream MIT notice and icon list for Feather-derived artwork. These icons have documented upstream licensing and are separate from the unresolved project-branding assets below. Preserve the applicable notices when distributing rendered SVGs or a generated website containing them.
 
 Dependencies remain separately licensed packages. This review inspected the root manifest, locked license metadata, and the license/NOTICE files present in the installed dependencies. It is not a certification of every transitive component or a grant of rights to their code.
 
@@ -44,6 +46,8 @@ The installed dependency tree also contains components requiring distinct treatm
 No installed dependency license or NOTICE file was removed, overwritten, or relicensed. Dependency license metadata alone does not establish that arbitrary future bundling or redistribution is compliant.
 
 ## Existing visual assets: provenance review remains open
+
+Generation record: `src/content/pages/showcase/_assets/icons.png` was generated for this project on 2026-11-15 with OpenAI's image-generation tool. The prompt described the existing showcase's blue-and-white 3D illustration style and six generic icon motifs. No external images or Lucide SVG files were supplied to the generator. This records provenance, not a separate asset-license grant.
 
 The following existing assets do not have a committed, asset-specific rights/provenance record sufficient to declare them newly licensed under Apache-2.0. **This change does not relicense them.** Confirm their origin and redistribution permissions before publishing a package or website that includes them.
 

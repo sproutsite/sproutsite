@@ -1,0 +1,147 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Icon } from 'sproutsite/components';
+import { Button } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Kleine visuelle Hinweise</Eyebrow>
+
+## Lucide Icons
+
+Mit `Icon` bindest du Symbole in nummerierten `.mdx`-Sections oder in Astro-Komponenten ein. Die SVGs werden lokal gerendert. Dafür sind weder eine Icon-Schrift noch CDN-Anfragen oder Browser-JavaScript nötig.
+
+**Atomic Design:** Atom `Icon`. Quellpfad: `atoms/Icon/` im Verzeichnis `components/` des Standard-Themes.
+
+### Ein Icon auswählen
+
+Suche ein Symbol im [Lucide-Katalog](https://lucide.dev/icons/). Verwende den offiziellen Astro-Komponentennamen in PascalCase: Aus `arrow-right` wird `ArrowRight`, aus `file-text` wird `FileText` und aus `sprout` wird `Sprout`. Ein unbekannter Name bricht den Build mit einer Fehlermeldung ab.
+
+<Tabs label="Icon auswählen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Icon name="Sprout" size={32} label="Wachstum" />
+        <Icon name="FileText" size={32} label="Dokument" />
+        <Icon name="Layers" size={32} label="Ebenen" />
+        <Icon name="Code" size={32} label="Code" />
+        <Icon name="Settings" size={32} label="Einstellungen" />
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Icon } from 'sproutsite/components';
+
+        <Icon name="Sprout" size={32} label="Wachstum" />
+        <Icon name="FileText" size={32} label="Dokument" />
+        <Icon name="Layers" size={32} label="Ebenen" />
+        <Icon name="Code" size={32} label="Code" />
+        <Icon name="Settings" size={32} label="Einstellungen" />
+        ```
+    </Tab>
+
+</Tabs>
+
+### Größe, Farbe und Strichstärke
+
+Standardmäßig ist ein Icon 24 Pixel groß und hat die Strichstärke 2. Es übernimmt die umgebende Textfarbe. Bei Bedarf stehen die semantischen Theme-Farben zur Verfügung. Auf dunklen Flächen und innerhalb von Buttons ist die geerbte Textfarbe meist die passende Wahl.
+
+<Tabs label="Darstellung: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Icon
+            name="Sprout"
+            size={16}
+            color="primary"
+            label="Kleiner Sprössling"
+        />
+        <Icon
+            name="Sprout"
+            size={24}
+            color="secondary"
+            label="Mittlerer Sprössling"
+        />
+        <Icon
+            name="Sprout"
+            size={32}
+            color="success"
+            label="Großer Sprössling"
+        />
+        <Icon
+            name="Sprout"
+            size={48}
+            strokeWidth={1.5}
+            label="Sprössling mit feiner Kontur"
+        />
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        <Icon
+            name="Sprout"
+            size={16}
+            color="primary"
+            label="Kleiner Sprössling"
+        />
+        <Icon
+            name="Sprout"
+            size={24}
+            color="secondary"
+            label="Mittlerer Sprössling"
+        />
+        <Icon
+            name="Sprout"
+            size={32}
+            color="success"
+            label="Großer Sprössling"
+        />
+        <Icon
+            name="Sprout"
+            size={48}
+            strokeWidth={1.5}
+            label="Sprössling mit feiner Kontur"
+        />
+        ```
+    </Tab>
+</Tabs>
+
+| Eigenschaft   | Standard      | Verwendung                                                                         |
+| ------------- | ------------- | ---------------------------------------------------------------------------------- |
+| `name`        | Pflichtfeld   | Offizieller Lucide-Komponentenname, etwa `Sprout` oder `ArrowRight`                |
+| `size`        | `24`          | Positive Zahl in Pixeln, etwa `size={32}`                                          |
+| `strokeWidth` | `2`           | Positive Zahl, etwa `strokeWidth={1.5}`                                            |
+| `color`       | `inherit`     | `inherit`, `primary`, `secondary`, `accent`, `info`, `success`, `warning`, `error` |
+| `label`       | Nicht gesetzt | Zugängliche Beschriftung für ein alleinstehendes, inhaltlich relevantes Icon       |
+
+### Icons neben Text und in Buttons
+
+Ohne `label` bleibt das SVG für Screenreader verborgen. So wird dieselbe Information nicht doppelt vorgelesen, wenn sichtbarer Text das Icon bereits erklärt. Ein Icon ist für sich allein kein Bedienelement.
+
+<Tabs label="Icons mit Text: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        - <Icon name="Check" size={20} /> Bereit zur Prüfung
+        - <Icon name="Calendar" size={20} /> Veröffentlichungsdatum
+
+        <Button href="/showcase/buttons/">
+            <Icon name="ArrowRight" size={20} /> Buttons ansehen
+        </Button>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Icon } from 'sproutsite/components';
+        import { Button } from 'sproutsite/components';
+
+        - <Icon name="Check" size={20} /> Bereit zur Prüfung
+        - <Icon name="Calendar" size={20} /> Veröffentlichungsdatum
+
+        <Button href="/showcase/buttons/">
+            <Icon name="ArrowRight" size={20} /> Buttons ansehen
+        </Button>
+        ```
+    </Tab>
+
+</Tabs>
+
+Wenn ein alleinstehendes Symbol eine Information vermittelt, vergib ein aussagekräftiges `label`, zum Beispiel `<Icon name="CircleCheck" label="Veröffentlicht" />`. Die Beschriftung ersetzt bei Bedienelementen weder Tastaturbedienung noch sichtbaren Text. Vermittle einen Status nicht allein durch die Farbe.
+
+Die Komponente löst Namen beim Build über Lucides Icon-Verzeichnis auf. Auf der Website landen nur die gerenderten SVGs; das vollständige Verzeichnis kann jedoch den Build-Aufwand erhöhen. Für festgelegte Symbole können Theme-Entwickler einzelne Komponenten direkt aus `@lucide/astro` in `.astro`-Dateien importieren. Inhalts-Sections verwenden die dokumentierte Sproutsite-Komponente.
+
+Für Lucide gilt eine eigene ISC-Lizenz mit MIT-Hinweisen für von Feather abgeleitete Icons. Erhalte bei der Weiterverbreitung die mitgelieferten [Lucide-Lizenzhinweise](https://lucide.dev/license). Eine Kopie liegt unter `third-party-licenses/lucide-LICENSE`.

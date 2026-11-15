@@ -1,0 +1,29 @@
+@layer components {
+    .ss-icon {
+        display: inline-block;
+        flex-shrink: 0;
+        vertical-align: -0.125em;
+
+        &.ss-icon--primary {
+            color: var(--color-primary);
+        }
+        &.ss-icon--secondary {
+            color: var(--color-secondary);
+        }
+        &.ss-icon--accent {
+            color: var(--color-accent);
+        }
+        &.ss-icon--info {
+            color: var(--color-info);
+        }
+        &.ss-icon--success {
+            color: var(--color-success);
+        }
+        &.ss-icon--warning {
+            color: var(--color-warning);
+        }
+        &.ss-icon--error {
+            color: var(--color-error);
+        }
+    }
+}
