@@ -11,6 +11,7 @@ import remarkGfm from 'remark-gfm';
 import { visit } from 'unist-util-visit';
 import { loadSiteConfig } from './site-config.js';
 import { heroTypes, tones } from './types.js';
+import { isHexColor } from './colors.js';
 import { routeFromPageId } from './urls.js';
 
 const pageSchema = z.object({
@@ -96,6 +97,8 @@ const badgeComponentImport =
     /^import\s*\{\s*Badge\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const iconComponentImport =
     /^import\s*\{\s*Icon\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
+const featureComponentImport =
+    /^import\s*\{\s*Feature\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const localImageImport =
     /^import\s+([A-Za-z_$][\w$]*)\s+from\s+['"](?:\.\.\/|\.\/)[a-z0-9_][a-z0-9._/-]*\.(?:avif|jpe?g|png|webp)['"];?$/i;
 const imageExtensions = new Set(['.avif', '.jpeg', '.jpg', '.png', '.webp']);
@@ -166,6 +169,7 @@ function validateMdxLayout(
     let buttonCount = 0;
     let badgeCount = 0;
     let iconCount = 0;
+    let featureCount = 0;
     const localImageImports = new Set<string>();
     const validatedColumns = new Set<MdxNode>();
     const validatedTabs = new Set<MdxNode>();
@@ -195,7 +199,8 @@ function validateMdxLayout(
                     !contentTableImport.test(importValue) &&
                     !buttonComponentImport.test(importValue) &&
                     !badgeComponentImport.test(importValue) &&
-                    !iconComponentImport.test(importValue)
+                    !iconComponentImport.test(importValue) &&
+                    !featureComponentImport.test(importValue)
                 )
                     fail(
                         contentRoot,
@@ -214,7 +219,64 @@ function validateMdxLayout(
             mdxNode.type === 'mdxJsxFlowElement' ||
             mdxNode.type === 'mdxJsxTextElement'
         ) {
-            if (mdxNode.name === 'Icon') {
+            if (mdxNode.name === 'Feature') {
+                featureCount += 1;
+                const attributes = mdxNode.attributes ?? [];
+                const value = (name: string) =>
+                    attributes.find((attribute) => attribute.name === name)
+                        ?.value;
+                const icon = value('icon');
+                const title = value('title');
+                const variant = value('variant');
+                const color = value('color');
+                const heading = value('headingLevel');
+                const headingValue =
+                    heading !== null && typeof heading === 'object'
+                        ? heading.value
+                        : undefined;
+                if (
+                    attributes.some(
+                        (attribute) =>
+                            attribute.type !== 'mdxJsxAttribute' ||
+                            ![
+                                'icon',
+                                'title',
+                                'variant',
+                                'color',
+                                'headingLevel',
+                            ].includes(attribute.name ?? ''),
+                    ) ||
+                    new Set(attributes.map((attribute) => attribute.name))
+                        .size !== attributes.length ||
+                    typeof icon !== 'string' ||
+                    !/^[A-Z][A-Za-z0-9]*$/.test(icon) ||
+                    typeof title !== 'string' ||
+                    !title.trim() ||
+                    (variant !== undefined &&
+                        !['soft', 'solid', 'plain'].includes(
+                            String(variant),
+                        )) ||
+                    (color !== undefined &&
+                        ![
+                            'primary',
+                            'secondary',
+                            'accent',
+                            'neutral',
+                            'info',
+                            'success',
+                            'warning',
+                            'error',
+                        ].includes(String(color)) &&
+                        !isHexColor(color)) ||
+                    (heading !== undefined &&
+                        !['3', '4', '5', '6'].includes(headingValue ?? ''))
+                )
+                    fail(
+                        contentRoot,
+                        path,
+                        'Feature requires a canonical PascalCase icon and non-empty title; variant is soft, solid, or plain, color is a semantic theme color or valid CSS hex color, and headingLevel is a numeric literal from 3 to 6',
+                    );
+            } else if (mdxNode.name === 'Icon') {
                 iconCount += 1;
                 const attributes = mdxNode.attributes ?? [];
                 const name = attributes.find(
@@ -854,7 +916,8 @@ function validateMdxLayout(
             eyebrowCount === 0 &&
             buttonCount === 0 &&
             badgeCount === 0 &&
-            iconCount === 0)
+            iconCount === 0 &&
+            featureCount === 0)
     )
         fail(
             contentRoot,

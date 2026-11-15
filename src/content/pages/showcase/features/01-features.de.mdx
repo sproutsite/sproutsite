@@ -1,0 +1,210 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Feature } from 'sproutsite/components';
+import { ContentTable } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Vorteile kurz erklären</Eyebrow>
+
+## Features
+
+`Feature` verbindet ein Icon links mit einer Überschrift und einer kurzen Beschreibung rechts. Der Baustein eignet sich für Vorteile, Eigenschaften und kurze Erklärungen. Die Beschreibung unterstützt Markdown.
+
+**Atomic Design:** Molekül `Feature`, zusammengesetzt mit dem vorhandenen Atom `Icon`. Quellpfad: `molecules/Feature/` im Verzeichnis `components/` des Standard-Themes.
+
+### Standarddarstellung
+
+Standardmäßig liegt das Icon auf einer dezent eingefärbten, quadratischen Fläche mit abgerundeten Ecken. Es verwendet die primäre Theme-Farbe.
+
+<Tabs label="Standard-Feature: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Feature icon="Zap" title="Statisch ausgeliefert" headingLevel={4}>
+            Vorab erzeugte Seiten, die auf statischem Hosting laufen.
+        </Feature>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Feature } from 'sproutsite/components';
+
+        <Feature icon="Zap" title="Statisch ausgeliefert" headingLevel={4}>
+            Vorab erzeugte Seiten, die auf statischem Hosting laufen.
+        </Feature>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Darstellungsvarianten
+
+`soft` ergänzt einen dezenten Hintergrund, `solid` eine gefüllte Fläche mit kontrastierendem Icon und `plain` lässt den Icon-Hintergrund transparent. Alle Varianten behalten dieselbe Icon-Fläche und Textausrichtung.
+
+<Tabs label="Feature-Varianten: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Feature icon="Zap" title="Soft" headingLevel={4}>
+            Ein dezenter Hintergrund für ruhige Inhaltsbereiche.
+        </Feature>
+        <Feature
+            icon="Layers"
+            title="Solid"
+            variant="solid"
+            color="secondary"
+            headingLevel={4}
+        >
+            Eine gefüllte Fläche für stärkere Hervorhebung.
+        </Feature>
+        <Feature
+            icon="Code"
+            title="Plain"
+            variant="plain"
+            color="accent"
+            headingLevel={4}
+        >
+            Ein Icon ohne Hintergrund, ausgerichtet wie die anderen Varianten.
+        </Feature>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        <Feature icon="Zap" title="Soft" headingLevel={4}>
+            Ein dezenter Hintergrund für ruhige Inhaltsbereiche.
+        </Feature>
+        <Feature
+            icon="Layers"
+            title="Solid"
+            variant="solid"
+            color="secondary"
+            headingLevel={4}
+        >
+            Eine gefüllte Fläche für stärkere Hervorhebung.
+        </Feature>
+        <Feature
+            icon="Code"
+            title="Plain"
+            variant="plain"
+            color="accent"
+            headingLevel={4}
+        >
+            Ein Icon ohne Hintergrund, ausgerichtet wie die anderen Varianten.
+        </Feature>
+        ```
+    </Tab>
+</Tabs>
+
+### Hex-Farben
+
+`color` akzeptiert auch CSS-Hexwerte mit 3, 4, 6 oder 8 hexadezimalen Stellen, etwa `#527b37` oder `#527b37cc`. Der Hexwert bestimmt die Icon-Farbe und einen dezent eingefärbten Hintergrund. In diesem Fall wird `variant` ignoriert: `soft`, `solid` und `plain` führen zur gleichen Darstellung. Wähle eine Farbe, die sich ausreichend von der umgebenden Section abhebt.
+
+<Tabs label="Hex-Farben: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Feature
+            icon="Layers"
+            title="Eigene Farbe"
+            color="#527b37"
+            headingLevel={4}
+        >
+            Icon und dezenter Hintergrund mit einem eigenen Grünton.
+        </Feature>
+        <Feature
+            icon="Layers"
+            title="Variante ignoriert"
+            color="#527b37"
+            variant="solid"
+            headingLevel={4}
+        >
+            Dieselbe Darstellung, auch wenn solid angegeben wird.
+        </Feature>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        <Feature
+            icon="Layers"
+            title="Eigene Farbe"
+            color="#527b37"
+            headingLevel={4}
+        >
+            Icon und dezenter Hintergrund mit einem eigenen Grünton.
+        </Feature>
+        <Feature
+            icon="Layers"
+            title="Variante ignoriert"
+            color="#527b37"
+            variant="solid"
+            headingLevel={4}
+        >
+            Dieselbe Darstellung, auch wenn solid angegeben wird.
+        </Feature>
+        ```
+    </Tab>
+</Tabs>
+
+### Features in Spalten
+
+Kombiniere `Feature` mit den vorhandenen Komponenten `Columns` und `Column`. Drei Spalten mit `span={4}` sind auf dem Desktop gleich breit; auf kleineren Bildschirmen stehen sie untereinander. Längere Beschreibungen umbrechen innerhalb ihrer Spalte.
+
+<Tabs label="Feature-Spalten: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Columns>
+            <Column span={4}>
+                <Feature icon="Zap" title="Statisch ausgeliefert" headingLevel={4}>
+                    Vorab erzeugte Seiten ohne CMS-Serverlaufzeit veröffentlichen.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Layers" title="Agent-ready" color="secondary" headingLevel={4}>
+                    Externe Coding-Agenten arbeiten mit versionierten Inhaltsdateien.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Code" title="Wiederverwendbare Komponenten" color="info" headingLevel={4}>
+                    Markdown mit getesteten Astro-Bausteinen kombinieren.
+                </Feature>
+            </Column>
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Feature } from 'sproutsite/components';
+        import { Column, Columns } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={4}>
+                <Feature icon="Zap" title="Statisch ausgeliefert" headingLevel={4}>
+                    Vorab erzeugte Seiten ohne CMS-Serverlaufzeit veröffentlichen.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Layers" title="Agent-ready" color="secondary" headingLevel={4}>
+                    Externe Coding-Agenten arbeiten mit versionierten Inhaltsdateien.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Code" title="Wiederverwendbare Komponenten" color="info" headingLevel={4}>
+                    Markdown mit getesteten Astro-Bausteinen kombinieren.
+                </Feature>
+            </Column>
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Eigenschaften und Zugänglichkeit
+
+<ContentTable caption="Feature-Eigenschaften" density="compact">
+
+| Eigenschaft    | Standard    | Zweck                                                                                          |
+| -------------- | ----------- | ---------------------------------------------------------------------------------------------- |
+| `icon`         | Pflichtfeld | Offizieller Lucide-Name in PascalCase, etwa `Zap`, `Layers` oder `Code`                        |
+| `title`        | Pflichtfeld | Nicht leere Feature-Überschrift                                                                |
+| Standard-Slot  | Leer        | Kurze Markdown-Beschreibung, auch mit Hervorhebungen und Links                                 |
+| `variant`      | `soft`      | `soft`, `solid` oder `plain`                                                                   |
+| `color`        | `primary`   | Semantische Theme-Farbe oder CSS-Hexwert wie `#527b37`; bei Hexwerten wird `variant` ignoriert |
+| `headingLevel` | `3`         | `3`, `4`, `5` oder `6`; als numerischer Prop, etwa `headingLevel={4}`                          |
+
+</ContentTable>
+
+Das Icon ist dekorativ, weil Überschrift und Beschreibung den Inhalt erklären. Wähle die Überschriftenebene passend zum Umfeld: Unter einer H2 gilt standardmäßig H3; unter einer H3 setzt du wie in diesen Beispielen `headingLevel={4}`. Halte Beschreibungen kurz und benenne einen Status auch in Worten. Für einzelne Symbole gibt es [Icons](/showcase/icons/), für größere Inhaltsblöcke mit Bildern oder Aktionen [Cards](/showcase/cards/).

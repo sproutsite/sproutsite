@@ -7,6 +7,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Added
+
+- Added the Feature molecule for icon-and-text benefits, with soft, solid, and plain treatments, semantic and validated custom hex colors, configurable heading levels, validated MDX, bilingual showcase examples, Storybook stories, and a generated overview illustration.
+
 ## [0.5.1] - 2026-11-15
 
 ### Added

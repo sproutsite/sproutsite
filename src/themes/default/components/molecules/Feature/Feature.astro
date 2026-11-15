@@ -1,0 +1,74 @@
+---
+import type { ComponentProps } from 'astro/types';
+import Icon from '../../atoms/Icon/Icon.astro';
+import { isHexColor } from '../../../../../lib/sproutsite/colors.js';
+
+/** A compact benefit with a decorative icon, heading, and Markdown description. */
+interface Props {
+    icon: ComponentProps<typeof Icon>['name'];
+    title: string;
+    variant?: 'soft' | 'solid' | 'plain';
+    color?:
+        | 'primary'
+        | 'secondary'
+        | 'accent'
+        | 'neutral'
+        | 'info'
+        | 'success'
+        | 'warning'
+        | 'error'
+        | `#${string}`;
+    headingLevel?: 3 | 4 | 5 | 6;
+}
+
+const {
+    icon,
+    title,
+    variant = 'soft',
+    color = 'primary',
+    headingLevel = 3,
+} = Astro.props;
+if (!title?.trim())
+    throw new Error('Sproutsite Feature requires a non-empty title.');
+if (![3, 4, 5, 6].includes(headingLevel))
+    throw new Error('Sproutsite Feature headingLevel must be 3, 4, 5, or 6.');
+const Heading = `h${headingLevel}` as 'h3' | 'h4' | 'h5' | 'h6';
+const customColor = isHexColor(color);
+if (
+    !customColor &&
+    ![
+        'primary',
+        'secondary',
+        'accent',
+        'neutral',
+        'info',
+        'success',
+        'warning',
+        'error',
+    ].includes(color)
+) {
+    throw new Error(
+        'Sproutsite Feature color must be a semantic theme color or a valid hexadecimal CSS color.',
+    );
+}
+---
+
+<div
+    class:list={[
+        'ss-feature',
+        'not-prose',
+        customColor ? 'ss-feature--custom' : `ss-feature--${variant}`,
+        !customColor && `ss-feature--${color}`,
+    ]}
+    style={customColor ? `--ss-feature-color: ${color};` : undefined}
+>
+    <span class="ss-feature__icon" aria-hidden="true">
+        <Icon name={icon} size={28} />
+    </span>
+    <div class="ss-feature__content">
+        <Heading class="ss-feature__title">{title.trim()}</Heading>
+        <div class="ss-feature__description">
+            <slot />
+        </div>
+    </div>
+</div>

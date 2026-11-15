@@ -36,6 +36,7 @@
 @import '../components/molecules/Alert/Alert.css';
 @import '../components/molecules/ContentTable/ContentTable.css';
 @import '../components/molecules/Card/Card.css';
+@import '../components/molecules/Feature/Feature.css';
 @import '../components/molecules/CardActions/CardActions.css';
 @import '../components/organisms/Header/Header.css';
 @import '../components/organisms/Footer/Footer.css';

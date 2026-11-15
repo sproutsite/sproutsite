@@ -1,0 +1,210 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Feature } from 'sproutsite/components';
+import { ContentTable } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Explain a benefit</Eyebrow>
+
+## Features
+
+`Feature` pairs an icon on the left with a heading and a short description on the right. Use it for benefits, capabilities, or short explanations. The description accepts Markdown.
+
+**Atomic Design:** Molecule `Feature`, using the existing `Icon` atom. Source: `molecules/Feature/` in the default theme's `components/` directory.
+
+### Default appearance
+
+The default is a softly tinted square with rounded corners. The icon uses the primary theme color.
+
+<Tabs label="Default feature: preview and code" variant="border">
+    <Tab title="Preview">
+        <Feature icon="Zap" title="Static output" headingLevel={4}>
+            Prebuilt pages that can be served by static hosting.
+        </Feature>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Feature } from 'sproutsite/components';
+
+        <Feature icon="Zap" title="Static output" headingLevel={4}>
+            Prebuilt pages that can be served by static hosting.
+        </Feature>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Presentation variants
+
+`soft` adds a subtle background, `solid` uses a filled square with a contrasting icon, and `plain` leaves the icon background transparent. All variants keep the same icon area and text alignment.
+
+<Tabs label="Feature variants: preview and code" variant="border">
+    <Tab title="Preview">
+        <Feature icon="Zap" title="Soft" headingLevel={4}>
+            A subtle background for a calm content area.
+        </Feature>
+        <Feature
+            icon="Layers"
+            title="Solid"
+            variant="solid"
+            color="secondary"
+            headingLevel={4}
+        >
+            A filled surface for stronger emphasis.
+        </Feature>
+        <Feature
+            icon="Code"
+            title="Plain"
+            variant="plain"
+            color="accent"
+            headingLevel={4}
+        >
+            An icon without a background, aligned with the other variants.
+        </Feature>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        <Feature icon="Zap" title="Soft" headingLevel={4}>
+            A subtle background for a calm content area.
+        </Feature>
+        <Feature
+            icon="Layers"
+            title="Solid"
+            variant="solid"
+            color="secondary"
+            headingLevel={4}
+        >
+            A filled surface for stronger emphasis.
+        </Feature>
+        <Feature
+            icon="Code"
+            title="Plain"
+            variant="plain"
+            color="accent"
+            headingLevel={4}
+        >
+            An icon without a background, aligned with the other variants.
+        </Feature>
+        ```
+    </Tab>
+</Tabs>
+
+### Hex colors
+
+`color` also accepts CSS hex values with 3, 4, 6, or 8 hexadecimal digits, such as `#527b37` or `#527b37cc`. A hex value sets the icon color and a softly tinted background. In this mode, `variant` is ignored: `soft`, `solid`, and `plain` produce the same appearance. Choose a color that remains visible against the surrounding section.
+
+<Tabs label="Hex colors: preview and code" variant="border">
+    <Tab title="Preview">
+        <Feature
+            icon="Layers"
+            title="Custom color"
+            color="#527b37"
+            headingLevel={4}
+        >
+            An icon and subtle background using a custom green.
+        </Feature>
+        <Feature
+            icon="Layers"
+            title="Variant ignored"
+            color="#527b37"
+            variant="solid"
+            headingLevel={4}
+        >
+            The same treatment even when solid is specified.
+        </Feature>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        <Feature
+            icon="Layers"
+            title="Custom color"
+            color="#527b37"
+            headingLevel={4}
+        >
+            An icon and subtle background using a custom green.
+        </Feature>
+        <Feature
+            icon="Layers"
+            title="Variant ignored"
+            color="#527b37"
+            variant="solid"
+            headingLevel={4}
+        >
+            The same treatment even when solid is specified.
+        </Feature>
+        ```
+    </Tab>
+</Tabs>
+
+### Features in columns
+
+Combine `Feature` with the existing `Columns` and `Column` components. Three spans of four use equal desktop columns; on smaller screens they stack. Longer descriptions wrap within their column.
+
+<Tabs label="Feature columns: preview and code" variant="border">
+    <Tab title="Preview">
+        <Columns>
+            <Column span={4}>
+                <Feature icon="Zap" title="Static output" headingLevel={4}>
+                    Publish prebuilt pages without a CMS server runtime.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Layers" title="Agent-ready" color="secondary" headingLevel={4}>
+                    External coding agents work with versioned content files.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Code" title="Reusable components" color="info" headingLevel={4}>
+                    Combine Markdown with tested Astro building blocks.
+                </Feature>
+            </Column>
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Feature } from 'sproutsite/components';
+        import { Column, Columns } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={4}>
+                <Feature icon="Zap" title="Static output" headingLevel={4}>
+                    Publish prebuilt pages without a CMS server runtime.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Layers" title="Agent-ready" color="secondary" headingLevel={4}>
+                    External coding agents work with versioned content files.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Code" title="Reusable components" color="info" headingLevel={4}>
+                    Combine Markdown with tested Astro building blocks.
+                </Feature>
+            </Column>
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Properties and accessibility
+
+<ContentTable caption="Feature properties" density="compact">
+
+| Property       | Default   | Purpose                                                                              |
+| -------------- | --------- | ------------------------------------------------------------------------------------ |
+| `icon`         | Required  | Canonical PascalCase Lucide name, such as `Zap`, `Layers`, or `Code`                 |
+| `title`        | Required  | Non-empty feature heading                                                            |
+| Default slot   | Empty     | A short Markdown description, including emphasis and links                           |
+| `variant`      | `soft`    | `soft`, `solid`, or `plain`                                                          |
+| `color`        | `primary` | Semantic theme color or CSS hex value such as `#527b37`; hex values ignore `variant` |
+| `headingLevel` | `3`       | `3`, `4`, `5`, or `6`; use numeric props such as `headingLevel={4}`                  |
+
+</ContentTable>
+
+The icon is decorative because the heading and description explain the content. Choose a heading level that follows the surrounding structure: below an H2 use the default H3; below an H3 use `headingLevel={4}`, as in these examples. Keep descriptions concise and explain any status in words. Use [Icons](/showcase/icons/) for standalone symbols and [Cards](/showcase/cards/) for larger content blocks with images or actions.

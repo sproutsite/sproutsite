@@ -306,6 +306,20 @@ Tabs progressively enhance static panels: all content remains readable without J
 
 Fenced code blocks use Astro's built-in Shiki highlighter. Specify the language after the opening fence, for example `mdx`, `typescript`, `yaml`, or `css`. The configuration preloads MDX and its embedded TSX grammar so imports, components, attributes, and Markdown receive their respective syntax colors. Highlighting runs at build time and needs no browser library. Restart the development server after changing the shared Astro configuration.
 
+## Features
+
+The default theme's `Feature` molecule pairs a decorative Lucide icon with a heading and a short Markdown description:
+
+```mdx
+import { Feature } from 'sproutsite/components';
+
+<Feature icon="Zap" title="Static output">
+    Prebuilt pages that can be served by static hosting.
+</Feature>
+```
+
+`icon` is a canonical Lucide component name; `title` is required. `variant` accepts `soft` (default), `solid`, or `plain`. `color` uses `primary` (default), `secondary`, `accent`, `neutral`, `info`, `success`, `warning`, or `error`, or a CSS hex value with 3, 4, 6, or 8 digits. Hex values always use the custom icon color with a softly tinted background and ignore `variant`. `headingLevel` defaults to `3` and accepts numeric values from `3` to `6`; match it to the enclosing section. Combine features with the existing `Columns`/`Column` layout for responsive groups. Examples are available at `/showcase/features/` and `/de/showcase/features/`, and in Storybook.
+
 ## Icons
 
 Use the default theme's `Icon` atom in MDX or Astro:
