@@ -53,6 +53,17 @@
             }
         }
 
+        &.ss-feature--vertical {
+            grid-template-columns: minmax(0, 1fr);
+            justify-items: center;
+            text-align: center;
+
+            .ss-feature__content {
+                width: 100%;
+                max-width: 36ch;
+            }
+        }
+
         &.ss-feature--solid {
             .ss-feature__icon {
                 background-color: var(--ss-feature-color);

@@ -27,6 +27,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Added
 
+- Added a vertical Feature layout with centered content, preserving the horizontal default, plus bilingual showcase examples and Storybook controls.
+
 - Added odd/even section tone mappings resolved from the numeric filename prefix, preserving fixed tones, with bilingual homepage configuration and showcase examples.
 
 - Added section frontmatter spacing presets (small, default, large), with half or double desktop padding, unchanged mobile spacing, and bilingual showcase examples.

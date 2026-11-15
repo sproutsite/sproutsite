@@ -1,0 +1,116 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Feature } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Icon above the text</Eyebrow>
+
+## Vertical layout
+
+Use `layout="vertical"` to place the icon above the title. The title and description are centered. Omitting the prop keeps the existing `horizontal` layout: icon on the left, text on the right. Colors, styles, and heading levels work with both layouts.
+
+### A single feature
+
+<Tabs label="A single feature" variant="border">
+    <Tab title="Preview">
+
+<Feature icon="FileText" title="Write" layout="vertical" headingLevel={4}>
+    Create content in Markdown.
+</Feature>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Feature } from 'sproutsite/components';
+
+<Feature icon="FileText" title="Write" layout="vertical" headingLevel={4}>
+    Create content in Markdown.
+</Feature>
+```
+
+    </Tab>
+
+</Tabs>
+
+### Three steps in columns
+
+Columns places the three features side by side on desktop and stacks them on mobile. Each feature keeps its vertical layout.
+
+<Tabs label="Three steps in columns" variant="border">
+    <Tab title="Preview">
+
+<Columns>
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Write"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Create content in Markdown.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature icon="Layers" title="Build" layout="vertical" headingLevel={4}>
+            Generate a static site with Astro.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Publish"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Deploy anywhere (e.g. Vercel, Netlify, your server).
+        </Feature>
+    </Column>
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+import { Feature } from 'sproutsite/components';
+
+<Columns>
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Write"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Create content in Markdown.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature icon="Layers" title="Build" layout="vertical" headingLevel={4}>
+            Generate a static site with Astro.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Publish"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Deploy anywhere (e.g. Vercel, Netlify, your server).
+        </Feature>
+    </Column>
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>

@@ -1,0 +1,128 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Feature } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Icon über dem Text</Eyebrow>
+
+## Vertikale Darstellung
+
+Mit `layout="vertical"` steht das Icon über dem Titel. Titel und Beschreibung sind zentriert. Ohne Angabe bleibt die bisherige Darstellung `horizontal` aktiv: Icon links, Text rechts. Farben, Stile und Überschriftenebenen lassen sich mit beiden Layouts kombinieren.
+
+### Ein einzelnes Feature
+
+<Tabs label="Ein einzelnes Feature" variant="border">
+    <Tab title="Vorschau">
+
+<Feature icon="FileText" title="Schreiben" layout="vertical" headingLevel={4}>
+    Inhalte in Markdown erstellen.
+</Feature>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Feature } from 'sproutsite/components';
+
+<Feature icon="FileText" title="Schreiben" layout="vertical" headingLevel={4}>
+    Inhalte in Markdown erstellen.
+</Feature>
+```
+
+    </Tab>
+
+</Tabs>
+
+### Drei Schritte in Spalten
+
+`Columns` ordnet die drei Features auf Desktop nebeneinander an und stapelt sie auf Mobilgeräten. Das vertikale Layout innerhalb der Features bleibt dabei erhalten.
+
+<Tabs label="Drei Schritte in Spalten" variant="border">
+    <Tab title="Vorschau">
+
+<Columns>
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Schreiben"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Inhalte in Markdown erstellen.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Layers"
+            title="Generieren"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Mit Astro eine statische Website generieren.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Veröffentlichen"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Flexibel bereitstellen – etwa bei Vercel, Netlify oder auf dem
+            eigenen Server.
+        </Feature>
+    </Column>
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+import { Feature } from 'sproutsite/components';
+
+<Columns>
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Schreiben"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Inhalte in Markdown erstellen.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Layers"
+            title="Generieren"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Mit Astro eine statische Website generieren.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Veröffentlichen"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Flexibel bereitstellen – etwa bei Vercel, Netlify oder auf dem
+            eigenen Server.
+        </Feature>
+    </Column>
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>

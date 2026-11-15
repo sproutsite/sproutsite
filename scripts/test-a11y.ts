@@ -316,6 +316,51 @@ try {
                 throw new Error(
                     `${viewport.name} ${route}: viewport overflows horizontally`,
                 );
+            if (route.endsWith('/showcase/features/')) {
+                const vertical = page.locator('.ss-feature--vertical');
+                assert.equal(await vertical.count(), 4);
+                for (const feature of await vertical.all()) {
+                    const geometry = await feature.evaluate((element) => {
+                        const icon = element
+                            .querySelector('.ss-feature__icon')!
+                            .getBoundingClientRect();
+                        const content = element
+                            .querySelector('.ss-feature__content')!
+                            .getBoundingClientRect();
+                        const bounds = element.getBoundingClientRect();
+                        return {
+                            iconCenter: (icon.left + icon.right) / 2,
+                            contentCenter: (content.left + content.right) / 2,
+                            center: (bounds.left + bounds.right) / 2,
+                            below: content.top >= icon.bottom,
+                            alignment: getComputedStyle(element).textAlign,
+                        };
+                    });
+                    assert.ok(
+                        Math.abs(geometry.iconCenter - geometry.center) < 1,
+                    );
+                    assert.ok(
+                        Math.abs(geometry.contentCenter - geometry.center) < 1,
+                    );
+                    assert.equal(geometry.below, true);
+                    assert.equal(geometry.alignment, 'center');
+                }
+                const horizontal = page
+                    .locator('.ss-feature--horizontal')
+                    .first();
+                assert.equal(
+                    await horizontal.evaluate((element) => {
+                        const icon = element
+                            .querySelector('.ss-feature__icon')!
+                            .getBoundingClientRect();
+                        const content = element
+                            .querySelector('.ss-feature__content')!
+                            .getBoundingClientRect();
+                        return icon.right < content.left;
+                    }),
+                    true,
+                );
+            }
             if (route.endsWith('/showcase/layout/')) {
                 const measuredGaps = async (stacked: boolean) =>
                     page.locator('.ss-columns--divider').evaluateAll(

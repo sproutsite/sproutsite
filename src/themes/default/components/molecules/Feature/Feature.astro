@@ -7,6 +7,7 @@ import { isHexColor } from '../../../../../lib/sproutsite/colors.js';
 interface Props {
     icon: ComponentProps<typeof Icon>['name'];
     title: string;
+    layout?: 'horizontal' | 'vertical';
     variant?: 'soft' | 'solid' | 'plain';
     color?:
         | 'primary'
@@ -24,10 +25,15 @@ interface Props {
 const {
     icon,
     title,
+    layout = 'horizontal',
     variant = 'soft',
     color = 'primary',
     headingLevel = 3,
 } = Astro.props;
+if (!['horizontal', 'vertical'].includes(layout))
+    throw new Error(
+        'Sproutsite Feature layout must be horizontal or vertical.',
+    );
 if (!title?.trim())
     throw new Error('Sproutsite Feature requires a non-empty title.');
 if (![2, 3, 4, 5, 6].includes(headingLevel))
@@ -59,6 +65,7 @@ if (
     class:list={[
         'ss-feature',
         'not-prose',
+        `ss-feature--${layout}`,
         customColor ? 'ss-feature--custom' : `ss-feature--${variant}`,
         !customColor && `ss-feature--${color}`,
     ]}

@@ -239,6 +239,7 @@ function validateMdxLayout(
                         ?.value;
                 const icon = value('icon');
                 const title = value('title');
+                const layout = value('layout');
                 const variant = value('variant');
                 const color = value('color');
                 const heading = value('headingLevel');
@@ -253,6 +254,7 @@ function validateMdxLayout(
                             ![
                                 'icon',
                                 'title',
+                                'layout',
                                 'variant',
                                 'color',
                                 'headingLevel',
@@ -264,6 +266,9 @@ function validateMdxLayout(
                     !/^[A-Z][A-Za-z0-9]*$/.test(icon) ||
                     typeof title !== 'string' ||
                     !title.trim() ||
+                    (layout !== undefined &&
+                        (typeof layout !== 'string' ||
+                            !['horizontal', 'vertical'].includes(layout))) ||
                     (variant !== undefined &&
                         !['soft', 'solid', 'plain'].includes(
                             String(variant),
@@ -286,7 +291,7 @@ function validateMdxLayout(
                     fail(
                         contentRoot,
                         path,
-                        'Feature requires a canonical PascalCase icon and non-empty title; variant is soft, solid, or plain, color is a semantic theme color or valid CSS hex color, and headingLevel is a numeric literal from 2 to 6',
+                        'Feature requires a canonical PascalCase icon and non-empty title; layout is horizontal or vertical, variant is soft, solid, or plain, color is a semantic theme color or valid CSS hex color, and headingLevel is a numeric literal from 2 to 6',
                     );
             } else if (mdxNode.name === 'Icon') {
                 iconCount += 1;

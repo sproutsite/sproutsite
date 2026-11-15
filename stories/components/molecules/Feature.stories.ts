@@ -8,6 +8,7 @@ export default {
     args: {
         icon: 'Zap',
         title: 'Static output',
+        layout: 'horizontal',
         variant: 'soft',
         color: 'primary',
         headingLevel: 3,
@@ -21,6 +22,7 @@ export default {
             description: 'Canonical PascalCase Lucide name.',
         },
         title: { control: 'text' },
+        layout: { control: 'select', options: ['horizontal', 'vertical'] },
         variant: { control: 'select', options: ['soft', 'solid', 'plain'] },
         color: {
             control: 'text',
@@ -32,6 +34,18 @@ export default {
 };
 
 export const Soft = {};
+export const Vertical = {
+    args: { layout: 'vertical' },
+    parameters: { docs: { story: { height: '14rem' } } },
+};
+export const VerticalSolid = {
+    args: { layout: 'vertical', variant: 'solid', color: 'secondary' },
+    parameters: { docs: { story: { height: '14rem' } } },
+};
+export const VerticalCustomColor = {
+    args: { layout: 'vertical', color: '#527b37' },
+    parameters: { docs: { story: { height: '14rem' } } },
+};
 export const HexColor = { args: { color: '#527b37' } };
 export const HexIgnoresVariant = {
     args: { color: '#527b37', variant: 'solid' },
