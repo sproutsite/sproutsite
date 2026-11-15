@@ -2,8 +2,10 @@
     .ss-feature {
         --ss-feature-color: var(--color-primary);
         --ss-feature-contrast: var(--color-primary-content);
+        --ss-feature-icon-box: 3.5rem;
+        --ss-feature-icon-radius: 1rem;
         display: grid;
-        grid-template-columns: 3.5rem minmax(0, 1fr);
+        grid-template-columns: var(--ss-feature-icon-box) minmax(0, 1fr);
         align-items: start;
         gap: 1rem;
         margin-bottom: 1.25em;
@@ -11,9 +13,9 @@
         .ss-feature__icon {
             display: grid;
             place-items: center;
-            width: 3.5rem;
-            height: 3.5rem;
-            border-radius: 1rem;
+            width: var(--ss-feature-icon-box);
+            height: var(--ss-feature-icon-box);
+            border-radius: var(--ss-feature-icon-radius);
             color: var(--ss-feature-color);
             background-color: color-mix(
                 in srgb,
@@ -53,6 +55,23 @@
             }
         }
 
+        &.ss-feature--icon-xs {
+            --ss-feature-icon-box: 1.75rem;
+            --ss-feature-icon-radius: 0.5rem;
+        }
+        &.ss-feature--icon-sm {
+            --ss-feature-icon-box: 2.625rem;
+            --ss-feature-icon-radius: 0.75rem;
+        }
+        &.ss-feature--icon-lg {
+            --ss-feature-icon-box: 5.25rem;
+            --ss-feature-icon-radius: 1.5rem;
+        }
+        &.ss-feature--icon-xl {
+            --ss-feature-icon-box: 7rem;
+            --ss-feature-icon-radius: 2rem;
+        }
+
         &.ss-feature--vertical {
             grid-template-columns: minmax(0, 1fr);
             justify-items: center;
@@ -78,6 +97,11 @@
         &.ss-feature--secondary {
             --ss-feature-color: var(--color-secondary);
             --ss-feature-contrast: var(--color-secondary-content);
+        }
+        &.ss-feature--custom-background {
+            .ss-feature__icon {
+                background-color: var(--ss-feature-background);
+            }
         }
         &.ss-feature--accent {
             --ss-feature-color: var(--color-accent);

@@ -317,8 +317,61 @@ try {
                     `${viewport.name} ${route}: viewport overflows horizontally`,
                 );
             if (route.endsWith('/showcase/features/')) {
+                const samples = page
+                    .locator('main .ss-section')
+                    .last()
+                    .locator('.ss-feature');
+                assert.equal(await samples.count(), 5);
+                const dimensions = await samples.evaluateAll((features) =>
+                    features.map((feature) => ({
+                        icon: feature
+                            .querySelector('svg')!
+                            .getBoundingClientRect().width,
+                        box: feature
+                            .querySelector('.ss-feature__icon')!
+                            .getBoundingClientRect().width,
+                        text: getComputedStyle(
+                            feature.querySelector('.ss-feature__title')!,
+                        ).fontSize,
+                    })),
+                );
+                assert.deepEqual(
+                    dimensions.map((sample) => sample.icon),
+                    [14, 21, 28, 42, 56],
+                );
+                assert.deepEqual(
+                    dimensions.map((sample) => sample.box / dimensions[2]!.box),
+                    [0.5, 0.75, 1, 1.5, 2],
+                );
+                assert.equal(
+                    new Set(dimensions.map((sample) => sample.text)).size,
+                    1,
+                );
                 const vertical = page.locator('.ss-feature--vertical');
-                assert.equal(await vertical.count(), 4);
+                assert.equal(await vertical.count(), 7);
+                const sizes = await vertical.evaluateAll((features) =>
+                    features.map((feature) => {
+                        const box = feature.querySelector('.ss-feature__icon')!;
+                        return {
+                            large: feature.classList.contains(
+                                'ss-feature--icon-xl',
+                            ),
+                            box: box.getBoundingClientRect().width,
+                            icon: box
+                                .querySelector('svg')!
+                                .getBoundingClientRect().width,
+                            title: getComputedStyle(
+                                feature.querySelector('.ss-feature__title')!,
+                            ).fontSize,
+                        };
+                    }),
+                );
+                assert.equal(sizes.filter((size) => size.large).length, 3);
+                for (const size of sizes.filter((size) => size.large)) {
+                    assert.equal(size.box, sizes[0]!.box * 2);
+                    assert.equal(size.icon, sizes[0]!.icon * 2);
+                    assert.equal(size.title, sizes[0]!.title);
+                }
                 for (const feature of await vertical.all()) {
                     const geometry = await feature.evaluate((element) => {
                         const icon = element

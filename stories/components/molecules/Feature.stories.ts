@@ -22,7 +22,15 @@ export default {
             description: 'Canonical PascalCase Lucide name.',
         },
         title: { control: 'text' },
+        backgroundColor: {
+            control: 'text',
+            description: 'Optional explicit CSS hex background.',
+        },
         layout: { control: 'select', options: ['horizontal', 'vertical'] },
+        iconSize: {
+            control: 'select',
+            options: ['xs', 'sm', 'md', 'lg', 'xl'],
+        },
         variant: { control: 'select', options: ['soft', 'solid', 'plain'] },
         color: {
             control: 'text',
@@ -75,3 +83,12 @@ export const LongDescription = {
         },
     },
 };
+
+export const LargeVertical = {
+    args: { layout: 'vertical', iconSize: 'xl' },
+    parameters: { docs: { story: { height: '18rem' } } },
+};
+
+export const ExtraSmall = { args: { iconSize: 'xs' } };
+export const Small = { args: { iconSize: 'sm' } };
+export const MediumLarge = { args: { iconSize: 'lg', layout: 'vertical' } };

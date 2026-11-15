@@ -114,3 +114,92 @@ import { Feature } from 'sproutsite/components';
     </Tab>
 
 </Tabs>
+
+Set `iconSize="xl"` to double both the icon and its background box: a 56px symbol instead of 28px, inside a 7rem box instead of 3.5rem. Title and description sizes stay unchanged. The default is `md`.
+
+<Tabs label="Three steps with large icons" variant="border">
+    <Tab title="Preview">
+
+<Columns>
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Write"
+            layout="vertical"
+            iconSize="xl"
+            headingLevel={4}
+        >
+            Create content in Markdown.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Layers"
+            title="Build"
+            layout="vertical"
+            iconSize="xl"
+            headingLevel={4}
+        >
+            Generate a static site with Astro.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Publish"
+            layout="vertical"
+            iconSize="xl"
+            headingLevel={4}
+        >
+            Deploy anywhere (e.g. Vercel, Netlify, your server).
+        </Feature>
+    </Column>
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+import { Feature } from 'sproutsite/components';
+
+<Columns>
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Write"
+            layout="vertical"
+            iconSize="xl"
+            headingLevel={4}
+        >
+            Create content in Markdown.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Layers"
+            title="Build"
+            layout="vertical"
+            iconSize="xl"
+            headingLevel={4}
+        >
+            Generate a static site with Astro.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Publish"
+            layout="vertical"
+            iconSize="xl"
+            headingLevel={4}
+        >
+            Deploy anywhere (e.g. Vercel, Netlify, your server).
+        </Feature>
+    </Column>
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>

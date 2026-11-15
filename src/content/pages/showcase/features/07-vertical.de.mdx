@@ -126,3 +126,94 @@ import { Feature } from 'sproutsite/components';
     </Tab>
 
 </Tabs>
+
+Mit `iconSize="xl"` werden Icon und Hintergrundbox doppelt so groß: 56 statt 28 px für das Symbol und 7 statt 3,5 rem für die Box. Titel und Beschreibung bleiben gleich groß. Ohne Angabe gilt `md`.
+
+<Tabs label="Drei Schritte mit großen Icons" variant="border">
+    <Tab title="Vorschau">
+
+<Columns>
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Schreiben"
+            layout="vertical"
+            iconSize="xl"
+            headingLevel={4}
+        >
+            Inhalte in Markdown erstellen.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Layers"
+            title="Generieren"
+            layout="vertical"
+            iconSize="xl"
+            headingLevel={4}
+        >
+            Mit Astro eine statische Website generieren.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Veröffentlichen"
+            layout="vertical"
+            iconSize="xl"
+            headingLevel={4}
+        >
+            Flexibel bereitstellen – etwa bei Vercel, Netlify oder auf dem
+            eigenen Server.
+        </Feature>
+    </Column>
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+import { Feature } from 'sproutsite/components';
+
+<Columns>
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Schreiben"
+            layout="vertical"
+            iconSize="xl"
+            headingLevel={4}
+        >
+            Inhalte in Markdown erstellen.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Layers"
+            title="Generieren"
+            layout="vertical"
+            iconSize="xl"
+            headingLevel={4}
+        >
+            Mit Astro eine statische Website generieren.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Veröffentlichen"
+            layout="vertical"
+            iconSize="xl"
+            headingLevel={4}
+        >
+            Flexibel bereitstellen – etwa bei Vercel, Netlify oder auf dem
+            eigenen Server.
+        </Feature>
+    </Column>
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>

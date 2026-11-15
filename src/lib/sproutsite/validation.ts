@@ -240,8 +240,10 @@ function validateMdxLayout(
                 const icon = value('icon');
                 const title = value('title');
                 const layout = value('layout');
+                const iconSize = value('iconSize');
                 const variant = value('variant');
                 const color = value('color');
+                const backgroundColor = value('backgroundColor');
                 const heading = value('headingLevel');
                 const headingValue =
                     heading !== null && typeof heading === 'object'
@@ -255,8 +257,10 @@ function validateMdxLayout(
                                 'icon',
                                 'title',
                                 'layout',
+                                'iconSize',
                                 'variant',
                                 'color',
+                                'backgroundColor',
                                 'headingLevel',
                             ].includes(attribute.name ?? ''),
                     ) ||
@@ -266,6 +270,13 @@ function validateMdxLayout(
                     !/^[A-Z][A-Za-z0-9]*$/.test(icon) ||
                     typeof title !== 'string' ||
                     !title.trim() ||
+                    (backgroundColor !== undefined &&
+                        !isHexColor(backgroundColor)) ||
+                    (iconSize !== undefined &&
+                        (typeof iconSize !== 'string' ||
+                            !['xs', 'sm', 'md', 'lg', 'xl'].includes(
+                                iconSize,
+                            ))) ||
                     (layout !== undefined &&
                         (typeof layout !== 'string' ||
                             !['horizontal', 'vertical'].includes(layout))) ||
@@ -291,7 +302,7 @@ function validateMdxLayout(
                     fail(
                         contentRoot,
                         path,
-                        'Feature requires a canonical PascalCase icon and non-empty title; layout is horizontal or vertical, variant is soft, solid, or plain, color is a semantic theme color or valid CSS hex color, and headingLevel is a numeric literal from 2 to 6',
+                        'Feature requires a canonical PascalCase icon and non-empty title; layout is horizontal or vertical, iconSize is xs, sm, md, lg, or xl, variant is soft, solid, or plain, color is a semantic theme color or valid CSS hex color, and headingLevel is a numeric literal from 2 to 6',
                     );
             } else if (mdxNode.name === 'Icon') {
                 iconCount += 1;

@@ -14,15 +14,17 @@ import { Eyebrow } from 'sproutsite/components';
 
 <ContentTable caption="Feature-Eigenschaften" density="compact">
 
-| Eigenschaft    | Standard     | Zweck                                                                                          |
-| -------------- | ------------ | ---------------------------------------------------------------------------------------------- |
-| `icon`         | Pflichtfeld  | Offizieller Lucide-Name in PascalCase, etwa `Zap`, `Layers` oder `Code`                        |
-| `title`        | Pflichtfeld  | Nicht leere Feature-Überschrift                                                                |
-| `layout`       | `horizontal` | `horizontal`: Icon links; `vertical`: Icon oben, Titel und Beschreibung zentriert              |
-| Standard-Slot  | Leer         | Kurze Markdown-Beschreibung, auch mit Hervorhebungen und Links                                 |
-| `variant`      | `soft`       | `soft`, `solid` oder `plain`                                                                   |
-| `color`        | `primary`    | Semantische Theme-Farbe oder CSS-Hexwert wie `#527b37`; bei Hexwerten wird `variant` ignoriert |
-| `headingLevel` | `3`          | `2`, `3`, `4`, `5` oder `6`; als numerischer Prop, etwa `headingLevel={3}`                     |
+| Eigenschaft       | Standard     | Zweck                                                                                                   |
+| ----------------- | ------------ | ------------------------------------------------------------------------------------------------------- |
+| `icon`            | Pflichtfeld  | Offizieller Lucide-Name in PascalCase, etwa `Zap`, `Layers` oder `Code`                                 |
+| `title`           | Pflichtfeld  | Nicht leere Feature-Überschrift                                                                         |
+| `layout`          | `horizontal` | `horizontal`: Icon links; `vertical`: Icon oben, Titel und Beschreibung zentriert                       |
+| `iconSize`        | `md`         | `xs`, `sm`, `md`, `lg`, `xl`; Symbol: 14 / 21 / 28 / 42 / 56 px, Box: 1,75 / 2,625 / 3,5 / 5,25 / 7 rem |
+| Standard-Slot     | Leer         | Kurze Markdown-Beschreibung, auch mit Hervorhebungen und Links                                          |
+| `variant`         | `soft`       | `soft`, `solid` oder `plain`                                                                            |
+| `color`           | `primary`    | Semantische Theme-Farbe oder CSS-Hexwert wie `#527b37`; bei Hexwerten wird `variant` ignoriert          |
+| `backgroundColor` | Automatisch  | Eigener CSS-Hexwert für den Icon-Hintergrund; überschreibt den Hintergrund von variant                  |
+| `headingLevel`    | `3`          | `2`, `3`, `4`, `5` oder `6`; als numerischer Prop, etwa `headingLevel={3}`                              |
 
 </ContentTable>
 

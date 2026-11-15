@@ -13,6 +13,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
+- Expanded Feature icon sizes to xs/sm/md/lg/xl, retaining md as default and migrating former large examples to xl to preserve their appearance.
+
 - Moved the bilingual homepage principle section directly after the feature strip and paired its text with a three-step workflow using existing Columns, Feature, and Lucide separators.
 
 - Migrated existing alternating Showcase, Documentation, FAQ, Info, and blog sections to odd/even tone mappings in both languages while preserving their rendered colors and explicit tone examples.
@@ -32,6 +34,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - Split English and German showcase examples into focused sections with alternating default and muted surfaces and contextual eyebrows, while preserving the section tone demonstrations.
 
 ### Added
+
+- Added explicit Feature icon background colors and applied muted green and teal hex palettes to the homepage workflow.
+
+- Added a large Feature icon size that doubles the symbol and background box, with bilingual column examples and a Storybook story.
 
 - Added centered and top alignment for Columns icon separators, including vertical Feature icon alignment and bilingual showcase examples.
 

@@ -8,6 +8,9 @@ interface Props {
     icon: ComponentProps<typeof Icon>['name'];
     title: string;
     layout?: 'horizontal' | 'vertical';
+    iconSize?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    /** Explicit icon background, independent of the chosen visual variant. */
+    backgroundColor?: `#${string}`;
     variant?: 'soft' | 'solid' | 'plain';
     color?:
         | 'primary'
@@ -26,10 +29,21 @@ const {
     icon,
     title,
     layout = 'horizontal',
+    iconSize = 'md',
     variant = 'soft',
     color = 'primary',
+    backgroundColor,
     headingLevel = 3,
 } = Astro.props;
+if (backgroundColor !== undefined && !isHexColor(backgroundColor))
+    throw new Error(
+        'Sproutsite Feature backgroundColor must be a CSS hex color.',
+    );
+const iconPixels = { xs: 14, sm: 21, md: 28, lg: 42, xl: 56 } as const;
+if (!Object.hasOwn(iconPixels, iconSize))
+    throw new Error(
+        'Sproutsite Feature iconSize must be xs, sm, md, lg, or xl.',
+    );
 if (!['horizontal', 'vertical'].includes(layout))
     throw new Error(
         'Sproutsite Feature layout must be horizontal or vertical.',
@@ -66,13 +80,22 @@ if (
         'ss-feature',
         'not-prose',
         `ss-feature--${layout}`,
+        `ss-feature--icon-${iconSize}`,
         customColor ? 'ss-feature--custom' : `ss-feature--${variant}`,
         !customColor && `ss-feature--${color}`,
+        backgroundColor && 'ss-feature--custom-background',
     ]}
-    style={customColor ? `--ss-feature-color: ${color};` : undefined}
+    style={
+        [
+            customColor && `--ss-feature-color: ${color};`,
+            backgroundColor && `--ss-feature-background: ${backgroundColor};`,
+        ]
+            .filter(Boolean)
+            .join(' ') || undefined
+    }
 >
     <span class="ss-feature__icon" aria-hidden="true">
-        <Icon name={icon} size={28} />
+        <Icon name={icon} size={iconPixels[iconSize]} />
     </span>
     <div class="ss-feature__content">
         <Heading class="ss-feature__title">{title.trim()}</Heading>

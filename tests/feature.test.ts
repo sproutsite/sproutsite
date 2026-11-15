@@ -22,16 +22,26 @@ test('validates Feature content, variants, and heading levels without executable
         for (const component of [
             '<Feature icon="Zap" title="Static">A short description.</Feature>',
             '<Feature icon="Zap" title="Horizontal" layout="horizontal" />',
+            '<Feature icon="Layers" title="Large" layout="vertical" iconSize="lg" />',
+            '<Feature icon="Zap" title="Standard" iconSize="md" />',
             '<Feature icon="Layers" title="Vertical" layout="vertical" variant="solid" color="secondary" />',
             '<Feature icon="Code" title="Hex vertical" layout="vertical" color="#527b37" />',
             '<Feature icon="Layers" title="Components" variant="solid" color="secondary" headingLevel={4}>Reusable **Markdown** content.</Feature>',
             '<Feature icon="Code" title="Flexible" variant="plain" headingLevel={6} />',
             '<Feature icon="Zap" title="Hex" color="#abc" />',
+            '<Feature icon="Zap" title="Palette" color="#527442" backgroundColor="#E9EFDF" />',
             '<Feature icon="Zap" title="Hex" color="#abcf" />',
             '<Feature icon="Zap" title="Hex" color="#527B37" variant="solid" />',
             '<Feature icon="Zap" title="Hex" color="#527b37cc" variant="plain" />',
         ])
             assert.doesNotThrow(() => validate(component));
+        for (const size of ['xs', 'sm', 'md', 'lg', 'xl']) {
+            assert.doesNotThrow(() =>
+                validate(
+                    `<Feature icon="Zap" title="Size" iconSize="${size}" />`,
+                ),
+            );
+        }
         for (const props of [
             'title="Missing icon"',
             'icon="Zap"',
@@ -40,9 +50,13 @@ test('validates Feature content, variants, and heading levels without executable
             'icon="Zap" title={process.exit()}',
             'icon="Zap" title="Test" variant="unknown"',
             'icon="Zap" title="Test" layout="stacked"',
+            'icon="Zap" title="Test" iconSize="xxl"',
+            'icon="Zap" title="Test" iconSize={56}',
             'icon="Zap" title="Test" layout={"vertical"}',
             'icon="Zap" title="Test" layout',
             'icon="Zap" title="Test" color="pink"',
+            'icon="Zap" title="Test" backgroundColor="red"',
+            'icon="Zap" title="Test" backgroundColor="#fff;display:none"',
             'icon="Zap" title="Test" color="#12"',
             'icon="Zap" title="Test" color="#12345"',
             'icon="Zap" title="Test" color="#gggggg"',

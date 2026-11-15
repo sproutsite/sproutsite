@@ -1,0 +1,70 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Feature } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Fit the content</Eyebrow>
+
+## Compare icon sizes
+
+The default remains `md`. `xs` halves and `xl` doubles the icon and box. `sm` and `lg` sit between those sizes. All sizes work in horizontal and vertical layouts.
+
+<Tabs label="Compare icon sizes" variant="border">
+    <Tab title="Preview">
+
+<Feature icon="Layers" title="xs" iconSize="xs">
+    Text stays the same size in every variant.
+</Feature>
+
+<Feature icon="Layers" title="sm" iconSize="sm">
+    Text stays the same size in every variant.
+</Feature>
+
+<Feature icon="Layers" title="md" iconSize="md">
+    Text stays the same size in every variant.
+</Feature>
+
+<Feature icon="Layers" title="lg" iconSize="lg">
+    Text stays the same size in every variant.
+</Feature>
+
+<Feature icon="Layers" title="xl" iconSize="xl">
+    Text stays the same size in every variant.
+</Feature>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Feature } from 'sproutsite/components';
+
+<Feature icon="Layers" title="xs" iconSize="xs">
+    Text stays the same size in every variant.
+</Feature>
+
+<Feature icon="Layers" title="sm" iconSize="sm">
+    Text stays the same size in every variant.
+</Feature>
+
+<Feature icon="Layers" title="md" iconSize="md">
+    Text stays the same size in every variant.
+</Feature>
+
+<Feature icon="Layers" title="lg" iconSize="lg">
+    Text stays the same size in every variant.
+</Feature>
+
+<Feature icon="Layers" title="xl" iconSize="xl">
+    Text stays the same size in every variant.
+</Feature>
+```
+
+    </Tab>
+
+</Tabs>
