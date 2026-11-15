@@ -32,7 +32,11 @@
             }
 
             .ss-footer__links {
-                @apply flex flex-wrap gap-4;
+                @apply flex flex-wrap gap-2;
+
+                li {
+                    @apply inline-flex items-center gap-2;
+                }
 
                 a {
                     color: var(--color-primary-content);

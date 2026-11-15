@@ -30,10 +30,11 @@ const { site } = Astro.props;
             )}
         >
             <ul class="ss-footer__links">
-                {site.footer.links.map((link) => {
+                {site.footer.links.map((link, index) => {
                     const external = isExternalWebLink(link.href, site.url);
                     return (
                         <li>
+                            {index > 0 && <span aria-hidden="true">·</span>}
                             <a
                                 href={contentHref(link.href, site)}
                                 target={external ? '_blank' : undefined}

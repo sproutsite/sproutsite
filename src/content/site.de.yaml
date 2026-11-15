@@ -16,10 +16,6 @@ header:
     links:
         - label: Startseite
           href: /
-        - label: FAQ
-          href: /faq/
-        - label: Info
-          href: /info/
         - label: Showcase
           href: /showcase/
         - label: Dokumentation
@@ -31,6 +27,10 @@ header:
 footer:
     text: Agent-ready static CMS for Astro and TypeScript.
     links:
+        - label: Info
+          href: /info/
+        - label: FAQ
+          href: /faq/
         - label: Dokumentation
           href: /dokumentation/
         - label: Kontakt
