@@ -48,10 +48,10 @@ test('validates divider flags and custom hex colors without accepting arbitrary 
             'divider',
             'divider={true}',
             'divider={false}',
-            'divider dividerGap={4}',
-            'divider dividerGap={0.5}',
-            'divider dividerGap={6} dividerGapMobile={3}',
-            'divider dividerGapMobile={1.5}',
+            'divider dividerGap="lg"',
+            'divider dividerGap="xs"',
+            'divider dividerGap="xl" dividerGapMobile="md"',
+            'divider dividerGapMobile="sm"',
             'divider dividerColor="#94a3b8"',
             'dividerColor="#abc"',
             'dividerColor="#abcd"',
@@ -59,21 +59,34 @@ test('validates divider flags and custom hex colors without accepting arbitrary 
         ]) {
             assert.doesNotThrow(() => validate(props));
         }
+        for (const size of ['xs', 'sm', 'md', 'lg', 'xl']) {
+            assert.doesNotThrow(() => validate(`divider dividerGap="${size}"`));
+            assert.doesNotThrow(() =>
+                validate(`divider dividerGapMobile="${size}"`),
+            );
+        }
         for (const props of [
             'divider="true"',
             'divider={enabled}',
             'dividerGap={0}',
+            'dividerGap={3}',
+            'dividerGap="xxl"',
+            'dividerGap=""',
+            'dividerGap={"md"}',
             'dividerGap={-1}',
             'dividerGap={1 + 2}',
             'dividerGap={gap}',
             'dividerGap="4"',
             'dividerGapMobile={0}',
+            'dividerGapMobile={3}',
+            'dividerGapMobile="unknown"',
+            'dividerGapMobile={"sm"}',
             'dividerGapMobile={-1}',
             'dividerGapMobile={Infinity}',
             'dividerGapMobile={gap}',
             'dividerGapMobile={1 + 2}',
             'dividerGapMobile="3"',
-            'dividerGapMobile={3} dividerGapMobile={1.5}',
+            'dividerGapMobile="md" dividerGapMobile="sm"',
             'divider divider',
             'dividerColor="red"',
             'dividerColor="#12"',

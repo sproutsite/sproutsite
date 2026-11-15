@@ -9,6 +9,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
+- Increased the default Columns divider gap to 6rem, with a 2/4/6/8/12rem preset scale and half-sized mobile gaps, including automatic mobile inheritance.
+
+- Replaced numeric Columns divider gaps with xs, sm, md, lg, and xl CSS presets; md remains the default and mobile spacing inherits the general preset when omitted.
+
 - Switched Columns dividerGap and dividerGapMobile to rem, including defaults and examples, so spacing scales with the root font size.
 
 - Kept large Columns divider gaps between actual content areas to avoid overflow at narrow desktop widths.

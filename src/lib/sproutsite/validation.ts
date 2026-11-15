@@ -542,11 +542,10 @@ function validateMdxLayout(
                     )
                     .some((attribute) => {
                         const value = attribute.value;
-                        const number =
-                            value && typeof value === 'object'
-                                ? Number(value.value)
-                                : NaN;
-                        return !Number.isFinite(number) || number <= 0;
+                        return (
+                            typeof value !== 'string' ||
+                            !['xs', 'sm', 'md', 'lg', 'xl'].includes(value)
+                        );
                     });
                 const columns = (mdxNode.children ?? []).filter(
                     (child) => child.type === 'mdxJsxFlowElement',
@@ -581,7 +580,7 @@ function validateMdxLayout(
                     fail(
                         contentRoot,
                         path,
-                        'Columns must contain at least one direct Column component; optional divider must be boolean, dividerColor must be a CSS hex color, and dividerGap and dividerGapMobile must be positive numeric rem values',
+                        'Columns must contain at least one direct Column component; optional divider must be boolean, dividerColor must be a CSS hex color, and dividerGap and dividerGapMobile must be xs, sm, md, lg, or xl',
                     );
                 columns.forEach((column) => {
                     validatedColumns.add(column);

@@ -340,8 +340,11 @@ try {
                 assert.equal(gaps.length, 3);
                 for (const [index, gap] of gaps.entries()) {
                     const expected =
-                        (index === 2 && viewport.name === 'desktop' ? 6 : 3) *
-                        rootFontSize;
+                        (viewport.name === 'desktop'
+                            ? index === 2
+                                ? 12
+                                : 6
+                            : 3) * rootFontSize;
                     assert.ok(
                         Math.abs(gap - expected) < 1,
                         `${route}: divider gap ${gap}, expected ${expected}`,
@@ -354,7 +357,7 @@ try {
                         height: viewport.height,
                     });
                     const narrowGaps = await measuredGaps(false);
-                    assert.ok(Math.abs(narrowGaps[2]! - 6 * rootFontSize) < 1);
+                    assert.ok(Math.abs(narrowGaps[2]! - 12 * rootFontSize) < 1);
                     assert.equal(
                         await page.evaluate(
                             () =>
@@ -379,8 +382,10 @@ try {
                     );
                     for (const [index, gap] of scaledGaps.entries()) {
                         const expected =
-                            (index === 2 && viewport.name === 'desktop'
-                                ? 6
+                            (viewport.name === 'desktop'
+                                ? index === 2
+                                    ? 12
+                                    : 6
                                 : 3) * 20;
                         assert.ok(
                             Math.abs(gap - expected) < 1,

@@ -4,9 +4,43 @@
 
         &.ss-columns--divider {
             --ss-columns-divider-color: rgb(226, 232, 240);
-            --ss-columns-divider-gap: 3rem;
-            --ss-columns-divider-gap-mobile: var(--ss-columns-divider-gap);
+            --ss-columns-divider-gap: 6rem;
+            --ss-columns-divider-gap-mobile: calc(
+                var(--ss-columns-divider-gap) / 2
+            );
             gap: var(--ss-columns-divider-gap-mobile);
+
+            &.ss-columns--divider-gap-xs {
+                --ss-columns-divider-gap: 2rem;
+            }
+            &.ss-columns--divider-gap-sm {
+                --ss-columns-divider-gap: 4rem;
+            }
+            &.ss-columns--divider-gap-md {
+                --ss-columns-divider-gap: 6rem;
+            }
+            &.ss-columns--divider-gap-lg {
+                --ss-columns-divider-gap: 8rem;
+            }
+            &.ss-columns--divider-gap-xl {
+                --ss-columns-divider-gap: 12rem;
+            }
+
+            &.ss-columns--divider-gap-mobile-xs {
+                --ss-columns-divider-gap-mobile: 1rem;
+            }
+            &.ss-columns--divider-gap-mobile-sm {
+                --ss-columns-divider-gap-mobile: 2rem;
+            }
+            &.ss-columns--divider-gap-mobile-md {
+                --ss-columns-divider-gap-mobile: 3rem;
+            }
+            &.ss-columns--divider-gap-mobile-lg {
+                --ss-columns-divider-gap-mobile: 4rem;
+            }
+            &.ss-columns--divider-gap-mobile-xl {
+                --ss-columns-divider-gap-mobile: 6rem;
+            }
 
             @media (width >= 64rem) {
                 /* Equivalent twelve-span rows without eleven internal grid

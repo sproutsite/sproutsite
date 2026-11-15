@@ -13,20 +13,23 @@ export default {
     argTypes: {
         divider: { control: 'boolean' },
         dividerGap: {
-            control: { type: 'number', min: 0.25, step: 0.25 },
-            description: 'Total gap in rem; half on either side of each line.',
+            control: 'select',
+            options: ['xs', 'sm', 'md', 'lg', 'xl'],
+            description:
+                'Desktop preset: xs 2rem, sm 4rem, md 6rem, lg 8rem, xl 12rem.',
         },
         dividerGapMobile: {
-            control: { type: 'number', min: 0.25, step: 0.25 },
+            control: 'select',
+            options: ['xs', 'sm', 'md', 'lg', 'xl'],
             description:
-                'Optional gap in rem below 64rem; defaults to dividerGap.',
+                'Mobile preset: xs 1rem, sm 2rem, md 3rem, lg 4rem, xl 6rem. Omit to use half the general gap.',
         },
         dividerColor: {
             control: 'text',
             description: 'Optional CSS hex color for the separators.',
         },
     },
-    args: { divider: false, dividerGap: 3 },
+    args: { divider: false, dividerGap: 'md' },
     parameters: {
         docs: {
             story: {
@@ -79,7 +82,7 @@ export const CustomDividers = {
     args: {
         divider: true,
         dividerColor: '#94a3b8',
-        dividerGap: 4,
+        dividerGap: 'lg',
         slots: { default: columns([4, 4, 4, 6, 6]) },
     },
 };
@@ -87,8 +90,8 @@ export const CustomDividers = {
 export const MobileDividerSpacing = {
     args: {
         divider: true,
-        dividerGap: 6,
-        dividerGapMobile: 3,
+        dividerGap: 'xl',
+        dividerGapMobile: 'md',
         slots: { default: columns([4, 4, 4]) },
     },
 };

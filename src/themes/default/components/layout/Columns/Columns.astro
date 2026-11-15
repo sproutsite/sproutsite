@@ -1,48 +1,50 @@
 ---
 import { isHexColor } from '../../../../../lib/sproutsite/colors.js';
 
+const gapSizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+type GapSize = (typeof gapSizes)[number];
+
 interface Props {
     /** Draw separators between adjacent columns, horizontal when stacked. */
     divider?: boolean;
     /** Optional CSS hex color; otherwise use the theme's subtle gray. */
     dividerColor?: `#${string}`;
-    /** Total gap in rem around a separator; half on either side. */
-    dividerGap?: number;
-    /** Optional gap in rem for stacked columns below 64rem; defaults to dividerGap. */
-    dividerGapMobile?: number;
+    /** Named spacing preset; md is the default (6rem total gap). */
+    dividerGap?: GapSize;
+    /** Optional preset for stacked columns below 64rem; defaults to half the dividerGap spacing. */
+    dividerGapMobile?: GapSize;
 }
 
 const {
     divider = false,
     dividerColor,
-    dividerGap = 3,
+    dividerGap = 'md',
     dividerGapMobile,
 } = Astro.props;
 if (
     typeof divider !== 'boolean' ||
     (dividerColor !== undefined && !isHexColor(dividerColor)) ||
-    !Number.isFinite(dividerGap) ||
-    dividerGap <= 0 ||
-    (dividerGapMobile !== undefined &&
-        (!Number.isFinite(dividerGapMobile) || dividerGapMobile <= 0))
+    !gapSizes.includes(dividerGap) ||
+    (dividerGapMobile !== undefined && !gapSizes.includes(dividerGapMobile))
 )
     throw new Error(
-        'Sproutsite Columns: divider must be boolean, dividerColor must be a CSS hex color, and dividerGap and dividerGapMobile must be positive numbers in rem.',
+        'Sproutsite Columns: divider must be boolean, dividerColor must be a CSS hex color, and dividerGap and dividerGapMobile must be xs, sm, md, lg, or xl.',
     );
 ---
 
 <div
-    class:list={['ss-columns', divider && 'ss-columns--divider']}
+    class:list={[
+        'ss-columns',
+        divider && 'ss-columns--divider',
+        divider && `ss-columns--divider-gap-${dividerGap}`,
+        divider &&
+            dividerGapMobile &&
+            `ss-columns--divider-gap-mobile-${dividerGapMobile}`,
+    ]}
     style={
-        [
-            dividerColor && `--ss-columns-divider-color: ${dividerColor};`,
-            divider && `--ss-columns-divider-gap: ${dividerGap}rem;`,
-            divider &&
-                dividerGapMobile !== undefined &&
-                `--ss-columns-divider-gap-mobile: ${dividerGapMobile}rem;`,
-        ]
-            .filter(Boolean)
-            .join(' ') || undefined
+        dividerColor
+            ? `--ss-columns-divider-color: ${dividerColor};`
+            : undefined
     }
 >
     <slot />

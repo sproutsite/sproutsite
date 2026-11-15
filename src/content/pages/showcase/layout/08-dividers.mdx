@@ -11,7 +11,19 @@ import { Eyebrow } from 'sproutsite/components';
 
 ## Dividers between columns
 
-`divider` enables subtle gray separators. On desktop they run vertically between adjacent columns; on smaller screens they run horizontally between stacked areas. No line appears at the outer edges or between desktop rows. Set `dividerColor` to a custom hex color, such as `#94a3b8`. The gap defaults to 3rem, or 1.5rem on each side of the line. Set `dividerGap={4}` to use another positive rem value. On mobile, spacing defaults to `dividerGap`. Set `dividerGapMobile` to override the gap between stacked areas. Vertical lines leave a 20% inset at both ends. All spacing values use rem and scale with the root font size. Without `divider`, the layout stays unchanged.
+`divider` adds separators between adjacent columns: vertical on desktop and horizontal when stacked. There are no lines at the outer edges or between desktop rows. `dividerColor` accepts a custom hex color, such as `#94a3b8`.
+
+Choose a spacing preset with `dividerGap`. The default, `md`, provides 6rem on desktop and 3rem on mobile. Each mobile preset uses half its desktop value. Without `dividerGapMobile`, the general preset applies; set it explicitly to choose another mobile size. Half the total gap sits on each side of the line. Vertical lines retain a 20% inset at both ends.
+
+Presets use CSS classes such as `ss-columns--divider-gap-xl` and `ss-columns--divider-gap-mobile-md`. All values scale with the root font size. Without `divider`, the layout stays unchanged.
+
+| Size           | Desktop gap | Mobile gap |
+| -------------- | ----------- | ---------- |
+| `xs`           | 2rem        | 1rem       |
+| `sm`           | 4rem        | 2rem       |
+| `md` (default) | 6rem        | 3rem       |
+| `lg`           | 8rem        | 4rem       |
+| `xl`           | 12rem       | 6rem       |
 
 <Tabs label="Dividers between columns" variant="border">
     <Tab title="Preview">
@@ -141,11 +153,11 @@ import { Column, Columns } from 'sproutsite/components';
 
 ### Double the divider spacing
 
-With `dividerGap={6}`, the gap is twice the 3rem default. On desktop, each side of the line has 3rem of space. `dividerGapMobile={3}` halves the total gap on mobile, leaving 1.5rem above and below the line.
+With `dividerGap="xl"`, the desktop gap is 12rem, twice the `md` default. Each side of the line has 6rem of space. `dividerGapMobile="md"` selects a 3rem mobile gap, leaving 1.5rem above and below the line. Without this mobile override, `xl` would use 6rem on mobile.
 
 <Tabs label="Double the divider spacing" variant="border">
     <Tab title="Preview">
-<Columns divider dividerGap={6} dividerGapMobile={3}>
+<Columns divider dividerGap="xl" dividerGapMobile="md">
     <Column span={4}>
 
         #### Area 1
@@ -175,7 +187,7 @@ With `dividerGap={6}`, the gap is twice the 3rem default. On desktop, each side 
 ```mdx
 import { Column, Columns } from 'sproutsite/components';
 
-<Columns divider dividerGap={6} dividerGapMobile={3}>
+<Columns divider dividerGap="xl" dividerGapMobile="md">
     <Column span={4}>
 
         #### Area 1
