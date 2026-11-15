@@ -36,7 +36,11 @@
                 var(--ss-header-dropdown-border, var(--color-base-300));
             border-radius: 0.75rem;
             background: var(--ss-header-dropdown-bg, var(--color-base-100));
-            box-shadow: var(--shadow-soft);
+            @apply shadow-lg;
+
+            .ss-header--scrolled & {
+                inset-block-start: calc(100% + 2.5rem);
+            }
 
             @media (max-width: 47.999rem) {
                 inset-inline-start: 0;
