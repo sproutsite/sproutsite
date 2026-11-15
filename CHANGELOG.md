@@ -7,6 +7,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.1] - 2026-11-15
+
 ### Added
 
 - Added an English and German article about adopting Apache 2.0, with a generated licensing illustration and links to the official license and FAQ.
@@ -14,10 +16,23 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - Added complete English showcase and documentation content alongside the German localized files, including translated metadata, image descriptions, and code examples.
 - Integrated local Lucide SVG icons through the default theme's accessible Icon atom, validated MDX usage, a bilingual showcase page, and Storybook examples.
 - Retained Lucide's ISC and Feather-derived MIT notices with the distributed third-party licenses.
+- Added optional rounded square icon backgrounds with semantic theme colors, automatic contrast colors, and bilingual showcase and Storybook examples.
+- Added configurable header CTAs with button variants, optional Lucide icons, and CSS separators.
+- Added a configurable language switcher with local MIT-licensed flags, translated page and blog targets, homepage fallback, and support for a single configured language.
+- Added a fullscreen native-dialog mobile menu with inline language selection, full-width CTAs, keyboard controls, scroll locking, and a wrapping navigation fallback without JavaScript.
+- Added validated `small`, `big`, and `fullscreen` hero types and matching CSS modifiers. The default is `small`; fullscreen sizing remains reserved for later styling.
+
+### Changed
+
+- Set both homepage heroes to `big` with additional top spacing; other heroes and title fallbacks use `small`.
+- Moved Info and FAQ to the footer, separated footer links with middle dots, and replaced demo contact addresses with `grow@sproutsite.dev` in both languages.
+- Aligned header control heights and hover backgrounds, removed navigation link borders and inset shadows, and refined language dropdown positioning, arrow, spacing, and shadow.
+- Added tone-aware leading lines to eyebrows and matched their hero font size to section eyebrows.
 
 ### Fixed
 
 - Updated accessibility checks to discover every generated page and exercise English and German component examples, corrected localized anchor links and theme reference values, and localized shared navigation and foundation specimens.
+- Corrected button row alignment in tabs, columns, and prose, centered button icons, and standardized icon-to-label spacing with bilingual showcase examples.
 
 ## [0.5.0] - 2026-11-14
 
