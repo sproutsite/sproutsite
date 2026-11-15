@@ -16,6 +16,11 @@
             .ss-header__brand {
                 @apply inline-flex items-center gap-3 text-lg font-bold text-primary-content no-underline hover:no-underline;
             }
+
+            .ss-header__link,
+            .ss-header__cta .ss-button {
+                min-height: 2.75rem;
+            }
         }
 
         .ss-header__links {
@@ -41,6 +46,8 @@
 
         .ss-header__link {
             @apply relative !gap-2.5 !text-lg !text-primary-content no-underline hover:no-underline;
+            border-color: transparent !important;
+            box-shadow: none !important;
 
             .ss-icon {
                 display: block;
@@ -49,8 +56,8 @@
 
             &:hover {
                 --btn-bg: color-mix(
-                    in oklab,
-                    var(--color-primary-content) 30%,
+                    in srgb,
+                    currentColor 10%,
                     transparent
                 ) !important;
             }
@@ -89,16 +96,6 @@
 
                 .ss-header__brand {
                     color: var(--color-brand-navy) !important;
-                }
-
-                .ss-header__link {
-                    &:not([aria-current='page']):hover {
-                        --btn-bg: color-mix(
-                            in oklab,
-                            var(--color-base-content) 10%,
-                            transparent
-                        ) !important;
-                    }
                 }
             }
         }
