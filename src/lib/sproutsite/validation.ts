@@ -10,7 +10,7 @@ import remarkMdx from 'remark-mdx';
 import remarkGfm from 'remark-gfm';
 import { visit } from 'unist-util-visit';
 import { loadSiteConfig } from './site-config.js';
-import { tones } from './types.js';
+import { heroTypes, tones } from './types.js';
 import { routeFromPageId } from './urls.js';
 
 const pageSchema = z.object({
@@ -48,6 +48,7 @@ const heroAction = z
 const heroSchema = markdownSchema
     .extend({
         title: z.string().trim().min(1),
+        type: z.enum(heroTypes).default('small'),
         titleHighlight: z
             .string()
             .trim()

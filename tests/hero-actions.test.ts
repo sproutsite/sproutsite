@@ -34,6 +34,15 @@ Introduction.
         );
         assert.doesNotThrow(() => validateSproutsiteContent(directory));
 
+        for (const type of ['small', 'big', 'fullscreen']) {
+            writeFileSync(hero, `---\ntitle: Start\ntype: ${type}\n---\n`);
+            assert.doesNotThrow(() => validateSproutsiteContent(directory));
+        }
+        for (const type of ['centered', 'null', '42']) {
+            writeFileSync(hero, `---\ntitle: Start\ntype: ${type}\n---\n`);
+            assert.throws(() => validateSproutsiteContent(directory), /type/);
+        }
+
         writeFileSync(
             hero,
             `---

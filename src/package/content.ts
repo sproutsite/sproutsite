@@ -1,7 +1,7 @@
 import { defineCollection, type ImageFunction } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
-import { tones } from '../lib/sproutsite/types.js';
+import { heroTypes, tones } from '../lib/sproutsite/types.js';
 
 function blogDirectoryId(entry: string): string {
     const match = entry.match(
@@ -56,6 +56,7 @@ export function createSproutsiteCollections(
     const documentSchema = ({ image }: { image: ImageFunction }) =>
         z.object({
             title: z.string().trim().min(1).optional(),
+            type: z.enum(heroTypes).default('small'),
             titleHighlight: z.string().trim().min(1).optional(),
             eyebrow: z.string().trim().min(1).optional(),
             classes: z.array(heroClass).max(8).nullable().optional(),

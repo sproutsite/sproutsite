@@ -13,6 +13,7 @@ A `hero.md` file activates the shared hero and provides its visible H1, eyebrow,
 ```yaml
 ---
 title: Page title in the hero
+type: small
 titleHighlight: hero
 eyebrow: Context
 tone: brand
@@ -27,6 +28,12 @@ tagline: A short supporting tagline.
 ```
 
 `background-image` references a local image relative to `hero.md`. Astro validates and optimizes the file. The default theme treats it as decoration and adds an overlay to preserve text contrast. Images that convey information belong in a regular section with alternative text instead.
+
+### Prepare the hero type
+
+Set `type` to `small`, `big`, or `fullscreen`. Without this field, the type is `small`. The hero receives the corresponding `ss-hero--small`, `ss-hero--big`, or `ss-hero--fullscreen` class independently of its theme classes. Both homepage translations use `big`; other heroes, the blog overview, and H1 fallbacks use `small`.
+
+The `big` variant adds more space above the hero content. Other variant-specific styling is still being prepared: `small` retains the base presentation, and `fullscreen` does not yet fill the viewport.
 
 ### Override or remove classes for one page
 

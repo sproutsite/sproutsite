@@ -1,11 +1,19 @@
 @layer components {
     .ss-hero {
+        /* Small and fullscreen retain the base presentation for now. */
         @apply relative isolate overflow-hidden py-section-hero;
         padding-top: max(
             var(--spacing-section-hero),
             calc(var(--spacing-header-overlay) + 2.5rem)
         );
         padding-bottom: var(--spacing-section-hero-bottom);
+
+        &.ss-hero--big {
+            padding-top: max(
+                var(--spacing-section-hero),
+                calc(var(--spacing-header-overlay) + 4.5rem)
+            );
+        }
 
         .ss-hero__inner {
             @apply relative z-10;

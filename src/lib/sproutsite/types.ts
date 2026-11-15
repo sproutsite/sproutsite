@@ -1,5 +1,6 @@
 export const tones = ['default', 'muted', 'brand'] as const;
 export type Tone = (typeof tones)[number];
+export const heroTypes = ['small', 'big', 'fullscreen'] as const;
 
 export interface Link {
     label: string;

@@ -45,6 +45,7 @@ const titleLines = heroTitle.split('\n').map((line) => {
     class:list={[
         toneClass,
         'ss-hero',
+        `ss-hero--${hero.data.type ?? 'small'}`,
         { 'ss-hero--has-background-image': Boolean(backgroundImage) },
         ...heroClasses,
     ]}

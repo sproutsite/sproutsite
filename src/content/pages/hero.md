@@ -1,5 +1,6 @@
 ---
 title: Sproutsite
+type: big
 titleHighlight: site
 eyebrow: AGENT-READY STATIC CMS
 tone: brand

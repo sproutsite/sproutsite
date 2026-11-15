@@ -13,6 +13,7 @@ Ein `hero.md` aktiviert den gemeinsamen Hero und liefert dessen sichtbare H1, Ey
 ```yaml
 ---
 title: Seitentitel im Hero
+type: small
 titleHighlight: Hero
 eyebrow: Einordnung
 tone: brand
@@ -27,6 +28,12 @@ tagline: Ein kurzer unterstützender Claim.
 ```
 
 `background-image` verweist auf ein lokales Bild relativ zu `hero.md`. Astro validiert und optimiert die Datei; das Standard-Theme behandelt sie als dekorativen Hintergrund und legt automatisch ein kontrastreiches Overlay für die Hero-Typografie darüber. Inhalte, die inhaltlich erklärt werden müssen, gehören stattdessen als reguläres Bild mit Alternativtext in eine Section.
+
+### Hero-Typ vorbereiten
+
+Mit `type` wählst du `small`, `big` oder `fullscreen`. Fehlt das Feld, gilt `small`. Der Hero erhält unabhängig von seinen Theme-Klassen die entsprechende Klasse `ss-hero--small`, `ss-hero--big` oder `ss-hero--fullscreen`. Beide Sprachversionen der Startseite verwenden `big`; alle anderen Heros, die Blogübersicht und H1-Fallbacks verwenden `small`.
+
+Die Variante `big` ergänzt mehr Abstand oberhalb des Hero-Inhalts. Weitere Formatierungen werden noch vorbereitet: `small` behält die Basisdarstellung bei, und `fullscreen` füllt aktuell noch nicht den Bildschirm.
 
 ### Klassen lokal überschreiben oder entfernen
 

@@ -154,9 +154,12 @@ pages/
 
 A `hero.md` activates the shared hero and requires a frontmatter `title`, rendered as the visible `h1`. `titleHighlight` may select one text fragment from that title for the theme highlight. `hero-classes` in `site.yaml` may optionally set up to eight theme classes for each hero and for the H1 fallback view without `hero.md`. A `classes` list in an individual `hero.md` completely overrides that global list; `classes: null` removes global classes for that hero. Classes must begin with `ss-`, for example `ss-hero--visual`, so a theme can add gradients, overlays, or textures. `background-image` optionally references a local image relative to `hero.md`; Astro validates it and emits an optimized decorative hero image. `claim` adds a prominent line below the title. `actions` optionally defines one or two Button-based calls to action with `label`, `href`, and `variant: primary|secondary`; `tagline` adds a short line below them. If these settings are omitted, the hero receives no additional image or actions. Delete the file to render `page.yaml.title` as a compact visible H1 fallback above the sections; it still receives global `hero-classes`. Sections must be named `NN-name.md`, begin with an `h2`, and may set `tone: default`, `muted`, or `brand` in frontmatter. By default, `ss-section__content` constrains content to a readable width. `fullWidth: true` in section frontmatter removes this inner constraint; the shared outer `site-shell` and Markdown typography remain active. Internal links always stay website-root-relative, for example `/faq/`; Sproutsite applies `base` exactly once. Heading IDs are derived from file names and headings, for example `01-introduction-inhalte-direkt-im-projekt-pflegen`, so anchor links remain unique across assembled Markdown files.
 
+The optional hero frontmatter `type` accepts `small` (the default), `big`, or `fullscreen`. It adds `ss-hero--small`, `ss-hero--big`, or `ss-hero--fullscreen` alongside the existing theme classes. Both homepage translations explicitly use `big`; other heroes default to `small`. The blog overview and compact H1 fallback also receive `ss-hero--small`. The `big` variant adds more top spacing. Other variant-specific styling is still being prepared; `small` retains the base presentation, and `fullscreen` does not yet force a viewport-height hero.
+
 ```md
 ---
 title: Beispiel-Hero
+type: small
 titleHighlight: Hero
 tone: brand
 classes:
