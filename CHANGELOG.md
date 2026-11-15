@@ -13,6 +13,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
+- Reduced the big hero's mobile top clearance after the navbar from 4.5rem to 1.5rem while retaining desktop spacing.
+
 - Removed repetitive homepage copy and added a concise bilingual closing section with distinct Showcase and getting-started actions; replaced the broad security claim with specific static-hosting copy.
 
 - Replaced the homepage benefits list with four bilingual Feature cards directly after the workflow, retaining the existing Info and FAQ links below them.

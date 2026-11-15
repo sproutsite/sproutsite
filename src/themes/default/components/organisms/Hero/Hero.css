@@ -13,6 +13,10 @@
                 var(--spacing-section-hero),
                 calc(var(--spacing-header-overlay) + 4.5rem)
             );
+
+            @media (width < 64rem) {
+                padding-top: calc(var(--spacing-header-overlay) + 1.5rem);
+            }
         }
 
         .ss-hero__inner {
