@@ -16,7 +16,13 @@ const toneClass = {
 }[toneOf(section)];
 ---
 
-<section class:list={[toneClass, 'ss-section']}>
+<section
+    class:list={[
+        toneClass,
+        'ss-section',
+        `ss-section--spacing-${section.data.spacing ?? 'default'}`,
+    ]}
+>
     <div class="ss-section__inner site-shell">
         <div
             class:list={[

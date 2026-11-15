@@ -2,6 +2,18 @@
     .ss-section {
         @apply py-section;
 
+        &.ss-section--spacing-small {
+            @media (width >= 64rem) {
+                padding-block: calc(var(--spacing-section) / 2);
+            }
+        }
+
+        &.ss-section--spacing-large {
+            @media (width >= 64rem) {
+                padding-block: calc(var(--spacing-section) * 2);
+            }
+        }
+
         .ss-section__content {
             @apply max-w-4xl;
         }

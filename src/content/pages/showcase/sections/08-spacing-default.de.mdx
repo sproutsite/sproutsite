@@ -1,0 +1,40 @@
+---
+tone: default
+fullWidth: true
+spacing: default
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Der gewohnte Rhythmus</Eyebrow>
+
+## Standardabstände
+
+Diese Section verwendet den bisherigen Innenabstand. Ohne spacing-Angabe gilt ebenfalls default.
+
+<Tabs label="Standardabstände: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        ## Inhalt mit passendem Abstand
+
+        Die Breite des Inhalts bleibt unverändert. Die Einstellung betrifft nur den Innenabstand oben und unten.
+
+    </Tab>
+    <Tab title="Code">
+
+```markdown
+---
+tone: default
+fullWidth: true
+spacing: default
+---
+
+## Inhalt mit passendem Abstand
+
+Die Breite des Inhalts bleibt unverändert. Die Einstellung betrifft nur den Innenabstand oben und unten.
+```
+
+    </Tab>
+
+</Tabs>

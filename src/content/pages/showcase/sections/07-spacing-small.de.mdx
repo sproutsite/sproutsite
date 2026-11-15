@@ -1,0 +1,40 @@
+---
+tone: muted
+fullWidth: true
+spacing: small
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Kompakte Abschnitte</Eyebrow>
+
+## Kleine Abstände
+
+Auf Desktop ist der Innenabstand oben und unten halb so groß wie beim Standard. Auf Mobilgeräten bleibt der bisherige Abstand erhalten.
+
+<Tabs label="Kleine Abstände: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        ## Inhalt mit passendem Abstand
+
+        Die Breite des Inhalts bleibt unverändert. Die Einstellung betrifft nur den Innenabstand oben und unten.
+
+    </Tab>
+    <Tab title="Code">
+
+```markdown
+---
+tone: muted
+fullWidth: true
+spacing: small
+---
+
+## Inhalt mit passendem Abstand
+
+Die Breite des Inhalts bleibt unverändert. Die Einstellung betrifft nur den Innenabstand oben und unten.
+```
+
+    </Tab>
+
+</Tabs>

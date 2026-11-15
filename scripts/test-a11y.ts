@@ -1174,10 +1174,29 @@ try {
                 )
             ) {
                 const groups = page.locator('.ss-tabs');
-                const tones = ['default', 'muted', 'brand', 'muted', 'default'];
-                const fullWidths = [true, true, true, false, true];
+                const tones = [
+                    'default',
+                    'muted',
+                    'brand',
+                    'muted',
+                    'default',
+                    'muted',
+                    'default',
+                    'muted',
+                ];
+                const fullWidths = [
+                    true,
+                    true,
+                    true,
+                    false,
+                    true,
+                    true,
+                    true,
+                    true,
+                ];
                 const widths: number[] = [];
-                assert.equal(await groups.count(), 5);
+                const paddings: { top: number; bottom: number }[] = [];
+                assert.equal(await groups.count(), 8);
                 for (let index = 0; index < tones.length; index += 1) {
                     const group = groups.nth(index);
                     const preview = group.getByRole('tab', {
@@ -1204,6 +1223,14 @@ try {
                                 'ss-section__content',
                             ),
                             width: content.getBoundingClientRect().width,
+                            padding: {
+                                top: parseFloat(
+                                    getComputedStyle(section).paddingTop,
+                                ),
+                                bottom: parseFloat(
+                                    getComputedStyle(section).paddingBottom,
+                                ),
+                            },
                         };
                     });
                     assert(
@@ -1211,6 +1238,18 @@ try {
                     );
                     assert.equal(sectionState.constrained, !fullWidths[index]);
                     widths.push(sectionState.width);
+                    paddings.push(sectionState.padding);
+                    const spacing =
+                        index === 5
+                            ? 'small'
+                            : index === 7
+                              ? 'large'
+                              : 'default';
+                    assert.ok(
+                        sectionState.classes.includes(
+                            `ss-section--spacing-${spacing}`,
+                        ),
+                    );
                     const heading = await group
                         .getByRole('tabpanel')
                         .getByRole('heading')
@@ -1223,6 +1262,8 @@ try {
                     assert(source.startsWith('---\n'));
                     assert(source.includes(`tone: ${tones[index]}`));
                     assert(source.includes(`fullWidth: ${fullWidths[index]}`));
+                    if (index >= 5)
+                        assert.ok(source.includes(`spacing: ${spacing}`));
                     assert(source.includes(`## ${heading}`));
                     assert.equal(await sample.isVisible(), true);
                     assert(
@@ -1240,6 +1281,27 @@ try {
                 }
                 if (viewport.name === 'desktop') assert(widths[3] < widths[4]);
                 else assert.equal(widths[3], widths[4]);
+                for (const index of [5, 6, 7]) {
+                    const factor =
+                        viewport.name === 'mobile'
+                            ? 1
+                            : index === 5
+                              ? 0.5
+                              : index === 7
+                                ? 2
+                                : 1;
+                    assert.ok(
+                        Math.abs(
+                            paddings[index]!.top - paddings[6]!.top * factor,
+                        ) < 0.1,
+                    );
+                    assert.ok(
+                        Math.abs(
+                            paddings[index]!.bottom -
+                                paddings[6]!.bottom * factor,
+                        ) < 0.1,
+                    );
+                }
                 await page.evaluate(() => window.scrollTo(0, 0));
             }
             const canScroll = await page.evaluate(

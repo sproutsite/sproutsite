@@ -10,7 +10,7 @@ import remarkMdx from 'remark-mdx';
 import remarkGfm from 'remark-gfm';
 import { visit } from 'unist-util-visit';
 import { loadSiteConfig } from './site-config.js';
-import { heroTypes, tones } from './types.js';
+import { heroTypes, sectionSpacings, tones } from './types.js';
 import { isHexColor } from './colors.js';
 import { routeFromPageId } from './urls.js';
 
@@ -34,6 +34,7 @@ const markdownSchema = z
     .strict();
 const sectionSchema = markdownSchema.extend({
     fullWidth: z.boolean().optional(),
+    spacing: z.enum(sectionSpacings).optional(),
 });
 const heroClass = z.string().regex(/^ss-[a-z0-9][a-z0-9_-]*$/, {
     message:

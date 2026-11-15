@@ -1,0 +1,40 @@
+---
+tone: muted
+fullWidth: true
+spacing: small
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Compact sections</Eyebrow>
+
+## Small spacing
+
+On desktop, top and bottom padding is half the default. Mobile spacing stays unchanged.
+
+<Tabs label="Small spacing: Preview and Code" variant="border">
+    <Tab title="Preview">
+
+        ## Content with suitable spacing
+
+        Content width stays unchanged. The setting only affects top and bottom padding.
+
+    </Tab>
+    <Tab title="Code">
+
+```markdown
+---
+tone: muted
+fullWidth: true
+spacing: small
+---
+
+## Content with suitable spacing
+
+Content width stays unchanged. The setting only affects top and bottom padding.
+```
+
+    </Tab>
+
+</Tabs>

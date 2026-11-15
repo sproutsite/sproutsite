@@ -1,7 +1,7 @@
 import { defineCollection, type ImageFunction } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
-import { heroTypes, tones } from '../lib/sproutsite/types.js';
+import { heroTypes, sectionSpacings, tones } from '../lib/sproutsite/types.js';
 
 function blogDirectoryId(entry: string): string {
     const match = entry.match(
@@ -66,6 +66,7 @@ export function createSproutsiteCollections(
             tagline: z.string().trim().min(1).optional(),
             tone,
             fullWidth: z.boolean().default(false),
+            spacing: z.enum(sectionSpacings).default('default'),
         });
 
     const documents = defineCollection({

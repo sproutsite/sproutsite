@@ -1,0 +1,40 @@
+---
+tone: muted
+fullWidth: true
+spacing: large
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Mehr Freiraum</Eyebrow>
+
+## Große Abstände
+
+Auf Desktop ist der Innenabstand oben und unten doppelt so groß wie beim Standard. Auf Mobilgeräten bleibt der bisherige Abstand erhalten.
+
+<Tabs label="Große Abstände: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        ## Inhalt mit passendem Abstand
+
+        Die Breite des Inhalts bleibt unverändert. Die Einstellung betrifft nur den Innenabstand oben und unten.
+
+    </Tab>
+    <Tab title="Code">
+
+```markdown
+---
+tone: muted
+fullWidth: true
+spacing: large
+---
+
+## Inhalt mit passendem Abstand
+
+Die Breite des Inhalts bleibt unverändert. Die Einstellung betrifft nur den Innenabstand oben und unten.
+```
+
+    </Tab>
+
+</Tabs>

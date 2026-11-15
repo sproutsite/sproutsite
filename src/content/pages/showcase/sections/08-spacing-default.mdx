@@ -1,0 +1,40 @@
+---
+tone: default
+fullWidth: true
+spacing: default
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>The familiar rhythm</Eyebrow>
+
+## Default spacing
+
+This section uses the existing padding. Omitting spacing also selects default.
+
+<Tabs label="Default spacing: Preview and Code" variant="border">
+    <Tab title="Preview">
+
+        ## Content with suitable spacing
+
+        Content width stays unchanged. The setting only affects top and bottom padding.
+
+    </Tab>
+    <Tab title="Code">
+
+```markdown
+---
+tone: default
+fullWidth: true
+spacing: default
+---
+
+## Content with suitable spacing
+
+Content width stays unchanged. The setting only affects top and bottom padding.
+```
+
+    </Tab>
+
+</Tabs>
