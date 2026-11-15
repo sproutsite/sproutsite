@@ -1,5 +1,6 @@
 ---
 import BrandLogo from '../../atoms/BrandLogo/BrandLogo.astro';
+import version from '../../../../../../VERSION?raw';
 import { t } from '../../../i18n/index.js';
 import type { SiteConfig } from '../../../../../lib/sproutsite/types.js';
 import {
@@ -15,12 +16,15 @@ const { site } = Astro.props;
 <footer class="ss-footer">
     <div class="ss-footer__inner site-shell">
         <div class="ss-footer__text">
-            <a
-                href={contentHref('/', site)}
-                aria-label={`${site.name}: ${t(site.language === 'de' ? 'de' : 'en', 'home')}`}
-            >
-                <BrandLogo name={site.name} />
-            </a>
+            <div class="ss-footer__brand">
+                <a
+                    href={contentHref('/', site)}
+                    aria-label={`${site.name}: ${t(site.language === 'de' ? 'de' : 'en', 'home')}`}
+                >
+                    <BrandLogo name={site.name} />
+                </a>
+                <span class="ss-footer__version">Version {version.trim()}</span>
+            </div>
             <span>{site.footer.text}</span>
         </div>
         <nav

@@ -16,6 +16,7 @@
         "src/package/",
         "src/themes/default/",
         "README.md",
+        "VERSION",
         "LICENSE",
         "NOTICE",
         "THIRD_PARTY_NOTICES.md",
