@@ -331,11 +331,17 @@ try {
                             }),
                         stacked,
                     );
+                const rootFontSize = await page.evaluate(() =>
+                    parseFloat(
+                        getComputedStyle(document.documentElement).fontSize,
+                    ),
+                );
                 const gaps = await measuredGaps(viewport.name === 'mobile');
                 assert.equal(gaps.length, 3);
                 for (const [index, gap] of gaps.entries()) {
                     const expected =
-                        index === 2 && viewport.name === 'desktop' ? 96 : 48;
+                        (index === 2 && viewport.name === 'desktop' ? 6 : 3) *
+                        rootFontSize;
                     assert.ok(
                         Math.abs(gap - expected) < 1,
                         `${route}: divider gap ${gap}, expected ${expected}`,
@@ -348,7 +354,7 @@ try {
                         height: viewport.height,
                     });
                     const narrowGaps = await measuredGaps(false);
-                    assert.ok(Math.abs(narrowGaps[2]! - 96) < 1);
+                    assert.ok(Math.abs(narrowGaps[2]! - 6 * rootFontSize) < 1);
                     assert.equal(
                         await page.evaluate(
                             () =>
@@ -360,6 +366,31 @@ try {
                     );
                 } finally {
                     await page.setViewportSize(viewport);
+                }
+                const originalFontSize = await page.evaluate(
+                    () => document.documentElement.style.fontSize,
+                );
+                try {
+                    await page.evaluate(() => {
+                        document.documentElement.style.fontSize = '20px';
+                    });
+                    const scaledGaps = await measuredGaps(
+                        viewport.name === 'mobile',
+                    );
+                    for (const [index, gap] of scaledGaps.entries()) {
+                        const expected =
+                            (index === 2 && viewport.name === 'desktop'
+                                ? 6
+                                : 3) * 20;
+                        assert.ok(
+                            Math.abs(gap - expected) < 1,
+                            `${route}: rem divider gap does not scale with the root font size`,
+                        );
+                    }
+                } finally {
+                    await page.evaluate((value) => {
+                        document.documentElement.style.fontSize = value;
+                    }, originalFontSize);
                 }
             }
             if (

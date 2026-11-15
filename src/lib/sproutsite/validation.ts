@@ -581,7 +581,7 @@ function validateMdxLayout(
                     fail(
                         contentRoot,
                         path,
-                        'Columns must contain at least one direct Column component; optional divider must be boolean, dividerColor must be a CSS hex color, and dividerGap and dividerGapMobile must be positive numeric pixel values',
+                        'Columns must contain at least one direct Column component; optional divider must be boolean, dividerColor must be a CSS hex color, and dividerGap and dividerGapMobile must be positive numeric rem values',
                     );
                 columns.forEach((column) => {
                     validatedColumns.add(column);

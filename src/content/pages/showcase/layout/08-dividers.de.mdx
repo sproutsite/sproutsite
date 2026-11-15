@@ -11,7 +11,7 @@ import { Tabs, Tab } from 'sproutsite/components';
 
 ## Trennlinien zwischen Spalten
 
-`divider` aktiviert dezente graue Trennlinien. Auf Desktop stehen sie senkrecht zwischen benachbarten Spalten; auf kleinen Bildschirmen waagerecht zwischen den gestapelten Bereichen. An den äußeren Rändern und zwischen Desktop-Reihen erscheint keine Linie. Mit `dividerColor` lässt sich eine eigene Hex-Farbe setzen, zum Beispiel `#94a3b8`. Der Abstand beträgt standardmäßig 48 px, also 24 px auf jeder Seite der Linie. Mit `dividerGap={64}` lässt er sich als positive Pixelzahl ändern. Mobil gilt zunächst `dividerGap`. Mit `dividerGapMobile` lässt sich der Abstand zwischen den gestapelten Bereichen separat einstellen. Die vertikalen Linien lassen oben und unten jeweils 20 % frei. Ohne `divider` bleibt das Layout unverändert.
+`divider` aktiviert dezente graue Trennlinien. Auf Desktop stehen sie senkrecht zwischen benachbarten Spalten; auf kleinen Bildschirmen waagerecht zwischen den gestapelten Bereichen. An den äußeren Rändern und zwischen Desktop-Reihen erscheint keine Linie. Mit `dividerColor` lässt sich eine eigene Hex-Farbe setzen, zum Beispiel `#94a3b8`. Der Abstand beträgt standardmäßig 3 rem, also 1,5 rem auf jeder Seite der Linie. Mit `dividerGap={4}` lässt er sich als positive Zahl in rem ändern. Mobil gilt zunächst `dividerGap`. Mit `dividerGapMobile` lässt sich der Abstand zwischen den gestapelten Bereichen separat einstellen. Die vertikalen Linien lassen oben und unten jeweils 20 % frei. Alle Abstände sind in rem angegeben und passen sich der Grundschriftgröße an. Ohne `divider` bleibt das Layout unverändert.
 
 <Tabs label="Trennlinien zwischen Spalten" variant="border">
     <Tab title="Vorschau">
@@ -141,11 +141,11 @@ import { Column, Columns } from 'sproutsite/components';
 
 ### Doppelter Abstand zur Trennlinie
 
-Mit `dividerGap={96}` ist der Zwischenraum doppelt so groß wie der Standard von 48 px. Auf Desktop bleiben auf jeder Seite der Linie 48 px frei. `dividerGapMobile={48}` halbiert den gesamten Zwischenraum auf Mobilgeräten: oberhalb und unterhalb der Linie bleiben jeweils 24 px.
+Mit `dividerGap={6}` ist der Zwischenraum doppelt so groß wie der Standard von 3 rem. Auf Desktop bleiben auf jeder Seite der Linie 3 rem frei. `dividerGapMobile={3}` halbiert den gesamten Zwischenraum auf Mobilgeräten: oberhalb und unterhalb der Linie bleiben jeweils 1,5 rem.
 
 <Tabs label="Doppelter Abstand zur Trennlinie" variant="border">
     <Tab title="Vorschau">
-<Columns divider dividerGap={96} dividerGapMobile={48}>
+<Columns divider dividerGap={6} dividerGapMobile={3}>
     <Column span={4}>
 
         #### Bereich 1
@@ -175,7 +175,7 @@ Mit `dividerGap={96}` ist der Zwischenraum doppelt so groß wie der Standard von
 ```mdx
 import { Column, Columns } from 'sproutsite/components';
 
-<Columns divider dividerGap={96} dividerGapMobile={48}>
+<Columns divider dividerGap={6} dividerGapMobile={3}>
     <Column span={4}>
 
         #### Bereich 1

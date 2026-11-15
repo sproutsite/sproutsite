@@ -9,6 +9,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
+- Switched Columns dividerGap and dividerGapMobile to rem, including defaults and examples, so spacing scales with the root font size.
+
 - Kept large Columns divider gaps between actual content areas to avoid overflow at narrow desktop widths.
 
 - Split English and German showcase examples into focused sections with alternating default and muted surfaces and contextual eyebrows, while preserving the section tone demonstrations.

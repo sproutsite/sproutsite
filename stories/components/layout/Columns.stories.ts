@@ -13,20 +13,20 @@ export default {
     argTypes: {
         divider: { control: 'boolean' },
         dividerGap: {
-            control: { type: 'number', min: 1 },
-            description:
-                'Total gap in pixels; half on either side of each line.',
+            control: { type: 'number', min: 0.25, step: 0.25 },
+            description: 'Total gap in rem; half on either side of each line.',
         },
         dividerGapMobile: {
-            control: { type: 'number', min: 1 },
-            description: 'Optional gap below 64rem; defaults to dividerGap.',
+            control: { type: 'number', min: 0.25, step: 0.25 },
+            description:
+                'Optional gap in rem below 64rem; defaults to dividerGap.',
         },
         dividerColor: {
             control: 'text',
             description: 'Optional CSS hex color for the separators.',
         },
     },
-    args: { divider: false, dividerGap: 48 },
+    args: { divider: false, dividerGap: 3 },
     parameters: {
         docs: {
             story: {
@@ -79,7 +79,7 @@ export const CustomDividers = {
     args: {
         divider: true,
         dividerColor: '#94a3b8',
-        dividerGap: 64,
+        dividerGap: 4,
         slots: { default: columns([4, 4, 4, 6, 6]) },
     },
 };
@@ -87,8 +87,8 @@ export const CustomDividers = {
 export const MobileDividerSpacing = {
     args: {
         divider: true,
-        dividerGap: 96,
-        dividerGapMobile: 48,
+        dividerGap: 6,
+        dividerGapMobile: 3,
         slots: { default: columns([4, 4, 4]) },
     },
 };
