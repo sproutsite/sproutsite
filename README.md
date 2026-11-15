@@ -144,7 +144,7 @@ Every page is a directory under `src/content/pages/`:
 pages/
 ├── page.yaml            # homepage
 ├── hero.md              # optional
-├── 01-introduction.md   # regular Markdown sections, sorted numerically
+├── 01-introduction.md   # start at 01, then number sections consecutively
 └── faq/
     ├── page.yaml
     └── 01-questions.md

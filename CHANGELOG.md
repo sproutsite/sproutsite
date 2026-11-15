@@ -9,6 +9,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
+- Renumbered both homepage translations from 01-features through 05-further-reading and documented consecutive section numbering from 01.
+
 - Removed the extra homepage feature title, allowed Feature H2 headings to introduce a section, and alternated homepage section surfaces in both languages.
 
 - Increased the default Columns divider gap to 6rem, with a 2/4/6/8/12rem preset scale and half-sized mobile gaps, including automatic mobile inheritance.

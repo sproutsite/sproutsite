@@ -245,7 +245,7 @@ Hier steht normaler Markdown-Inhalt.
 ```
 
 - Only files directly in a page directory belong to that page; do not mix them with child pages.
-- Use numeric prefixes of at least two digits and a descriptive lowercase hyphenated name; sort numerically. Duplicate numbers are errors. Gaps are allowed. Standard sections use `.md`; an `.mdx` file is allowed only for documented MDX layout components.
+- Start each page's sections at `01` and number them consecutively (`01`, `02`, `03`, …), using at least two digits and descriptive lowercase hyphenated names; sort numerically. Do not start at `00` or leave gaps. Duplicate numbers are errors. Keep translated section files numbered identically. Standard sections use `.md`; an `.mdx` file is allowed only for documented MDX layout components.
 - `tone`: only `default`, `muted`, or `brand`; an omitted value means `default`.
 - `fullWidth`: an optional Boolean for sections; an omitted value means `false` and constrains content to the reading column. With `true`, only `ss-section__content` is omitted; `content-prose` and the outer `site-shell` remain active. The area therefore uses the full content width but not the browser edge.
 - `spacing`: optional `small`, `default`, or `large`; omission means `default`. It controls the section's top and bottom padding. In the default theme, from 64rem viewport width, `small` halves and `large` doubles the existing section spacing; below that width, all variants retain the existing padding. This applies to numbered page and blog sections, not heroes, and is independent of tone and content width. Keep its CSS modifiers inside the Section component.
