@@ -1,6 +1,7 @@
 @layer components {
     .ss-header {
         --ss-header-active-underline: var(--color-hero-cyan);
+        --ss-header-cta-outline: var(--color-primary-content);
         @apply absolute inset-x-0 top-0 z-40 border-b border-transparent bg-transparent text-primary-content transition-[background-color,border-color,box-shadow,backdrop-filter] duration-200;
 
         .ss-header__inner {
@@ -18,6 +19,17 @@
                 @apply mx-2 h-5 w-px shrink-0;
                 background-color: currentColor;
                 opacity: 0.4;
+            }
+
+            .ss-header__cta {
+                .ss-button {
+                    @apply m-0 !text-lg no-underline hover:no-underline;
+
+                    &[aria-current='page'] {
+                        @apply outline-2 outline-offset-2;
+                        outline-color: var(--ss-header-cta-outline);
+                    }
+                }
             }
 
             .ss-header__link {
@@ -51,6 +63,7 @@
 
         &.ss-header--scrolled {
             --ss-header-active-underline: currentColor;
+            --ss-header-cta-outline: var(--color-base-content);
             --ss-brand-highlight: var(--color-primary);
             @apply fixed border-base-300 bg-base-100/40 text-base-content shadow-sm backdrop-blur-md;
 

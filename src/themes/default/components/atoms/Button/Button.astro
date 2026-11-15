@@ -1,6 +1,7 @@
 ---
 import { contentHref } from '../../../../../lib/sproutsite/urls.js';
 import { loadSiteConfig } from '../../../../../lib/sproutsite/site-config.js';
+import type { HTMLAttributes } from 'astro/types';
 
 type ButtonVariant =
     | 'primary'
@@ -25,6 +26,12 @@ interface Props {
     size?: ButtonSize;
     /** When set, the component renders an anchor instead of a button. */
     href?: string;
+    /** Browsing context for a link. */
+    target?: HTMLAttributes<'a'>['target'];
+    /** Relationship of a link to its target. */
+    rel?: string;
+    /** Marks a link as the current page. */
+    'aria-current'?: 'page';
     /** Native button type for button actions. */
     type?: ButtonType;
     /** Disables a native button. Links cannot be disabled. */
@@ -36,6 +43,9 @@ const {
     style = 'solid',
     size = 'md',
     href,
+    target,
+    rel,
+    'aria-current': ariaCurrent,
     type = 'button',
     disabled = false,
 } = Astro.props;
@@ -79,7 +89,13 @@ const classes = [
 ---
 
 {href ? (
-    <a class:list={classes} href={contentHref(href, site)}>
+    <a
+        class:list={classes}
+        href={contentHref(href, site)}
+        target={target}
+        rel={rel}
+        aria-current={ariaCurrent}
+    >
         {/* @slot Button label or other inline content. */}
         <slot />
     </a>

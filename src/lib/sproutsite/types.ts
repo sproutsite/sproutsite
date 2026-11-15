@@ -6,6 +6,22 @@ export interface Link {
     href: string;
 }
 
+export type HeaderItem =
+    | (Link & { type?: 'link' })
+    | (Link & {
+          type: 'cta';
+          variant?:
+              | 'primary'
+              | 'secondary'
+              | 'accent'
+              | 'neutral'
+              | 'info'
+              | 'success'
+              | 'warning'
+              | 'error';
+      })
+    | { type: 'separator' };
+
 export interface SiteConfig {
     name: string;
     url: string;
@@ -19,6 +35,6 @@ export interface SiteConfig {
         eyebrow: string;
         heading: string;
     };
-    header: { links: (Link | { type: 'separator' })[] };
+    header: { links: HeaderItem[] };
     footer: { text: string; links: Link[] };
 }

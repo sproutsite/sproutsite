@@ -40,7 +40,26 @@ const siteSchema = z.object({
             .array(
                 z.union([
                     z.object({ type: z.literal('separator') }).strict(),
-                    linkSchema,
+                    linkSchema
+                        .extend({
+                            type: z.literal('cta'),
+                            variant: z
+                                .enum([
+                                    'primary',
+                                    'secondary',
+                                    'accent',
+                                    'neutral',
+                                    'info',
+                                    'success',
+                                    'warning',
+                                    'error',
+                                ])
+                                .default('primary'),
+                        })
+                        .strict(),
+                    linkSchema
+                        .extend({ type: z.literal('link').optional() })
+                        .strict(),
                 ]),
             )
             .min(1)

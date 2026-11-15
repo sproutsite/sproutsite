@@ -23,7 +23,9 @@ header:
         - label: Blog
           href: /blog/
         - type: separator
-        - label: Kontakt
+        - type: cta
+          variant: primary
+          label: Kontakt
           href: /kontakt/
 footer:
     text: Agent-ready static CMS for Astro and TypeScript.

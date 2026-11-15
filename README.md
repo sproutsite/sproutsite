@@ -122,9 +122,13 @@ header:
         - label: Blog
           href: /blog/
         - type: separator
-        - label: Contact
+        - type: cta
+          variant: primary
+          label: Contact
           href: /contact/
 ```
+
+Header links use `type: link` by default; it may be omitted. Set `type: cta` to render a navigation link with the shared Button component. Its optional `variant` defaults to `primary` and accepts `primary`, `secondary`, `accent`, `neutral`, `info`, `success`, `warning`, or `error`. CTA entries retain normal link behavior, locale and base handling, and the active page indication. `variant` applies only to CTA entries; separators use only `type: separator`.
 
 Every page is a directory under `src/content/pages/`:
 

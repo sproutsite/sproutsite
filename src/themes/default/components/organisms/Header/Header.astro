@@ -1,5 +1,6 @@
 ---
 import BrandLogo from '../../atoms/BrandLogo/BrandLogo.astro';
+import Button from '../../atoms/Button/Button.astro';
 import { t } from '../../../i18n/index.js';
 import type { Link, SiteConfig } from '../../../../../lib/sproutsite/types.js';
 import {
@@ -29,7 +30,7 @@ const isActive = (link: Link) => link.href === route;
         >
             <ul class="ss-header__links">
                 {site.header.links.map((link) => {
-                    if ('type' in link) {
+                    if (link.type === 'separator') {
                         return (
                             <li
                                 class="ss-header__separator"
@@ -38,6 +39,28 @@ const isActive = (link: Link) => link.href === route;
                         );
                     }
                     const external = isExternalWebLink(link.href, site.url);
+                    if (link.type === 'cta') {
+                        return (
+                            <li class="ss-header__cta">
+                                <Button
+                                    href={link.href}
+                                    variant={link.variant}
+                                    size="md"
+                                    target={external ? '_blank' : undefined}
+                                    rel={
+                                        external
+                                            ? 'noopener noreferrer'
+                                            : undefined
+                                    }
+                                    aria-current={
+                                        isActive(link) ? 'page' : undefined
+                                    }
+                                >
+                                    {link.label}
+                                </Button>
+                            </li>
+                        );
+                    }
                     return (
                         <li>
                             <a
