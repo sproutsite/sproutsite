@@ -9,6 +9,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
+- Migrated existing alternating Showcase, Documentation, FAQ, Info, and blog sections to odd/even tone mappings in both languages while preserving their rendered colors and explicit tone examples.
+
 - Renumbered both homepage translations from 01-features through 05-further-reading and documented consecutive section numbering from 01.
 
 - Removed the extra homepage feature title, allowed Feature H2 headings to introduce a section, and alternated homepage section surfaces in both languages.
