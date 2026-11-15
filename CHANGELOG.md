@@ -13,6 +13,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
+- Removed repetitive homepage copy and added a concise bilingual closing section with distinct Showcase and getting-started actions; replaced the broad security claim with specific static-hosting copy.
+
 - Replaced the homepage benefits list with four bilingual Feature cards directly after the workflow, retaining the existing Info and FAQ links below them.
 
 - Expanded Feature icon sizes to xs/sm/md/lg/xl, retaining md as default and migrating former large examples to xl to preserve their appearance.
