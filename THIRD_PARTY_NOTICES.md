@@ -47,6 +47,8 @@ No installed dependency license or NOTICE file was removed, overwritten, or reli
 
 ## Existing visual assets: provenance review remains open
 
+Generation record: `src/content/blog/_assets/apache-2-license.png` was generated for this project on 2026-11-15 with OpenAI's image-generation tool. A text-only prompt requested an original blue 3D licensing illustration, with no input images, Apache feather, or foundation logos. This records provenance, not a separate artwork-license grant.
+
 Generation record: `src/content/pages/showcase/_assets/icons.png` was generated for this project on 2026-11-15 with OpenAI's image-generation tool. The prompt described the existing showcase's blue-and-white 3D illustration style and six generic icon motifs. No external images or Lucide SVG files were supplied to the generator. This records provenance, not a separate asset-license grant.
 
 The following existing assets do not have a committed, asset-specific rights/provenance record sufficient to declare them newly licensed under Apache-2.0. **This change does not relicense them.** Confirm their origin and redistribution permissions before publishing a package or website that includes them.

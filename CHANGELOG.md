@@ -9,6 +9,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Added
 
+- Added an English and German article about adopting Apache 2.0, with a generated licensing illustration and links to the official license and FAQ.
 - Completed the bilingual blog overview with English and German site settings, localized article links and fallback copy, and checks covering article pairs and publication dates.
 - Added complete English showcase and documentation content alongside the German localized files, including translated metadata, image descriptions, and code examples.
 - Integrated local Lucide SVG icons through the default theme's accessible Icon atom, validated MDX usage, a bilingual showcase page, and Storybook examples.
