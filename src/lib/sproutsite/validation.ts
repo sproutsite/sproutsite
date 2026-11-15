@@ -526,18 +526,54 @@ function validateMdxLayout(
                     );
             } else if (mdxNode.name === 'Columns') {
                 columnsCount += 1;
+                const attributes = mdxNode.attributes ?? [];
+                const divider = attributes.find(
+                    (attribute) => attribute.name === 'divider',
+                );
+                const dividerColor = attributes.find(
+                    (attribute) => attribute.name === 'dividerColor',
+                );
+                const dividerValue = divider?.value;
+                const dividerGap = attributes.find(
+                    (attribute) => attribute.name === 'dividerGap',
+                );
+                const gapValue = dividerGap?.value;
+                const gapNumber =
+                    gapValue && typeof gapValue === 'object'
+                        ? Number(gapValue.value)
+                        : NaN;
                 const columns = (mdxNode.children ?? []).filter(
                     (child) => child.type === 'mdxJsxFlowElement',
                 );
                 if (
-                    mdxNode.attributes?.length !== 0 ||
+                    attributes.some(
+                        (attribute) =>
+                            attribute.type !== 'mdxJsxAttribute' ||
+                            !['divider', 'dividerColor', 'dividerGap'].includes(
+                                attribute.name ?? '',
+                            ),
+                    ) ||
+                    new Set(attributes.map((attribute) => attribute.name))
+                        .size !== attributes.length ||
+                    (divider !== undefined &&
+                        dividerValue !== null &&
+                        !(
+                            typeof dividerValue === 'object' &&
+                            ['true', 'false'].includes(
+                                dividerValue.value?.trim() ?? '',
+                            )
+                        )) ||
+                    (dividerColor !== undefined &&
+                        !isHexColor(dividerColor.value)) ||
+                    (dividerGap !== undefined &&
+                        (!Number.isFinite(gapNumber) || gapNumber <= 0)) ||
                     columns.length < 1 ||
                     columns.some((column) => column.name !== 'Column')
                 )
                     fail(
                         contentRoot,
                         path,
-                        'Columns must contain at least one direct Column component and no props',
+                        'Columns must contain at least one direct Column component; optional divider must be boolean, dividerColor must be a CSS hex color, and dividerGap must be a positive numeric pixel value',
                     );
                 columns.forEach((column) => {
                     validatedColumns.add(column);

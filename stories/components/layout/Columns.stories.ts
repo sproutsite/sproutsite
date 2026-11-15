@@ -10,6 +10,19 @@ export default {
     title: 'Layout/Columns',
     component: Columns,
     tags: ['autodocs'],
+    argTypes: {
+        divider: { control: 'boolean' },
+        dividerGap: {
+            control: { type: 'number', min: 1 },
+            description:
+                'Total gap in pixels; half on either side of each line.',
+        },
+        dividerColor: {
+            control: 'text',
+            description: 'Optional CSS hex color for the separators.',
+        },
+    },
+    args: { divider: false, dividerGap: 48 },
     parameters: {
         docs: {
             story: {
@@ -48,5 +61,21 @@ export const FourColumns = {
         slots: {
             default: columns([3, 3, 3, 3]),
         },
+    },
+};
+
+export const Dividers = {
+    args: {
+        divider: true,
+        slots: { default: columns([4, 4, 4]) },
+    },
+};
+
+export const CustomDividers = {
+    args: {
+        divider: true,
+        dividerColor: '#94a3b8',
+        dividerGap: 64,
+        slots: { default: columns([4, 4, 4, 6, 6]) },
     },
 };

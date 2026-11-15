@@ -1,3 +1,69 @@
-<div class="ss-columns">
+---
+import { isHexColor } from '../../../../../lib/sproutsite/colors.js';
+
+interface Props {
+    /** Draw separators between adjacent columns, horizontal when stacked. */
+    divider?: boolean;
+    /** Optional CSS hex color; otherwise use the theme's subtle gray. */
+    dividerColor?: `#${string}`;
+    /** Total gap in pixels around a separator; half on either side. */
+    dividerGap?: number;
+}
+
+const { divider = false, dividerColor, dividerGap = 48 } = Astro.props;
+if (
+    typeof divider !== 'boolean' ||
+    (dividerColor !== undefined && !isHexColor(dividerColor)) ||
+    !Number.isFinite(dividerGap) ||
+    dividerGap <= 0
+)
+    throw new Error(
+        'Sproutsite Columns: divider must be boolean, dividerColor must be a CSS hex color, and dividerGap must be a positive number in pixels.',
+    );
+---
+
+<div
+    class:list={['ss-columns', divider && 'ss-columns--divider']}
+    style={
+        [
+            dividerColor && `--ss-columns-divider-color: ${dividerColor};`,
+            divider && `--ss-columns-divider-gap: ${dividerGap}px;`,
+        ]
+            .filter(Boolean)
+            .join(' ') || undefined
+    }
+>
     <slot />
 </div>
+
+<script>
+    // CSS Grid wraps arbitrary spans. Measure rows rather than assuming a fixed
+    // number of columns, so separators never appear at the start of a new row.
+    document
+        .querySelectorAll<HTMLElement>('.ss-columns--divider')
+        .forEach((grid) => {
+            const columns = Array.from(grid.children).filter(
+                (child): child is HTMLElement =>
+                    child instanceof HTMLElement &&
+                    child.classList.contains('ss-column'),
+            );
+            const update = () => {
+                const positions = columns.map(
+                    (column) => column.getBoundingClientRect().top,
+                );
+                columns.forEach((column, index) => {
+                    column.toggleAttribute(
+                        'data-divider-before',
+                        index > 0 &&
+                            Math.abs(
+                                positions[index]! - positions[index - 1]!,
+                            ) < 1,
+                    );
+                });
+            };
+            const observer = new ResizeObserver(update);
+            observer.observe(grid);
+            columns.forEach((column) => observer.observe(column));
+            update();
+        });
+</script>

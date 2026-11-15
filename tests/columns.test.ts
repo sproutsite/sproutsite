@@ -28,3 +28,57 @@ test('accepts multiple rows while rejecting invalid Column spans', () => {
         rmSync(directory, { recursive: true, force: true });
     }
 });
+
+test('validates divider flags and custom hex colors without accepting arbitrary CSS or expressions', () => {
+    const directory = mkdtempSync(join(tmpdir(), 'sproutsite-dividers-'));
+    try {
+        writeFileSync(
+            join(directory, 'page.yaml'),
+            'title: Dividers\ndescription: Responsive dividers.\n',
+        );
+        const sectionPath = join(directory, '01-dividers.mdx');
+        const validate = (props: string) => {
+            writeFileSync(
+                sectionPath,
+                `import { Column, Columns } from 'sproutsite/components';\n\n## Dividers\n\n<Columns ${props}>\n<Column span={6}>\n\nFirst\n\n</Column>\n<Column span={6}>\n\nSecond\n\n</Column>\n</Columns>\n`,
+            );
+            validateSproutsiteContent(directory);
+        };
+        for (const props of [
+            'divider',
+            'divider={true}',
+            'divider={false}',
+            'divider dividerGap={64}',
+            'divider dividerGap={0.5}',
+            'divider dividerColor="#94a3b8"',
+            'dividerColor="#abc"',
+            'dividerColor="#abcd"',
+            'dividerColor="#AABBCCDD"',
+        ]) {
+            assert.doesNotThrow(() => validate(props));
+        }
+        for (const props of [
+            'divider="true"',
+            'divider={enabled}',
+            'dividerGap={0}',
+            'dividerGap={-1}',
+            'dividerGap={1 + 2}',
+            'dividerGap={gap}',
+            'dividerGap="64"',
+            'divider divider',
+            'dividerColor="red"',
+            'dividerColor="#12"',
+            'dividerColor="#fff;display:none"',
+            'dividerColor={"#fff"}',
+            'style="color:red"',
+            '{...props}',
+        ]) {
+            assert.throws(
+                () => validate(props),
+                /optional divider must be boolean/,
+            );
+        }
+    } finally {
+        rmSync(directory, { recursive: true, force: true });
+    }
+});

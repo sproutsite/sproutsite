@@ -1,5 +1,45 @@
 @layer components {
     .ss-columns {
         @apply grid grid-cols-1 gap-8 lg:grid-cols-12;
+
+        &.ss-columns--divider {
+            --ss-columns-divider-color: rgb(226, 232, 240);
+            --ss-columns-divider-gap: 48px;
+            gap: var(--ss-columns-divider-gap);
+
+            > .ss-column {
+                position: relative;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    pointer-events: none;
+                    background: var(--ss-columns-divider-color);
+                }
+
+                &:not(:first-child)::before {
+                    inset-block-start: calc(var(--ss-columns-divider-gap) / -2);
+                    inset-inline: 0;
+                    height: 1px;
+                }
+
+                @media (width >= 64rem) {
+                    &::before {
+                        display: none;
+                    }
+
+                    &[data-divider-before]::before {
+                        display: block;
+                        inset-block: 20%;
+                        inset-inline-start: calc(
+                            var(--ss-columns-divider-gap) / -2
+                        );
+                        inset-inline-end: auto;
+                        width: 1px;
+                        height: auto;
+                    }
+                }
+            }
+        }
     }
 }
