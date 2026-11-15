@@ -17,6 +17,10 @@ interface Props {
 }
 const { site, route } = Astro.props;
 const isActive = (link: Link) => link.href === route;
+const language = site.language === 'de' ? 'de' : 'en';
+const hasLanguageSwitcher = site.header.links.some(
+    (link) => link.type === 'language-switcher',
+);
 ---
 
 <header class="ss-header">
@@ -24,6 +28,26 @@ const isActive = (link: Link) => link.href === route;
         <a class="ss-header__brand" href={contentHref('/', site)}>
             <BrandLogo name={site.name} />
         </a>
+        <div class="ss-header__mobile-tools">
+            {hasLanguageSwitcher && (
+                <>
+                    <LanguageSwitcher site={site} route={route} />
+                    <span
+                        class="ss-header__mobile-divider"
+                        aria-hidden="true"
+                    />
+                </>
+            )}
+            <button
+                type="button"
+                class="ss-header__menu-toggle"
+                aria-label={t(language, 'openMenu')}
+                aria-controls="ss-mobile-menu"
+                aria-expanded="false"
+            >
+                <Icon name="Menu" size={28} />
+            </button>
+        </div>
         <nav
             class="ss-header__nav"
             aria-label={t(
@@ -97,6 +121,26 @@ const isActive = (link: Link) => link.href === route;
             </ul>
         </nav>
     </div>
+    <dialog
+        id="ss-mobile-menu"
+        class="ss-header__dialog"
+        aria-label={t(language, 'primaryNavigation')}
+    >
+        <div class="ss-header__dialog-top site-shell">
+            <a class="ss-header__dialog-brand" href={contentHref('/', site)}>
+                <BrandLogo name={site.name} />
+            </a>
+            <button
+                type="button"
+                class="ss-header__dialog-close"
+                aria-label={t(language, 'closeMenu')}
+                autofocus
+            >
+                <Icon name="X" size={32} />
+            </button>
+        </div>
+        <div class="ss-header__dialog-content site-shell" />
+    </dialog>
 </header>
 
 <script>
@@ -104,6 +148,66 @@ const isActive = (link: Link) => link.href === route;
     const header = document.querySelector<HTMLElement>('.ss-header');
 
     if (header) {
+        const navigation = header.querySelector<HTMLElement>('.ss-header__nav');
+        const dialog =
+            header.querySelector<HTMLDialogElement>('.ss-header__dialog');
+        const dialogContent = header.querySelector<HTMLElement>(
+            '.ss-header__dialog-content',
+        );
+        const toggle = header.querySelector<HTMLButtonElement>(
+            '.ss-header__menu-toggle',
+        );
+        const close = header.querySelector<HTMLButtonElement>(
+            '.ss-header__dialog-close',
+        );
+        if (navigation && dialog && dialogContent && toggle && close) {
+            const home = navigation.parentElement!;
+            const mobile = window.matchMedia('(max-width: 71.999rem)');
+            let previousOverflow = '';
+            const closeLanguageMenus = () =>
+                header
+                    .querySelectorAll<HTMLDetailsElement>(
+                        '.ss-language-switcher',
+                    )
+                    .forEach((menu) => {
+                        menu.open = false;
+                    });
+            const syncNavigation = () => {
+                if (dialog.open) dialog.close();
+                closeLanguageMenus();
+                (mobile.matches ? dialogContent : home).append(navigation);
+            };
+            toggle.addEventListener('click', () => {
+                if (!mobile.matches || dialog.open) return;
+                closeLanguageMenus();
+                previousOverflow = document.documentElement.style.overflow;
+                dialog.showModal();
+                document.documentElement.style.overflow = 'hidden';
+                toggle.setAttribute('aria-expanded', 'true');
+            });
+            close.addEventListener('click', () => dialog.close());
+            dialog.addEventListener('close', () => {
+                document.documentElement.style.overflow = previousOverflow;
+                toggle.setAttribute('aria-expanded', 'false');
+                closeLanguageMenus();
+                if (mobile.matches) toggle.focus();
+                else
+                    header
+                        .querySelector<HTMLAnchorElement>('.ss-header__brand')
+                        ?.focus({ preventScroll: true });
+            });
+            navigation.addEventListener('click', (event) => {
+                if (
+                    event.target instanceof Element &&
+                    event.target.closest('a') &&
+                    dialog.open
+                )
+                    dialog.close();
+            });
+            mobile.addEventListener('change', syncNavigation);
+            header.dataset.mobileEnhanced = '';
+            syncNavigation();
+        }
         const updateHeaderState = () => {
             header.classList.toggle(
                 'ss-header--scrolled',

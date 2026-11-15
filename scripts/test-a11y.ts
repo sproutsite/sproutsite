@@ -4,7 +4,7 @@ import { createServer } from 'node:http';
 import { extname, join, relative, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
-import { chromium } from 'playwright';
+import { chromium, type Page } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
 import { parse } from 'yaml';
 import { loadSiteConfig } from '../src/lib/sproutsite/site-config.js';
@@ -123,6 +123,147 @@ async function waitForServer(): Promise<void> {
     throw new Error('Static preview server did not start');
 }
 
+async function checkMobileNavigation(page: Page, german: boolean) {
+    const originalUrl = page.url();
+    const trigger = page.getByRole('button', {
+        name: german ? 'Menü öffnen' : 'Open menu',
+        exact: true,
+    });
+    const dialog = page.getByRole('dialog', {
+        name: german ? 'Hauptnavigation' : 'Primary navigation',
+    });
+    const close = dialog.getByRole('button', {
+        name: german ? 'Menü schließen' : 'Close menu',
+        exact: true,
+    });
+    const waitForMenuClosed = async () => {
+        await dialog.waitFor({ state: 'hidden' });
+        await page.waitForFunction(
+            () =>
+                document
+                    .querySelector('.ss-header__menu-toggle')
+                    ?.getAttribute('aria-expanded') === 'false' &&
+                document.documentElement.style.overflow !== 'hidden',
+        );
+    };
+    await trigger.click();
+    await dialog.waitFor({ state: 'visible' });
+    assert.equal(await trigger.getAttribute('aria-expanded'), 'true');
+    assert.ok(
+        await close.evaluate((element) => element === document.activeElement),
+    );
+    const bounds = await dialog.boundingBox();
+    assert.ok(bounds);
+    assert.equal(bounds.x, 0);
+    assert.equal(bounds.y, 0);
+    assert.equal(bounds.width, page.viewportSize()!.width);
+    assert.equal(bounds.height, page.viewportSize()!.height);
+    assert.equal(
+        await page
+            .locator('html')
+            .evaluate((element) => element.style.overflow),
+        'hidden',
+    );
+    assert.equal(await dialog.getByRole('navigation').count(), 1);
+    const cta = dialog.locator('.ss-header__cta .ss-button');
+    const list = dialog.locator('.ss-header__links');
+    assert.ok(
+        Math.abs(
+            (await cta.boundingBox())!.width -
+                (await list.boundingBox())!.width,
+        ) < 1,
+    );
+    const languages = dialog.locator('.ss-language-switcher');
+    await languages.locator('summary').click();
+    assert.equal(
+        await languages
+            .locator('.ss-language-switcher__options')
+            .evaluate((element) => getComputedStyle(element).position),
+        'static',
+    );
+    assert.equal(await languages.getByRole('link').count(), 2);
+    const results = await new AxeBuilder({ page }).analyze();
+    assert.deepEqual(
+        results.violations.map((violation) => violation.id),
+        [],
+    );
+    await page.keyboard.press('Escape');
+    assert.equal(await languages.getAttribute('open'), null);
+    assert.ok(await dialog.isVisible());
+    for (let step = 0; step < 12; step += 1) {
+        await page.keyboard.press('Tab');
+        assert.ok(
+            await dialog.evaluate(
+                (element) =>
+                    !document.hasFocus() ||
+                    element.contains(document.activeElement),
+            ),
+        );
+    }
+    await close.click();
+    await waitForMenuClosed();
+    assert.equal(await trigger.getAttribute('aria-expanded'), 'false');
+    assert.ok(
+        await trigger.evaluate((element) => element === document.activeElement),
+    );
+    assert.notEqual(
+        await page
+            .locator('html')
+            .evaluate((element) => element.style.overflow),
+        'hidden',
+    );
+    await trigger.click();
+    await page.keyboard.press('Escape');
+    await waitForMenuClosed();
+    await trigger.click();
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await waitForMenuClosed();
+    assert.equal(
+        await page.locator('.ss-header__inner > .ss-header__nav').count(),
+        1,
+    );
+    assert.notEqual(
+        await page
+            .locator('html')
+            .evaluate((element) => element.style.overflow),
+        'hidden',
+    );
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.waitForFunction(() =>
+        document.querySelector('.ss-header__dialog-content > .ss-header__nav'),
+    );
+    await page.evaluate(() => window.scrollTo(0, 120));
+    await page.waitForFunction(() =>
+        document.querySelector('.ss-header--scrolled'),
+    );
+    const scrollPosition = await page.evaluate(() => window.scrollY);
+    await trigger.click();
+    assert.equal(
+        await dialog
+            .locator('.ss-header__dialog-brand')
+            .evaluate((element) => getComputedStyle(element).color),
+        'rgb(255, 255, 255)',
+    );
+    await close.click();
+    await waitForMenuClosed();
+    assert.equal(await page.evaluate(() => window.scrollY), scrollPosition);
+    await trigger.click();
+    const destination = dialog
+        .locator('.ss-header__link:not([aria-current])')
+        .first();
+    const href = await destination.getAttribute('href');
+    assert.ok(href);
+    await Promise.all([
+        page.waitForURL(new URL(href, originalUrl).href, {
+            waitUntil: 'networkidle',
+        }),
+        destination.click(),
+    ]);
+    assert.equal(await page.locator('.ss-header__dialog[open]').count(), 0);
+    await page.goto(originalUrl, { waitUntil: 'networkidle' });
+    await page.evaluate(() => window.scrollTo(0, 0));
+}
+
 try {
     await waitForServer();
     const browser = await chromium.launch({ headless: true });
@@ -175,6 +316,12 @@ try {
                 throw new Error(
                     `${viewport.name} ${route}: viewport overflows horizontally`,
                 );
+            if (
+                viewport.name === 'mobile' &&
+                ['/', '/de/', '/blog/', '/de/blog/'].includes(route)
+            ) {
+                await checkMobileNavigation(page, german);
+            }
             if (route === '/blog/' || route === '/de/blog/') {
                 const settings = loadSiteConfig(german ? 'de' : 'en').blog;
                 assert.ok(settings);

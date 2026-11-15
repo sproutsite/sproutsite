@@ -82,6 +82,11 @@ const options = languageLinks(
                     '.ss-language-switcher__options',
                 );
                 if (!options) return;
+                if (switcher.closest('.ss-header__dialog')) {
+                    options.removeAttribute('data-positioned');
+                    options.style.removeProperty('--ss-language-shift');
+                    return;
+                }
                 options.dataset.positioned = '';
                 options.style.removeProperty('--ss-language-shift');
                 const bounds = options.getBoundingClientRect();
@@ -103,6 +108,8 @@ const options = languageLinks(
             });
             switcher.addEventListener('keydown', (event) => {
                 if (event.key === 'Escape' && switcher.open) {
+                    event.preventDefault();
+                    event.stopPropagation();
                     switcher.open = false;
                     switcher.querySelector('summary')?.focus();
                 }

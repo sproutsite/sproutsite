@@ -136,6 +136,8 @@ Both regular header links and CTAs accept an optional `icon`, using a canonical 
 
 Add `type: language-switcher` to `header.links` to show the native disclosure dropdown. It lists the project's configured `locales`, including when there is only one language. Content IDs match translated pages and blog articles even when their URL segments differ; missing counterparts link to the target language's homepage. Astro's `getRelativeLocaleUrl()` supplies the language prefix and deployment base. The existing content convention supports English and German; it does not discover or translate new languages automatically. Language names use their native spelling. Flags are local SVGs from MIT-licensed `flag-icons` (GB for English, DE for German); languages are identified by text, not flags alone. The selector works without JavaScript; a small processed Astro script adds Escape and outside-click dismissal. Removing the configuration entry removes the selector.
 
+Below 72rem, the header uses a hamburger button and a fullscreen native `<dialog>`. It reuses the same configured navigation, with an inline language selector and full-width CTA. A compact language selector also remains available in the closed header when configured. Native modal focus handling, Escape, localized open/close labels, scroll locking, and desktop resize restoration are supported. Without JavaScript, the ordinary wrapping navigation remains accessible. The desktop layout is unchanged.
+
 Every page is a directory under `src/content/pages/`:
 
 ```text

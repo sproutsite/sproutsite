@@ -8,6 +8,8 @@ const messagesSchema = z
         skipToContent: z.string().trim().min(1),
         primaryNavigation: z.string().trim().min(1),
         languageSwitcher: z.string().trim().min(1),
+        openMenu: z.string().trim().min(1),
+        closeMenu: z.string().trim().min(1),
         footerNavigation: z.string().trim().min(1),
         home: z.string().trim().min(1),
         blogEyebrow: z.string().trim().min(1),
