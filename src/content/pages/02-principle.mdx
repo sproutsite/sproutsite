@@ -1,0 +1,43 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Column, Columns, Eyebrow } from 'sproutsite/components';
+import { Feature } from 'sproutsite/components';
+
+<Eyebrow>The principle</Eyebrow>
+
+<Columns>
+    <Column span={5}>
+
+        ## How Sproutsite works
+
+        Developers define the theme and tested building blocks. Content is created in Markdown files in the same repository. Editors and coding agents can develop pages without leaving the visual framework.
+
+        The published website remains static. Visitors do not need a CMS running in the background.
+
+    </Column>
+    <Column span={7}>
+        <Columns separator="MoveRight" dividerGap="xs" dividerGapMobile="md">
+            <Column span={4}>
+                <Feature icon="FileText" title="Write" layout="vertical" color="primary">
+                    Create content in Markdown.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Layers" title="Build" layout="vertical" color="secondary">
+                    Generate a static site with Astro.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Globe" title="Publish" layout="vertical" color="success">
+                    Deploy anywhere (e.g. Vercel, Netlify, your server).
+                </Feature>
+            </Column>
+        </Columns>
+    </Column>
+
+</Columns>
