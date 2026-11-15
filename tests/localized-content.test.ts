@@ -14,9 +14,13 @@ function contentFiles(directory: string): string[] {
     });
 }
 
-test('showcase and documentation keep distinct English and German content', () => {
-    for (const area of ['showcase', 'documentation']) {
-        const files = contentFiles(`src/content/pages/${area}`).filter(
+test('showcase, documentation, and blog keep distinct English and German content', () => {
+    for (const root of [
+        'src/content/pages/showcase',
+        'src/content/pages/documentation',
+        'src/content/blog',
+    ]) {
+        const files = contentFiles(root).filter(
             (path) =>
                 ['.md', '.mdx', '.yaml'].includes(extname(path)) &&
                 !path.includes('.de.'),
@@ -36,6 +40,9 @@ test('showcase and documentation keep distinct English and German content', () =
                     title: string;
                     description: string;
                     url?: string;
+                    pubDate?: string;
+                    image?: string;
+                    imageAlt?: string;
                 };
                 assert.ok(page.title.trim() && page.description.trim());
                 assert.equal(
@@ -43,8 +50,46 @@ test('showcase and documentation keep distinct English and German content', () =
                     undefined,
                     `${path}: English routes use English directory names`,
                 );
+                if (root.endsWith('/blog')) {
+                    const localized = parse(
+                        readFileSync(german, 'utf8'),
+                    ) as typeof page;
+                    assert.equal(
+                        page.pubDate,
+                        localized.pubDate,
+                        `${path}: publication dates must agree`,
+                    );
+                    assert.equal(
+                        page.pubDate,
+                        path.split('/').at(-2)?.slice(0, 10),
+                        `${path}: date prefix must match metadata`,
+                    );
+                    assert.equal(
+                        page.image,
+                        localized.image,
+                        `${path}: localized articles share their image`,
+                    );
+                    assert.ok(
+                        page.imageAlt?.trim() && localized.imageAlt?.trim(),
+                    );
+                    assert.notEqual(
+                        page.imageAlt,
+                        localized.imageAlt,
+                        `${path}: translate image descriptions`,
+                    );
+                }
             }
         }
+    }
+});
+
+test('blog overview copy is configured separately for English and German', () => {
+    const english = loadSiteConfig().blog;
+    const german = loadSiteConfig('de').blog;
+    assert.ok(english && german);
+    for (const field of ['eyebrow', 'description', 'heading'] as const) {
+        assert.ok(english[field].trim() && german[field].trim());
+        assert.notEqual(english[field], german[field]);
     }
 });
 

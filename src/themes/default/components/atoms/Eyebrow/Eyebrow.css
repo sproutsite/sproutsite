@@ -3,5 +3,16 @@
         @apply mb-1.5 text-sm font-bold tracking-wider uppercase;
         font-family: var(--font-heading);
         color: var(--ss-eyebrow-color, var(--color-primary));
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+
+        &::before {
+            content: '';
+            flex: 0 0 2.5rem;
+            height: 2px;
+            border-radius: 999px;
+            background-color: currentColor;
+        }
     }
 }

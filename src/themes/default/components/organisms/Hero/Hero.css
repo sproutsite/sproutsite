@@ -12,7 +12,6 @@
 
             .ss-eyebrow {
                 margin-bottom: clamp(1rem, 1.5vw, 1.25rem);
-                font-size: clamp(0.75rem, 0.85vw, 0.875rem);
             }
 
             .ss-hero__title {

@@ -76,12 +76,14 @@ npm run dev
 
 The dev server deliberately starts with `--force`, so changes to Content Collections, MDX components, and local package files are checked without an outdated Astro content cache.
 
-The running demo documents itself at `/dokumentation/`: it contains setup, the content contract, layout components, theme, checks, and local package use. The visible [showcase](/showcase/) instead collects component examples.
+The running demo documents itself at `/documentation/` (German: `/de/dokumentation/`): it contains setup, the content contract, layout components, theme, checks, and local package use. The visible [showcase](/showcase/) instead collects component examples.
 The [blog](/blog/) is a small, file-based project journal. Each article lives in a `YYYY-MM-DD.article-slug/` directory in `src/content/blog/` and uses the same `page.yaml`, `hero.md`, and numbered sections as a normal page. `page.yaml` validates the title, description, date, local card image, and alternative text; the date prefix orders source directories while the URL only uses `article-slug`. Astro generates the overview and article routes from the collection, and every section supports the usual tones and documented MDX components.
 
-Additional commands:
+The optional `blog` setting in `site.yaml` accepts `title`, `eyebrow`, `description`, and `heading` (all non-empty strings) to customize the blog overview. The demo configures English overview copy in `site.yaml` and German copy in `site.de.yaml`. Without this setting, the theme supplies neutral, localized fallback text. Article links use “Learn more” or “Mehr erfahren” and include the article title in their accessible name.
 
-The optional `blog` setting in `site.yaml` accepts `title`, `eyebrow`, `description`, and `heading` (all non-empty strings) to customize the blog overview for a consumer website. Without this setting the demo's existing overview text applies.
+English articles use `page.yaml`, `hero.md`, and numbered sections; their German counterparts use `page.de.yaml`, `hero.de.md`, and `.de.mdx` sections in the same article directory. Each pair keeps its publication date, image, and slug; titles, descriptions, alternative text, heroes, and body copy are maintained separately. `/blog/` and `/de/blog/` list their respective language versions. Dates use the site's language and UTC so a date-only publication value does not shift on hosts in another time zone.
+
+Additional commands:
 
 ```sh
 npm run check       # content contract plus Astro and TypeScript checks

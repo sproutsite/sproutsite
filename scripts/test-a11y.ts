@@ -6,6 +6,9 @@ import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
+import { parse } from 'yaml';
+import { loadSiteConfig } from '../src/lib/sproutsite/site-config.js';
+import { blogRouteFromId } from '../src/lib/sproutsite/urls.js';
 
 const distDirectory = fileURLToPath(new URL('../dist/', import.meta.url));
 const contentTypes: Record<string, string> = {
@@ -71,6 +74,43 @@ if (requestedRoutes) {
 }
 const testedRoutes = requestedRoutes ?? routes;
 
+interface BlogMetadata {
+    title: string;
+    description: string;
+    pubDate: string;
+    imageAlt: string;
+}
+const blogDirectory = fileURLToPath(
+    new URL('../src/content/blog/', import.meta.url),
+);
+const articleDirectories = (
+    await readdir(blogDirectory, { withFileTypes: true })
+)
+    .filter((entry) => entry.isDirectory() && !entry.name.startsWith('_'))
+    .map((entry) => entry.name);
+async function expectedBlogPosts(german: boolean) {
+    const posts = await Promise.all(
+        articleDirectories.map(async (directory) => ({
+            route: `${german ? '/de' : ''}${blogRouteFromId(directory)}`,
+            metadata: parse(
+                await readFile(
+                    join(
+                        blogDirectory,
+                        directory,
+                        german ? 'page.de.yaml' : 'page.yaml',
+                    ),
+                    'utf8',
+                ),
+            ) as BlogMetadata,
+        })),
+    );
+    return posts.sort(
+        (left, right) =>
+            new Date(right.metadata.pubDate).getTime() -
+            new Date(left.metadata.pubDate).getTime(),
+    );
+}
+
 async function waitForServer(): Promise<void> {
     for (let attempt = 0; attempt < 40; attempt += 1) {
         try {
@@ -135,6 +175,112 @@ try {
                 throw new Error(
                     `${viewport.name} ${route}: viewport overflows horizontally`,
                 );
+            if (route === '/blog/' || route === '/de/blog/') {
+                const settings = loadSiteConfig(german ? 'de' : 'en').blog;
+                assert.ok(settings);
+                assert.equal(
+                    await page.locator('h1').innerText(),
+                    settings.title,
+                );
+                assert.equal(
+                    await page
+                        .locator('.ss-page-title__description')
+                        .innerText(),
+                    settings.description,
+                );
+                assert.equal(
+                    (
+                        await page.locator('.ss-hero .ss-eyebrow').textContent()
+                    )?.trim(),
+                    settings.eyebrow,
+                );
+                assert.equal(
+                    await page.locator('#blog-overview').innerText(),
+                    settings.heading,
+                );
+                const posts = await expectedBlogPosts(german);
+                const cards = page.locator('.ss-blog-index__grid > .ss-card');
+                assert.equal(await cards.count(), posts.length);
+                const formatter = new Intl.DateTimeFormat(
+                    german ? 'de' : 'en',
+                    {
+                        day: '2-digit',
+                        month: 'long',
+                        year: 'numeric',
+                        timeZone: 'UTC',
+                    },
+                );
+                for (const [index, post] of posts.entries()) {
+                    const card = cards.nth(index);
+                    assert.equal(
+                        await card.locator('.card-title').innerText(),
+                        post.metadata.title,
+                    );
+                    assert.equal(
+                        await card.locator('p').innerText(),
+                        post.metadata.description,
+                    );
+                    assert.equal(
+                        await card.locator('img').getAttribute('alt'),
+                        post.metadata.imageAlt,
+                    );
+                    assert.equal(
+                        await card.locator('time').innerText(),
+                        formatter
+                            .format(new Date(post.metadata.pubDate))
+                            .toUpperCase(),
+                    );
+                    const label = german ? 'Mehr erfahren' : 'Learn more';
+                    const link = card.getByRole('link', {
+                        name: `${label}: ${post.metadata.title}`,
+                        exact: true,
+                    });
+                    assert.equal(await link.innerText(), label);
+                    assert.equal(await link.getAttribute('href'), post.route);
+                }
+                await page.screenshot({
+                    path: join(
+                        tmpdir(),
+                        `sproutsite-blog-${german ? 'de' : 'en'}-${viewport.name}.png`,
+                    ),
+                });
+            } else if (/^\/(?:de\/)?blog\/[a-z0-9-]+\/$/.test(route)) {
+                const post = (await expectedBlogPosts(german)).find(
+                    (entry) => entry.route === route,
+                );
+                assert.ok(post);
+                assert.equal(
+                    await page.title(),
+                    `${post.metadata.title} | Sproutsite`,
+                );
+                assert.equal(
+                    await page
+                        .locator('meta[name="description"]')
+                        .getAttribute('content'),
+                    post.metadata.description,
+                );
+                const formatter = new Intl.DateTimeFormat(
+                    german ? 'de' : 'en',
+                    {
+                        day: '2-digit',
+                        month: 'long',
+                        year: 'numeric',
+                        timeZone: 'UTC',
+                    },
+                );
+                assert.equal(
+                    await page.locator('.ss-hero__meta').innerText(),
+                    formatter
+                        .format(new Date(post.metadata.pubDate))
+                        .toUpperCase(),
+                );
+                assert.equal(
+                    await page
+                        .locator('.ss-hero__meta')
+                        .getAttribute('datetime'),
+                    new Date(post.metadata.pubDate).toISOString(),
+                );
+            }
             if (
                 ['/showcase/tables/', '/de/showcase/tabellen/'].includes(route)
             ) {
