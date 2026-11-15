@@ -17,6 +17,10 @@ export default {
             description:
                 'Total gap in pixels; half on either side of each line.',
         },
+        dividerGapMobile: {
+            control: { type: 'number', min: 1 },
+            description: 'Optional gap below 64rem; defaults to dividerGap.',
+        },
         dividerColor: {
             control: 'text',
             description: 'Optional CSS hex color for the separators.',
@@ -77,5 +81,14 @@ export const CustomDividers = {
         dividerColor: '#94a3b8',
         dividerGap: 64,
         slots: { default: columns([4, 4, 4, 6, 6]) },
+    },
+};
+
+export const MobileDividerSpacing = {
+    args: {
+        divider: true,
+        dividerGap: 96,
+        dividerGapMobile: 48,
+        slots: { default: columns([4, 4, 4]) },
     },
 };

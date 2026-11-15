@@ -8,17 +8,26 @@ interface Props {
     dividerColor?: `#${string}`;
     /** Total gap in pixels around a separator; half on either side. */
     dividerGap?: number;
+    /** Optional gap for stacked columns below 64rem; defaults to dividerGap. */
+    dividerGapMobile?: number;
 }
 
-const { divider = false, dividerColor, dividerGap = 48 } = Astro.props;
+const {
+    divider = false,
+    dividerColor,
+    dividerGap = 48,
+    dividerGapMobile,
+} = Astro.props;
 if (
     typeof divider !== 'boolean' ||
     (dividerColor !== undefined && !isHexColor(dividerColor)) ||
     !Number.isFinite(dividerGap) ||
-    dividerGap <= 0
+    dividerGap <= 0 ||
+    (dividerGapMobile !== undefined &&
+        (!Number.isFinite(dividerGapMobile) || dividerGapMobile <= 0))
 )
     throw new Error(
-        'Sproutsite Columns: divider must be boolean, dividerColor must be a CSS hex color, and dividerGap must be a positive number in pixels.',
+        'Sproutsite Columns: divider must be boolean, dividerColor must be a CSS hex color, and dividerGap and dividerGapMobile must be positive numbers in pixels.',
     );
 ---
 
@@ -28,6 +37,9 @@ if (
         [
             dividerColor && `--ss-columns-divider-color: ${dividerColor};`,
             divider && `--ss-columns-divider-gap: ${dividerGap}px;`,
+            divider &&
+                dividerGapMobile !== undefined &&
+                `--ss-columns-divider-gap-mobile: ${dividerGapMobile}px;`,
         ]
             .filter(Boolean)
             .join(' ') || undefined

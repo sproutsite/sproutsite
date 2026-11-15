@@ -316,6 +316,52 @@ try {
                 throw new Error(
                     `${viewport.name} ${route}: viewport overflows horizontally`,
                 );
+            if (route.endsWith('/showcase/layout/')) {
+                const measuredGaps = async (stacked: boolean) =>
+                    page.locator('.ss-columns--divider').evaluateAll(
+                        (groups, vertical) =>
+                            groups.map((group) => {
+                                const first =
+                                    group.children[0]!.getBoundingClientRect();
+                                const second =
+                                    group.children[1]!.getBoundingClientRect();
+                                return vertical
+                                    ? second.top - first.bottom
+                                    : second.left - first.right;
+                            }),
+                        stacked,
+                    );
+                const gaps = await measuredGaps(viewport.name === 'mobile');
+                assert.equal(gaps.length, 3);
+                for (const [index, gap] of gaps.entries()) {
+                    const expected =
+                        index === 2 && viewport.name === 'desktop' ? 96 : 48;
+                    assert.ok(
+                        Math.abs(gap - expected) < 1,
+                        `${route}: divider gap ${gap}, expected ${expected}`,
+                    );
+                }
+                // Large gaps must also fit immediately above the desktop breakpoint.
+                try {
+                    await page.setViewportSize({
+                        width: 1024,
+                        height: viewport.height,
+                    });
+                    const narrowGaps = await measuredGaps(false);
+                    assert.ok(Math.abs(narrowGaps[2]! - 96) < 1);
+                    assert.equal(
+                        await page.evaluate(
+                            () =>
+                                document.documentElement.scrollWidth >
+                                innerWidth,
+                        ),
+                        false,
+                        `${route}: large divider gap overflows at 1024px`,
+                    );
+                } finally {
+                    await page.setViewportSize(viewport);
+                }
+            }
             if (
                 viewport.name === 'mobile' &&
                 ['/', '/de/', '/blog/', '/de/blog/'].includes(route)

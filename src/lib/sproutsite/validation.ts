@@ -534,14 +534,20 @@ function validateMdxLayout(
                     (attribute) => attribute.name === 'dividerColor',
                 );
                 const dividerValue = divider?.value;
-                const dividerGap = attributes.find(
-                    (attribute) => attribute.name === 'dividerGap',
-                );
-                const gapValue = dividerGap?.value;
-                const gapNumber =
-                    gapValue && typeof gapValue === 'object'
-                        ? Number(gapValue.value)
-                        : NaN;
+                const invalidGap = attributes
+                    .filter((attribute) =>
+                        ['dividerGap', 'dividerGapMobile'].includes(
+                            attribute.name ?? '',
+                        ),
+                    )
+                    .some((attribute) => {
+                        const value = attribute.value;
+                        const number =
+                            value && typeof value === 'object'
+                                ? Number(value.value)
+                                : NaN;
+                        return !Number.isFinite(number) || number <= 0;
+                    });
                 const columns = (mdxNode.children ?? []).filter(
                     (child) => child.type === 'mdxJsxFlowElement',
                 );
@@ -549,9 +555,12 @@ function validateMdxLayout(
                     attributes.some(
                         (attribute) =>
                             attribute.type !== 'mdxJsxAttribute' ||
-                            !['divider', 'dividerColor', 'dividerGap'].includes(
-                                attribute.name ?? '',
-                            ),
+                            ![
+                                'divider',
+                                'dividerColor',
+                                'dividerGap',
+                                'dividerGapMobile',
+                            ].includes(attribute.name ?? ''),
                     ) ||
                     new Set(attributes.map((attribute) => attribute.name))
                         .size !== attributes.length ||
@@ -565,15 +574,14 @@ function validateMdxLayout(
                         )) ||
                     (dividerColor !== undefined &&
                         !isHexColor(dividerColor.value)) ||
-                    (dividerGap !== undefined &&
-                        (!Number.isFinite(gapNumber) || gapNumber <= 0)) ||
+                    invalidGap ||
                     columns.length < 1 ||
                     columns.some((column) => column.name !== 'Column')
                 )
                     fail(
                         contentRoot,
                         path,
-                        'Columns must contain at least one direct Column component; optional divider must be boolean, dividerColor must be a CSS hex color, and dividerGap must be a positive numeric pixel value',
+                        'Columns must contain at least one direct Column component; optional divider must be boolean, dividerColor must be a CSS hex color, and dividerGap and dividerGapMobile must be positive numeric pixel values',
                     );
                 columns.forEach((column) => {
                     validatedColumns.add(column);

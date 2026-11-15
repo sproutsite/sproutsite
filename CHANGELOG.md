@@ -9,11 +9,13 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
+- Kept large Columns divider gaps between actual content areas to avoid overflow at narrow desktop widths.
+
 - Split English and German showcase examples into focused sections with alternating default and muted surfaces and contextual eyebrows, while preserving the section tone demonstrations.
 
 ### Added
 
-- Added optional responsive Columns dividers with a light gray default, custom hex colors and configurable spacing, bilingual layout examples, and Storybook controls.
+- Added optional responsive Columns dividers with a light gray default, custom hex colors and configurable desktop and mobile spacing, bilingual layout examples, and Storybook controls.
 
 - Added the Feature molecule for icon-and-text benefits, with soft, solid, and plain treatments, semantic and validated custom hex colors, configurable heading levels, validated MDX, bilingual showcase examples, Storybook stories, and a generated overview illustration.
 

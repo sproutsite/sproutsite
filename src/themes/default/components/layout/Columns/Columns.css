@@ -5,7 +5,16 @@
         &.ss-columns--divider {
             --ss-columns-divider-color: rgb(226, 232, 240);
             --ss-columns-divider-gap: 48px;
-            gap: var(--ss-columns-divider-gap);
+            --ss-columns-divider-gap-mobile: var(--ss-columns-divider-gap);
+            gap: var(--ss-columns-divider-gap-mobile);
+
+            @media (width >= 64rem) {
+                /* Equivalent twelve-span rows without eleven internal grid
+                   gutters, which would overflow with large divider gaps. */
+                display: flex;
+                flex-wrap: wrap;
+                gap: var(--ss-columns-divider-gap);
+            }
 
             > .ss-column {
                 position: relative;
@@ -18,12 +27,24 @@
                 }
 
                 &:not(:first-child)::before {
-                    inset-block-start: calc(var(--ss-columns-divider-gap) / -2);
+                    inset-block-start: calc(
+                        var(--ss-columns-divider-gap-mobile) / -2
+                    );
                     inset-inline: 0;
                     height: 1px;
                 }
 
                 @media (width >= 64rem) {
+                    flex: 0 0
+                        max(
+                            0px,
+                            calc(
+                                (100% + var(--ss-columns-divider-gap)) *
+                                    var(--ss-column-span, 12) / 12 -
+                                    var(--ss-columns-divider-gap)
+                            )
+                        );
+
                     &::before {
                         display: none;
                     }
