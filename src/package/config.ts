@@ -1,4 +1,6 @@
 import mdx from '@astrojs/mdx';
+import { existsSync, renameSync, rmdirSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import type { AstroIntegration } from 'astro';
 import sitemap from '@astrojs/sitemap';
 import {
@@ -30,11 +32,40 @@ export function createSproutsiteConfig() {
         },
         integrations: [
             mdx(),
-            sitemap(),
+            sitemap({
+                filter: (page) =>
+                    !/\/(?:404|500)(?:-[a-z]{2})?(?:\.html|\/)?$/.test(
+                        new URL(page).pathname,
+                    ),
+            }),
             {
-                name: 'sproutsite/manifest',
+                name: 'sproutsite/default-routes',
                 hooks: {
                     'astro:config:setup': ({ injectRoute }) => {
+                        injectRoute({
+                            pattern: '/404',
+                            entrypoint: new URL('./404.astro', import.meta.url),
+                            prerender: true,
+                        });
+                        injectRoute({
+                            pattern: '/500',
+                            entrypoint: new URL('./500.astro', import.meta.url),
+                            prerender: true,
+                        });
+                        for (const locale of site.locales.filter(
+                            (locale) => locale !== site.language,
+                        )) {
+                            for (const status of [404, 500]) {
+                                injectRoute({
+                                    pattern: `/${locale}/${status}`,
+                                    entrypoint: new URL(
+                                        `./${status}.astro`,
+                                        import.meta.url,
+                                    ),
+                                    prerender: true,
+                                });
+                            }
+                        }
                         injectRoute({
                             pattern: '/site.webmanifest',
                             entrypoint: new URL(
@@ -43,6 +74,38 @@ export function createSproutsiteConfig() {
                             ),
                             prerender: true,
                         });
+                    },
+                    'astro:build:done': ({ dir }) => {
+                        // Astro owns error-page rendering. Flatten localized output
+                        // for web servers that select their error documents by locale.
+                        for (const locale of site.locales.filter(
+                            (locale) => locale !== site.language,
+                        )) {
+                            for (const status of [404, 500]) {
+                                const flat = new URL(
+                                    `${locale}/${status}.html`,
+                                    dir,
+                                );
+                                const nested = new URL(
+                                    `${locale}/${status}/index.html`,
+                                    dir,
+                                );
+                                const source = existsSync(flat) ? flat : nested;
+                                renameSync(
+                                    source,
+                                    new URL(`${status}-${locale}.html`, dir),
+                                );
+                                if (source === nested)
+                                    rmdirSync(
+                                        fileURLToPath(
+                                            new URL(
+                                                `${locale}/${status}/`,
+                                                dir,
+                                            ),
+                                        ),
+                                    );
+                            }
+                        }
                     },
                 },
             } satisfies AstroIntegration,

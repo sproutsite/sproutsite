@@ -64,8 +64,17 @@ const port = await new Promise<number>((resolvePort, reject) => {
 const baseUrl = `http://127.0.0.1:${port}`;
 // Inspect every generated content page, including localized routes and new pages.
 const routes = (await readdir(distDirectory, { recursive: true }))
-    .filter((file) => file === 'index.html' || file.endsWith('/index.html'))
-    .map((file) => `/${file.slice(0, -'index.html'.length)}`)
+    .filter(
+        (file) =>
+            file === 'index.html' ||
+            file.endsWith('/index.html') ||
+            /^(404|500)(-[a-z]{2})?\.html$/.test(file),
+    )
+    .map((file) =>
+        /^(404|500)(-[a-z]{2})?\.html$/.test(file)
+            ? `/${file}`
+            : `/${file.slice(0, -'index.html'.length)}`,
+    )
     .sort();
 const requestedRoutes = process.env.SPROUTSITE_A11Y_ROUTES?.split(',');
 if (requestedRoutes) {
@@ -273,7 +282,7 @@ try {
     ]) {
         const context = await browser.newContext({ viewport });
         for (const route of testedRoutes) {
-            const german = route.startsWith('/de/');
+            const german = route.startsWith('/de/') || /-de\.html$/.test(route);
             const previewLabel = german ? 'Vorschau' : 'Preview';
             const tokenHeading = german
                 ? 'Token-Referenz des Default-Themes'

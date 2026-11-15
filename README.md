@@ -375,6 +375,28 @@ The entry point for the default theme is `src/themes/default/styles/theme.css`. 
 
 Another theme can replace these components and the technical CSS integration without migrating Markdown or YAML. This is not yet a configurable theme loader and deliberately does not claim every UI library can be switched through a setting.
 
+## Error Pages
+
+The default theme registers standard Astro custom 404 and 500 routes. In `npm run dev`, open `/404` or `/500` to preview the corresponding error page without triggering a server failure. Unknown URLs render the custom 404 page with HTTP status 404. Both pages reuse the small Hero, header, and footer. Agent references in their playful copy are fictional; Sproutsite contains no integrated agent.
+
+`npm run build` emits `dist/404.html` and `dist/500.html` in the default language. Each additional configured language gets flat files with a language suffix: with English as default and German enabled, `dist/404-de.html` and `dist/500-de.html`. Development previews use `/404`, `/500`, `/de/404`, and `/de/500`; the localized preview directories are not retained in the build. All error pages are marked `noindex` and excluded from the sitemap. During development, the 404 also uses German for unknown `/de/` URLs when German is configured. A static host needs its own error-document configuration, including selection of the localized file; generating HTML does not configure the server or simulate server failures. Astro renders the localized routes normally, and a small build hook moves their HTML files to the server-friendly filenames.
+
+For an Apache site whose document root contains `dist/`, configure local error documents:
+
+```apache
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+```
+
+For an Nginx server with the same document root:
+
+```nginx
+error_page 404 /404.html;
+error_page 500 /500.html;
+```
+
+These local error documents preserve the original error status. For a subpath deployment, prefix the error-document URLs with the deployment base (for example `/demo/404.html`). Error pages still load their shared CSS, logo, and scripts from the generated asset directory, so deploy the complete build. See the official [Astro error-page documentation](https://docs.astro.build/en/basics/astro-pages/), [Apache ErrorDocument reference](https://httpd.apache.org/docs/2.4/mod/core.html#errordocument), and [Nginx error_page reference](https://nginx.org/en/docs/http/ngx_http_core_module.html#error_page).
+
 ## Validation and Limitations
 
 The demo keeps English showcase and documentation sources in the standard files and German translations in their `.de.md`, `.de.mdx`, and `page.de.yaml` counterparts. English routes use `/showcase/` and `/documentation/`; German routes use `/de/showcase/` and `/de/dokumentation/`, including localized URL segments. Keep both versions up to date when editing examples, labels, image descriptions, or metadata. Markdown links use the source file's locale, and Button applies the active locale and deployment base exactly once. Theme messages are bundled from the local YAML files using Vite raw imports; they are not read from paths relative to generated build chunks.

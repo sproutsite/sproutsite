@@ -3,8 +3,11 @@ import type { CollectionEntry } from 'astro:content';
 import { toneOf } from '../../../../../lib/sproutsite/pages.js';
 
 interface Props {
-    section: CollectionEntry<'documents' | 'blogDocuments'>;
-    Content: Awaited<
+    section: Pick<
+        CollectionEntry<'documents' | 'blogDocuments'>,
+        'id' | 'data'
+    >;
+    Content?: Awaited<
         ReturnType<typeof import('astro:content').render>
     >['Content'];
 }
@@ -30,7 +33,7 @@ const toneClass = {
                 !section.data.fullWidth && 'ss-section__content',
             ]}
         >
-            <Content />
+            {Content ? <Content /> : <slot />}
         </div>
     </div>
 </section>

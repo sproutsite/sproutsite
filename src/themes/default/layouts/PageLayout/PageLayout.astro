@@ -18,10 +18,20 @@ interface Props {
     description: string;
     route: string;
     layout?: 'default' | 'landing';
+    noindex?: boolean;
 }
-const { site, title, description, route, layout = 'default' } = Astro.props;
+const {
+    site,
+    title,
+    description,
+    route,
+    layout = 'default',
+    noindex = false,
+} = Astro.props;
 const documentTitle = `${title} | ${site.name}`;
-const canonical = canonicalUrl(route, site);
+const canonical = noindex
+    ? new URL(withBase(route, site.base), site.url).href
+    : canonicalUrl(route, site);
 const productSite = site.name === 'Sproutsite';
 const socialImage = new URL(socialCard.src, site.url).href;
 ---
@@ -33,6 +43,7 @@ const socialImage = new URL(socialCard.src, site.url).href;
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{documentTitle}</title>
         <meta name="description" content={description} />
+        {noindex && <meta name="robots" content="noindex, follow" />}
         <link rel="canonical" href={canonical} />
         <link rel="icon" type="image/svg+xml" href={favicon} />
         <link

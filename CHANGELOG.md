@@ -7,6 +7,12 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Added
+
+- Added shared small-hero error pages with /404 and /500 development previews and static 404.html/500.html for server error documents, with localized playful copy and noindex metadata.
+- Split error-page introductions from their explanatory content and homepage action using the shared Hero and Section components.
+- Added localized error-page previews and flat language-suffixed HTML files for each additional configured language.
+
 ## [0.5.2] - 2026-11-15
 
 ### Fixed

@@ -7,9 +7,9 @@ import Button from '../../atoms/Button/Button.astro';
 import Eyebrow from '../../atoms/Eyebrow/Eyebrow.astro';
 
 interface Props {
-    hero: CollectionEntry<'documents' | 'blogDocuments'>;
+    hero: Pick<CollectionEntry<'documents' | 'blogDocuments'>, 'id' | 'data'>;
     site: SiteConfig;
-    Content: Awaited<
+    Content?: Awaited<
         ReturnType<typeof import('astro:content').render>
     >['Content'];
 }
@@ -81,7 +81,7 @@ const titleLines = heroTitle.split('\n').map((line) => {
         {hero.data.claim && <p class="ss-hero__claim">{hero.data.claim}</p>}
         <slot name="meta" />
         <div class="ss-hero__content content-prose">
-            <Content />
+            {Content ? <Content /> : <slot />}
         </div>
         {hero.data.actions && (
             <div class="ss-hero__actions">

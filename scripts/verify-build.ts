@@ -1,9 +1,40 @@
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { loadSiteConfig } from '../src/lib/sproutsite/site-config.js';
-import { canonicalUrl, withBase } from '../src/lib/sproutsite/urls.js';
+import {
+    canonicalUrl,
+    contentHref,
+    withBase,
+} from '../src/lib/sproutsite/urls.js';
 
 const site = loadSiteConfig();
+for (const locale of site.locales) {
+    for (const status of [404, 500]) {
+        if (existsSync(join('dist', String(status))))
+            throw new Error(`Unexpected error page directory: dist/${status}`);
+        const suffix = locale === site.language ? '' : `-${locale}`;
+        if (existsSync(join('dist', locale, String(status))))
+            throw new Error(
+                `Unexpected localized error page directory: ${locale}/${status}`,
+            );
+        const file = join('dist', `${status}${suffix}.html`);
+        if (!existsSync(file)) throw new Error(`Missing error page: ${file}`);
+        const html = readFileSync(file, 'utf8');
+        if (
+            !html.includes('ss-hero--small') ||
+            !html.includes(`lang="${locale}"`) ||
+            !html.includes(
+                `href="${contentHref('/', loadSiteConfig(locale))}"`,
+            ) ||
+            !html.includes('ss-section__content') ||
+            (html.match(/<h2\b/g) ?? []).length !== 1 ||
+            !html.includes('name="robots" content="noindex, follow"') ||
+            (html.match(/<h1\b/g) ?? []).length !== 1 ||
+            (html.match(/<main\b/g) ?? []).length !== 1
+        )
+            throw new Error(`Error page contract failed: ${file}`);
+    }
+}
 const germanSite = site.locales.includes('de')
     ? loadSiteConfig('de')
     : undefined;
@@ -93,7 +124,9 @@ if (!home.includes(`href="${withBase('/faq/', site.base)}"`))
 const htmlFiles = readdirSync('dist', { recursive: true }).filter(
     (file): file is string =>
         typeof file === 'string' &&
-        (file === 'index.html' || file.endsWith('/index.html')),
+        (file === 'index.html' ||
+            file.endsWith('/index.html') ||
+            /^(404|500)(-[a-z]{2})?\.html$/.test(file)),
 );
 const htmlByFile = new Map(
     htmlFiles.map((file) => [
