@@ -1,0 +1,41 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Icon } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Adjust the details</Eyebrow>
+
+## Size, color, and stroke
+
+The default size is 24 pixels and the stroke width is 2. Icons inherit the surrounding text color. Use semantic theme colors when needed; keep the inherited color on dark surfaces and inside buttons.
+
+<Tabs label="Appearance: preview and code" variant="border">
+    <Tab title="Preview">
+        <Icon name="Sprout" size={16} color="primary" label="Small sprout" />
+        <Icon name="Sprout" size={24} color="secondary" label="Medium sprout" />
+        <Icon name="Sprout" size={32} color="success" label="Large sprout" />
+        <Icon
+            name="Sprout"
+            size={48}
+            strokeWidth={1.5}
+            label="Sprout with a fine stroke"
+        />
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        <Icon name="Sprout" size={16} color="primary" label="Small sprout" />
+        <Icon name="Sprout" size={24} color="secondary" label="Medium sprout" />
+        <Icon name="Sprout" size={32} color="success" label="Large sprout" />
+        <Icon
+            name="Sprout"
+            size={48}
+            strokeWidth={1.5}
+            label="Sprout with a fine stroke"
+        />
+        ```
+    </Tab>
+</Tabs>

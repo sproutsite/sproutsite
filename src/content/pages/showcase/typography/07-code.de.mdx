@@ -1,0 +1,43 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Technisches im Zusammenhang</Eyebrow>
+
+## Inline-Code und sprachabhängige Codeblöcke
+
+Inline-Code kennzeichnet Dateinamen oder kurze technische Begriffe. Mehrzeiliger Code erhält eine Sprachangabe für das Syntaxhighlighting. Der Code-Tab zeigt auch die dafür benötigten Markdown-Zeichen.
+
+<Tabs label="Inline-Code und sprachabhängige Codeblöcke: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        Die Datei `page.yaml` enthält die Seitenmetadaten. Mit `npm run build` wird die statische Ausgabe erstellt.
+
+        ```typescript
+        const page = {
+            title: 'Sproutsite',
+            published: true,
+        };
+
+        const description: string = page.title;
+        ```
+    </Tab>
+    <Tab title="Code">
+        ````markdown
+        Die Datei `page.yaml` enthält die Seitenmetadaten. Mit `npm run build` wird die statische Ausgabe erstellt.
+
+        ```typescript
+        const page = {
+            title: 'Sproutsite',
+            published: true,
+        };
+
+        const description: string = page.title;
+        ```
+        ````
+    </Tab>
+
+</Tabs>

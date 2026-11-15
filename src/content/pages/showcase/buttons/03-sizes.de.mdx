@@ -1,0 +1,36 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Button } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Platz zum Klicken</Eyebrow>
+
+## Größen
+
+Fünf Größen helfen, die visuelle Gewichtung an den Kontext anzupassen. Die mittlere Größe ist der Standard.
+
+<Tabs label="Größen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Button size="xs">Extra klein</Button>
+        <Button size="sm">Klein</Button>
+        <Button size="md">Mittel</Button>
+        <Button size="lg">Groß</Button>
+        <Button size="xl">Extra groß</Button>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Button } from 'sproutsite/components';
+
+        <Button size="xs">Extra klein</Button>
+        <Button size="sm">Klein</Button>
+        <Button size="md">Mittel</Button>
+        <Button size="lg">Groß</Button>
+        <Button size="xl">Extra groß</Button>
+        ```
+    </Tab>
+
+</Tabs>

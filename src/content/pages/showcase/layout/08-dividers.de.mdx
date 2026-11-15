@@ -1,0 +1,206 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Abstand und Trennung</Eyebrow>
+
+## Trennlinien zwischen Spalten
+
+`divider` aktiviert dezente graue Trennlinien. Auf Desktop stehen sie senkrecht zwischen benachbarten Spalten; auf kleinen Bildschirmen waagerecht zwischen den gestapelten Bereichen. An den äußeren Rändern und zwischen Desktop-Reihen erscheint keine Linie. Mit `dividerColor` lässt sich eine eigene Hex-Farbe setzen, zum Beispiel `#94a3b8`. Der Abstand beträgt standardmäßig 48 px, also 24 px auf jeder Seite der Linie. Mit `dividerGap={64}` lässt er sich als positive Pixelzahl ändern. Mobil gilt derselbe Abstand oberhalb und unterhalb der horizontalen Linie. Die vertikalen Linien lassen oben und unten jeweils 20 % frei. Ohne `divider` bleibt das Layout unverändert.
+
+<Tabs label="Trennlinien zwischen Spalten" variant="border">
+    <Tab title="Vorschau">
+<Columns divider>
+    <Column span={4}>
+
+        ### Bereich 1
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+    <Column span={4}>
+
+        ### Bereich 2
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+    <Column span={4}>
+
+        ### Bereich 3
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+
+</Columns>
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+
+<Columns divider>
+    <Column span={4}>
+
+        ### Bereich 1
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+    <Column span={4}>
+
+        ### Bereich 2
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+    <Column span={4}>
+
+        ### Bereich 3
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>
+
+### Eigene Linienfarbe
+
+<Tabs label="Eigene Linienfarbe" variant="border">
+    <Tab title="Vorschau">
+<Columns divider dividerColor="#94a3b8">
+    <Column span={4}>
+
+        #### Bereich 1
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+    <Column span={4}>
+
+        #### Bereich 2
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+    <Column span={4}>
+
+        #### Bereich 3
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+
+</Columns>
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+
+<Columns divider dividerColor="#94a3b8">
+    <Column span={4}>
+
+        #### Bereich 1
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+    <Column span={4}>
+
+        #### Bereich 2
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+    <Column span={4}>
+
+        #### Bereich 3
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>
+
+### Doppelter Abstand zur Trennlinie
+
+Mit `dividerGap={96}` ist der Zwischenraum doppelt so groß wie der Standard von 48 px. Auf jeder Seite der Linie bleiben 48 px frei; mobil gilt das oberhalb und unterhalb.
+
+<Tabs label="Doppelter Abstand zur Trennlinie" variant="border">
+    <Tab title="Vorschau">
+<Columns divider dividerGap={96}>
+    <Column span={4}>
+
+        #### Bereich 1
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+    <Column span={4}>
+
+        #### Bereich 2
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+    <Column span={4}>
+
+        #### Bereich 3
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+
+</Columns>
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+
+<Columns divider dividerGap={96}>
+    <Column span={4}>
+
+        #### Bereich 1
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+    <Column span={4}>
+
+        #### Bereich 2
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+    <Column span={4}>
+
+        #### Bereich 3
+
+        Ein eigener Inhalt mit Abstand zur Trennlinie.
+
+    </Column>
+
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>

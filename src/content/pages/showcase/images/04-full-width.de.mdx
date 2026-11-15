@@ -1,0 +1,40 @@
+---
+tone: default
+fullWidth: true
+---
+
+import layoutLandscape from '../_assets/layout-landscape.png';
+import { ContentImage } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Den verfügbaren Platz nutzen</Eyebrow>
+
+## Volle Breite
+
+Das Bild füllt die gesamte verfügbare Breite des Vorschau-Panels. Es bleibt innerhalb des Inhaltsbereichs und behält sein Seitenverhältnis.
+
+<Tabs label="Volle Breite: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <ContentImage
+            src={layoutLandscape}
+            alt="Breite abstrakte Darstellung eines responsiven Layouts"
+            fullWidth
+            shape="rounded"
+        />
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import layoutLandscape from '../_assets/layout-landscape.png';
+        import { ContentImage } from 'sproutsite/components';
+
+        <ContentImage
+            src={layoutLandscape}
+            alt="Breite abstrakte Darstellung eines responsiven Layouts"
+            fullWidth
+            shape="rounded"
+        />
+        ```
+    </Tab>
+
+</Tabs>

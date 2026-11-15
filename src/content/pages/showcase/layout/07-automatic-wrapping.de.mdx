@@ -1,0 +1,104 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Mehr als eine Reihe</Eyebrow>
+
+## Automatischer Umbruch: fünf Karten in einem Block
+
+Alle fünf Karten gehören zum selben `Columns`-Block und verwenden `span={4}`. Nach der dritten Karte beginnt automatisch eine neue Reihe. Die letzten beiden Karten bleiben linksbündig und behalten ihre Breite; der letzte Platz bleibt frei.
+
+<Tabs label="Automatischer Umbruch: fünf Karten in einem Block: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Columns>
+            <Column span={4}>
+                <Card>
+                    ### Karte 1
+
+                    Erste Reihe, erster Platz.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Karte 2
+
+                    Erste Reihe, zweiter Platz.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Karte 3
+
+                    Erste Reihe, dritter Platz. Die zwölf Rasterspalten sind belegt.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Karte 4
+
+                    Zweite Reihe, erster Platz. Der Umbruch benötigt keinen weiteren Layout-Block.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Karte 5
+
+                    Zweite Reihe, zweiter Platz. Der Abstand zur oberen Reihe entspricht dem Abstand zwischen den Spalten.
+                </Card>
+            </Column>
+
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Column, Columns } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={4}>
+                <Card>
+                    ### Karte 1
+
+                    Erste Reihe, erster Platz.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Karte 2
+
+                    Erste Reihe, zweiter Platz.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Karte 3
+
+                    Erste Reihe, dritter Platz. Die zwölf Rasterspalten sind belegt.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Karte 4
+
+                    Zweite Reihe, erster Platz. Der Umbruch benötigt keinen weiteren Layout-Block.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Karte 5
+
+                    Zweite Reihe, zweiter Platz. Der Abstand zur oberen Reihe entspricht dem Abstand zwischen den Spalten.
+                </Card>
+            </Column>
+
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>

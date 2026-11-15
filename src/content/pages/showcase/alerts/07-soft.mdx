@@ -1,0 +1,32 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Alert } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Quiet emphasis</Eyebrow>
+
+## Subtle surface: Soft
+
+A subdued background for less prominent notices.
+
+<Tabs label="Subtle surface: Soft: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Alert variant="info" style="soft">
+            **Info, soft:** A low-emphasis information message.
+        </Alert>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Alert } from 'sproutsite/components';
+
+        <Alert variant="info" style="soft">
+            **Info, soft:** A low-emphasis information message.
+        </Alert>
+        ```
+    </Tab>
+
+</Tabs>

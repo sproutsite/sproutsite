@@ -1,0 +1,32 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Alert } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>An alternative border</Eyebrow>
+
+## Dashed border: Dash
+
+An alternative border style that visually separates a notice.
+
+<Tabs label="Dashed border: Dash: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Alert variant="warning" style="dash">
+            **Warning, dash:** A warning with a dashed border.
+        </Alert>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Alert } from 'sproutsite/components';
+
+        <Alert variant="warning" style="dash">
+            **Warning, dash:** A warning with a dashed border.
+        </Alert>
+        ```
+    </Tab>
+
+</Tabs>

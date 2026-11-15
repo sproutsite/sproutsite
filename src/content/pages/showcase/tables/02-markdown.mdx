@@ -1,0 +1,37 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Start with Markdown</Eyebrow>
+
+## Plain Markdown table
+
+This table needs no component or import. It uses shared Markdown typography and works in both `.md` and `.mdx` content. Its data matches the captioned basic table below.
+
+<Tabs label="Plain Markdown table: Preview and code" variant="border">
+    <Tab title="Preview">
+
+        | Content | File |
+        | --- | --- |
+        | Page settings | `page.yaml` |
+        | Hero | `hero.md` |
+        | Section | `01-introduction.md` |
+
+    </Tab>
+    <Tab title="Code">
+
+        ````markdown
+        | Content | File |
+        | --- | --- |
+        | Page settings | `page.yaml` |
+        | Hero | `hero.md` |
+        | Section | `01-introduction.md` |
+        ````
+
+    </Tab>
+
+</Tabs>

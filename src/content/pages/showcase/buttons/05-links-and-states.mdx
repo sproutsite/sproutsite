@@ -1,0 +1,32 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Button } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Navigation and interaction</Eyebrow>
+
+## Links, actions, and disabled states
+
+A link navigates to another address; a button triggers an action. The action button in this example intentionally has no effect without JavaScript.
+
+<Tabs label="Links, actions, and disabled states: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Button href="/showcase/">Open showcase</Button>
+        <Button type="button" variant="secondary">Run action</Button>
+        <Button variant="primary" disabled>Currently unavailable</Button>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Button } from 'sproutsite/components';
+
+        <Button href="/showcase/">Open showcase</Button>
+        <Button type="button" variant="secondary">Run action</Button>
+        <Button variant="primary" disabled>Currently unavailable</Button>
+        ```
+    </Tab>
+
+</Tabs>

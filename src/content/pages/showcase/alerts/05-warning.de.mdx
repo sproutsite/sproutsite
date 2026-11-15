@@ -1,0 +1,32 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Alert } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Vor dem nächsten Schritt</Eyebrow>
+
+## Warnung
+
+Lenkt die Aufmerksamkeit auf einen notwendigen Prüfschritt.
+
+<Tabs label="Warnung: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Alert variant="warning">
+            **Warning:** Prüfe Inhalte und Links vor einer Veröffentlichung.
+        </Alert>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Alert } from 'sproutsite/components';
+
+        <Alert variant="warning">
+            **Warning:** Prüfe Inhalte und Links vor einer Veröffentlichung.
+        </Alert>
+        ```
+    </Tab>
+
+</Tabs>

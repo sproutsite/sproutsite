@@ -1,0 +1,39 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Badge } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Passend zum Umfeld</Eyebrow>
+
+## Größen und Stile
+
+Größe und Stil können unabhängig von der Farbvariante gewählt werden.
+
+<Tabs label="Größen und Stile: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Badge size="xs">XS</Badge>
+        <Badge size="sm">SM</Badge>
+        <Badge size="md">MD</Badge>
+        <Badge size="lg">LG</Badge>
+        <Badge size="xl">XL</Badge>
+        <Badge variant="primary" style="outline">Outline</Badge>
+        <Badge variant="success" style="soft">Soft</Badge>
+        <Badge variant="warning" style="dash">Dash</Badge>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Badge } from 'sproutsite/components';
+
+        <Badge size="xs">XS</Badge>
+        <Badge size="xl">XL</Badge>
+        <Badge variant="primary" style="outline">Outline</Badge>
+        <Badge variant="success" style="soft">Soft</Badge>
+        <Badge variant="warning" style="dash">Dash</Badge>
+        ```
+    </Tab>
+
+</Tabs>

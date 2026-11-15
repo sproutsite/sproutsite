@@ -1,0 +1,40 @@
+---
+tone: default
+fullWidth: true
+---
+
+import layoutLandscape from '../_assets/layout-landscape.png';
+import { ContentImage } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Use the available space</Eyebrow>
+
+## Full width
+
+The image fills the preview panel's available width. It stays within the content area and preserves its aspect ratio.
+
+<Tabs label="Full width: Preview and code" variant="border">
+    <Tab title="Preview">
+        <ContentImage
+            src={layoutLandscape}
+            alt="Wide abstract illustration of a responsive layout"
+            fullWidth
+            shape="rounded"
+        />
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import layoutLandscape from '../_assets/layout-landscape.png';
+        import { ContentImage } from 'sproutsite/components';
+
+        <ContentImage
+            src={layoutLandscape}
+            alt="Wide abstract illustration of a responsive layout"
+            fullWidth
+            shape="rounded"
+        />
+        ```
+    </Tab>
+
+</Tabs>

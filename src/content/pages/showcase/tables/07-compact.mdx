@@ -1,0 +1,48 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { ContentTable } from 'sproutsite/components';
+
+<Eyebrow>More data in less space</Eyebrow>
+
+## Compact layout
+
+Reduced cell padding leaves room for more data. Content and captions follow the same rules as the basic table.
+
+<Tabs label="Compact layout: Preview and code" variant="border">
+    <Tab title="Preview">
+
+        <ContentTable caption="Files in the page directory – compact" density="compact">
+
+        | Content | File |
+        | --- | --- |
+        | Page settings | `page.yaml` |
+        | Hero | `hero.md` |
+        | Section | `01-introduction.md` |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'sproutsite/components';
+
+        <ContentTable caption="Files in the page directory – compact" density="compact">
+
+        | Content | File |
+        | --- | --- |
+        | Page settings | `page.yaml` |
+        | Hero | `hero.md` |
+        | Section | `01-introduction.md` |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>

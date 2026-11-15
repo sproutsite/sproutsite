@@ -1,0 +1,32 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Button } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Navigation und Bedienung</Eyebrow>
+
+## Link, Aktion und deaktivierter Zustand
+
+Ein Link führt zu einer anderen Adresse; ein Button löst eine Aktion aus. Ohne JavaScript bleibt der Aktions-Button hier bewusst ohne Seiteneffekt.
+
+<Tabs label="Link, Aktion und deaktivierter Zustand: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Button href="/showcase/">Zum Showcase</Button>
+        <Button type="button" variant="secondary">Aktion ausführen</Button>
+        <Button variant="primary" disabled>Derzeit nicht verfügbar</Button>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Button } from 'sproutsite/components';
+
+        <Button href="/showcase/">Zum Showcase</Button>
+        <Button type="button" variant="secondary">Aktion ausführen</Button>
+        <Button variant="primary" disabled>Derzeit nicht verfügbar</Button>
+        ```
+    </Tab>
+
+</Tabs>

@@ -1,0 +1,79 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Tabs, Tab } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>A subtle active state</Eyebrow>
+
+## Border
+
+A subtle line marks the selected tab. This is the default style.
+
+<Tabs label="Border: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Tabs label="Workflow">
+            <Tab title="Content">
+                ### Maintain content
+
+                Pages are assembled from `page.yaml` and numbered Markdown files.
+
+                - Edit text locally
+                - Check changes in the preview
+                - Version content together
+            </Tab>
+            <Tab title="Check">
+                ### Check quality
+
+                Before publishing, use the existing commands to check content and output:
+
+                ```sh
+                npm run check
+                npm run build
+                ```
+            </Tab>
+            <Tab title="Further reading">
+                ### Learn more
+
+                The [documentation](/documentation/) explains the structure. The [getting-started guide](/documentation/getting-started/) walks you through setup.
+            </Tab>
+
+        </Tabs>
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { Tabs, Tab } from 'sproutsite/components';
+
+        <Tabs label="Workflow">
+            <Tab title="Content">
+                ### Maintain content
+
+                Pages are assembled from `page.yaml` and numbered Markdown files.
+
+                - Edit text locally
+                - Check changes in the preview
+                - Version content together
+            </Tab>
+            <Tab title="Check">
+                ### Check quality
+
+                Before publishing, use the existing commands to check content and output:
+
+                ```sh
+                npm run check
+                npm run build
+                ```
+            </Tab>
+            <Tab title="Further reading">
+                ### Learn more
+
+                The [documentation](/documentation/) explains the structure. The [getting-started guide](/documentation/getting-started/) walks you through setup.
+            </Tab>
+
+        </Tabs>
+        ````
+    </Tab>
+
+</Tabs>

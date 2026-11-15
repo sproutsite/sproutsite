@@ -1,0 +1,48 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { ContentTable } from 'sproutsite/components';
+
+<Eyebrow>Name the data</Eyebrow>
+
+## Basic captioned table
+
+A visible caption identifies the table's content. The first row contains column headings, marked as column headers for assistive technology as well.
+
+<Tabs label="Basic captioned table: Preview and code" variant="border">
+    <Tab title="Preview">
+
+        <ContentTable caption="Files in the page directory">
+
+        | Content | File |
+        | --- | --- |
+        | Page settings | `page.yaml` |
+        | Hero | `hero.md` |
+        | Section | `01-introduction.md` |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'sproutsite/components';
+
+        <ContentTable caption="Files in the page directory">
+
+        | Content | File |
+        | --- | --- |
+        | Page settings | `page.yaml` |
+        | Hero | `hero.md` |
+        | Section | `01-introduction.md` |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>

@@ -1,0 +1,48 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { ContentTable } from 'sproutsite/components';
+
+<Eyebrow>Weniger Platz pro Zeile</Eyebrow>
+
+## Kompakte Darstellung
+
+Weniger Zellabstand schafft Platz für größere Datenmengen. Inhalt und Beschriftung folgen denselben Regeln wie in der Basistabelle.
+
+<Tabs label="Kompakte Darstellung: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        <ContentTable caption="Dateien im Seitenverzeichnis – kompakt" density="compact">
+
+        | Inhalt | Datei |
+        | --- | --- |
+        | Seiteneinstellungen | `page.yaml` |
+        | Hero | `hero.md` |
+        | Abschnitt | `01-einleitung.md` |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'sproutsite/components';
+
+        <ContentTable caption="Dateien im Seitenverzeichnis – kompakt" density="compact">
+
+        | Inhalt | Datei |
+        | --- | --- |
+        | Seiteneinstellungen | `page.yaml` |
+        | Hero | `hero.md` |
+        | Abschnitt | `01-einleitung.md` |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>

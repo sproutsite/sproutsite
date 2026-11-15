@@ -1,0 +1,32 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Alert } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Useful context</Eyebrow>
+
+## Information
+
+Additional information about the current content.
+
+<Tabs label="Information: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Alert variant="info">
+            **Info:** This page shows the currently available Sproutsite components.
+        </Alert>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Alert } from 'sproutsite/components';
+
+        <Alert variant="info">
+            **Info:** This page shows the currently available Sproutsite components.
+        </Alert>
+        ```
+    </Tab>
+
+</Tabs>

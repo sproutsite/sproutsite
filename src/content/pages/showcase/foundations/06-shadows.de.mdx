@@ -1,0 +1,48 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { FoundationSample } from 'sproutsite/components';
+
+<Eyebrow>Ebenen unterscheiden</Eyebrow>
+
+## Schatten und Tiefe
+
+Gleich große Flächen machen die Wirkung unterschiedlicher Schatten sichtbar. Neben dem kleinen Schatten lassen sich die weichere und die stärker angehobene Variante des Themes vergleichen.
+
+<Tabs label="Schatten und Tiefe: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <FoundationSample kind="shadow" />
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { FoundationSample } from 'sproutsite/components';
+
+        <FoundationSample kind="shadow" />
+        ````
+
+        Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
+
+        ````css
+        .ss-foundation-sample__elevation--none {
+            box-shadow: none;
+        }
+
+        .ss-foundation-sample__elevation--sm {
+            box-shadow: var(--shadow-sm);
+        }
+
+        .ss-foundation-sample__elevation--soft {
+            box-shadow: var(--shadow-soft);
+        }
+
+        .ss-foundation-sample__elevation--raised {
+            box-shadow: var(--shadow-raised);
+        }
+        ````
+    </Tab>
+
+</Tabs>

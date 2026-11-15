@@ -1,0 +1,51 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { FoundationSample } from 'sproutsite/components';
+
+<Eyebrow>Display and reading text</Eyebrow>
+
+## Compare type and sizes
+
+Compare Nunito's softer shapes with the system font. Display text scales with the viewport width. The specimens are paragraphs so the page's heading hierarchy stays intact.
+
+<Tabs label="Compare type and sizes: Preview and code" variant="border">
+    <Tab title="Preview">
+        <FoundationSample kind="type" />
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { FoundationSample } from 'sproutsite/components';
+
+        <FoundationSample kind="type" />
+        ````
+
+        The presentation uses CSS such as this excerpt:
+
+        ````css
+        .ss-foundation-sample__display {
+            font-family: var(--font-heading);
+            font-size: var(--text-display);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .ss-foundation-sample__heading {
+            font-family: var(--font-heading);
+            font-size: var(--text-heading-2);
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        .ss-foundation-sample__body {
+            font-family: var(--font-sans);
+            line-height: 1.75;
+        }
+        ````
+    </Tab>
+
+</Tabs>

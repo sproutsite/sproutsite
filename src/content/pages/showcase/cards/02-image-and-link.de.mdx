@@ -1,0 +1,44 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import layoutLandscape from '../_assets/layout-landscape.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Vom Überblick zum Detail</Eyebrow>
+
+## Bildkarte mit weiterführendem Link
+
+<Tabs label="Bildkarte mit weiterführendem Link: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Card image={layoutLandscape} imageAlt="Abstrakte blaue Darstellung eines modularen Website-Layouts" shadow="lg">
+            ### Mit Bild, Titel und Action
+
+            Die erste Überschrift der Card wird als Titel gestaltet. Das Bild wird innerhalb eines `figure`-Elements als optimiertes WebP ausgegeben. Mit `shadow="lg"` erhält diese Card eine stärkere räumliche Betonung.
+
+            <CardActions>
+                [Mehr zum Konzept](/info/)
+            </CardActions>
+        </Card>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import layoutLandscape from '../_assets/layout-landscape.png';
+        import { Card, CardActions } from 'sproutsite/components';
+
+        <Card image={layoutLandscape} imageAlt="Abstrakte blaue Darstellung eines modularen Website-Layouts" shadow="lg">
+            ### Mit Bild, Titel und Action
+
+            Die erste Überschrift der Card wird als Titel gestaltet. Das Bild wird innerhalb eines `figure`-Elements als optimiertes WebP ausgegeben. Mit `shadow="lg"` erhält diese Card eine stärkere räumliche Betonung.
+
+            <CardActions>
+                [Mehr zum Konzept](/info/)
+            </CardActions>
+        </Card>
+        ```
+    </Tab>
+
+</Tabs>

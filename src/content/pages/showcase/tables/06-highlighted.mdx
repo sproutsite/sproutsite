@@ -1,0 +1,48 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { ContentTable } from 'sproutsite/components';
+
+<Eyebrow>Draw attention to one result</Eyebrow>
+
+## Highlight a data row
+
+highlight counts data rows from one, excluding the header. Here the second row receives a stronger background and an edge marker. The written status also explains its meaning.
+
+<Tabs label="Highlight a data row: Preview and code" variant="border">
+    <Tab title="Preview">
+
+        <ContentTable caption="Editing progress – sample data" highlight={2}>
+
+        | Area | Status | Next step |
+        | --- | --- | --- |
+        | Home | Done | Review the result |
+        | Info | **Current** | Revise details |
+        | FAQ | Open | Collect questions |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'sproutsite/components';
+
+        <ContentTable caption="Editing progress – sample data" highlight={2}>
+
+        | Area | Status | Next step |
+        | --- | --- | --- |
+        | Home | Done | Review the result |
+        | Info | **Current** | Revise details |
+        | FAQ | Open | Collect questions |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>

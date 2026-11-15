@@ -1,0 +1,40 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Zusammengehöriges vergleichen</Eyebrow>
+
+## Tabellen für strukturierte Informationen
+
+Tabellen stellen vergleichbare Angaben zeilenweise gegenüber. Die Kopfzeile benennt die Spalten; Inline-Code hebt Dateinamen innerhalb der Tabelle hervor.
+
+<Tabs
+    label="Tabellen für strukturierte Informationen: Vorschau und Code"
+    variant="border"
+>
+    <Tab title="Vorschau">
+
+        | Inhalt              | Pflegeort                       |
+        | ------------------- | ------------------------------- |
+        | Seitentitel und SEO | `page.yaml`                     |
+        | Hero-Text           | `hero.md`                       |
+        | Abschnitte          | `NN-name.md` oder `NN-name.mdx` |
+
+    </Tab>
+    <Tab title="Code">
+
+        ````markdown
+        | Inhalt              | Pflegeort                       |
+        | ------------------- | ------------------------------- |
+        | Seitentitel und SEO | `page.yaml`                     |
+        | Hero-Text           | `hero.md`                       |
+        | Abschnitte          | `NN-name.md` oder `NN-name.mdx` |
+        ````
+
+    </Tab>
+
+</Tabs>

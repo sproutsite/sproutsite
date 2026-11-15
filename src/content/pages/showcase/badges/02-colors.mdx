@@ -1,0 +1,40 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Badge } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Status at a glance</Eyebrow>
+
+## Color variants
+
+The variants use the same semantic theme colors as other DaisyUI components.
+
+<Tabs label="Color variants: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Badge>Default</Badge>
+        <Badge variant="primary">Primary</Badge>
+        <Badge variant="secondary">Secondary</Badge>
+        <Badge variant="accent">Accent</Badge>
+        <Badge variant="neutral">Neutral</Badge>
+        <Badge variant="info">Info</Badge>
+        <Badge variant="success">Success</Badge>
+        <Badge variant="warning">Warning</Badge>
+        <Badge variant="error">Error</Badge>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Badge } from 'sproutsite/components';
+
+        <Badge>Default</Badge>
+        <Badge variant="primary">Primary</Badge>
+        <Badge variant="success">Success</Badge>
+        <Badge variant="warning">Warning</Badge>
+        <Badge variant="error">Error</Badge>
+        ```
+    </Tab>
+
+</Tabs>

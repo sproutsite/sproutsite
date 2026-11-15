@@ -1,0 +1,61 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Tabs, Tab } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Eine sichtbare Panelkante</Eyebrow>
+
+## Angehoben
+
+Die aktive Registerkarte hebt sich optisch von den anderen Reitern ab. Bei wenig Platz lässt sich die Reiterleiste horizontal scrollen.
+
+<Tabs label="Angehoben: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Tabs label="Darstellung und Bedienung" variant="lift">
+            <Tab title="Desktop und Mobil">
+                ### Platz für den Inhalt
+
+                Die Panels nutzen die verfügbare Breite. Lange Reiterleisten scrollen innerhalb des Bausteins, ohne die gesamte Seite zu verbreitern.
+            </Tab>
+            <Tab title="Tastaturbedienung">
+                ### Ohne Maus wechseln
+
+                Pfeiltasten wählen den benachbarten Reiter. Nach dem letzten folgt wieder der erste. Die Tabulatortaste führt anschließend in das aktive Panel und zu seinen Links.
+            </Tab>
+            <Tab title="Markdown und Links">
+                ### Inhalt wie gewohnt
+
+                **Hervorhebungen**, Listen, Code und [interne Links](/showcase/layout/) können in jedem Panel verwendet werden.
+            </Tab>
+
+        </Tabs>
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { Tabs, Tab } from 'sproutsite/components';
+
+        <Tabs label="Darstellung und Bedienung" variant="lift">
+            <Tab title="Desktop und Mobil">
+                ### Platz für den Inhalt
+
+                Die Panels nutzen die verfügbare Breite. Lange Reiterleisten scrollen innerhalb des Bausteins, ohne die gesamte Seite zu verbreitern.
+            </Tab>
+            <Tab title="Tastaturbedienung">
+                ### Ohne Maus wechseln
+
+                Pfeiltasten wählen den benachbarten Reiter. Nach dem letzten folgt wieder der erste. Die Tabulatortaste führt anschließend in das aktive Panel und zu seinen Links.
+            </Tab>
+            <Tab title="Markdown und Links">
+                ### Inhalt wie gewohnt
+
+                **Hervorhebungen**, Listen, Code und [interne Links](/showcase/layout/) können in jedem Panel verwendet werden.
+            </Tab>
+
+        </Tabs>
+        ````
+    </Tab>
+
+</Tabs>

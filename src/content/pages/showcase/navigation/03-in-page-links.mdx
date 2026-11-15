@@ -1,0 +1,43 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Within the same page</Eyebrow>
+
+## Linked table of contents
+
+Fragment links lead to a heading on the same page. Sproutsite prefixes heading IDs with the source filename. This example refers to 03-in-page-links.mdx; change the prefix when using another filename.
+
+<Tabs label="Linked table of contents: Preview and code" variant="border">
+    <Tab title="Preview">
+
+        ### Start of the example
+
+        [Go to further information](#03-in-page-links-further-information)
+
+        ### Further information
+
+        Headings receive unique IDs. The target here is in the same preview panel.
+
+        [Back to the start](#03-in-page-links-start-of-the-example)
+
+    </Tab>
+    <Tab title="Code">
+        ````markdown
+        ### Start of the example
+
+        [Go to further information](#03-in-page-links-further-information)
+
+        ### Further information
+
+        Headings receive unique IDs. The target here is in the same preview panel.
+
+        [Back to the start](#03-in-page-links-start-of-the-example)
+        ````
+    </Tab>
+
+</Tabs>

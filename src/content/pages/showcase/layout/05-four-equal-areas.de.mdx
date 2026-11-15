@@ -1,0 +1,90 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Kompakte Gruppen</Eyebrow>
+
+## Vier gleiche Bereiche: 3 + 3 + 3 + 3
+
+Viertel eignen sich für kurze Inhalte. Auf kleinen Bildschirmen erhalten auch diese Karten die volle Inhaltsbreite.
+
+<Tabs label="Vier gleiche Bereiche: 3 + 3 + 3 + 3: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Columns>
+            <Column span={3}>
+                <Card>
+                    ### Viertel 1
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    ### Viertel 2
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    ### Viertel 3
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    ### Viertel 4
+
+                    `span={3}`
+                </Card>
+            </Column>
+
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Column, Columns } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={3}>
+                <Card>
+                    ### Viertel 1
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    ### Viertel 2
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    ### Viertel 3
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    ### Viertel 4
+
+                    `span={3}`
+                </Card>
+            </Column>
+
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>

@@ -7,6 +7,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Changed
+
+- Split English and German showcase examples into focused sections with alternating default and muted surfaces and contextual eyebrows, while preserving the section tone demonstrations.
+
 ### Added
 
 - Added optional responsive Columns dividers with a light gray default, custom hex colors and configurable spacing, bilingual layout examples, and Storybook controls.

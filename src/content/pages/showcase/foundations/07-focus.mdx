@@ -1,0 +1,39 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { FoundationSample } from 'sproutsite/components';
+
+<Eyebrow>Navigate by keyboard</Eyebrow>
+
+## Try keyboard focus
+
+Select the Preview tab and press Tab twice: first to focus the panel, then the link. The visible outline identifies the keyboard target. Press Enter to follow the link.
+
+<Tabs label="Try keyboard focus: Preview and code" variant="border">
+    <Tab title="Preview">
+        <FoundationSample kind="focus" />
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { FoundationSample } from 'sproutsite/components';
+
+        <FoundationSample kind="focus" />
+        ````
+
+        The presentation uses CSS such as this excerpt:
+
+        ````css
+        .ss-foundation-sample__focus {
+            &:focus-visible {
+                outline: 3px solid var(--color-primary);
+                outline-offset: 3px;
+            }
+        }
+        ````
+    </Tab>
+
+</Tabs>

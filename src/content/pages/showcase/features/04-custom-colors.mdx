@@ -1,0 +1,57 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Feature } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Match your palette</Eyebrow>
+
+## Hex colors
+
+`color` also accepts CSS hex values with 3, 4, 6, or 8 hexadecimal digits, such as `#527b37` or `#527b37cc`. A hex value sets the icon color and a softly tinted background. In this mode, `variant` is ignored: `soft`, `solid`, and `plain` produce the same appearance. Choose a color that remains visible against the surrounding section.
+
+<Tabs label="Hex colors: preview and code" variant="border">
+    <Tab title="Preview">
+        <Feature
+            icon="Layers"
+            title="Custom color"
+            color="#527b37"
+            headingLevel={3}
+        >
+            An icon and subtle background using a custom green.
+        </Feature>
+        <Feature
+            icon="Layers"
+            title="Variant ignored"
+            color="#527b37"
+            variant="solid"
+            headingLevel={3}
+        >
+            The same treatment even when solid is specified.
+        </Feature>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        <Feature
+            icon="Layers"
+            title="Custom color"
+            color="#527b37"
+            headingLevel={3}
+        >
+            An icon and subtle background using a custom green.
+        </Feature>
+        <Feature
+            icon="Layers"
+            title="Variant ignored"
+            color="#527b37"
+            variant="solid"
+            headingLevel={3}
+        >
+            The same treatment even when solid is specified.
+        </Feature>
+        ```
+    </Tab>
+</Tabs>

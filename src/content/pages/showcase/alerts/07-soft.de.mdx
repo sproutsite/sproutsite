@@ -1,0 +1,32 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Alert } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Dezent hervorheben</Eyebrow>
+
+## Sanfte Fläche: Soft
+
+Eine zurückhaltende Hintergrundfläche für weniger dominante Hinweise.
+
+<Tabs label="Sanfte Fläche: Soft: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Alert variant="info" style="soft">
+            **Info, soft:** Eine zurückhaltende Informationsmeldung.
+        </Alert>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Alert } from 'sproutsite/components';
+
+        <Alert variant="info" style="soft">
+            **Info, soft:** Eine zurückhaltende Informationsmeldung.
+        </Alert>
+        ```
+    </Tab>
+
+</Tabs>

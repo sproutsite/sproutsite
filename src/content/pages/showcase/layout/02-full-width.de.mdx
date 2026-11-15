@@ -1,0 +1,48 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Raum für Details</Eyebrow>
+
+## Volle Breite: 12
+
+Ohne `span` nutzt eine Spalte die gesamte Inhaltsbreite.
+
+<Tabs label="Volle Breite: 12: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Columns>
+            <Column>
+                <Card>
+                    ### 12 von 12
+
+                    Platz für einen Überblick oder einen längeren Inhalt. Die Breite endet am gemeinsamen Inhaltsrand der Seite.
+                </Card>
+            </Column>
+
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Column, Columns } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        <Columns>
+            <Column>
+                <Card>
+                    ### 12 von 12
+
+                    Platz für einen Überblick oder einen längeren Inhalt. Die Breite endet am gemeinsamen Inhaltsrand der Seite.
+                </Card>
+            </Column>
+
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>

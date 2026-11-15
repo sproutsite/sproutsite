@@ -1,0 +1,65 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Feature } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Choose the emphasis</Eyebrow>
+
+## Presentation variants
+
+`soft` adds a subtle background, `solid` uses a filled square with a contrasting icon, and `plain` leaves the icon background transparent. All variants keep the same icon area and text alignment.
+
+<Tabs label="Feature variants: preview and code" variant="border">
+    <Tab title="Preview">
+        <Feature icon="Zap" title="Soft" headingLevel={3}>
+            A subtle background for a calm content area.
+        </Feature>
+        <Feature
+            icon="Layers"
+            title="Solid"
+            variant="solid"
+            color="secondary"
+            headingLevel={3}
+        >
+            A filled surface for stronger emphasis.
+        </Feature>
+        <Feature
+            icon="Code"
+            title="Plain"
+            variant="plain"
+            color="accent"
+            headingLevel={3}
+        >
+            An icon without a background, aligned with the other variants.
+        </Feature>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        <Feature icon="Zap" title="Soft" headingLevel={3}>
+            A subtle background for a calm content area.
+        </Feature>
+        <Feature
+            icon="Layers"
+            title="Solid"
+            variant="solid"
+            color="secondary"
+            headingLevel={3}
+        >
+            A filled surface for stronger emphasis.
+        </Feature>
+        <Feature
+            icon="Code"
+            title="Plain"
+            variant="plain"
+            color="accent"
+            headingLevel={3}
+        >
+            An icon without a background, aligned with the other variants.
+        </Feature>
+        ```
+    </Tab>
+</Tabs>

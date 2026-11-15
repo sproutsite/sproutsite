@@ -1,0 +1,42 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import layoutPortrait from '../_assets/layout-portrait.png';
+import { ContentImage } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>A straight edge</Eyebrow>
+
+## Fixed height, square corners, and no border
+
+The portrait source renders at a height of 360 pixels. Its width follows the aspect ratio, with square corners and no border.
+
+<Tabs label="Fixed height, square corners, and no border: Preview and code" variant="border">
+    <Tab title="Preview">
+        <ContentImage
+            src={layoutPortrait}
+            alt="Editorial illustration of modular content blocks"
+            height={360}
+            shape="square"
+            border="none"
+        />
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import layoutPortrait from '../_assets/layout-portrait.png';
+        import { ContentImage } from 'sproutsite/components';
+
+        <ContentImage
+            src={layoutPortrait}
+            alt="Editorial illustration of modular content blocks"
+            height={360}
+            shape="square"
+            border="none"
+        />
+        ```
+    </Tab>
+
+</Tabs>

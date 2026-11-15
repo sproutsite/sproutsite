@@ -1,0 +1,48 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { ContentTable } from 'sproutsite/components';
+
+<Eyebrow>Ein Ergebnis hervorheben</Eyebrow>
+
+## Eine Datenzeile hervorheben
+
+highlight zählt Datenzeilen ab eins, ohne die Kopfzeile. Die zweite Zeile erhält hier eine betonte Fläche und eine seitliche Markierung. Der ausgeschriebene Status macht die Bedeutung zusätzlich verständlich.
+
+<Tabs label="Eine Datenzeile hervorheben: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        <ContentTable caption="Bearbeitungsstand – Beispieldaten" highlight={2}>
+
+        | Bereich | Status | Nächster Schritt |
+        | --- | --- | --- |
+        | Startseite | Erledigt | Ergebnis prüfen |
+        | Info | **Aktuell** | Details überarbeiten |
+        | FAQ | Offen | Fragen sammeln |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'sproutsite/components';
+
+        <ContentTable caption="Bearbeitungsstand – Beispieldaten" highlight={2}>
+
+        | Bereich | Status | Nächster Schritt |
+        | --- | --- | --- |
+        | Startseite | Erledigt | Ergebnis prüfen |
+        | Info | **Aktuell** | Details überarbeiten |
+        | FAQ | Offen | Fragen sammeln |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>

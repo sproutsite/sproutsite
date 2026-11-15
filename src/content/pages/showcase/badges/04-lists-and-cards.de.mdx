@@ -1,0 +1,45 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Badge } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Im Zusammenhang</Eyebrow>
+
+## In Listen und Cards
+
+Badges lassen sich innerhalb normaler Markdown-Inhalte verwenden. Der umgebende Text erklärt jeweils, was der Status bedeutet.
+
+<Tabs label="Badges in Listen und Cards: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        - Statischer Build <Badge variant="success">erfolgreich</Badge>
+        - Inhaltliche Prüfung <Badge variant="info" style="soft">ausstehend</Badge>
+        - Veröffentlichung <Badge variant="warning">prüfen</Badge>
+
+        <Card>
+            ## Paketstatus
+
+            Diese Demo wird lokal entwickelt. <Badge variant="primary" style="outline">Entwicklung</Badge>
+        </Card>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Badge } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        - Statischer Build <Badge variant="success">erfolgreich</Badge>
+        - Inhaltliche Prüfung <Badge variant="info" style="soft">ausstehend</Badge>
+
+        <Card>
+            ## Paketstatus
+
+            Diese Demo wird lokal entwickelt. <Badge variant="primary" style="outline">Entwicklung</Badge>
+        </Card>
+        ```
+    </Tab>
+
+</Tabs>

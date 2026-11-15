@@ -1,0 +1,48 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { ContentTable } from 'sproutsite/components';
+
+<Eyebrow>Keep columns readable</Eyebrow>
+
+## Wide tables on small screens
+
+The table keeps its column widths and scrolls within its own region. Swipe horizontally on mobile, or press Tab to focus the region and use the arrow keys to scroll.
+
+<Tabs label="Wide tables on small screens: Preview and code" variant="border">
+    <Tab title="Preview">
+
+        <ContentTable caption="Editorial plan – sample data" variant="striped" density="compact" wide>
+
+        | Page | Responsibility | Status | Language | Schedule | Review | Approval | Note |
+        | --- | --- | --- | --- | --- | --- | --- | --- |
+        | Home | Editorial | Draft | English | Week 1 | Editorial | Team | Revise the introduction |
+        | Info | Development | In progress | English | Week 2 | Development | Team | Add examples |
+        | FAQ | Editorial | Planned | English | Week 3 | Editorial | Team | Collect frequently asked questions |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'sproutsite/components';
+
+        <ContentTable caption="Editorial plan – sample data" variant="striped" density="compact" wide>
+
+        | Page | Responsibility | Status | Language | Schedule | Review | Approval | Note |
+        | --- | --- | --- | --- | --- | --- | --- | --- |
+        | Home | Editorial | Draft | English | Week 1 | Editorial | Team | Revise the introduction |
+        | Info | Development | In progress | English | Week 2 | Development | Team | Add examples |
+        | FAQ | Editorial | Planned | English | Week 3 | Editorial | Team | Collect frequently asked questions |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>

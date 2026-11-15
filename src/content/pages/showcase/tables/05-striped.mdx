@@ -1,0 +1,50 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { ContentTable } from 'sproutsite/components';
+
+<Eyebrow>Follow each row</Eyebrow>
+
+## Alternating row backgrounds
+
+Subtle stripes make a row easier to follow across several columns. Data and row order stay unchanged.
+
+<Tabs label="Alternating row backgrounds: Preview and code" variant="border">
+    <Tab title="Preview">
+
+        <ContentTable caption="Workflow overview" variant="striped">
+
+        | Step | Task |
+        | --- | --- |
+        | Plan | Define topics and responsibilities |
+        | Write | Maintain content in Markdown |
+        | Check | Check links and output |
+        | Approve | Review the result together |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'sproutsite/components';
+
+        <ContentTable caption="Workflow overview" variant="striped">
+
+        | Step | Task |
+        | --- | --- |
+        | Plan | Define topics and responsibilities |
+        | Write | Maintain content in Markdown |
+        | Check | Check links and output |
+        | Approve | Review the result together |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>

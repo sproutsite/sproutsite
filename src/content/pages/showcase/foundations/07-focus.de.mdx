@@ -1,0 +1,39 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { FoundationSample } from 'sproutsite/components';
+
+<Eyebrow>Mit der Tastatur bedienen</Eyebrow>
+
+## Tastaturfokus ausprobieren
+
+Wähle den Vorschau-Reiter und drücke zweimal die Tabulatortaste: zuerst zum Panel, dann zum Link. Die sichtbare Kontur zeigt das aktive Tastaturziel. Mit Enter lässt sich der Link bedienen.
+
+<Tabs label="Tastaturfokus ausprobieren: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <FoundationSample kind="focus" />
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { FoundationSample } from 'sproutsite/components';
+
+        <FoundationSample kind="focus" />
+        ````
+
+        Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
+
+        ````css
+        .ss-foundation-sample__focus {
+            &:focus-visible {
+                outline: 3px solid var(--color-primary);
+                outline-offset: 3px;
+            }
+        }
+        ````
+    </Tab>
+
+</Tabs>

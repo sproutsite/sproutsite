@@ -1,0 +1,61 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Tabs, Tab } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Inhalte auf gemeinsamer Fläche</Eyebrow>
+
+## Box
+
+Die Reiter stehen auf einer gemeinsamen Fläche. Hier ist anfangs der zweite Reiter ausgewählt.
+
+<Tabs label="Box: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Tabs label="Vorteile des Frameworks" variant="box" initial={2}>
+            <Tab title="Für Autoren">
+                ### Vertraute Dateien
+
+                Markdown für Texte, YAML für Einstellungen. Ein CMS-Backend ist nicht erforderlich.
+            </Tab>
+            <Tab title="Für Entwickler">
+                ### Geprüfte Bausteine
+
+                Astro-Komponenten bilden das Layout. Autoren setzen die dokumentierten Bausteine in MDX ein.
+            </Tab>
+            <Tab title="Für Besucher">
+                ### Statische Seiten
+
+                Links und Inhalte werden als HTML ausgeliefert. Ohne JavaScript bleiben alle Tab-Inhalte untereinander lesbar.
+            </Tab>
+
+        </Tabs>
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { Tabs, Tab } from 'sproutsite/components';
+
+        <Tabs label="Vorteile des Frameworks" variant="box" initial={2}>
+            <Tab title="Für Autoren">
+                ### Vertraute Dateien
+
+                Markdown für Texte, YAML für Einstellungen. Ein CMS-Backend ist nicht erforderlich.
+            </Tab>
+            <Tab title="Für Entwickler">
+                ### Geprüfte Bausteine
+
+                Astro-Komponenten bilden das Layout. Autoren setzen die dokumentierten Bausteine in MDX ein.
+            </Tab>
+            <Tab title="Für Besucher">
+                ### Statische Seiten
+
+                Links und Inhalte werden als HTML ausgeliefert. Ohne JavaScript bleiben alle Tab-Inhalte untereinander lesbar.
+            </Tab>
+
+        </Tabs>
+        ````
+    </Tab>
+
+</Tabs>

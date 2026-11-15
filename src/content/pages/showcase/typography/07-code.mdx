@@ -1,0 +1,43 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Technical details in context</Eyebrow>
+
+## Inline code and syntax-highlighted code blocks
+
+Inline code identifies filenames or short technical terms. Add a language identifier to multi-line code blocks for syntax highlighting. The Code tab also shows the Markdown syntax required.
+
+<Tabs label="Inline code and syntax-highlighted code blocks: Preview and code" variant="border">
+    <Tab title="Preview">
+        The `page.yaml` file contains page metadata. Run `npm run build` to generate the static output.
+
+        ```typescript
+        const page = {
+            title: 'Sproutsite',
+            published: true,
+        };
+
+        const description: string = page.title;
+        ```
+    </Tab>
+    <Tab title="Code">
+        ````markdown
+        The `page.yaml` file contains page metadata. Run `npm run build` to generate the static output.
+
+        ```typescript
+        const page = {
+            title: 'Sproutsite',
+            published: true,
+        };
+
+        const description: string = page.title;
+        ```
+        ````
+    </Tab>
+
+</Tabs>

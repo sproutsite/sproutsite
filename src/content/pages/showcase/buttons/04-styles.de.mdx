@@ -1,0 +1,34 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Button } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Die Gewichtung wählen</Eyebrow>
+
+## Darstellungsstile
+
+Outline, Soft, Ghost und Link setzen unterschiedliche Gewichtungen, ohne die semantische Farbvariante zu ändern.
+
+<Tabs label="Darstellungsstile: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Button variant="secondary" style="outline">Outline</Button>
+        <Button variant="info" style="soft">Soft</Button>
+        <Button variant="neutral" style="ghost">Ghost</Button>
+        <Button variant="primary" style="link">Link</Button>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Button } from 'sproutsite/components';
+
+        <Button variant="secondary" style="outline">Outline</Button>
+        <Button variant="info" style="soft">Soft</Button>
+        <Button variant="neutral" style="ghost">Ghost</Button>
+        <Button variant="primary" style="link">Link</Button>
+        ```
+    </Tab>
+
+</Tabs>

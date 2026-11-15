@@ -1,0 +1,32 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Alert } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Allgemeine Hinweise</Eyebrow>
+
+## Neutraler Hinweis
+
+Ohne Farbvariante eignet sich der Alert für allgemeine Hinweise.
+
+<Tabs label="Neutraler Hinweis: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Alert>
+            **Alert:** Eine neutrale Meldung ohne zusätzliche Farbvariante.
+        </Alert>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Alert } from 'sproutsite/components';
+
+        <Alert>
+            **Alert:** Eine neutrale Meldung ohne zusätzliche Farbvariante.
+        </Alert>
+        ```
+    </Tab>
+
+</Tabs>

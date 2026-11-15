@@ -1,0 +1,61 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Tabs, Tab } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>A visible panel edge</Eyebrow>
+
+## Lifted
+
+The active tab is visually raised above the others. The tab list scrolls horizontally when space is limited.
+
+<Tabs label="Lifted: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Tabs label="Presentation and interaction" variant="lift">
+            <Tab title="Desktop and mobile">
+                ### Room for content
+
+                Panels use the available width. Long tab lists scroll inside the component without widening the page.
+            </Tab>
+            <Tab title="Keyboard interaction">
+                ### Switch without a mouse
+
+                Arrow keys select the neighboring tab, wrapping from the last back to the first. Tab then moves focus into the active panel and its links.
+            </Tab>
+            <Tab title="Markdown and links">
+                ### Content as usual
+
+                Use **emphasis**, lists, code, and [internal links](/showcase/layout/) in every panel.
+            </Tab>
+
+        </Tabs>
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { Tabs, Tab } from 'sproutsite/components';
+
+        <Tabs label="Presentation and interaction" variant="lift">
+            <Tab title="Desktop and mobile">
+                ### Room for content
+
+                Panels use the available width. Long tab lists scroll inside the component without widening the page.
+            </Tab>
+            <Tab title="Keyboard interaction">
+                ### Switch without a mouse
+
+                Arrow keys select the neighboring tab, wrapping from the last back to the first. Tab then moves focus into the active panel and its links.
+            </Tab>
+            <Tab title="Markdown and links">
+                ### Content as usual
+
+                Use **emphasis**, lists, code, and [internal links](/showcase/layout/) in every panel.
+            </Tab>
+
+        </Tabs>
+        ````
+    </Tab>
+
+</Tabs>

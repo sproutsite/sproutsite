@@ -1,0 +1,48 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { ContentTable } from 'sproutsite/components';
+
+<Eyebrow>Spalten lesbar halten</Eyebrow>
+
+## Breite Tabellen auf kleinen Bildschirmen
+
+Die Tabelle behält ihre Spaltenbreite und scrollt innerhalb ihres eigenen Bereichs. Auf Mobilgeräten kannst du horizontal wischen. Mit der Tabulatortaste erreichst du den Tabellenbereich und kannst ihn mit den Pfeiltasten horizontal bewegen.
+
+<Tabs label="Breite Tabellen auf kleinen Bildschirmen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        <ContentTable caption="Redaktionsplan – Beispieldaten" variant="striped" density="compact" wide>
+
+        | Seite | Zuständigkeit | Status | Sprache | Planung | Prüfung | Freigabe | Hinweis |
+        | --- | --- | --- | --- | --- | --- | --- | --- |
+        | Startseite | Redaktion | Entwurf | Deutsch | Woche 1 | Redaktion | Team | Einstieg überarbeiten |
+        | Info | Entwicklung | In Arbeit | Deutsch | Woche 2 | Entwicklung | Team | Beispiele ergänzen |
+        | FAQ | Redaktion | Geplant | Deutsch | Woche 3 | Redaktion | Team | Häufige Fragen sammeln |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'sproutsite/components';
+
+        <ContentTable caption="Redaktionsplan – Beispieldaten" variant="striped" density="compact" wide>
+
+        | Seite | Zuständigkeit | Status | Sprache | Planung | Prüfung | Freigabe | Hinweis |
+        | --- | --- | --- | --- | --- | --- | --- | --- |
+        | Startseite | Redaktion | Entwurf | Deutsch | Woche 1 | Redaktion | Team | Einstieg überarbeiten |
+        | Info | Entwicklung | In Arbeit | Deutsch | Woche 2 | Entwicklung | Team | Beispiele ergänzen |
+        | FAQ | Redaktion | Geplant | Deutsch | Woche 3 | Redaktion | Team | Häufige Fragen sammeln |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>

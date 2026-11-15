@@ -1,0 +1,76 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Auf einen Blick</Eyebrow>
+
+## Drei gleiche Bereiche: 4 + 4 + 4
+
+Drei Karten stehen nebeneinander. Die Abstände zwischen ihnen bleiben genauso groß wie bei zwei Spalten.
+
+<Tabs label="Drei gleiche Bereiche: 4 + 4 + 4: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Columns>
+            <Column span={4}>
+                <Card>
+                    ### Erstes Drittel
+
+                    `span={4}` eignet sich beispielsweise für einen Vorteil.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Zweites Drittel
+
+                    Auch mit etwas mehr Text bleibt die Karte innerhalb ihrer Spalte. Die Karten einer Reihe werden auf dieselbe Höhe gestreckt.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Drittes Drittel
+
+                    Die Reihe ist mit zwölf Rasterspalten vollständig gefüllt.
+                </Card>
+            </Column>
+
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Column, Columns } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={4}>
+                <Card>
+                    ### Erstes Drittel
+
+                    `span={4}` eignet sich beispielsweise für einen Vorteil.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Zweites Drittel
+
+                    Auch mit etwas mehr Text bleibt die Karte innerhalb ihrer Spalte. Die Karten einer Reihe werden auf dieselbe Höhe gestreckt.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Drittes Drittel
+
+                    Die Reihe ist mit zwölf Rasterspalten vollständig gefüllt.
+                </Card>
+            </Column>
+
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>

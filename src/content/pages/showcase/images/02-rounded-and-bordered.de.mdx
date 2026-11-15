@@ -1,0 +1,42 @@
+---
+tone: default
+fullWidth: true
+---
+
+import layoutLandscape from '../_assets/layout-landscape.png';
+import { ContentImage } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Proportionen erhalten</Eyebrow>
+
+## Feste Breite, runde Ecken und Rahmen
+
+Das Bild erhält eine Breite von 360 Pixeln. Die Höhe folgt dem ursprünglichen Seitenverhältnis. Abgerundete Ecken und ein dezenter Rahmen schließen die Darstellung ab.
+
+<Tabs label="Feste Breite, runde Ecken und Rahmen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <ContentImage
+            src={layoutLandscape}
+            alt="Abstrakte blaue Darstellung eines modularen Website-Layouts"
+            width={360}
+            shape="rounded"
+            border="default"
+        />
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import layoutLandscape from '../_assets/layout-landscape.png';
+        import { ContentImage } from 'sproutsite/components';
+
+        <ContentImage
+            src={layoutLandscape}
+            alt="Abstrakte blaue Darstellung eines modularen Website-Layouts"
+            width={360}
+            shape="rounded"
+            border="default"
+        />
+        ```
+    </Tab>
+
+</Tabs>

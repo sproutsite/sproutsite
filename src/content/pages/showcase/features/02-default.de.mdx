@@ -1,0 +1,32 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Feature } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Ein Vorteil pro Baustein</Eyebrow>
+
+## Standarddarstellung
+
+Standardmäßig liegt das Icon auf einer dezent eingefärbten, quadratischen Fläche mit abgerundeten Ecken. Es verwendet die primäre Theme-Farbe.
+
+<Tabs label="Standard-Feature: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Feature icon="Zap" title="Statisch ausgeliefert" headingLevel={3}>
+            Vorab erzeugte Seiten, die auf statischem Hosting laufen.
+        </Feature>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Feature } from 'sproutsite/components';
+
+        <Feature icon="Zap" title="Statisch ausgeliefert" headingLevel={3}>
+            Vorab erzeugte Seiten, die auf statischem Hosting laufen.
+        </Feature>
+        ```
+    </Tab>
+
+</Tabs>

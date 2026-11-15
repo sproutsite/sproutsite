@@ -1,0 +1,32 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Alert } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Task completed</Eyebrow>
+
+## Success message
+
+Confirms that an operation completed successfully.
+
+<Tabs label="Success message: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Alert variant="success">
+            **Success:** The static build completed successfully.
+        </Alert>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Alert } from 'sproutsite/components';
+
+        <Alert variant="success">
+            **Success:** The static build completed successfully.
+        </Alert>
+        ```
+    </Tab>
+
+</Tabs>

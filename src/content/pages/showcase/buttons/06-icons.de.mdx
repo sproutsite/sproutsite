@@ -1,0 +1,52 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Button } from 'sproutsite/components';
+import { Icon } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Vertraute Symbole</Eyebrow>
+
+## Buttons mit Icons
+
+Setze ein `Icon` vor die Beschriftung innerhalb von `Button`. Es übernimmt die Textfarbe des Buttons. Lass `label` beim Icon weg, damit Screenreader nur den sichtbaren Button-Text vorlesen.
+
+<Tabs label="Buttons mit Icons: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Button href="/kontakt/">
+            <Icon name="Mail" size={20} /> Kontakt
+        </Button>
+        <Button href="/dokumentation/" variant="secondary" style="outline">
+            <Icon name="BookOpen" size={20} /> Dokumentation
+        </Button>
+        <Button href="/blog/" variant="info" style="soft">
+            <Icon name="Newspaper" size={20} /> Blog lesen
+        </Button>
+        <Button href="/showcase/" variant="neutral" style="ghost">
+            <Icon name="LayoutGrid" size={20} /> Komponenten ansehen
+        </Button>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Button } from 'sproutsite/components';
+        import { Icon } from 'sproutsite/components';
+
+        <Button href="/kontakt/">
+            <Icon name="Mail" size={20} /> Kontakt
+        </Button>
+        <Button href="/dokumentation/" variant="secondary" style="outline">
+            <Icon name="BookOpen" size={20} /> Dokumentation
+        </Button>
+        <Button href="/blog/" variant="info" style="soft">
+            <Icon name="Newspaper" size={20} /> Blog lesen
+        </Button>
+        <Button href="/showcase/" variant="neutral" style="ghost">
+            <Icon name="LayoutGrid" size={20} /> Komponenten ansehen
+        </Button>
+        ```
+    </Tab>
+
+</Tabs>

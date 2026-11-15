@@ -1,0 +1,46 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Icon } from 'sproutsite/components';
+import { Button } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Symbole im Zusammenhang</Eyebrow>
+
+## Icons neben Text und in Buttons
+
+Ohne `label` bleibt das SVG für Screenreader verborgen. So wird dieselbe Information nicht doppelt vorgelesen, wenn sichtbarer Text das Icon bereits erklärt. Ein Icon ist für sich allein kein Bedienelement.
+
+<Tabs label="Icons mit Text: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        - <Icon name="Check" size={20} /> Bereit zur Prüfung
+        - <Icon name="Calendar" size={20} /> Veröffentlichungsdatum
+
+        <Button href="/showcase/buttons/">
+            <Icon name="ArrowRight" size={20} /> Buttons ansehen
+        </Button>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Icon } from 'sproutsite/components';
+        import { Button } from 'sproutsite/components';
+
+        - <Icon name="Check" size={20} /> Bereit zur Prüfung
+        - <Icon name="Calendar" size={20} /> Veröffentlichungsdatum
+
+        <Button href="/showcase/buttons/">
+            <Icon name="ArrowRight" size={20} /> Buttons ansehen
+        </Button>
+        ```
+    </Tab>
+
+</Tabs>
+
+Wenn ein alleinstehendes Symbol eine Information vermittelt, vergib ein aussagekräftiges `label`, zum Beispiel `<Icon name="CircleCheck" label="Veröffentlicht" />`. Die Beschriftung ersetzt bei Bedienelementen weder Tastaturbedienung noch sichtbaren Text. Vermittle einen Status nicht allein durch die Farbe.
+
+Die Komponente löst Namen beim Build über Lucides Icon-Verzeichnis auf. Auf der Website landen nur die gerenderten SVGs; das vollständige Verzeichnis kann jedoch den Build-Aufwand erhöhen. Für festgelegte Symbole können Theme-Entwickler einzelne Komponenten direkt aus `@lucide/astro` in `.astro`-Dateien importieren. Inhalts-Sections verwenden die dokumentierte Sproutsite-Komponente.
+
+Für Lucide gilt eine eigene ISC-Lizenz mit MIT-Hinweisen für von Feather abgeleitete Icons. Erhalte bei der Weiterverbreitung die mitgelieferten [Lucide-Lizenzhinweise](https://lucide.dev/license). Eine Kopie liegt unter `third-party-licenses/lucide-LICENSE`.

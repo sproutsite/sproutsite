@@ -1,0 +1,34 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Button } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Choose the emphasis</Eyebrow>
+
+## Visual styles
+
+Outline, Soft, Ghost, and Link provide different levels of emphasis without changing the semantic color variant.
+
+<Tabs label="Visual styles: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Button variant="secondary" style="outline">Outline</Button>
+        <Button variant="info" style="soft">Soft</Button>
+        <Button variant="neutral" style="ghost">Ghost</Button>
+        <Button variant="primary" style="link">Link</Button>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Button } from 'sproutsite/components';
+
+        <Button variant="secondary" style="outline">Outline</Button>
+        <Button variant="info" style="soft">Soft</Button>
+        <Button variant="neutral" style="ghost">Ghost</Button>
+        <Button variant="primary" style="link">Link</Button>
+        ```
+    </Tab>
+
+</Tabs>

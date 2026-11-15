@@ -1,0 +1,31 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Keep the extra context</Eyebrow>
+
+## Links with query parameters
+
+Links can include query parameters. The page target stays the same, and adding the base path preserves the query string.
+
+<Tabs label="Links with query parameters: Preview and code" variant="border">
+    <Tab title="Preview">
+
+        [Open the FAQ from the showcase](/faq/?ref=showcase)
+
+        [Open Info with a referral parameter](/info/?ref=navigation)
+
+    </Tab>
+    <Tab title="Code">
+        ````markdown
+        [Open the FAQ from the showcase](/faq/?ref=showcase)
+
+        [Open Info with a referral parameter](/info/?ref=navigation)
+        ````
+    </Tab>
+
+</Tabs>

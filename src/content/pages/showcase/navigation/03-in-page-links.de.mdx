@@ -1,0 +1,43 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Innerhalb einer Seite</Eyebrow>
+
+## Verlinktes Inhaltsverzeichnis
+
+Fragmentlinks führen zu einer Überschrift auf derselben Seite. Sproutsite setzt den Dateinamen vor die Überschriften-ID. Der Code bezieht sich auf diese deutsche Datei, 03-in-page-links.de.mdx; ihr Präfix lautet 03-in-page-links-de. Bei einem anderen Dateinamen muss der Präfix angepasst werden.
+
+<Tabs label="Verlinktes Inhaltsverzeichnis: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        ### Einstieg in das Beispiel
+
+        [Zu den weiteren Informationen](#03-in-page-links-de-weitere-informationen)
+
+        ### Weitere Informationen
+
+        Überschriften erhalten eindeutige IDs. Das Sprungziel liegt hier im selben Vorschau-Panel.
+
+        [Zurück zum Einstieg](#03-in-page-links-de-einstieg-in-das-beispiel)
+
+    </Tab>
+    <Tab title="Code">
+        ````markdown
+        ### Einstieg in das Beispiel
+
+        [Zu den weiteren Informationen](#03-in-page-links-de-weitere-informationen)
+
+        ### Weitere Informationen
+
+        Überschriften erhalten eindeutige IDs. Das Sprungziel liegt hier im selben Vorschau-Panel.
+
+        [Zurück zum Einstieg](#03-in-page-links-de-einstieg-in-das-beispiel)
+        ````
+    </Tab>
+
+</Tabs>

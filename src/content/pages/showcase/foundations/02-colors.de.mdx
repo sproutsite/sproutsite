@@ -1,0 +1,44 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { FoundationSample } from 'sproutsite/components';
+
+<Eyebrow>Die Theme-Palette</Eyebrow>
+
+## Farben sehen und vergleichen
+
+Die Palette zeigt neutrale Flächen, Markenfarben und Statusfarben direkt nebeneinander. Jede Farbfläche ist beschriftet; ihre Farbe kommt aus dem Theme.
+
+<Tabs label="Farben sehen und vergleichen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <FoundationSample kind="colors" />
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { FoundationSample } from 'sproutsite/components';
+
+        <FoundationSample kind="colors" />
+        ````
+
+        Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
+
+        ````css
+        .ss-foundation-sample__swatch--primary {
+            background-color: var(--color-primary);
+        }
+
+        .ss-foundation-sample__swatch--secondary {
+            background-color: var(--color-secondary);
+        }
+
+        .ss-foundation-sample__swatch--accent {
+            background-color: var(--color-accent);
+        }
+        ````
+    </Tab>
+
+</Tabs>

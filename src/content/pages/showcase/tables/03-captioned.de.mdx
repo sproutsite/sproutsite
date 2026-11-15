@@ -1,0 +1,48 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { ContentTable } from 'sproutsite/components';
+
+<Eyebrow>Daten benennen</Eyebrow>
+
+## Beschriftete Basistabelle
+
+Eine sichtbare Tabellenbeschriftung benennt den Inhalt. Die erste Zeile enthält die Spaltenüberschriften; diese werden auch für assistive Technologien als Spaltenköpfe ausgezeichnet.
+
+<Tabs label="Beschriftete Basistabelle: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        <ContentTable caption="Dateien im Seitenverzeichnis">
+
+        | Inhalt | Datei |
+        | --- | --- |
+        | Seiteneinstellungen | `page.yaml` |
+        | Hero | `hero.md` |
+        | Abschnitt | `01-einleitung.md` |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'sproutsite/components';
+
+        <ContentTable caption="Dateien im Seitenverzeichnis">
+
+        | Inhalt | Datei |
+        | --- | --- |
+        | Seiteneinstellungen | `page.yaml` |
+        | Hero | `hero.md` |
+        | Abschnitt | `01-einleitung.md` |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>

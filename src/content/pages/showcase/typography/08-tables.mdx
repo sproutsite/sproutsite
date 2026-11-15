@@ -1,0 +1,40 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Compare related information</Eyebrow>
+
+## Tables for structured information
+
+Tables compare related information row by row. The header names each column, and inline code identifies filenames within the table.
+
+<Tabs
+    label="Tables for structured information: Preview and code"
+    variant="border"
+>
+    <Tab title="Preview">
+
+        | Content              | Source file                       |
+        | ------------------- | ------------------------------- |
+        | Page title and SEO | `page.yaml`                     |
+        | Hero text           | `hero.md`                       |
+        | Sections          | `NN-name.md` or `NN-name.mdx` |
+
+    </Tab>
+    <Tab title="Code">
+
+        ````markdown
+        | Content              | Source file                       |
+        | ------------------- | ------------------------------- |
+        | Page title and SEO | `page.yaml`                     |
+        | Hero text           | `hero.md`                       |
+        | Sections          | `NN-name.md` or `NN-name.mdx` |
+        ````
+
+    </Tab>
+
+</Tabs>

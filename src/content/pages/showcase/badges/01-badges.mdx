@@ -3,10 +3,7 @@ tone: default
 fullWidth: true
 ---
 
-import { Badge } from 'sproutsite/components';
-import { Card } from 'sproutsite/components';
 import { Eyebrow } from 'sproutsite/components';
-import { Tabs, Tab } from 'sproutsite/components';
 
 <Eyebrow>Status and categories</Eyebrow>
 
@@ -17,96 +14,3 @@ Badges identify short status values, categories, or counts. They supplement cont
 **Atomic Design:** Atom `Badge`.
 
 Component path within `src/themes/default/components/`: `atoms/Badge/`.
-
-### Color variants
-
-The variants use the same semantic theme colors as other DaisyUI components.
-
-<Tabs label="Color variants: Preview and code" variant="border">
-    <Tab title="Preview">
-        <Badge>Default</Badge>
-        <Badge variant="primary">Primary</Badge>
-        <Badge variant="secondary">Secondary</Badge>
-        <Badge variant="accent">Accent</Badge>
-        <Badge variant="neutral">Neutral</Badge>
-        <Badge variant="info">Info</Badge>
-        <Badge variant="success">Success</Badge>
-        <Badge variant="warning">Warning</Badge>
-        <Badge variant="error">Error</Badge>
-    </Tab>
-    <Tab title="Code">
-        ```mdx
-        import { Badge } from 'sproutsite/components';
-
-        <Badge>Default</Badge>
-        <Badge variant="primary">Primary</Badge>
-        <Badge variant="success">Success</Badge>
-        <Badge variant="warning">Warning</Badge>
-        <Badge variant="error">Error</Badge>
-        ```
-    </Tab>
-
-</Tabs>
-
-### Sizes and styles
-
-Choose size and style independently of the color variant.
-
-<Tabs label="Sizes and styles: Preview and code" variant="border">
-    <Tab title="Preview">
-        <Badge size="xs">XS</Badge>
-        <Badge size="sm">SM</Badge>
-        <Badge size="md">MD</Badge>
-        <Badge size="lg">LG</Badge>
-        <Badge size="xl">XL</Badge>
-        <Badge variant="primary" style="outline">Outline</Badge>
-        <Badge variant="success" style="soft">Soft</Badge>
-        <Badge variant="warning" style="dash">Dash</Badge>
-    </Tab>
-    <Tab title="Code">
-        ```mdx
-        import { Badge } from 'sproutsite/components';
-
-        <Badge size="xs">XS</Badge>
-        <Badge size="xl">XL</Badge>
-        <Badge variant="primary" style="outline">Outline</Badge>
-        <Badge variant="success" style="soft">Soft</Badge>
-        <Badge variant="warning" style="dash">Dash</Badge>
-        ```
-    </Tab>
-
-</Tabs>
-
-### In lists and cards
-
-Use badges within ordinary Markdown content. The surrounding text explains what each status means.
-
-<Tabs label="Badges in lists and cards: Preview and code" variant="border">
-    <Tab title="Preview">
-        - Static build <Badge variant="success">successful</Badge>
-        - Content review <Badge variant="info" style="soft">pending</Badge>
-        - Publication <Badge variant="warning">check</Badge>
-
-        <Card>
-            ### Package status
-
-            This demo is developed locally. <Badge variant="primary" style="outline">Development</Badge>
-        </Card>
-    </Tab>
-    <Tab title="Code">
-        ```mdx
-        import { Badge } from 'sproutsite/components';
-        import { Card } from 'sproutsite/components';
-
-        - Static build <Badge variant="success">successful</Badge>
-        - Content review <Badge variant="info" style="soft">pending</Badge>
-
-        <Card>
-            ### Package status
-
-            This demo is developed locally. <Badge variant="primary" style="outline">Development</Badge>
-        </Card>
-        ```
-    </Tab>
-
-</Tabs>

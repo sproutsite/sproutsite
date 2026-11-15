@@ -1,0 +1,44 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { FoundationSample } from 'sproutsite/components';
+
+<Eyebrow>Kanten gestalten</Eyebrow>
+
+## Ecken und Radien vergleichen
+
+Drei gleich große Flächen zeigen den Unterschied zwischen eckigen Kanten und den Rundungen für Felder und Boxen.
+
+<Tabs label="Ecken und Radien vergleichen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <FoundationSample kind="radius" />
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { FoundationSample } from 'sproutsite/components';
+
+        <FoundationSample kind="radius" />
+        ````
+
+        Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
+
+        ````css
+        .ss-foundation-sample__shape--none {
+            border-radius: 0;
+        }
+
+        .ss-foundation-sample__shape--field {
+            border-radius: var(--radius-field);
+        }
+
+        .ss-foundation-sample__shape--box {
+            border-radius: var(--radius-box);
+        }
+        ````
+    </Tab>
+
+</Tabs>

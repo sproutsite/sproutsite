@@ -1,0 +1,48 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { Card, CardActions } from 'sproutsite/components';
+
+<Eyebrow>A next step in the card</Eyebrow>
+
+## Further actions
+
+CardActions displays navigation links inside a card as buttons. They remain semantic links because they lead to other pages.
+
+<Tabs label="Further actions: Preview and code" variant="border">
+    <Tab title="Preview">
+
+        <Card>
+            ### Explore the layout
+
+            Explore column layouts in the showcase or read the component documentation.
+
+            <CardActions>
+                [View layouts](/showcase/layout/)
+                [Understand the components](/documentation/layout/)
+            </CardActions>
+        </Card>
+
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { Card, CardActions } from 'sproutsite/components';
+
+        <Card>
+            ### Explore the layout
+
+            Explore column layouts in the showcase or read the component documentation.
+
+            <CardActions>
+                [View layouts](/showcase/layout/)
+                [Understand the components](/documentation/layout/)
+            </CardActions>
+        </Card>
+        ````
+    </Tab>
+
+</Tabs>

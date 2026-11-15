@@ -1,0 +1,36 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Icon } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Find the right symbol</Eyebrow>
+
+## Choose an icon
+
+Find a symbol in the [Lucide catalog](https://lucide.dev/icons/). Use its canonical Astro component name in PascalCase: `arrow-right` becomes `ArrowRight`, `file-text` becomes `FileText`, and `sprout` becomes `Sprout`. An unknown name stops the build with an error.
+
+<Tabs label="Choose an icon: preview and code" variant="border">
+    <Tab title="Preview">
+        <Icon name="Sprout" size={32} label="Growth" />
+        <Icon name="FileText" size={32} label="Document" />
+        <Icon name="Layers" size={32} label="Layers" />
+        <Icon name="Code" size={32} label="Code" />
+        <Icon name="Settings" size={32} label="Settings" />
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Icon } from 'sproutsite/components';
+
+        <Icon name="Sprout" size={32} label="Growth" />
+        <Icon name="FileText" size={32} label="Document" />
+        <Icon name="Layers" size={32} label="Layers" />
+        <Icon name="Code" size={32} label="Code" />
+        <Icon name="Settings" size={32} label="Settings" />
+        ```
+    </Tab>
+
+</Tabs>

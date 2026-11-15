@@ -1,0 +1,51 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { FoundationSample } from 'sproutsite/components';
+
+<Eyebrow>Titel und Lesetext</Eyebrow>
+
+## Schrift und Größen erleben
+
+Die weicheren Formen von Nunito und die Systemschrift lassen sich direkt vergleichen. Die große Schrift passt sich an die Bildschirmbreite an. Die Proben sind Textabsätze, damit die Überschriftenhierarchie der Seite erhalten bleibt.
+
+<Tabs label="Schrift und Größen erleben: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <FoundationSample kind="type" />
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { FoundationSample } from 'sproutsite/components';
+
+        <FoundationSample kind="type" />
+        ````
+
+        Die Darstellung verwendet unter anderem diesen CSS-Ausschnitt:
+
+        ````css
+        .ss-foundation-sample__display {
+            font-family: var(--font-heading);
+            font-size: var(--text-display);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .ss-foundation-sample__heading {
+            font-family: var(--font-heading);
+            font-size: var(--text-heading-2);
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        .ss-foundation-sample__body {
+            font-family: var(--font-sans);
+            line-height: 1.75;
+        }
+        ````
+    </Tab>
+
+</Tabs>

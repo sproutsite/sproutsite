@@ -1,0 +1,32 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Alert } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>A clear boundary</Eyebrow>
+
+## Clear border: Outline
+
+A border emphasizes the message while keeping the background subtle.
+
+<Tabs label="Clear border: Outline: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Alert variant="success" style="outline">
+            **Success, outline:** A successful action with a clear outline.
+        </Alert>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Alert } from 'sproutsite/components';
+
+        <Alert variant="success" style="outline">
+            **Success, outline:** A successful action with a clear outline.
+        </Alert>
+        ```
+    </Tab>
+
+</Tabs>

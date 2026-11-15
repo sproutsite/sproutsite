@@ -1,0 +1,48 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { ContentTable } from 'sproutsite/components';
+
+<Eyebrow>Help readers compare</Eyebrow>
+
+## Align columns appropriately
+
+Colons in the Markdown delimiter row control alignment: left for names, centered for short status values, and right for numbers.
+
+<Tabs label="Align columns appropriately: Preview and code" variant="border">
+    <Tab title="Preview">
+
+        <ContentTable caption="Sample projects and page counts">
+
+        | Project | Status | Pages |
+        | :--- | :---: | ---: |
+        | North | In progress | 12 |
+        | South | Reviewed | 8 |
+        | West | Planned | 3 |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'sproutsite/components';
+
+        <ContentTable caption="Sample projects and page counts">
+
+        | Project | Status | Pages |
+        | :--- | :---: | ---: |
+        | North | In progress | 12 |
+        | South | Reviewed | 8 |
+        | West | Planned | 3 |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>

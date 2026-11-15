@@ -1,0 +1,50 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { ContentTable } from 'sproutsite/components';
+
+<Eyebrow>Zeilen leichter verfolgen</Eyebrow>
+
+## Abwechselnde Zeilenflächen
+
+Dezente Streifen erleichtern es, einer Zeile über mehrere Spalten zu folgen. Die Daten und ihre Reihenfolge bleiben unverändert.
+
+<Tabs label="Abwechselnde Zeilenflächen: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        <ContentTable caption="Arbeitsschritte im Überblick" variant="striped">
+
+        | Schritt | Aufgabe |
+        | --- | --- |
+        | Planen | Themen und Zuständigkeiten festlegen |
+        | Schreiben | Inhalte in Markdown pflegen |
+        | Prüfen | Links und Ausgabe kontrollieren |
+        | Freigeben | Ergebnis gemeinsam bewerten |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'sproutsite/components';
+
+        <ContentTable caption="Arbeitsschritte im Überblick" variant="striped">
+
+        | Schritt | Aufgabe |
+        | --- | --- |
+        | Planen | Themen und Zuständigkeiten festlegen |
+        | Schreiben | Inhalte in Markdown pflegen |
+        | Prüfen | Links und Ausgabe kontrollieren |
+        | Freigeben | Ergebnis gemeinsam bewerten |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>

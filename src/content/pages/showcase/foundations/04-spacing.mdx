@@ -1,0 +1,52 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { FoundationSample } from 'sproutsite/components';
+
+<Eyebrow>Room between elements</Eyebrow>
+
+## Spacing at actual size
+
+The blue bars show five steps in the shared spacing scale. Each bar's width matches the stated value without being enlarged for illustration.
+
+<Tabs label="Spacing at actual size: Preview and code" variant="border">
+    <Tab title="Preview">
+        <FoundationSample kind="spacing" />
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { FoundationSample } from 'sproutsite/components';
+
+        <FoundationSample kind="spacing" />
+        ````
+
+        The presentation uses CSS such as this excerpt:
+
+        ````css
+        .ss-foundation-sample__space--1 {
+            width: calc(var(--spacing) * 1);
+        }
+
+        .ss-foundation-sample__space--2 {
+            width: calc(var(--spacing) * 2);
+        }
+
+        .ss-foundation-sample__space--4 {
+            width: calc(var(--spacing) * 4);
+        }
+
+        .ss-foundation-sample__space--6 {
+            width: calc(var(--spacing) * 6);
+        }
+
+        .ss-foundation-sample__space--8 {
+            width: calc(var(--spacing) * 8);
+        }
+        ````
+    </Tab>
+
+</Tabs>

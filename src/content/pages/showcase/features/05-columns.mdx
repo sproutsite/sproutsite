@@ -1,0 +1,62 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Feature } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Arrange related benefits</Eyebrow>
+
+## Features in columns
+
+Combine `Feature` with the existing `Columns` and `Column` components. Three spans of four use equal desktop columns; on smaller screens they stack. Longer descriptions wrap within their column.
+
+<Tabs label="Feature columns: preview and code" variant="border">
+    <Tab title="Preview">
+        <Columns>
+            <Column span={4}>
+                <Feature icon="Zap" title="Static output" headingLevel={3}>
+                    Publish prebuilt pages without a CMS server runtime.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Layers" title="Agent-ready" color="secondary" headingLevel={3}>
+                    External coding agents work with versioned content files.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Code" title="Reusable components" color="info" headingLevel={3}>
+                    Combine Markdown with tested Astro building blocks.
+                </Feature>
+            </Column>
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Feature } from 'sproutsite/components';
+        import { Column, Columns } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={4}>
+                <Feature icon="Zap" title="Static output" headingLevel={3}>
+                    Publish prebuilt pages without a CMS server runtime.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Layers" title="Agent-ready" color="secondary" headingLevel={3}>
+                    External coding agents work with versioned content files.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Code" title="Reusable components" color="info" headingLevel={3}>
+                    Combine Markdown with tested Astro building blocks.
+                </Feature>
+            </Column>
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>

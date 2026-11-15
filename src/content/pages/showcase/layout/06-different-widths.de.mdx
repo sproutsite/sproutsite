@@ -1,0 +1,62 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Hauptinhalt und Ergänzung</Eyebrow>
+
+## Unterschiedliche Breiten: 8 + 4
+
+Ein Hauptbereich erhält zwei Drittel der Breite, ein ergänzender Bereich ein Drittel. Auf mobilen Ansichten steht der Hauptbereich zuerst.
+
+<Tabs label="Unterschiedliche Breiten: 8 + 4: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Columns>
+            <Column span={8}>
+                <Card>
+                    ### Hauptinhalt: 8 von 12
+
+                    Der breitere Bereich bietet Platz für ausführliche Erklärungen. Die Aufteilung entsteht allein durch `span={8}`.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Ergänzung: 4 von 12
+
+                    `span={4}` schafft Platz für einen begleitenden Hinweis.
+                </Card>
+            </Column>
+
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Column, Columns } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={8}>
+                <Card>
+                    ### Hauptinhalt: 8 von 12
+
+                    Der breitere Bereich bietet Platz für ausführliche Erklärungen. Die Aufteilung entsteht allein durch `span={8}`.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Ergänzung: 4 von 12
+
+                    `span={4}` schafft Platz für einen begleitenden Hinweis.
+                </Card>
+            </Column>
+
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>

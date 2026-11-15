@@ -1,0 +1,44 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { FoundationSample } from 'sproutsite/components';
+
+<Eyebrow>Shape the edges</Eyebrow>
+
+## Compare corners and radii
+
+Three equally sized surfaces compare square corners with the radii used for fields and boxes.
+
+<Tabs label="Compare corners and radii: Preview and code" variant="border">
+    <Tab title="Preview">
+        <FoundationSample kind="radius" />
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { FoundationSample } from 'sproutsite/components';
+
+        <FoundationSample kind="radius" />
+        ````
+
+        The presentation uses CSS such as this excerpt:
+
+        ````css
+        .ss-foundation-sample__shape--none {
+            border-radius: 0;
+        }
+
+        .ss-foundation-sample__shape--field {
+            border-radius: var(--radius-field);
+        }
+
+        .ss-foundation-sample__shape--box {
+            border-radius: var(--radius-box);
+        }
+        ````
+    </Tab>
+
+</Tabs>

@@ -1,0 +1,29 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Make the destination clear</Eyebrow>
+
+## Links in body text
+
+Descriptive link text explains the destination. Internal links start at the website root; the deployment base path is added automatically.
+
+<Tabs label="Links in body text: Preview and code" variant="border">
+    <Tab title="Preview">
+        The [Info page](/info/) explains Sproutsite's concept. The [getting-started guide](/documentation/getting-started/) walks through the first steps.
+
+        For individual components, explore the [layout examples](/showcase/layout/) and [image examples](/showcase/images/).
+    </Tab>
+    <Tab title="Code">
+        ````markdown
+        The [Info page](/info/) explains Sproutsite's concept. The [getting-started guide](/documentation/getting-started/) walks through the first steps.
+
+        For individual components, explore the [layout examples](/showcase/layout/) and [image examples](/showcase/images/).
+        ````
+    </Tab>
+
+</Tabs>

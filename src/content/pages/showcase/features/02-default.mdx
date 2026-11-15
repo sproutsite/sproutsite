@@ -1,0 +1,32 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Feature } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>One benefit at a time</Eyebrow>
+
+## Default appearance
+
+The default is a softly tinted square with rounded corners. The icon uses the primary theme color.
+
+<Tabs label="Default feature: preview and code" variant="border">
+    <Tab title="Preview">
+        <Feature icon="Zap" title="Static output" headingLevel={3}>
+            Prebuilt pages that can be served by static hosting.
+        </Feature>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Feature } from 'sproutsite/components';
+
+        <Feature icon="Zap" title="Static output" headingLevel={3}>
+            Prebuilt pages that can be served by static hosting.
+        </Feature>
+        ```
+    </Tab>
+
+</Tabs>

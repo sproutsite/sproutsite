@@ -1,0 +1,48 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { ContentTable } from 'sproutsite/components';
+
+<Eyebrow>Werte leichter vergleichen</Eyebrow>
+
+## Spalten passend ausrichten
+
+Die Doppelpunkte in der Markdown-Trennzeile bestimmen die Ausrichtung: links für Namen, mittig für kurze Statusangaben und rechts für Zahlen.
+
+<Tabs label="Spalten passend ausrichten: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        <ContentTable caption="Beispielprojekte und Seitenumfang">
+
+        | Projekt | Status | Seiten |
+        | :--- | :---: | ---: |
+        | Nord | In Arbeit | 12 |
+        | Süd | Geprüft | 8 |
+        | West | Geplant | 3 |
+
+        </ContentTable>
+
+    </Tab>
+    <Tab title="Code">
+
+        ````mdx
+        import { ContentTable } from 'sproutsite/components';
+
+        <ContentTable caption="Beispielprojekte und Seitenumfang">
+
+        | Projekt | Status | Seiten |
+        | :--- | :---: | ---: |
+        | Nord | In Arbeit | 12 |
+        | Süd | Geprüft | 8 |
+        | West | Geplant | 3 |
+
+        </ContentTable>
+        ````
+
+    </Tab>
+
+</Tabs>

@@ -1,0 +1,48 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { FoundationSample } from 'sproutsite/components';
+
+<Eyebrow>Separate the layers</Eyebrow>
+
+## Shadows and depth
+
+Equally sized surfaces demonstrate different shadows. Compare the small shadow with the theme's soft and raised variants.
+
+<Tabs label="Shadows and depth: Preview and code" variant="border">
+    <Tab title="Preview">
+        <FoundationSample kind="shadow" />
+    </Tab>
+    <Tab title="Code">
+        ````mdx
+        import { FoundationSample } from 'sproutsite/components';
+
+        <FoundationSample kind="shadow" />
+        ````
+
+        The presentation uses CSS such as this excerpt:
+
+        ````css
+        .ss-foundation-sample__elevation--none {
+            box-shadow: none;
+        }
+
+        .ss-foundation-sample__elevation--sm {
+            box-shadow: var(--shadow-sm);
+        }
+
+        .ss-foundation-sample__elevation--soft {
+            box-shadow: var(--shadow-soft);
+        }
+
+        .ss-foundation-sample__elevation--raised {
+            box-shadow: var(--shadow-raised);
+        }
+        ````
+    </Tab>
+
+</Tabs>

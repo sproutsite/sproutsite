@@ -1,0 +1,37 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Mit Markdown beginnen</Eyebrow>
+
+## Einfache Markdown-Tabelle
+
+Für diese Tabelle brauchst du weder eine Komponente noch einen Import. Sie verwendet die allgemeine Markdown-Typografie und lässt sich in `.md`- und `.mdx`-Inhalte einfügen. Die Daten sind identisch mit der anschließenden beschrifteten Basistabelle.
+
+<Tabs label="Einfache Markdown-Tabelle: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+        | Inhalt | Datei |
+        | --- | --- |
+        | Seiteneinstellungen | `page.yaml` |
+        | Hero | `hero.md` |
+        | Abschnitt | `01-einleitung.md` |
+
+    </Tab>
+    <Tab title="Code">
+
+        ````markdown
+        | Inhalt | Datei |
+        | --- | --- |
+        | Seiteneinstellungen | `page.yaml` |
+        | Hero | `hero.md` |
+        | Abschnitt | `01-einleitung.md` |
+        ````
+
+    </Tab>
+
+</Tabs>

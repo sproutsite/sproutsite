@@ -1,0 +1,71 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Icon } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Details abstimmen</Eyebrow>
+
+## Größe, Farbe und Strichstärke
+
+Standardmäßig ist ein Icon 24 Pixel groß und hat die Strichstärke 2. Es übernimmt die umgebende Textfarbe. Bei Bedarf stehen die semantischen Theme-Farben zur Verfügung. Auf dunklen Flächen und innerhalb von Buttons ist die geerbte Textfarbe meist die passende Wahl.
+
+<Tabs label="Darstellung: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Icon
+            name="Sprout"
+            size={16}
+            color="primary"
+            label="Kleiner Sprössling"
+        />
+        <Icon
+            name="Sprout"
+            size={24}
+            color="secondary"
+            label="Mittlerer Sprössling"
+        />
+        <Icon
+            name="Sprout"
+            size={32}
+            color="success"
+            label="Großer Sprössling"
+        />
+        <Icon
+            name="Sprout"
+            size={48}
+            strokeWidth={1.5}
+            label="Sprössling mit feiner Kontur"
+        />
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        <Icon
+            name="Sprout"
+            size={16}
+            color="primary"
+            label="Kleiner Sprössling"
+        />
+        <Icon
+            name="Sprout"
+            size={24}
+            color="secondary"
+            label="Mittlerer Sprössling"
+        />
+        <Icon
+            name="Sprout"
+            size={32}
+            color="success"
+            label="Großer Sprössling"
+        />
+        <Icon
+            name="Sprout"
+            size={48}
+            strokeWidth={1.5}
+            label="Sprössling mit feiner Kontur"
+        />
+        ```
+    </Tab>
+</Tabs>

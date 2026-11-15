@@ -1,0 +1,62 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Feature } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Vorteile gruppieren</Eyebrow>
+
+## Features in Spalten
+
+Kombiniere `Feature` mit den vorhandenen Komponenten `Columns` und `Column`. Drei Spalten mit `span={4}` sind auf dem Desktop gleich breit; auf kleineren Bildschirmen stehen sie untereinander. Längere Beschreibungen umbrechen innerhalb ihrer Spalte.
+
+<Tabs label="Feature-Spalten: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+        <Columns>
+            <Column span={4}>
+                <Feature icon="Zap" title="Statisch ausgeliefert" headingLevel={3}>
+                    Vorab erzeugte Seiten ohne CMS-Serverlaufzeit veröffentlichen.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Layers" title="Agent-ready" color="secondary" headingLevel={3}>
+                    Externe Coding-Agenten arbeiten mit versionierten Inhaltsdateien.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Code" title="Wiederverwendbare Komponenten" color="info" headingLevel={3}>
+                    Markdown mit getesteten Astro-Bausteinen kombinieren.
+                </Feature>
+            </Column>
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Feature } from 'sproutsite/components';
+        import { Column, Columns } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={4}>
+                <Feature icon="Zap" title="Statisch ausgeliefert" headingLevel={3}>
+                    Vorab erzeugte Seiten ohne CMS-Serverlaufzeit veröffentlichen.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Layers" title="Agent-ready" color="secondary" headingLevel={3}>
+                    Externe Coding-Agenten arbeiten mit versionierten Inhaltsdateien.
+                </Feature>
+            </Column>
+            <Column span={4}>
+                <Feature icon="Code" title="Wiederverwendbare Komponenten" color="info" headingLevel={3}>
+                    Markdown mit getesteten Astro-Bausteinen kombinieren.
+                </Feature>
+            </Column>
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>

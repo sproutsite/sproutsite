@@ -1,0 +1,46 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Icon } from 'sproutsite/components';
+import { Button } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Symbols in context</Eyebrow>
+
+## Icons beside text and in buttons
+
+Without `label`, the SVG is hidden from assistive technology. This avoids reading the same information twice when visible text already explains the icon. Icons are not interactive controls on their own.
+
+<Tabs label="Icons beside text: preview and code" variant="border">
+    <Tab title="Preview">
+        - <Icon name="Check" size={20} /> Ready for review
+        - <Icon name="Calendar" size={20} /> Publication date
+
+        <Button href="/showcase/buttons/">
+            <Icon name="ArrowRight" size={20} /> Explore buttons
+        </Button>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Icon } from 'sproutsite/components';
+        import { Button } from 'sproutsite/components';
+
+        - <Icon name="Check" size={20} /> Ready for review
+        - <Icon name="Calendar" size={20} /> Publication date
+
+        <Button href="/showcase/buttons/">
+            <Icon name="ArrowRight" size={20} /> Explore buttons
+        </Button>
+        ```
+    </Tab>
+
+</Tabs>
+
+For a standalone symbol that conveys information, supply a meaningful `label`, for example `<Icon name="CircleCheck" label="Published" />`. A label does not replace keyboard support or visible text for an interactive control. Do not use color alone to communicate status.
+
+The wrapper resolves names from Lucide's icon registry during the build. Only the rendered SVGs reach the website; loading the full registry can increase build work. Theme developers who need fixed icons can import individual components directly from `@lucide/astro` in `.astro` files. Content sections use the documented Sproutsite component.
+
+Lucide has its own ISC license, with MIT notices for icons derived from Feather. Preserve the supplied [Lucide license notices](https://lucide.dev/license) when redistributing the icons; a copy is included in `third-party-licenses/lucide-LICENSE`.
