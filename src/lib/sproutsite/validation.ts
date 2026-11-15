@@ -551,6 +551,9 @@ function validateMdxLayout(
                     (attribute) => attribute.name === 'dividerColor',
                 );
                 const dividerValue = divider?.value;
+                const separator = attributes.find(
+                    (attribute) => attribute.name === 'separator',
+                );
                 const invalidGap = attributes
                     .filter((attribute) =>
                         ['dividerGap', 'dividerGapMobile'].includes(
@@ -573,6 +576,7 @@ function validateMdxLayout(
                             attribute.type !== 'mdxJsxAttribute' ||
                             ![
                                 'divider',
+                                'separator',
                                 'dividerColor',
                                 'dividerGap',
                                 'dividerGapMobile',
@@ -590,6 +594,9 @@ function validateMdxLayout(
                         )) ||
                     (dividerColor !== undefined &&
                         !isHexColor(dividerColor.value)) ||
+                    (separator !== undefined &&
+                        (typeof separator.value !== 'string' ||
+                            !/^[A-Z][A-Za-z0-9]*$/.test(separator.value))) ||
                     invalidGap ||
                     columns.length < 1 ||
                     columns.some((column) => column.name !== 'Column')
@@ -597,7 +604,7 @@ function validateMdxLayout(
                     fail(
                         contentRoot,
                         path,
-                        'Columns must contain at least one direct Column component; optional divider must be boolean, dividerColor must be a CSS hex color, and dividerGap and dividerGapMobile must be xs, sm, md, lg, or xl',
+                        'Columns must contain at least one direct Column component; optional divider must be boolean, separator must be a canonical PascalCase Lucide name, dividerColor must be a CSS hex color, and dividerGap and dividerGapMobile must be xs, sm, md, lg, or xl',
                     );
                 columns.forEach((column) => {
                     validatedColumns.add(column);

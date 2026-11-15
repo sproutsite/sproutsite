@@ -362,6 +362,71 @@ try {
                 );
             }
             if (route.endsWith('/showcase/layout/')) {
+                const iconGroups = page.locator('.ss-columns--separator');
+                assert.equal(await iconGroups.count(), 3);
+                for (const [index, group] of (
+                    await iconGroups.all()
+                ).entries()) {
+                    const states = await group.evaluate((element) => {
+                        const columns = Array.from(element.children).filter(
+                            (child) => child.classList.contains('ss-column'),
+                        );
+                        return Array.from(
+                            element.querySelectorAll<HTMLElement>(
+                                ':scope > .ss-columns__separator',
+                            ),
+                        ).map((icon, index) => {
+                            const previous =
+                                columns[index]!.getBoundingClientRect();
+                            const current =
+                                columns[index + 1]!.getBoundingClientRect();
+                            const bounds = icon.getBoundingClientRect();
+                            const desktop =
+                                matchMedia('(min-width: 64rem)').matches;
+                            const rotation = new DOMMatrixReadOnly(
+                                getComputedStyle(icon).transform,
+                            );
+                            return {
+                                hidden: icon.hidden,
+                                expectedHidden:
+                                    desktop &&
+                                    Math.abs(previous.top - current.top) >= 1,
+                                x: (bounds.left + bounds.right) / 2,
+                                y: (bounds.top + bounds.bottom) / 2,
+                                expectedX: desktop
+                                    ? (previous.right + current.left) / 2
+                                    : (current.left + current.right) / 2,
+                                expectedY: desktop
+                                    ? (current.top + current.bottom) / 2
+                                    : (previous.bottom + current.top) / 2,
+                                rotation: rotation.b,
+                                decorative: icon.getAttribute('aria-hidden'),
+                            };
+                        });
+                    });
+                    assert.equal(states.length, index === 2 ? 4 : 2);
+                    assert.equal(
+                        states.filter((state) => !state.hidden).length,
+                        index === 2 && viewport.name === 'desktop'
+                            ? 3
+                            : index === 2
+                              ? 4
+                              : 2,
+                    );
+                    for (const state of states) {
+                        assert.equal(state.decorative, 'true');
+                        assert.equal(state.hidden, state.expectedHidden);
+                        if (state.hidden) continue;
+                        assert.ok(Math.abs(state.x - state.expectedX) < 1);
+                        assert.ok(Math.abs(state.y - state.expectedY) < 1);
+                        assert.ok(
+                            Math.abs(
+                                state.rotation -
+                                    (viewport.name === 'mobile' ? 1 : 0),
+                            ) < 0.01,
+                        );
+                    }
+                }
                 const measuredGaps = async (stacked: boolean) =>
                     page.locator('.ss-columns--divider').evaluateAll(
                         (groups, vertical) =>

@@ -1,0 +1,263 @@
+---
+tone:
+    odd: muted
+    even: default
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Feature } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Connect the steps</Eyebrow>
+
+## Icons between columns
+
+`separator="MoveRight"` places the Lucide icon between adjacent columns. Use another canonical PascalCase Lucide name, such as `Plus` or `ChevronRight`, to replace it. On desktop, the icon is centered in the gap. On mobile, it rotates 90 degrees so the arrow points down. No icon appears at the outer edges or at the start of a new desktop row.
+
+Use `dividerGap` and `dividerGapMobile` for spacing and `dividerColor` for an optional icon color. If `divider` is also set, the icon replaces the line. Icons are decorative enhancements added by the existing browser script; without JavaScript, content and layout remain available and separator icons are omitted.
+
+### Three steps with arrows
+
+<Tabs label="Three steps with arrows" variant="border">
+    <Tab title="Preview">
+
+<Columns separator="MoveRight">
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Write"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Create content in Markdown.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature icon="Layers" title="Build" layout="vertical" headingLevel={4}>
+            Generate a static site with Astro.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Publish"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Deploy anywhere (e.g. Vercel, Netlify, your server).
+        </Feature>
+    </Column>
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+import { Feature } from 'sproutsite/components';
+
+<Columns separator="MoveRight">
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Write"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Create content in Markdown.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature icon="Layers" title="Build" layout="vertical" headingLevel={4}>
+            Generate a static site with Astro.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Publish"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Deploy anywhere (e.g. Vercel, Netlify, your server).
+        </Feature>
+    </Column>
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>
+
+### Another icon and a custom color
+
+The plus demonstrates that the icon can be replaced independently of the content.
+
+<Tabs label="Another icon and a custom color" variant="border">
+    <Tab title="Preview">
+
+<Columns separator="Plus" dividerColor="#4c7b78" dividerGap="sm">
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Write"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Create content in Markdown.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature icon="Layers" title="Build" layout="vertical" headingLevel={4}>
+            Generate a static site with Astro.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Publish"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Deploy anywhere (e.g. Vercel, Netlify, your server).
+        </Feature>
+    </Column>
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+import { Feature } from 'sproutsite/components';
+
+<Columns separator="Plus" dividerColor="#4c7b78" dividerGap="sm">
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Write"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Create content in Markdown.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature icon="Layers" title="Build" layout="vertical" headingLevel={4}>
+            Generate a static site with Astro.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Publish"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Deploy anywhere (e.g. Vercel, Netlify, your server).
+        </Feature>
+    </Column>
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>
+
+### Automatic wrapping
+
+Five areas with `span={4}` form two desktop rows. Three arrows separate adjacent areas; none appears at the start of the second row. On mobile, four arrows connect the five stacked areas.
+
+<Tabs label="Automatic wrapping" variant="border">
+    <Tab title="Preview">
+
+<Columns separator="MoveRight" dividerGap="sm">
+    <Column span={4}>
+
+        #### Area 1
+
+        Separate content within the same column group.
+
+    </Column>
+    <Column span={4}>
+
+        #### Area 2
+
+        Separate content within the same column group.
+
+    </Column>
+    <Column span={4}>
+
+        #### Area 3
+
+        Separate content within the same column group.
+
+    </Column>
+    <Column span={4}>
+
+        #### Area 4
+
+        Separate content within the same column group.
+
+    </Column>
+    <Column span={4}>
+
+        #### Area 5
+
+        Separate content within the same column group.
+
+    </Column>
+
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+
+<Columns separator="MoveRight" dividerGap="sm">
+    <Column span={4}>
+
+        #### Area 1
+
+        Separate content within the same column group.
+
+    </Column>
+    <Column span={4}>
+
+        #### Area 2
+
+        Separate content within the same column group.
+
+    </Column>
+    <Column span={4}>
+
+        #### Area 3
+
+        Separate content within the same column group.
+
+    </Column>
+    <Column span={4}>
+
+        #### Area 4
+
+        Separate content within the same column group.
+
+    </Column>
+    <Column span={4}>
+
+        #### Area 5
+
+        Separate content within the same column group.
+
+    </Column>
+
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>

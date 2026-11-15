@@ -27,6 +27,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Added
 
+- Added interchangeable Lucide icon separators to Columns, with responsive direction, row-boundary handling, existing spacing/color controls, bilingual showcase examples, and Storybook stories.
+
 - Added a vertical Feature layout with centered content, preserving the horizontal default, plus bilingual showcase examples and Storybook controls.
 
 - Added odd/even section tone mappings resolved from the numeric filename prefix, preserving fixed tones, with bilingual homepage configuration and showcase examples.

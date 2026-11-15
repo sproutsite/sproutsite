@@ -1,5 +1,7 @@
 ---
 import { isHexColor } from '../../../../../lib/sproutsite/colors.js';
+import type { ComponentProps } from 'astro/types';
+import Icon from '../../atoms/Icon/Icon.astro';
 
 const gapSizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 type GapSize = (typeof gapSizes)[number];
@@ -7,6 +9,8 @@ type GapSize = (typeof gapSizes)[number];
 interface Props {
     /** Draw separators between adjacent columns, horizontal when stacked. */
     divider?: boolean;
+    /** Decorative Lucide icon between columns; takes precedence over divider. */
+    separator?: ComponentProps<typeof Icon>['name'];
     /** Optional CSS hex color; otherwise use the theme's subtle gray. */
     dividerColor?: `#${string}`;
     /** Named spacing preset; md is the default (6rem total gap). */
@@ -17,10 +21,19 @@ interface Props {
 
 const {
     divider = false,
+    separator,
     dividerColor,
     dividerGap = 'md',
     dividerGapMobile,
 } = Astro.props;
+if (
+    separator !== undefined &&
+    (typeof separator !== 'string' || !/^[A-Z][A-Za-z0-9]*$/.test(separator))
+)
+    throw new Error(
+        'Sproutsite Columns separator must be a canonical Lucide name, such as MoveRight or Plus.',
+    );
+const separated = divider || separator !== undefined;
 if (
     typeof divider !== 'boolean' ||
     (dividerColor !== undefined && !isHexColor(dividerColor)) ||
@@ -35,44 +48,73 @@ if (
 <div
     class:list={[
         'ss-columns',
-        divider && 'ss-columns--divider',
-        divider && `ss-columns--divider-gap-${dividerGap}`,
-        divider &&
+        divider && !separator && 'ss-columns--divider',
+        separator && 'ss-columns--separator',
+        separated && `ss-columns--divider-gap-${dividerGap}`,
+        separated &&
             dividerGapMobile &&
             `ss-columns--divider-gap-mobile-${dividerGapMobile}`,
     ]}
     style={
         dividerColor
-            ? `--ss-columns-divider-color: ${dividerColor};`
+            ? `--ss-columns-divider-color: ${dividerColor}; --ss-columns-separator-color: ${dividerColor};`
             : undefined
     }
 >
     <slot />
+    {separator && (
+        <template data-columns-separator>
+            <span class="ss-columns__separator" aria-hidden="true">
+                <Icon name={separator} size={24} />
+            </span>
+        </template>
+    )}
 </div>
 
 <script>
-    // CSS Grid wraps arbitrary spans. Measure rows rather than assuming a fixed
+    // Layouts wrap arbitrary spans. Measure rows rather than assuming a fixed
     // number of columns, so separators never appear at the start of a new row.
     document
-        .querySelectorAll<HTMLElement>('.ss-columns--divider')
+        .querySelectorAll<HTMLElement>(
+            '.ss-columns--divider, .ss-columns--separator',
+        )
         .forEach((grid) => {
             const columns = Array.from(grid.children).filter(
                 (child): child is HTMLElement =>
                     child instanceof HTMLElement &&
                     child.classList.contains('ss-column'),
             );
+            const template = grid.querySelector<HTMLTemplateElement>(
+                ':scope > template[data-columns-separator]',
+            );
+            const separators = template
+                ? columns.slice(1).map(() => {
+                      const element =
+                          template.content.firstElementChild!.cloneNode(
+                              true,
+                          ) as HTMLElement;
+                      grid.append(element);
+                      return element;
+                  })
+                : [];
             const update = () => {
-                const positions = columns.map(
-                    (column) => column.getBoundingClientRect().top,
+                const positions = columns.map((column) =>
+                    column.getBoundingClientRect(),
                 );
+                const bounds = grid.getBoundingClientRect();
+                const desktop = window.matchMedia('(min-width: 64rem)').matches;
                 columns.forEach((column, index) => {
-                    column.toggleAttribute(
-                        'data-divider-before',
-                        index > 0 &&
-                            Math.abs(
-                                positions[index]! - positions[index - 1]!,
-                            ) < 1,
-                    );
+                    const current = positions[index]!;
+                    const previous = positions[index - 1];
+                    const sameRow =
+                        previous !== undefined &&
+                        Math.abs(current.top - previous.top) < 1;
+                    column.toggleAttribute('data-divider-before', sameRow);
+                    const separator = separators[index - 1];
+                    if (!separator || !previous) return;
+                    separator.hidden = desktop && !sameRow;
+                    separator.style.left = `${(desktop ? (previous.right + current.left) / 2 : (current.left + current.right) / 2) - bounds.left}px`;
+                    separator.style.top = `${(desktop ? (current.top + current.bottom) / 2 : (previous.bottom + current.top) / 2) - bounds.top}px`;
                 });
             };
             const observer = new ResizeObserver(update);

@@ -1,0 +1,287 @@
+---
+tone:
+    odd: muted
+    even: default
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Feature } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Schritte verbinden</Eyebrow>
+
+## Icons zwischen Spalten
+
+`separator="MoveRight"` setzt das Lucide-Icon zwischen benachbarte Spalten. Du kannst den offiziellen PascalCase-Namen eines anderen Lucide-Icons angeben, etwa `Plus` oder `ChevronRight`. Auf Desktop steht es mittig im Zwischenraum; mobil wird es um 90 Grad gedreht, sodass der Pfeil nach unten zeigt. An äußeren Rändern und am Anfang einer neuen Desktop-Reihe erscheint kein Icon.
+
+`dividerGap` und `dividerGapMobile` steuern weiterhin die Abstände. `dividerColor` färbt bei Bedarf das Icon. Ist zusätzlich `divider` gesetzt, ersetzt das Icon die Linie. Die Icons sind dekorativ und werden durch das bestehende Browser-Skript ergänzt; ohne JavaScript bleiben Inhalt und Layout erhalten, die Icons entfallen.
+
+### Drei Schritte mit Pfeilen
+
+<Tabs label="Drei Schritte mit Pfeilen" variant="border">
+    <Tab title="Vorschau">
+
+<Columns separator="MoveRight">
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Schreiben"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Inhalte in Markdown erstellen.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Layers"
+            title="Generieren"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Mit Astro eine statische Website generieren.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Veröffentlichen"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Flexibel bereitstellen – etwa bei Vercel, Netlify oder auf dem
+            eigenen Server.
+        </Feature>
+    </Column>
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+import { Feature } from 'sproutsite/components';
+
+<Columns separator="MoveRight">
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Schreiben"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Inhalte in Markdown erstellen.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Layers"
+            title="Generieren"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Mit Astro eine statische Website generieren.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Veröffentlichen"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Flexibel bereitstellen – etwa bei Vercel, Netlify oder auf dem
+            eigenen Server.
+        </Feature>
+    </Column>
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>
+
+### Ein anderes Icon und eine eigene Farbe
+
+Das Plus zeigt, dass sich das Icon unabhängig vom Inhalt austauschen lässt.
+
+<Tabs label="Ein anderes Icon und eine eigene Farbe" variant="border">
+    <Tab title="Vorschau">
+
+<Columns separator="Plus" dividerColor="#4c7b78" dividerGap="sm">
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Schreiben"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Inhalte in Markdown erstellen.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Layers"
+            title="Generieren"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Mit Astro eine statische Website generieren.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Veröffentlichen"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Flexibel bereitstellen – etwa bei Vercel, Netlify oder auf dem
+            eigenen Server.
+        </Feature>
+    </Column>
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+import { Feature } from 'sproutsite/components';
+
+<Columns separator="Plus" dividerColor="#4c7b78" dividerGap="sm">
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Schreiben"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Inhalte in Markdown erstellen.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Layers"
+            title="Generieren"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Mit Astro eine statische Website generieren.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Veröffentlichen"
+            layout="vertical"
+            headingLevel={4}
+        >
+            Flexibel bereitstellen – etwa bei Vercel, Netlify oder auf dem
+            eigenen Server.
+        </Feature>
+    </Column>
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>
+
+### Automatischer Umbruch
+
+Fünf Bereiche mit `span={4}` bilden auf Desktop zwei Reihen. Zwischen ihnen stehen drei Pfeile; am Anfang der zweiten Reihe steht keiner. Mobil gibt es vier Pfeile zwischen den fünf gestapelten Bereichen.
+
+<Tabs label="Automatischer Umbruch" variant="border">
+    <Tab title="Vorschau">
+
+<Columns separator="MoveRight" dividerGap="sm">
+    <Column span={4}>
+
+        #### Bereich 1
+
+        Ein eigener Inhalt innerhalb derselben Spaltengruppe.
+
+    </Column>
+    <Column span={4}>
+
+        #### Bereich 2
+
+        Ein eigener Inhalt innerhalb derselben Spaltengruppe.
+
+    </Column>
+    <Column span={4}>
+
+        #### Bereich 3
+
+        Ein eigener Inhalt innerhalb derselben Spaltengruppe.
+
+    </Column>
+    <Column span={4}>
+
+        #### Bereich 4
+
+        Ein eigener Inhalt innerhalb derselben Spaltengruppe.
+
+    </Column>
+    <Column span={4}>
+
+        #### Bereich 5
+
+        Ein eigener Inhalt innerhalb derselben Spaltengruppe.
+
+    </Column>
+
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+
+<Columns separator="MoveRight" dividerGap="sm">
+    <Column span={4}>
+
+        #### Bereich 1
+
+        Ein eigener Inhalt innerhalb derselben Spaltengruppe.
+
+    </Column>
+    <Column span={4}>
+
+        #### Bereich 2
+
+        Ein eigener Inhalt innerhalb derselben Spaltengruppe.
+
+    </Column>
+    <Column span={4}>
+
+        #### Bereich 3
+
+        Ein eigener Inhalt innerhalb derselben Spaltengruppe.
+
+    </Column>
+    <Column span={4}>
+
+        #### Bereich 4
+
+        Ein eigener Inhalt innerhalb derselben Spaltengruppe.
+
+    </Column>
+    <Column span={4}>
+
+        #### Bereich 5
+
+        Ein eigener Inhalt innerhalb derselben Spaltengruppe.
+
+    </Column>
+
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>

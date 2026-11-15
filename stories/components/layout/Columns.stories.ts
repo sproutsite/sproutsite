@@ -12,6 +12,11 @@ export default {
     tags: ['autodocs'],
     argTypes: {
         divider: { control: 'boolean' },
+        separator: {
+            control: 'text',
+            description:
+                'Optional canonical Lucide icon name, for example MoveRight or Plus. Replaces the divider line.',
+        },
         dividerGap: {
             control: 'select',
             options: ['xs', 'sm', 'md', 'lg', 'xl'],
@@ -93,5 +98,24 @@ export const MobileDividerSpacing = {
         dividerGap: 'xl',
         dividerGapMobile: 'md',
         slots: { default: columns([4, 4, 4]) },
+    },
+};
+
+export const IconSeparators = {
+    args: { separator: 'MoveRight', slots: { default: columns([4, 4, 4]) } },
+};
+export const CustomIconSeparators = {
+    args: {
+        separator: 'Plus',
+        dividerColor: '#4c7b78',
+        dividerGap: 'sm',
+        slots: { default: columns([4, 4, 4]) },
+    },
+};
+export const WrappedIconSeparators = {
+    args: {
+        separator: 'MoveRight',
+        dividerGap: 'sm',
+        slots: { default: columns([4, 4, 4, 4, 4]) },
     },
 };

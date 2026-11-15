@@ -48,6 +48,9 @@ test('validates divider flags and custom hex colors without accepting arbitrary 
             'divider',
             'divider={true}',
             'divider={false}',
+            'separator="MoveRight"',
+            'separator="Plus" dividerGap="sm"',
+            'divider separator="ChevronRight" dividerColor="#527b37"',
             'divider dividerGap="lg"',
             'divider dividerGap="xs"',
             'divider dividerGap="xl" dividerGapMobile="md"',
@@ -67,6 +70,10 @@ test('validates divider flags and custom hex colors without accepting arbitrary 
         }
         for (const props of [
             'divider="true"',
+            'separator=""',
+            'separator="move-right"',
+            'separator={"MoveRight"}',
+            'separator',
             'divider={enabled}',
             'dividerGap={0}',
             'dividerGap={3}',
