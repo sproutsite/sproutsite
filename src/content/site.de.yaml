@@ -23,6 +23,7 @@ header:
         - label: Blog
           href: /blog/
         - type: separator
+        - type: language-switcher
         - type: cta
           icon: Mail
           variant: primary

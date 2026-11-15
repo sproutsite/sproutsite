@@ -19,6 +19,8 @@ Both existing `OFL.txt` files are retained unchanged. The source font is from th
 
 ## Dependency licenses and notices
 
+Language-selector flags are local SVG assets from `flag-icons` 7.6.0, licensed under MIT. The full, unmodified [upstream license](third-party-licenses/flag-icons-LICENSE), including Panayiotis Lipiridis's copyright notice, is retained for redistribution. Only the GB and DE SVGs used by the theme are bundled into the website; no flag CDN or external requests are required. Preserve the upstream notice when redistributing these assets.
+
 Lucide icons are rendered from `@lucide/astro` 1.73.0. Its full, unmodified [license text](third-party-licenses/lucide-LICENSE) is included with the npm package: ISC for Lucide, plus the upstream MIT notice and icon list for Feather-derived artwork. These icons have documented upstream licensing and are separate from the unresolved project-branding assets below. Preserve the applicable notices when distributing rendered SVGs or a generated website containing them.
 
 Dependencies remain separately licensed packages. This review inspected the root manifest, locked license metadata, and the license/NOTICE files present in the installed dependencies. It is not a certification of every transitive component or a grant of rights to their code.

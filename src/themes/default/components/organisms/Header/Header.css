@@ -2,6 +2,12 @@
     .ss-header {
         --ss-header-active-underline: var(--color-hero-cyan);
         --ss-header-cta-outline: var(--color-primary-content);
+        --ss-header-dropdown-bg: var(--color-hero-navy);
+        --ss-header-dropdown-border: color-mix(
+            in srgb,
+            currentColor 35%,
+            transparent
+        );
         @apply absolute inset-x-0 top-0 z-40 border-b border-transparent bg-transparent text-primary-content transition-[background-color,border-color,box-shadow,backdrop-filter] duration-200;
 
         .ss-header__inner {
@@ -69,6 +75,8 @@
         &.ss-header--scrolled {
             --ss-header-active-underline: currentColor;
             --ss-header-cta-outline: var(--color-base-content);
+            --ss-header-dropdown-bg: var(--color-base-100);
+            --ss-header-dropdown-border: var(--color-base-300);
             --ss-brand-highlight: var(--color-primary);
             @apply fixed border-base-300 bg-base-100/40 text-base-content shadow-sm backdrop-blur-md;
 

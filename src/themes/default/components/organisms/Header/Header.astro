@@ -2,6 +2,7 @@
 import BrandLogo from '../../atoms/BrandLogo/BrandLogo.astro';
 import Button from '../../atoms/Button/Button.astro';
 import Icon from '../../atoms/Icon/Icon.astro';
+import LanguageSwitcher from '../../molecules/LanguageSwitcher/LanguageSwitcher.astro';
 import type { ComponentProps } from 'astro/types';
 import { t } from '../../../i18n/index.js';
 import type { Link, SiteConfig } from '../../../../../lib/sproutsite/types.js';
@@ -32,6 +33,13 @@ const isActive = (link: Link) => link.href === route;
         >
             <ul class="ss-header__links">
                 {site.header.links.map((link) => {
+                    if (link.type === 'language-switcher') {
+                        return (
+                            <li>
+                                <LanguageSwitcher site={site} route={route} />
+                            </li>
+                        );
+                    }
                     if (link.type === 'separator') {
                         return (
                             <li

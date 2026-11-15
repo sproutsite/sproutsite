@@ -1,0 +1,94 @@
+---
+import { getCollection } from 'astro:content';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import type { SiteConfig } from '../../../../../lib/sproutsite/types.js';
+import { languageLinks } from '../../../../../lib/sproutsite/language-links.js';
+import { withBase } from '../../../../../lib/sproutsite/urls.js';
+import { t } from '../../../i18n/index.js';
+import Icon from '../../atoms/Icon/Icon.astro';
+import englishFlag from 'flag-icons/flags/4x3/gb.svg?url&no-inline';
+import germanFlag from 'flag-icons/flags/4x3/de.svg?url&no-inline';
+
+interface Props {
+    site: SiteConfig;
+    route: string;
+}
+const { site, route } = Astro.props;
+const [pages, posts] = await Promise.all([
+    getCollection('pages'),
+    getCollection('blogPages'),
+]);
+const flags: Record<string, string> = { en: englishFlag, de: germanFlag };
+const options = languageLinks(
+    pages,
+    posts,
+    site.locales,
+    site.language,
+    route,
+).map((option) => ({
+    ...option,
+    name:
+        new Intl.DisplayNames([option.locale], { type: 'language' }).of(
+            option.locale,
+        ) ?? option.locale,
+    flag: flags[option.locale],
+    href:
+        site.locales.length > 1
+            ? getRelativeLocaleUrl(option.locale, option.route.slice(1))
+            : withBase(option.route, site.base),
+}));
+---
+
+<details class="ss-language-switcher">
+    <summary
+        aria-label={t(site.language === 'de' ? 'de' : 'en', 'languageSwitcher')}
+    >
+        <Icon name="Globe" size={20} />
+        <span>{site.language.toUpperCase()}</span>
+        <Icon name="ChevronDown" size={16} />
+    </summary>
+    <ul class="ss-language-switcher__options">
+        {options.map((option) => (
+            <li>
+                <a
+                    href={option.href}
+                    hreflang={option.locale}
+                    lang={option.locale}
+                    aria-current={option.current ? 'true' : undefined}
+                >
+                    <span
+                        class="ss-language-switcher__check"
+                        aria-hidden="true"
+                    >
+                        {option.current && <Icon name="Check" size={20} />}
+                    </span>
+                    {option.flag && (
+                        <img src={option.flag} width="24" height="18" alt="" />
+                    )}
+                    <span>{option.name}</span>
+                </a>
+            </li>
+        ))}
+    </ul>
+</details>
+
+<script>
+    document
+        .querySelectorAll<HTMLDetailsElement>('.ss-language-switcher')
+        .forEach((switcher) => {
+            document.addEventListener('click', (event) => {
+                if (
+                    event.target instanceof Node &&
+                    !switcher.contains(event.target)
+                ) {
+                    switcher.open = false;
+                }
+            });
+            switcher.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && switcher.open) {
+                    switcher.open = false;
+                    switcher.querySelector('summary')?.focus();
+                }
+            });
+        });
+</script>

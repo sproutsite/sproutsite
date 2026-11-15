@@ -49,6 +49,7 @@ const siteSchema = z.object({
             .array(
                 z.union([
                     z.object({ type: z.literal('separator') }).strict(),
+                    z.object({ type: z.literal('language-switcher') }).strict(),
                     headerLinkSchema
                         .extend({
                             type: z.literal('cta'),

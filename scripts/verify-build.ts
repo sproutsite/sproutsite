@@ -4,15 +4,21 @@ import { loadSiteConfig } from '../src/lib/sproutsite/site-config.js';
 import { canonicalUrl, withBase } from '../src/lib/sproutsite/urls.js';
 
 const site = loadSiteConfig();
-const germanSite = loadSiteConfig('de');
+const germanSite = site.locales.includes('de')
+    ? loadSiteConfig('de')
+    : undefined;
 const pages = [
     { route: '/', site },
     { route: '/faq/', site },
     { route: '/info/', site },
     { route: '/showcase/', site },
     { route: '/contact/', site },
-    { route: '/de/', site: germanSite },
-    { route: '/de/kontakt/', site: germanSite },
+    ...(germanSite
+        ? [
+              { route: '/de/', site: germanSite },
+              { route: '/de/kontakt/', site: germanSite },
+          ]
+        : []),
 ];
 for (const { route, site: pageSite } of pages) {
     const relativeFile =

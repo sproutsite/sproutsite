@@ -21,7 +21,8 @@ export type HeaderItem =
               | 'warning'
               | 'error';
       })
-    | { type: 'separator' };
+    | { type: 'separator' }
+    | { type: 'language-switcher' };
 
 export interface SiteConfig {
     name: string;

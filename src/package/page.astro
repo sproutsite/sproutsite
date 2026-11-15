@@ -3,6 +3,7 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { assemblePages, type AssembledPage } from '../lib/sproutsite/pages.js';
 import { loadSiteConfig } from '../lib/sproutsite/site-config.js';
 import { blogRouteFromId } from '../lib/sproutsite/urls.js';
+import { localeOf, logicalId } from '../lib/sproutsite/language-links.js';
 import PageLayout from '../themes/default/layouts/PageLayout/PageLayout.astro';
 import BlogIndex from '../themes/default/components/organisms/BlogIndex/BlogIndex.astro';
 import BlogPost from '../themes/default/components/organisms/BlogPost/BlogPost.astro';
@@ -12,15 +13,10 @@ import Section from '../themes/default/components/organisms/Section/Section.astr
 
 type Locale = 'en' | 'de';
 
-export function localeOf(id: string): Locale {
-    return id.endsWith('.de') ? 'de' : 'en';
-}
-
-export function logicalId(id: string): string {
-    return id.replace(/\.de$/, '');
-}
+export { localeOf, logicalId };
 
 export async function getSproutsiteStaticPaths(locale: Locale = 'en') {
+    if (!loadSiteConfig().locales.includes(locale)) return [];
     const pages = assemblePages(
         (await getCollection('pages')).filter(
             (entry) => localeOf(entry.id) === locale,

@@ -36,6 +36,10 @@ test('validates header links, separators, and CTA variants', () => {
         assert.deepEqual(configure([{ ...link, type: 'link' }]), [
             { ...link, type: 'link' },
         ]);
+        assert.deepEqual(configure([link, { type: 'language-switcher' }]), [
+            link,
+            { type: 'language-switcher' },
+        ]);
         assert.deepEqual(
             configure([
                 { ...link, icon: 'Sprout' },
@@ -71,6 +75,7 @@ test('validates header links, separators, and CTA variants', () => {
             [{ ...cta, icon: 'mail' }],
             [{ ...cta, icon: 123 }],
             [link, { type: 'separator', icon: 'Mail' }],
+            [link, { type: 'language-switcher', href: '/' }],
         ]) {
             assert.throws(() => configure(invalid), /header.links/);
         }
