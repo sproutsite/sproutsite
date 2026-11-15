@@ -269,12 +269,12 @@ function validateMdxLayout(
                         ].includes(String(color)) &&
                         !isHexColor(color)) ||
                     (heading !== undefined &&
-                        !['3', '4', '5', '6'].includes(headingValue ?? ''))
+                        !['2', '3', '4', '5', '6'].includes(headingValue ?? ''))
                 )
                     fail(
                         contentRoot,
                         path,
-                        'Feature requires a canonical PascalCase icon and non-empty title; variant is soft, solid, or plain, color is a semantic theme color or valid CSS hex color, and headingLevel is a numeric literal from 3 to 6',
+                        'Feature requires a canonical PascalCase icon and non-empty title; variant is soft, solid, or plain, color is a semantic theme color or valid CSS hex color, and headingLevel is a numeric literal from 2 to 6',
                     );
             } else if (mdxNode.name === 'Icon') {
                 iconCount += 1;
@@ -1090,6 +1090,25 @@ export function validateSproutsiteContent(
         visit(tree, (node) => {
             if (node.type === 'html')
                 fail(contentRoot, path, 'raw HTML is not allowed in Markdown');
+            // A rendered Feature heading can introduce a section without an
+            // additional Markdown title. Its props have already been validated.
+            if (
+                firstHeading === undefined &&
+                (node.type === 'mdxJsxFlowElement' ||
+                    node.type === 'mdxJsxTextElement')
+            ) {
+                const component = node as unknown as MdxNode;
+                if (component.name === 'Feature') {
+                    const level = component.attributes?.find(
+                        (attribute) => attribute.name === 'headingLevel',
+                    )?.value;
+                    firstHeading =
+                        level && typeof level === 'object'
+                            ? Number(level.value)
+                            : 3;
+                    previousHeading = firstHeading;
+                }
+            }
             if (node.type === 'heading') {
                 firstHeading ??= node.depth;
                 if (node.depth === 1 && !landing)

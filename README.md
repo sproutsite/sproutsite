@@ -318,7 +318,7 @@ import { Feature } from 'sproutsite/components';
 </Feature>
 ```
 
-`icon` is a canonical Lucide component name; `title` is required. `variant` accepts `soft` (default), `solid`, or `plain`. `color` uses `primary` (default), `secondary`, `accent`, `neutral`, `info`, `success`, `warning`, or `error`, or a CSS hex value with 3, 4, 6, or 8 digits. Hex values always use the custom icon color with a softly tinted background and ignore `variant`. `headingLevel` defaults to `3` and accepts numeric values from `3` to `6`; match it to the enclosing section. Combine features with the existing `Columns`/`Column` layout for responsive groups. Examples are available at `/showcase/features/` and `/de/showcase/features/`, and in Storybook.
+`icon` is a canonical Lucide component name; `title` is required. `variant` accepts `soft` (default), `solid`, or `plain`. `color` uses `primary` (default), `secondary`, `accent`, `neutral`, `info`, `success`, `warning`, or `error`, or a CSS hex value with 3, 4, 6, or 8 digits. Hex values always use the custom icon color with a softly tinted background and ignore `variant`. `headingLevel` defaults to `3` and accepts numeric values from `2` to `6`; match it to the enclosing section. A section may begin directly with features using `headingLevel={2}`, without a separate Markdown heading. Combine features with the existing `Columns`/`Column` layout for responsive groups. Examples are available at `/showcase/features/` and `/de/showcase/features/`, and in Storybook.
 
 ## Icons
 

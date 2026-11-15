@@ -42,7 +42,7 @@ test('validates Feature content, variants, and heading levels without executable
             'icon="Zap" title="Test" color="#gggggg"',
             'icon="Zap" title="Test" color="#fff;display:none"',
             'icon="Zap" title="Test" color={"#fff"}',
-            'icon="Zap" title="Test" headingLevel={2}',
+            'icon="Zap" title="Test" headingLevel={1}',
             'icon="Zap" title="Test" headingLevel="4"',
             'icon="Zap" title="Test" style="color:red"',
             'icon="Zap" title="Test" {...props}',
@@ -51,6 +51,46 @@ test('validates Feature content, variants, and heading levels without executable
                 () => validate(`<Feature ${props} />`),
                 /Feature requires/,
             );
+    } finally {
+        rmSync(directory, { recursive: true, force: true });
+    }
+});
+
+test('Feature H2 headings can introduce a section without a separate Markdown title', () => {
+    const directory = mkdtempSync(
+        join(tmpdir(), 'sproutsite-feature-heading-'),
+    );
+    try {
+        writeFileSync(
+            join(directory, 'page.yaml'),
+            'title: Features\ndescription: Standalone feature headings.\n',
+        );
+        const section = join(directory, '01-feature.mdx');
+        const write = (level: number | undefined, suffix = '') =>
+            writeFileSync(
+                section,
+                `import { Column, Columns } from 'sproutsite/components';\nimport { Feature } from 'sproutsite/components';\n\n<Columns divider>\n<Column span={6}>\n<Feature icon="Zap" title="Static"${level === undefined ? '' : ` headingLevel={${level}}`}>Fast pages.</Feature>\n</Column>\n<Column span={6}>\n<Feature icon="Code" title="Flexible" headingLevel={2}>Reusable components.</Feature>\n</Column>\n</Columns>\n${suffix}`,
+            );
+        write(2);
+        assert.doesNotThrow(() => validateSproutsiteContent(directory));
+        write(undefined);
+        assert.throws(
+            () => validateSproutsiteContent(directory),
+            /a section must begin with an h2/,
+        );
+        write(2, '\n#### Skipped level\n');
+        assert.throws(
+            () => validateSproutsiteContent(directory),
+            /heading level jumps from h2 to h4/,
+        );
+        writeFileSync(
+            section,
+            "import { Eyebrow } from 'sproutsite/components';\n\n<Eyebrow>A section without headings</Eyebrow>\n",
+        );
+        assert.throws(
+            () => validateSproutsiteContent(directory),
+            /a section must begin with an h2/,
+        );
     } finally {
         rmSync(directory, { recursive: true, force: true });
     }

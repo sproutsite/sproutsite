@@ -9,6 +9,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
+- Removed the extra homepage feature title, allowed Feature H2 headings to introduce a section, and alternated homepage section surfaces in both languages.
+
 - Increased the default Columns divider gap to 6rem, with a 2/4/6/8/12rem preset scale and half-sized mobile gaps, including automatic mobile inheritance.
 
 - Replaced numeric Columns divider gaps with xs, sm, md, lg, and xl CSS presets; md remains the default and mobile spacing inherits the general preset when omitted.
@@ -20,6 +22,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - Split English and German showcase examples into focused sections with alternating default and muted surfaces and contextual eyebrows, while preserving the section tone demonstrations.
 
 ### Added
+
+- Added a bilingual homepage feature section directly after the hero, using the existing Columns, Feature, and responsive divider components.
 
 - Added optional responsive Columns dividers with a light gray default, custom hex colors and configurable desktop and mobile spacing, bilingual layout examples, and Storybook controls.
 

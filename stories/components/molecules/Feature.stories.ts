@@ -27,7 +27,7 @@ export default {
             description:
                 'Semantic theme color or CSS hex value. Hex colors use a soft background and ignore variant.',
         },
-        headingLevel: { control: 'select', options: [3, 4, 5, 6] },
+        headingLevel: { control: 'select', options: [2, 3, 4, 5, 6] },
     },
 };
 
