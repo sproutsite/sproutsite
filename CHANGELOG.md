@@ -7,6 +7,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Fixed
+
+- Prevented consecutive paragraphs inside Columns from adding their vertical margins together.
+
 ### Changed
 
 - Moved the bilingual homepage principle section directly after the feature strip and paired its text with a three-step workflow using existing Columns, Feature, and Lucide separators.
