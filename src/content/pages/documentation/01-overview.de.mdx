@@ -10,6 +10,7 @@ import themeImage from './_assets/theme.png';
 import checksImage from './_assets/checks.png';
 import packageImage from './_assets/package.png';
 import storybookImage from './_assets/storybook.png';
+import deploymentImage from './_assets/deployment.png';
 import { Card, CardActions } from 'sproutsite/components';
 import { Column, Columns } from 'sproutsite/components';
 import { Eyebrow } from 'sproutsite/components';
@@ -101,6 +102,18 @@ Die Dokumentation ist nach Aufgaben gegliedert. Jede Unterseite bleibt eine norm
 
             <CardActions>
                 [Storybook öffnen](/dokumentation/storybook/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={deploymentImage} imageAlt="Blau-weißer Serverstapel mit Terminal, Upload-Pfeil und Browserfenster">
+            ### Veröffentlichen
+
+            Die erzeugten Dateien mit Apache oder Nginx ausliefern und sprachabhängige Fehlerseiten einbinden.
+
+            <CardActions>
+                [Veröffentlichen öffnen](/dokumentation/veroeffentlichen/)
             </CardActions>
         </Card>
     </Column>

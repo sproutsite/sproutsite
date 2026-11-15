@@ -1,0 +1,28 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>When something goes wrong</Eyebrow>
+
+## Connect the error documents
+
+For the current English/German configuration, the build emits these files directly in `dist/`:
+
+| File          | Language | Purpose                            |
+| ------------- | -------- | ---------------------------------- |
+| `404.html`    | English  | Unknown address                    |
+| `404-de.html` | German   | Unknown address below `/de/`       |
+| `500.html`    | English  | Internal server error              |
+| `500-de.html` | German   | Internal server error below `/de/` |
+
+The unsuffixed files use the configured default language. Additional configured languages receive suffixed files. If German is not enabled, omit the `/de/` configuration shown above.
+
+Use local error-document paths as shown in the server examples. They preserve the original error status rather than redirecting visitors to a different URL. A direct request to `/500.html` only opens an HTML file; it does not cause a server failure. The custom 500 document can be served only while the web server is still able to deliver it. It cannot replace browser connection errors or a failed web server process.
+
+All error pages share the small hero, a separate content section, and a localized homepage link. They have `noindex` metadata and are excluded from the sitemap. Their styles and images depend on the rest of the build, including `_astro/`.
+
+During development, `/404`, `/500`, `/de/404`, and `/de/500` preview the respective pages. Production uses the flat HTML files; there are no matching error-page directories to deploy. Unknown development URLs use the custom 404 automatically. Production language selection is handled by the web server configuration above, not by a running Astro application.

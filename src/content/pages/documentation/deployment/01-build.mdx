@@ -1,0 +1,29 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Prepare the files</Eyebrow>
+
+## Build and upload
+
+Check `url` and `base` in `src/content/site.yaml` and its language variants. For this website, the production URL is `https://sproutsite.dev` and the base is `/`.
+
+```sh
+npm ci
+npm run check
+npm run build
+```
+
+Run these commands with the supported Node.js version from the README. The build validates content, generates the static website, and checks internal links and metadata. To inspect it locally, run `npm run preview`. This preview does not test your production web server configuration.
+
+Copy the **contents** of `dist/` into the server's document root, for example `/var/www/sproutsite`. The homepage must be `/var/www/sproutsite/index.html`, not `/var/www/sproutsite/dist/index.html`.
+
+Upload the complete output, including `_astro/`, localized page directories, the sitemap, the manifest, and all error documents. CSS, JavaScript, fonts, and optimized images are part of this output. Do not upload only the HTML files.
+
+English is served at `/`, German at `/de/`. Regular pages use directory indexes, such as `blog/index.html`. No application server, `npm run dev`, or `npm run preview` is required on the production host.
+
+Upload to a new release directory and switch the document root or release symlink after the upload completes, if your hosting setup supports this. Keep the previous release available for rollback.

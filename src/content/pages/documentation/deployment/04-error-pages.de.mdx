@@ -1,0 +1,28 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Wenn etwas schiefläuft</Eyebrow>
+
+## Die Fehlerseiten einbinden
+
+Für die aktuelle englisch-deutsche Konfiguration erzeugt der Build diese Dateien direkt in `dist/`:
+
+| Datei         | Sprache  | Verwendung                         |
+| ------------- | -------- | ---------------------------------- |
+| `404.html`    | Englisch | Unbekannte Adresse                 |
+| `404-de.html` | Deutsch  | Unbekannte Adresse unter `/de/`    |
+| `500.html`    | Englisch | Interner Serverfehler              |
+| `500-de.html` | Deutsch  | Interner Serverfehler unter `/de/` |
+
+Die Dateien ohne Sprachkürzel verwenden die konfigurierte Standardsprache. Weitere konfigurierte Sprachen erhalten Dateien mit Sprachkürzel. Ist Deutsch nicht aktiviert, entfällt die oben gezeigte Konfiguration für `/de/`.
+
+Verwende lokale Fehlerseitenpfade wie in den Serverbeispielen. So bleibt der ursprüngliche Fehlerstatus erhalten, statt Besucher auf eine andere URL umzuleiten. Ein direkter Aufruf von `/500.html` öffnet nur eine HTML-Datei; er löst keinen Serverfehler aus. Die eigene 500-Seite kann nur erscheinen, solange der Webserver sie noch ausliefern kann. Sie ersetzt weder Verbindungsfehler im Browser noch einen ausgefallenen Webserver-Prozess.
+
+Alle Fehlerseiten verwenden den kleinen Hero, eine eigene Inhaltssection und einen sprachlich passenden Link zur Startseite. Sie haben `noindex`-Metadaten und fehlen bewusst in der Sitemap. Ihre Styles und Bilder benötigen den übrigen Build einschließlich `_astro/`.
+
+Im Entwicklungsmodus zeigen `/404`, `/500`, `/de/404` und `/de/500` eine Vorschau der jeweiligen Seite. In Produktion werden die flachen HTML-Dateien verwendet; entsprechende Fehlerseiten-Verzeichnisse gibt es nicht. Unbekannte Entwicklungs-URLs verwenden automatisch die eigene 404. Die Sprachauswahl in Produktion übernimmt die oben gezeigte Webserver-Konfiguration, keine laufende Astro-Anwendung.

@@ -1,0 +1,36 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Nginx</Eyebrow>
+
+## Configure the server block
+
+Add the following to the existing HTTPS `server` block. Adjust the root path; keep your TLS settings and the standard `mime.types` include in the surrounding Nginx configuration.
+
+```nginx
+server_name sproutsite.dev;
+root /var/www/sproutsite;
+index index.html;
+
+error_page 404 /404.html;
+error_page 500 /500.html;
+
+location / {
+    try_files $uri $uri/ =404;
+}
+
+location /de/ {
+    try_files $uri $uri/ =404;
+    error_page 404 /404-de.html;
+    error_page 500 /500-de.html;
+}
+```
+
+Existing files and directories are served directly. Unknown URLs return 404; do not replace `=404` with `/index.html`. Run `nginx -t` before reloading the configuration.
+
+Reference: [Nginx core module: error_page and try_files](https://nginx.org/en/docs/http/ngx_http_core_module.html#error_page).

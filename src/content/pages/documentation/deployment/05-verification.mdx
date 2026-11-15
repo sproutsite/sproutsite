@@ -1,0 +1,26 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Before going live</Eyebrow>
+
+## Check the deployed website
+
+After uploading and reloading the server configuration, check the homepage, `/de/`, a deep page, images, fonts, and the mobile navigation in a browser. Confirm that HTTPS works and that production is not blocked by staging authentication or indexing restrictions. `robots.txt` is not access control.
+
+```sh
+curl -I https://sproutsite.dev/
+curl -I https://sproutsite.dev/de/blog/
+curl -i https://sproutsite.dev/this-page-does-not-exist/
+curl -i https://sproutsite.dev/de/diese-seite-gibt-es-nicht/
+```
+
+Existing pages should return 200. The last two requests must return 404 with the English and German error content respectively. Check the 500 documents directly to review their appearance; that does not test actual 500 handling. Test a real server error only in a controlled staging environment.
+
+For deployment below a path such as `/demo/`, configure `base: /demo/` consistently, rebuild, and deploy the output at that URL path. The server's filesystem mapping must match it. Prefix error-document targets too, for example `/demo/404.html` and `/demo/404-de.html`; the German location becomes `/demo/de/`. Do not use the root-deployment examples unchanged for a subpath.
+
+The snippets are configuration examples, not an automated deployment. Adjust paths, domain, HTTPS settings, and any existing server locations before enabling them. Validate them on your own server; Sproutsite's build checks do not execute Apache or Nginx.

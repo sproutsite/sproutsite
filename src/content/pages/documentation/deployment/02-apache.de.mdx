@@ -1,0 +1,39 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Apache</Eyebrow>
+
+## Den Virtual Host konfigurieren
+
+Ergänze diese Direktiven im Virtual Host für `sproutsite.dev`. Passe den Dateisystempfad an dein Zielverzeichnis an. Die vorhandene HTTPS-Konfiguration mit Zertifikat und Listener bleibt bestehen.
+
+```apache
+ServerName sproutsite.dev
+DocumentRoot /var/www/sproutsite
+
+<Directory /var/www/sproutsite>
+    Require all granted
+    AllowOverride None
+    Options -Indexes
+    DirectoryIndex index.html
+</Directory>
+
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+
+<Location /de/>
+    ErrorDocument 404 /404-de.html
+    ErrorDocument 500 /500-de.html
+</Location>
+```
+
+`mod_dir` liefert bei Verzeichnis-URLs die `index.html` aus. Eine Umschreibung auf die Startseite ist nicht erforderlich. Fehlende Seiten müssen weiterhin den Status 404 liefern. Die deutsche Zuordnung gilt für Anfragen unter `/de/`; andere Anfragen verwenden die Fehlerseiten der Standardsprache.
+
+Prüfe die Konfiguration vor dem Neuladen mit dem Konfigurationstest deiner Apache-Installation, beispielsweise `apachectl configtest`. Bei Shared Hosting verwendest du stattdessen die Domaineinstellungen des Anbieters und erlaubte `.htaccess`-Direktiven; `DocumentRoot` und `Location` gehören nicht in eine `.htaccess`.
+
+Referenzen: [Apache-Verzeichnisindizes](https://httpd.apache.org/docs/2.4/mod/mod_dir.html) und [ErrorDocument](https://httpd.apache.org/docs/2.4/mod/core.html#errordocument).

@@ -7,6 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Added
+
+- Added English and German deployment documentation for Apache and Nginx, including static builds, localized error documents, subpaths, and deployment checks.
+- Added a deployment overview card in both languages with a generated illustration matching the documentation artwork.
+
 ## [0.5.4] - 2026-11-15
 
 ### Added

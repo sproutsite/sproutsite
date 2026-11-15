@@ -10,6 +10,7 @@ import themeImage from './_assets/theme.png';
 import checksImage from './_assets/checks.png';
 import packageImage from './_assets/package.png';
 import storybookImage from './_assets/storybook.png';
+import deploymentImage from './_assets/deployment.png';
 import { Card, CardActions } from 'sproutsite/components';
 import { Column, Columns } from 'sproutsite/components';
 import { Eyebrow } from 'sproutsite/components';
@@ -101,6 +102,18 @@ The documentation is organized by task. Every detail page is a regular content p
 
             <CardActions>
                 [Open Storybook](/documentation/storybook/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={deploymentImage} imageAlt="Blue and white server stack, terminal, upload arrow, and browser window">
+            ### Deployment
+
+            Publish the generated files with Apache or Nginx, including localized error documents.
+
+            <CardActions>
+                [Open deployment](/documentation/deployment/)
             </CardActions>
         </Card>
     </Column>

@@ -1,0 +1,39 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Apache</Eyebrow>
+
+## Configure the virtual host
+
+Add these directives to the virtual host serving `sproutsite.dev`. Adjust the filesystem path to your deployment directory. Keep your existing HTTPS certificate and listener configuration.
+
+```apache
+ServerName sproutsite.dev
+DocumentRoot /var/www/sproutsite
+
+<Directory /var/www/sproutsite>
+    Require all granted
+    AllowOverride None
+    Options -Indexes
+    DirectoryIndex index.html
+</Directory>
+
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+
+<Location /de/>
+    ErrorDocument 404 /404-de.html
+    ErrorDocument 500 /500-de.html
+</Location>
+```
+
+`mod_dir` serves `index.html` for directory URLs. No rewrite to the homepage is needed. Missing pages must remain 404 responses. The German override applies to requests below `/de/`; other requests use the default-language documents.
+
+Validate the configuration with your server's Apache configuration test, such as `apachectl configtest`, before reloading it. On shared hosting, use the provider's domain settings and permitted `.htaccess` directives instead; `DocumentRoot` and `Location` are not `.htaccess` directives.
+
+References: [Apache directory indexes](https://httpd.apache.org/docs/2.4/mod/mod_dir.html) and [ErrorDocument](https://httpd.apache.org/docs/2.4/mod/core.html#errordocument).

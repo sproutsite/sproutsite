@@ -1,0 +1,26 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Vor dem Livegang</Eyebrow>
+
+## Die veröffentlichte Website prüfen
+
+Prüfe nach dem Hochladen und Neuladen der Serverkonfiguration die Startseite, `/de/`, eine Unterseite, Bilder, Schriften und die mobile Navigation im Browser. Kontrolliere HTTPS und stelle sicher, dass weder ein Staging-Zugangsschutz noch Indexierungssperren die Produktionsseite blockieren. `robots.txt` ist kein Zugriffsschutz.
+
+```sh
+curl -I https://sproutsite.dev/
+curl -I https://sproutsite.dev/de/blog/
+curl -i https://sproutsite.dev/this-page-does-not-exist/
+curl -i https://sproutsite.dev/de/diese-seite-gibt-es-nicht/
+```
+
+Vorhandene Seiten sollten 200 liefern. Die letzten beiden Anfragen müssen 404 mit dem englischen beziehungsweise deutschen Fehlerinhalt zurückgeben. Prüfe die Darstellung der 500-Dateien durch einen direkten Aufruf; das testet keine tatsächliche 500-Behandlung. Einen echten Serverfehler testest du nur in einer kontrollierten Staging-Umgebung.
+
+Für eine Veröffentlichung unter einem Pfad wie `/demo/` konfigurierst du durchgehend `base: /demo/`, baust neu und stellst die Ausgabe unter diesem URL-Pfad bereit. Die Dateisystem-Zuordnung des Servers muss dazu passen. Ergänze den Basispfad auch bei Fehlerseiten, beispielsweise `/demo/404.html` und `/demo/404-de.html`; der deutsche Location-Bereich lautet dann `/demo/de/`. Übernimm die Beispiele für die Domainwurzel nicht unverändert für einen Unterpfad.
+
+Die Ausschnitte sind Konfigurationsbeispiele, kein automatisches Deployment. Passe Pfade, Domain, HTTPS-Einstellungen und vorhandene Serverbereiche vor der Aktivierung an. Prüfe sie auf deinem Server; die Build-Prüfungen von Sproutsite führen weder Apache noch Nginx aus.

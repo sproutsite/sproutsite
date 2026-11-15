@@ -1,0 +1,29 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Dateien vorbereiten</Eyebrow>
+
+## Bauen und hochladen
+
+Prüfe `url` und `base` in `src/content/site.yaml` und den Sprachvarianten. Für diese Website lautet die Produktionsadresse `https://sproutsite.dev`, der Basispfad ist `/`.
+
+```sh
+npm ci
+npm run check
+npm run build
+```
+
+Verwende die in der README angegebene Node.js-Version. Der Build validiert Inhalte, erzeugt die statische Website und prüft interne Links und Metadaten. Mit `npm run preview` kannst du das Ergebnis lokal ansehen. Diese Vorschau prüft nicht die Konfiguration deines Produktionsservers.
+
+Kopiere den **Inhalt** von `dist/` in das Webroot des Servers, beispielsweise `/var/www/sproutsite`. Die Startseite muss unter `/var/www/sproutsite/index.html` liegen, nicht unter `/var/www/sproutsite/dist/index.html`.
+
+Übertrage die vollständige Ausgabe einschließlich `_astro/`, Sprachverzeichnissen, Sitemap, Manifest und Fehlerseiten. CSS, JavaScript, Schriften und optimierte Bilder gehören dazu. Nur die HTML-Dateien hochzuladen reicht nicht.
+
+Englisch liegt unter `/`, Deutsch unter `/de/`. Reguläre Seiten verwenden Verzeichnisindizes wie `blog/index.html`. Auf dem Produktionsserver sind weder ein Anwendungsserver noch `npm run dev` oder `npm run preview` erforderlich.
+
+Falls dein Hosting es unterstützt, lade die Dateien in ein neues Release-Verzeichnis und schalte erst nach vollständiger Übertragung das Webroot oder den Release-Symlink um. Halte die vorherige Version für eine Rückkehr bereit.
