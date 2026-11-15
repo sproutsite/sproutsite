@@ -1183,6 +1183,7 @@ try {
                     'muted',
                     'default',
                     'muted',
+                    'muted',
                 ];
                 const fullWidths = [
                     true,
@@ -1193,10 +1194,11 @@ try {
                     true,
                     true,
                     true,
+                    true,
                 ];
                 const widths: number[] = [];
                 const paddings: { top: number; bottom: number }[] = [];
-                assert.equal(await groups.count(), 8);
+                assert.equal(await groups.count(), 9);
                 for (let index = 0; index < tones.length; index += 1) {
                     const group = groups.nth(index);
                     const preview = group.getByRole('tab', {
@@ -1260,7 +1262,10 @@ try {
                         .locator('pre[data-language="markdown"]');
                     const source = await sample.innerText();
                     assert(source.startsWith('---\n'));
-                    assert(source.includes(`tone: ${tones[index]}`));
+                    if (index === 8) {
+                        assert.ok(source.includes('odd: default'));
+                        assert.ok(source.includes('even: muted'));
+                    } else assert(source.includes(`tone: ${tones[index]}`));
                     assert(source.includes(`fullWidth: ${fullWidths[index]}`));
                     if (index >= 5)
                         assert.ok(source.includes(`spacing: ${spacing}`));

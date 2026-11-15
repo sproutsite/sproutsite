@@ -33,6 +33,17 @@ const markdownSchema = z
     })
     .strict();
 const sectionSchema = markdownSchema.extend({
+    tone: z
+        .union(
+            [
+                z.enum(tones),
+                z.object({ odd: z.enum(tones), even: z.enum(tones) }).strict(),
+            ],
+            {
+                error: 'Expected default, muted, or brand, or a YAML object with both odd and even set to those tones (not a list).',
+            },
+        )
+        .optional(),
     fullWidth: z.boolean().optional(),
     spacing: z.enum(sectionSpacings).optional(),
 });

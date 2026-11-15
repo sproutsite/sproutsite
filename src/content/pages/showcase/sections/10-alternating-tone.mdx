@@ -1,0 +1,44 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+spacing: default
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Selected by the file number</Eyebrow>
+
+## Automatic alternating tones
+
+This section uses file number 10, so it selects `even`: `muted`. Odd numbers select `odd`. The source filename determines the choice, not the position in a list. Both values are required. Fixed values such as `tone: brand` stay unchanged.
+
+<Tabs label="Automatic alternating tones" variant="border">
+    <Tab title="Preview">
+
+        ## Select surfaces by section number
+
+        Keep the same configuration when renumbering. The background follows the new section number automatically.
+
+    </Tab>
+    <Tab title="Code">
+
+```markdown
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+spacing: default
+---
+
+## Select surfaces by section number
+
+Keep the same configuration when renumbering. The background follows the new section number automatically.
+```
+
+    </Tab>
+
+</Tabs>

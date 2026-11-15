@@ -19,7 +19,17 @@ export function createSproutsiteCollections(
     contentDirectory = './src/content/pages',
     blogDirectory = './src/content/blog',
 ) {
-    const tone = z.enum(tones).default('default');
+    const tone = z
+        .union(
+            [
+                z.enum(tones),
+                z.object({ odd: z.enum(tones), even: z.enum(tones) }).strict(),
+            ],
+            {
+                error: 'Expected default, muted, or brand, or a YAML object with both odd and even set to those tones (not a list).',
+            },
+        )
+        .default('default');
     const heroClass = z.string().regex(/^ss-[a-z0-9][a-z0-9_-]*$/, {
         message:
             'Hero classes must start with ss- and contain only lowercase letters, digits, underscores, or hyphens',

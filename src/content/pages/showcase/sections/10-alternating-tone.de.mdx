@@ -1,0 +1,44 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+spacing: default
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Die Dateinummer entscheidet</Eyebrow>
+
+## Automatischer Farbwechsel
+
+Bei diesem Abschnitt wählt die Dateinummer 10 den Wert von `even`, also `muted`. Ungerade Nummern verwenden `odd`. Entscheidend ist die Zahl im Dateinamen, nicht die Position in einer Liste. Beide Werte sind erforderlich. Feste Angaben wie `tone: brand` bleiben unverändert.
+
+<Tabs label="Automatischer Farbwechsel" variant="border">
+    <Tab title="Vorschau">
+
+        ## Farbflächen über die Nummer steuern
+
+        Beim Umnummerieren bleibt die Konfiguration gleich. Der Hintergrund folgt automatisch der neuen Dateinummer.
+
+    </Tab>
+    <Tab title="Code">
+
+```markdown
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+spacing: default
+---
+
+## Farbflächen über die Nummer steuern
+
+Beim Umnummerieren bleibt die Konfiguration gleich. Der Hintergrund folgt automatisch der neuen Dateinummer.
+```
+
+    </Tab>
+
+</Tabs>

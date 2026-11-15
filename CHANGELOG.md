@@ -25,6 +25,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Added
 
+- Added odd/even section tone mappings resolved from the numeric filename prefix, preserving fixed tones, with bilingual homepage configuration and showcase examples.
+
 - Added section frontmatter spacing presets (small, default, large), with half or double desktop padding, unchanged mobile spacing, and bilingual showcase examples.
 
 - Added a bilingual homepage feature section directly after the hero, using the existing Columns, Feature, and responsive divider components.

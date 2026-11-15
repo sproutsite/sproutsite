@@ -1,5 +1,6 @@
 export const tones = ['default', 'muted', 'brand'] as const;
 export type Tone = (typeof tones)[number];
+export type SectionTone = Tone | { odd: Tone; even: Tone };
 export const heroTypes = ['small', 'big', 'fullscreen'] as const;
 export const sectionSpacings = ['small', 'default', 'large'] as const;
 

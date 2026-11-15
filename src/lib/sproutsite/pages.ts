@@ -1,11 +1,11 @@
 import type { CollectionEntry } from 'astro:content';
 import { pageDirectoryFromId, routeFromPageId } from './urls.js';
-import type { Tone } from './types.js';
+import type { SectionTone, Tone } from './types.js';
 
 type PageEntry = CollectionEntry<'pages'>;
 type DocumentEntry = CollectionEntry<'documents'>;
 type PageEntryLike = { id: string; data: object };
-type DocumentEntryLike = { id: string; data: { tone: Tone } };
+type DocumentEntryLike = { id: string; data: { tone: SectionTone } };
 
 export interface AssembledPage<
     TPage extends PageEntryLike = PageEntry,
@@ -67,5 +67,12 @@ export function assemblePages<
 }
 
 export function toneOf(document: DocumentEntryLike): Tone {
-    return document.data.tone;
+    const tone = document.data.tone;
+    if (typeof tone === 'string') return tone;
+    const match = sectionName.exec(document.id.replace(/\.de$/, ''));
+    if (!match)
+        throw new Error(
+            `${document.id}: odd/even tones require a numbered section.`,
+        );
+    return tone[Number(match[1]) % 2 === 1 ? 'odd' : 'even'];
 }
