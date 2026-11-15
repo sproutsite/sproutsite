@@ -1,0 +1,90 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Compact groups</Eyebrow>
+
+## Four equal areas: 3 + 3 + 3 + 3
+
+Quarter-width areas suit short content. On small screens, these cards also take the full content width.
+
+<Tabs label="Four equal areas: 3 + 3 + 3 + 3: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Columns>
+            <Column span={3}>
+                <Card>
+                    ### Quarter 1
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    ### Quarter 2
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    ### Quarter 3
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    ### Quarter 4
+
+                    `span={3}`
+                </Card>
+            </Column>
+
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Column, Columns } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={3}>
+                <Card>
+                    ### Quarter 1
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    ### Quarter 2
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    ### Quarter 3
+
+                    `span={3}`
+                </Card>
+            </Column>
+            <Column span={3}>
+                <Card>
+                    ### Quarter 4
+
+                    `span={3}`
+                </Card>
+            </Column>
+
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>

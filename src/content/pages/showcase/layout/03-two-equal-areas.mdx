@@ -1,0 +1,62 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Side by side</Eyebrow>
+
+## Two equal areas: 6 + 6
+
+Both cards share one row. Each column keeps its heading above its text.
+
+<Tabs label="Two equal areas: 6 + 6: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Columns>
+            <Column span={6}>
+                <Card>
+                    ### Left half
+
+                    `span={6}` occupies the first six grid columns.
+                </Card>
+            </Column>
+            <Column span={6}>
+                <Card>
+                    ### Right half
+
+                    `span={6}` occupies the remaining six grid columns.
+                </Card>
+            </Column>
+
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Column, Columns } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={6}>
+                <Card>
+                    ### Left half
+
+                    `span={6}` occupies the first six grid columns.
+                </Card>
+            </Column>
+            <Column span={6}>
+                <Card>
+                    ### Right half
+
+                    `span={6}` occupies the remaining six grid columns.
+                </Card>
+            </Column>
+
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>

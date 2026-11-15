@@ -1,0 +1,62 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Main content and aside</Eyebrow>
+
+## Different widths: 8 + 4
+
+The main area receives two thirds of the width and the supporting area one third. The main area comes first on mobile.
+
+<Tabs label="Different widths: 8 + 4: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Columns>
+            <Column span={8}>
+                <Card>
+                    ### Main content: 8 of 12
+
+                    The wider area provides space for detailed explanations. The layout is defined entirely by `span={8}`.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Supporting content: 4 of 12
+
+                    `span={4}` provides space for a supporting note.
+                </Card>
+            </Column>
+
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Column, Columns } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={8}>
+                <Card>
+                    ### Main content: 8 of 12
+
+                    The wider area provides space for detailed explanations. The layout is defined entirely by `span={8}`.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Supporting content: 4 of 12
+
+                    `span={4}` provides space for a supporting note.
+                </Card>
+            </Column>
+
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>

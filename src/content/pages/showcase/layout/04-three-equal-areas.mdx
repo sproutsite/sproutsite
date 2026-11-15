@@ -1,0 +1,76 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>At a glance</Eyebrow>
+
+## Three equal areas: 4 + 4 + 4
+
+Three cards sit side by side. Their gaps match those of the two-column layout.
+
+<Tabs label="Three equal areas: 4 + 4 + 4: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Columns>
+            <Column span={4}>
+                <Card>
+                    ### First third
+
+                    `span={4}` can hold a benefit, for example.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Second third
+
+                    Even with more text, the card stays inside its column. Cards in the same row stretch to equal heights.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Third third
+
+                    All twelve grid columns in the row are occupied.
+                </Card>
+            </Column>
+
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Column, Columns } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={4}>
+                <Card>
+                    ### First third
+
+                    `span={4}` can hold a benefit, for example.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Second third
+
+                    Even with more text, the card stays inside its column. Cards in the same row stretch to equal heights.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Third third
+
+                    All twelve grid columns in the row are occupied.
+                </Card>
+            </Column>
+
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>

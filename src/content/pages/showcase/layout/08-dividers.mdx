@@ -1,0 +1,206 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Space and separation</Eyebrow>
+
+## Dividers between columns
+
+`divider` enables subtle gray separators. On desktop they run vertically between adjacent columns; on smaller screens they run horizontally between stacked areas. No line appears at the outer edges or between desktop rows. Set `dividerColor` to a custom hex color, such as `#94a3b8`. The gap defaults to 48px, or 24px on each side of the line. Set `dividerGap={64}` to use another positive pixel value. On mobile, the same spacing applies above and below each horizontal line. Vertical lines leave a 20% inset at both ends. Without `divider`, the layout stays unchanged.
+
+<Tabs label="Dividers between columns" variant="border">
+    <Tab title="Preview">
+<Columns divider>
+    <Column span={4}>
+
+        ### Area 1
+
+        Separate content with space around the divider.
+
+    </Column>
+    <Column span={4}>
+
+        ### Area 2
+
+        Separate content with space around the divider.
+
+    </Column>
+    <Column span={4}>
+
+        ### Area 3
+
+        Separate content with space around the divider.
+
+    </Column>
+
+</Columns>
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+
+<Columns divider>
+    <Column span={4}>
+
+        ### Area 1
+
+        Separate content with space around the divider.
+
+    </Column>
+    <Column span={4}>
+
+        ### Area 2
+
+        Separate content with space around the divider.
+
+    </Column>
+    <Column span={4}>
+
+        ### Area 3
+
+        Separate content with space around the divider.
+
+    </Column>
+
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>
+
+### Custom divider color
+
+<Tabs label="Custom divider color" variant="border">
+    <Tab title="Preview">
+<Columns divider dividerColor="#94a3b8">
+    <Column span={4}>
+
+        #### Area 1
+
+        Separate content with space around the divider.
+
+    </Column>
+    <Column span={4}>
+
+        #### Area 2
+
+        Separate content with space around the divider.
+
+    </Column>
+    <Column span={4}>
+
+        #### Area 3
+
+        Separate content with space around the divider.
+
+    </Column>
+
+</Columns>
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+
+<Columns divider dividerColor="#94a3b8">
+    <Column span={4}>
+
+        #### Area 1
+
+        Separate content with space around the divider.
+
+    </Column>
+    <Column span={4}>
+
+        #### Area 2
+
+        Separate content with space around the divider.
+
+    </Column>
+    <Column span={4}>
+
+        #### Area 3
+
+        Separate content with space around the divider.
+
+    </Column>
+
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>
+
+### Double the divider spacing
+
+With `dividerGap={96}`, the gap is twice the 48px default. Each side of the line has 48px of space; on mobile, this applies above and below.
+
+<Tabs label="Double the divider spacing" variant="border">
+    <Tab title="Preview">
+<Columns divider dividerGap={96}>
+    <Column span={4}>
+
+        #### Area 1
+
+        Separate content with space around the divider.
+
+    </Column>
+    <Column span={4}>
+
+        #### Area 2
+
+        Separate content with space around the divider.
+
+    </Column>
+    <Column span={4}>
+
+        #### Area 3
+
+        Separate content with space around the divider.
+
+    </Column>
+
+</Columns>
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Column, Columns } from 'sproutsite/components';
+
+<Columns divider dividerGap={96}>
+    <Column span={4}>
+
+        #### Area 1
+
+        Separate content with space around the divider.
+
+    </Column>
+    <Column span={4}>
+
+        #### Area 2
+
+        Separate content with space around the divider.
+
+    </Column>
+    <Column span={4}>
+
+        #### Area 3
+
+        Separate content with space around the divider.
+
+    </Column>
+
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>

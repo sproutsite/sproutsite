@@ -1,0 +1,104 @@
+---
+tone: muted
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Beyond one row</Eyebrow>
+
+## Automatic wrapping: five cards in one block
+
+All five cards share one `Columns` block and use `span={4}`. A new row starts automatically after the third card. The last two cards stay left-aligned at the same width, leaving the last position empty.
+
+<Tabs label="Automatic wrapping: five cards in one block: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Columns>
+            <Column span={4}>
+                <Card>
+                    ### Card 1
+
+                    First row, first position.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Card 2
+
+                    First row, second position.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Card 3
+
+                    First row, third position. All twelve grid columns are occupied.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Card 4
+
+                    Second row, first position. Wrapping needs no additional layout block.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Card 5
+
+                    Second row, second position. The row gap matches the column gap.
+                </Card>
+            </Column>
+
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Column, Columns } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        <Columns>
+            <Column span={4}>
+                <Card>
+                    ### Card 1
+
+                    First row, first position.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Card 2
+
+                    First row, second position.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Card 3
+
+                    First row, third position. All twelve grid columns are occupied.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Card 4
+
+                    Second row, first position. Wrapping needs no additional layout block.
+                </Card>
+            </Column>
+            <Column span={4}>
+                <Card>
+                    ### Card 5
+
+                    Second row, second position. The row gap matches the column gap.
+                </Card>
+            </Column>
+
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>

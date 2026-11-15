@@ -1,0 +1,48 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Room for detail</Eyebrow>
+
+## Full width: 12
+
+Without `span`, a column takes the full content width.
+
+<Tabs label="Full width: 12: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Columns>
+            <Column>
+                <Card>
+                    ### 12 of 12
+
+                    Space for an overview or longer content. The column ends at the page's shared outer content edge.
+                </Card>
+            </Column>
+
+        </Columns>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Column, Columns } from 'sproutsite/components';
+        import { Card } from 'sproutsite/components';
+
+        <Columns>
+            <Column>
+                <Card>
+                    ### 12 of 12
+
+                    Space for an overview or longer content. The column ends at the page's shared outer content edge.
+                </Card>
+            </Column>
+
+        </Columns>
+        ```
+    </Tab>
+
+</Tabs>
