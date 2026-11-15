@@ -23,8 +23,9 @@
 
         .ss-language-switcher__options {
             position: absolute;
-            inset-block-start: calc(100% + 0.75rem);
-            inset-inline-end: 0;
+            inset-block-start: calc(100% + 1.25rem);
+            inset-inline-start: 50%;
+            translate: -50% 0;
             z-index: 50;
             min-width: 11rem;
             max-width: calc(100vw - 2rem);
@@ -39,7 +40,26 @@
 
             @media (max-width: 47.999rem) {
                 inset-inline-start: 0;
-                inset-inline-end: auto;
+                translate: none;
+            }
+
+            &[data-positioned] {
+                inset-inline-start: 50%;
+                translate: calc(-50% + var(--ss-language-shift, 0px)) 0;
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                inset-block-start: 0;
+                inset-inline-start: calc(50% - var(--ss-language-shift, 0px));
+                width: 0.875rem;
+                height: 0.875rem;
+                background: inherit;
+                border-top: inherit;
+                border-left: inherit;
+                translate: -50% -50%;
+                rotate: 45deg;
             }
 
             a {

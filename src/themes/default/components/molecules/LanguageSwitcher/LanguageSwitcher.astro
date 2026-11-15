@@ -76,6 +76,23 @@ const options = languageLinks(
     document
         .querySelectorAll<HTMLDetailsElement>('.ss-language-switcher')
         .forEach((switcher) => {
+            const positionOptions = () => {
+                if (!switcher.open) return;
+                const options = switcher.querySelector<HTMLElement>(
+                    '.ss-language-switcher__options',
+                );
+                if (!options) return;
+                options.dataset.positioned = '';
+                options.style.removeProperty('--ss-language-shift');
+                const bounds = options.getBoundingClientRect();
+                const shift = Math.max(
+                    16 - bounds.left,
+                    Math.min(0, window.innerWidth - 16 - bounds.right),
+                );
+                options.style.setProperty('--ss-language-shift', `${shift}px`);
+            };
+            switcher.addEventListener('toggle', positionOptions);
+            window.addEventListener('resize', positionOptions);
             document.addEventListener('click', (event) => {
                 if (
                     event.target instanceof Node &&
