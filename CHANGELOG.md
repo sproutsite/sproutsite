@@ -7,6 +7,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.2] - 2026-11-15
+
 ### Fixed
 
 - Prevented consecutive paragraphs inside Columns from adding their vertical margins together.
@@ -14,6 +16,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 ### Changed
 
 - Reduced the big hero's mobile top clearance after the navbar from 4.5rem to 1.5rem while retaining desktop spacing.
+
+- Restored default spacing for the homepage feature section in both languages.
 
 - Removed repetitive homepage copy and added a concise bilingual closing section with distinct Showcase and getting-started actions; replaced the broad security claim with specific static-hosting copy.
 
@@ -25,7 +29,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 - Migrated existing alternating Showcase, Documentation, FAQ, Info, and blog sections to odd/even tone mappings in both languages while preserving their rendered colors and explicit tone examples.
 
-- Renumbered both homepage translations from 01-features through 05-further-reading and documented consecutive section numbering from 01.
+- Numbered both homepage translations consecutively from 01-features through 04-further-reading and documented section numbering from 01.
 
 - Removed the extra homepage feature title, allowed Feature H2 headings to introduce a section, and alternated homepage section surfaces in both languages.
 
