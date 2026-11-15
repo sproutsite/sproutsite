@@ -1,5 +1,14 @@
 @layer components {
     .ss-button {
-        @apply m-1 font-semibold;
+        @apply m-1 !gap-2.5 font-semibold;
+
+        > p:has(> .ss-icon) {
+            @apply m-0 inline-flex items-center gap-2.5;
+        }
+
+        .ss-icon {
+            display: block;
+            align-self: center;
+        }
     }
 }

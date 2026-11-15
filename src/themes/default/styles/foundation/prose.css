@@ -43,11 +43,11 @@
 
     .ss-section > .site-shell > .content-prose,
     .ss-hero > .site-shell > .content-prose {
-        > :first-child {
+        > :first-child:not(.ss-button) {
             @apply mt-0;
         }
 
-        > :last-child {
+        > :last-child:not(.ss-button) {
             @apply mb-0;
         }
     }

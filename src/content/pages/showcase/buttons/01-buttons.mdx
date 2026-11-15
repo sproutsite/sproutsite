@@ -4,6 +4,7 @@ fullWidth: true
 ---
 
 import { Button } from 'sproutsite/components';
+import { Icon } from 'sproutsite/components';
 import { Eyebrow } from 'sproutsite/components';
 import { Tabs, Tab } from 'sproutsite/components';
 
@@ -116,6 +117,47 @@ A link navigates to another address; a button triggers an action. The action but
         <Button href="/showcase/">Open showcase</Button>
         <Button type="button" variant="secondary">Run action</Button>
         <Button variant="primary" disabled>Currently unavailable</Button>
+        ```
+    </Tab>
+
+</Tabs>
+
+### Buttons with icons
+
+Place an `Icon` before the label inside `Button`. It inherits the button's text color. Omit `label` on the icon so screen readers announce only the visible button text.
+
+<Tabs label="Buttons with icons: Preview and code" variant="border">
+    <Tab title="Preview">
+        <Button href="/contact/">
+            <Icon name="Mail" size={20} /> Contact
+        </Button>
+        <Button href="/documentation/" variant="secondary" style="outline">
+            <Icon name="BookOpen" size={20} /> Documentation
+        </Button>
+        <Button href="/blog/" variant="info" style="soft">
+            <Icon name="Newspaper" size={20} /> Read the blog
+        </Button>
+        <Button href="/showcase/" variant="neutral" style="ghost">
+            <Icon name="LayoutGrid" size={20} /> Explore components
+        </Button>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Button } from 'sproutsite/components';
+        import { Icon } from 'sproutsite/components';
+
+        <Button href="/contact/">
+            <Icon name="Mail" size={20} /> Contact
+        </Button>
+        <Button href="/documentation/" variant="secondary" style="outline">
+            <Icon name="BookOpen" size={20} /> Documentation
+        </Button>
+        <Button href="/blog/" variant="info" style="soft">
+            <Icon name="Newspaper" size={20} /> Read the blog
+        </Button>
+        <Button href="/showcase/" variant="neutral" style="ghost">
+            <Icon name="LayoutGrid" size={20} /> Explore components
+        </Button>
         ```
     </Tab>
 

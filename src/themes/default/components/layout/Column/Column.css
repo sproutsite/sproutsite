@@ -2,11 +2,11 @@
     .ss-column {
         @apply flex min-w-0 flex-col;
 
-        > :first-child {
+        > :first-child:not(.ss-button) {
             @apply mt-0;
         }
 
-        > :last-child {
+        > :last-child:not(.ss-button) {
             @apply mb-0;
         }
 

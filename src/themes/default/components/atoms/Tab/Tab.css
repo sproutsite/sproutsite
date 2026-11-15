@@ -22,11 +22,11 @@
             @apply min-w-0;
             overflow-wrap: anywhere;
 
-            > :first-child {
+            > :first-child:not(.ss-button) {
                 @apply mt-0;
             }
 
-            > :last-child {
+            > :last-child:not(.ss-button) {
                 @apply mb-0;
             }
         }
