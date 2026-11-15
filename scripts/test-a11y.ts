@@ -317,9 +317,53 @@ try {
                     `${viewport.name} ${route}: viewport overflows horizontally`,
                 );
             if (route.endsWith('/showcase/features/')) {
+                const cards = page.locator('.ss-feature--card');
+                assert.equal(await cards.count(), 5);
+                const surfaces = await cards.evaluateAll((features) =>
+                    features.map((feature) => {
+                        const icon =
+                            feature.querySelector('.ss-feature__icon')!;
+                        const content = feature.querySelector(
+                            '.ss-feature__content',
+                        )!;
+                        const bounds = feature.getBoundingClientRect();
+                        const iconBounds = icon.getBoundingClientRect();
+                        const textBounds = content.getBoundingClientRect();
+                        const styles = getComputedStyle(feature);
+                        return {
+                            alignment: styles.textAlign,
+                            background: styles.backgroundColor,
+                            padding: parseFloat(styles.paddingLeft),
+                            radius: parseFloat(styles.borderRadius),
+                            left: iconBounds.left - bounds.left,
+                            textLeft: textBounds.left - bounds.left,
+                            below: textBounds.top >= iconBounds.bottom,
+                            iconBackground:
+                                getComputedStyle(icon).backgroundColor,
+                            iconWidth: iconBounds.width,
+                            symbolWidth: icon
+                                .querySelector('svg')!
+                                .getBoundingClientRect().width,
+                            solid: feature.classList.contains(
+                                'ss-feature--solid',
+                            ),
+                        };
+                    }),
+                );
+                for (const surface of surfaces) {
+                    assert.ok(['start', 'left'].includes(surface.alignment));
+                    assert.ok(surface.padding > 0 && surface.radius > 0);
+                    assert.ok(Math.abs(surface.left - surface.padding) < 1);
+                    assert.ok(Math.abs(surface.textLeft - surface.padding) < 1);
+                    assert.equal(surface.below, true);
+                    assert.equal(surface.iconBackground, 'rgba(0, 0, 0, 0)');
+                    assert.equal(surface.iconWidth, surface.symbolWidth);
+                    assert.equal(surface.solid, false);
+                }
+                assert.equal(surfaces[1]!.background, 'rgb(233, 239, 223)');
                 const samples = page
                     .locator('main .ss-section')
-                    .last()
+                    .filter({ has: page.locator('h2[id^="08-icon-sizes"]') })
                     .locator('.ss-feature');
                 assert.equal(await samples.count(), 5);
                 const dimensions = await samples.evaluateAll((features) =>

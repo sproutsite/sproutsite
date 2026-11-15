@@ -1,0 +1,184 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Feature } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>One idea per surface</Eyebrow>
+
+## Feature with a shared background
+
+`layout="card"` places the icon, title, and description on one left-aligned surface. The icon sits above the text without a separate background box. Without `backgroundColor`, the surface mixes 8% icon color with 92% transparent. The variant prop has no effect in this layout.
+
+### Automatically tinted background
+
+<Tabs label="Automatically tinted background" variant="border">
+    <Tab title="Preview">
+
+<Feature
+    icon="Rocket"
+    title="Focus on what matters"
+    layout="card"
+    color="#527b37"
+    headingLevel={4}
+>
+    Less tooling overhead. More time for content and ideas.
+</Feature>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Feature } from 'sproutsite/components';
+
+<Feature
+    icon="Rocket"
+    title="Focus on what matters"
+    layout="card"
+    color="#527b37"
+    headingLevel={4}
+>
+    Less tooling overhead. More time for content and ideas.
+</Feature>
+```
+
+    </Tab>
+
+</Tabs>
+
+### Custom background color
+
+For card layout, backgroundColor sets the entire surface. color remains the icon color, and iconSize changes only the symbol. In horizontal and vertical layouts, backgroundColor still affects only the icon box.
+
+<Tabs label="Custom background color" variant="border">
+    <Tab title="Preview">
+
+<Feature
+    icon="Rocket"
+    title="Focus on what matters"
+    layout="card"
+    color="#527b37"
+    backgroundColor="#E9EFDF"
+    iconSize="lg"
+    headingLevel={4}
+>
+    Less tooling overhead. More time for content and ideas.
+</Feature>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Feature } from 'sproutsite/components';
+
+<Feature
+    icon="Rocket"
+    title="Focus on what matters"
+    layout="card"
+    color="#527b37"
+    backgroundColor="#E9EFDF"
+    iconSize="lg"
+    headingLevel={4}
+>
+    Less tooling overhead. More time for content and ideas.
+</Feature>
+```
+
+    </Tab>
+
+</Tabs>
+
+### Features in columns
+
+<Tabs label="Features in columns" variant="border">
+    <Tab title="Preview">
+
+<Columns gap="md">
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Write content"
+            layout="card"
+            color="primary"
+            headingLevel={4}
+        >
+            Maintain copy directly in Markdown files.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Layers"
+            title="Reuse components"
+            layout="card"
+            color="secondary"
+            headingLevel={4}
+        >
+            Build pages with the existing components.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Publish static pages"
+            layout="card"
+            color="success"
+            headingLevel={4}
+        >
+            Generate the finished website with Astro.
+        </Feature>
+    </Column>
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Feature } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+
+<Columns gap="md">
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Write content"
+            layout="card"
+            color="primary"
+            headingLevel={4}
+        >
+            Maintain copy directly in Markdown files.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Layers"
+            title="Reuse components"
+            layout="card"
+            color="secondary"
+            headingLevel={4}
+        >
+            Build pages with the existing components.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Publish static pages"
+            layout="card"
+            color="success"
+            headingLevel={4}
+        >
+            Generate the finished website with Astro.
+        </Feature>
+    </Column>
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>

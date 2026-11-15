@@ -1,0 +1,184 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Feature } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Ein Gedanke pro Fläche</Eyebrow>
+
+## Feature mit gemeinsamer Hintergrundfläche
+
+`layout="card"` stellt Icon, Titel und Beschreibung linksbündig auf eine gemeinsame Fläche. Das Icon steht oben und hat keine zusätzliche Hintergrundbox. Ohne `backgroundColor` mischt sich die Fläche aus 8 % Iconfarbe und 92 % transparent. `variant` hat in diesem Layout keine Wirkung.
+
+### Automatisch getönter Hintergrund
+
+<Tabs label="Automatisch getönter Hintergrund" variant="border">
+    <Tab title="Vorschau">
+
+<Feature
+    icon="Rocket"
+    title="Auf das Wesentliche konzentrieren"
+    layout="card"
+    color="#527b37"
+    headingLevel={4}
+>
+    Weniger Aufwand für Werkzeuge. Mehr Zeit für Inhalte und Ideen.
+</Feature>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Feature } from 'sproutsite/components';
+
+<Feature
+    icon="Rocket"
+    title="Auf das Wesentliche konzentrieren"
+    layout="card"
+    color="#527b37"
+    headingLevel={4}
+>
+    Weniger Aufwand für Werkzeuge. Mehr Zeit für Inhalte und Ideen.
+</Feature>
+```
+
+    </Tab>
+
+</Tabs>
+
+### Eigene Hintergrundfarbe
+
+`backgroundColor` setzt bei `card` die gesamte Fläche. `color` bleibt die Iconfarbe; `iconSize` verändert nur das Symbol. Bei `horizontal` und `vertical` steuert `backgroundColor` weiterhin ausschließlich die Icon-Box.
+
+<Tabs label="Eigene Hintergrundfarbe" variant="border">
+    <Tab title="Vorschau">
+
+<Feature
+    icon="Rocket"
+    title="Auf das Wesentliche konzentrieren"
+    layout="card"
+    color="#527b37"
+    backgroundColor="#E9EFDF"
+    iconSize="lg"
+    headingLevel={4}
+>
+    Weniger Aufwand für Werkzeuge. Mehr Zeit für Inhalte und Ideen.
+</Feature>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Feature } from 'sproutsite/components';
+
+<Feature
+    icon="Rocket"
+    title="Auf das Wesentliche konzentrieren"
+    layout="card"
+    color="#527b37"
+    backgroundColor="#E9EFDF"
+    iconSize="lg"
+    headingLevel={4}
+>
+    Weniger Aufwand für Werkzeuge. Mehr Zeit für Inhalte und Ideen.
+</Feature>
+```
+
+    </Tab>
+
+</Tabs>
+
+### Mehrere Features in Spalten
+
+<Tabs label="Mehrere Features in Spalten" variant="border">
+    <Tab title="Vorschau">
+
+<Columns gap="md">
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Inhalte schreiben"
+            layout="card"
+            color="primary"
+            headingLevel={4}
+        >
+            Texte direkt in Markdown-Dateien pflegen.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Layers"
+            title="Bausteine verwenden"
+            layout="card"
+            color="secondary"
+            headingLevel={4}
+        >
+            Vorhandene Komponenten für den Seitenaufbau nutzen.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Statisch veröffentlichen"
+            layout="card"
+            color="success"
+            headingLevel={4}
+        >
+            Mit Astro die fertige Website generieren.
+        </Feature>
+    </Column>
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Feature } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+
+<Columns gap="md">
+    <Column span={4}>
+        <Feature
+            icon="FileText"
+            title="Inhalte schreiben"
+            layout="card"
+            color="primary"
+            headingLevel={4}
+        >
+            Texte direkt in Markdown-Dateien pflegen.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Layers"
+            title="Bausteine verwenden"
+            layout="card"
+            color="secondary"
+            headingLevel={4}
+        >
+            Vorhandene Komponenten für den Seitenaufbau nutzen.
+        </Feature>
+    </Column>
+    <Column span={4}>
+        <Feature
+            icon="Globe"
+            title="Statisch veröffentlichen"
+            layout="card"
+            color="success"
+            headingLevel={4}
+        >
+            Mit Astro die fertige Website generieren.
+        </Feature>
+    </Column>
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>

@@ -7,9 +7,9 @@ import { isHexColor } from '../../../../../lib/sproutsite/colors.js';
 interface Props {
     icon: ComponentProps<typeof Icon>['name'];
     title: string;
-    layout?: 'horizontal' | 'vertical';
+    layout?: 'horizontal' | 'vertical' | 'card';
     iconSize?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-    /** Explicit icon background, independent of the chosen visual variant. */
+    /** Explicit background: icon box, or entire surface for layout card. */
     backgroundColor?: `#${string}`;
     variant?: 'soft' | 'solid' | 'plain';
     color?:
@@ -44,9 +44,9 @@ if (!Object.hasOwn(iconPixels, iconSize))
     throw new Error(
         'Sproutsite Feature iconSize must be xs, sm, md, lg, or xl.',
     );
-if (!['horizontal', 'vertical'].includes(layout))
+if (!['horizontal', 'vertical', 'card'].includes(layout))
     throw new Error(
-        'Sproutsite Feature layout must be horizontal or vertical.',
+        'Sproutsite Feature layout must be horizontal, vertical, or card.',
     );
 if (!title?.trim())
     throw new Error('Sproutsite Feature requires a non-empty title.');
@@ -81,9 +81,11 @@ if (
         'not-prose',
         `ss-feature--${layout}`,
         `ss-feature--icon-${iconSize}`,
-        customColor ? 'ss-feature--custom' : `ss-feature--${variant}`,
+        customColor
+            ? 'ss-feature--custom'
+            : layout !== 'card' && `ss-feature--${variant}`,
         !customColor && `ss-feature--${color}`,
-        backgroundColor && 'ss-feature--custom-background',
+        backgroundColor && layout !== 'card' && 'ss-feature--custom-background',
     ]}
     style={
         [

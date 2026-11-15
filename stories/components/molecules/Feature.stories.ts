@@ -26,7 +26,10 @@ export default {
             control: 'text',
             description: 'Optional explicit CSS hex background.',
         },
-        layout: { control: 'select', options: ['horizontal', 'vertical'] },
+        layout: {
+            control: 'select',
+            options: ['horizontal', 'vertical', 'card'],
+        },
         iconSize: {
             control: 'select',
             options: ['xs', 'sm', 'md', 'lg', 'xl'],
@@ -92,3 +95,24 @@ export const LargeVertical = {
 export const ExtraSmall = { args: { iconSize: 'xs' } };
 export const Small = { args: { iconSize: 'sm' } };
 export const MediumLarge = { args: { iconSize: 'lg', layout: 'vertical' } };
+
+export const CardLayout = {
+    args: {
+        layout: 'card',
+        icon: 'Rocket',
+        title: 'Focus on what matters',
+        color: '#527b37',
+        slots: {
+            default: 'Less tooling overhead. More time for content and ideas.',
+        },
+    },
+    parameters: { docs: { story: { height: '16rem' } } },
+};
+export const CardCustomBackground = {
+    args: { ...CardLayout.args, backgroundColor: '#E9EFDF', iconSize: 'lg' },
+    parameters: CardLayout.parameters,
+};
+export const CardIgnoresVariant = {
+    args: { layout: 'card', variant: 'solid', color: 'secondary' },
+    parameters: CardLayout.parameters,
+};

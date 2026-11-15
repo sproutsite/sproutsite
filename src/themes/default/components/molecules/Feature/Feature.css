@@ -83,6 +83,32 @@
             }
         }
 
+        &.ss-feature--card {
+            flex: 1;
+            grid-template-columns: minmax(0, 1fr);
+            align-content: start;
+            justify-items: start;
+            text-align: start;
+            padding: 1.5rem;
+            border-radius: var(--radius-box);
+            background-color: var(
+                --ss-feature-background,
+                color-mix(in srgb, var(--ss-feature-color) 8%, transparent)
+            );
+
+            .ss-feature__icon {
+                width: auto;
+                height: auto;
+                border-radius: 0;
+                background: transparent;
+                color: var(--ss-feature-color);
+            }
+
+            .ss-feature__content {
+                width: 100%;
+            }
+        }
+
         &.ss-feature--solid {
             .ss-feature__icon {
                 background-color: var(--ss-feature-color);

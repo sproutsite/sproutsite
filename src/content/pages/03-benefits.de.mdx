@@ -1,0 +1,64 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Column, Columns, Eyebrow } from 'sproutsite/components';
+import { Feature } from 'sproutsite/components';
+
+<Eyebrow>Das Ergebnis</Eyebrow>
+
+## Was sich dadurch vereinfacht
+
+<Columns>
+    <Column span={3}>
+        <Feature
+            icon="Leaf"
+            title="Inhalte im Repository"
+            layout="card"
+            iconSize="lg"
+            color="#527442"
+        >
+            Seiten, Navigation und Assets bleiben versioniert und
+            nachvollziehbar.
+        </Feature>
+    </Column>
+    <Column span={3}>
+        <Feature
+            icon="Users"
+            title="Für die Zusammenarbeit"
+            layout="card"
+            iconSize="lg"
+            color="#456E70"
+        >
+            Mit klarer Struktur und reproduzierbaren Ergebnissen
+            zusammenarbeiten.
+        </Feature>
+    </Column>
+    <Column span={3}>
+        <Feature
+            icon="Puzzle"
+            title="Wiederverwendbare Komponenten"
+            layout="card"
+            iconSize="lg"
+            color="#456B43"
+        >
+            Einmal erstellen und auf den eigenen Seiten wiederverwenden.
+        </Feature>
+    </Column>
+    <Column span={3}>
+        <Feature
+            icon="Rocket"
+            title="Auf das Wesentliche konzentrieren"
+            layout="card"
+            iconSize="lg"
+            color="#527B37"
+        >
+            Weniger Aufwand für Werkzeuge. Mehr Zeit für Inhalte und Ideen.
+        </Feature>
+    </Column>
+</Columns>
+
+[So arbeitet Sproutsite](/info/) · [Häufige Fragen ansehen](/faq/)

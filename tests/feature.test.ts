@@ -22,6 +22,8 @@ test('validates Feature content, variants, and heading levels without executable
         for (const component of [
             '<Feature icon="Zap" title="Static">A short description.</Feature>',
             '<Feature icon="Zap" title="Horizontal" layout="horizontal" />',
+            '<Feature icon="Rocket" title="Card" layout="card" color="secondary" variant="solid" />',
+            '<Feature icon="Rocket" title="Custom card" layout="card" color="#527b37" backgroundColor="#E9EFDF" />',
             '<Feature icon="Layers" title="Large" layout="vertical" iconSize="lg" />',
             '<Feature icon="Zap" title="Standard" iconSize="md" />',
             '<Feature icon="Layers" title="Vertical" layout="vertical" variant="solid" color="secondary" />',

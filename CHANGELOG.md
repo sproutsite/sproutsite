@@ -13,6 +13,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
+- Replaced the homepage benefits list with four bilingual Feature cards directly after the workflow, retaining the existing Info and FAQ links below them.
+
 - Expanded Feature icon sizes to xs/sm/md/lg/xl, retaining md as default and migrating former large examples to xl to preserve their appearance.
 
 - Moved the bilingual homepage principle section directly after the feature strip and paired its text with a three-step workflow using existing Columns, Feature, and Lucide separators.
@@ -34,6 +36,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - Split English and German showcase examples into focused sections with alternating default and muted surfaces and contextual eyebrows, while preserving the section tone demonstrations.
 
 ### Added
+
+- Added Feature card layout with left-aligned content, a shared tinted or explicit background, and no separate icon box, with bilingual showcase and Storybook examples.
 
 - Added shared Columns gap and gapMobile presets for layouts with or without separators, retaining existing layout defaults and legacy divider spacing options.
 
