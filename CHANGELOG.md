@@ -9,6 +9,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Added
 
+- Added sitemap.xml with canonical page URLs, content-derived lastmod dates, translated hreflang links and x-default, using the official Astro sitemap serializer and preserving its index output.
+
+### Added
+
 - Added English and German deployment documentation for Apache and Nginx, including static builds, localized error documents, subpaths, and deployment checks.
 - Added a deployment overview card in both languages with a generated illustration matching the documentation artwork.
 

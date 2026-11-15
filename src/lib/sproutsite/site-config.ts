@@ -83,10 +83,13 @@ const siteSchema = z.object({
     }),
 });
 
-export function loadSiteConfig(locale?: string): SiteConfig {
+export function loadSiteConfig(
+    locale?: string,
+    root = process.cwd(),
+): SiteConfig {
     const filename =
         locale && locale !== 'en' ? `site.${locale}.yaml` : 'site.yaml';
-    const source = resolve(process.cwd(), 'src/content', filename);
+    const source = resolve(root, 'src/content', filename);
     const raw = parse(readFileSync(source, 'utf8'));
     const parsed = siteSchema.safeParse(raw);
     if (!parsed.success) {

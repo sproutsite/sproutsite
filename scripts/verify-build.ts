@@ -134,6 +134,41 @@ const htmlByFile = new Map(
         readFileSync(join('dist', file), 'utf8'),
     ]),
 );
+const sitemapXml = readFileSync(join('dist', 'sitemap.xml'), 'utf8');
+const sitemapEntries = [...sitemapXml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(
+    (match) => match[1]!,
+);
+const locations = new Set(
+    sitemapEntries.map((entry) => entry.match(/<loc>([^<]+)<\/loc>/)?.[1]),
+);
+const indexablePages = [...htmlByFile.values()].filter(
+    (html) => !html.includes('name="robots" content="noindex, follow"'),
+);
+if (
+    locations.size !== indexablePages.length ||
+    sitemapEntries.length !== locations.size
+)
+    throw new Error('Sitemap must list every indexable page exactly once');
+for (const html of indexablePages) {
+    const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+    if (!canonical || !locations.has(canonical))
+        throw new Error(`Missing sitemap page: ${canonical}`);
+}
+for (const entry of sitemapEntries) {
+    const lastmod = entry.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1];
+    if (!lastmod || !Number.isFinite(Date.parse(lastmod)))
+        throw new Error('Missing or invalid sitemap lastmod');
+    for (const alternate of entry.matchAll(
+        /<xhtml:link\b[^>]*href="([^"]+)"/g,
+    )) {
+        if (!locations.has(alternate[1]))
+            throw new Error(
+                `Sitemap alternate is not an indexable page: ${alternate[1]}`,
+            );
+    }
+    if (!entry.includes('hreflang='))
+        throw new Error('Missing sitemap language links');
+}
 for (const [file, html] of htmlByFile) {
     const route = file.slice('dist/'.length).replace(/index\.html$/, '');
     const pageUrl = new URL(withBase(`/${route}`, site.base), site.url);

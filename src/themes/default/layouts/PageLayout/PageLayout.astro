@@ -45,6 +45,11 @@ const socialImage = new URL(socialCard.src, site.url).href;
         <meta name="description" content={description} />
         {noindex && <meta name="robots" content="noindex, follow" />}
         <link rel="canonical" href={canonical} />
+        <link
+            rel="sitemap"
+            type="application/xml"
+            href={withBase('/sitemap.xml', site.base)}
+        />
         <link rel="icon" type="image/svg+xml" href={favicon} />
         <link
             rel="icon"

@@ -375,6 +375,14 @@ The entry point for the default theme is `src/themes/default/styles/theme.css`. 
 
 Another theme can replace these components and the technical CSS integration without migrating Markdown or YAML. This is not yet a configurable theme loader and deliberately does not claim every UI library can be switched through a setting.
 
+## Sitemap
+
+`npm run build` generates `dist/sitemap.xml` using the official Astro sitemap integration. It lists every regular page and blog article with its absolute canonical URL, `lastmod`, and reciprocal `xhtml:link` language alternatives. Translations are matched by content identity, including different URL segments such as `/documentation/` and `/de/dokumentation/`; missing translations are not replaced with homepage links. `x-default` points to the existing default-language version. Error pages are excluded.
+
+`lastmod` uses the latest Git commit touching a page's source directory or applicable site configuration. Local edits and untracked sources use their file modification timestamps when later. The blog overview considers article metadata. Without available Git history, source modification times are the fallback; preserve meaningful timestamps in exported source archives. These dates describe content/configuration changes, not every rebuild or a full dependency/theme change audit.
+
+The existing `sitemap-index.xml` and `sitemap-0.xml` remain valid. `sitemap.xml` exposes the generated URL list directly; if the integration splits a large site into multiple chunks, it exposes the sitemap index instead. The document head links to `/sitemap.xml`, respecting the configured deployment base. No custom XML serializer is used.
+
 ## Error Pages
 
 The default theme registers standard Astro custom 404 and 500 routes. In `npm run dev`, open `/404` or `/500` to preview the corresponding error page without triggering a server failure. Unknown URLs render the custom 404 page with HTTP status 404. Both pages reuse the small Hero, header, and footer. Agent references in their playful copy are fictional; Sproutsite contains no integrated agent.

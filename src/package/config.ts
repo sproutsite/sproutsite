@@ -1,5 +1,5 @@
 import mdx from '@astrojs/mdx';
-import { existsSync, renameSync, rmdirSync } from 'node:fs';
+import { copyFileSync, existsSync, renameSync, rmdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import type { AstroIntegration } from 'astro';
 import sitemap from '@astrojs/sitemap';
@@ -16,11 +16,13 @@ import { rehypeExternalLinks } from '../lib/sproutsite/rehype-links.js';
 import { remarkContentLinks } from '../lib/sproutsite/remark-links.js';
 import { loadSiteConfig } from '../lib/sproutsite/site-config.js';
 import { validateSproutsiteContent } from '../lib/sproutsite/validation.js';
+import { createSitemapMetadata } from '../lib/sproutsite/sitemap.js';
 
 /** Returns the Astro configuration required by the default Sproutsite theme. */
 export function createSproutsiteConfig() {
     validateSproutsiteContent();
     const site = loadSiteConfig();
+    let sitemapMetadata: ReturnType<typeof createSitemapMetadata> | undefined;
 
     return {
         site: site.url,
@@ -33,6 +35,21 @@ export function createSproutsiteConfig() {
         integrations: [
             mdx(),
             sitemap({
+                namespaces: {
+                    news: false,
+                    image: false,
+                    video: false,
+                    xhtml: true,
+                },
+                serialize: (item) => {
+                    sitemapMetadata ??= createSitemapMetadata();
+                    const metadata = sitemapMetadata.get(item.url);
+                    if (!metadata)
+                        throw new Error(
+                            `Missing sitemap metadata for ${item.url}`,
+                        );
+                    return { ...item, ...metadata };
+                },
                 filter: (page) =>
                     !/\/(?:404|500)(?:-[a-z]{2})?(?:\.html|\/)?$/.test(
                         new URL(page).pathname,
@@ -76,6 +93,17 @@ export function createSproutsiteConfig() {
                         });
                     },
                     'astro:build:done': ({ dir }) => {
+                        // Keep Astro's index/chunks; expose the single chunk at the
+                        // conventional URL, or the index if the site needs chunks.
+                        copyFileSync(
+                            new URL(
+                                existsSync(new URL('sitemap-1.xml', dir))
+                                    ? 'sitemap-index.xml'
+                                    : 'sitemap-0.xml',
+                                dir,
+                            ),
+                            new URL('sitemap.xml', dir),
+                        );
                         // Astro owns error-page rendering. Flatten localized output
                         // for web servers that select their error documents by locale.
                         for (const locale of site.locales.filter(
