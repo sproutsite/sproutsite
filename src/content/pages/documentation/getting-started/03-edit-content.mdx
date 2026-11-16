@@ -1,0 +1,56 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Your daily work</Eyebrow>
+
+## Edit text and build pages
+
+Your content lives under `src/content/`. These are the files you work with; the installed library stays in `node_modules/` and should not be edited there.
+
+- `site.yaml` contains your website name, navigation, and footer.
+- `pages/page.yaml` contains the homepage's browser title and description.
+- `pages/hero.md` contains its main heading and introduction.
+- `pages/01-introduction.md` contains the first content section. Further sections follow consecutively as `02-…`, `03-…`, and so on.
+
+For a first homepage, create `src/content/pages/page.yaml`:
+
+```yaml
+title: My website
+description: News and information from our team.
+```
+
+Add `src/content/pages/hero.md`:
+
+```markdown
+---
+title: Welcome to our website
+eyebrow: Our team
+type: small
+tone: brand
+---
+
+Find our latest news, services, and contact details here.
+```
+
+Then create `src/content/pages/01-introduction.md`:
+
+```markdown
+---
+tone: default
+---
+
+## What we do
+
+We help local teams plan and deliver their projects.
+```
+
+Start `npm run dev`, open the local preview, and change the last sentence. Save the file and check the result in the browser. To add a page, create another directory with its own `page.yaml` and numbered sections.
+
+Use `.mdx` when you want building blocks such as cards, columns, or accordions. Copy a documented example from the [showcase](/showcase/) and replace its text and images. The supplied components already use coordinated colors, fonts, and spacing; you do not have to design them yourself.
+
+For example, ask an external coding agent: “Add a new section to our About page using the existing components. Keep the design and update both language versions.” Review the changes in the preview before publishing. Sproutsite itself contains no agent.

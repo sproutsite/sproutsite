@@ -1,0 +1,26 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Prüfen und veröffentlichen</Eyebrow>
+
+## Deine Änderungen online stellen
+
+Prüfe die Seite in der Vorschau auf einem schmalen und einem breiten Bildschirm. Lies den fertigen Text, folge seinen Links und kontrolliere Bilder und Navigation. Hast du eine gemeinsame Komponente oder eine übersetzte Seite geändert, prüfe auch die anderen betroffenen Seiten.
+
+Baue anschließend deine Website:
+
+```sh
+npm run build
+npm run preview
+```
+
+Die fertigen Dateien liegen in `dist/`. Der Build prüft die unterstützte Inhaltsstruktur; die redaktionelle Kontrolle ersetzt er nicht. Dein Website-Projekt kann zusätzlich einen eigenen Befehl `npm run check` bereitstellen. Nutze ihn, wenn er eingerichtet ist; die später beschriebenen vollständigen Tests und Storybook-Befehle gehören zum Sproutsite-Repository für Mitwirkende.
+
+Zum Veröffentlichen überträgst du den vollständigen Inhalt von `dist/` auf dein Webhosting oder nutzt den vereinbarten Veröffentlichungsprozess deines Teams. Node.js wird zum Bauen und für die Vorschau benötigt, nicht zum Ausliefern der fertigen statischen Website.
+
+[Anleitung für Apache und Nginx öffnen](/dokumentation/veroeffentlichen/).

@@ -41,6 +41,16 @@ After installing its development dependencies, this repository must run immediat
 - Markdown, YAML, CSS, JSON, and HTML templates inside `.astro` remain allowed for content, styles, data, and markup. npm scripts may invoke existing CLI tools; project-owned validation logic belongs in TypeScript files.
 - During acceptance, check that no project-owned JavaScript source files exist. Exclude generated directories and dependencies from this check.
 
+## Audience and Editorial Perspective
+
+- The primary audience is the editorial user maintaining their own website with Sproutsite. Write from that person's perspective across the website and documentation: what they receive, which content files they edit, how they preview changes, and how they publish.
+- Present the supplied design and components as existing tools for the user. Do not imply that editorial users must design a theme, build components, or develop Sproutsite before using it.
+- Distinguish a user's own website project from the Sproutsite framework repository. Installing and using the library is a different workflow from cloning Sproutsite to contribute to it.
+- Contributors to Sproutsite are the secondary audience. Put framework development, internal directories, tests, and contribution instructions in a clearly labeled second part, after the user workflow.
+- Identify whose developers are meant whenever development is discussed: Sproutsite contributors or the team setting up an individual website. Avoid unexplained references to "developers" or "the project".
+- Keep technical references precise, but explain their relevance to the editorial workflow first. Do not invent a graphical editor, installer, starter template, or command that does not exist.
+- When explicitly requested, documentation may describe the intended npm consumer-installation workflow. Keep actual publication status identifiable and do not install an unverified registry package, publish a release, or claim unperformed installation tests.
+
 ## Writing Style for User-Facing Content
 
 These rules apply to content primarily intended for prospective users or users, including the homepage, hero sections, product pages, the showcase, and comparable page copy. They do not apply to technical documentation, the README, API or configuration references, the changelog, validation errors, or code comments. For those, precision, completeness, and established technical writing conventions take precedence.

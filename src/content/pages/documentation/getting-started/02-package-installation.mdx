@@ -1,0 +1,80 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>One-time setup</Eyebrow>
+
+## Add Sproutsite to your website
+
+Sproutsite is used as a library in your own Astro project. The library supplies the theme and components; your content belongs to your project. Installing the package does not create content files or a ready-to-edit website automatically.
+
+For a new website, create an Astro project with the official setup tool. Choose a project folder such as `my-website`, the minimal template, and dependency installation. Then install Sproutsite and MDX in that folder:
+
+```sh
+npm create astro@latest
+cd my-website
+npm install sproutsite @astrojs/mdx
+```
+
+If you already have an Astro project, run only the package installation there. You can ask your technical contact or external coding agent to connect the library once using the following files.
+
+### Connect the supplied configuration
+
+In `astro.config.ts`:
+
+```typescript
+import { defineConfig } from 'astro/config';
+import { createSproutsiteConfig } from 'sproutsite/config';
+
+export default defineConfig(createSproutsiteConfig());
+```
+
+In `src/content.config.ts`:
+
+```typescript
+import { createSproutsiteCollections } from 'sproutsite/content';
+
+export const collections = createSproutsiteCollections();
+```
+
+Create `src/pages/[...slug].astro`. In a new minimal project, this replaces the generated starter `src/pages/index.astro`; do not keep both homepage routes.
+
+```astro
+---
+import SproutsitePage, { getSproutsiteStaticPaths } from 'sproutsite/page';
+
+export async function getStaticPaths() {
+    return getSproutsiteStaticPaths();
+}
+---
+
+<SproutsitePage {...Astro.props} />
+```
+
+Create `src/content/site.yaml` for the website's name, address, and navigation. This minimal example uses English as its only language; replace the example name and production address with your own:
+
+```yaml
+name: My website
+url: https://example.com
+base: /
+language: en
+locales:
+    - en
+header:
+    links:
+        - label: Home
+          href: /
+footer:
+    text: My website with Sproutsite.
+    links: []
+```
+
+Add the page files from the next section before starting `npm run dev`. Keep the Astro project's strict TypeScript configuration. For multiple languages, see the [content guide](/documentation/content/).
+
+The npm commands describe the intended package-consumer workflow. The current Sproutsite working copy is still private; registry publication is a separate step. Until the official package is published, use the [local package installation](/documentation/package/) instead of assuming a registry package with this name belongs to this project.
+
+The initial Astro setup follows the [official installation guide](https://docs.astro.build/en/install-and-setup/). Sproutsite's configuration already includes the [official MDX integration](https://docs.astro.build/en/guides/integrations-guide/mdx/), so do not add it a second time.

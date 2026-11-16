@@ -1,0 +1,44 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Part two: contribute to Sproutsite</Eyebrow>
+
+## Work on the framework itself
+
+This part is for people who want to improve Sproutsite's components, theme, content handling, or documentation. You can skip it when maintaining your own website. Here you work in the **Sproutsite repository**, not in a consumer website project.
+
+```sh
+git clone https://github.com/sproutsite/sproutsite.git
+cd sproutsite
+nvm use
+npm ci
+npm run dev
+```
+
+`nvm use` is for contributors who use nvm; otherwise install the Node.js version recorded in `.nvmrc` by your preferred method. The local server displays the repository's demo website. Its own package is linked through the existing project configuration; do not install another `sproutsite` package into this checkout.
+
+Read `AGENTS.md` and the README before making changes. Work in the appropriate area:
+
+- `src/content/`: demo content and documentation, with matching English and German versions.
+- `src/themes/default/`: the supplied design, styles, and Astro components.
+- `src/lib/sproutsite/`: shared content, URL, and validation logic.
+- `src/package/`: the public import entry points used by consumer projects.
+- `stories/` and `tests/`: isolated component examples and project checks.
+
+Before proposing a change, run the checks appropriate to it:
+
+```sh
+npm run format:check
+npm run check
+npm test
+npm run build
+```
+
+For component work, use `npm run storybook`, add suitable stories, and check the result with `npm run build:storybook`. Use `npm run test:a11y` for changes affecting appearance or interaction; automated checks complement a visual and keyboard review.
+
+[Read about project checks](/documentation/checks/) · [Test the package in a separate website project](/documentation/package/)

@@ -1,0 +1,80 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Einmalig einrichten</Eyebrow>
+
+## Sproutsite zu deiner Website hinzufügen
+
+Du verwendest Sproutsite als Bibliothek in deinem eigenen Astro-Projekt. Die Bibliothek liefert Theme und Komponenten; deine Inhalte gehören zu deinem Projekt. Die Paketinstallation erzeugt nicht automatisch Inhaltsdateien oder eine fertig eingerichtete Website.
+
+Für eine neue Website legst du mit dem offiziellen Einrichtungswerkzeug ein Astro-Projekt an. Wähle einen Projektordner wie `my-website`, das minimale Template und die Installation der Abhängigkeiten. Installiere anschließend in diesem Ordner Sproutsite und MDX:
+
+```sh
+npm create astro@latest
+cd my-website
+npm install sproutsite @astrojs/mdx
+```
+
+Hast du bereits ein Astro-Projekt, führst du dort nur die Paketinstallation aus. Die einmalige Anbindung mit den folgenden Dateien kann deine technische Ansprechperson oder dein externer Coding-Agent übernehmen.
+
+### Die mitgelieferte Konfiguration anbinden
+
+In `astro.config.ts`:
+
+```typescript
+import { defineConfig } from 'astro/config';
+import { createSproutsiteConfig } from 'sproutsite/config';
+
+export default defineConfig(createSproutsiteConfig());
+```
+
+In `src/content.config.ts`:
+
+```typescript
+import { createSproutsiteCollections } from 'sproutsite/content';
+
+export const collections = createSproutsiteCollections();
+```
+
+Lege `src/pages/[...slug].astro` an. In einem neuen Minimalprojekt ersetzt diese Datei die erzeugte Startdatei `src/pages/index.astro`; behalte nicht beide Startseitenrouten.
+
+```astro
+---
+import SproutsitePage, { getSproutsiteStaticPaths } from 'sproutsite/page';
+
+export async function getStaticPaths() {
+    return getSproutsiteStaticPaths();
+}
+---
+
+<SproutsitePage {...Astro.props} />
+```
+
+Lege für Name, Adresse und Navigation `src/content/site.yaml` an. Dieses Minimalbeispiel verwendet Englisch als einzige Sprache; ersetze den Beispielnamen und die Produktionsadresse durch deine eigenen Angaben:
+
+```yaml
+name: My website
+url: https://example.com
+base: /
+language: en
+locales:
+    - en
+header:
+    links:
+        - label: Home
+          href: /
+footer:
+    text: My website with Sproutsite.
+    links: []
+```
+
+Ergänze vor dem Start mit `npm run dev` die Seitendateien aus dem nächsten Abschnitt. Behalte die strikte TypeScript-Konfiguration des Astro-Projekts bei. Für mehrere Sprachen gibt es die [Anleitung zu Inhalten](/dokumentation/inhalte/).
+
+Die npm-Befehle beschreiben den vorgesehenen Nutzungsweg als Paket. Die aktuelle Sproutsite-Arbeitskopie ist noch privat; die Registry-Veröffentlichung ist ein eigener Schritt. Bis das offizielle Paket veröffentlicht ist, verwende die [lokale Paketinstallation](/dokumentation/paket/), statt bei einem gleichnamigen Registry-Paket von diesem Projekt auszugehen.
+
+Die erste Astro-Einrichtung folgt der [offiziellen Installationsanleitung](https://docs.astro.build/en/install-and-setup/). Die Sproutsite-Konfiguration bindet die [offizielle MDX-Integration](https://docs.astro.build/en/guides/integrations-guide/mdx/) bereits ein; ergänze sie nicht ein zweites Mal.

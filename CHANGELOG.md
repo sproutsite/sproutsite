@@ -7,6 +7,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Changed
+
+- Prioritized editorial website users in the agent guidelines and bilingual getting-started documentation, separating package use, content editing, publishing, and framework contribution.
+
 ## [0.5.6] - 2026-11-16
 
 ### Added
