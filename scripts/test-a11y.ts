@@ -273,6 +273,97 @@ async function checkMobileNavigation(page: Page, german: boolean) {
     await page.evaluate(() => window.scrollTo(0, 0));
 }
 
+async function checkAccordions(page: Page) {
+    const groups = page.locator('.ss-accordion');
+    assert.equal(await groups.count(), 4);
+    const first = groups.nth(0).locator(':scope > details');
+    const iconItems = groups.nth(1).locator(':scope > details');
+    const multiple = groups.nth(3).locator(':scope > details');
+    await page.waitForFunction(
+        () =>
+            document
+                .querySelector('.ss-accordion')
+                ?.getAttribute('data-enhanced') === 'true',
+    );
+    assert.equal(await first.nth(0).getAttribute('open'), '');
+    await first.nth(1).locator('summary').click();
+    assert.equal(await first.nth(0).getAttribute('open'), null);
+    assert.equal(await first.nth(1).getAttribute('open'), '');
+    // Another single-open group must retain its initial open item.
+    assert.equal(await iconItems.nth(0).getAttribute('open'), '');
+    await first.nth(1).locator('.ss-accordion-item__answer p').click();
+    assert.equal(await first.nth(1).getAttribute('open'), null);
+    await first.nth(0).locator('summary').focus();
+    await page.keyboard.press('Space');
+    assert.equal(await first.nth(0).getAttribute('open'), '');
+    assert.equal(
+        await first.nth(0).locator('.ss-accordion-item__up').isVisible(),
+        true,
+    );
+    await page.keyboard.press('Enter');
+    assert.equal(await first.nth(0).getAttribute('open'), null);
+    assert.equal(
+        await first.nth(0).locator('.ss-accordion-item__plus').isVisible(),
+        true,
+    );
+    const box = await iconItems
+        .nth(0)
+        .locator('.ss-accordion-item__icon')
+        .boundingBox();
+    assert.ok(
+        box && Math.abs(box.width - 56) < 1 && Math.abs(box.height - 56) < 1,
+    );
+    assert.equal(
+        await iconItems
+            .nth(0)
+            .locator('.ss-accordion-item__icon svg')
+            .getAttribute('width'),
+        '28',
+    );
+    const custom = iconItems.nth(2);
+    assert.equal(
+        await custom
+            .locator('.ss-accordion-item__icon')
+            .evaluate((icon) => getComputedStyle(icon).backgroundColor),
+        'rgb(223, 234, 229)',
+    );
+    assert.equal(await multiple.nth(0).getAttribute('open'), '');
+    assert.equal(await multiple.nth(1).getAttribute('open'), '');
+    const answer = multiple
+        .nth(0)
+        .locator('.ss-accordion-item__answer p')
+        .first();
+    await answer.evaluate((element) => {
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        window.getSelection()?.removeAllRanges();
+        window.getSelection()?.addRange(range);
+    });
+    // Preserve a programmatically established text selection during a click.
+    await answer.dispatchEvent('click');
+    assert.equal(await multiple.nth(0).getAttribute('open'), '');
+    await page.evaluate(() => window.getSelection()?.removeAllRanges());
+    const link = multiple.nth(0).locator('a');
+    await link.evaluate((element) =>
+        element.addEventListener('click', (event) => event.preventDefault(), {
+            once: true,
+        }),
+    );
+    await link.click();
+    assert.equal(await multiple.nth(0).getAttribute('open'), '');
+    await answer.click();
+    assert.equal(await multiple.nth(0).getAttribute('open'), null);
+    assert.equal(await multiple.nth(1).getAttribute('open'), '');
+    await page.screenshot({
+        path: join(
+            tmpdir(),
+            `sproutsite-accordions-${page.viewportSize()?.width}.png`,
+        ),
+        fullPage: true,
+    });
+    await page.evaluate(() => window.scrollTo(0, 0));
+}
+
 try {
     await waitForServer();
     const browser = await chromium.launch({ headless: true });
@@ -325,6 +416,8 @@ try {
                 throw new Error(
                     `${viewport.name} ${route}: viewport overflows horizontally`,
                 );
+            if (route.endsWith('/showcase/accordions/'))
+                await checkAccordions(page);
             if (route.endsWith('/showcase/features/')) {
                 const cards = page.locator('.ss-feature--card');
                 assert.equal(await cards.count(), 5);

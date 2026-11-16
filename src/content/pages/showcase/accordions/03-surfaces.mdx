@@ -1,0 +1,73 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Accordion, AccordionItem } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Separate icon and surface</Eyebrow>
+
+## Custom backgrounds
+
+`backgroundColor` belongs to the icon box. `surfaceColor` sets the closed item background; `openSurfaceColor` and `openBorderColor` control the open state. These three surface props accept CSS hex colors. Omit them for the blue-and-white defaults. When changing surfaces, check text and focus contrast yourself.
+
+<Tabs label="Custom surfaces: preview and code">
+    <Tab title="Preview">
+        <Accordion multiple>
+            <AccordionItem
+                title="A softly colored closed item"
+                icon="Leaf"
+                color="#456b43"
+                surfaceColor="#f2f6ed"
+                openSurfaceColor="#e9efdf"
+                openBorderColor="#527442"
+            >
+                The surface is tinted even before opening. Its icon still has
+                its own background.
+            </AccordionItem>
+            <AccordionItem
+                title="A custom open surface"
+                icon="Info"
+                color="#456e70"
+                backgroundColor="#dfeae5"
+                openSurfaceColor="#edf5f5"
+                openBorderColor="#456e70"
+                open
+            >
+                Use a restrained tint for supporting notes. Essential warnings
+                should remain visible without opening an accordion.
+            </AccordionItem>
+        </Accordion>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        <Accordion multiple>
+            <AccordionItem
+                title="A softly colored closed item"
+                icon="Leaf"
+                color="#456b43"
+                surfaceColor="#f2f6ed"
+                openSurfaceColor="#e9efdf"
+                openBorderColor="#527442"
+            >
+                The surface is tinted even before opening.
+            </AccordionItem>
+            <AccordionItem
+                title="A custom open surface"
+                icon="Info"
+                color="#456e70"
+                backgroundColor="#dfeae5"
+                openSurfaceColor="#edf5f5"
+                openBorderColor="#456e70"
+                open
+            >
+                Supporting notes with a restrained tint.
+            </AccordionItem>
+        </Accordion>
+        ```
+    </Tab>
+</Tabs>

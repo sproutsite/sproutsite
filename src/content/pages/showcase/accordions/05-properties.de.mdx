@@ -1,0 +1,33 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { ContentTable } from 'sproutsite/components';
+
+<Eyebrow>Gezielt konfigurieren</Eyebrow>
+
+## Parameter und Einsatzbereiche
+
+<ContentTable caption="Akkordeon-Parameter">
+
+| Komponente    | Parameter          | Standard      | Erlaubte Werte                                                                       |
+| ------------- | ------------------ | ------------- | ------------------------------------------------------------------------------------ |
+| Accordion     | `multiple`         | `false`       | Boolean                                                                              |
+| AccordionItem | `title`            | Erforderlich  | Nichtleere Frage oder Überschrift                                                    |
+| AccordionItem | `open`             | `false`       | Boolean; höchstens einer je Gruppe ohne Mehrfachöffnung                              |
+| AccordionItem | `icon`             | Keines        | PascalCase-Name von Lucide                                                           |
+| AccordionItem | `color`            | `primary`     | primary, secondary, accent, neutral, info, success, warning, error oder CSS-Hexfarbe |
+| AccordionItem | `backgroundColor`  | 8 % Iconfarbe | CSS-Hexfarbe; nur für die Icon-Box                                                   |
+| AccordionItem | `surfaceColor`     | Weiß          | CSS-Hexfarbe; geschlossene Box                                                       |
+| AccordionItem | `openSurfaceColor` | Hellblau      | CSS-Hexfarbe; geöffnete Box                                                          |
+| AccordionItem | `openBorderColor`  | Blau          | CSS-Hexfarbe; geöffneter Rahmen                                                      |
+
+</ContentTable>
+
+Akkordeons eignen sich für ergänzende Antworten, Einrichtungshinweise oder Details zur Veröffentlichung. Zentrale Produkterklärungen, notwendige Schritte und wichtige Warnungen bleiben besser sichtbar. Die Kopfzeile ist das native Bedienelement, keine zusätzliche Überschrift; gib der umgebenden Section eine sinnvolle Überschrift. Verwende keine Links in `title` und verschachtele keine Accordion-Gruppen innerhalb eines Eintrags. Antworten dürfen Markdown, Links und dokumentierte Komponenten enthalten.
+
+Beide Komponenten sind in Storybook unter **Molecules/Accordion** und **Molecules/AccordionItem** verfügbar. Teste die Controls für Farben und Startzustand und vergleiche einfache Einträge, Icons, eigene Flächen und Mehrfachöffnung.

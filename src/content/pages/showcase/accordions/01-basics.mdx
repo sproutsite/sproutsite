@@ -1,0 +1,46 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Accordion, AccordionItem } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Start with the question</Eyebrow>
+
+## Plain questions and answers
+
+`Accordion` groups direct `AccordionItem` children. Each item needs a `title`; Markdown in its default slot becomes the answer. The default opens one item at a time. Closed items have a white surface and gray border; open items use a light blue tint and blue border. The indicator changes from Plus to ChevronUp.
+
+**Atomic Design:** Both components are molecules in `components/molecules/Accordion/` and `components/molecules/AccordionItem/`. They reuse the Icon atom and DaisyUI's collapse styles with native details and summary elements.
+
+<Tabs label="Plain accordion: preview and code">
+    <Tab title="Preview">
+        <Accordion>
+            <AccordionItem title="Does Sproutsite include an AI agent?" open>
+                No. Your external coding agent edits repository files. Sproutsite provides the content structure and reusable components.
+            </AccordionItem>
+            <AccordionItem title="Do I need a CMS server?">
+                No. Astro generates static files that you can publish on a web server.
+            </AccordionItem>
+        </Accordion>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Accordion, AccordionItem } from 'sproutsite/components';
+
+        <Accordion>
+            <AccordionItem title="Does Sproutsite include an AI agent?" open>
+                No. Use your preferred external coding agent.
+            </AccordionItem>
+            <AccordionItem title="Do I need a CMS server?">
+                No. Deploy the static build.
+            </AccordionItem>
+        </Accordion>
+        ```
+    </Tab>
+
+</Tabs>

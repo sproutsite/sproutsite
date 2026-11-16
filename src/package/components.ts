@@ -11,5 +11,7 @@ export { default as Badge } from '../themes/default/components/atoms/Badge/Badge
 export { default as Button } from '../themes/default/components/atoms/Button/Button.astro';
 export { default as Icon } from '../themes/default/components/atoms/Icon/Icon.astro';
 export { default as Feature } from '../themes/default/components/molecules/Feature/Feature.astro';
+export { default as Accordion } from '../themes/default/components/molecules/Accordion/Accordion.astro';
+export { default as AccordionItem } from '../themes/default/components/molecules/AccordionItem/AccordionItem.astro';
 export { default as Column } from '../themes/default/components/layout/Column/Column.astro';
 export { default as Columns } from '../themes/default/components/layout/Columns/Columns.astro';

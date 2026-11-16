@@ -1,0 +1,118 @@
+/* DaisyUI collapse uses the utilities layer; keep these local overrides there. */
+@layer utilities {
+    .ss-accordion-item {
+        --ss-accordion-icon-color: var(--color-primary);
+        border: 1px solid var(--color-base-300);
+        border-radius: var(--radius-box);
+        background: var(--ss-accordion-surface, var(--color-base-100));
+        color: var(--color-base-content);
+        overflow-wrap: anywhere;
+
+        > .ss-accordion-item__summary {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem;
+            min-height: 4rem;
+            list-style: none;
+            cursor: pointer;
+
+            .ss-accordion-item__icon {
+                display: grid;
+                place-items: center;
+                width: 3.5rem;
+                height: 3.5rem;
+                border-radius: 1rem;
+                color: var(--ss-accordion-icon-color);
+                background-color: var(
+                    --ss-accordion-icon-background,
+                    color-mix(
+                        in srgb,
+                        var(--ss-accordion-icon-color) 8%,
+                        transparent
+                    )
+                );
+            }
+
+            .ss-accordion-item__title {
+                font-family: var(--font-heading);
+                font-size: 1.25rem;
+                font-weight: 700;
+                line-height: 1.4;
+            }
+
+            .ss-accordion-item__indicator {
+                color: var(--color-primary);
+
+                .ss-accordion-item__up {
+                    display: none;
+                }
+                .ss-icon {
+                    display: block;
+                }
+            }
+        }
+
+        > .ss-accordion-item__answer {
+            padding: 0 1.25rem;
+            cursor: pointer;
+
+            > .content-prose {
+                color: var(--color-base-content);
+                font-size: 1rem;
+                line-height: 1.6;
+
+                > :first-child {
+                    margin-top: 0;
+                }
+                > :last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        &[open] {
+            border-color: var(
+                --ss-accordion-open-border,
+                color-mix(
+                    in srgb,
+                    var(--color-primary) 40%,
+                    var(--color-base-100)
+                )
+            );
+            background: var(
+                --ss-accordion-open-surface,
+                color-mix(
+                    in srgb,
+                    var(--color-primary) 5%,
+                    var(--color-base-100)
+                )
+            );
+
+            > .ss-accordion-item__summary .ss-accordion-item__indicator {
+                .ss-accordion-item__plus {
+                    display: none;
+                }
+                .ss-accordion-item__up {
+                    display: block;
+                }
+            }
+            > .ss-accordion-item__answer {
+                padding-bottom: 1.25rem;
+            }
+        }
+
+        &.ss-accordion-item--icon {
+            > .ss-accordion-item__summary {
+                grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+            }
+
+            @media (width >= 40rem) {
+                > .ss-accordion-item__answer {
+                    padding-left: 5.75rem;
+                }
+            }
+        }
+    }
+}

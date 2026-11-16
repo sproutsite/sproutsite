@@ -1,0 +1,54 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Accordion, AccordionItem } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Keep the context</Eyebrow>
+
+## Multiple answers and rich content
+
+Use `multiple` for setup instructions or reference notes that readers compare side by side. Several `open` items are allowed in this mode. Separate groups never close one another's items.
+
+<Tabs label="Multiple answers: preview and code">
+    <Tab title="Preview">
+        <Accordion multiple>
+            <AccordionItem title="What do I upload?" icon="Upload" open>
+                Upload the **complete** `dist/` output:
+
+                - HTML pages and error documents
+                - The `_astro/` asset directory
+                - The sitemap and manifest
+
+                [Read the deployment guide](/documentation/deployment/).
+            </AccordionItem>
+            <AccordionItem title="Can I use Sproutsite commercially?" icon="BriefcaseBusiness" open>
+                Yes, under the Apache License 2.0. Preserve applicable copyright, license, and NOTICE information.
+
+                [Read the Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+            </AccordionItem>
+        </Accordion>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        <Accordion multiple>
+            <AccordionItem title="What do I upload?" icon="Upload" open>
+                Upload the **complete** `dist/` output.
+
+                [Read the deployment guide](/documentation/deployment/).
+            </AccordionItem>
+            <AccordionItem title="Can I use Sproutsite commercially?" open>
+                Yes, under the Apache License 2.0.
+            </AccordionItem>
+        </Accordion>
+        ```
+    </Tab>
+
+</Tabs>
+
+The whole closed box opens on click. When open, click the heading or noninteractive answer area to close it. Links, buttons, and text selection remain usable without closing. Tab focuses each heading; Enter and Space toggle it. A small processed TypeScript script adds whole-box closing and independent single-open groups. Without JavaScript, native details still open and close through their headings, but groups allow multiple open items.

@@ -1,0 +1,54 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Accordion, AccordionItem } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Den Zusammenhang behalten</Eyebrow>
+
+## Mehrere Antworten und formatierter Inhalt
+
+Verwende `multiple` für Einrichtungsschritte oder Hinweise, die Leser gleichzeitig vergleichen sollen. In diesem Modus sind mehrere `open`-Einträge erlaubt. Getrennte Gruppen schließen niemals die Einträge der jeweils anderen Gruppe.
+
+<Tabs label="Mehrere Antworten: Vorschau und Code">
+    <Tab title="Vorschau">
+        <Accordion multiple>
+            <AccordionItem title="Was lade ich hoch?" icon="Upload" open>
+                Übertrage die **vollständige** Ausgabe von `dist/`:
+
+                - HTML-Seiten und Fehlerseiten
+                - Das Asset-Verzeichnis `_astro/`
+                - Sitemap und Manifest
+
+                [Anleitung zum Veröffentlichen lesen](/dokumentation/veroeffentlichen/).
+            </AccordionItem>
+            <AccordionItem title="Darf ich Sproutsite kommerziell nutzen?" icon="BriefcaseBusiness" open>
+                Ja, unter der Apache License 2.0. Erhalte die jeweils geltenden Copyright-, Lizenz- und NOTICE-Hinweise.
+
+                [Apache License 2.0 lesen](https://www.apache.org/licenses/LICENSE-2.0).
+            </AccordionItem>
+        </Accordion>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        <Accordion multiple>
+            <AccordionItem title="Was lade ich hoch?" icon="Upload" open>
+                Übertrage die **vollständige** Ausgabe von `dist/`.
+
+                [Anleitung zum Veröffentlichen lesen](/dokumentation/veroeffentlichen/).
+            </AccordionItem>
+            <AccordionItem title="Darf ich Sproutsite kommerziell nutzen?" open>
+                Ja, unter der Apache License 2.0.
+            </AccordionItem>
+        </Accordion>
+        ```
+    </Tab>
+
+</Tabs>
+
+Die gesamte geschlossene Box öffnet sich per Klick. Geöffnet schließt sie beim Klick auf den Kopf oder nichtinteraktive Antwortflächen. Links, Buttons und Textauswahl bleiben bedienbar, ohne zu schließen. Tab fokussiert die Kopfzeilen; Enter und Leertaste schalten den Zustand um. Ein kleines verarbeitetes TypeScript-Script ergänzt das Schließen über die Box und unabhängige Einzelöffnung je Gruppe. Ohne JavaScript bleiben die nativen Details über ihre Kopfzeilen bedienbar; dann dürfen mehrere Einträge je Gruppe offen sein.

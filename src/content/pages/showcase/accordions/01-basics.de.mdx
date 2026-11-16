@@ -1,0 +1,46 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Accordion, AccordionItem } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Die Frage zuerst</Eyebrow>
+
+## Fragen und Antworten ohne Icons
+
+`Accordion` gruppiert direkte `AccordionItem`-Kinder. Jeder Eintrag benötigt einen `title`; Markdown im Standard-Slot bildet die Antwort. Standardmäßig bleibt jeweils ein Eintrag geöffnet. Geschlossene Einträge haben einen weißen Hintergrund und grauen Rahmen, geöffnete eine leichte blaue Tönung mit blauem Rahmen. Der Indikator wechselt von Plus zu ChevronUp.
+
+**Atomic Design:** Beide Komponenten sind Molecules unter `components/molecules/Accordion/` und `components/molecules/AccordionItem/`. Sie verwenden das Icon-Atom und DaisyUIs Collapse-Styles mit nativen Details- und Summary-Elementen.
+
+<Tabs label="Einfaches Akkordeon: Vorschau und Code">
+    <Tab title="Vorschau">
+        <Accordion>
+            <AccordionItem title="Enthält Sproutsite einen KI-Agenten?" open>
+                Nein. Dein externer Coding-Agent bearbeitet Dateien im Repository. Sproutsite stellt die Inhaltsstruktur und wiederverwendbare Komponenten bereit.
+            </AccordionItem>
+            <AccordionItem title="Brauche ich einen CMS-Server?">
+                Nein. Astro erzeugt statische Dateien, die du auf einem Webserver veröffentlichen kannst.
+            </AccordionItem>
+        </Accordion>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        import { Accordion, AccordionItem } from 'sproutsite/components';
+
+        <Accordion>
+            <AccordionItem title="Enthält Sproutsite einen KI-Agenten?" open>
+                Nein. Verwende deinen bevorzugten externen Coding-Agenten.
+            </AccordionItem>
+            <AccordionItem title="Brauche ich einen CMS-Server?">
+                Nein. Veröffentliche den statischen Build.
+            </AccordionItem>
+        </Accordion>
+        ```
+    </Tab>
+
+</Tabs>

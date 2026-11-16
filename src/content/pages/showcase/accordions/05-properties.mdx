@@ -1,0 +1,33 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { ContentTable } from 'sproutsite/components';
+
+<Eyebrow>Configure each part</Eyebrow>
+
+## Properties and suitable uses
+
+<ContentTable caption="Accordion properties">
+
+| Component     | Property           | Default       | Accepted values                                                                |
+| ------------- | ------------------ | ------------- | ------------------------------------------------------------------------------ |
+| Accordion     | `multiple`         | `false`       | Boolean                                                                        |
+| AccordionItem | `title`            | Required      | Non-empty question or title                                                    |
+| AccordionItem | `open`             | `false`       | Boolean; at most one per single-open group                                     |
+| AccordionItem | `icon`             | None          | Canonical PascalCase Lucide name                                               |
+| AccordionItem | `color`            | `primary`     | primary, secondary, accent, neutral, info, success, warning, error, or CSS hex |
+| AccordionItem | `backgroundColor`  | 8% icon color | CSS hex; applies only to the icon box                                          |
+| AccordionItem | `surfaceColor`     | White         | CSS hex; closed item background                                                |
+| AccordionItem | `openSurfaceColor` | Light blue    | CSS hex; open item background                                                  |
+| AccordionItem | `openBorderColor`  | Blue          | CSS hex; open item border                                                      |
+
+</ContentTable>
+
+Use accordions for supporting answers, onboarding details, or deployment notes. Keep key product explanations, required steps, and important warnings visible. The summary is the native control, not an extra heading; give each surrounding section a meaningful heading. Do not place links inside `title` or nest Accordion groups inside an item. Answers may contain Markdown, links, and documented components.
+
+Both components are available in Storybook under **Molecules/Accordion** and **Molecules/AccordionItem**. Try the controls for colors and initial state, and compare plain, icon, custom-surface, and multiple-open examples.

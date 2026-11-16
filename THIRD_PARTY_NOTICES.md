@@ -49,6 +49,8 @@ No installed dependency license or NOTICE file was removed, overwritten, or reli
 
 ## Existing visual assets: provenance review remains open
 
+Generation record: `src/content/pages/showcase/_assets/accordions.png` was generated for this project on 2026-11-16 with OpenAI's image-generation tool. A text-only prompt requested an original blue-and-white 3D accordion illustration with one expanded answer, two collapsed rows, and plus/chevron indicators. No external artwork or logos were supplied as input. This records provenance, not a separate artwork-license grant.
+
 Generation record: `src/content/pages/documentation/_assets/deployment.png` was generated for this project on 2026-11-15 with OpenAI's image-generation tool. A text-only prompt requested an original blue-and-white 3D deployment illustration with a server stack, terminal, upload arrow, and browser window. No external artwork or server-product logos were supplied. This records provenance, not a separate artwork-license grant.
 
 Generation record: `src/content/pages/showcase/_assets/features.png` was generated for this project on 2026-11-15 with OpenAI's image-generation tool. A text-only prompt requested an original blue-and-white 3D illustration of icon-and-description feature rows in the showcase's existing visual style. No external artwork, logo, or Lucide SVG was supplied as input. This records provenance, not a separate artwork-license grant.

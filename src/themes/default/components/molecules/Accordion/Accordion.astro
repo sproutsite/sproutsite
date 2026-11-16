@@ -1,0 +1,17 @@
+---
+interface Props {
+    /** Allow several items to remain open. */
+    multiple?: boolean;
+}
+const { multiple = false } = Astro.props;
+if (typeof multiple !== 'boolean')
+    throw new Error('Accordion multiple must be boolean.');
+---
+
+<div class="ss-accordion" data-multiple={String(multiple)}>
+    <slot />
+</div>
+
+<script>
+    import './accordion';
+</script>

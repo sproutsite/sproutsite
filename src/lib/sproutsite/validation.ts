@@ -111,6 +111,8 @@ const iconComponentImport =
     /^import\s*\{\s*Icon\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const featureComponentImport =
     /^import\s*\{\s*Feature\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
+const accordionComponentImport =
+    /^import\s*\{\s*Accordion\s*,\s*AccordionItem\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const localImageImport =
     /^import\s+([A-Za-z_$][\w$]*)\s+from\s+['"](?:\.\.\/|\.\/)[a-z0-9_][a-z0-9._/-]*\.(?:avif|jpe?g|png|webp)['"];?$/i;
 const imageExtensions = new Set(['.avif', '.jpeg', '.jpg', '.png', '.webp']);
@@ -182,6 +184,8 @@ function validateMdxLayout(
     let badgeCount = 0;
     let iconCount = 0;
     let featureCount = 0;
+    let accordionCount = 0;
+    const validatedAccordionItems = new Set<MdxNode>();
     const localImageImports = new Set<string>();
     const validatedColumns = new Set<MdxNode>();
     const validatedTabs = new Set<MdxNode>();
@@ -212,7 +216,8 @@ function validateMdxLayout(
                     !buttonComponentImport.test(importValue) &&
                     !badgeComponentImport.test(importValue) &&
                     !iconComponentImport.test(importValue) &&
-                    !featureComponentImport.test(importValue)
+                    !featureComponentImport.test(importValue) &&
+                    !accordionComponentImport.test(importValue)
                 )
                     fail(
                         contentRoot,
@@ -231,7 +236,135 @@ function validateMdxLayout(
             mdxNode.type === 'mdxJsxFlowElement' ||
             mdxNode.type === 'mdxJsxTextElement'
         ) {
-            if (mdxNode.name === 'Feature') {
+            if (mdxNode.name === 'Accordion') {
+                accordionCount += 1;
+                const attributes = mdxNode.attributes ?? [];
+                const children = mdxNode.children ?? [];
+                const items = children.filter(
+                    (child) =>
+                        child.type === 'mdxJsxFlowElement' &&
+                        child.name === 'AccordionItem',
+                );
+                const isBoolean = (value: unknown) =>
+                    value === null ||
+                    (typeof value === 'object' &&
+                        value !== null &&
+                        'value' in value &&
+                        ['true', 'false'].includes(String(value.value)));
+                if (
+                    attributes.length > 1 ||
+                    attributes.some(
+                        (attribute) =>
+                            attribute.type !== 'mdxJsxAttribute' ||
+                            attribute.name !== 'multiple' ||
+                            !isBoolean(attribute.value),
+                    ) ||
+                    items.length === 0 ||
+                    children.some(
+                        (child) =>
+                            !items.includes(child) &&
+                            !(child.type === 'text' && !child.value?.trim()),
+                    )
+                )
+                    fail(
+                        contentRoot,
+                        path,
+                        'Accordion accepts optional boolean multiple and requires direct AccordionItem children.',
+                    );
+                const multipleValue = attributes[0]?.value;
+                const multiple =
+                    attributes.length > 0 &&
+                    (multipleValue === null ||
+                        (typeof multipleValue === 'object' &&
+                            multipleValue?.value === 'true'));
+                const initiallyOpen = items.filter((item) =>
+                    item.attributes?.some(
+                        (attribute) =>
+                            attribute.name === 'open' &&
+                            (attribute.value === null ||
+                                (typeof attribute.value === 'object' &&
+                                    attribute.value?.value === 'true')),
+                    ),
+                );
+                if (!multiple && initiallyOpen.length > 1)
+                    fail(
+                        contentRoot,
+                        path,
+                        'Accordion without multiple permits only one initially open item.',
+                    );
+                items.forEach((item) => validatedAccordionItems.add(item));
+            } else if (mdxNode.name === 'AccordionItem') {
+                const attributes = mdxNode.attributes ?? [];
+                const value = (name: string) =>
+                    attributes.find((attribute) => attribute.name === name)
+                        ?.value;
+                const title = value('title');
+                const color = value('color');
+                const icon = value('icon');
+                const open = attributes.find(
+                    (attribute) => attribute.name === 'open',
+                );
+                if (
+                    !validatedAccordionItems.has(mdxNode) ||
+                    typeof title !== 'string' ||
+                    !title.trim() ||
+                    attributes.some(
+                        (attribute) =>
+                            attribute.type !== 'mdxJsxAttribute' ||
+                            ![
+                                'title',
+                                'icon',
+                                'color',
+                                'backgroundColor',
+                                'surfaceColor',
+                                'openSurfaceColor',
+                                'openBorderColor',
+                                'open',
+                            ].includes(attribute.name ?? ''),
+                    ) ||
+                    new Set(attributes.map((attribute) => attribute.name))
+                        .size !== attributes.length ||
+                    (icon !== undefined &&
+                        (typeof icon !== 'string' ||
+                            !/^[A-Z][A-Za-z0-9]*$/.test(icon))) ||
+                    (color !== undefined &&
+                        (typeof color !== 'string' ||
+                            (!isHexColor(color) &&
+                                ![
+                                    'primary',
+                                    'secondary',
+                                    'accent',
+                                    'neutral',
+                                    'info',
+                                    'success',
+                                    'warning',
+                                    'error',
+                                ].includes(color)))) ||
+                    [
+                        'backgroundColor',
+                        'surfaceColor',
+                        'openSurfaceColor',
+                        'openBorderColor',
+                    ].some(
+                        (name) =>
+                            value(name) !== undefined &&
+                            !isHexColor(value(name)),
+                    ) ||
+                    (open &&
+                        !(
+                            open.value === null ||
+                            (typeof open.value === 'object' &&
+                                ['true', 'false'].includes(
+                                    open.value?.value ?? '',
+                                ))
+                        ))
+                )
+                    fail(
+                        contentRoot,
+                        path,
+                        'AccordionItem must be a direct child of Accordion with a non-empty title, optional PascalCase icon, semantic or hex color, hex backgroundColor/surfaceColor/openSurfaceColor/openBorderColor, and boolean open.',
+                    );
+            } else if (mdxNode.name === 'Feature') {
                 featureCount += 1;
                 const attributes = mdxNode.attributes ?? [];
                 const value = (name: string) =>
@@ -1011,7 +1144,8 @@ function validateMdxLayout(
             buttonCount === 0 &&
             badgeCount === 0 &&
             iconCount === 0 &&
-            featureCount === 0)
+            featureCount === 0 &&
+            accordionCount === 0)
     )
         fail(
             contentRoot,

@@ -1,0 +1,73 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Accordion, AccordionItem } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Icon und Fläche getrennt</Eyebrow>
+
+## Eigene Hintergrundfarben
+
+`backgroundColor` gehört zur Icon-Box. `surfaceColor` bestimmt den geschlossenen Hintergrund; `openSurfaceColor` und `openBorderColor` steuern den geöffneten Zustand. Diese drei Flächenparameter akzeptieren CSS-Hexfarben. Ohne Angabe gelten die blau-weißen Standardfarben. Prüfe bei eigenen Flächen den Kontrast von Text und Fokusmarkierung.
+
+<Tabs label="Eigene Flächen: Vorschau und Code">
+    <Tab title="Vorschau">
+        <Accordion multiple>
+            <AccordionItem
+                title="Schon geschlossen leicht eingefärbt"
+                icon="Leaf"
+                color="#456b43"
+                surfaceColor="#f2f6ed"
+                openSurfaceColor="#e9efdf"
+                openBorderColor="#527442"
+            >
+                Die Fläche ist bereits vor dem Öffnen getönt. Das Icon behält
+                seinen eigenen Hintergrund.
+            </AccordionItem>
+            <AccordionItem
+                title="Eine eigene geöffnete Fläche"
+                icon="Info"
+                color="#456e70"
+                backgroundColor="#dfeae5"
+                openSurfaceColor="#edf5f5"
+                openBorderColor="#456e70"
+                open
+            >
+                Eine zurückhaltende Tönung eignet sich für ergänzende Hinweise.
+                Wichtige Warnungen sollten ohne Aufklappen sichtbar bleiben.
+            </AccordionItem>
+        </Accordion>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        <Accordion multiple>
+            <AccordionItem
+                title="Schon geschlossen leicht eingefärbt"
+                icon="Leaf"
+                color="#456b43"
+                surfaceColor="#f2f6ed"
+                openSurfaceColor="#e9efdf"
+                openBorderColor="#527442"
+            >
+                Die Fläche ist bereits vor dem Öffnen getönt.
+            </AccordionItem>
+            <AccordionItem
+                title="Eine eigene geöffnete Fläche"
+                icon="Info"
+                color="#456e70"
+                backgroundColor="#dfeae5"
+                openSurfaceColor="#edf5f5"
+                openBorderColor="#456e70"
+                open
+            >
+                Ergänzende Hinweise mit zurückhaltender Tönung.
+            </AccordionItem>
+        </Accordion>
+        ```
+    </Tab>
+</Tabs>

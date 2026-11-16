@@ -1,0 +1,76 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Accordion, AccordionItem } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Visuelle Orientierung</Eyebrow>
+
+## Icons und ihre Farben
+
+Verwende die PascalCase-Namen von Lucide. Die Icon-Größe entspricht Feature in Medium: ein 28px-Symbol in einer abgerundeten Box mit 3.5rem Kantenlänge. `color` akzeptiert Theme-Namen oder CSS-Hexwerte; Standard ist `primary`. Ohne `backgroundColor` verwendet die Icon-Box 8 % Iconfarbe und 92 % transparent. Die Fläche des Eintrags bleibt unabhängig von der Iconfarbe.
+
+<Tabs label="Akkordeon-Icons: Vorschau und Code">
+    <Tab title="Vorschau">
+        <Accordion>
+            <AccordionItem
+                title="Wie funktioniert Sproutsite?"
+                icon="Layers"
+                open
+            >
+                Astro erzeugt aus deinen Markdown-Inhalten und
+                wiederverwendbaren Komponenten eine statische Website.
+            </AccordionItem>
+            <AccordionItem
+                title="Kann ich Komponenten wiederverwenden?"
+                icon="Puzzle"
+                color="secondary"
+            >
+                Ja. Importiere die dokumentierten Komponenten in deinen
+                MDX-Sections.
+            </AccordionItem>
+            <AccordionItem
+                title="Wo kann ich veröffentlichen?"
+                icon="Server"
+                color="#456e70"
+                backgroundColor="#dfeae5"
+            >
+                Übertrage den vollständigen Build auf dein statisches
+                Webhosting.
+            </AccordionItem>
+        </Accordion>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        <Accordion>
+            <AccordionItem
+                title="Wie funktioniert Sproutsite?"
+                icon="Layers"
+                open
+            >
+                Astro erzeugt die statische Website.
+            </AccordionItem>
+            <AccordionItem
+                title="Kann ich Komponenten wiederverwenden?"
+                icon="Puzzle"
+                color="secondary"
+            >
+                Importiere die dokumentierten Komponenten.
+            </AccordionItem>
+            <AccordionItem
+                title="Wo kann ich veröffentlichen?"
+                icon="Server"
+                color="#456e70"
+                backgroundColor="#dfeae5"
+            >
+                Übertrage den vollständigen Build auf dein Hosting.
+            </AccordionItem>
+        </Accordion>
+        ```
+    </Tab>
+</Tabs>

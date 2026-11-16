@@ -1,0 +1,11 @@
+@layer components {
+    .ss-accordion {
+        display: grid;
+        gap: 1rem;
+        margin-bottom: 1.25em;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

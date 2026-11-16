@@ -1,0 +1,66 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Accordion, AccordionItem } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Optional visual cues</Eyebrow>
+
+## Icons and their colors
+
+Use canonical PascalCase Lucide names. Icon dimensions match Feature's medium size: a 28px symbol in a 3.5rem rounded square. `color` accepts theme names or CSS hex values; its default is `primary`. Without `backgroundColor`, the icon box uses 8% icon color and 92% transparent. The item surface remains independent of the icon color.
+
+<Tabs label="Accordion icons: preview and code">
+    <Tab title="Preview">
+        <Accordion>
+            <AccordionItem title="How does Sproutsite work?" icon="Layers" open>
+                Astro builds a static website from your Markdown content and
+                reusable components.
+            </AccordionItem>
+            <AccordionItem
+                title="Can I reuse components?"
+                icon="Puzzle"
+                color="secondary"
+            >
+                Yes. Import the documented components in your MDX sections.
+            </AccordionItem>
+            <AccordionItem
+                title="Where can I deploy?"
+                icon="Server"
+                color="#456e70"
+                backgroundColor="#dfeae5"
+            >
+                Upload the complete build to your static web host.
+            </AccordionItem>
+        </Accordion>
+    </Tab>
+    <Tab title="Code">
+        ```mdx
+        <Accordion>
+            <AccordionItem title="How does Sproutsite work?" icon="Layers" open>
+                Astro builds the static website.
+            </AccordionItem>
+            <AccordionItem
+                title="Can I reuse components?"
+                icon="Puzzle"
+                color="secondary"
+            >
+                Import the documented components.
+            </AccordionItem>
+            <AccordionItem
+                title="Where can I deploy?"
+                icon="Server"
+                color="#456e70"
+                backgroundColor="#dfeae5"
+            >
+                Upload the complete build to your host.
+            </AccordionItem>
+        </Accordion>
+        ```
+    </Tab>
+</Tabs>

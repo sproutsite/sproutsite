@@ -1,0 +1,100 @@
+---
+import type { ComponentProps } from 'astro/types';
+import Icon from '../../atoms/Icon/Icon.astro';
+import type Feature from '../Feature/Feature.astro';
+import { isHexColor } from '../../../../../lib/sproutsite/colors.js';
+
+interface Props {
+    title: string;
+    open?: boolean;
+    icon?: ComponentProps<typeof Icon>['name'];
+    color?: ComponentProps<typeof Feature>['color'];
+    backgroundColor?: `#${string}`;
+    surfaceColor?: `#${string}`;
+    openSurfaceColor?: `#${string}`;
+    openBorderColor?: `#${string}`;
+}
+const {
+    title,
+    open = false,
+    icon,
+    color = 'primary',
+    backgroundColor,
+    surfaceColor,
+    openSurfaceColor,
+    openBorderColor,
+} = Astro.props;
+const colors = [
+    'primary',
+    'secondary',
+    'accent',
+    'neutral',
+    'info',
+    'success',
+    'warning',
+    'error',
+];
+if (!title?.trim())
+    throw new Error('AccordionItem requires a non-empty title.');
+if (typeof open !== 'boolean')
+    throw new Error('AccordionItem open must be boolean.');
+if (!isHexColor(color) && !colors.includes(color))
+    throw new Error(
+        'AccordionItem color must be a semantic theme color or CSS hex color.',
+    );
+const surfaces = {
+    backgroundColor,
+    surfaceColor,
+    openSurfaceColor,
+    openBorderColor,
+};
+for (const [name, value] of Object.entries(surfaces)) {
+    if (value !== undefined && !isHexColor(value))
+        throw new Error(`AccordionItem ${name} must be a CSS hex color.`);
+}
+const style = [
+    `--ss-accordion-icon-color: ${isHexColor(color) ? color : `var(--color-${color})`}`,
+    backgroundColor && `--ss-accordion-icon-background: ${backgroundColor}`,
+    surfaceColor && `--ss-accordion-surface: ${surfaceColor}`,
+    openSurfaceColor && `--ss-accordion-open-surface: ${openSurfaceColor}`,
+    openBorderColor && `--ss-accordion-open-border: ${openBorderColor}`,
+]
+    .filter(Boolean)
+    .join(';');
+---
+
+<details
+    class:list={[
+        'ss-accordion-item',
+        'collapse',
+        { 'ss-accordion-item--icon': Boolean(icon) },
+    ]}
+    open={open}
+    style={style}
+>
+    <summary class="ss-accordion-item__summary collapse-title not-prose">
+        {icon && (
+            <span class="ss-accordion-item__icon">
+                <Icon name={icon} size={28} />
+            </span>
+        )}
+        <span class="ss-accordion-item__title">{title}</span>
+        <span class="ss-accordion-item__indicator" aria-hidden="true">
+            <span class="ss-accordion-item__plus">
+                <Icon name="Plus" size={24} />
+            </span>
+            <span class="ss-accordion-item__up">
+                <Icon name="ChevronUp" size={24} />
+            </span>
+        </span>
+    </summary>
+    <div class="ss-accordion-item__answer collapse-content">
+        <div class="content-prose">
+            <slot />
+        </div>
+    </div>
+</details>
+
+<script>
+    import '../Accordion/accordion';
+</script>

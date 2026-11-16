@@ -375,6 +375,27 @@ The entry point for the default theme is `src/themes/default/styles/theme.css`. 
 
 Another theme can replace these components and the technical CSS integration without migrating Markdown or YAML. This is not yet a configurable theme loader and deliberately does not claim every UI library can be switched through a setting.
 
+## Accordions
+
+Import `{ Accordion, AccordionItem }` from `sproutsite/components` in an MDX section. `Accordion` accepts `multiple` (boolean, default false) and direct `AccordionItem` children. Items require `title`, accept `open` and an optional canonical PascalCase Lucide `icon`, and render Markdown in their default slot. Use at most one initially open item unless `multiple` is true.
+
+`color` accepts Feature's semantic colors or validated CSS hex colors, defaulting to primary. Icon geometry matches Feature's medium size. `backgroundColor` overrides the icon box's default 8% color tint. `surfaceColor`, `openSurfaceColor`, and `openBorderColor` accept CSS hex colors for the closed background and open background/border; defaults are white/gray when closed and a light blue surface/blue border when open.
+
+```mdx
+import { Accordion, AccordionItem } from 'sproutsite/components';
+
+<Accordion>
+    <AccordionItem title="Does Sproutsite contain an agent?" icon="Layers" open>
+        No. Your external coding agent edits files in the repository.
+    </AccordionItem>
+    <AccordionItem title="Do I need a CMS server?">
+        No. Deploy the static output.
+    </AccordionItem>
+</Accordion>
+```
+
+Native details/summary provides keyboard operation. A small processed TypeScript module scopes single-open behavior to each group and closes open items when clicking noninteractive answer areas. Links, buttons, and text selection remain usable. Without JavaScript, headings still toggle items; whole-answer closing and single-open grouping are progressive enhancements. Do not nest Accordion groups. Custom colors need their own contrast review. See `/showcase/accordions/` for bilingual live examples and Storybook's Molecules/Accordion and Molecules/AccordionItem for controls.
+
 ## Sitemap
 
 `npm run build` generates `dist/sitemap.xml` using the official Astro sitemap integration. It lists every regular page and blog article with its absolute canonical URL, `lastmod`, and reciprocal `xhtml:link` language alternatives. Translations are matched by content identity, including different URL segments such as `/documentation/` and `/de/dokumentation/`; missing translations are not replaced with homepage links. `x-default` points to the existing default-language version. Error pages are excluded.
