@@ -1,0 +1,9 @@
+---
+import SproutsitePage, { getSproutsiteStaticPaths } from 'sproutsite/page';
+
+export async function getStaticPaths() {
+    return getSproutsiteStaticPaths('de');
+}
+---
+
+<SproutsitePage {...Astro.props} />

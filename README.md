@@ -10,105 +10,182 @@ Sproutsite is an npm-based developer tool for file-based content, page structure
 
 _Plant an idea. Grow your website._
 
-This repository is a working demo and local package development state. The package remains private and has not been published; registry availability is not implied. Official website: [sproutsite.dev](https://sproutsite.dev). Repository: [sproutsite/sproutsite](https://github.com/sproutsite/sproutsite).
+Official website: [sproutsite.dev](https://sproutsite.dev) · [Documentation](https://sproutsite.dev/documentation/) · [Component showcase](https://sproutsite.dev/showcase/) · [Source code](https://github.com/sproutsite/sproutsite)
 
-## Preparing Local Package Use
+## Installation
 
-Sproutsite provides a small public package surface:
+Use Sproutsite in your own Astro project. You maintain the content files; the package provides the content model, page assembly, and default theme. An initial project setup is required before authors can edit pages. There is no project generator or administration interface.
 
-- `sproutsite/content` with `createSproutsiteCollections()`
-- `sproutsite/config` with `createSproutsiteConfig()`
-- `sproutsite/page` with the shared route and `getSproutsiteStaticPaths()`
-- `sproutsite/components` with documented MDX layout components
+Requires Node.js 24 or later. The current package supports Astro 7 and MDX 8; the commands below use the tested peer-dependency ranges.
 
-The demo itself already uses these imports. A future local consumer uses a tarball created with `npm pack` and installs it there. The package remains `private` and is not published to the npm registry until an explicit publishing request is made.
+Before the first npm release, use a local archive as described under [Testing a Local Package](#testing-a-local-package) instead of installing `sproutsite` from the registry. The package has not been published yet.
 
-A consumer project needs its own content plus these three small integrations:
-
-```ts
-// src/content.config.ts
-import { createSproutsiteCollections } from 'sproutsite/content';
-
-export const collections = createSproutsiteCollections();
+```sh
+mkdir my-website
+cd my-website
+npm init -y
+npm install sproutsite astro@^7.4.4 @astrojs/mdx@^8.1.2
+npm install --save-dev @astrojs/check typescript
 ```
 
+In your project's `package.json`, set `"type": "module"` and add these scripts, preserving the other fields:
+
+```json
+{
+    "type": "module",
+    "scripts": {
+        "dev": "astro dev",
+        "check": "astro check",
+        "build": "astro build",
+        "preview": "astro preview"
+    }
+}
+```
+
+These are consumer-project scripts. Sproutsite's repository has additional development and publication checks described below.
+
+## Set Up Your Website
+
+Create these files in your project:
+
+```text
+my-website/
+├── astro.config.ts
+├── package.json
+├── tsconfig.json
+└── src/
+    ├── content.config.ts
+    ├── pages/
+    │   └── [...slug].astro
+    └── content/
+        ├── site.yaml
+        └── pages/
+            ├── page.yaml
+            ├── hero.md
+            └── 01-introduction.md
+```
+
+`astro.config.ts`:
+
 ```ts
-// astro.config.ts
 import { defineConfig } from 'astro/config';
 import { createSproutsiteConfig } from 'sproutsite/config';
 
 export default defineConfig(createSproutsiteConfig());
 ```
 
+This configuration registers MDX, the default theme's Tailwind integration, sitemap, and error pages. You do not need to add separate MDX or Tailwind integrations for this setup. In an existing Astro project, merge the setup carefully and remove routes that would conflict with Sproutsite's generated pages, such as a starter `src/pages/index.astro`.
+
+`tsconfig.json`:
+
+```json
+{
+    "extends": "astro/tsconfigs/strict"
+}
+```
+
+`src/content.config.ts`:
+
+```ts
+import { createSproutsiteCollections } from 'sproutsite/content';
+
+export const collections = createSproutsiteCollections();
+```
+
+`src/pages/[...slug].astro`:
+
 ```astro
 ---
-// src/pages/[...slug].astro
 import SproutsitePage, { getSproutsiteStaticPaths } from 'sproutsite/page';
 
-export const getStaticPaths = getSproutsiteStaticPaths;
+export async function getStaticPaths() {
+    return getSproutsiteStaticPaths();
+}
 ---
 
 <SproutsitePage {...Astro.props} />
 ```
 
-Content files belong exclusively to the consumer project. Test the installable state without publishing to a registry:
+`src/content/site.yaml`:
+
+```yaml
+name: My website
+url: https://example.com
+base: /
+language: en
+locales: [en]
+header:
+    links:
+        - label: Home
+          href: /
+footer:
+    text: My website, built with Sproutsite.
+    links:
+        - label: Home
+          href: /
+```
+
+Replace `name`, `url`, and the footer copy with your own details. `url` is your production origin, even during local development. A visible Sproutsite attribution is optional. Set `base` if the website will be hosted under a subpath, for example `/demo/`.
+
+`src/content/pages/page.yaml`:
+
+```yaml
+title: My website
+description: Practical notes and updates from our team.
+```
+
+`src/content/pages/hero.md`:
+
+```md
+---
+title: Welcome to our website
+eyebrow: Our team
+type: small
+tone: brand
+---
+
+Find our latest notes, project updates, and useful resources.
+```
+
+`src/content/pages/01-introduction.md`:
+
+```md
+---
+tone: default
+---
+
+## Notes from our team
+
+This is our first page. Edit this file to update the website.
+```
+
+## Write, Preview, and Publish
+
+Run `npm run dev` and open the local address printed by Astro. Edit Markdown files under `src/content/` to change the page content. Add a directory with `page.yaml` and numbered sections to create another page; add its link to `site.yaml` when it should appear in navigation. An optional `hero.md` supplies the page's introductory area.
+
+Use `.mdx` sections when you need documented components such as cards, columns, features, or accordions:
+
+```mdx
+import { Feature } from 'sproutsite/components';
+
+## What you can find here
+
+<Feature icon="BookOpen" title="Team notes">
+    Practical guides maintained alongside our project.
+</Feature>
+```
+
+Keep the content in your project and commit it to Git. An external coding agent can help edit these files; Sproutsite does not run an agent or translate content automatically. The installed package supplies the default theme and its components, while custom component or design development remains a developer task.
 
 ```sh
-# in the Sproutsite repository
-npm pack
-
-# in the separate Astro consumer project
-npm install /absolute/path/to/sproutsite-0.4.0.tgz
 npm run check
 npm run build
+npm run preview
 ```
 
-The resulting `.tgz` is ignored by this repository. A fresh temporary consumer project with its own `site.yaml` and Markdown section has been tested successfully this way.
+Deploy the complete `dist/` directory to your static host. The build includes the website, local assets, sitemap, manifest, and `404.html`/`500.html` error documents. Configure your web server to use those error documents; generated files do not configure Apache or Nginx automatically. See [Deployment](https://sproutsite.dev/documentation/deployment/) and [Error Pages](#error-pages).
 
-## Getting Started
-
-Node.js 24 LTS or later is required. `.nvmrc` pins Node.js 24.22.2 for local development.
-
-```sh
-npm install
-npm run dev
-```
-
-The dev server deliberately starts with `--force`, so changes to Content Collections, MDX components, and local package files are checked without an outdated Astro content cache.
-
-The running demo documents itself at `/documentation/` (German: `/de/dokumentation/`): it contains setup, the content contract, layout components, theme, checks, and local package use. The visible [showcase](/showcase/) instead collects component examples.
-The [blog](/blog/) is a small, file-based project journal. Each article lives in a `YYYY-MM-DD.article-slug/` directory in `src/content/blog/` and uses the same `page.yaml`, `hero.md`, and numbered sections as a normal page. `page.yaml` validates the title, description, date, local card image, and alternative text; the date prefix orders source directories while the URL only uses `article-slug`. Astro generates the overview and article routes from the collection, and every section supports the usual tones and documented MDX components.
-
-The optional `blog` setting in `site.yaml` accepts `title`, `eyebrow`, `description`, and `heading` (all non-empty strings) to customize the blog overview. The demo configures English overview copy in `site.yaml` and German copy in `site.de.yaml`. Without this setting, the theme supplies neutral, localized fallback text. Article links use “Learn more” or “Mehr erfahren” and include the article title in their accessible name.
-
-English articles use `page.yaml`, `hero.md`, and numbered sections; their German counterparts use `page.de.yaml`, `hero.de.md`, and `.de.mdx` sections in the same article directory. Each pair keeps its publication date, image, and slug; titles, descriptions, alternative text, heroes, and body copy are maintained separately. `/blog/` and `/de/blog/` list their respective language versions. Dates use the site's language and UTC so a date-only publication value does not shift on hosts in another time zone.
-
-Additional commands:
-
-```sh
-npm run check       # content contract plus Astro and TypeScript checks
-npm test            # small unit tests for URL conventions
-npm run build       # validated static build to dist/
-npm run preview     # preview the build
-npm run test:a11y   # Playwright, axe, keyboard focus, and mobile width
-npm run build:demo  # builds once with base /demo/
-npm run storybook   # isolated Astro component workshop on port 6006
-npm run build:storybook # static Storybook output to storybook-static/
-```
-
-Storybook is a local developer tool and not part of the published website. It renders the existing `.astro` components with the default Sproutsite theme. Stories live in `stories/`, use TypeScript, and directly import their corresponding component. The initial set covers `Button`, `Badge`, `Alert`, `Card`, and `ContentImage`; add a story whenever a reusable component or meaningful variant is introduced. The running demo documents the workflow at `/dokumentation/storybook/`.
-
-`npm run build:demo` sets `SPROUTSITE_BASE=/demo/` only for that command; `src/content/site.yaml` remains unchanged. The product website uses `https://sproutsite.dev`; consumer projects must configure their own production URL. Before deployment, check indexability and any staging protection. `robots.txt` is not access control.
-
-The product identity is consistently Sproutsite: package imports use `sproutsite/*`, public helpers use `createSproutsiteCollections()`, `createSproutsiteConfig()` and `getSproutsiteStaticPaths()`, and theme classes use the `ss-` prefix. Update local consumers' dependency, imports, environment variables and custom theme overrides together.
-
-### Logo and icons
-
-The reference-based sprout and three-layer symbol lives in `src/themes/default/assets/branding/`. `logo.svg` (navy wordmark), `logo-dark.svg` (white wordmark), `logo-monochrome.svg`, `icon.svg`, and `icon-monochrome.svg` are standalone vector assets with transparent backgrounds and outlined Nunito lettering. They need no external font. The shared `BrandLogo` atom uses the existing locally hosted Nunito font, inherits the light/dark text color, and is used in the header and footer. Consumer sites with a different `site.name` retain their own text wordmark.
-
-`favicon.svg` uses flat colors for small displays. The ICO contains native 16, 32, and 48 pixel frames; separate PNGs provide those sizes too. The Apple touch icon is 180 pixels; web app icons are 192 and 512 pixels, with navy backgrounds and safe internal padding. `PageLayout` links the icons and the static `/site.webmanifest` endpoint registered by `createSproutsiteConfig()` through Astro's standard `injectRoute()` API. Imported asset URLs and the configured base are respected; no CMS runtime or service worker is added. These are the default theme's icons; a differently branded consumer should replace them when replacing the theme. The Sproutsite social card is emitted only for the product site (`site.name: Sproutsite`).
-
-Brand colors are separate `--color-brand-*` tokens in `styles/foundation/tokens.css`; the existing semantic UI palette is unchanged. Run `npm run branding:generate` after changing the vector geometry or brand tokens, then `npm run format`. The TypeScript generator uses `fontkit` and `sharp` only during development. Its local source font is `scripts/assets/nunito-variable.ttf` from the [official Nunito distribution](https://github.com/google/fonts/tree/main/ofl/nunito), covered by the adjacent SIL Open Font License. Generated assets are committed and ordinary builds do not regenerate or download them.
+The sections below describe the content format and component options. Repository development and release checks follow under [Developing Sproutsite](#developing-sproutsite).
 
 ## Maintaining Content
 
@@ -182,7 +259,7 @@ tagline: A short supporting claim.
 ---
 ```
 
-Localization is not implemented in this milestone. Keep UI and explanatory copy in one language; established English brand claims can remain on a German page. A future localization layer should own translations and language selection rather than mixing languages in shared components.
+English and German content can be maintained in the same project. Configure `locales: [en, de]` in `site.yaml`, add `site.de.yaml` with German navigation and the same production URL/base, and add translated `page.de.yaml`, `hero.de.md`, and numbered `.de.md`/`.de.mdx` sections. Add `src/pages/de/[...slug].astro` using the same page component and an async `getStaticPaths()` wrapper that calls `getSproutsiteStaticPaths('de')`. Each locale uses its own copy and optional URL segments; translations are not generated automatically. Keep section numbers aligned between languages.
 
 To deliberately remove global hero classes, use:
 
@@ -365,9 +442,9 @@ import { ContentTable } from 'sproutsite/components';
 </ContentTable>
 ```
 
-This MDX component requires the Sproutsite configuration: a small rehype transform adds the caption, column-header scopes, and optional row marker to Astro's existing table AST. Validation uses `remark-gfm` to inspect the same Markdown table structure. No custom table parser or browser JavaScript is needed. Plain Markdown tables remain supported; `/showcase/tabellen/` demonstrates the enhanced component.
+This MDX component requires the Sproutsite configuration: a small rehype transform adds the caption, column-header scopes, and optional row marker to Astro's existing table AST. Validation uses `remark-gfm` to inspect the same Markdown table structure. No custom table parser or browser JavaScript is needed. Plain Markdown tables remain supported; `/showcase/tables/` demonstrates the enhanced component.
 
-`FoundationSample` is a fixed visual theme specimen exported from `sproutsite/components`. Its required `kind` prop accepts `colors`, `type`, `spacing`, `radius`, `shadow`, or `focus`; it accepts no other props or children. For example, `<FoundationSample kind="colors" />` displays labeled swatches using the actual theme variables. It illustrates the theme rather than providing a general layout language. `/showcase/foundations/` contains live specimens and usage/CSS examples; the detailed token reference lives on `/dokumentation/theme/`.
+`FoundationSample` is a fixed visual theme specimen exported from `sproutsite/components`. Its required `kind` prop accepts `colors`, `type`, `spacing`, `radius`, `shadow`, or `focus`; it accepts no other props or children. For example, `<FoundationSample kind="colors" />` displays labeled swatches using the actual theme variables. It illustrates the theme rather than providing a general layout language. `/showcase/foundations/` contains live specimens and usage/CSS examples; the detailed token reference lives on `/documentation/theme/`.
 
 The small reusable content and URL logic lives in `src/lib/sproutsite/`. It knows neither demo text nor Tailwind or DaisyUI classes. The default theme lives in `src/themes/default/` and includes the layout, header, hero, sections, and footer. DaisyUI is actively used there for navigation and theme elements.
 
@@ -398,7 +475,7 @@ Native details/summary provides keyboard operation. A small processed TypeScript
 
 ## Sitemap
 
-`npm run build` generates `dist/sitemap.xml` using the official Astro sitemap integration. It lists every regular page and blog article with its absolute canonical URL, `lastmod`, and reciprocal `xhtml:link` language alternatives. Translations are matched by content identity, including different URL segments such as `/documentation/` and `/de/dokumentation/`; missing translations are not replaced with homepage links. `x-default` points to the existing default-language version. Error pages are excluded.
+The configured Astro build generates `dist/sitemap.xml` using the official Astro sitemap integration. It lists every regular page and blog article with its absolute canonical URL, `lastmod`, and reciprocal `xhtml:link` language alternatives. Translations are matched by content identity, including different URL segments such as `/documentation/` and `/de/dokumentation/`; missing translations are not replaced with homepage links. `x-default` points to the existing default-language version. Error pages are excluded.
 
 `lastmod` uses the latest Git commit touching a page's source directory or applicable site configuration. Local edits and untracked sources use their file modification timestamps when later. The blog overview considers article metadata. Without available Git history, source modification times are the fallback; preserve meaningful timestamps in exported source archives. These dates describe content/configuration changes, not every rebuild or a full dependency/theme change audit.
 
@@ -428,6 +505,8 @@ These local error documents preserve the original error status. For a subpath de
 
 ## Validation and Limitations
 
+A new website without blog articles currently emits warnings about a missing or empty blog collection. The build still generates an empty blog overview; these warnings do not prevent the regular pages from building.
+
 The demo keeps English showcase and documentation sources in the standard files and German translations in their `.de.md`, `.de.mdx`, and `page.de.yaml` counterparts. English routes use `/showcase/` and `/documentation/`; German routes use `/de/showcase/` and `/de/dokumentation/`, including localized URL segments. Keep both versions up to date when editing examples, labels, image descriptions, or metadata. Markdown links use the source file's locale, and Button applies the active locale and deployment base exactly once. Theme messages are bundled from the local YAML files using Vite raw imports; they are not read from paths relative to generated build chunks.
 
 The accessibility script discovers all generated page routes and checks both languages on mobile and desktop. To investigate specific pages, set `SPROUTSITE_A11Y_ROUTES` to a comma-separated list of generated routes before running `node --import tsx scripts/test-a11y.ts`; omit it for the complete run. Build verification also checks internal page and fragment targets in both languages, including under `/demo/`.
@@ -436,7 +515,81 @@ The validator checks directory association, YAML fields, file names, tones, dupl
 
 Accessibility testing automates axe, visible keyboard focus, and mobile overflow checks. It does not replace a complete WCAG 2.2 AA conformance assessment or editorial review of headings and link text.
 
-Future npm extraction still needs a defined public package surface, an installation test in a consumer project, package metadata/publishing, a project generator, and optional extensions. These capabilities are explicitly outside the scope of this milestone.
+The public package exports and local archive installation checks are implemented. Registry publication remains a separate explicit step. A project generator and optional extensions remain outside the scope of this milestone.
+
+## Testing a Local Package
+
+Before registry publication, or when testing changes to the library, create an archive in the Sproutsite repository:
+
+```sh
+npm pack
+```
+
+Use the filename printed by npm. In your separate consumer project, replace the registry installation command with:
+
+```sh
+npm install /absolute/path/to/sproutsite-VERSION.tgz astro@^7.4.4 @astrojs/mdx@^8.1.2
+npm install --save-dev @astrojs/check typescript
+```
+
+Replace `VERSION` with the packed version, then follow the same configuration and content setup above. The archive contains the library and default theme, not the demo content, repository scripts, or Storybook. Install it in a separate directory rather than into the Sproutsite checkout.
+
+## Developing Sproutsite
+
+Node.js 24 LTS or later is required. `.nvmrc` pins Node.js 24.22.2 for local development.
+
+```sh
+git clone https://github.com/sproutsite/sproutsite.git
+cd sproutsite
+npm install
+npm run dev
+```
+
+The dev server deliberately starts with `--force`, so changes to Content Collections, MDX components, and local package files are checked without an outdated Astro content cache.
+
+The running demo documents itself at `/documentation/` (German: `/de/dokumentation/`): it contains setup, the content contract, layout components, theme, checks, and local package use. The visible [showcase](https://sproutsite.dev/showcase/) instead collects component examples.
+The [blog](https://sproutsite.dev/blog/) is a small, file-based project journal. Each article lives in a `YYYY-MM-DD.article-slug/` directory in `src/content/blog/` and uses the same `page.yaml`, `hero.md`, and numbered sections as a normal page. `page.yaml` validates the title, description, date, local card image, and alternative text; the date prefix orders source directories while the URL only uses `article-slug`. Astro generates the overview and article routes from the collection, and every section supports the usual tones and documented MDX components.
+
+The optional `blog` setting in `site.yaml` accepts `title`, `eyebrow`, `description`, and `heading` (all non-empty strings) to customize the blog overview. The demo configures English overview copy in `site.yaml` and German copy in `site.de.yaml`. Without this setting, the theme supplies neutral, localized fallback text. Article links use “Learn more” or “Mehr erfahren” and include the article title in their accessible name.
+
+English articles use `page.yaml`, `hero.md`, and numbered sections; their German counterparts use `page.de.yaml`, `hero.de.md`, and `.de.mdx` sections in the same article directory. Each pair keeps its publication date, image, and slug; titles, descriptions, alternative text, heroes, and body copy are maintained separately. `/blog/` and `/de/blog/` list their respective language versions. Dates use the site's language and UTC so a date-only publication value does not shift on hosts in another time zone.
+
+Additional commands:
+
+```sh
+npm run check       # content contract plus Astro and TypeScript checks
+npm test            # small unit tests for URL conventions
+npm run build       # validated static build to dist/
+npm run preview     # preview the build
+npm run test:a11y   # Playwright, axe, keyboard focus, and mobile width
+npm run build:demo  # builds once with base /demo/
+npm run storybook   # isolated Astro component workshop on port 6006
+npm run build:storybook # static Storybook output to storybook-static/
+npm run test:package # install and build the local archive in a fresh consumer
+npm run prepublishOnly # run all publication checks without publishing
+```
+
+Storybook is a local developer tool and not part of the published website. It renders the existing `.astro` components with the default Sproutsite theme. Stories live in `stories/`, use TypeScript, and directly import their corresponding component. The initial set covers `Button`, `Badge`, `Alert`, `Card`, and `ContentImage`; add a story whenever a reusable component or meaningful variant is introduced. The running demo documents the workflow at `/documentation/storybook/`.
+
+`npm run build:demo` sets `SPROUTSITE_BASE=/demo/` only for that command; `src/content/site.yaml` remains unchanged. The product website uses `https://sproutsite.dev`; consumer projects must configure their own production URL. Before deployment, check indexability and any staging protection. `robots.txt` is not access control.
+
+The product identity is consistently Sproutsite: package imports use `sproutsite/*`, public helpers use `createSproutsiteCollections()`, `createSproutsiteConfig()` and `getSproutsiteStaticPaths()`, and theme classes use the `ss-` prefix. Update local consumers' dependency, imports, environment variables and custom theme overrides together.
+
+### Logo and icons
+
+The reference-based sprout and three-layer symbol lives in `src/themes/default/assets/branding/`. `logo.svg` (navy wordmark), `logo-dark.svg` (white wordmark), `logo-monochrome.svg`, `icon.svg`, and `icon-monochrome.svg` are standalone vector assets with transparent backgrounds and outlined Nunito lettering. They need no external font. The shared `BrandLogo` atom uses the existing locally hosted Nunito font, inherits the light/dark text color, and is used in the header and footer. Consumer sites with a different `site.name` retain their own text wordmark.
+
+`favicon.svg` uses flat colors for small displays. The ICO contains native 16, 32, and 48 pixel frames; separate PNGs provide those sizes too. The Apple touch icon is 180 pixels; web app icons are 192 and 512 pixels, with navy backgrounds and safe internal padding. `PageLayout` links the icons and the static `/site.webmanifest` endpoint registered by `createSproutsiteConfig()` through Astro's standard `injectRoute()` API. Imported asset URLs and the configured base are respected; no CMS runtime or service worker is added. These are the default theme's icons; a differently branded consumer should replace them when replacing the theme. The Sproutsite social card is emitted only for the product site (`site.name: Sproutsite`).
+
+Brand colors are separate `--color-brand-*` tokens in `styles/foundation/tokens.css`; the existing semantic UI palette is unchanged. Run `npm run branding:generate` after changing the vector geometry or brand tokens, then `npm run format`. The TypeScript generator uses `fontkit` and `sharp` only during development. Its local source font is `scripts/assets/nunito-variable.ttf` from the [official Nunito distribution](https://github.com/google/fonts/tree/main/ofl/nunito), covered by the adjacent SIL Open Font License. Generated assets are committed and ordinary builds do not regenerate or download them.
+
+## Publication Checks
+
+Run `npm run test:package` to test the actual npm archive in a fresh consumer project. It checks package metadata/version consistency, required exports and license files, and exclusion of demo/development files. It then installs the local tarball (not a registry package named Sproutsite), runs Astro/TypeScript checking, and builds the consumer for `/` and `/demo/`. The fixture exercises English/German routes, a Markdown section, an MDX accordion with a Lucide icon, theme CSS and fonts, version display, error documents, manifest, and multilingual sitemap. It also verifies that the installed library is a real copy rather than a symlink to this checkout.
+
+The test uses `scripts/fixtures/package-consumer/`, pins its direct Astro/MDX/checking dependencies to versions in the repository lockfile, and lets npm resolve the library's published dependency ranges. npm may need network access and uses its normal cache. Temporary files are removed after success and retained with their path printed after failure. Lifecycle scripts are suppressed during packing and installation to prevent recursive publication checks and ensure the archive already contains everything it needs.
+
+`npm run prepublishOnly` runs formatting, TypeScript-source enforcement, content/Astro checking, unit tests, the demo build/output checks, and the consumer installation test. npm runs this gate automatically before publishing from this repository; any failing command stops the sequence. Neither running the gate manually nor running the package test publishes anything. A normal `npm pack` remains separate from this gate. Run the existing Storybook and accessibility checks as well when changing components or interactions. Do not bypass the gate with `--ignore-scripts` when publishing; publishing an existing tarball also requires checking that exact artifact beforehand.
 
 ## License
 
@@ -447,6 +600,6 @@ Copyright © 2026 Björn Hempel.
 See [LICENSE](LICENSE) for the full license text and
 [NOTICE](NOTICE) for attribution information.
 
-This declaration covers first-party source code. Third-party software and fonts retain their own licenses. Existing visual assets with unverified provenance are not relicensed by this change; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the asset scope, retained notices, and outstanding checks before redistribution.
+This declaration covers first-party source code. The maintainer has also authorized Apache-2.0 licensing of the project's branding assets, their generated icon variants and social card, and `hero-waves.svg`, to the extent he holds rights that he can license. Their AI-assisted provenance and derivation are recorded in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Third-party software and fonts retain their own licenses. Other demo illustrations with unresolved provenance or licensing are not automatically covered by this artwork authorization; see the same file for scope and outstanding checks.
 
 The software license does not grant general trademark rights to the Sproutsite name, domain, or logos; see Section 6 of the license. No visible Sproutsite attribution in a generated website's footer is required by Apache 2.0.

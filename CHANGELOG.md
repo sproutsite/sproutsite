@@ -7,8 +7,14 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Added
+
+- Added a prepublishOnly quality gate and a repeatable tarball installation test in an independent bilingual Astro consumer, covering root/subpath builds, components, assets, notices, errors, and sitemap output.
+
 ### Changed
 
+- Reorganized the npm README around consumer installation, complete website setup, content editing, and deployment; separated repository development and publication checks and corrected outdated package and localization guidance.
+- Recorded the maintainer's AI-origin confirmation and Apache-2.0 authorization for project branding, derived icons/social card, and hero waves, while retaining third-party licenses and separate trademark treatment.
 - Prioritized editorial website users in the agent guidelines and bilingual getting-started documentation, separating package use, content editing, publishing, and framework contribution.
 
 ## [0.5.6] - 2026-11-16

@@ -1,0 +1,15 @@
+name: Consumer fixture
+url: https://example.com
+base: /
+language: de
+locales: [en, de]
+header:
+    links:
+        - label: Startseite
+          href: /
+        - type: language-switcher
+footer:
+    text: Eigenständige Website-Inhalte.
+    links:
+        - label: Über uns
+          href: /ueber/

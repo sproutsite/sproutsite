@@ -1,6 +1,6 @@
 # Third-party notices and asset licensing status
 
-Review date: 2026-11-15.
+Review date: 2026-11-16.
 
 The root [LICENSE](LICENSE) and [NOTICE](NOTICE) license Sproutsite's first-party source code under Apache-2.0 and identify its original author. They do not replace third-party licenses or establish rights to reference material. This file records the scope of the repository review and outstanding asset checks; it adds no conditions to Apache-2.0.
 
@@ -15,13 +15,13 @@ Nunito is third-party font software licensed under the SIL Open Font License 1.1
 | `src/themes/default/styles/foundation/fonts/nunito-latin-variable.woff2` | Adjacent `OFL.txt`           | Included in the npm package                                 |
 | `scripts/assets/nunito-variable.ttf`                                     | Adjacent `OFL.txt`           | Repository development asset; excluded from the npm package |
 
-Both existing `OFL.txt` files are retained unchanged. The source font is from the [official Nunito distribution](https://github.com/google/fonts/tree/main/ofl/nunito). Apache-2.0 does not replace the OFL. Outlining the wordmark in the logo generator does not resolve the separate reference-image provenance question below.
+Both existing `OFL.txt` files are retained unchanged. The source font is from the [official Nunito distribution](https://github.com/google/fonts/tree/main/ofl/nunito). Apache-2.0 does not replace the OFL. The project's artwork license below does not relicense Nunito or remove its applicable notices.
 
 ## Dependency licenses and notices
 
 Language-selector flags are local SVG assets from `flag-icons` 7.6.0, licensed under MIT. The full, unmodified [upstream license](third-party-licenses/flag-icons-LICENSE), including Panayiotis Lipiridis's copyright notice, is retained for redistribution. Only the GB and DE SVGs used by the theme are bundled into the website; no flag CDN or external requests are required. Preserve the upstream notice when redistributing these assets.
 
-Lucide icons are rendered from `@lucide/astro` 1.73.0. Its full, unmodified [license text](third-party-licenses/lucide-LICENSE) is included with the npm package: ISC for Lucide, plus the upstream MIT notice and icon list for Feather-derived artwork. These icons have documented upstream licensing and are separate from the unresolved project-branding assets below. Preserve the applicable notices when distributing rendered SVGs or a generated website containing them.
+Lucide icons are rendered from `@lucide/astro` 1.73.0. Its full, unmodified [license text](third-party-licenses/lucide-LICENSE) is included with the npm package: ISC for Lucide, plus the upstream MIT notice and icon list for Feather-derived artwork. These icons retain their upstream licensing independently of the project-branding artwork below. Preserve the applicable notices when distributing rendered SVGs or a generated website containing them.
 
 Dependencies remain separately licensed packages. This review inspected the root manifest, locked license metadata, and the license/NOTICE files present in the installed dependencies. It is not a certification of every transitive component or a grant of rights to their code.
 
@@ -47,7 +47,21 @@ The installed dependency tree also contains components requiring distinct treatm
 
 No installed dependency license or NOTICE file was removed, overwritten, or relicensed. Dependency license metadata alone does not establish that arbitrary future bundling or redistribution is compliant.
 
-## Existing visual assets: provenance review remains open
+## Project branding and hero artwork
+
+On 2026-11-16, project maintainer Björn Hempel confirmed that the supplied logo reference and hero SVG were created with AI assistance and explicitly authorized making the following project artwork available under the Apache License, Version 2.0, to the extent he holds rights that he can license. The technical derivation is recorded below. No particular AI provider, model, or absence of third-party reference inputs is asserted by this confirmation.
+
+| Asset scope                                                               | Recorded origin and derivation                                                                                                                                                                               | Release status                                                          |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| `src/themes/default/assets/branding/icon.svg` and the other branding SVGs | Reconstructed and subsequently refined as vector artwork for Sproutsite from the maintainer's AI-created logo reference. `scripts/generate-branding.ts` contains the vector geometry and generation process. | Apache-2.0 under the maintainer's authorization stated above.           |
+| Favicons, app icons, and `social-card.png` in the same branding directory | Generated from the project's vector artwork by `npm run branding:generate`.                                                                                                                                  | Apache-2.0 under the same authorization, including these derived files. |
+| `src/themes/default/assets/hero-waves.svg`                                | The maintainer supplied the AI-created `sproutsite-hero-waves.svg` for integration. The project subsequently adjusted its composition, gradients, and positioning.                                           | Apache-2.0 under the maintainer's authorization stated above.           |
+
+All three scopes are included in the npm archive and are covered by the root [LICENSE](LICENSE), with the project's attribution information in [NOTICE](NOTICE). Their use, modification, and redistribution follow Apache-2.0, including its applicable notice requirements. This records the maintainer's provenance statement and license grant; it does not assert exclusive copyright in AI output or independently certify third-party rights. Nunito and all other third-party materials retain their own licenses and applicable notices.
+
+Copyright licensing of artwork and trademark rights are separate. Apache-2.0 Section 6 does not grant general trademark rights; this file adds no trademark restrictions or extra attribution obligations.
+
+## Other visual assets: provenance review remains open
 
 Generation record: `src/content/pages/showcase/_assets/accordions.png` was generated for this project on 2026-11-16 with OpenAI's image-generation tool. A text-only prompt requested an original blue-and-white 3D accordion illustration with one expanded answer, two collapsed rows, and plus/chevron indicators. No external artwork or logos were supplied as input. This records provenance, not a separate artwork-license grant.
 
@@ -61,13 +75,11 @@ Generation record: `src/content/pages/showcase/_assets/icons.png` was generated 
 
 The following existing assets do not have a committed, asset-specific rights/provenance record sufficient to declare them newly licensed under Apache-2.0. **This change does not relicense them.** Confirm their origin and redistribution permissions before publishing a package or website that includes them.
 
-| Scope                                                                                                                       | Repository evidence                                                                                                     | Outstanding check                                                                                                                                                                               |
-| --------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/themes/default/assets/branding/` (logo and icon SVGs, favicons, app icons, and social card)                            | `scripts/generate-branding.ts` records vector reconstruction from a branding reference and generates the derived files. | Confirm rights to the original reference design and record the intended copyright license for the artwork separately from trademark rights. Regeneration alone does not clear reference rights. |
-| `src/themes/default/assets/hero-waves.svg`                                                                                  | Existing supplied SVG; no author/license metadata is present in the file.                                               | Record its source and authorization for redistribution and modification.                                                                                                                        |
-| PNGs in `src/content/pages/_assets/`, `src/content/pages/showcase/_assets/`, and `src/content/pages/documentation/_assets/` | Committed demo illustrations without an accompanying asset licensing record.                                            | Record the source or generation provenance, relevant terms, and any third-party reference permissions for each illustration.                                                                    |
-| PNGs in `src/content/blog/_assets/`                                                                                         | Committed article illustrations; `sproutsite-brand.png` uses the project branding artwork.                              | Record illustration provenance; the branding image shares the branding-reference review above.                                                                                                  |
+| Scope                                                                                                                       | Repository evidence                                                                                | Outstanding check                                                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| PNGs in `src/content/pages/_assets/`, `src/content/pages/showcase/_assets/`, and `src/content/pages/documentation/_assets/` | Committed demo illustrations without an accompanying asset licensing record.                       | Record the source or generation provenance, relevant terms, and any third-party reference permissions for each illustration.                                            |
+| PNGs in `src/content/blog/_assets/`                                                                                         | Committed article illustrations; `sproutsite-brand.png` incorporates the project branding artwork. | Record provenance and license for each complete illustration; the branding authorization above covers the underlying branding, not automatically every composite image. |
 
-The branding and hero SVG are included by the current npm file list. Demo content images are excluded from that archive but remain relevant when publishing the repository's demo website. The package stays private; a successful packaging check verifies file inclusion, not asset-rights clearance or readiness to publish.
+The branding and hero SVG are included by the current npm file list and their Apache-2.0 authorization is recorded separately above. This authorization does not automatically license all demo illustrations or separate composite artwork incorporating the branding. Demo content images are excluded from the npm archive but remain relevant when publishing the repository's demo website. Removing the package's private flag or passing a packaging check does not itself establish asset rights.
 
 No additional trademark policy, registration claim, or attribution obligation is introduced here. Apache-2.0 Section 6 governs its trademark-license scope; any later artwork licensing decision should be documented explicitly rather than inferred from the software license.

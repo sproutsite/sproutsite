@@ -4,7 +4,7 @@
 
 Sproutsite — The Agent-Ready Static CMS. It is an agent-ready, Markdown-first Static CMS powered by Astro and TypeScript. Developers provide layouts and tested building blocks; authors and external coding agents such as Codex or Claude Code maintain versioned content, components and page structures in the repository. Sproutsite itself contains no AI agent and no traditional CMS administration backend. Astro generates static websites requiring no CMS server runtime.
 
-The product name is exclusively `Sproutsite`, its technical name is `sproutsite`, its official website is `https://sproutsite.dev`, and its repository is `https://github.com/sproutsite/sproutsite`. Use `sproutsite` for the package and `@sproutsite/` only for actual standalone packages when appropriate and available. Do not invent additional packages. Development happens directly in this repository; the local package remains private. Do NOT install a potentially unrelated `sproutsite` package from the registry or imply that npm publication has already happened.
+The product name is exclusively `Sproutsite`, its technical name is `sproutsite`, its official website is `https://sproutsite.dev`, and its repository is `https://github.com/sproutsite/sproutsite`. Use `sproutsite` for the package and `@sproutsite/` only for actual standalone packages when appropriate and available. Do not invent additional packages. Development happens directly in this repository; package metadata now permits public publication, which still requires an explicit request. Do NOT install a potentially unrelated `sproutsite` package from the registry or imply that npm publication has already happened.
 
 After installing its development dependencies, this repository must run immediately as a demo website with `npm run dev`. This is a functional development state, not a finished published npm product.
 
@@ -343,6 +343,8 @@ Provide at least these commands:
 - `npm run preview`: preview the build.
 - `npm run check`: Astro/TypeScript checking plus required content validation.
 - `npm test`: a few meaningful tests of project-owned conventions.
+- `npm run test:package`: pack and install the actual archive into a fresh temporary consumer, then check/build it for `/` and `/demo/`. Requires npm dependency access or a suitable cache; does not publish.
+- `npm run prepublishOnly`: execute the publication checks manually without publishing. npm also runs this hook before publication from this repository; do not bypass it or publish a separate untested artifact.
 - `npm run test:a11y`: reproducible browser verification of all generated demo, showcase, and documentation pages, for example with Playwright and axe-core.
 - `npm run storybook`: local isolated component workshop using Storybook Astro on port 6006.
 - `npm run build:storybook`: static Storybook build to `storybook-static/`.
@@ -357,6 +359,6 @@ README in English: setup, Node version, commands, project structure, adding page
 
 Keep core and base layout separated so they can later be extracted into an npm package. Do not use absolute developer paths or core imports from demo content. Briefly document the planned public surface without implementing unused APIs now.
 
-This milestone does not yet include: npm publishing, installation testing of a finished Sproutsite package, a project generator, a custom MCP server, extensions/marketplace, multisite, multilingual support, a CMS administration backend, integrated AI agents, authentication, form backend, deployment, or a complex layout language.
+Local archive installation testing is implemented through `npm run test:package`; this does not imply registry publication. This milestone does not yet include: npm publishing, a project generator, a custom MCP server, extensions/marketplace, multisite, multilingual support, a CMS administration backend, integrated AI agents, authentication, form backend, deployment, or a complex layout language.
 
 Do not publish or deploy anything without the corresponding request. Do not treat an invented license or package-name availability as resolved.
