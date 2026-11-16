@@ -1,7 +1,8 @@
 ---
-title: Frequently asked questions about Astro
+title: Frequently asked questions
 eyebrow: Questions and answers
+type: small
 tone: brand
 ---
 
-Find the key information about working with static pages, Markdown content, and reusable components.
+How Sproutsite works, how you maintain content, and what you need to publish your website.

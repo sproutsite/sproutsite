@@ -5,19 +5,32 @@ tone:
 ---
 
 import { Eyebrow } from 'sproutsite/components';
+import { Accordion, AccordionItem } from 'sproutsite/components';
 
 <Eyebrow>Fundamentals</Eyebrow>
 
 ## General questions
 
-### What does Sproutsite show?
+<Accordion>
+    <AccordionItem title="How does Sproutsite work?" icon="Layers" color="#134b70" open>
+        Sproutsite is a Markdown-first static CMS powered by Astro and TypeScript. Developers provide the theme and reusable components. You maintain content and page structure in files, using an editor or your preferred external coding agent.
 
-Sproutsite is an agent-ready, Markdown-first static CMS powered by Astro and TypeScript. This demo shows how file-based content, shared layouts, and components work together. The website is generated statically and does not need a CMS server runtime.
+        Astro generates the finished website from these files. Content, configuration, and code stay together in your repository.
+    </AccordionItem>
+    <AccordionItem title="Do I need a traditional CMS?" icon="Database" color="#456e70">
+        No. Sproutsite stores content in Markdown and YAML files instead of a CMS database. It has no administration backend and requires no CMS server runtime on the published website.
 
-### Does Sproutsite include an AI agent?
+        It suits teams that want to maintain their website in a repository. If you need a browser-based editorial backend, Sproutsite does not currently provide one.
+    </AccordionItem>
+    <AccordionItem title="Does Sproutsite include an AI agent?" icon="Bot" color="#527442">
+        No. External tools such as Codex or Claude Code can edit the repository's content, components, and pages. Sproutsite supplies the structure and building blocks; it does not run or include an agent.
 
-No. External coding agents such as Codex or Claude Code can create and edit content, components, and pages in the repository. Sproutsite provides the technical foundation but includes neither an AI agent nor a traditional CMS administration backend.
+        You can also maintain the files manually. An agent is optional.
+    </AccordionItem>
+    <AccordionItem title="Do I need programming knowledge?" icon="Users" color="#456e70">
+        Initial setup, theme changes, and new components require development experience. Once that foundation is in place, you can edit text in Markdown and use the documented components in MDX sections.
 
-### Why Astro for this kind of website?
+        A coding agent can help with these changes. Review its output and run the project checks before publishing.
+    </AccordionItem>
 
-Astro delivers static pages efficiently and supports components from different UI approaches. This works well for landing pages and structured content pages.
+</Accordion>

@@ -1,7 +1,8 @@
 ---
-title: Häufige Fragen zu Astro
+title: Häufige Fragen
 eyebrow: Fragen und Antworten
+type: small
 tone: brand
 ---
 
-Hier finden Sie die wichtigsten Hinweise zur Arbeit mit statischen Seiten, Markdown-Inhalten und wiederverwendbaren Komponenten.
+Wie Sproutsite funktioniert, wie du Inhalte pflegst und was du zum Veröffentlichen deiner Website brauchst.

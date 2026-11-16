@@ -7,6 +7,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Changed
+
+- Reworked the English and German FAQ pages into two themed accordion groups with initially open first answers, refreshed Sproutsite-specific copy, and links to relevant guides.
+
 ### Added
 
 - Added Accordion and AccordionItem with DaisyUI/native details, optional Lucide icons, Feature-style colors, configurable surfaces, whole-box toggling, bilingual showcase examples, and Storybook controls.

@@ -5,15 +5,34 @@ tone:
 ---
 
 import { Eyebrow } from 'sproutsite/components';
+import { Accordion, AccordionItem } from 'sproutsite/components';
 
 <Eyebrow>Editorial work</Eyebrow>
 
-## Maintain content
+## Content and publishing
 
-### How do I add a section?
+<Accordion>
+    <AccordionItem title="Can I reuse components across pages?" icon="Puzzle" color="#527442" open>
+        Yes. Import the documented components from `sproutsite/components` in your MDX sections. Use the same building blocks on several pages and adjust their supported properties to suit the content.
 
-Create a Markdown file in the page directory with a numerical prefix such as `03-new-section.md`. Its content starts with a level-two heading.
+        [Explore the components and copy examples from the showcase](/showcase/).
+    </AccordionItem>
+    <AccordionItem title="How do I add pages and sections?" icon="FileText" color="#134b70">
+        A directory with `page.yaml` defines a page. Add `hero.md` for an optional hero and number the content sections consecutively from `01`, for example `01-introduction.md` and `02-benefits.mdx`.
 
-### Where do component examples belong?
+        Each section starts with a meaningful level-two heading. Use Markdown for text and MDX when you need documented components.
 
-The theme provides the layout and tested building blocks. New examples for Tailwind or DaisyUI components can be added as clearly scoped theme components and explained through these content pages.
+        [Read the content guide](/documentation/content/).
+    </AccordionItem>
+    <AccordionItem title="Where do I keep my own images?" icon="Image" color="#456e70">
+        Keep local images in an `_assets` directory near the relevant content. In supported image fields and MDX components, reference them relative to the content file. Astro optimizes these images during the build.
+
+        [See image examples](/showcase/images/).
+    </AccordionItem>
+    <AccordionItem title="How do I publish the website?" icon="Globe" color="#134b70">
+        Run `npm run build` and upload the complete contents of `dist/` to your web host. Keep the `_astro/` asset directory and the generated error documents with the HTML pages. The published site needs no running Node.js process.
+
+        [Configure Apache or Nginx, including localized error pages](/documentation/deployment/).
+    </AccordionItem>
+
+</Accordion>

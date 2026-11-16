@@ -5,15 +5,34 @@ tone:
 ---
 
 import { Eyebrow } from 'sproutsite/components';
+import { Accordion, AccordionItem } from 'sproutsite/components';
 
 <Eyebrow>Redaktion</Eyebrow>
 
-## Inhalte pflegen
+## Inhalte und Veröffentlichung
 
-### Wie füge ich einen Abschnitt hinzu?
+<Accordion>
+    <AccordionItem title="Kann ich Komponenten auf mehreren Seiten verwenden?" icon="Puzzle" color="#527442" open>
+        Ja. Importiere die dokumentierten Komponenten aus `sproutsite/components` in deinen MDX-Sections. Verwende dieselben Bausteine auf mehreren Seiten und passe ihre unterstützten Parameter an den jeweiligen Inhalt an.
 
-Legen Sie im Seitenordner eine Markdown-Datei mit einem numerischen Präfix wie `03-neuer-abschnitt.md` an. Der Inhalt beginnt mit einer Überschrift zweiter Ebene.
+        [Komponenten entdecken und Beispiele aus dem Showcase übernehmen](/showcase/).
+    </AccordionItem>
+    <AccordionItem title="Wie füge ich Seiten und Abschnitte hinzu?" icon="FileText" color="#134b70">
+        Ein Verzeichnis mit `page.yaml` definiert eine Seite. Mit `hero.md` ergänzt du einen optionalen Hero. Nummeriere die Inhaltsabschnitte lückenlos ab `01`, zum Beispiel `01-einleitung.md` und `02-vorteile.mdx`.
 
-### Wo kommen Komponenten-Beispiele hin?
+        Jeder Abschnitt beginnt mit einer sinnvollen Überschrift zweiter Ebene. Verwende Markdown für Texte und MDX, wenn du dokumentierte Komponenten benötigst.
 
-Das Theme liefert das Layout und die geprüften Bausteine. Neue Beispiele für Tailwind- oder DaisyUI-Komponenten können als klar abgegrenzte Theme-Komponenten ergänzt und über diese Inhaltsseiten erklärt werden.
+        [Anleitung zu Inhalten lesen](/dokumentation/inhalte/).
+    </AccordionItem>
+    <AccordionItem title="Wo lege ich eigene Bilder ab?" icon="Image" color="#456e70">
+        Lege lokale Bilder in einem `_assets`-Verzeichnis bei den zugehörigen Inhalten ab. In unterstützten Bildfeldern und MDX-Komponenten verweist du relativ zur Inhaltsdatei darauf. Astro optimiert diese Bilder beim Build.
+
+        [Beispiele für Bilder ansehen](/showcase/images/).
+    </AccordionItem>
+    <AccordionItem title="Wie veröffentliche ich die Website?" icon="Globe" color="#134b70">
+        Führe `npm run build` aus und übertrage den vollständigen Inhalt von `dist/` auf dein Webhosting. Das Asset-Verzeichnis `_astro/` und die erzeugten Fehlerseiten gehören zu den HTML-Seiten dazu. Die veröffentlichte Website benötigt keinen laufenden Node.js-Prozess.
+
+        [Apache oder Nginx einschließlich sprachabhängiger Fehlerseiten einrichten](/dokumentation/veroeffentlichen/).
+    </AccordionItem>
+
+</Accordion>
