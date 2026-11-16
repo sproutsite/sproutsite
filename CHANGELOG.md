@@ -9,12 +9,20 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Added
 
-- Added sitemap.xml with canonical page URLs, content-derived lastmod dates, translated hreflang links and x-default, using the official Astro sitemap serializer and preserving its index output.
+- Added Accordion and AccordionItem with DaisyUI/native details, optional Lucide icons, Feature-style colors, configurable surfaces, whole-box toggling, bilingual showcase examples, and Storybook controls.
+- Added a generated accordion illustration to the English and German showcase overview cards.
+
+## [0.5.5] - 2026-11-15
 
 ### Added
 
+- Added sitemap.xml with canonical page URLs, content-derived lastmod dates, translated hreflang links and x-default, using the official Astro sitemap serializer and preserving its index output.
 - Added English and German deployment documentation for Apache and Nginx, including static builds, localized error documents, subpaths, and deployment checks.
 - Added a deployment overview card in both languages with a generated illustration matching the documentation artwork.
+
+### Changed
+
+- Halved the eyebrow's leading line length from 2.5rem to 1.25rem.
 
 ## [0.5.4] - 2026-11-15
 
