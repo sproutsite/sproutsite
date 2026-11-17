@@ -7,6 +7,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.8] - 2026-11-17
+
 ### Fixed
 
 - Prevented inherited npm dry-run configuration from suppressing the local archive and dependency installation during publication checks.
