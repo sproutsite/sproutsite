@@ -7,6 +7,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.9] - 2026-11-17
+
 ### Added
 
 - Documented the separate create-sproutsite initializer for minimal English/German websites, with its own package lifecycle, and updated library publication guidance to reflect npm availability.
