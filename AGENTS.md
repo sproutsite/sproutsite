@@ -4,9 +4,9 @@
 
 Sproutsite — The Agent-Ready Static CMS. It is an agent-ready, Markdown-first Static CMS powered by Astro and TypeScript. Developers provide layouts and tested building blocks; authors and external coding agents such as Codex or Claude Code maintain versioned content, components and page structures in the repository. Sproutsite itself contains no AI agent and no traditional CMS administration backend. Astro generates static websites requiring no CMS server runtime.
 
-The product name is exclusively `Sproutsite`, its technical name is `sproutsite`, its official website is `https://sproutsite.dev`, and its repository is `https://github.com/sproutsite/sproutsite`. Use `sproutsite` for the package and `@sproutsite/` only for actual standalone packages when appropriate and available. Do not invent additional packages. Development happens directly in this repository; package metadata now permits public publication, which still requires an explicit request. Do NOT install a potentially unrelated `sproutsite` package from the registry or imply that npm publication has already happened.
+The product name is exclusively `Sproutsite`, its technical name is `sproutsite`, its official website is `https://sproutsite.dev`, and its repository is `https://github.com/sproutsite/sproutsite`. Use `sproutsite` for the package and `@sproutsite/` only for actual standalone packages when appropriate and available. Do not invent additional packages. Development happens directly in this repository. Sproutsite and its separate `create-sproutsite` initializer are published to npm; registry package ownership and the tested version must be verified before installation. Further publication still requires an explicit request. The initializer lives in the sibling project and https://github.com/sproutsite/create-sproutsite. Recommend `npm create sproutsite@latest` for a new website; retain manual library integration for existing Astro projects.
 
-After installing its development dependencies, this repository must run immediately as a demo website with `npm run dev`. This is a functional development state, not a finished published npm product.
+After installing its development dependencies, this repository must run immediately as a demo website with `npm run dev`. Preserve this contributor workflow independently of the installed library and the separate project generator.
 
 ## Architecture Principles
 
@@ -359,6 +359,6 @@ README in English: setup, Node version, commands, project structure, adding page
 
 Keep core and base layout separated so they can later be extracted into an npm package. Do not use absolute developer paths or core imports from demo content. Briefly document the planned public surface without implementing unused APIs now.
 
-Local archive installation testing is implemented through `npm run test:package`; this does not imply registry publication. This milestone does not yet include: npm publishing, a project generator, a custom MCP server, extensions/marketplace, multisite, multilingual support, a CMS administration backend, integrated AI agents, authentication, form backend, deployment, or a complex layout language.
+Local archive installation testing is implemented through `npm run test:package`. The library is published; the minimal generator is a separate sibling project and has its own tests and publication lifecycle. Keep generator code and templates out of the framework package. A custom MCP server, extensions/marketplace, multisite, an administration backend, integrated AI agents, authentication, a form backend, automated deployment and a complex layout language remain outside the current scope.
 
 Do not publish or deploy anything without the corresponding request. Do not treat an invented license or package-name availability as resolved.

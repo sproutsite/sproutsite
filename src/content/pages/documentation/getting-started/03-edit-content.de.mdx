@@ -12,46 +12,46 @@ import { Eyebrow } from 'sproutsite/components';
 
 Deine Inhalte liegen unter `src/content/`. Mit diesen Dateien arbeitest du; die installierte Bibliothek liegt in `node_modules/` und wird dort nicht bearbeitet.
 
-- `site.yaml` enthält Website-Namen, Navigation und Footer.
-- `pages/page.yaml` enthält Browsertitel und Beschreibung der Startseite.
-- `pages/hero.md` enthält deren Hauptüberschrift und Einleitung.
-- `pages/01-introduction.md` enthält den ersten Inhaltsabschnitt. Weitere folgen lückenlos als `02-…`, `03-…` und so weiter.
+- `site.yaml` und `site.de.yaml` enthalten Website-Namen, Navigation und Footer. Halte beide Konfigurationen synchron.
+- `pages/page.yaml` und `pages/page.de.yaml` enthalten Browsertitel und Beschreibung der Startseite. Halte die Metadaten gleich.
+- `pages/hero.de.md` enthält deren Hauptüberschrift und Einleitung.
+- `pages/01-introduction.de.md` enthält den ersten Inhaltsabschnitt. Weitere folgen lückenlos als `02-…`, `03-…` und so weiter.
 
-Lege für eine erste Startseite `src/content/pages/page.yaml` an:
+Der deutsche Starter enthält diese Dateien bereits. Bearbeite sie in deinem Website-Projekt. Ein Beispiel für `src/content/pages/page.de.yaml` (und die zugehörige `page.yaml`):
 
 ```yaml
-title: My website
-description: News and information from our team.
+title: Unsere Website
+description: Neuigkeiten und Informationen aus unserem Team.
 ```
 
-Ergänze `src/content/pages/hero.md`:
+In `src/content/pages/hero.de.md`:
 
 ```markdown
 ---
-title: Welcome to our website
-eyebrow: Our team
+title: Willkommen auf unserer Website
+eyebrow: Unser Team
 type: small
 tone: brand
 ---
 
-Find our latest news, services, and contact details here.
+Hier findest du aktuelle Neuigkeiten und Informationen zu unserer Arbeit.
 ```
 
-Lege dann `src/content/pages/01-introduction.md` an:
+In `src/content/pages/01-introduction.de.md`:
 
 ```markdown
 ---
 tone: default
 ---
 
-## What we do
+## Was wir tun
 
-We help local teams plan and deliver their projects.
+Wir unterstützen lokale Teams bei der Planung und Umsetzung ihrer Projekte.
 ```
 
-Die Beispiele passen zur englischen Minimalwebsite aus dem Installationsabschnitt. Bei einer eingerichteten zweisprachigen Website bearbeitest du die deutschen Inhalte in `page.de.yaml`, `hero.de.md` und den entsprechenden `.de.md`- oder `.de.mdx`-Sections.
+Die `.de`-Dateinamen folgen der bestehenden Sprachkonvention von Sproutsite; der deutsche Starter erzeugt dadurch keine zusätzliche englische Website. Bei einer englischen Website verwendest du stattdessen `page.yaml`, `hero.md` und Sections ohne `.de` im Dateinamen. Das englische Minimalbeispiel im manuellen Installationsabschnitt nutzt diese Basisdateien.
 
-Starte `npm run dev`, öffne die lokale Vorschau und ändere den letzten Satz. Speichere die Datei und prüfe das Ergebnis im Browser. Für eine weitere Seite legst du ein eigenes Verzeichnis mit `page.yaml` und nummerierten Abschnitten an.
+Starte `npm run dev`, öffne die lokale Vorschau und ändere den letzten Satz. Speichere die Datei und prüfe das Ergebnis im Browser. Für eine weitere deutsche Seite legst du ein eigenes Verzeichnis mit `page.yaml`, `page.de.yaml`, optionalem `hero.de.md` und nummerierten deutschen Abschnitten an.
 
 Verwende `.mdx`, wenn du Bausteine wie Karten, Spalten oder Akkordeons einsetzen möchtest. Übernimm ein dokumentiertes Beispiel aus dem [Showcase](/showcase/) und ersetze Texte und Bilder. Farben, Schriften und Abstände der vorhandenen Komponenten sind bereits aufeinander abgestimmt; du musst sie nicht selbst gestalten.
 

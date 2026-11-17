@@ -14,11 +14,27 @@ Official website: [sproutsite.dev](https://sproutsite.dev) · [Documentation](ht
 
 ## Installation
 
-Use Sproutsite in your own Astro project. You maintain the content files; the package provides the content model, page assembly, and default theme. An initial project setup is required before authors can edit pages. There is no project generator or administration interface.
+Use Sproutsite in your own Astro project. You maintain the content files; the package provides the content model, page assembly, and default theme. The published `create-sproutsite` generator prepares a minimal English or German website. Sproutsite has no administration interface.
 
-Requires Node.js 24 or later. The current package supports Astro 7 and MDX 8; the commands below use the tested peer-dependency ranges.
+Requires Node.js 24 or a newer supported LTS version, and npm. Create an English website:
 
-Before the first npm release, use a local archive as described under [Testing a Local Package](#testing-a-local-package) instead of installing `sproutsite` from the registry. The package has not been published yet.
+```sh
+npm create sproutsite@latest my-website -- --language en
+cd my-website
+npm run dev
+```
+
+For German content, use `--language de`. The assistant asks for a website name and whether to install dependencies. If you skip installation, run `npm install` before `npm run dev`. The starter includes Astro configuration, content collections, a shared page route, a small homepage and editorial guidance in `AGENTS.md`. Edit the generated files under `src/content/`; the design stays in the installed Sproutsite package.
+
+The German starter serves German directly at `/`. It follows the existing locale convention with `site.de.yaml`, `page.de.yaml` and `.de.md`/`.de.mdx` content, plus base configuration and page metadata. Its README explains which configuration and metadata pairs to keep synchronized. It does not generate an English website.
+
+Set your production URL before deployment. The new website's README explains preview, content editing and building. The generator has its own [repository](https://github.com/sproutsite/create-sproutsite) and [npm package](https://www.npmjs.com/package/create-sproutsite); its version is independent of the library.
+
+### Manual installation in an Astro project
+
+For an existing Astro project, or to configure a new project by hand, use the following setup. The current package supports Astro 7 and MDX 8; these commands use the tested peer-dependency ranges. If you used the generator, skip this manual setup and continue with [Write, Preview, and Publish](#write-preview-and-publish).
+
+The library is available on [npm](https://www.npmjs.com/package/sproutsite). For local library changes, use the archive workflow under [Testing a Local Package](#testing-a-local-package).
 
 ```sh
 mkdir my-website
@@ -515,11 +531,11 @@ The validator checks directory association, YAML fields, file names, tones, dupl
 
 Accessibility testing automates axe, visible keyboard focus, and mobile overflow checks. It does not replace a complete WCAG 2.2 AA conformance assessment or editorial review of headings and link text.
 
-The public package exports and local archive installation checks are implemented. Registry publication remains a separate explicit step. A project generator and optional extensions remain outside the scope of this milestone.
+Both the library and the separate `create-sproutsite` initializer are published to npm. The generator is maintained in its own repository with its own version and publication workflow. It creates the documented Astro setup and starter content rather than copying the framework or theme. It supports English or German, optional dependency installation, and localized editorial guidance. Optional extensions remain outside the current scope.
 
 ## Testing a Local Package
 
-Before registry publication, or when testing changes to the library, create an archive in the Sproutsite repository:
+When testing changes to the library, create an archive in the Sproutsite repository:
 
 ```sh
 npm pack

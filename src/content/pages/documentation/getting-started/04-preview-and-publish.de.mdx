@@ -15,11 +15,12 @@ Prüfe die Seite in der Vorschau auf einem schmalen und einem breiten Bildschirm
 Baue anschließend deine Website:
 
 ```sh
+npm run check
 npm run build
 npm run preview
 ```
 
-Die fertigen Dateien liegen in `dist/`. Der Build prüft die unterstützte Inhaltsstruktur; die redaktionelle Kontrolle ersetzt er nicht. Dein Website-Projekt kann zusätzlich einen eigenen Befehl `npm run check` bereitstellen. Nutze ihn, wenn er eingerichtet ist; die später beschriebenen vollständigen Tests und Storybook-Befehle gehören zum Sproutsite-Repository für Mitwirkende.
+Die fertigen Dateien liegen in `dist/`. Der Generator richtet `npm run check` für die Astro-/TypeScript-Prüfung ein; der Build validiert zusätzlich die unterstützte Inhaltsstruktur. Diese Prüfungen ersetzen keine redaktionelle Kontrolle. Die später beschriebenen vollständigen Framework-Tests und Storybook-Befehle gehören zum Sproutsite-Repository für Mitwirkende.
 
 Zum Veröffentlichen überträgst du den vollständigen Inhalt von `dist/` auf dein Webhosting oder nutzt den vereinbarten Veröffentlichungsprozess deines Teams. Node.js wird zum Bauen und für die Vorschau benötigt, nicht zum Ausliefern der fertigen statischen Website.
 

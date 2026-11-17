@@ -8,19 +8,32 @@ import { Eyebrow } from 'sproutsite/components';
 
 <Eyebrow>One-time setup</Eyebrow>
 
-## Add Sproutsite to your website
+## Create your website
 
-Sproutsite is used as a library in your own Astro project. The library supplies the theme and components; your content belongs to your project. Installing the package does not create content files or a ready-to-edit website automatically.
-
-For a new website, create an Astro project with the official setup tool. Choose a project folder such as `my-website`, the minimal template, and dependency installation. Then install Sproutsite and MDX in that folder:
+The published `create-sproutsite` generator sets up a website with the supplied design and components. Choose a folder name and the content language:
 
 ```sh
-npm create astro@latest
+npm create sproutsite@latest my-website -- --language en
 cd my-website
-npm install sproutsite @astrojs/mdx
+npm run dev
 ```
 
-If you already have an Astro project, run only the package installation there. You can ask your technical contact or external coding agent to connect the library once using the following files.
+The assistant asks for your website name and whether to install dependencies. Accept installation, or run `npm install` before starting the preview. Use `--language de` for a German website. The generator refuses non-empty target directories and leaves your files intact if dependency installation fails; run `npm install` in the created project to retry.
+
+You receive a small homepage with a hero, Markdown and a Feature example, the required Astro configuration, and an `AGENTS.md` with editorial guidance. Your website uses `sproutsite` as an installed dependency. You do not need to copy theme files or clone the framework repository. Set the real production URL in `src/content/site.yaml` before deployment.
+
+The generator's [repository](https://github.com/sproutsite/create-sproutsite) documents its options. For an unattended setup, add `--yes`; to create files without installing dependencies, add `--yes --no-install`.
+
+### Alternative: connect an Astro project manually
+
+If you already have an Astro project or want to set up each file yourself, install the library and its supported Astro/MDX peers there. The generator already does this for new websites, so skip the remaining setup if you used it.
+
+```sh
+npm install sproutsite astro@^7.4.4 @astrojs/mdx@^8.1.2
+npm install --save-dev @astrojs/check typescript
+```
+
+Use an ES module project (`"type": "module"` in `package.json`) with a `tsconfig.json` extending `astro/tsconfigs/strict`. Add package scripts for `dev: astro dev`, `check: astro check`, `build: astro build`, and `preview: astro preview`. Your technical contact or external coding agent can connect the library once with the following files.
 
 ### Connect the supplied configuration
 
@@ -75,6 +88,6 @@ footer:
 
 Add the page files from the next section before starting `npm run dev`. Keep the Astro project's strict TypeScript configuration. For multiple languages, see the [content guide](/documentation/content/).
 
-The npm commands describe the intended package-consumer workflow. The current Sproutsite working copy is still private; registry publication is a separate step. Until the official package is published, use the [local package installation](/documentation/package/) instead of assuming a registry package with this name belongs to this project.
+Both `sproutsite` and `create-sproutsite` are published npm packages. The [local package installation](/documentation/package/) is for testing changes to the framework, rather than the normal editorial setup.
 
 The initial Astro setup follows the [official installation guide](https://docs.astro.build/en/install-and-setup/). Sproutsite's configuration already includes the [official MDX integration](https://docs.astro.build/en/guides/integrations-guide/mdx/), so do not add it a second time.

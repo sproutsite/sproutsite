@@ -7,6 +7,14 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Added
+
+- Documented the separate create-sproutsite initializer for minimal English/German websites, with its own package lifecycle, and updated library publication guidance to reflect npm availability.
+
+### Changed
+
+- Made the published create-sproutsite generator the recommended English/German onboarding path, retained manual Astro integration, and corrected outdated publication notices and German starter file guidance.
+
 ## [0.5.8] - 2026-11-17
 
 ### Fixed
