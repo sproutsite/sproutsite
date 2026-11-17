@@ -69,7 +69,14 @@ const registry = 'https://registry.npmjs.org/';
 function npm(args: string[], cwd: string, capture = false, base = '/') {
     const result = spawnSync(process.execPath, [npmCli!, ...args], {
         cwd,
-        env: { ...process.env, SPROUTSITE_BASE: base },
+        env: {
+            ...process.env,
+            // npm publish --dry-run passes this setting into lifecycle scripts.
+            // Nested checks need real local packing/installation; the parent
+            // publication remains a dry run because its environment is unchanged.
+            npm_config_dry_run: 'false',
+            SPROUTSITE_BASE: base,
+        },
         stdio: capture ? ['ignore', 'pipe', 'pipe'] : 'inherit',
         encoding: 'utf8',
         maxBuffer: 10 * 1024 * 1024,
@@ -212,6 +219,10 @@ try {
     assert.equal(
         resolve(temporary, archive.filename).startsWith(temporary),
         true,
+    );
+    assert.ok(
+        existsSync(archivePath),
+        `npm pack did not create the test archive: ${archivePath}`,
     );
     cpSync(join(root, 'scripts/fixtures/package-consumer'), consumer, {
         recursive: true,
