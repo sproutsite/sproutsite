@@ -7,6 +7,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.15] - 2026-11-18
+
 ### Added
 
 - Rebuilt the bilingual privacy policy with environment-backed controller/contact and hosting details, cookie/tracking information, scoped nginx and shared Traefik log retention, email retention and data-subject rights. Documented the confirmed seven-day policy during normal operation, reduced access logging, hourly rotation, five-minute cleanup, Copytruncate limitations and unresolved retention of external copies/backups.
