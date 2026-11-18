@@ -1,0 +1,84 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import featuresImage from './_assets/features.png';
+import cardsImage from './_assets/cards.png';
+import imagesImage from './_assets/images.png';
+import typographyImage from './_assets/typography.png';
+import tablesImage from './_assets/tables.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Text, images and components</Eyebrow>
+
+## Present content
+
+Use Features and Cards for concise information, then add images, longer text and tables where they fit your content.
+
+<Columns>
+    <Column span={4}>
+        <Card image={featuresImage} imageAlt="Three-dimensional feature rows with icons, headings and descriptions in navy and teal.">
+            ### Features
+
+            Pair an icon with a heading and short description, with soft, solid, or plain presentation.
+
+            <CardActions>
+                [View features](/showcase/features/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={cardsImage} imageAlt="Three-dimensional content cards with an image area, text lines and an action button.">
+            ### Cards
+
+            Reusable content cards with an optional image, Markdown body, and action links.
+
+            <CardActions>
+                [View cards](/showcase/cards/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={imagesImage} imageAlt="Three-dimensional image frames showing landscape scenes in wide, square and portrait formats.">
+            ### Images
+
+            Optimized local assets with fixed dimensions, borders, shapes, and cover crops.
+
+            <CardActions>
+                [View images](/showcase/images/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={typographyImage} imageAlt="Three-dimensional typography board with letterforms, headings, text lines and a list.">
+            ### Content typography
+
+            Readable Markdown typography for headings, lists, quotations, tables, and code.
+
+            <CardActions>
+                [View content typography](/showcase/typography/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={tablesImage} imageAlt="Three-dimensional table with a navy header, aligned columns and a highlighted teal row.">
+            ### Tables
+
+            Captioned tables with alignment, row highlighting, compact spacing, and mobile scrolling.
+
+            <CardActions>
+                [View tables](/showcase/tables/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

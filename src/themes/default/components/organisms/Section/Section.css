@@ -2,6 +2,13 @@
     .ss-section {
         @apply py-section;
 
+        /* Keep hero jump-link destinations below the docked header. */
+        .ss-hero:has(a[href^='#']) ~ & {
+            .content-prose > h2 {
+                scroll-margin-top: 8rem;
+            }
+        }
+
         &.ss-section--spacing-small {
             @media (width >= 64rem) {
                 padding-block: calc(var(--spacing-section) / 2);

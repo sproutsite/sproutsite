@@ -9,6 +9,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
+- Reorganized the bilingual showcase overview around page structure, content, interaction and design, added hero jump links, and preserved all 15 topic destinations and existing illustrations.
 - Replaced all eight documentation overview illustrations with the approved navy-and-teal 3D style, updated bilingual alternative text, and recorded prompts and provenance under docs/assets.
 - Documented the approved illustration style, palette, responsive framing and generation-record workflow in docs/assets, with a permanent agent-guidance reference.
 - Replaced all 15 showcase overview illustrations with a coordinated navy-and-teal 3D series, refreshed shared landscape/portrait example assets, and updated bilingual alternative text and generation records.

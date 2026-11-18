@@ -1,0 +1,47 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import iconsImage from './_assets/icons.png';
+import foundationsImage from './_assets/foundations.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Farben und visuelle Details</Eyebrow>
+
+## Gestaltung verstehen
+
+Ergänze passende Icons und lerne die Farben, Schriften und Abstände des vorhandenen Designs kennen.
+
+<Columns>
+    <Column span={4}>
+        <Card image={iconsImage} imageAlt="Dreidimensionale Icon-Sammlung mit Sprössling, Dokument, Ebenen, Pfeil, Zahnrad und Häkchen.">
+            ### Icons
+
+            Lucide-Symbole lokal einbinden: Größen, Theme-Farben, zugängliche Beschriftungen und Beispiele mit Buttons.
+
+            <CardActions>
+                [Icons ansehen](/showcase/icons/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={foundationsImage} imageAlt="Dreidimensionale Darstellung von Farbmustern, Abständen und abgerundeten Design-Bausteinen in Navy und Petrol.">
+            ### Design Foundations
+
+            Farben, Typografie, Abstände, Radien, Schatten und Fokuszustände des Standard-Themes.
+
+            <CardActions>
+                [Design Foundations ansehen](/showcase/foundations/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>
+
+Hinweise zur Atomic-Design-Einordnung und zu den Quelldateien findest du auf den jeweiligen Detailseiten.

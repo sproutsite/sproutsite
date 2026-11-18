@@ -1,0 +1,47 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import iconsImage from './_assets/icons.png';
+import foundationsImage from './_assets/foundations.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Colors and visual details</Eyebrow>
+
+## Understand the design
+
+Find suitable icons and explore the colors, typography and spacing used by the supplied design.
+
+<Columns>
+    <Column span={4}>
+        <Card image={iconsImage} imageAlt="Three-dimensional icon collection with a sprout, document, layers, arrow, gear and check mark.">
+            ### Icons
+
+            Use local Lucide icons with sizes, theme colors, accessible labels, and button examples.
+
+            <CardActions>
+                [View icons](/showcase/icons/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={foundationsImage} imageAlt="Three-dimensional illustration of navy and teal color swatches, spacing and rounded design elements.">
+            ### Design Foundations
+
+            Colors, typography, spacing, corner radii, shadows, and focus states in the default theme.
+
+            <CardActions>
+                [View design foundations](/showcase/foundations/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>
+
+The detail pages also identify Atomic Design categories and source files.
