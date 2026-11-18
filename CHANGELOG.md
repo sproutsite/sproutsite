@@ -7,9 +7,15 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.19] - 2026-11-18
+
 ### Added
 
 - Documented the operator-reported SSL Labs and SecurityHeaders A+ results for sproutsite.dev with a dated deployment record, bilingual HTTPS/security-header guidance and footer links to the relevant sections.
+
+### Fixed
+
+- Kept directly linked section headings clear of the docked header, including the new security-check footer destinations.
 
 ## [0.5.18] - 2026-11-18
 
