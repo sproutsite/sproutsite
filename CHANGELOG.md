@@ -7,6 +7,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Changed
+
+- Replaced the bilingual demo contact copy with small contact heroes, shared environment-backed postal/email/LinkedIn cards and practical guidance for getting in touch, using the existing LegalIdentity component.
+
 ### Fixed
 
 - Keep the enclosing header navigation item highlighted on descendant pages in both languages and mobile menus, with distinct current-page and current-location semantics and segment-safe matching.

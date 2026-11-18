@@ -1,7 +1,8 @@
 ---
-title: Kontakt zur Sproutsite-Demo
+title: Kontakt zu Sproutsite
 eyebrow: Fragen und Austausch
+type: small
 tone: brand
 ---
 
-Sie haben Fragen zu Sproutsite oder möchten sich über ein Astro-Projekt austauschen? Hier finden Sie die beispielhafte Kontaktmöglichkeit dieser Demo.
+Du hast eine Frage zu deiner Website mit Sproutsite, eine Rückmeldung oder eine Idee? Schreib mir direkt.
