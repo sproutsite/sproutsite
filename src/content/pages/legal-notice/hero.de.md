@@ -1,8 +1,8 @@
 ---
 title: Impressum
-eyebrow: Angaben zur Website
+eyebrow: Rechtliche Angaben
 type: small
 tone: brand
 ---
 
-Wer hinter Sproutsite steht und wie du uns erreichst.
+Betreiber, Kontakt und redaktionelle Verantwortung für sproutsite.dev.

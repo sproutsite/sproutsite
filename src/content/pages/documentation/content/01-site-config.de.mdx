@@ -56,3 +56,23 @@ footer:
 ```
 
 `links` bleibt die untere Linkzeile und unterstützt vorhandene Konfigurationen unverändert. Ohne `groups` oder `social` entfällt der jeweilige Bereich. Als Social-Plattformen werden derzeit `github`, `instagram` und `facebook` mit lokal eingebundenen Logos aus Simple Icons unterstützt. `label` ist der zugängliche Name des jeweiligen Icon-Links. `showVersion` liest die `VERSION` der installierten Bibliothek und ist standardmäßig `true`; mit `false` blendest du die Version aus. `copyright` ist ein Text, den du selbst aktuell hältst. `languageSwitcher` ist standardmäßig `false`; mit `true` nutzt der Footer die vorhandene Sprachauswahl einschließlich übersetzter Unterseiten und Startseiten-Fallback. Das Auswahlmenü öffnet sich im Footer nach oben. Interne Links berücksichtigen Sprache und Base-Pfad; externe Links öffnen in einem neuen Tab.
+
+### Private Betreiberangaben im Impressum
+
+Die Impressumsseiten der Demo lesen Name, Anschrift und Kontakt aus der lokalen `.env`. Kopiere `.env.dist` nach `.env` und ersetze die Musterdaten. Die `.env` wird nicht eingecheckt; `.env.dist` enthält nur Beispiele. Im fertigen HTML werden die Betreiberangaben wie vorgesehen öffentlich angezeigt.
+
+Pflichtfelder sind `LEGAL_NAME`, `LEGAL_STREET`, `LEGAL_POSTAL_CODE`, `LEGAL_CITY`, `LEGAL_COUNTRY` (zweistelliger Ländercode), `LEGAL_EMAIL` und `LEGAL_LINKEDIN`. Ohne vollständige Angaben zeigt `npm run dev` gekennzeichnete Beispieldaten. Der Build bricht bei fehlender `.env`, ungültigen oder unvollständigen Werten und unveränderter Musteridentität ab. Nach Änderungen an `.env` den Dev-Server neu starten.
+
+Die dokumentierte MDX-Komponente verwendet die bestehenden Columns- und Feature-Bausteine:
+
+```mdx
+import { LegalIdentity } from 'sproutsite/components';
+
+## Betreiber
+
+<LegalIdentity />
+
+Verantwortlich: **<LegalIdentity part="name" />**.
+```
+
+Ohne `part` wird `contact` verwendet und es erscheinen Anschrift und Kontakt. `part="name"` gibt nur den Namen aus. Es gibt keine Textersetzung in Markdown. Websites ohne diese Komponente benötigen keine Betreiber-Variablen. Ausgelesen wird ausschließlich `.env`, nicht `.env.local` oder die Shell-Umgebung. Nicht zugehörige Variablen werden nicht ausgegeben.

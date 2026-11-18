@@ -596,6 +596,18 @@ Storybook is a local developer tool and not part of the published website. It re
 
 The product identity is consistently Sproutsite: package imports use `sproutsite/*`, public helpers use `createSproutsiteCollections()`, `createSproutsiteConfig()` and `getSproutsiteStaticPaths()`, and theme classes use the `ss-` prefix. Update local consumers' dependency, imports, environment variables and custom theme overrides together.
 
+### Legal details for the demo website
+
+The legal-notice pages read operator details from a local `.env`. Copy `.env.dist` to `.env` and enter your details before running `npm run build`. `.env` is ignored by Git; `.env.dist` contains example values for version control. Without `.env`, `npm run dev` displays clearly marked sample details. Builds of pages using `LegalIdentity` reject a missing file, incomplete/invalid fields, or the sample name, email and LinkedIn profile. Consumer websites without this component do not require these variables. Generated HTML intentionally contains the legal details for publication.
+
+```sh
+cp .env.dist .env
+```
+
+Required keys: `LEGAL_NAME`, `LEGAL_STREET`, `LEGAL_POSTAL_CODE`, `LEGAL_CITY`, `LEGAL_COUNTRY` (two-letter country code), `LEGAL_EMAIL` and `LEGAL_LINKEDIN`. The component reads only `.env`, not `.env.local` or inherited shell variables, so the validated file and rendered identity stay consistent. Restart the dev server after editing `.env`.
+
+Import `{ LegalIdentity }` from `sproutsite/components` in MDX: `<LegalIdentity />` renders address/contact cards; `<LegalIdentity part="name" />` inserts the operator's name. The component reuses Columns and Feature. Node's native `.env` parser reads the values server-side; unrelated environment variables are not included in the output. There is no Markdown variable substitution.
+
 ### Logo and icons
 
 The reference-based sprout and three-layer symbol lives in `src/themes/default/assets/branding/`. `logo.svg` (navy wordmark), `logo-dark.svg` (white wordmark), `logo-monochrome.svg`, `icon.svg`, and `icon-monochrome.svg` are standalone vector assets with transparent backgrounds and outlined Nunito lettering. They need no external font. The shared `BrandLogo` atom uses the existing locally hosted Nunito font, inherits the light/dark text color, and is used in the header and footer. Consumer sites with a different `site.name` retain their own text wordmark.

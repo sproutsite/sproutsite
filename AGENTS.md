@@ -322,6 +322,13 @@ These rules are behavior instructions, not a technical sandbox. Do not claim tha
 - Release workflows prepare a release; run `npm publish`, create a GitHub release, tag, or push only with an explicit request.
 - The publishable version must match in `package.json`, `VERSION`, and `CHANGELOG.md`. The changelog follows Keep a Changelog and SemVer.
 
+### Legal identity data
+
+- Keep personal website-operator details in the ignored root `.env`; `.env.dist` contains examples only and is safe to commit.
+- Legal-notice content uses the documented `LegalIdentity` component instead of hardcoded operator details. Its `contact` view renders address/contact cards; `name` renders the operator name.
+- Development previews without complete operator details show marked examples. Builds rendering this component require a complete `.env` with the examples replaced. Consumer sites without the component do not need these variables.
+- Do not add private operator details to content, metadata, tests, logs or documentation. Preserve public source-code copyright and attribution notices independently.
+
 ### Licensing
 
 - Sproutsite is licensed under Apache License 2.0.

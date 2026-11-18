@@ -1,0 +1,81 @@
+---
+import { loadLegalIdentity } from '../../../../../lib/sproutsite/legal-identity.js';
+import Column from '../../layout/Column/Column.astro';
+import Columns from '../../layout/Columns/Columns.astro';
+import Feature from '../Feature/Feature.astro';
+import Alert from '../Alert/Alert.astro';
+
+interface Props {
+    part?: 'contact' | 'name';
+}
+const { part = 'contact' } = Astro.props;
+if (!['contact', 'name'].includes(part))
+    throw new Error('LegalIdentity part must be contact or name.');
+const { values, placeholder } = loadLegalIdentity(import.meta.env.PROD);
+const german = Astro.currentLocale === 'de';
+const country =
+    new Intl.DisplayNames([german ? 'de' : 'en'], { type: 'region' }).of(
+        values.LEGAL_COUNTRY,
+    ) ?? values.LEGAL_COUNTRY;
+---
+
+{part === 'name' ? (
+    values.LEGAL_NAME
+) : (
+    <div class="ss-legal-identity">
+        {placeholder && (
+            <Alert variant="info">
+                {german
+                    ? 'Vorschau mit Beispieldaten: Die Betreiberangaben in der lokalen .env fehlen, sind unvollständig oder enthalten noch Musterwerte.'
+                    : 'Preview with example data: Operator details in the local .env are missing, incomplete or still contain example values.'}
+            </Alert>
+        )}
+        <Columns>
+            <Column span={6}>
+                <Feature
+                    icon="MapPin"
+                    title={german ? 'Postanschrift' : 'Postal address'}
+                    layout="card"
+                    color="primary"
+                >
+                    <address>
+                        <strong>{values.LEGAL_NAME}</strong>
+                        <span>{values.LEGAL_STREET}</span>
+                        <span>
+                            {values.LEGAL_POSTAL_CODE} {values.LEGAL_CITY}
+                        </span>
+                        <span>{country}</span>
+                    </address>
+                </Feature>
+            </Column>
+            <Column span={6}>
+                <Feature
+                    icon="Mail"
+                    title={german ? 'Kontakt' : 'Contact'}
+                    layout="card"
+                    color="secondary"
+                >
+                    <p>
+                        <strong>{german ? 'E-Mail' : 'Email'}</strong>
+                        <br />
+                        <a href={`mailto:${values.LEGAL_EMAIL}`}>
+                            {values.LEGAL_EMAIL}
+                        </a>
+                    </p>
+                    <p>
+                        <strong>LinkedIn</strong>
+                        <br />
+                        <a
+                            href={values.LEGAL_LINKEDIN}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {values.LEGAL_NAME}{' '}
+                            {german ? 'auf LinkedIn' : 'on LinkedIn'}
+                        </a>
+                    </p>
+                </Feature>
+            </Column>
+        </Columns>
+    </div>
+)}

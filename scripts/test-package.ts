@@ -108,6 +108,78 @@ function assertQuietBlog(output: string) {
     );
 }
 
+function verifyLegalIdentityBuilds() {
+    const directory = join(consumer, 'src/content/pages/legal-fixture');
+    mkdirSync(directory);
+    writeFileSync(
+        join(directory, 'page.yaml'),
+        'title: Legal fixture\ndescription: Environment-backed legal identity.\n',
+    );
+    writeFileSync(
+        join(directory, '01-identity.mdx'),
+        `import { LegalIdentity } from 'sproutsite/components';\n\n## Operator\n\n<LegalIdentity />\n\nResponsible: **<LegalIdentity part="name" />**\n`,
+    );
+    const envFile = join(consumer, '.env');
+    const expectBuildFailure = (message: RegExp) => {
+        const result = spawnSync(process.execPath, [npmCli!, 'run', 'build'], {
+            cwd: consumer,
+            env: {
+                ...process.env,
+                npm_config_dry_run: 'false',
+                SPROUTSITE_BASE: '/',
+            },
+            encoding: 'utf8',
+            maxBuffer: 10 * 1024 * 1024,
+        });
+        if (result.error) throw result.error;
+        assert.notEqual(
+            result.status,
+            0,
+            'Invalid legal identity must stop the build',
+        );
+        assert.match(`${result.stdout}\n${result.stderr}`, message);
+    };
+    expectBuildFailure(/Legal identity: \.env is missing/);
+    writeFileSync(envFile, 'LEGAL_NAME="Test Operator"\n');
+    expectBuildFailure(/missing or invalid fields: LEGAL_STREET/);
+    cpSync(join(root, '.env.dist'), envFile);
+    expectBuildFailure(/example identity values must be replaced/);
+    writeFileSync(
+        envFile,
+        [
+            'LEGAL_NAME="Test Operator"',
+            'LEGAL_STREET="Teststraße 7"',
+            'LEGAL_POSTAL_CODE="01234"',
+            'LEGAL_CITY="Teststadt"',
+            'LEGAL_COUNTRY="DE"',
+            'LEGAL_EMAIL="contact@test.invalid"',
+            'LEGAL_LINKEDIN="https://www.linkedin.com/in/test-operator/"',
+            'UNRELATED_SECRET="never-render-this-token"',
+        ].join('\n'),
+    );
+    npm(['run', 'build'], consumer, true, '/demo/');
+    const html = readFileSync(
+        join(consumer, 'dist/legal-fixture/index.html'),
+        'utf8',
+    );
+    for (const value of [
+        'Test Operator',
+        'Teststraße 7',
+        '01234',
+        'contact@test.invalid',
+    ])
+        assert.ok(html.includes(value));
+    assert.ok(html.includes('<address>'));
+    assert.ok(
+        !html.includes('Max Mustermann') &&
+            !html.includes('never-render-this-token'),
+    );
+    rmSync(envFile);
+    console.log(
+        'PASS legal identity: missing, incomplete and example .env rejected; complete private values rendered from the installed package.',
+    );
+}
+
 async function verifyDevBlogLifecycle() {
     const blog = join(consumer, 'src/content/blog');
     rmSync(blog, { recursive: true, force: true });
@@ -187,6 +259,13 @@ async function verifyDevBlogLifecycle() {
             '/',
             (response, html) =>
                 response.ok && html.includes('Consumer content stays here.'),
+        );
+        await waitForPage(
+            '/legal-fixture/',
+            (response, html) =>
+                response.ok &&
+                html.includes('Max Mustermann') &&
+                html.includes('Preview with example data'),
         );
         assertQuietBlog(output);
         const assetDirectory = join(blog, '_assets');
@@ -465,6 +544,7 @@ try {
         npm(['run', 'build'], consumer, false, base);
         verifyBuild(base);
     }
+    verifyLegalIdentityBuilds();
     await verifyDevBlogLifecycle();
     rmSync(temporary, { recursive: true, force: true });
     console.log(

@@ -37,6 +37,7 @@
 @import '../components/molecules/ContentTable/ContentTable.css';
 @import '../components/molecules/Card/Card.css';
 @import '../components/molecules/Feature/Feature.css';
+@import '../components/molecules/LegalIdentity/LegalIdentity.css';
 @import '../components/molecules/Accordion/Accordion.css';
 @import '../components/molecules/AccordionItem/AccordionItem.css';
 @import '../components/molecules/CardActions/CardActions.css';

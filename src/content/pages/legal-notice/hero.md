@@ -1,8 +1,8 @@
 ---
 title: Legal notice
-eyebrow: Website information
+eyebrow: Website operator
 type: small
 tone: brand
 ---
 
-Who is behind Sproutsite and how to get in touch.
+Operator details, contact information and editorial responsibility for sproutsite.dev.

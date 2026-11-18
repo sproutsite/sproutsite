@@ -56,3 +56,23 @@ footer:
 ```
 
 `links` remains the lower link row and supports existing configurations unchanged. Omit `groups` or `social` to hide those areas. Social platforms currently supported are `github`, `instagram` and `facebook`, using local Simple Icons logos. `label` is the accessible name of each icon link. `showVersion` defaults to `true` and reads the installed library's `VERSION`; set it to `false` to hide it. `copyright` is literal text you maintain yourself. `languageSwitcher` defaults to `false`; enabling it reuses the header's language selection, including matching translated pages and homepage fallback. The dropdown opens upward in the footer. Internal links use the active language and deployment base; external links open in a new tab.
+
+### Private operator details in the legal notice
+
+The demo's legal-notice pages read the operator's name, address and contact details from the local `.env`. Copy `.env.dist` to `.env` and replace the examples. `.env` is ignored by Git; `.env.dist` contains examples only. The generated HTML intentionally displays the operator details publicly.
+
+Required keys are `LEGAL_NAME`, `LEGAL_STREET`, `LEGAL_POSTAL_CODE`, `LEGAL_CITY`, `LEGAL_COUNTRY` (two-letter country code), `LEGAL_EMAIL` and `LEGAL_LINKEDIN`. Without complete details, `npm run dev` shows marked examples. Builds reject a missing `.env`, invalid or incomplete values, and the unchanged example identity. Restart the dev server after changing `.env`.
+
+The documented MDX component reuses the existing Columns and Feature building blocks:
+
+```mdx
+import { LegalIdentity } from 'sproutsite/components';
+
+## Operator
+
+<LegalIdentity />
+
+Responsible: **<LegalIdentity part="name" />**.
+```
+
+Omitting `part` selects `contact`, which renders the address and contact details. `part="name"` outputs only the name. There is no Markdown variable substitution. Websites without this component do not require operator variables. Only `.env` is read, not `.env.local` or inherited shell variables. Unrelated variables are not rendered.

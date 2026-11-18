@@ -1,0 +1,19 @@
+@layer components {
+    .ss-legal-identity {
+        address {
+            display: flex;
+            flex-direction: column;
+            font-style: normal;
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: underline;
+            text-underline-offset: 0.2em;
+        }
+
+        p {
+            margin-block: 0 0.75rem;
+        }
+    }
+}
