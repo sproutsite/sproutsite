@@ -13,6 +13,10 @@
         .ss-card__body {
             @apply flex flex-1 flex-col;
 
+            a:not(.ss-button) {
+                @apply font-semibold;
+            }
+
             > h3:first-child {
                 @apply card-title;
             }

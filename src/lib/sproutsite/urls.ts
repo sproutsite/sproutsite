@@ -64,6 +64,37 @@ export function isExternalWebLink(href: string, siteUrl: string): boolean {
     );
 }
 
+/** Preserve existing relationship tokens and secure any explicitly requested new tab. */
+export function secureLinkRel(
+    target: string | undefined,
+    rel: string | undefined,
+): string | undefined {
+    if (target?.toLowerCase() !== '_blank') return rel;
+    const tokens = new Set(
+        (rel ?? '')
+            .split(/\s+/)
+            .filter(Boolean)
+            .map((token) => token.toLowerCase()),
+    );
+    tokens.add('noopener');
+    tokens.add('noreferrer');
+    return [...tokens].join(' ');
+}
+
+/** Attributes for native theme anchors; no client-side DOM rewriting. */
+export function externalLinkAttributes(
+    href: string,
+    site: Pick<SiteConfig, 'url' | 'links'>,
+): { 'data-external-link'?: string; target?: '_blank'; rel?: string } {
+    if (!isExternalWebLink(href, site.url)) return {};
+    return {
+        'data-external-link': '',
+        ...(site.links?.externalNewTab !== false
+            ? { target: '_blank' as const, rel: 'noopener noreferrer' }
+            : {}),
+    };
+}
+
 export function canonicalUrl(route: string, site: SiteConfig): string {
     return new URL(contentHref(route, site), site.url).toString();
 }

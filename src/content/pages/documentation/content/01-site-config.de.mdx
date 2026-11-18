@@ -30,6 +30,16 @@ hero-classes:
 
 ### Footer-Bereiche
 
+Externe Links lassen sich unabhängig vom Footer-Layout einstellen:
+
+```yaml
+links:
+    externalNewTab: true
+    externalIcon: true
+```
+
+`externalNewTab` ist standardmäßig `true` und ergänzt bei externen Weblinks automatisch `target="_blank"` und `rel="noopener noreferrer"`. Mit `false` öffnen diese Links regulär im selben Tab. `externalIcon` ist standardmäßig `false`; mit `true` erscheint ein nachgestellter CSS-Pfeil bei externen Weblinks, E-Mail- und Telefonlinks. Für diese Demo sind beide Optionen aktiviert. Im Theme bleiben native `<a>`-Elemente erhalten; eine Link-Komponente ist nicht erforderlich.
+
 Den Footer jeder Sprache pflegst du in `site.yaml` beziehungsweise `site.de.yaml`. `text` beschreibt deine Website; `groups` legt Navigationsspalten mit eigenen Titeln an. Der optionale Wert `icon` verwendet einen Lucide-Namen in PascalCase. Auf Mobilgeräten stehen die Spalten untereinander; Icons und Pfeile ergänzen die Links.
 
 ```yaml

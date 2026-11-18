@@ -153,7 +153,13 @@ export function createSproutsiteConfig() {
                     rehypeHeadingIds,
                     rehypeUniqueHeadingIds,
                     rehypeContentTables,
-                    [rehypeExternalLinks, site.url],
+                    [
+                        rehypeExternalLinks,
+                        {
+                            url: site.url,
+                            externalNewTab: site.links?.externalNewTab ?? true,
+                        },
+                    ],
                 ],
             }),
         },

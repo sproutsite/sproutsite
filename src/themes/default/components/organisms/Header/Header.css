@@ -14,7 +14,7 @@
             @apply flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-[2.1875rem] transition-[padding] duration-200;
 
             .ss-header__brand {
-                @apply inline-flex items-center gap-3 text-lg font-bold text-primary-content no-underline hover:no-underline;
+                @apply inline-flex items-center gap-3 text-lg font-bold text-primary-content no-underline hover:underline;
             }
 
             .ss-header__link,
@@ -35,7 +35,7 @@
 
         .ss-header__cta {
             .ss-button {
-                @apply m-0 !text-lg no-underline hover:no-underline;
+                @apply m-0 !text-lg no-underline hover:underline;
 
                 &[aria-current='page'] {
                     @apply outline-2 outline-offset-2;
@@ -45,7 +45,7 @@
         }
 
         .ss-header__link {
-            @apply relative !gap-2.5 !text-lg !text-primary-content no-underline hover:no-underline;
+            @apply relative !gap-2.5 !text-lg !text-primary-content no-underline hover:underline;
             border-color: transparent !important;
             box-shadow: none !important;
 
@@ -200,7 +200,7 @@
                 border: 0;
                 border-radius: 0;
                 font-size: 1.5rem !important;
-                font-weight: 500 !important;
+                font-weight: 600 !important;
                 line-height: 1.35;
                 text-align: start;
                 white-space: normal;

@@ -1,5 +1,7 @@
 ---
 import { loadLegalIdentity } from '../../../../../lib/sproutsite/legal-identity.js';
+import { loadSiteConfig } from '../../../../../lib/sproutsite/site-config.js';
+import { externalLinkAttributes } from '../../../../../lib/sproutsite/urls.js';
 import Column from '../../layout/Column/Column.astro';
 import Columns from '../../layout/Columns/Columns.astro';
 import Feature from '../Feature/Feature.astro';
@@ -15,6 +17,7 @@ if (!['contact', 'name', 'email', 'controller'].includes(part))
     );
 const { values, placeholder } = loadLegalIdentity(import.meta.env.PROD);
 const german = Astro.currentLocale === 'de';
+const site = loadSiteConfig(german ? 'de' : 'en');
 const country =
     new Intl.DisplayNames([german ? 'de' : 'en'], { type: 'region' }).of(
         values.LEGAL_COUNTRY,
@@ -72,8 +75,10 @@ const country =
                             <br />
                             <a
                                 href={values.LEGAL_LINKEDIN}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                {...externalLinkAttributes(
+                                    values.LEGAL_LINKEDIN,
+                                    site,
+                                )}
                             >
                                 {values.LEGAL_NAME}{' '}
                                 {german ? 'auf LinkedIn' : 'on LinkedIn'}

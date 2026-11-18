@@ -8,8 +8,11 @@
 
         a {
             color: var(--color-primary);
-            text-decoration: underline;
+            text-decoration: none;
             text-underline-offset: 0.2em;
+            &:hover {
+                text-decoration: underline;
+            }
         }
 
         p {

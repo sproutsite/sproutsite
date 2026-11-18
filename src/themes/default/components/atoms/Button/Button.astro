@@ -1,5 +1,9 @@
 ---
-import { contentHref } from '../../../../../lib/sproutsite/urls.js';
+import {
+    contentHref,
+    externalLinkAttributes,
+    secureLinkRel,
+} from '../../../../../lib/sproutsite/urls.js';
 import { loadSiteConfig } from '../../../../../lib/sproutsite/site-config.js';
 import type { HTMLAttributes } from 'astro/types';
 
@@ -50,6 +54,14 @@ const {
     disabled = false,
 } = Astro.props;
 const site = loadSiteConfig(Astro.currentLocale === 'de' ? 'de' : 'en');
+const externalAttributes: ReturnType<typeof externalLinkAttributes> = href
+    ? externalLinkAttributes(href, site)
+    : {};
+const linkTarget = target ?? externalAttributes.target;
+const linkRel = secureLinkRel(
+    linkTarget,
+    [rel, externalAttributes.rel].filter(Boolean).join(' ') || undefined,
+);
 
 if (href && disabled)
     throw new Error('Sproutsite Button links cannot be disabled.');
@@ -92,8 +104,9 @@ const classes = [
     <a
         class:list={classes}
         href={contentHref(href, site)}
-        target={target}
-        rel={rel}
+        {...externalAttributes}
+        target={linkTarget}
+        rel={linkRel}
         aria-current={ariaCurrent}
     >
         {/* @slot Button label or other inline content. */}

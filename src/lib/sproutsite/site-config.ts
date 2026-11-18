@@ -37,6 +37,13 @@ const heroClass = z.string().regex(/^ss-[a-z0-9][a-z0-9_-]*$/, {
 });
 
 const siteSchema = z.object({
+    links: z
+        .object({
+            externalNewTab: z.boolean().optional(),
+            externalIcon: z.boolean().optional(),
+        })
+        .strict()
+        .optional(),
     name: z.string().trim().min(1),
     url: z.url(),
     base: z

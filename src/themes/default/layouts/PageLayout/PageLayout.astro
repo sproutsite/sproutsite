@@ -95,7 +95,12 @@ const socialImage = new URL(socialCard.src, site.url).href;
         <meta name="twitter:title" content={documentTitle} />
         <meta name="twitter:description" content={description} />
     </head>
-    <body class:list={{ 'ss-page--landing': layout === 'landing' }}>
+    <body
+        class:list={{
+            'ss-page--landing': layout === 'landing',
+            'ss-links--external-icons': site.links?.externalIcon === true,
+        }}
+    >
         <a class="ss-skip-link" href="#main-content">
             {t(site.language === 'de' ? 'de' : 'en', 'skipToContent')}
         </a>

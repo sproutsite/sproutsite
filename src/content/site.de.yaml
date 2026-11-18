@@ -1,6 +1,9 @@
 name: Sproutsite
 url: https://sproutsite.dev
 base: /
+links:
+    externalNewTab: true
+    externalIcon: true
 language: de
 locales:
     - en

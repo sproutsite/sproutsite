@@ -106,6 +106,10 @@
 
             .ss-feature__content {
                 width: 100%;
+
+                .ss-feature__description a:not(.ss-button) {
+                    @apply font-semibold;
+                }
             }
         }
 

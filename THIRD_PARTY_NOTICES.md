@@ -25,6 +25,8 @@ Language-selector flags are local SVG assets from `flag-icons` 7.6.0, licensed u
 
 Lucide icons are rendered from `@lucide/astro` 1.73.0. Its full, unmodified [license text](third-party-licenses/lucide-LICENSE) is included with the npm package: ISC for Lucide, plus the upstream MIT notice and icon list for Feather-derived artwork. These icons retain their upstream licensing independently of the project-branding artwork below. Preserve the applicable notices when distributing rendered SVGs or a generated website containing them.
 
+The default theme also includes Lucide's ArrowUpRight paths in `src/themes/default/assets/arrow-up-right.svg` for the shared CSS link indicator. The same Lucide license applies.
+
 Dependencies remain separately licensed packages. This review inspected the root manifest, locked license metadata, and the license/NOTICE files present in the installed dependencies. It is not a certification of every transitive component or a grant of rights to their code.
 
 The npm archive contains Sproutsite sources and assets, not `node_modules` or bundled dependency executables. Dependencies are installed separately with their own notices. A generated website or separately distributed build/tool bundle must retain the applicable upstream notices for the code and fonts it actually includes.

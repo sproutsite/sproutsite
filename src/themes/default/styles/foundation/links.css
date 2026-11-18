@@ -1,0 +1,28 @@
+@layer components {
+    a {
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        .ss-links--external-icons
+            &:is(
+                [data-external-link],
+                [target='_blank'],
+                [href^='mailto:' i],
+                [href^='tel:' i]
+            )::after {
+            content: '';
+            display: inline-block;
+            flex: none;
+            width: 0.85em;
+            height: 0.85em;
+            margin-inline-start: 0.2em;
+            vertical-align: -0.05em;
+            background-color: currentColor;
+            mask: url('../../assets/arrow-up-right.svg') center / contain
+                no-repeat;
+        }
+    }
+}

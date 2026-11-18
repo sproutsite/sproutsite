@@ -8,7 +8,7 @@ import { t } from '../../../i18n/index.js';
 import type { Link, SiteConfig } from '../../../../../lib/sproutsite/types.js';
 import {
     contentHref,
-    isExternalWebLink,
+    externalLinkAttributes,
 } from '../../../../../lib/sproutsite/urls.js';
 
 interface Props {
@@ -72,7 +72,10 @@ const hasLanguageSwitcher = site.header.links.some(
                             />
                         );
                     }
-                    const external = isExternalWebLink(link.href, site.url);
+                    const externalAttributes = externalLinkAttributes(
+                        link.href,
+                        site,
+                    );
                     // Icon validates configured names against Lucide at render time.
                     const icon = link.icon as
                         ComponentProps<typeof Icon>['name'] | undefined;
@@ -83,12 +86,8 @@ const hasLanguageSwitcher = site.header.links.some(
                                     href={link.href}
                                     variant={link.variant}
                                     size="md"
-                                    target={external ? '_blank' : undefined}
-                                    rel={
-                                        external
-                                            ? 'noopener noreferrer'
-                                            : undefined
-                                    }
+                                    target={externalAttributes.target}
+                                    rel={externalAttributes.rel}
                                     aria-current={
                                         isActive(link) ? 'page' : undefined
                                     }
@@ -104,10 +103,7 @@ const hasLanguageSwitcher = site.header.links.some(
                             <a
                                 class="ss-header__link btn btn-ghost btn-sm"
                                 href={contentHref(link.href, site)}
-                                target={external ? '_blank' : undefined}
-                                rel={
-                                    external ? 'noopener noreferrer' : undefined
-                                }
+                                {...externalAttributes}
                                 aria-current={
                                     isActive(link) ? 'page' : undefined
                                 }

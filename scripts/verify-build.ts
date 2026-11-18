@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { assertSafeNewTabLinks } from './check-link-security.js';
 import { loadSiteConfig } from '../src/lib/sproutsite/site-config.js';
 import {
     canonicalUrl,
@@ -174,6 +175,7 @@ for (const entry of sitemapEntries) {
         throw new Error('Missing sitemap language links');
 }
 for (const [file, html] of htmlByFile) {
+    assertSafeNewTabLinks(html, file);
     const route = file.slice('dist/'.length).replace(/index\.html$/, '');
     const pageUrl = new URL(withBase(`/${route}`, site.base), site.url);
     for (const match of html.matchAll(/<a\b[^>]*\shref="([^"]+)"/g)) {
@@ -212,5 +214,5 @@ for (const [file, html] of htmlByFile) {
     }
 }
 console.log(
-    'Built pages, metadata, sitemap, and base-prefixed links verified.',
+    'Built pages, metadata, sitemap, base-prefixed links, and new-tab link security verified.',
 );

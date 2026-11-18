@@ -15,6 +15,7 @@
 @import './foundation/fonts.css';
 @import './foundation/tokens.css';
 @import './foundation/base.css';
+@import './foundation/links.css';
 @import './foundation/prose.css';
 @import './foundation/focus.css';
 @import './foundation/layout.css';

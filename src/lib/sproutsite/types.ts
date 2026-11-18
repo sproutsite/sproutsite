@@ -34,6 +34,10 @@ export interface SiteConfig {
     language: string;
     locales: string[];
     heroClasses: string[];
+    links?: {
+        externalNewTab?: boolean;
+        externalIcon?: boolean;
+    };
     blog?: {
         title: string;
         description: string;

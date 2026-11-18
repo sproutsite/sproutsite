@@ -1,7 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { unified } from '@astrojs/markdown-remark';
-import { isExternalWebLink } from '../src/lib/sproutsite/urls.js';
+import {
+    externalLinkAttributes,
+    isExternalWebLink,
+} from '../src/lib/sproutsite/urls.js';
 import { rehypeExternalLinks } from '../src/lib/sproutsite/rehype-links.js';
 
 test('classifies external web links against the production origin', () => {
@@ -26,6 +29,45 @@ test('classifies external web links against the production origin', () => {
         'tel:+4930123456',
     ])
         assert.equal(isExternalWebLink(href, site), false, href);
+});
+
+test('native anchors can opt out of automatic external tab attributes', () => {
+    const site = { url: 'https://example.com' };
+    assert.deepEqual(externalLinkAttributes('https://other.test/', site), {
+        'data-external-link': '',
+        target: '_blank',
+        rel: 'noopener noreferrer',
+    });
+    assert.deepEqual(
+        externalLinkAttributes('https://other.test/', {
+            ...site,
+            links: { externalNewTab: false },
+        }),
+        { 'data-external-link': '' },
+    );
+    for (const href of [
+        '/faq/',
+        'https://example.com/',
+        'mailto:hello@example.com',
+        'tel:+4930123456',
+    ]) {
+        assert.deepEqual(externalLinkAttributes(href, site), {});
+    }
+});
+
+test('Markdown external links retain native tab behavior when automatic tabs are disabled', async () => {
+    const renderer = await unified({
+        rehypePlugins: [
+            [
+                rehypeExternalLinks,
+                { url: 'https://example.com', externalNewTab: false },
+            ],
+        ],
+    }).createRenderer({});
+    const { code } = await renderer.render('[External](https://other.test/)');
+    assert(!code.includes('target='));
+    assert(!code.includes('rel='));
+    assert(code.includes('data-external-link'));
 });
 
 test('renders direct, reference and autolinks with the required external attributes', async () => {

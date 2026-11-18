@@ -9,7 +9,7 @@ import { t } from '../../../i18n/index.js';
 import type { SiteConfig } from '../../../../../lib/sproutsite/types.js';
 import {
     contentHref,
-    isExternalWebLink,
+    externalLinkAttributes,
 } from '../../../../../lib/sproutsite/urls.js';
 interface Props {
     site: SiteConfig;
@@ -24,8 +24,7 @@ const socialIcons = {
 };
 const linkAttributes = (href: string) => ({
     href: contentHref(href, site),
-    target: isExternalWebLink(href, site.url) ? '_blank' : undefined,
-    rel: isExternalWebLink(href, site.url) ? 'noopener noreferrer' : undefined,
+    ...externalLinkAttributes(href, site),
 });
 ---
 
@@ -62,15 +61,6 @@ const linkAttributes = (href: string) => ({
                                         </span>
                                     )}
                                     <span>{link.label}</span>
-                                    {isExternalWebLink(link.href, site.url) && (
-                                        <span class="ss-footer__external">
-                                            <Icon
-                                                name="ArrowUpRight"
-                                                size={16}
-                                                strokeWidth={1.5}
-                                            />
-                                        </span>
-                                    )}
                                     <span class="ss-footer__chevron">
                                         <Icon
                                             name="ChevronRight"
