@@ -1,6 +1,9 @@
 # Sproutsite
 
-[![GitHub Release](https://img.shields.io/github/v/release/sproutsite/sproutsite?display_name=tag&sort=semver)](https://github.com/sproutsite/sproutsite/releases)
+[![npm version](https://img.shields.io/npm/v/sproutsite?logo=npm)](https://www.npmjs.com/package/sproutsite)
+[![License](https://img.shields.io/npm/l/sproutsite)](LICENSE)
+[![Node.js version](https://img.shields.io/node/v/sproutsite?logo=nodedotjs)](https://www.npmjs.com/package/sproutsite)
+[![Documentation](https://img.shields.io/badge/docs-sproutsite.dev-0875C9)](https://sproutsite.dev/documentation/)
 
 **Sproutsite — The Agent-Ready Static CMS**
 
@@ -10,7 +13,7 @@ Sproutsite is an npm-based developer tool for file-based content, page structure
 
 _Plant an idea. Grow your website._
 
-Official website: [sproutsite.dev](https://sproutsite.dev) · [Documentation](https://sproutsite.dev/documentation/) · [Component showcase](https://sproutsite.dev/showcase/) · [Source code](https://github.com/sproutsite/sproutsite)
+Official website: [sproutsite.dev](https://sproutsite.dev) · [Documentation](https://sproutsite.dev/documentation/) · [Component showcase](https://sproutsite.dev/showcase/) · [Source code](https://github.com/sproutsite/sproutsite) · [Release notes](https://github.com/sproutsite/sproutsite/releases)
 
 ## Installation
 
