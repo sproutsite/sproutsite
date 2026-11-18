@@ -1,0 +1,30 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>HTTPS and server configuration</Eyebrow>
+
+## HTTPS and security headers
+
+Once your website is live, check its HTTPS configuration and HTTP security headers. These settings belong to your hosting environment, for example nginx, Apache or a reverse proxy. Sproutsite's static build does not configure them for you.
+
+SSL Labs assesses the server's TLS configuration. SecurityHeaders assesses selected HTTP response headers. Run both tests against your own production domain and review the findings before changing your server configuration. Some headers affect which scripts, images or embedded content a website can load.
+
+### Recorded results for sproutsite.dev
+
+The website operator reported the following results on **18 November 2026**:
+
+| Check                 | Result | Report                                                                                                              |
+| --------------------- | ------ | ------------------------------------------------------------------------------------------------------------------- |
+| TLS configuration     | A+     | [SSL Labs report](https://www.ssllabs.com/ssltest/analyze.html?d=sproutsite.dev&hideResults=on)                     |
+| HTTP security headers | A+     | [SecurityHeaders report](https://securityheaders.com/?q=https%3A%2F%2Fsproutsite.dev%2F&hide=on&followRedirects=on) |
+
+These results describe the deployment of **sproutsite.dev** at the recorded date. They are not a security certification of the Sproutsite package and do not automatically apply to websites created with it. The reports can change after a new scan or a server update; neither test replaces a complete security assessment.
+
+### Repeat checks after changes
+
+Run the checks again after changing TLS settings, certificates, security headers or reverse-proxy configuration. Record the domain, date, results and report links. Check that navigation, images and other website features still work, and investigate any new findings rather than relying on the letter grade alone.

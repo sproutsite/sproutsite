@@ -2,6 +2,11 @@
     .ss-section {
         @apply py-section;
 
+        /* Keep direct section links, including footer links, below the header. */
+        .content-prose > h2:target {
+            scroll-margin-top: 10rem;
+        }
+
         /* Keep hero jump-link destinations below the docked header. */
         .ss-hero:has(a[href^='#']) ~ & {
             .content-prose > h2 {

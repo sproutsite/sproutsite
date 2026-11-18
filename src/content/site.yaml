@@ -77,3 +77,5 @@ footer:
           href: /legal-notice/
         - label: Privacy
           href: /privacy-policy/
+        - label: Security checks
+          href: /documentation/deployment/#06-security-checks-https-and-security-headers

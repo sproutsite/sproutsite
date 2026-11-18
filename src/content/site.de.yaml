@@ -77,3 +77,5 @@ footer:
           href: /impressum/
         - label: Datenschutz
           href: /datenschutz/
+        - label: Sicherheitsprüfungen
+          href: /dokumentation/veroeffentlichen/#06-security-checks-de-https-und-sicherheitsheader

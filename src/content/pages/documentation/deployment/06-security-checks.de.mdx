@@ -1,0 +1,30 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>HTTPS und Serverkonfiguration</Eyebrow>
+
+## HTTPS und Sicherheitsheader
+
+Prüfe nach der Veröffentlichung die HTTPS-Konfiguration und HTTP-Sicherheitsheader deiner Website. Diese Einstellungen gehören zur Hosting-Umgebung, beispielsweise nginx, Apache oder einem vorgeschalteten Reverse Proxy. Der statische Build von Sproutsite richtet sie nicht selbst ein.
+
+SSL Labs bewertet die TLS-Konfiguration des Servers. SecurityHeaders prüft ausgewählte HTTP-Antwortheader. Führe beide Tests für deine eigene Produktionsdomain aus und prüfe die Hinweise, bevor du die Serverkonfiguration änderst. Manche Header beeinflussen, welche Skripte, Bilder oder eingebetteten Inhalte eine Website laden darf.
+
+### Dokumentierte Ergebnisse für sproutsite.dev
+
+Der Website-Betreiber hat am **18. November 2026** folgende Ergebnisse gemeldet:
+
+| Prüfung                | Ergebnis | Bericht                                                                                                                  |
+| ---------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------ |
+| TLS-Konfiguration      | A+       | [Bericht von SSL Labs](https://www.ssllabs.com/ssltest/analyze.html?d=sproutsite.dev&hideResults=on)                     |
+| HTTP-Sicherheitsheader | A+       | [Bericht von SecurityHeaders](https://securityheaders.com/?q=https%3A%2F%2Fsproutsite.dev%2F&hide=on&followRedirects=on) |
+
+Diese Ergebnisse beschreiben die Bereitstellung von **sproutsite.dev** zum dokumentierten Zeitpunkt. Sie sind kein Sicherheitszertifikat für das Sproutsite-Paket und gelten nicht automatisch für damit erstellte Websites. Nach einem neuen Scan oder einer Serveränderung können die Berichte anders ausfallen. Beide Tests ersetzen keine vollständige Sicherheitsprüfung.
+
+### Nach Änderungen erneut prüfen
+
+Wiederhole die Tests nach Änderungen an TLS-Einstellungen, Zertifikaten, Sicherheitsheadern oder der Reverse-Proxy-Konfiguration. Halte Domain, Datum, Ergebnisse und Berichtlinks fest. Prüfe außerdem, ob Navigation, Bilder und weitere Funktionen der Website weiterhin arbeiten. Gehe neuen Hinweisen nach, statt dich allein auf die Gesamtnote zu verlassen.
