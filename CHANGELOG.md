@@ -7,6 +7,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.18] - 2026-11-18
+
 ### Changed
 
 - Matched all eight documentation and six blog illustration backgrounds to the approved showcase wave, replacing hard-edged ribbons with broad navy-to-teal gradients that fade into the studio floor while retaining foreground subjects.
