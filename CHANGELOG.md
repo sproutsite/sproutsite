@@ -7,6 +7,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.16] - 2026-11-18
+
 ### Changed
 
 - Reorganized the bilingual documentation overview around starting a website, checking/publishing and technical work, with task-oriented copy and hero jump links while preserving all eight destinations and existing illustrations.
@@ -18,6 +20,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - Added matching navy-and-teal 3D illustrations to the bilingual getting-started overview cards.
 - Added a subtle shared border to cards for a clear outline with and without images.
 - Split the bilingual getting-started documentation into website-owner and contributor guides, with generator setup, coding-agent startup, practical editorial prompts and a separate manual Astro integration reference.
+
+### Fixed
+
+- Removed hover text underlines from header navigation links while preserving active-page indicators and hover backgrounds on desktop and mobile.
 
 ## [0.5.15] - 2026-11-18
 
