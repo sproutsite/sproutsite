@@ -7,6 +7,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.17] - 2026-11-18
+
 ### Changed
 
 - Refreshed all six bilingual blog illustrations in the approved navy-and-teal 3D style, updated alternative text and generation records, and expanded the responsive blog overview to three desktop columns.
