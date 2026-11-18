@@ -7,6 +7,12 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.13] - 2026-11-18
+
+### Changed
+
+- Added npm version, license, Node.js compatibility and documentation badges to the README, and moved the GitHub release link to the project links.
+
 ## [0.5.12] - 2026-11-18
 
 ### Fixed
