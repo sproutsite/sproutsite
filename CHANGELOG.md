@@ -7,6 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Security
+
+- Updated Astro to 7.4.12 and raised its peer/development minimum to exclude versions affected by GHSA-mh32-jxcr-mh9f and GHSA-r3h5-4585-7x3w; updated the compatible MDX, Markdown and checking packages.
+- Documented the remaining transitive picomatch ReDoS advisory GHSA-fc5q-39xc-vjpf, for which no patched npm release is currently available; no audit suppression, incompatible downgrades or unreviewed forks were introduced.
+
 ## [0.5.10] - 2026-11-18
 
 ### Fixed

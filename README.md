@@ -40,7 +40,7 @@ The library is available on [npm](https://www.npmjs.com/package/sproutsite). For
 mkdir my-website
 cd my-website
 npm init -y
-npm install sproutsite astro@^7.4.4 @astrojs/mdx@^8.1.2
+npm install sproutsite astro@^7.4.12 @astrojs/mdx@^8.1.6
 npm install --save-dev @astrojs/check typescript
 ```
 
@@ -544,7 +544,7 @@ npm pack
 Use the filename printed by npm. In your separate consumer project, replace the registry installation command with:
 
 ```sh
-npm install /absolute/path/to/sproutsite-VERSION.tgz astro@^7.4.4 @astrojs/mdx@^8.1.2
+npm install /absolute/path/to/sproutsite-VERSION.tgz astro@^7.4.12 @astrojs/mdx@^8.1.6
 npm install --save-dev @astrojs/check typescript
 ```
 
@@ -606,6 +606,14 @@ Run `npm run test:package` to test the actual npm archive in a fresh consumer pr
 The test uses `scripts/fixtures/package-consumer/`, pins its direct Astro/MDX/checking dependencies to versions in the repository lockfile, and lets npm resolve the library's published dependency ranges. npm may need network access and uses its normal cache. Temporary files are removed after success and retained with their path printed after failure. Lifecycle scripts are suppressed during packing and installation to prevent recursive publication checks and ensure the archive already contains everything it needs. During `npm publish --dry-run`, the nested checks still create and install a real local archive; only their child processes override the inherited dry-run setting, so the outer publication remains a dry run.
 
 `npm run prepublishOnly` runs formatting, TypeScript-source enforcement, content/Astro checking, unit tests, the demo build/output checks, and the consumer installation test. npm runs this gate automatically before publishing from this repository; any failing command stops the sequence. Neither running the gate manually nor running the package test publishes anything. A normal `npm pack` remains separate from this gate. Run the existing Storybook and accessibility checks as well when changing components or interactions. Do not bypass the gate with `--ignore-scripts` when publishing; publishing an existing tarball also requires checking that exact artifact beforehand.
+
+## Dependency Security
+
+Reviewed on 2026-11-18. The tested Astro version is 7.4.12, which is also the minimum accepted by this package's peer range. It includes the fixes for [dynamic-tag attribute injection](https://github.com/advisories/GHSA-mh32-jxcr-mh9f) and the [Node image endpoint path issue](https://github.com/advisories/GHSA-r3h5-4585-7x3w). The default Sproutsite website uses static output without the Node adapter, but the supported Astro range excludes those affected versions regardless.
+
+The transitive [picomatch ReDoS advisory GHSA-fc5q-39xc-vjpf](https://github.com/advisories/GHSA-fc5q-39xc-vjpf) remains open: the latest published picomatch version is 4.0.7 and the advisory lists no patched release. npm reports it through several Astro, globbing and developer-tool dependency paths; these are not separate root vulnerabilities. No audit exception or replacement package has been added to hide these reports.
+
+This finding concerns Node-based tooling. Deploying `dist/` does not deploy a Node runtime or its npm dependencies. The static output does not eliminate the need to review build inputs and development tooling, and this project does not claim the dependency tree is free of vulnerabilities. Recheck `npm audit` after upstream patches are published. Do not use `npm audit fix --force` without reviewing the proposed changes; its current suggestions include incompatible Astro/MDX downgrades.
 
 ## License
 
