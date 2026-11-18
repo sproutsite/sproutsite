@@ -478,6 +478,9 @@ try {
         'THIRD_PARTY_NOTICES.md',
         'src/themes/default/assets/hero-waves.svg',
         'src/themes/default/styles/foundation/fonts/OFL.txt',
+        'src/themes/default/styles/foundation/fonts/eb-garamond-OFL.txt',
+        'src/themes/default/styles/foundation/fonts/eb-garamond-latin-variable.woff2',
+        'src/themes/default/styles/foundation/fonts/eb-garamond-latin-variable-italic.woff2',
         'third-party-licenses/lucide-LICENSE',
         ...Object.values(manifest.exports).map((file) =>
             file.replace(/^\.\//, ''),

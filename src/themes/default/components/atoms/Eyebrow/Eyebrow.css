@@ -1,7 +1,8 @@
 @layer components {
     .ss-eyebrow {
-        @apply mb-1.5 text-sm font-bold tracking-wider uppercase;
-        font-family: var(--font-heading);
+        @apply mb-1.5 text-sm tracking-wider uppercase;
+        font-family: var(--font-eyebrow);
+        font-weight: var(--ss-eyebrow-weight, 500);
         color: var(--ss-eyebrow-color, var(--color-primary));
         display: flex;
         align-items: center;

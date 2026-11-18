@@ -36,7 +36,37 @@ const heroClass = z.string().regex(/^ss-[a-z0-9][a-z0-9_-]*$/, {
         'must start with ss- and contain only lowercase letters, digits, underscores, or hyphens',
 });
 
+const fontSelectionSchema = z
+    .object({
+        family: z.enum(['serif', 'sans-serif']).default('serif'),
+        weight: z.number().int().min(200).max(1000).default(500),
+    })
+    .strict()
+    .superRefine((font, context) => {
+        if (
+            font.family === 'serif' &&
+            (font.weight < 400 || font.weight > 800)
+        ) {
+            context.addIssue({
+                code: 'custom',
+                path: ['weight'],
+                message: 'must be between 400 and 800 for serif (EB Garamond)',
+            });
+        }
+    })
+    .default({ family: 'serif', weight: 500 });
+
 const siteSchema = z.object({
+    typography: z
+        .object({
+            headings: fontSelectionSchema,
+            eyebrow: fontSelectionSchema,
+        })
+        .strict()
+        .default({
+            headings: { family: 'serif', weight: 500 },
+            eyebrow: { family: 'serif', weight: 500 },
+        }),
     links: z
         .object({
             externalNewTab: z.boolean().optional(),
@@ -147,7 +177,7 @@ export function loadSiteConfig(
     const parsed = siteSchema.safeParse(raw);
     if (!parsed.success) {
         throw new Error(
-            `Invalid src/content/site.yaml: ${parsed.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join('; ')}`,
+            `Invalid src/content/${filename}: ${parsed.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join('; ')}`,
         );
     }
     const { 'hero-classes': heroClasses, ...site } = parsed.data;

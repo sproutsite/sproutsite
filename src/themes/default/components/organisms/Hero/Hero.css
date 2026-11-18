@@ -27,9 +27,10 @@
             }
 
             .ss-hero__title {
-                @apply max-w-3xl font-bold tracking-tight;
+                @apply max-w-3xl tracking-tight;
+                font-weight: var(--ss-heading-weight, 500);
                 font-size: clamp(3.25rem, 6vw, 6rem);
-                line-height: 1.06;
+                line-height: var(--ss-heading-leading);
 
                 .ss-hero__title-line {
                     display: block;
@@ -46,8 +47,8 @@
                 color: var(--color-primary-content);
                 font-family: var(--font-heading);
                 font-size: clamp(1.75rem, 2.5vw, 2.25rem);
-                font-weight: 700;
-                line-height: 1.12;
+                font-weight: var(--ss-heading-weight, 500);
+                line-height: var(--leading-heading-2);
             }
 
             .ss-hero__meta {

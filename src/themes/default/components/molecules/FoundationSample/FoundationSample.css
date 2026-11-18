@@ -78,18 +78,19 @@
             .ss-foundation-sample__heading {
                 @apply m-0 mb-4;
                 font-family: var(--font-heading);
-                line-height: 1.2;
                 overflow-wrap: anywhere;
             }
 
             .ss-foundation-sample__display {
                 font-size: var(--text-display);
-                font-weight: 700;
+                font-weight: var(--ss-heading-weight, 500);
+                line-height: var(--leading-heading-1);
             }
 
             .ss-foundation-sample__heading {
                 font-size: var(--text-heading-2);
-                font-weight: 500;
+                font-weight: var(--ss-heading-weight, 500);
+                line-height: var(--leading-heading-2);
             }
 
             .ss-foundation-sample__body {

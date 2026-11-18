@@ -180,6 +180,22 @@ This is our first page. Edit this file to update the website.
 
 ## Write, Preview, and Publish
 
+Choose heading and eyebrow fonts independently in each locale's `src/content/site.yaml` or `src/content/site.de.yaml`:
+
+```yaml
+typography:
+    headings:
+        family: serif
+        weight: 500
+    eyebrow:
+        family: serif
+        weight: 500
+```
+
+For each area, `family` accepts `serif` (EB Garamond, the default) or `sans-serif` (Nunito); `weight` is an integer, defaulting to `500`. EB Garamond supports weights 400–800 and Nunito 200–1000. Unsupported weights and unknown settings are rejected. The default theme hosts both variable fonts locally, including EB Garamond's italic face, with their SIL Open Font License notices. HTML headings, title components and the live header/footer wordmark follow `headings`; eyebrow text has its own setting. Body text, navigation, buttons and inline emphasis retain their existing typography. Custom themes decide how to present these semantic choices.
+
+Heading line heights are shared by semantic level across the default theme: H1 `1.1`, H2 `1.2`, H3 `1.3`, H4 `1.35`, H5/H6 `1.4`. Their central tokens are `--leading-heading-1` through `--leading-heading-6` in `styles/foundation/tokens.css`. Component title text without an HTML heading, such as accordion summaries, uses the H3 token.
+
 Run `npm run dev` and open the local address printed by Astro. Edit Markdown files under `src/content/` to change the page content. Add a directory with `page.yaml` and numbered sections to create another page; add its link to `site.yaml` when it should appear in navigation. An optional `hero.md` supplies the page's introductory area.
 
 Use `.mdx` sections when you need documented components such as cards, columns, features, or accordions:
@@ -620,7 +636,7 @@ Leave `PRIVACY_LOG_RETENTION_DAYS` empty until a time-based policy is implemente
 
 ### Logo and icons
 
-The reference-based sprout and three-layer symbol lives in `src/themes/default/assets/branding/`. `logo.svg` (navy wordmark), `logo-dark.svg` (white wordmark), `logo-monochrome.svg`, `icon.svg`, and `icon-monochrome.svg` are standalone vector assets with transparent backgrounds and outlined Nunito lettering. They need no external font. The shared `BrandLogo` atom uses the existing locally hosted Nunito font, inherits the light/dark text color, and is used in the header and footer. Consumer sites with a different `site.name` retain their own text wordmark.
+The reference-based sprout and three-layer symbol lives in `src/themes/default/assets/branding/`. `logo.svg` (navy wordmark), `logo-dark.svg` (white wordmark), `logo-monochrome.svg`, `icon.svg`, and `icon-monochrome.svg` are standalone vector assets with transparent backgrounds and outlined Nunito lettering. They need no external font. The shared `BrandLogo` atom follows the configured heading family and weight, inherits the light/dark text color, and is used in the header and footer. Consumer sites with a different `site.name` retain their own text wordmark.
 
 `favicon.svg` uses flat colors for small displays. The ICO contains native 16, 32, and 48 pixel frames; separate PNGs provide those sizes too. The Apple touch icon is 180 pixels; web app icons are 192 and 512 pixels, with navy backgrounds and safe internal padding. `PageLayout` links the icons and the static `/site.webmanifest` endpoint registered by `createSproutsiteConfig()` through Astro's standard `injectRoute()` API. Imported asset URLs and the configured base are respected; no CMS runtime or service worker is added. These are the default theme's icons; a differently branded consumer should replace them when replacing the theme. The Sproutsite social card is emitted only for the product site (`site.name: Sproutsite`).
 

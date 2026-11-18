@@ -76,14 +76,19 @@ Source: styles/theme.css. Prefix the names in this table with --color-. They des
 
 ### Font families
 
-Sources: styles/foundation/tokens.css and fonts.css. Nunito is loaded locally. Body text uses the available system font, with no external font requests.
+Sources: styles/foundation/tokens.css and fonts.css. EB Garamond and Nunito are loaded locally. Select heading and eyebrow families independently with `typography.headings.family` and `typography.eyebrow.family` in each locale's site YAML: `serif` selects EB Garamond (default), `sans-serif` selects Nunito. Set `typography.headings.weight` and `typography.eyebrow.weight` separately (default 500): EB Garamond supports integer weights 400–800; Nunito supports 200–1000. The live header/footer wordmark follows the heading selection. Body text uses the available system font, with no external font requests.
 
 <Tabs label="Font families: Reference and CSS" variant="border">
     <Tab title="Preview">
 
         | Token | Value | Usage |
         | --- | --- | --- |
-        | `--font-heading` | Nunito with a system fallback | Headings and eyebrows |
+        | `--font-heading-serif` | EB Garamond with a serif fallback | Serif family |
+        | `--font-heading-sans` | Nunito with a system fallback | Sans-serif family |
+        | `--font-heading` | Selected heading family; EB Garamond by default | Headings and titles |
+        | `--font-eyebrow` | Selected eyebrow family; EB Garamond by default | Eyebrows |
+        | `--ss-heading-weight` | Validated heading weight; 500 by default | Headings, titles and live wordmarks |
+        | `--ss-eyebrow-weight` | Validated eyebrow weight; 500 by default | Eyebrows |
         | `--font-sans` | `ui-sans-serif`, `system-ui`, `sans-serif` | Body text |
 
     </Tab>
@@ -93,7 +98,10 @@ Sources: styles/foundation/tokens.css and fonts.css. Nunito is loaded locally. B
         /* styles/foundation/tokens.css */
         @theme {
             --font-sans: ui-sans-serif, system-ui, sans-serif;
-            --font-heading: 'Nunito', var(--font-sans);
+            --font-heading-sans: 'Nunito', var(--font-sans);
+            --font-heading-serif: 'EB Garamond', ui-serif, Georgia, serif;
+            --font-heading: var(--font-heading-serif);
+            --font-eyebrow: var(--font-heading-serif);
         }
 
         /* styles/foundation/fonts.css */
@@ -115,16 +123,16 @@ Source: styles/foundation/tokens.css. Prefix the short token names in this table
 <Tabs label="Font sizes: Reference and CSS" variant="border">
     <Tab title="Preview">
 
-        | Usage | Token | Size |
-        | --- | --- | --- |
-        | Page title | `display` | 2.25–4rem |
-        | h2 | `heading-2` | 1.75–2.5rem |
-        | h3 | `heading-3` | 1.5rem |
-        | h4 | `heading-4` | 1.25rem |
-        | h5 | `heading-5` | 1.125rem |
-        | h6 | `heading-6` | 1rem |
+        | Usage | Token | Size | Line height |
+        | --- | --- | --- | --- |
+        | Page title (h1) | `display` | 2.25–4rem | 1.1 |
+        | h2 | `heading-2` | 1.75–2.5rem | 1.2 |
+        | h3 | `heading-3` | 1.5rem | 1.3 |
+        | h4 | `heading-4` | 1.25rem | 1.35 |
+        | h5 | `heading-5` | 1.125rem | 1.4 |
+        | h6 | `heading-6` | 1rem | 1.4 |
 
-        `heading-1` uses the same size scale as `display`; `heading` follows `heading-2`. Markdown prose uses bold H1 and H2 headings and medium-weight H3 through H6 headings. Components may apply their own rules. The page layout creates the visible H1.
+        `heading-1` uses the same size scale as `display`; `heading` follows `heading-2`. Components may use different font sizes for their roles, but line heights follow the same semantic-level tokens `--leading-heading-1` through `--leading-heading-6` throughout the theme. Weights follow `typography.headings.weight`. The page layout creates the visible H1.
 
     </Tab>
     <Tab title="Code">
@@ -133,9 +141,15 @@ Source: styles/foundation/tokens.css. Prefix the short token names in this table
         /* styles/foundation/tokens.css */
         @theme {
             --text-display: clamp(2.25rem, 5vw, 4rem);
-            --text-display--line-height: 1.08;
+            --text-display--line-height: var(--leading-heading-1);
             --text-heading: clamp(1.75rem, 3vw, 2.5rem);
-            --text-heading--line-height: 1.15;
+            --text-heading--line-height: var(--leading-heading-2);
+            --leading-heading-1: 1.1;
+            --leading-heading-2: 1.2;
+            --leading-heading-3: 1.3;
+            --leading-heading-4: 1.35;
+            --leading-heading-5: 1.4;
+            --leading-heading-6: 1.4;
             --text-heading-1: clamp(2.25rem, 5vw, 4rem);
             --text-heading-2: clamp(1.75rem, 3vw, 2.5rem);
             --text-heading-3: 1.5rem;

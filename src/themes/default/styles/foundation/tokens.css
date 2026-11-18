@@ -16,12 +16,22 @@
     --color-hero-cyan: #70c6df;
 
     --font-sans: ui-sans-serif, system-ui, sans-serif;
-    --font-heading: 'Nunito', var(--font-sans);
+    --font-heading-sans: 'Nunito', var(--font-sans);
+    --font-heading-serif: 'EB Garamond', ui-serif, Georgia, serif;
+    --font-heading: var(--font-heading-serif);
+    --font-eyebrow: var(--font-heading-serif);
 
     --text-display: clamp(2.25rem, 5vw, 4rem);
-    --text-display--line-height: 1.08;
+    --text-display--line-height: var(--leading-heading-1);
     --text-heading: clamp(1.75rem, 3vw, 2.5rem);
-    --text-heading--line-height: 1.15;
+    --text-heading--line-height: var(--leading-heading-2);
+
+    --leading-heading-1: 1.1;
+    --leading-heading-2: 1.2;
+    --leading-heading-3: 1.3;
+    --leading-heading-4: 1.35;
+    --leading-heading-5: 1.4;
+    --leading-heading-6: 1.4;
 
     --spacing-gutter: clamp(1rem, 4vw, 2rem);
     --spacing-section: clamp(1.875rem, 3.75vw, 3.375rem);

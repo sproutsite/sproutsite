@@ -793,7 +793,9 @@ try {
                 for (const [index, post] of posts.entries()) {
                     const card = cards.nth(index);
                     assert.equal(
-                        await card.locator('.card-title').innerText(),
+                        await card
+                            .getByRole('heading', { level: 3 })
+                            .innerText(),
                         post.metadata.title,
                     );
                     assert.equal(
@@ -1359,7 +1361,13 @@ try {
                                             getComputedStyle(element)
                                                 .fontFamily,
                                     )
-                            ).includes('Nunito'),
+                            ).includes(
+                                loadSiteConfig(
+                                    route.startsWith('/de/') ? 'de' : 'en',
+                                ).typography.headings.family === 'serif'
+                                    ? 'EB Garamond'
+                                    : 'Nunito',
+                            ),
                         );
                         assert(
                             !(

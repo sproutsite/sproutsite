@@ -11,6 +11,7 @@
 
             .ss-blog-index__date {
                 @apply text-sm font-semibold tracking-wide text-base-content/70 uppercase;
+                font-family: var(--font-eyebrow);
             }
         }
     }

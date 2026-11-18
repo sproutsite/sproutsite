@@ -76,14 +76,19 @@ Quelle: styles/theme.css. Die Namen in der Tabelle erhalten den Präfix --color-
 
 ### Schriftfamilien
 
-Quellen: styles/foundation/tokens.css und fonts.css. Nunito wird lokal geladen. Der Fließtext verwendet die verfügbare Systemschrift; zusätzliche externe Schriftanfragen sind nicht erforderlich.
+Quellen: styles/foundation/tokens.css und fonts.css. EB Garamond und Nunito werden lokal geladen. Über `typography.headings.family` und `typography.eyebrow.family` in der jeweiligen Website-YAML wählst du Titel- und Eyebrow-Schrift getrennt: `serif` wählt EB Garamond (Standard), `sans-serif` wählt Nunito. Die Gewichte stellst du separat über `typography.headings.weight` und `typography.eyebrow.weight` ein (Standard 500): EB Garamond unterstützt ganze Zahlen von 400 bis 800, Nunito von 200 bis 1000. Die live ausgegebene Wortmarke in Header und Footer folgt der Titel-Auswahl. Der Fließtext verwendet die verfügbare Systemschrift; zusätzliche externe Schriftanfragen sind nicht erforderlich.
 
 <Tabs label="Schriftfamilien: Referenz und CSS" variant="border">
     <Tab title="Vorschau">
 
         | Token | Wert | Einsatz |
         | --- | --- | --- |
-        | `--font-heading` | Nunito mit System-Fallback | Überschriften und Eyebrows |
+        | `--font-heading-serif` | EB Garamond mit Serif-Fallback | Serifenschrift |
+        | `--font-heading-sans` | Nunito mit System-Fallback | Serifenlose Schrift |
+        | `--font-heading` | Gewählte Titelschrift; standardmäßig EB Garamond | Überschriften und Titel |
+        | `--font-eyebrow` | Gewählte Eyebrow-Schrift; standardmäßig EB Garamond | Eyebrows |
+        | `--ss-heading-weight` | Validiertes Titelgewicht; standardmäßig 500 | Überschriften, Titel und live ausgegebene Wortmarken |
+        | `--ss-eyebrow-weight` | Validiertes Eyebrow-Gewicht; standardmäßig 500 | Eyebrows |
         | `--font-sans` | `ui-sans-serif`, `system-ui`, `sans-serif` | Fließtext |
 
     </Tab>
@@ -93,7 +98,10 @@ Quellen: styles/foundation/tokens.css und fonts.css. Nunito wird lokal geladen. 
         /* styles/foundation/tokens.css */
         @theme {
             --font-sans: ui-sans-serif, system-ui, sans-serif;
-            --font-heading: 'Nunito', var(--font-sans);
+            --font-heading-sans: 'Nunito', var(--font-sans);
+            --font-heading-serif: 'EB Garamond', ui-serif, Georgia, serif;
+            --font-heading: var(--font-heading-serif);
+            --font-eyebrow: var(--font-heading-serif);
         }
 
         /* styles/foundation/fonts.css */
@@ -115,16 +123,16 @@ Quelle: styles/foundation/tokens.css. Die Tabelle verwendet die kurzen Tokenname
 <Tabs label="Schriftgrößen: Referenz und CSS" variant="border">
     <Tab title="Vorschau">
 
-        | Einsatz | Token | Größe |
-        | --- | --- | --- |
-        | Seitentitel | `display` | 2,25–4rem |
-        | h2 | `heading-2` | 1,75–2,5rem |
-        | h3 | `heading-3` | 1,5rem |
-        | h4 | `heading-4` | 1,25rem |
-        | h5 | `heading-5` | 1,125rem |
-        | h6 | `heading-6` | 1rem |
+        | Einsatz | Token | Größe | Zeilenhöhe |
+        | --- | --- | --- | --- |
+        | Seitentitel (h1) | `display` | 2,25–4rem | 1,1 |
+        | h2 | `heading-2` | 1,75–2,5rem | 1,2 |
+        | h3 | `heading-3` | 1,5rem | 1,3 |
+        | h4 | `heading-4` | 1,25rem | 1,35 |
+        | h5 | `heading-5` | 1,125rem | 1,4 |
+        | h6 | `heading-6` | 1rem | 1,4 |
 
-        `heading-1` entspricht der Größenskala von `display`; `heading` der von `heading-2`. In der Markdown-Prosa sind h1 und h2 fett, h3 bis h6 mittelstark. Einzelne Komponenten können eigene Regeln verwenden. Die sichtbare h1 wird vom Seitenlayout erzeugt.
+        `heading-1` entspricht der Größenskala von `display`; `heading` der von `heading-2`. Komponenten können je nach Aufgabe andere Schriftgrößen verwenden. Die Zeilenhöhen folgen jedoch überall denselben Tokens `--leading-heading-1` bis `--leading-heading-6` für die jeweilige semantische Ebene. Die Gewichte folgen `typography.headings.weight`. Die sichtbare h1 wird vom Seitenlayout erzeugt.
 
     </Tab>
     <Tab title="Code">
@@ -133,9 +141,15 @@ Quelle: styles/foundation/tokens.css. Die Tabelle verwendet die kurzen Tokenname
         /* styles/foundation/tokens.css */
         @theme {
             --text-display: clamp(2.25rem, 5vw, 4rem);
-            --text-display--line-height: 1.08;
+            --text-display--line-height: var(--leading-heading-1);
             --text-heading: clamp(1.75rem, 3vw, 2.5rem);
-            --text-heading--line-height: 1.15;
+            --text-heading--line-height: var(--leading-heading-2);
+            --leading-heading-1: 1.1;
+            --leading-heading-2: 1.2;
+            --leading-heading-3: 1.3;
+            --leading-heading-4: 1.35;
+            --leading-heading-5: 1.4;
+            --leading-heading-6: 1.4;
             --text-heading-1: clamp(2.25rem, 5vw, 4rem);
             --text-heading-2: clamp(1.75rem, 3vw, 2.5rem);
             --text-heading-3: 1.5rem;

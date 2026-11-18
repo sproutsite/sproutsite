@@ -38,8 +38,8 @@
             .ss-accordion-item__title {
                 font-family: var(--font-heading);
                 font-size: 1.25rem;
-                font-weight: 700;
-                line-height: 1.4;
+                font-weight: var(--ss-heading-weight, 500);
+                line-height: var(--leading-heading-3);
             }
 
             .ss-accordion-item__indicator {

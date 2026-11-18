@@ -34,6 +34,10 @@ export interface SiteConfig {
     language: string;
     locales: string[];
     heroClasses: string[];
+    typography: {
+        headings: { family: 'serif' | 'sans-serif'; weight: number };
+        eyebrow: { family: 'serif' | 'sans-serif'; weight: number };
+    };
     links?: {
         externalNewTab?: boolean;
         externalIcon?: boolean;

@@ -19,6 +19,22 @@ base: /
 language: en
 ```
 
+### Heading and eyebrow fonts
+
+Choose the two fonts independently in `site.yaml` and `site.de.yaml`:
+
+```yaml
+typography:
+    headings:
+        family: serif
+        weight: 500
+    eyebrow:
+        family: serif
+        weight: 500
+```
+
+For each area, `family: serif` selects EB Garamond and `family: sans-serif` selects Nunito. `weight` accepts integers from 400 to 800 for EB Garamond and 200 to 1000 for Nunito. Omitted fields default to `family: serif` and `weight: 500`. Each language uses its own configuration. The default theme loads the fonts locally. Headings, titles and the header/footer wordmark follow `headings`; eyebrow text follows `eyebrow`. Body text, navigation, buttons and inline emphasis keep their existing typography.
+
 ### Global hero classes
 
 Use `hero-classes` to set theme classes for all heroes and compact H1 fallbacks on pages without `hero.md`. Class names start with `ss-`; they remain theme details rather than a content-layout API.

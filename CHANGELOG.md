@@ -7,12 +7,20 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Added
+
+- Bundled local variable EB Garamond normal/italic fonts with their original OFL notice and independent, validated `typography.headings` and `typography.eyebrow` settings, each with `family` (`serif` for EB Garamond, `sans-serif` for Nunito) and `weight`; defaulted both to serif/500 in both locales, including live header/footer wordmarks, while preserving existing body/UI and inline-emphasis typography.
+
 ### Changed
 
+- Applied the selected eyebrow font family to the date labels above blog-card titles.
+- Standardized heading line heights by semantic level through shared theme tokens across heroes, sections, cards and component titles, with tighter multiline card headings.
+- Aligned the footer's symbol-to-wordmark spacing with the navbar on desktop and mobile.
 - Replaced the bilingual demo contact copy with small contact heroes, shared environment-backed postal/email/LinkedIn cards and practical guidance for getting in touch, using the existing LegalIdentity component.
 
 ### Fixed
 
+- Corrected blog overview article-card titles to h3 below the overview's h2, using the same heading typography as showcase cards in both languages.
 - Keep the enclosing header navigation item highlighted on descendant pages in both languages and mobile menus, with distinct current-page and current-location semantics and segment-safe matching.
 
 ## [0.5.19] - 2026-11-18

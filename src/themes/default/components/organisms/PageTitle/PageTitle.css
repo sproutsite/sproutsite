@@ -15,7 +15,8 @@
         }
 
         .ss-page-title__title {
-            @apply max-w-3xl text-display font-bold tracking-tight;
+            @apply max-w-3xl text-display tracking-tight;
+            font-weight: var(--ss-heading-weight, 500);
         }
 
         .ss-page-title__description {

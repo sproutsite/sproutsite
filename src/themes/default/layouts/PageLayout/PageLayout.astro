@@ -96,6 +96,12 @@ const socialImage = new URL(socialCard.src, site.url).href;
         <meta name="twitter:description" content={description} />
     </head>
     <body
+        data-heading-font={site.typography.headings.family}
+        data-eyebrow-font={site.typography.eyebrow.family}
+        style={{
+            '--ss-heading-weight': String(site.typography.headings.weight),
+            '--ss-eyebrow-weight': String(site.typography.eyebrow.weight),
+        }}
         class:list={{
             'ss-page--landing': layout === 'landing',
             'ss-links--external-icons': site.links?.externalIcon === true,

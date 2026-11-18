@@ -1,6 +1,13 @@
 name: Sproutsite
 url: https://sproutsite.dev
 base: /
+typography:
+    headings:
+        family: serif
+        weight: 500
+    eyebrow:
+        family: serif
+        weight: 500
 links:
     externalNewTab: true
     externalIcon: true

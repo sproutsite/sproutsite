@@ -11,7 +11,10 @@
         }
 
         .ss-tab__label {
-            @apply mt-0 font-bold;
+            @apply mt-0;
+            font-family: var(--font-heading);
+            font-weight: var(--ss-heading-weight, 500);
+            line-height: var(--leading-heading-3);
 
             &[hidden] {
                 display: none;
