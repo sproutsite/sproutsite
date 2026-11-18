@@ -446,6 +446,8 @@ Omit `label` beside explanatory text: the icon is then decorative (`aria-hidden`
 
 ## Structure and Theme
 
+Use `class="ss-link--icon-only"` on links that display only an icon, together with a meaningful accessible name. This suppresses the CSS arrow while retaining the link's target and relationship attributes. Footer social links use this class.
+
 Any link with `target="_blank"` must include both `noopener` and `noreferrer` in `rel`, even for same-origin destinations. Button and Markdown rendering preserve other relationship tokens while adding these protections. The repository's `npm run build` verifies all generated HTML pages and reports unsafe native anchors with their file and destination. This requirement also applies when automatic external new tabs are disabled and a new tab is explicitly requested.
 
 Theme components use native `<a>` elements. External HTTP(S) links receive `target="_blank"` and `rel="noopener noreferrer"` by default, including Markdown reference/autolinks and header/footer links. Set `links.externalNewTab: false` in `site.yaml` to retain native same-tab behavior for automatically handled links. Explicit Button `target`/`rel` props remain available. External means a different origin from the validated production URL, including in preview builds. Internal/same-origin links, fragments, `mailto:` and `tel:` retain their normal behavior. Links are underlined only on hover. Set `links.externalIcon: true` to add a compact CSS-only Lucide arrow to external, email and telephone links; omission means no arrows. The two settings are independent and both are enabled in this demo's English and German site files. No Link component or browser-side anchor rewriting is needed.

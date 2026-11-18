@@ -83,6 +83,7 @@ const linkAttributes = (href: string) => ({
                         {site.footer.social.links.map((link) => (
                             <li>
                                 <a
+                                    class="ss-link--icon-only"
                                     {...linkAttributes(link.href)}
                                     aria-label={link.label}
                                 >

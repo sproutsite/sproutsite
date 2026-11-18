@@ -12,7 +12,7 @@
                 [target='_blank'],
                 [href^='mailto:' i],
                 [href^='tel:' i]
-            )::after {
+            ):not(.ss-link--icon-only)::after {
             content: '';
             display: inline-block;
             flex: none;
