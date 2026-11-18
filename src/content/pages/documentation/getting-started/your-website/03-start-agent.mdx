@@ -1,0 +1,56 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Work with a coding agent</Eyebrow>
+
+## Open your website in the agent
+
+Install and set up the agent you want to use separately. Follow the official instructions for [Codex CLI](https://developers.openai.com/codex/cli/) or [Claude Code](https://code.claude.com/docs/en/quickstart), including sign-in. You choose the provider and account; creating a Sproutsite website does not install or connect an AI service.
+
+Keep `npm run dev` running in the first terminal. Open a second terminal in your website folder. For Codex CLI:
+
+```sh
+cd my-website
+codex
+```
+
+If the terminal is already inside `my-website`, skip `cd my-website`. Alternatively, start Claude Code in that same folder:
+
+```sh
+claude
+```
+
+If you use an editor extension or desktop agent instead, open the generated `my-website` folder there. The workspace must contain your website's `package.json`, `AGENTS.md` and `src/content/`, rather than a checkout of the Sproutsite framework.
+
+### Give the agent its first task
+
+The generated `AGENTS.md` describes the editorial rules for your website. Begin with a request that gives the agent this context:
+
+> Read AGENTS.md and the README. Explain which files contain my homepage, navigation and footer. Do not change anything yet. If information about my website is missing, ask me rather than inventing it.
+
+Then provide the purpose of your website, its audience and the facts it should communicate. Give one focused task at a time and review the changed files alongside the browser preview.
+
+### Ideas for your first changes
+
+**Improve the homepage:**
+
+> Rewrite the homepage for the audience and services I have described. Keep the existing design and components. Make the introduction clearer and add one useful next action. Ask me about missing facts before writing them.
+
+**Add a page and a menu link:**
+
+> Create an About page using the information I provide. Follow the existing content structure, add a short introduction and two sections, and link the page in the main menu. Keep the existing languages; do not add another language.
+
+**Add an approved image:**
+
+> Add the image I have supplied to a suitable section. Store it under \_assets, reference it using the documented components and write appropriate alternative text. Keep the layout usable on mobile.
+
+**Check the result:**
+
+> Review the changed pages for repeated statements, unclear headings and broken links. Run npm run check and npm run build, report the results and tell me what still needs checking in the browser. Do not publish anything.
+
+For editorial work, the agent changes your content, website settings and approved assets. It should not edit the installed library in `node_modules/`. If you use version control, save a known-good state before larger changes so you can compare or undo them.

@@ -1,0 +1,28 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Components and layouts</Eyebrow>
+
+## Find the right place for your change
+
+The default theme lives in `src/themes/default/`. Its Astro components are grouped under `components/atoms/`, `components/molecules/`, `components/organisms/` and `components/layout/`. Each component has its own directory containing matching `.astro` and `.css` files. Shared page layouts live under `src/themes/default/layouts/`.
+
+Reuse existing components and design tokens. Component styles belong beside the component; `src/themes/default/styles/theme.css` is the shared style entry point. Check the [theme guide](/documentation/theme/) before changing global styling.
+
+Other areas have distinct roles:
+
+- `src/content/` contains the demo website and documentation. Keep English and German examples aligned.
+- `src/lib/sproutsite/` contains shared content, URL and validation logic. Keep theme-specific styling out of this area.
+- `src/package/` defines public imports. New reusable components need an export and documented usage.
+- `stories/` contains isolated component examples; `tests/` checks project behavior and conventions.
+
+For example, give your coding agent this task:
+
+> Read AGENTS.md and inspect the existing Feature component. Improve its mobile spacing without changing the content API. Update the relevant Storybook examples and both language versions of the showcase if usage changes. Run the checks appropriate to the change and report their results.
+
+Changing a component and adding a new content prop are different tasks. If a change extends the supported content model, update its validation, documentation and tests together. Describe the effect on existing website projects when proposing the change.

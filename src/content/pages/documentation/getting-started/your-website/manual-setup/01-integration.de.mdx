@@ -6,27 +6,9 @@ tone:
 
 import { Eyebrow } from 'sproutsite/components';
 
-<Eyebrow>Einmalig einrichten</Eyebrow>
+<Eyebrow>Bestehendes Projekt</Eyebrow>
 
-## Deine Website anlegen
-
-Der veröffentlichte Generator `create-sproutsite` richtet eine Website mit dem vorhandenen Design und den vorhandenen Komponenten ein. Wähle einen Ordnernamen und die Inhaltssprache:
-
-```sh
-npm create sproutsite@latest meine-website -- --language de
-cd meine-website
-npm run dev
-```
-
-Der Assistent fragt nach dem Website-Namen und der Installation der Abhängigkeiten. Stimme der Installation zu oder führe vor dem Vorschau-Start selbst `npm install` aus. Für eine englische Website verwendest du `--language en`. Der Generator überschreibt keine belegten Zielordner. Schlägt die Installation fehl, bleiben die erzeugten Dateien erhalten; mit `npm install` im neuen Projekt kannst du sie wiederholen.
-
-Du erhältst eine kleine Startseite mit Hero, Markdown und einem Feature-Beispiel, die nötige Astro-Konfiguration und eine redaktionelle `AGENTS.md`. Deine Website nutzt `sproutsite` als installierte Abhängigkeit. Du musst keine Theme-Dateien kopieren oder das Framework-Repository klonen.
-
-Die deutsche Startseite liegt direkt unter `/`. Der Starter verwendet `site.yaml` und `site.de.yaml` sowie `page.yaml` und `page.de.yaml` für Konfiguration und Metadaten. Halte die jeweiligen Paare synchron. Die sichtbaren deutschen Inhalte stehen in `hero.de.md` und den nummerierten `.de.md`-/`.de.mdx`-Sections. Setze vor der Veröffentlichung die echte Produktionsadresse in beiden Website-Konfigurationen. Die mitgelieferte README erklärt diese Dateistruktur.
-
-Das [Generator-Repository](https://github.com/sproutsite/create-sproutsite) beschreibt die Optionen. Ergänze `--yes`, wenn der Generator ohne Rückfragen mit Standardwerten arbeiten soll. Mit `--yes --no-install` legt er nur die Dateien an.
-
-### Alternative: ein Astro-Projekt manuell anbinden
+## Ein bestehendes Astro-Projekt anbinden
 
 Hast du bereits ein Astro-Projekt oder möchtest du die Dateien einzeln einrichten, installiere dort die Bibliothek und die unterstützten Astro-/MDX-Versionen. Bei einer neuen Website übernimmt dies der Generator. Hast du ihn verwendet, kannst du die restliche manuelle Einrichtung überspringen.
 
@@ -88,7 +70,7 @@ footer:
     links: []
 ```
 
-Ergänze vor dem Start mit `npm run dev` die Seitendateien aus dem nächsten Abschnitt. Behalte die strikte TypeScript-Konfiguration des Astro-Projekts bei. Für mehrere Sprachen gibt es die [Anleitung zu Inhalten](/dokumentation/inhalte/).
+Lege anschließend die Seitendateien nach der [Anleitung für deine Website](/dokumentation/einstieg/deine-website/) an. Behalte die strikte TypeScript-Konfiguration des Astro-Projekts bei. Für mehrere Sprachen gibt es die [Anleitung zu Inhalten](/dokumentation/inhalte/).
 
 `sproutsite` und `create-sproutsite` sind veröffentlichte npm-Pakete. Die [lokale Paketinstallation](/dokumentation/paket/) dient dazu, Änderungen am Framework zu testen; für die übliche redaktionelle Einrichtung ist sie nicht erforderlich.
 

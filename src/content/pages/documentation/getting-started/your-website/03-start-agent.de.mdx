@@ -1,0 +1,56 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Mit einem Coding-Agenten arbeiten</Eyebrow>
+
+## Deine Website im Agenten öffnen
+
+Installiere den gewünschten Agenten separat und richte deinen Zugang ein. Die offiziellen Anleitungen für [Codex CLI](https://developers.openai.com/codex/cli/) und [Claude Code](https://code.claude.com/docs/en/quickstart) erklären Installation und Anmeldung. Anbieter und Konto wählst du selbst; das Anlegen einer Sproutsite-Website installiert oder verbindet keinen KI-Dienst.
+
+Lass `npm run dev` im ersten Terminal laufen. Öffne ein zweites Terminal im Ordner deiner Website. Für Codex CLI:
+
+```sh
+cd meine-website
+codex
+```
+
+Befindet sich das Terminal bereits in `meine-website`, entfällt `cd meine-website`. Alternativ startest du Claude Code im selben Ordner:
+
+```sh
+claude
+```
+
+Verwendest du eine Editor-Erweiterung oder eine Desktop-App, öffne dort den erzeugten Ordner `meine-website`. Der Arbeitsbereich muss die `package.json`, `AGENTS.md` und `src/content/` deiner Website enthalten – nicht eine Arbeitskopie des Sproutsite-Frameworks.
+
+### Dem Agenten den ersten Auftrag geben
+
+Die erzeugte `AGENTS.md` beschreibt die redaktionellen Regeln deiner Website. Beginne mit einer Anweisung, die dem Agenten diesen Kontext gibt:
+
+> Lies AGENTS.md und README. Erkläre mir, in welchen Dateien meine Startseite, Navigation und mein Footer gepflegt werden. Ändere zunächst nichts. Wenn Angaben zu meiner Website fehlen, frage nach, statt sie zu erfinden.
+
+Beschreibe danach den Zweck deiner Website, ihre Zielgruppe und die Fakten, die sie vermitteln soll. Gib jeweils einen überschaubaren Auftrag und prüfe die geänderten Dateien zusammen mit der Vorschau im Browser.
+
+### Ideen für die ersten Änderungen
+
+**Die Startseite verbessern:**
+
+> Überarbeite die Startseite für die von mir beschriebene Zielgruppe und meine Angebote. Behalte das vorhandene Design und die Komponenten bei. Formuliere die Einleitung verständlicher und ergänze einen sinnvollen nächsten Schritt. Frage mich nach fehlenden Fakten, bevor du sie in den Text aufnimmst.
+
+**Eine Seite mit Menülink ergänzen:**
+
+> Erstelle mit meinen Angaben eine Über-uns-Seite. Halte dich an die vorhandene Inhaltsstruktur, ergänze eine kurze Einleitung und zwei Abschnitte und verlinke die Seite im Hauptmenü. Behalte die vorhandenen Sprachen bei und lege keine zusätzliche Sprache an.
+
+**Ein freigegebenes Bild einbinden:**
+
+> Ergänze das von mir bereitgestellte Bild in einem passenden Abschnitt. Lege es unter \_assets ab, binde es mit den dokumentierten Komponenten ein und formuliere einen passenden Alternativtext. Achte darauf, dass die Darstellung auch auf Mobilgeräten funktioniert.
+
+**Das Ergebnis prüfen:**
+
+> Prüfe die geänderten Seiten auf Wiederholungen, unklare Überschriften und fehlerhafte Links. Führe npm run check und npm run build aus, nenne die Ergebnisse und sage mir, was ich noch im Browser prüfen sollte. Veröffentliche nichts.
+
+Bei redaktionellen Aufgaben bearbeitet der Agent deine Inhalte, Website-Einstellungen und freigegebenen Assets. Die installierte Bibliothek unter `node_modules/` wird nicht verändert. Wenn du Versionsverwaltung nutzt, sichere vor größeren Änderungen einen funktionierenden Stand, damit du Änderungen vergleichen oder zurücknehmen kannst.

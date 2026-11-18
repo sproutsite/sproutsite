@@ -1,0 +1,25 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Framework development</Eyebrow>
+
+## Set up the Sproutsite repository
+
+Use this guide when you want to change Sproutsite's components, layouts, styles, content handling or documentation. You work in the **Sproutsite framework repository**. To create and maintain your own website instead, follow the [website guide](/documentation/getting-started/your-website/).
+
+```sh
+git clone https://github.com/sproutsite/sproutsite.git
+cd sproutsite
+nvm use
+npm ci
+npm run dev
+```
+
+Use `nvm use` if you manage Node.js with nvm. Otherwise install the Node.js version specified in `.nvmrc` using your preferred method. `npm ci` installs the versions recorded in the lockfile. The local server displays the demo website, including the documentation and showcase.
+
+Open this checkout in your editor or coding agent and read `AGENTS.md` and the README. The repository already connects its own source package through the project configuration; do not install another copy of `sproutsite` into it. Make your changes on a separate Git branch.

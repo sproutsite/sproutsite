@@ -6,25 +6,9 @@ tone:
 
 import { Eyebrow } from 'sproutsite/components';
 
-<Eyebrow>One-time setup</Eyebrow>
+<Eyebrow>Existing project</Eyebrow>
 
-## Create your website
-
-The published `create-sproutsite` generator sets up a website with the supplied design and components. Choose a folder name and the content language:
-
-```sh
-npm create sproutsite@latest my-website -- --language en
-cd my-website
-npm run dev
-```
-
-The assistant asks for your website name and whether to install dependencies. Accept installation, or run `npm install` before starting the preview. Use `--language de` for a German website. The generator refuses non-empty target directories and leaves your files intact if dependency installation fails; run `npm install` in the created project to retry.
-
-You receive a small homepage with a hero, Markdown and a Feature example, the required Astro configuration, and an `AGENTS.md` with editorial guidance. Your website uses `sproutsite` as an installed dependency. You do not need to copy theme files or clone the framework repository. Set the real production URL in `src/content/site.yaml` before deployment.
-
-The generator's [repository](https://github.com/sproutsite/create-sproutsite) documents its options. For an unattended setup, add `--yes`; to create files without installing dependencies, add `--yes --no-install`.
-
-### Alternative: connect an Astro project manually
+## Connect an existing Astro project
 
 If you already have an Astro project or want to set up each file yourself, install the library and its supported Astro/MDX peers there. The generator already does this for new websites, so skip the remaining setup if you used it.
 
@@ -86,7 +70,7 @@ footer:
     links: []
 ```
 
-Add the page files from the next section before starting `npm run dev`. Keep the Astro project's strict TypeScript configuration. For multiple languages, see the [content guide](/documentation/content/).
+Then add the page files using the [guide for your website](/documentation/getting-started/your-website/). Keep the Astro project's strict TypeScript configuration. For multiple languages, see the [content guide](/documentation/content/).
 
 Both `sproutsite` and `create-sproutsite` are published npm packages. The [local package installation](/documentation/package/) is for testing changes to the framework, rather than the normal editorial setup.
 

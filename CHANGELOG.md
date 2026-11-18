@@ -7,6 +7,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Changed
+
+- Split the bilingual getting-started documentation into website-owner and contributor guides, with generator setup, coding-agent startup, practical editorial prompts and a separate manual Astro integration reference.
+
 ## [0.5.15] - 2026-11-18
 
 ### Added

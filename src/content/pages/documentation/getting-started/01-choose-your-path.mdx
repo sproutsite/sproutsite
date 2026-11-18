@@ -1,0 +1,40 @@
+---
+tone: default
+fullWidth: true
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Card, CardActions } from 'sproutsite/components';
+
+<Eyebrow>Getting started</Eyebrow>
+
+## What would you like to do?
+
+You can use Sproutsite to maintain your own website or help improve the framework. These guides keep the two workflows separate.
+
+<Columns>
+    <Column span={6}>
+        <Card>
+            ### Create your own website
+
+            Start with the published create-sproutsite generator. Use the supplied design, edit your content with an external coding agent, preview changes and publish your website.
+
+            <CardActions>
+                [Create and maintain your website](/documentation/getting-started/your-website/)
+            </CardActions>
+        </Card>
+    </Column>
+    <Column span={6}>
+        <Card>
+            ### Contribute to Sproutsite
+
+            Work in the Sproutsite repository to improve components, layouts, the theme or content handling. Learn where changes belong and how to test them.
+
+            <CardActions>
+                [Work on Sproutsite](/documentation/getting-started/contributing/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

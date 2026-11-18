@@ -1,0 +1,29 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>One-time setup</Eyebrow>
+
+## Create your website
+
+The published `create-sproutsite` generator sets up a website with the supplied design and components. Choose a folder name and the content language:
+
+```sh
+npm create sproutsite@latest my-website -- --language en
+cd my-website
+npm run dev
+```
+
+The assistant asks for your website name and whether to install dependencies. Accept installation, or run `npm install` before starting the preview. Use `--language de` for a German website. The generator refuses non-empty target directories and leaves your files intact if dependency installation fails; run `npm install` in the created project to retry.
+
+Open the local address printed by the terminal. Keep that terminal running while you work; saved content changes appear in the preview. Stop the server with Ctrl+C when you are finished.
+
+You receive a small homepage with a hero, Markdown and a Feature example, the required Astro configuration, and an `AGENTS.md` with editorial guidance. Your website uses `sproutsite` as an installed dependency. You do not need to copy theme files or clone the framework repository. Set the real production URL in `src/content/site.yaml` before deployment.
+
+The generator's [repository](https://github.com/sproutsite/create-sproutsite) documents its options. For an unattended setup, add `--yes`; to create files without installing dependencies, add `--yes --no-install`.
+
+[create-sproutsite on npm](https://www.npmjs.com/package/create-sproutsite)

@@ -1,0 +1,28 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Deinen Beitrag prüfen</Eyebrow>
+
+## Änderungen testen und beschreiben
+
+Führe vor einem Pull Request die Projektprüfungen aus:
+
+```sh
+npm run format:check
+npm run check
+npm test
+npm run build
+```
+
+Bei Änderungen an Komponenten und Layouts verwendest du `npm run storybook`, um Beispiele einzeln zu prüfen. Ergänze oder aktualisiere die passenden Stories und führe `npm run build:storybook` aus. Prüfe die betroffenen Seiten auf Desktop und Mobilgeräten sowie mit der Tastatur. `npm run test:a11y` ergänzt diese Kontrolle; eine vollständige Barrierefreiheitskonformität lässt sich daraus nicht ableiten.
+
+Betrifft die Änderung installierte Websites oder den Paketinhalt, führe zusätzlich `npm run test:package` aus. Der Test erstellt ein npm-Archiv, installiert es in einem temporären Website-Projekt und prüft das installierte Paket. Die [Paket-Anleitung](/dokumentation/paket/) erklärt diesen Ablauf. Diese Prüfungen veröffentlichen nichts.
+
+Beschreibe im Pull Request das Problem, das neue Verhalten und die ausgeführten Prüfungen. Ergänze bei relevanten Änderungen das Changelog. Versionsanpassungen, Tags und die Paketveröffentlichung gehören in einen gesonderten Release-Schritt.
+
+[Projektprüfungen](/dokumentation/pruefen/) · [Sproutsite-Repository](https://github.com/sproutsite/sproutsite)

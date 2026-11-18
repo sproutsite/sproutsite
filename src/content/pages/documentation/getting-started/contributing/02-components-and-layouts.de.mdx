@@ -1,0 +1,28 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Komponenten und Layouts</Eyebrow>
+
+## Die passende Stelle für deine Änderung finden
+
+Das Default-Theme liegt unter `src/themes/default/`. Seine Astro-Komponenten sind in `components/atoms/`, `components/molecules/`, `components/organisms/` und `components/layout/` gegliedert. Jede Komponente hat einen eigenen Ordner mit gleichnamiger `.astro`- und `.css`-Datei. Gemeinsame Seitenlayouts liegen unter `src/themes/default/layouts/`.
+
+Nutze vorhandene Komponenten und Design-Tokens. Komponenten-Styles gehören direkt zur Komponente; `src/themes/default/styles/theme.css` ist der gemeinsame Style-Einstieg. Lies vor Änderungen an globalen Styles die [Theme-Anleitung](/dokumentation/theme/).
+
+Die übrigen Bereiche haben eigene Aufgaben:
+
+- `src/content/` enthält die Demo-Website und Dokumentation. Halte englische und deutsche Beispiele auf demselben Stand.
+- `src/lib/sproutsite/` enthält gemeinsame Inhalts-, URL- und Validierungslogik. Theme-spezifische Styles gehören nicht hierher.
+- `src/package/` legt die öffentlichen Imports fest. Neue wiederverwendbare Komponenten benötigen einen Export und eine dokumentierte Verwendung.
+- `stories/` enthält isolierte Komponentenbeispiele; `tests/` prüft Verhalten und Projektkonventionen.
+
+Ein möglicher Auftrag für deinen Coding-Agenten:
+
+> Lies AGENTS.md und schaue dir die vorhandene Feature-Komponente an. Verbessere ihre mobilen Abstände, ohne die Inhalts-API zu verändern. Aktualisiere passende Storybook-Beispiele und bei geänderter Verwendung beide Sprachfassungen des Showcase. Führe die zur Änderung passenden Prüfungen aus und nenne ihre Ergebnisse.
+
+Die Darstellung einer Komponente zu ändern ist eine andere Aufgabe, als eine neue Inhaltsoption einzuführen. Erweitert eine Änderung das unterstützte Inhaltsmodell, gehören Validierung, Dokumentation und Tests dazu. Beschreibe bei deinem Änderungsvorschlag die Auswirkungen auf bestehende Website-Projekte.

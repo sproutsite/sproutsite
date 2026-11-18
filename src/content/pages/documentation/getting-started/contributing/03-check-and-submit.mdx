@@ -1,0 +1,28 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Review your contribution</Eyebrow>
+
+## Test and describe the change
+
+Before opening a pull request, run the repository checks:
+
+```sh
+npm run format:check
+npm run check
+npm test
+npm run build
+```
+
+For component and layout changes, use `npm run storybook` to review examples in isolation. Add or update the relevant stories and run `npm run build:storybook`. Check the affected pages on desktop and mobile, including keyboard operation. `npm run test:a11y` complements this review; it does not establish full accessibility conformance.
+
+If a change affects installed websites or the package contents, also run `npm run test:package`. It creates an npm archive, installs it in a temporary website project and checks the installed package. The [package guide](/documentation/package/) explains this workflow. These checks do not publish anything.
+
+Describe the problem, the resulting behavior and the checks you ran in the pull request. Update the changelog for relevant changes. Version bumps, tags and package publication are separate release tasks.
+
+[Project checks](/documentation/checks/) · [Sproutsite repository](https://github.com/sproutsite/sproutsite)
