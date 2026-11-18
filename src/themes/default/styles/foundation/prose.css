@@ -7,6 +7,11 @@
             @apply no-underline hover:underline;
         }
 
+        b,
+        strong {
+            font-weight: 600;
+        }
+
         h1 {
             font-size: var(--text-heading-1);
             @apply mb-5 font-bold;

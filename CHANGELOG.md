@@ -14,6 +14,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
+- Set inline bold emphasis in body text to font-weight 600, including Markdown and contact-box text, while preserving heading, logo and component-label weights.
 - Replaced the bilingual legal-notice drafts with the supplied operator details, styled address/contact cards, editorial responsibility and project/license links using existing components.
 - Moved legal operator details into an ignored .env, added an .env.dist template and the documented LegalIdentity component, and require complete non-example values when building pages that use it. Development previews fall back to clearly marked examples.
 

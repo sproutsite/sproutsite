@@ -69,6 +69,7 @@ These rules apply to content primarily intended for prospective users or users, 
 
 ## Brand, Design, and Product Experience
 
+- Inline emphasis in body text (`b` and `strong`, including Markdown bold text and text within components) uses font-weight 600. Preserve the existing weights of headings, logos, navigation, component labels and syntax highlighting; do not override the global bold-weight token for this rule.
 - Describe Sproutsite accurately: it is an agent-ready, Markdown-first Static CMS for Astro and TypeScript. External coding agents edit content and pages; Sproutsite does not include an AI agent.
 - Preserve the modern, calm, organic, and confident visual language. Use existing navy, blue, teal, and green tokens; green is an accent, not a dominant surface. Reuse organic waves and soft gradients where appropriate.
 - Prefer existing components and layout primitives. Keep typography, spacing, hierarchy, responsive behavior, contrast, and focus states clear; avoid visual clutter, glow effects, glassmorphism, and unnecessary animation.
