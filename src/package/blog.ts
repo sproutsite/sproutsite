@@ -1,12 +1,10 @@
-import { getCollection } from 'astro:content';
-import {
-    hasBlogSources,
-    type blogPatterns,
-} from '../lib/sproutsite/blog-sources.js';
+import { getCollection, getEntry } from 'astro:content';
+import type { blogPatterns } from '../lib/sproutsite/blog-sources.js';
 
-/** Optional collections are queried only when their source files exist. */
+/** Query optional collections only after Astro has written their first entry. */
 export async function getBlogCollection<C extends keyof typeof blogPatterns>(
     collection: C,
 ) {
-    return hasBlogSources(collection) ? getCollection(collection) : [];
+    const state = await getEntry('sproutsiteBlogState', 'readiness');
+    return state?.data[collection] ? getCollection(collection) : [];
 }

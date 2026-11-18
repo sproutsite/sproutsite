@@ -7,6 +7,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Fixed
+
+- Track optional blog readiness in Astro's content store so requests during first-article parsing do not emit empty-collection warnings. Exercise this race with deliberately delayed parsing in the package installation test.
+
 ## [0.5.11] - 2026-11-18
 
 ### Security

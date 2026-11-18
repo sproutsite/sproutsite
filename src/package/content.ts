@@ -3,6 +3,7 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { heroTypes, sectionSpacings, tones } from '../lib/sproutsite/types.js';
 import { optionalBlogLoader } from './optional-blog-loader.js';
+import { createBlogReadinessLoader } from './blog-state.js';
 
 function blogDirectoryId(entry: string): string {
     const match = entry.match(
@@ -20,6 +21,14 @@ export function createSproutsiteCollections(
     contentDirectory = './src/content/pages',
     blogDirectory = './src/content/blog',
 ) {
+    const readiness = createBlogReadinessLoader();
+    const sproutsiteBlogState = defineCollection({
+        loader: readiness.loader,
+        schema: z.object({
+            blogPages: z.boolean(),
+            blogDocuments: z.boolean(),
+        }),
+    });
     const tone = z
         .union(
             [
@@ -90,8 +99,11 @@ export function createSproutsiteCollections(
     });
 
     const blogPages = defineCollection({
-        loader: optionalBlogLoader('blogPages', blogDirectory, ({ entry }) =>
-            blogDirectoryId(entry),
+        loader: optionalBlogLoader(
+            'blogPages',
+            blogDirectory,
+            ({ entry }) => blogDirectoryId(entry),
+            (ready) => readiness.setReady('blogPages', ready),
         ),
         schema: ({ image }: { image: ImageFunction }) =>
             z.object({
@@ -108,9 +120,10 @@ export function createSproutsiteCollections(
             'blogDocuments',
             blogDirectory,
             ({ entry }) => entry.replace(/\.(?:md|mdx)$/, ''),
+            (ready) => readiness.setReady('blogDocuments', ready),
         ),
         schema: documentSchema,
     });
 
-    return { pages, documents, blogPages, blogDocuments };
+    return { pages, documents, blogPages, blogDocuments, sproutsiteBlogState };
 }

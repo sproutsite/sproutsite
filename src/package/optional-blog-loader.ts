@@ -10,6 +10,7 @@ export function optionalBlogLoader(
     collection: keyof typeof blogPatterns,
     base: string,
     generateId: (options: { entry: string }) => string,
+    onReady: (ready: boolean) => void,
 ): Loader {
     const loader = glob({
         base,
@@ -19,12 +20,34 @@ export function optionalBlogLoader(
     return {
         name: `sproutsite/optional-${collection}`,
         async load(context) {
+            // The filesystem may contain new files before Astro has parsed them.
+            // Track actual store writes, including the native loader's watchers.
+            const updateReadiness = () =>
+                onReady(context.store.keys().length > 0);
+            const store: typeof context.store = {
+                ...context.store,
+                set(entry) {
+                    const result = context.store.set(entry);
+                    updateReadiness();
+                    return result;
+                },
+                delete(id) {
+                    context.store.delete(id);
+                    updateReadiness();
+                },
+                clear() {
+                    onReady(false);
+                    context.store.clear();
+                },
+            };
+            const nativeContext = { ...context, store };
+            updateReadiness();
             const directory = fileURLToPath(new URL(base, context.config.root));
             if (hasBlogSources(collection, directory)) {
-                await loader.load(context);
+                await loader.load(nativeContext);
                 return;
             }
-            context.store.clear();
+            store.clear();
             const watcher = context.watcher;
             if (!watcher) return;
             // The native glob loader takes over as soon as the first matching
@@ -36,7 +59,7 @@ export function optionalBlogLoader(
                 if (loading || !hasBlogSources(collection, directory)) return;
                 loading = true;
                 try {
-                    await loader.load(context);
+                    await loader.load(nativeContext);
                     watcher.off('add', onAdd);
                     watcher.off('change', onAdd);
                 } catch (error) {
