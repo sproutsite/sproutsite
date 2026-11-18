@@ -1,0 +1,60 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import themeImage from './_assets/theme.png';
+import storybookImage from './_assets/storybook.png';
+import packageImage from './_assets/package.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>For technical teams</Eyebrow>
+
+## Extend the theme and components
+
+This area is for your website’s technical team and Sproutsite contributors: theme structure, component development and testing framework changes in a separate website project.
+
+The [contributor guide](/documentation/getting-started/contributing/) explains how to set up the framework repository locally.
+
+<Columns>
+    <Column span={4}>
+        <Card image={themeImage} imageAlt="Three-dimensional color palette with letterforms, rounded surfaces and spacing elements.">
+            ### Theme
+
+            Explore the existing colors, typography, spacing and CSS structure before making technical design changes.
+
+            <CardActions>
+                [Understand the theme](/documentation/theme/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={storybookImage} imageAlt="Three-dimensional component workshop with a browser window, UI elements and small books.">
+            ### Storybook
+
+            Develop Sproutsite components in isolation, compare their variants and document their use.
+
+            <CardActions>
+                [Work with Storybook](/documentation/storybook/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={packageImage} imageAlt="Three-dimensional software module connecting two website projects with arrows.">
+            ### Test the framework package
+
+            Install local Sproutsite changes as an npm archive in a separate website project and verify the result.
+
+            <CardActions>
+                [Test local package changes](/documentation/package/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

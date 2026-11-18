@@ -1,7 +1,9 @@
 ---
 title: Sproutsite-Dokumentation
-eyebrow: Alles an einem Ort
+eyebrow: Deine Website mit Sproutsite
 tone: brand
 ---
 
-Diese Dokumentation gehört zur Demo selbst. Sie erklärt, wie Sproutsite eingerichtet, inhaltlich gepflegt, gestaltet und geprüft wird.
+Starte deine eigene Website, pflege Inhalte und veröffentliche deine Änderungen. Technische Anleitungen für Theme- und Komponentenarbeit findest du im letzten Bereich.
+
+Direkt zu: [Starten](#01-start-your-website-de-deine-website-starten) · [Prüfen und veröffentlichen](#02-check-and-publish-de-prüfen-und-veröffentlichen) · [Technik](#03-technical-guides-de-theme-und-komponenten-weiterentwickeln)

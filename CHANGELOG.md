@@ -9,6 +9,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
+- Reorganized the bilingual documentation overview around starting a website, checking/publishing and technical work, with task-oriented copy and hero jump links while preserving all eight destinations and existing illustrations.
 - Reorganized the bilingual showcase overview around page structure, content, interaction and design, added hero jump links, and preserved all 15 topic destinations and existing illustrations.
 - Replaced all eight documentation overview illustrations with the approved navy-and-teal 3D style, updated bilingual alternative text, and recorded prompts and provenance under docs/assets.
 - Documented the approved illustration style, palette, responsive framing and generation-record workflow in docs/assets, with a permanent agent-guidance reference.

@@ -1,7 +1,9 @@
 ---
 title: Sproutsite Documentation
-eyebrow: Everything in one place
+eyebrow: Your website with Sproutsite
 tone: brand
 ---
 
-This documentation is part of the demo itself. It explains how to set up Sproutsite, maintain content, customize the theme, and verify the result.
+Start your own website, maintain content and publish your changes. Technical guides for theme and component work follow in the final section.
+
+Jump to: [Get started](#01-start-your-website-start-your-website) · [Check and publish](#02-check-and-publish-check-and-publish) · [Technical guides](#03-technical-guides-extend-the-theme-and-components)

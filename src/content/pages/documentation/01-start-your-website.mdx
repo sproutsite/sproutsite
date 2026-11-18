@@ -1,0 +1,58 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import gettingStartedImage from './_assets/getting-started.png';
+import contentImage from './_assets/content.png';
+import layoutImage from './_assets/layout.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Set up, edit and build pages</Eyebrow>
+
+## Start your website
+
+Create your website, find the files you edit and assemble pages with the supplied components.
+
+<Columns>
+    <Column span={4}>
+        <Card image={gettingStartedImage} imageAlt="Three-dimensional illustration of a browser window, compact editor and start arrow in navy and teal.">
+            ### Getting started
+
+            Create your website with the generator, start a coding agent and make your first content changes.
+
+            <CardActions>
+                [Start your own website](/documentation/getting-started/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={contentImage} imageAlt="Three-dimensional content files in a folder with text lines, an image area and a configuration tile.">
+            ### Content
+
+            Find the files for text, page information, navigation and the footer, and learn how they fit together.
+
+            <CardActions>
+                [Edit your content](/documentation/content/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={layoutImage} imageAlt="Three-dimensional layout grid with unequal columns and reusable components.">
+            ### Layout and components
+
+            Combine columns and existing components to assemble your pages. Follow the documented MDX examples.
+
+            <CardActions>
+                [Build your pages](/documentation/layout/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

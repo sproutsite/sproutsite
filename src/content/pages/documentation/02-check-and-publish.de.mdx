@@ -1,0 +1,45 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import checksImage from './_assets/checks.png';
+import deploymentImage from './_assets/deployment.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Von der Vorschau zum Webhosting</Eyebrow>
+
+## Prüfen und veröffentlichen
+
+Prüfe deine Änderungen vor der Veröffentlichung und übertrage anschließend die fertigen statischen Dateien auf dein Webhosting.
+
+<Columns>
+    <Column span={6}>
+        <Card image={checksImage} imageAlt="Dreidimensionale Website-Prüfung mit Fokusrahmen, Checkliste und einem Schild mit Häkchen.">
+            ### Prüfen
+
+            Kontrolliere deine Änderungen in der Vorschau und lerne die verfügbaren Projektprüfungen kennen.
+
+            <CardActions>
+                [Änderungen prüfen](/dokumentation/pruefen/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={6}>
+        <Card image={deploymentImage} imageAlt="Dreidimensionale Veröffentlichung einer Website mit Serverstapel, Dokument, Upload-Pfeil und Browserfenster.">
+            ### Deine Website veröffentlichen
+
+            Baue deine Website und veröffentliche den Inhalt von `dist/`. Die Anleitung zeigt die Einrichtung mit Apache oder Nginx einschließlich Fehlerseiten.
+
+            <CardActions>
+                [Website veröffentlichen](/dokumentation/veroeffentlichen/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>
