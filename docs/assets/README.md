@@ -18,6 +18,7 @@ Inspect these actual images before generating another illustration. Earlier brig
 - Build a clear subject around the page topic: a browser, content cards, modular layers or a recognizable component. Prefer one compact group over scattered decorative objects.
 - Use soft studio light from the upper left, delicate contact shadows and restrained depth. Avoid harsh reflections, chrome, heavy shadows, neon, glow and glassmorphism.
 - Use a pale cool-gray studio background with a broad, softly flowing navy-to-teal wave. A low rounded white plinth connects the object group to the scene.
+- Match the showcase background: the wave is a broad landscape-like color field below a soft organic crest and fades gradually into the lit studio floor. Avoid narrow floating ribbons with a second hard lower outline. The maintainer confirmed this distinction on 2026-11-18.
 - Keep the mood calm, professional and approachable. Avoid people, robots, confetti and unrelated floating shapes.
 - Keep images language-neutral: use placeholder bars instead of words. Isolated letterforms are appropriate for typography illustrations. Do not generate product wordmarks or substitute artwork for existing logos or icon components.
 
@@ -54,6 +55,7 @@ The semantic palette is maintained in [theme.css](../../src/themes/default/style
 
 ## Generation records
 
+- [Documentation and blog background refinements](background-wave-refinements.md)
 - [Blog illustrations](blog-images.md)
 - [Documentation overview illustrations](documentation-images.md)
 - [Getting-started illustrations](getting-started-images.md)
