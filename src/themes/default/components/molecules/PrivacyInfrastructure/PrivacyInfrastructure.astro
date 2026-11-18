@@ -1,0 +1,85 @@
+---
+import { loadPrivacyInfrastructure } from '../../../../../lib/sproutsite/privacy-infrastructure.js';
+import Feature from '../Feature/Feature.astro';
+import Alert from '../Alert/Alert.astro';
+interface Props {
+    part?: 'hosting' | 'email-retention' | 'log-size-limit' | 'log-retention';
+}
+const { part = 'hosting' } = Astro.props;
+if (
+    !['hosting', 'email-retention', 'log-size-limit', 'log-retention'].includes(
+        part,
+    )
+)
+    throw new Error('Invalid PrivacyInfrastructure part.');
+const { values, placeholder } = loadPrivacyInfrastructure(import.meta.env.PROD);
+const german = Astro.currentLocale === 'de';
+const country =
+    new Intl.DisplayNames([german ? 'de' : 'en'], { type: 'region' }).of(
+        values.PRIVACY_SERVER_COUNTRY,
+    ) ?? values.PRIVACY_SERVER_COUNTRY;
+---
+
+{part === 'email-retention' ? (
+    values.PRIVACY_EMAIL_RETENTION_MONTHS
+) : part === 'log-size-limit' ? (
+    <>{values.PRIVACY_LOG_SIZE_LIMIT_MIB} MiB</>
+) : part === 'log-retention' ? (
+    values.PRIVACY_LOG_RETENTION_DAYS ? (
+        <p>
+            {german
+                ? `Die beschriebenen nginx- und Traefik-Protokolle werden im regulären Betrieb spätestens nach ${values.PRIVACY_LOG_RETENTION_DAYS} Tagen gelöscht.`
+                : `During normal operation, the nginx and Traefik logs described above are deleted within ${values.PRIVACY_LOG_RETENTION_DAYS} days.`}
+        </p>
+    ) : (
+        <Alert variant="warning">
+            {german
+                ? 'Noch offen: Eine feste Speicherfrist in Tagen für die eingerichteten nginx-Zugriffs-/Fehlerprotokolle und Traefik-Betriebs-/Fehlerprotokolle ist nicht hinterlegt. Die Größenbegrenzung allein garantiert keine maximale Aufbewahrungsdauer in Tagen.'
+                : 'Still open: No fixed retention period in days has been specified for the configured nginx access/error logs and Traefik operational/error logs. A size limit alone does not guarantee a maximum retention period in days.'}
+        </Alert>
+    )
+) : (
+    <div class="ss-privacy-infrastructure">
+        {placeholder && (
+            <Alert variant="info">
+                {german
+                    ? 'Vorschau mit Beispieldaten: Hostingangaben in .env ergänzen.'
+                    : 'Preview with example data: Complete the hosting details in .env.'}
+            </Alert>
+        )}
+        <Feature
+            icon="Server"
+            title={german ? 'Hosting-Infrastruktur' : 'Hosting infrastructure'}
+            layout="card"
+            color="primary"
+        >
+            <p>
+                <a
+                    href={values.PRIVACY_HOST_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    {values.PRIVACY_HOST_NAME}
+                </a>
+            </p>
+            <address>{values.PRIVACY_HOST_ADDRESS}</address>
+            <p>
+                <strong>
+                    {german ? 'Serverstandort:' : 'Server location:'}
+                </strong>{' '}
+                {values.PRIVACY_SERVER_CITY}, {country}
+            </p>
+            <p>
+                <a
+                    href={values.PRIVACY_HOST_PRIVACY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    {german
+                        ? 'Datenschutzhinweise des Hosting-Anbieters'
+                        : 'Hosting provider privacy information'}
+                </a>
+            </p>
+        </Feature>
+    </div>
+)}

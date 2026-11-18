@@ -1,0 +1,38 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { PrivacyInfrastructure } from 'sproutsite/components';
+
+<Eyebrow>Technischer Betrieb</Eyebrow>
+
+## Hosting und Serverprotokolle
+
+Der Verantwortliche betreibt diese Website auf einem nginx-Webserver. Die verschlüsselte Verbindung wird über einen vorgeschalteten Traefik-Router hergestellt, der gemeinsam für mehrere Domains genutzt wird. Ein CDN ist nicht eingebunden. Die zugrunde liegende Serverinfrastruktur stammt von folgendem Anbieter:
+
+<PrivacyInfrastructure />
+
+Damit die angeforderten Seiten deinen Browser erreichen, verarbeitet der Server technische Verbindungsdaten. Dazu gehören insbesondere deine IP-Adresse, die aufgerufene Adresse und weitere Angaben, die dein Browser mit der Anfrage übermittelt.
+
+Um technische Fehler und Missbrauch untersuchen zu können, werden Zugriffs- und Fehlerprotokolle von nginx sowie Betriebs- und Fehlerprotokolle des gemeinsamen Traefik-Dienstes gespeichert. Diese Dateien sind zugriffsbeschränkt und dienen ausschließlich diesem Zweck. Eine Nutzung für Werbung oder die Bildung von Besucherprofilen erfolgt nicht.
+
+Der Umfang der Protokollierung ist begrenzt. In den nginx-Zugriffsprotokollen werden weder Query-Parameter noch Referrer, User-Agents oder Cookies erfasst. Fehlerprotokolle von nginx und die Betriebs- und Fehlerprotokolle von Traefik können dagegen weiterhin anfragebezogene Angaben enthalten. Auch bei dieser reduzierten Protokollierung können deshalb personenbezogene Daten anfallen.
+
+Zusätzliche Kopien dieser Ausgaben in Docker-Logs sind ebenso deaktiviert wie die Traefik-Access-Logs.
+
+Rechtsgrundlage ist Artikel 6 Absatz 1 Buchstabe f DSGVO. Das berechtigte Interesse liegt in der Bereitstellung der Projektinformationen sowie in der Fehlerbehebung und Missbrauchsabwehr.
+
+### Speicherdauer und Löschung
+
+<PrivacyInfrastructure part="log-retention" />
+
+Zur Einhaltung dieser Frist werden die Dateien stündlich rotiert und alle fünf Minuten altersbasiert bereinigt. Dabei ist eine technische Sicherheitsmarge berücksichtigt. Die zusätzliche Größenbegrenzung von ungefähr <PrivacyInfrastructure part="log-size-limit" /> kann dazu führen, dass Dateien bereits vor Ablauf der Frist gelöscht werden.
+
+Ist der jeweilige Dienst gestoppt, kann die automatische Bereinigung nicht laufen. Dateien können dann länger auf dem Datenträger verbleiben; die Altersbereinigung wird beim nächsten Start nachgeholt.
+
+### Externe Kopien und Backups
+
+Die beschriebene Löschregel gilt für die genannten Protokolldateien, nicht für möglicherweise vorhandene externe Kopien oder Backups. Deren Aufbewahrungsdauer ist noch nicht abschließend geklärt; für diese Kopien wird daher keine entsprechende Löschfrist zugesagt.

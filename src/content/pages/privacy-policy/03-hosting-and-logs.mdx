@@ -1,0 +1,38 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { PrivacyInfrastructure } from 'sproutsite/components';
+
+<Eyebrow>Technical operation</Eyebrow>
+
+## Hosting and server logs
+
+The controller runs this website on an nginx web server. Encrypted connections pass through a Traefik router shared by several domains. No CDN is used. The underlying server infrastructure is supplied by:
+
+<PrivacyInfrastructure />
+
+To deliver the pages you request, the server processes technical connection data. This includes your IP address, the requested URL and other information your browser sends with the request.
+
+nginx access and error logs, together with operational and error logs from the shared Traefik service, are stored to investigate technical faults and abuse. Access to these files is restricted, and they are used solely for that purpose, not for advertising or visitor profiling.
+
+Logging is limited in scope. nginx access logs do not record query parameters, referrers, user-agent strings or cookies. However, nginx error logs and Traefik operational and error logs may still contain request-related information. Personal data may therefore be present despite these restrictions.
+
+Additional copies of these outputs in Docker logs are disabled, as is Traefik access logging.
+
+The legal basis is Article 6(1)(f) GDPR. The legitimate interests are providing project information, resolving errors and preventing abuse.
+
+### Retention and deletion
+
+<PrivacyInfrastructure part="log-retention" />
+
+To meet this deadline, files are rotated hourly and checked for age-based deletion every five minutes, with a technical safety margin built in. The additional size limit of approximately <PrivacyInfrastructure part="log-size-limit" /> may cause files to be deleted before the retention period expires.
+
+Automatic cleanup cannot run while the respective service is stopped. Files may remain on disk for longer during that interruption; age-based cleanup resumes on the next start.
+
+### External copies and backups
+
+The deletion rule applies to the log files described above, not to any external copies or backups. Retention of those copies has not yet been conclusively established, so the same deletion deadline cannot be promised for them.

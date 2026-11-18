@@ -6,11 +6,13 @@ import Feature from '../Feature/Feature.astro';
 import Alert from '../Alert/Alert.astro';
 
 interface Props {
-    part?: 'contact' | 'name';
+    part?: 'contact' | 'name' | 'email' | 'controller';
 }
 const { part = 'contact' } = Astro.props;
-if (!['contact', 'name'].includes(part))
-    throw new Error('LegalIdentity part must be contact or name.');
+if (!['contact', 'name', 'email', 'controller'].includes(part))
+    throw new Error(
+        'LegalIdentity part must be contact, name, email or controller.',
+    );
 const { values, placeholder } = loadLegalIdentity(import.meta.env.PROD);
 const german = Astro.currentLocale === 'de';
 const country =
@@ -21,6 +23,8 @@ const country =
 
 {part === 'name' ? (
     values.LEGAL_NAME
+) : part === 'email' ? (
+    <a href={`mailto:${values.LEGAL_EMAIL}`}>{values.LEGAL_EMAIL}</a>
 ) : (
     <div class="ss-legal-identity">
         {placeholder && (
@@ -62,18 +66,20 @@ const country =
                             {values.LEGAL_EMAIL}
                         </a>
                     </p>
-                    <p>
-                        <strong>LinkedIn</strong>
-                        <br />
-                        <a
-                            href={values.LEGAL_LINKEDIN}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            {values.LEGAL_NAME}{' '}
-                            {german ? 'auf LinkedIn' : 'on LinkedIn'}
-                        </a>
-                    </p>
+                    {part !== 'controller' && (
+                        <p>
+                            <strong>LinkedIn</strong>
+                            <br />
+                            <a
+                                href={values.LEGAL_LINKEDIN}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {values.LEGAL_NAME}{' '}
+                                {german ? 'auf LinkedIn' : 'on LinkedIn'}
+                            </a>
+                        </p>
+                    )}
                 </Feature>
             </Column>
         </Columns>

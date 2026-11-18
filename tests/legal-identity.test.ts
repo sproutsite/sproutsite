@@ -86,6 +86,8 @@ test('LegalIdentity MDX allows only documented contact/name variants without exp
         for (const markup of [
             '<LegalIdentity />',
             '<LegalIdentity part="contact" />',
+            '<LegalIdentity part="controller" />',
+            '<LegalIdentity part="email" />',
             '**<LegalIdentity part="name" />**',
         ])
             validate(markup);

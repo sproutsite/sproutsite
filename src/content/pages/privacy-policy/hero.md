@@ -5,4 +5,4 @@ type: small
 tone: brand
 ---
 
-Information about visiting this website and contacting the Sproutsite project.
+Information about visiting this website, contacting us and exercising your data protection rights.

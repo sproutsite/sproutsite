@@ -76,3 +76,27 @@ Responsible: **<LegalIdentity part="name" />**.
 ```
 
 Omitting `part` selects `contact`, which renders the address and contact details. `part="name"` outputs only the name. There is no Markdown variable substitution. Websites without this component do not require operator variables. Only `.env` is read, not `.env.local` or inherited shell variables. Unrelated variables are not rendered.
+
+### Hosting and privacy information
+
+For privacy policies, `LegalIdentity part="controller"` renders operator cards without LinkedIn, and `part="email"` inserts an email link from `.env`. `PrivacyInfrastructure` reads hosting and retention metadata server-side from the same file:
+
+```mdx
+import { PrivacyInfrastructure } from 'sproutsite/components';
+
+## Hosting
+
+<PrivacyInfrastructure />
+
+Size limit: <PrivacyInfrastructure part="log-size-limit" />.
+
+<PrivacyInfrastructure part="log-retention" />
+
+Email upper limit: <PrivacyInfrastructure part="email-retention" /> months.
+```
+
+The `PRIVACY_HOST_*` and `PRIVACY_SERVER_*` fields, rotation size and email period are listed in `.env.dist`. Pages using this component require complete valid hosting metadata when built. Development previews otherwise show examples.
+
+Leave `PRIVACY_LOG_RETENTION_DAYS` empty until a time-based policy is implemented. A number applies to the configured nginx access/error logs and shared Traefik operational/error logs during normal operation. The demo describes hourly rotation, five-minute age cleanup and cleanup on the next start after a service interruption. External copies and backups are not covered by that rule. `PRIVACY_LOG_SIZE_LIMIT_MIB` records the additional limit in MiB; it is not a time limit.
+
+`PRIVACY_EMAIL_RETENTION_MONTHS` records the chosen maximum for completed ordinary enquiries in the active mailbox. Copies and backups require separate verification. These variables change the published text; they do not configure the server or mailbox or delete data.

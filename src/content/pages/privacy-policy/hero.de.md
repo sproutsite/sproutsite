@@ -5,4 +5,4 @@ type: small
 tone: brand
 ---
 
-Hinweise zum Besuch dieser Website und zur Kontaktaufnahme mit dem Sproutsite-Projekt.
+Informationen zum Seitenaufruf, zur Kontaktaufnahme und zu deinen Datenschutzrechten.

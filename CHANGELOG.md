@@ -7,6 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Added
+
+- Rebuilt the bilingual privacy policy with environment-backed controller/contact and hosting details, cookie/tracking information, scoped nginx and shared Traefik log retention, email retention and data-subject rights. Documented the confirmed seven-day policy during normal operation, reduced access logging, hourly rotation, five-minute cleanup, Copytruncate limitations and unresolved retention of external copies/backups.
+- Added the documented PrivacyInfrastructure component and LegalIdentity email/controller views with validation, tests and Storybook examples.
+
 ### Changed
 
 - Replaced the bilingual legal-notice drafts with the supplied operator details, styled address/contact cards, editorial responsibility and project/license links using existing components.

@@ -38,6 +38,7 @@
 @import '../components/molecules/Card/Card.css';
 @import '../components/molecules/Feature/Feature.css';
 @import '../components/molecules/LegalIdentity/LegalIdentity.css';
+@import '../components/molecules/PrivacyInfrastructure/PrivacyInfrastructure.css';
 @import '../components/molecules/Accordion/Accordion.css';
 @import '../components/molecules/AccordionItem/AccordionItem.css';
 @import '../components/molecules/CardActions/CardActions.css';

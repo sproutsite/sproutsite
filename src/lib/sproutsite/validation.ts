@@ -93,6 +93,8 @@ const eyebrowComponentImport =
     /^import\s*\{\s*Eyebrow\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const legalIdentityImport =
     /^import\s*\{\s*LegalIdentity\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
+const privacyInfrastructureImport =
+    /^import\s*\{\s*PrivacyInfrastructure\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const alertComponentImport =
     /^import\s*\{\s*Alert\s*\}\s*from\s*['"]sproutsite\/components['"];?$/;
 const contentImageComponentImport =
@@ -187,6 +189,7 @@ function validateMdxLayout(
     let iconCount = 0;
     let featureCount = 0;
     let legalIdentityCount = 0;
+    let privacyInfrastructureCount = 0;
     let accordionCount = 0;
     const validatedAccordionItems = new Set<MdxNode>();
     const localImageImports = new Set<string>();
@@ -211,6 +214,7 @@ function validateMdxLayout(
                     !mdxComponentImport.test(importValue) &&
                     !eyebrowComponentImport.test(importValue) &&
                     !legalIdentityImport.test(importValue) &&
+                    !privacyInfrastructureImport.test(importValue) &&
                     !alertComponentImport.test(importValue) &&
                     !contentImageComponentImport.test(importValue) &&
                     !cardComponentImport.test(importValue) &&
@@ -961,6 +965,29 @@ function validateMdxLayout(
                         path,
                         'Badge accepts optional variant, style (solid, outline, soft, dash), and size props',
                     );
+            } else if (mdxNode.name === 'PrivacyInfrastructure') {
+                privacyInfrastructureCount += 1;
+                const attributes = mdxNode.attributes ?? [];
+                if (
+                    attributes.some(
+                        (attribute) =>
+                            attribute.type !== 'mdxJsxAttribute' ||
+                            attribute.name !== 'part' ||
+                            ![
+                                'hosting',
+                                'email-retention',
+                                'log-size-limit',
+                                'log-retention',
+                            ].includes(String(attribute.value)),
+                    ) ||
+                    attributes.length > 1 ||
+                    (mdxNode.children?.length ?? 0) > 0
+                )
+                    fail(
+                        contentRoot,
+                        path,
+                        'PrivacyInfrastructure only accepts optional part="hosting|email-retention|log-size-limit|log-retention" and no children',
+                    );
             } else if (mdxNode.name === 'LegalIdentity') {
                 legalIdentityCount += 1;
                 const attributes = mdxNode.attributes ?? [];
@@ -969,9 +996,12 @@ function validateMdxLayout(
                         (attribute) =>
                             attribute.type !== 'mdxJsxAttribute' ||
                             attribute.name !== 'part' ||
-                            !['contact', 'name'].includes(
-                                String(attribute.value),
-                            ),
+                            ![
+                                'contact',
+                                'name',
+                                'email',
+                                'controller',
+                            ].includes(String(attribute.value)),
                     ) ||
                     attributes.length > 1 ||
                     (mdxNode.children?.length ?? 0) > 0
@@ -979,7 +1009,7 @@ function validateMdxLayout(
                     fail(
                         contentRoot,
                         path,
-                        'LegalIdentity only accepts optional part="contact|name" and no children',
+                        'LegalIdentity only accepts optional part="contact|name|email|controller" and no children',
                     );
             } else if (mdxNode.name === 'Eyebrow') {
                 eyebrowCount += 1;
@@ -1170,6 +1200,7 @@ function validateMdxLayout(
             iconCount === 0 &&
             featureCount === 0 &&
             legalIdentityCount === 0 &&
+            privacyInfrastructureCount === 0 &&
             accordionCount === 0)
     )
         fail(

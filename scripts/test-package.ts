@@ -157,6 +157,28 @@ function verifyLegalIdentityBuilds() {
             'UNRELATED_SECRET="never-render-this-token"',
         ].join('\n'),
     );
+    const identitySection = join(directory, '01-identity.mdx');
+    writeFileSync(
+        identitySection,
+        `import { PrivacyInfrastructure } from 'sproutsite/components';\n\n${readFileSync(identitySection, 'utf8')}\n\nEmail: <LegalIdentity part="email" />\n\n### Controller\n\n<LegalIdentity part="controller" />\n\n### Hosting\n\n<PrivacyInfrastructure />\n\nSize limit: <PrivacyInfrastructure part="log-size-limit" />\n\n<PrivacyInfrastructure part="log-retention" />\n\nEmail limit: <PrivacyInfrastructure part="email-retention" /> months.\n`,
+    );
+    expectBuildFailure(/Privacy infrastructure: missing or invalid fields/);
+    writeFileSync(
+        envFile,
+        readFileSync(envFile, 'utf8') +
+            '\n' +
+            [
+                'PRIVACY_HOST_NAME="Test Hosting GmbH"',
+                'PRIVACY_HOST_ADDRESS="Teststraße 1, 12345 Testort, Deutschland"',
+                'PRIVACY_HOST_URL="https://host.test.invalid"',
+                'PRIVACY_HOST_PRIVACY_URL="https://host.test.invalid/privacy"',
+                'PRIVACY_SERVER_CITY="Testort"',
+                'PRIVACY_SERVER_COUNTRY="DE"',
+                'PRIVACY_LOG_SIZE_LIMIT_MIB="100"',
+                'PRIVACY_LOG_RETENTION_DAYS=""',
+                'PRIVACY_EMAIL_RETENTION_MONTHS="6"',
+            ].join('\n'),
+    );
     npm(['run', 'build'], consumer, true, '/demo/');
     const html = readFileSync(
         join(consumer, 'dist/legal-fixture/index.html'),
@@ -170,6 +192,11 @@ function verifyLegalIdentityBuilds() {
     ])
         assert.ok(html.includes(value));
     assert.ok(html.includes('<address>'));
+    assert.ok(
+        html.includes('Test Hosting GmbH') &&
+            html.includes('No fixed retention period'),
+    );
+    assert.ok(html.includes('Email limit: 6 months.'));
     assert.ok(
         !html.includes('Max Mustermann') &&
             !html.includes('never-render-this-token'),

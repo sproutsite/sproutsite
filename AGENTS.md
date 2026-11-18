@@ -328,6 +328,7 @@ These rules are behavior instructions, not a technical sandbox. Do not claim tha
 - Legal-notice content uses the documented `LegalIdentity` component instead of hardcoded operator details. Its `contact` view renders address/contact cards; `name` renders the operator name.
 - Development previews without complete operator details show marked examples. Builds rendering this component require a complete `.env` with the examples replaced. Consumer sites without the component do not need these variables.
 - Do not add private operator details to content, metadata, tests, logs or documentation. Preserve public source-code copyright and attribution notices independently.
+- Privacy hosting and retention metadata comes from the documented `PrivacyInfrastructure` component and `PRIVACY_*` keys in `.env`. Do not infer absence of server logs from static generation or invent deletion periods. An empty log retention period remains explicitly unresolved. Published retention statements must match actual server and mailbox practice; editing `.env` does not configure deletion.
 
 ### Licensing
 
