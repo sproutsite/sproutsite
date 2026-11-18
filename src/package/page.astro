@@ -10,6 +10,7 @@ import BlogPost from '../themes/default/components/organisms/BlogPost/BlogPost.a
 import Hero from '../themes/default/components/organisms/Hero/Hero.astro';
 import PageTitle from '../themes/default/components/organisms/PageTitle/PageTitle.astro';
 import Section from '../themes/default/components/organisms/Section/Section.astro';
+import { getBlogCollection } from './blog.js';
 
 type Locale = 'en' | 'de';
 
@@ -33,7 +34,7 @@ export async function getSproutsiteStaticPaths(locale: Locale = 'en') {
         },
         props: { page, locale },
     }));
-    const posts = (await getCollection('blogPages'))
+    const posts = (await getBlogCollection('blogPages'))
         .filter((entry) => localeOf(entry.id) === locale)
         .sort(
             (left, right) =>
@@ -41,7 +42,7 @@ export async function getSproutsiteStaticPaths(locale: Locale = 'en') {
         );
     const assembledPosts = assemblePages(
         posts,
-        (await getCollection('blogDocuments')).filter(
+        (await getBlogCollection('blogDocuments')).filter(
             (entry) => localeOf(entry.id) === locale,
         ),
         (entry) => blogRouteFromId(logicalId(entry.id)),

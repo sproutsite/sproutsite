@@ -8,6 +8,7 @@ import { t } from '../../../i18n/index.js';
 import Icon from '../../atoms/Icon/Icon.astro';
 import englishFlag from 'flag-icons/flags/4x3/gb.svg?url&no-inline';
 import germanFlag from 'flag-icons/flags/4x3/de.svg?url&no-inline';
+import { getBlogCollection } from '../../../../../package/blog.js';
 
 interface Props {
     site: SiteConfig;
@@ -16,7 +17,7 @@ interface Props {
 const { site, route } = Astro.props;
 const [pages, posts] = await Promise.all([
     getCollection('pages'),
-    getCollection('blogPages'),
+    getBlogCollection('blogPages'),
 ]);
 const flags: Record<string, string> = { en: englishFlag, de: germanFlag };
 const options = languageLinks(

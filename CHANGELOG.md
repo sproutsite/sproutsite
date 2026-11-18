@@ -7,6 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Fixed
+
+- Treated missing, empty and asset-only blog directories as optional without missing-directory or empty-collection warnings, while preserving existing blog routes and Astro loading/validation for articles.
+- Extended the package installation check to cover quiet blog-free builds and adding, editing and removing the first article in the running dev server.
+
 ## [0.5.9] - 2026-11-17
 
 ### Added

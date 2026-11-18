@@ -1,13 +1,17 @@
 import assert from 'node:assert/strict';
-import { spawnSync } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
+import { createServer } from 'node:net';
+import { setTimeout as delay } from 'node:timers/promises';
 import {
     cpSync,
     existsSync,
     lstatSync,
+    mkdirSync,
     mkdtempSync,
     readFileSync,
     readdirSync,
     realpathSync,
+    renameSync,
     rmSync,
     writeFileSync,
 } from 'node:fs';
@@ -77,18 +81,181 @@ function npm(args: string[], cwd: string, capture = false, base = '/') {
             npm_config_dry_run: 'false',
             SPROUTSITE_BASE: base,
         },
-        stdio: capture ? ['ignore', 'pipe', 'pipe'] : 'inherit',
+        stdio: ['ignore', 'pipe', 'pipe'],
         encoding: 'utf8',
         maxBuffer: 10 * 1024 * 1024,
     });
     if (result.error) throw result.error;
+    if (!capture) {
+        process.stdout.write(result.stdout ?? '');
+        process.stderr.write(result.stderr ?? '');
+    }
     if (result.status !== 0) {
         if (capture) process.stderr.write(result.stderr ?? '');
         throw new Error(
             `npm ${args.join(' ')} failed (${result.status ?? result.signal}).`,
         );
     }
+    assertQuietBlog(`${result.stdout ?? ''}\n${result.stderr ?? ''}`);
     return result.stdout ?? '';
+}
+
+function assertQuietBlog(output: string) {
+    assert.doesNotMatch(
+        output,
+        /The collection "blog(?:Pages|Documents)" does not exist or is empty|The base directory "[^"\n]*[/\\]blog[/\\]?" does not exist|No files found matching[^\n]*blog/,
+        'Optional blog emitted missing/empty collection warnings.',
+    );
+}
+
+async function verifyDevBlogLifecycle() {
+    const blog = join(consumer, 'src/content/blog');
+    rmSync(blog, { recursive: true, force: true });
+    const reservation = createServer();
+    const port = await new Promise<number>((accept, reject) => {
+        reservation.once('error', reject);
+        reservation.listen(0, '127.0.0.1', () => {
+            const address = reservation.address();
+            assert.ok(address && typeof address !== 'string');
+            reservation.close(() => accept(address.port));
+        });
+    });
+    const astroRoot = join(consumer, 'node_modules/astro');
+    const astroManifest = JSON.parse(
+        readFileSync(join(astroRoot, 'package.json'), 'utf8'),
+    ) as { bin: { astro: string } };
+    const server = spawn(
+        process.execPath,
+        [
+            join(astroRoot, astroManifest.bin.astro),
+            'dev',
+            '--ignore-lock',
+            '--host',
+            '127.0.0.1',
+            '--port',
+            String(port),
+        ],
+        {
+            cwd: consumer,
+            env: { ...process.env, SPROUTSITE_BASE: '/' },
+            stdio: ['ignore', 'pipe', 'pipe'],
+        },
+    );
+    let output = '';
+    let launchError: Error | undefined;
+    server.on('error', (error) => {
+        launchError = error;
+    });
+    server.stdout.on('data', (chunk: Buffer) => {
+        output += chunk.toString();
+    });
+    server.stderr.on('data', (chunk: Buffer) => {
+        output += chunk.toString();
+    });
+    const waitForPage = async (
+        route: string,
+        predicate: (response: Response, html: string) => boolean,
+    ) => {
+        const deadline = Date.now() + 45_000;
+        while (Date.now() < deadline) {
+            if (launchError) throw launchError;
+            assert.equal(
+                server.exitCode,
+                null,
+                `Dev server exited:\n${output}`,
+            );
+            assert.equal(
+                server.signalCode,
+                null,
+                `Dev server stopped:\n${output}`,
+            );
+            try {
+                const response = await fetch(
+                    `http://127.0.0.1:${port}${route}`,
+                    { signal: AbortSignal.timeout(2000) },
+                );
+                if (predicate(response, await response.text())) return;
+            } catch {
+                /* Server startup and content synchronization may still be pending. */
+            }
+            await delay(200);
+        }
+        throw new Error(`Dev page did not update: ${route}\n${output}`);
+    };
+    try {
+        await waitForPage(
+            '/',
+            (response, html) =>
+                response.ok && html.includes('Consumer content stays here.'),
+        );
+        assertQuietBlog(output);
+        const assetDirectory = join(blog, '_assets');
+        mkdirSync(assetDirectory, { recursive: true });
+        cpSync(
+            join(root, 'src/themes/default/assets/branding/favicon-32x32.png'),
+            join(assetDirectory, 'article.png'),
+        );
+        const stagedArticle = join(temporary, 'first-article');
+        mkdirSync(stagedArticle);
+        writeFileSync(
+            join(stagedArticle, 'page.yaml'),
+            'title: First article\ndescription: Created while the dev server runs.\npubDate: 2026-01-01\nimage: ../_assets/article.png\nimageAlt: Test image\n',
+        );
+        writeFileSync(
+            join(stagedArticle, 'hero.md'),
+            '---\ntitle: First article\n---\n\nA new blog article.\n',
+        );
+        writeFileSync(
+            join(stagedArticle, '01-content.md'),
+            '## First section\n\nInitial article text.\n',
+        );
+        const article = join(blog, '2026-01-01.first-article');
+        renameSync(stagedArticle, article);
+        await waitForPage(
+            '/blog/first-article/',
+            (response, html) =>
+                response.ok && html.includes('Initial article text.'),
+        );
+        writeFileSync(
+            join(article, '01-content.md'),
+            '## First section\n\nUpdated article text.\n',
+        );
+        await waitForPage(
+            '/blog/first-article/',
+            (response, html) =>
+                response.ok && html.includes('Updated article text.'),
+        );
+        rmSync(article, { recursive: true });
+        await waitForPage(
+            '/blog/',
+            (response, html) => response.ok && !html.includes('First article'),
+        );
+        await waitForPage(
+            '/blog/first-article/',
+            (response) => response.status === 404,
+        );
+    } finally {
+        if (
+            server.exitCode === null &&
+            server.signalCode === null &&
+            !launchError
+        ) {
+            const stopped = new Promise<void>((accept) =>
+                server.once('close', () => accept()),
+            );
+            server.kill('SIGTERM');
+            const forceStop = setTimeout(() => server.kill('SIGKILL'), 5000);
+            try {
+                await stopped;
+            } finally {
+                clearTimeout(forceStop);
+            }
+        }
+    }
+    assertQuietBlog(output);
+    console.log(
+        'PASS dev server: missing blog, first article added, edited and removed without restart or optional-blog warnings.',
+    );
 }
 
 function verifyBuild(base: string) {
@@ -286,9 +453,16 @@ try {
     );
     npm(['run', 'check'], consumer);
     for (const base of ['/', '/demo/']) {
+        if (base === '/demo/') {
+            const assets = join(consumer, 'src/content/blog/_assets');
+            mkdirSync(assets, { recursive: true });
+            writeFileSync(join(assets, 'unused.txt'), 'No articles yet.');
+            npm(['run', 'check'], consumer);
+        }
         npm(['run', 'build'], consumer, false, base);
         verifyBuild(base);
     }
+    await verifyDevBlogLifecycle();
     rmSync(temporary, { recursive: true, force: true });
     console.log(
         'Package installation checks passed. Temporary files removed. Nothing was published.',

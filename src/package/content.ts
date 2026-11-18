@@ -2,6 +2,7 @@ import { defineCollection, type ImageFunction } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { heroTypes, sectionSpacings, tones } from '../lib/sproutsite/types.js';
+import { optionalBlogLoader } from './optional-blog-loader.js';
 
 function blogDirectoryId(entry: string): string {
     const match = entry.match(
@@ -89,11 +90,9 @@ export function createSproutsiteCollections(
     });
 
     const blogPages = defineCollection({
-        loader: glob({
-            base: blogDirectory,
-            pattern: '*/page*.yaml',
-            generateId: ({ entry }) => blogDirectoryId(entry),
-        }),
+        loader: optionalBlogLoader('blogPages', blogDirectory, ({ entry }) =>
+            blogDirectoryId(entry),
+        ),
         schema: ({ image }: { image: ImageFunction }) =>
             z.object({
                 title: z.string().trim().min(1),
@@ -105,11 +104,11 @@ export function createSproutsiteCollections(
     });
 
     const blogDocuments = defineCollection({
-        loader: glob({
-            base: blogDirectory,
-            pattern: '*/*.{md,mdx}',
-            generateId: ({ entry }) => entry.replace(/\.(?:md|mdx)$/, ''),
-        }),
+        loader: optionalBlogLoader(
+            'blogDocuments',
+            blogDirectory,
+            ({ entry }) => entry.replace(/\.(?:md|mdx)$/, ''),
+        ),
         schema: documentSchema,
     });
 

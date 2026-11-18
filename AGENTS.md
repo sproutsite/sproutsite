@@ -343,7 +343,7 @@ Provide at least these commands:
 - `npm run preview`: preview the build.
 - `npm run check`: Astro/TypeScript checking plus required content validation.
 - `npm test`: a few meaningful tests of project-owned conventions.
-- `npm run test:package`: pack and install the actual archive into a fresh temporary consumer, then check/build it for `/` and `/demo/`. Requires npm dependency access or a suitable cache; does not publish.
+- `npm run test:package`: pack and install the actual archive into a fresh temporary consumer, then check/build it for `/` and `/demo/`. Verify missing/empty optional blogs stay quiet, and add/edit/remove the first article in a temporary dev server without restarting it. Requires npm dependency access or a suitable cache; does not publish.
 - `npm run prepublishOnly`: execute the publication checks manually without publishing. npm also runs this hook before publication from this repository; do not bypass it or publish a separate untested artifact.
 - `npm run test:a11y`: reproducible browser verification of all generated demo, showcase, and documentation pages, for example with Playwright and axe-core.
 - `npm run storybook`: local isolated component workshop using Storybook Astro on port 6006.
