@@ -9,6 +9,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
+- Added a subtle shared border to cards for a clear outline with and without images.
 - Split the bilingual getting-started documentation into website-owner and contributor guides, with generator setup, coding-agent startup, practical editorial prompts and a separate manual Astro integration reference.
 
 ## [0.5.15] - 2026-11-18
