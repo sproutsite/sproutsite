@@ -54,6 +54,7 @@ The semantic palette is maintained in [theme.css](../../src/themes/default/style
 
 ## Generation records
 
+- [Blog illustrations](blog-images.md)
 - [Documentation overview illustrations](documentation-images.md)
 - [Getting-started illustrations](getting-started-images.md)
 - [Showcase illustrations and framing refinements](showcase-images.md)
