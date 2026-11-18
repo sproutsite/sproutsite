@@ -9,6 +9,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
+- Documented the approved illustration style, palette, responsive framing and generation-record workflow in docs/assets, with a permanent agent-guidance reference.
+- Replaced all 15 showcase overview illustrations with a coordinated navy-and-teal 3D series, refreshed shared landscape/portrait example assets, and updated bilingual alternative text and generation records.
 - Suppressed external-link arrows for icon-only links, including footer social buttons, while preserving their external-link security attributes.
 - Added matching navy-and-teal 3D illustrations to the bilingual getting-started overview cards.
 - Added a subtle shared border to cards for a clear outline with and without images.
