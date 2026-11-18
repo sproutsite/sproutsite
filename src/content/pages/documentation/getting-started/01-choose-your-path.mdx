@@ -3,6 +3,8 @@ tone: default
 fullWidth: true
 ---
 
+import websiteImage from './_assets/your-website.png';
+import contributingImage from './_assets/contributing.png';
 import { Eyebrow } from 'sproutsite/components';
 import { Column, Columns } from 'sproutsite/components';
 import { Card, CardActions } from 'sproutsite/components';
@@ -15,7 +17,7 @@ You can use Sproutsite to maintain your own website or help improve the framewor
 
 <Columns>
     <Column span={6}>
-        <Card>
+        <Card image={websiteImage} imageAlt="Three-dimensional illustration of a browser window with website content and an editor">
             ### Create your own website
 
             Start with the published create-sproutsite generator. Use the supplied design, edit your content with an external coding agent, preview changes and publish your website.
@@ -26,7 +28,7 @@ You can use Sproutsite to maintain your own website or help improve the framewor
         </Card>
     </Column>
     <Column span={6}>
-        <Card>
+        <Card image={contributingImage} imageAlt="Three-dimensional illustration of stacked layout layers, reusable components and a code panel">
             ### Contribute to Sproutsite
 
             Work in the Sproutsite repository to improve components, layouts, the theme or content handling. Learn where changes belong and how to test them.

@@ -67,6 +67,8 @@ Copyright licensing of artwork and trademark rights are separate. Apache-2.0 Sec
 
 ## Other visual assets: provenance review remains open
 
+Generation record: `src/content/pages/documentation/getting-started/_assets/your-website.png` and `contributing.png` were generated for this project on 2026-11-18 with OpenAI's built-in image-generation tool. Text-only prompts requested original, matching 3D illustrations of a website/editor and reusable layout components in the default theme's navy, muted blue and teal palette. Existing project images were inspected to describe the style; no image files, third-party artwork or logos were passed into the generator. The complete prompts and output paths are recorded in [docs/assets/getting-started-images.md](docs/assets/getting-started-images.md). This records provenance, not a separate artwork-license grant.
+
 Generation record: `src/content/pages/showcase/_assets/accordions.png` was generated for this project on 2026-11-16 with OpenAI's image-generation tool. A text-only prompt requested an original blue-and-white 3D accordion illustration with one expanded answer, two collapsed rows, and plus/chevron indicators. No external artwork or logos were supplied as input. This records provenance, not a separate artwork-license grant.
 
 Generation record: `src/content/pages/documentation/_assets/deployment.png` was generated for this project on 2026-11-15 with OpenAI's image-generation tool. A text-only prompt requested an original blue-and-white 3D deployment illustration with a server stack, terminal, upload arrow, and browser window. No external artwork or server-product logos were supplied. This records provenance, not a separate artwork-license grant.
