@@ -234,6 +234,8 @@ Add `type: language-switcher` to `header.links` to show the native disclosure dr
 
 Below 72rem, the header uses a hamburger button and a fullscreen native `<dialog>`. It reuses the same configured navigation, with an inline language selector and full-width CTA. A compact language selector also remains available in the closed header when configured. Native modal focus handling, Escape, localized open/close labels, scroll locking, and desktop resize restoration are supported. Without JavaScript, the ordinary wrapping navigation remains accessible. The desktop layout is unchanged.
 
+The footer supports optional `groups` (`title` and `links` with optional Lucide `icon`), `social` (`title` and icon links with `platform`, `label`, `href`), `copyright`, `showVersion` and `languageSwitcher`. Supported social platforms are `github`, `instagram` and `facebook`; logos are rendered locally from CC0-licensed Simple Icons. Existing `footer.text` and `footer.links` remain supported; `links` is the lower utility row. Version visibility defaults to `true`, language selection to `false`; omitting groups or socials hides those areas. The footer language dropdown opens upward and uses the same translated-page matching as the header. See [Global website settings](https://sproutsite.dev/documentation/content/) for a complete YAML example.
+
 Every page is a directory under `src/content/pages/`:
 
 ```text

@@ -13,8 +13,9 @@ import { getBlogCollection } from '../../../../../package/blog.js';
 interface Props {
     site: SiteConfig;
     route: string;
+    placement?: 'header' | 'footer';
 }
-const { site, route } = Astro.props;
+const { site, route, placement = 'header' } = Astro.props;
 const [pages, posts] = await Promise.all([
     getCollection('pages'),
     getBlogCollection('blogPages'),
@@ -40,11 +41,20 @@ const options = languageLinks(
 }));
 ---
 
-<details class="ss-language-switcher">
+<details
+    class:list={[
+        'ss-language-switcher',
+        { 'ss-language-switcher--footer': placement === 'footer' },
+    ]}
+>
     <summary
         aria-label={t(site.language === 'de' ? 'de' : 'en', 'languageSwitcher')}
     >
-        <Icon name="Globe" size={20} />
+        <Icon
+            name="Globe"
+            size={20}
+            strokeWidth={placement === 'footer' ? 1.5 : 2}
+        />
         <span>{site.language.toUpperCase()}</span>
         <Icon name="ChevronDown" size={16} />
     </summary>

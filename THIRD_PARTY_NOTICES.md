@@ -19,6 +19,8 @@ Both existing `OFL.txt` files are retained unchanged. The source font is from th
 
 ## Dependency licenses and notices
 
+Footer social logos (GitHub, Instagram and Facebook) are rendered locally from `simple-icons` 16.38.0, distributed under [CC0 1.0 Universal](third-party-licenses/simple-icons-LICENSE). The full, unmodified upstream license is retained. Brand names and logos remain subject to their respective trademark rights; CC0 does not grant trademark rights. No remote icon service or social embed is loaded. The footer-wave SVG in `src/themes/default/assets/footer-waves.svg` was supplied by the maintainer on 2026-11-18; its separate provenance and redistribution permissions have not yet been confirmed. The existing hero-wave authorization should not be assumed to cover this new file.
+
 Language-selector flags are local SVG assets from `flag-icons` 7.6.0, licensed under MIT. The full, unmodified [upstream license](third-party-licenses/flag-icons-LICENSE), including Panayiotis Lipiridis's copyright notice, is retained for redistribution. Only the GB and DE SVGs used by the theme are bundled into the website; no flag CDN or external requests are required. Preserve the upstream notice when redistributing these assets.
 
 Lucide icons are rendered from `@lucide/astro` 1.73.0. Its full, unmodified [license text](third-party-licenses/lucide-LICENSE) is included with the npm package: ISC for Lucide, plus the upstream MIT notice and icon list for Feather-derived artwork. These icons retain their upstream licensing independently of the project-branding artwork below. Preserve the applicable notices when distributing rendered SVGs or a generated website containing them.

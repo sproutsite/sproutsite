@@ -41,5 +41,16 @@ export interface SiteConfig {
         heading: string;
     };
     header: { links: HeaderItem[] };
-    footer: { text: string; links: Link[] };
+    footer: {
+        text: string;
+        links: Link[];
+        groups?: { title: string; links: (Link & { icon?: string })[] }[];
+        social?: {
+            title: string;
+            links: (Link & { platform: 'github' | 'instagram' | 'facebook' })[];
+        };
+        copyright?: string;
+        showVersion?: boolean;
+        languageSwitcher?: boolean;
+    };
 }

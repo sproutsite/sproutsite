@@ -7,6 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Added
+
+- Added configurable footer link groups, local Simple Icons social links, copyright, version visibility and a shared language switcher, with responsive desktop/mobile layouts and the supplied wave background.
+- Prepared English/German legal notice and privacy pages with small heroes and clearly marked draft content.
+
 ## [0.5.13] - 2026-11-18
 
 ### Changed

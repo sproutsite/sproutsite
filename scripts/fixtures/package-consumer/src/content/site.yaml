@@ -10,6 +10,20 @@ header:
         - type: language-switcher
 footer:
     text: Independent website content.
+    copyright: © 2026 Consumer fixture
+    languageSwitcher: true
+    groups:
+        - title: Explore
+          links:
+              - label: About
+                href: /about/
+                icon: BookOpen
+    social:
+        title: Follow
+        links:
+            - platform: github
+              label: Source on GitHub
+              href: https://github.com/example/website
     links:
         - label: About
           href: /about/

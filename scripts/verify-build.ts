@@ -27,7 +27,11 @@ for (const locale of site.locales) {
                 `href="${contentHref('/', loadSiteConfig(locale))}"`,
             ) ||
             !html.includes('ss-section__content') ||
-            (html.match(/<h2\b/g) ?? []).length !== 1 ||
+            (
+                html
+                    .match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1]
+                    ?.match(/<h2\b/g) ?? []
+            ).length !== 1 ||
             !html.includes('name="robots" content="noindex, follow"') ||
             (html.match(/<h1\b/g) ?? []).length !== 1 ||
             (html.match(/<main\b/g) ?? []).length !== 1

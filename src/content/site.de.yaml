@@ -31,12 +31,46 @@ header:
           href: /kontakt/
 footer:
     text: Agent-ready static CMS for Astro and TypeScript.
+    copyright: © 2026 Sproutsite
+    showVersion: true
+    languageSwitcher: true
+    groups:
+        - title: Produkt
+          links:
+              - label: Dokumentation
+                href: /dokumentation/
+                icon: BookOpen
+              - label: FAQ
+                href: /faq/
+                icon: CircleQuestionMark
+              - label: Kontakt
+                href: /kontakt/
+                icon: Mail
+        - title: Projekt
+          links:
+              - label: Über Sproutsite
+                href: /info/
+                icon: Sprout
+              - label: GitHub
+                href: https://github.com/sproutsite/sproutsite
+                icon: CodeXml
+              - label: Changelog
+                href: https://github.com/sproutsite/sproutsite/blob/main/CHANGELOG.md
+                icon: Layers
+    social:
+        title: Folgen
+        links:
+            - platform: github
+              label: Sproutsite auf GitHub
+              href: https://github.com/sproutsite/sproutsite
+            - platform: instagram
+              label: Sproutsite auf Instagram
+              href: https://www.instagram.com/sproutsite
+            - platform: facebook
+              label: Sproutsite auf Facebook
+              href: https://www.facebook.com/sproutsite
     links:
-        - label: Info
-          href: /info/
-        - label: FAQ
-          href: /faq/
-        - label: Dokumentation
-          href: /dokumentation/
-        - label: Kontakt
-          href: /kontakt/
+        - label: Impressum
+          href: /impressum/
+        - label: Datenschutz
+          href: /datenschutz/

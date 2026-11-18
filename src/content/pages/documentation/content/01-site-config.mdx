@@ -27,3 +27,32 @@ Use `hero-classes` to set theme classes for all heroes and compact H1 fallbacks 
 hero-classes:
     - ss-hero--theme-1
 ```
+
+### Footer areas
+
+Configure each language's footer in `site.yaml` or `site.de.yaml`. `text` describes your website; `groups` creates titled navigation columns. Optional `icon` values are canonical PascalCase Lucide names. On mobile the columns stack, with icons and arrows beside the links.
+
+```yaml
+footer:
+    text: Your website description.
+    copyright: © 2026 Your organisation
+    showVersion: true
+    languageSwitcher: true
+    groups:
+        - title: Explore
+          links:
+              - label: Contact
+                href: /contact/
+                icon: Mail
+    social:
+        title: Follow
+        links:
+            - platform: github
+              label: Sproutsite on GitHub
+              href: https://github.com/sproutsite/sproutsite
+    links:
+        - label: Legal notice
+          href: /legal-notice/
+```
+
+`links` remains the lower link row and supports existing configurations unchanged. Omit `groups` or `social` to hide those areas. Social platforms currently supported are `github`, `instagram` and `facebook`, using local Simple Icons logos. `label` is the accessible name of each icon link. `showVersion` defaults to `true` and reads the installed library's `VERSION`; set it to `false` to hide it. `copyright` is literal text you maintain yourself. `languageSwitcher` defaults to `false`; enabling it reuses the header's language selection, including matching translated pages and homepage fallback. The dropdown opens upward in the footer. Internal links use the active language and deployment base; external links open in a new tab.

@@ -6,7 +6,21 @@ import type { SiteConfig } from './types.js';
 
 const linkSchema = z.object({
     label: z.string().trim().min(1),
-    href: z.string().trim().min(1),
+    href: z
+        .string()
+        .trim()
+        .min(1)
+        .refine((href) => {
+            if (href.startsWith('//') || /[\u0000-\u0020\u007f\\]/.test(href))
+                return false;
+            try {
+                return ['http:', 'https:', 'mailto:', 'tel:'].includes(
+                    new URL(href, 'https://example.invalid').protocol,
+                );
+            } catch {
+                return false;
+            }
+        }, 'must be a safe website, email or telephone link'),
 });
 const headerLinkSchema = linkSchema.extend({
     icon: z
@@ -80,6 +94,38 @@ const siteSchema = z.object({
     footer: z.object({
         text: z.string().trim().min(1),
         links: z.array(linkSchema),
+        groups: z
+            .array(
+                z
+                    .object({
+                        title: z.string().trim().min(1),
+                        links: z.array(headerLinkSchema.strict()).min(1),
+                    })
+                    .strict(),
+            )
+            .optional(),
+        social: z
+            .object({
+                title: z.string().trim().min(1),
+                links: z
+                    .array(
+                        linkSchema
+                            .extend({
+                                platform: z.enum([
+                                    'github',
+                                    'instagram',
+                                    'facebook',
+                                ]),
+                            })
+                            .strict(),
+                    )
+                    .min(1),
+            })
+            .strict()
+            .optional(),
+        copyright: z.string().trim().min(1).optional(),
+        showVersion: z.boolean().optional(),
+        languageSwitcher: z.boolean().optional(),
     }),
 });
 

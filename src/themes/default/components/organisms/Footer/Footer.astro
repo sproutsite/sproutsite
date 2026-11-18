@@ -1,5 +1,9 @@
 ---
+import type { ComponentProps } from 'astro/types';
+import { siGithub, siInstagram, siFacebook } from 'simple-icons';
 import BrandLogo from '../../atoms/BrandLogo/BrandLogo.astro';
+import Icon from '../../atoms/Icon/Icon.astro';
+import LanguageSwitcher from '../../molecules/LanguageSwitcher/LanguageSwitcher.astro';
 import version from '../../../../../../VERSION?raw';
 import { t } from '../../../i18n/index.js';
 import type { SiteConfig } from '../../../../../lib/sproutsite/types.js';
@@ -9,49 +13,150 @@ import {
 } from '../../../../../lib/sproutsite/urls.js';
 interface Props {
     site: SiteConfig;
+    route: string;
 }
-const { site } = Astro.props;
+const { site, route } = Astro.props;
+const language = site.language === 'de' ? 'de' : 'en';
+const socialIcons = {
+    github: siGithub,
+    instagram: siInstagram,
+    facebook: siFacebook,
+};
+const linkAttributes = (href: string) => ({
+    href: contentHref(href, site),
+    target: isExternalWebLink(href, site.url) ? '_blank' : undefined,
+    rel: isExternalWebLink(href, site.url) ? 'noopener noreferrer' : undefined,
+});
 ---
 
 <footer class="ss-footer">
     <div class="ss-footer__inner site-shell">
-        <div class="ss-footer__text">
+        <div class="ss-footer__top">
             <div class="ss-footer__brand">
                 <a
                     href={contentHref('/', site)}
-                    aria-label={`${site.name}: ${t(site.language === 'de' ? 'de' : 'en', 'home')}`}
+                    aria-label={`${site.name}: ${t(language, 'home')}`}
                 >
                     <BrandLogo name={site.name} />
                 </a>
-                <span class="ss-footer__version">Version {version.trim()}</span>
+                <p>{site.footer.text}</p>
             </div>
-            <span>{site.footer.text}</span>
-        </div>
-        <nav
-            aria-label={t(
-                site.language === 'de' ? 'de' : 'en',
-                'footerNavigation',
+            {(site.footer.groups ?? []).map((group) => (
+                <nav class="ss-footer__group" aria-label={group.title}>
+                    <h2 class="ss-footer__heading">{group.title}</h2>
+                    <ul>
+                        {group.links.map((link) => (
+                            <li>
+                                <a {...linkAttributes(link.href)}>
+                                    {link.icon && (
+                                        <span class="ss-footer__link-icon">
+                                            <Icon
+                                                name={
+                                                    link.icon as ComponentProps<
+                                                        typeof Icon
+                                                    >['name']
+                                                }
+                                                size={20}
+                                                strokeWidth={1.5}
+                                            />
+                                        </span>
+                                    )}
+                                    <span>{link.label}</span>
+                                    {isExternalWebLink(link.href, site.url) && (
+                                        <span class="ss-footer__external">
+                                            <Icon
+                                                name="ArrowUpRight"
+                                                size={16}
+                                                strokeWidth={1.5}
+                                            />
+                                        </span>
+                                    )}
+                                    <span class="ss-footer__chevron">
+                                        <Icon
+                                            name="ChevronRight"
+                                            size={18}
+                                            strokeWidth={1.5}
+                                        />
+                                    </span>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+            ))}
+            {site.footer.social && (
+                <div class="ss-footer__social">
+                    <h2 class="ss-footer__heading">
+                        {site.footer.social.title}
+                    </h2>
+                    <ul>
+                        {site.footer.social.links.map((link) => (
+                            <li>
+                                <a
+                                    {...linkAttributes(link.href)}
+                                    aria-label={link.label}
+                                >
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        width="24"
+                                        height="24"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                        focusable="false"
+                                    >
+                                        <path
+                                            d={socialIcons[link.platform].path}
+                                        />
+                                    </svg>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             )}
-        >
-            <ul class="ss-footer__links">
-                {site.footer.links.map((link, index) => {
-                    const external = isExternalWebLink(link.href, site.url);
-                    return (
-                        <li>
-                            {index > 0 && <span aria-hidden="true">·</span>}
-                            <a
-                                href={contentHref(link.href, site)}
-                                target={external ? '_blank' : undefined}
-                                rel={
-                                    external ? 'noopener noreferrer' : undefined
-                                }
-                            >
-                                {link.label}
-                            </a>
-                        </li>
-                    );
-                })}
-            </ul>
-        </nav>
+        </div>
+        <div class="ss-footer__bottom">
+            <div class="ss-footer__credits">
+                {site.footer.copyright && <span>{site.footer.copyright}</span>}
+                {site.footer.showVersion !== false && (
+                    <span class="ss-footer__version">
+                        <a
+                            {...linkAttributes(
+                                `https://github.com/sproutsite/sproutsite/releases/tag/${version.trim()}`,
+                            )}
+                        >
+                            Version {version.trim()}
+                        </a>
+                    </span>
+                )}
+            </div>
+            <div class="ss-footer__utilities">
+                {site.footer.links.length > 0 && (
+                    <nav aria-label={t(language, 'footerNavigation')}>
+                        <ul class="ss-footer__links">
+                            {site.footer.links.map((link) => (
+                                <li>
+                                    <a {...linkAttributes(link.href)}>
+                                        {link.label}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+                )}
+                {site.footer.languageSwitcher && (
+                    <>
+                        {site.footer.links.length > 0 && (
+                            <span aria-hidden="true">·</span>
+                        )}
+                        <LanguageSwitcher
+                            site={site}
+                            route={route}
+                            placement="footer"
+                        />
+                    </>
+                )}
+            </div>
+        </div>
     </div>
 </footer>

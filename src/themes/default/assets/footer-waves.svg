@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="180" viewBox="0 0 1600 180" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="back-wave" x1="540" y1="170" x2="1600" y2="55" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B294A" stop-opacity="0"/>
+      <stop offset="0.38" stop-color="#10476B" stop-opacity="0.50"/>
+      <stop offset="0.78" stop-color="#0B6075" stop-opacity="0.76"/>
+      <stop offset="1" stop-color="#087B78" stop-opacity="0.88"/>
+    </linearGradient>
+    <linearGradient id="crest-base" x1="960" y1="168" x2="1550" y2="20" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D2B50" stop-opacity="0.10"/>
+      <stop offset="0.35" stop-color="#125B86" stop-opacity="0.62"/>
+      <stop offset="0.7" stop-color="#078481" stop-opacity="0.90"/>
+      <stop offset="1" stop-color="#159A70" stop-opacity="0.92"/>
+    </linearGradient>
+    <radialGradient id="crest-green" cx="0" cy="0" r="1" gradientTransform="translate(1510 62) rotate(163) scale(370 98)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#73DF48" stop-opacity="0.83"/>
+      <stop offset="0.24" stop-color="#40BF61" stop-opacity="0.65"/>
+      <stop offset="0.58" stop-color="#159C78" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#159C78" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="middle-wave" x1="660" y1="95" x2="1550" y2="177" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D3458" stop-opacity="0.12"/>
+      <stop offset="0.48" stop-color="#15567B" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#0B365C" stop-opacity="0.84"/>
+    </linearGradient>
+    <linearGradient id="front-wave" x1="920" y1="125" x2="1570" y2="185" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B2B4E" stop-opacity="0.18"/>
+      <stop offset="0.5" stop-color="#10446C" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#092947" stop-opacity="0.88"/>
+    </linearGradient>
+    <path id="crest-shape" d="M 810 210 C 990 185 1135 132 1250 100 C 1380 64 1470 35 1600 30 L 1600 210 Z"/>
+  </defs>
+  <path d="M 0 167 C 245 174 410 160 615 143 C 805 125 950 129 1090 105 C 1300 70 1460 80 1600 45 L 1600 180 L 0 180 Z" fill="url(#back-wave)"/>
+  <use href="#crest-shape" fill="url(#crest-base)"/>
+  <use href="#crest-shape" fill="url(#crest-green)"/>
+  <path d="M 350 190 C 560 170 720 142 880 142 C 1050 142 1155 170 1300 142 C 1425 118 1515 115 1600 123 L 1600 190 Z" fill="url(#middle-wave)"/>
+  <path d="M 720 190 C 940 173 1070 157 1210 164 C 1365 174 1495 144 1600 151 L 1600 190 Z" fill="url(#front-wave)"/>
+</svg>

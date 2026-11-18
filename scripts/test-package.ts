@@ -297,6 +297,9 @@ function verifyBuild(base: string) {
     const home = readFileSync(join(output, 'index.html'), 'utf8');
     assert.ok(home.includes('ss-accordion-item'));
     assert.ok(home.includes('lucide-bot'));
+    assert.ok(home.includes('ss-footer__group'));
+    assert.ok(home.includes('ss-footer__social'));
+    assert.ok(home.includes('ss-language-switcher--footer'));
     assert.ok(home.includes(`href="${base}about/"`));
     assert.ok(home.includes('Consumer content stays here.'));
     for (const file of ['404.html', '500.html', '404-de.html', '500-de.html']) {
