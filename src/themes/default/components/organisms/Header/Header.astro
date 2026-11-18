@@ -5,7 +5,8 @@ import Icon from '../../atoms/Icon/Icon.astro';
 import LanguageSwitcher from '../../molecules/LanguageSwitcher/LanguageSwitcher.astro';
 import type { ComponentProps } from 'astro/types';
 import { t } from '../../../i18n/index.js';
-import type { Link, SiteConfig } from '../../../../../lib/sproutsite/types.js';
+import type { SiteConfig } from '../../../../../lib/sproutsite/types.js';
+import { navigationCurrent } from './navigation.js';
 import {
     contentHref,
     externalLinkAttributes,
@@ -16,7 +17,6 @@ interface Props {
     route: string;
 }
 const { site, route } = Astro.props;
-const isActive = (link: Link) => link.href === route;
 const language = site.language === 'de' ? 'de' : 'en';
 const hasLanguageSwitcher = site.header.links.some(
     (link) => link.type === 'language-switcher',
@@ -88,9 +88,10 @@ const hasLanguageSwitcher = site.header.links.some(
                                     size="md"
                                     target={externalAttributes.target}
                                     rel={externalAttributes.rel}
-                                    aria-current={
-                                        isActive(link) ? 'page' : undefined
-                                    }
+                                    aria-current={navigationCurrent(
+                                        link.href,
+                                        route,
+                                    )}
                                 >
                                     {icon && <Icon name={icon} size={20} />}
                                     {link.label}
@@ -104,9 +105,10 @@ const hasLanguageSwitcher = site.header.links.some(
                                 class="ss-header__link btn btn-ghost btn-sm"
                                 href={contentHref(link.href, site)}
                                 {...externalAttributes}
-                                aria-current={
-                                    isActive(link) ? 'page' : undefined
-                                }
+                                aria-current={navigationCurrent(
+                                    link.href,
+                                    route,
+                                )}
                             >
                                 {icon && <Icon name={icon} size={20} />}
                                 {link.label}

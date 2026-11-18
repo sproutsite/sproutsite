@@ -37,7 +37,7 @@
             .ss-button {
                 @apply m-0 !text-lg no-underline hover:underline;
 
-                &[aria-current='page'] {
+                &:is([aria-current='page'], [aria-current='location']) {
                     @apply outline-2 outline-offset-2;
                     outline-color: var(--ss-header-cta-outline);
                 }
@@ -63,7 +63,7 @@
                 ) !important;
             }
 
-            &[aria-current='page'] {
+            &:is([aria-current='page'], [aria-current='location']) {
                 --btn-bg: transparent !important;
                 --btn-border: transparent !important;
                 @apply font-bold;
@@ -206,7 +206,7 @@
                 text-align: start;
                 white-space: normal;
 
-                &[aria-current='page'] {
+                &:is([aria-current='page'], [aria-current='location']) {
                     font-weight: 700 !important;
 
                     &::after {

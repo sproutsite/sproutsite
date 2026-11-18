@@ -34,8 +34,8 @@ interface Props {
     target?: HTMLAttributes<'a'>['target'];
     /** Relationship of a link to its target. */
     rel?: string;
-    /** Marks a link as the current page. */
-    'aria-current'?: 'page';
+    /** Marks the current page or its enclosing navigation location. */
+    'aria-current'?: 'page' | 'location';
     /** Native button type for button actions. */
     type?: ButtonType;
     /** Disables a native button. Links cannot be disabled. */
