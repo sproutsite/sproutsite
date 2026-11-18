@@ -45,7 +45,7 @@
         }
 
         .ss-header__link {
-            @apply relative !gap-2.5 !text-lg !text-primary-content no-underline hover:underline;
+            @apply relative !gap-2.5 !text-lg !text-primary-content no-underline;
             border-color: transparent !important;
             box-shadow: none !important;
 
@@ -55,6 +55,7 @@
             }
 
             &:hover {
+                text-decoration: none;
                 --btn-bg: color-mix(
                     in srgb,
                     currentColor 10%,
