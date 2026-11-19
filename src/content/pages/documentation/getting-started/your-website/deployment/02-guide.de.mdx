@@ -1,0 +1,25 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Produktionsadresse und Fehlerseiten einrichten
+
+### Die Produktionsadresse verwenden
+
+Trage deine echte Domain in `site.yaml` bei `url` ein. Für eine Veröffentlichung direkt unter der Domain bleibt `base: /`. Einen Unterpfad wie `/studio/` verwendest du nur, wenn deine Website tatsächlich dort liegt. Die Werte müssen in allen Sprachkonfigurationen übereinstimmen. Starte nach globalen URL-Änderungen den Dev-Server neu.
+
+Lade den gesamten Inhalt von `dist` in das Webverzeichnis deines Hosters, einschließlich `_astro`, Manifest, Sitemap und Fehlerseiten. Nur HTML-Dateien hochzuladen reicht nicht: Die Seiten benötigen auch das erzeugte CSS, Bilder und Schriften.
+
+### Den Webserver einrichten
+
+Die [Anleitung für Apache und Nginx](/dokumentation/veroeffentlichen/) enthält Serverbeispiele und die Einbindung der Fehlerseiten. Diese liegen als direkte Dateien wie `404.html` und `500.html` vor; weitere konfigurierte Sprachen ergänzen beispielsweise `404-de.html` und `500-de.html`. Vorschaupfade wie `/500/` sind keine regulären Produktionsseiten.
+
+Ein statischer Host liefert diese Dateien ohne laufenden Astro- oder CMS-Server aus. HTTPS, Weiterleitungen, korrekte HTTP-Fehlercodes und Serverprotokolle bleiben Aufgabe des Hosters. Prüfe nach dem Deployment eine normale Seite, eine unbekannte URL und die Sprachlinks auf deiner echten Domain.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

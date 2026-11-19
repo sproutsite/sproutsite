@@ -1,0 +1,57 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Publish your first article
+
+The blog is optional. Create it when you have a dated article to publish; a normal website page does not need to become a blog post.
+
+### Files for one article
+
+Create this structure in your website project:
+
+```text
+src/content/blog/
+    _assets/
+        first-article.png
+    2026-11-19.first-article/
+        page.yaml
+        hero.md
+        01-story.md
+```
+
+Add the actual cover image, then create `page.yaml`:
+
+```yaml
+title: Our first update
+description: What we are working on and what comes next.
+pubDate: 2026-11-19
+image: ../_assets/first-article.png
+imageAlt: Our team planning the next project
+```
+
+All five article metadata fields are required. In `hero.md`, add a non-empty `title` between frontmatter delimiters and a short introduction below them. In `01-story.md`, start the article content with H2 and use the same numbered-section conventions as other pages.
+
+### Overview and navigation
+
+The date prefix orders source directories; only `first-article` becomes the URL segment below `/blog/`. Sproutsite generates the overview and lists articles by publication date, newest first. Do not create a separate ordinary `pages/blog/page.yaml` for that automatic overview.
+
+To change overview copy, add all four fields together to your existing site configuration:
+
+```yaml
+blog:
+    title: News
+    eyebrow: From our team
+    description: Updates from our work.
+    heading: Latest articles
+```
+
+Add `/blog/` to navigation when you want it visible there. Review the overview image and the article on mobile, then run your normal checks and build. For translations, keep a single article directory and add localized metadata, hero and sections as described under [languages](/documentation/getting-started/your-website/languages/).
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

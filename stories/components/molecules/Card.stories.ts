@@ -6,6 +6,11 @@ export default {
     component: Card,
     tags: ['autodocs'],
     argTypes: {
+        badges: {
+            control: 'object',
+            description:
+                'One badge descriptor or an array: text, optional variant, style and hover hint. Labels appear at the bottom right of the image or a theme-coloured surface.',
+        },
         imageAlt: {
             control: 'text',
             description: 'Meaningful alternative text for the optional image.',
@@ -58,6 +63,72 @@ export const ResponsiveWithImage = {
         slots: {
             default:
                 '<h3>A card that remains readable on small screens</h3><p>This longer text makes line wrapping, image cropping, and the available content width easy to review with the Storybook viewport toolbar.</p>',
+        },
+    },
+};
+
+export const SingleBadge = {
+    args: {
+        image: layoutLandscape,
+        imageAlt: 'Illustration of a modular website layout',
+        badges: { text: 'Partly available', variant: 'info', style: 'soft' },
+        slots: {
+            default:
+                '<h3>A single status badge</h3><p>The label sits inside the image area.</p>',
+        },
+    },
+};
+
+export const MultipleBadges = {
+    args: {
+        image: layoutLandscape,
+        imageAlt: 'Illustration of a modular website layout',
+        badges: [
+            { text: 'Preview', variant: 'info', style: 'soft' },
+            { text: 'Open', variant: 'warning', style: 'outline' },
+        ],
+        slots: {
+            default:
+                '<h3>Several labels</h3><p>Labels keep their input order and wrap when the available width is too small.</p>',
+        },
+    },
+};
+
+export const BadgesWithoutImage = {
+    args: {
+        badges: [
+            { text: 'Documentation', variant: 'secondary', style: 'solid' },
+            { text: 'New', variant: 'primary', style: 'dash' },
+        ],
+        slots: {
+            default:
+                '<h3>A theme-coloured media area</h3><p>When labels are present without an image, the card supplies a matching empty surface.</p>',
+        },
+    },
+};
+
+export const HoverHints = {
+    args: {
+        image: layoutLandscape,
+        imageAlt: 'Illustration of a modular website layout',
+        badges: [
+            {
+                text: 'Partly available',
+                variant: 'info',
+                style: 'soft',
+                hover: 'The documented options work today; further customisation is still open.',
+            },
+            {
+                text: 'Open',
+                variant: 'warning',
+                style: 'soft',
+                hover: 'This capability is planned for a future release.',
+            },
+            { text: 'Preview', variant: 'neutral', style: 'solid' },
+        ],
+        slots: {
+            default:
+                '<h3>Hover or Tab for details</h3><p>Only badges with a hint join the tab order. Escape dismisses a hint without moving focus.</p>',
         },
     },
 };

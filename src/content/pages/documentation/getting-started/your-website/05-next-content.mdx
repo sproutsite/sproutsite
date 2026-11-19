@@ -1,0 +1,114 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import image0 from './_assets/settings.png';
+import image1 from './_assets/pages-and-sections.png';
+import image2 from './_assets/layouts-and-components.png';
+import image3 from './_assets/images-and-files.png';
+import image4 from './_assets/blog.png';
+import image5 from './_assets/languages.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>What's next?</Eyebrow>
+
+## Create your content and pages
+
+Your website is running. Choose what you want to do next. These guides build on the starter; you do not need to read them all in order.
+
+<Columns>
+    <Column span={4}>
+        <Card image={image0} imageAlt="Website settings panel with toggles and a globe">
+
+            ### Website settings
+
+            Set your name, domain, navigation and footer.
+
+            <CardActions>
+                [Edit settings](/documentation/getting-started/your-website/settings/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={image1} imageAlt="Three connected pages in a website tree">
+
+            ### Pages and sections
+
+            Add pages and arrange their content.
+
+            <CardActions>
+                [Add a page](/documentation/getting-started/your-website/pages-and-sections/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={image2} imageAlt="Browser layout with modular content cards">
+
+            ### Layouts and components
+
+            Combine columns, cards and features.
+
+            <CardActions>
+                [Use components](/documentation/getting-started/your-website/layouts-and-components/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={image3} imageAlt="Landscape image beside a downloadable document">
+
+            ### Images and files
+
+            Add your images and downloadable files.
+
+            <CardActions>
+                [Add images](/documentation/getting-started/your-website/images-and-files/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={image4} imageAlt="Article preview beside a calendar">
+
+            ### Your blog
+
+            Publish articles with dates and cover images.
+
+            <CardActions>
+                [Start a blog](/documentation/getting-started/your-website/blog/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image5}
+            imageAlt="Two pages linked around a globe"
+            badges={{
+                text: "Partly available",
+                variant: "info",
+                style: "soft",
+                hover: "Translations and language switching work with English as the default. A verified workflow for other default languages is still missing.",
+            }}
+        >
+
+            ### More languages
+
+
+
+            Create translated pages and language navigation.
+
+            <CardActions>
+                [Set up languages](/documentation/getting-started/your-website/languages/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

@@ -1,0 +1,53 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Seiten mit vorhandenen Bausteinen aufbauen
+
+Normaler Text bleibt in `.md`-Dateien. Benötigt ein Abschnitt ein dokumentiertes Sproutsite-Layout oder eine Komponente, verwendest du `.mdx`. Frontmatter und Platz in der Nummerierung bleiben gleich.
+
+### Zwei Spalten
+
+```mdx
+---
+tone: default
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Feature } from 'sproutsite/components';
+
+## Was Besucher hier finden
+
+<Columns gap="lg">
+    <Column span={8}>
+        Beschreibe deine Arbeit und den nächsten hilfreichen Schritt für
+        Besucher.
+    </Column>
+    <Column span={4}>
+        <Feature icon="Mail" title="Kontakt aufnehmen" color="primary">
+            Erkläre, wie Interessierte dich erreichen.
+        </Feature>
+    </Column>
+</Columns>
+```
+
+`Columns` verwendet zwölf Rastereinheiten. Häufige Aufteilungen sind `8 + 4`, `6 + 6` und `4 + 4 + 4`; auf kleineren Bildschirmen stehen die Bereiche untereinander. `fullWidth` gibt der Section Platz innerhalb der gemeinsamen Inhaltsränder.
+
+### Abstände und Trenner
+
+Mit `gap="xs"`, `sm`, `md`, `lg` oder `xl` stellst du normale Spaltenabstände ein. `divider` und `dividerGap` ergänzen Trennlinien; `separator="MoveRight"` verwendet stattdessen einen Lucide-Pfeil. `dividerGapMobile` steuert den Abstand bei gestapelten Bereichen. Die Angaben erzeugen keine doppelt aufeinandergelegten Abstände.
+
+### Nach dem Zweck auswählen
+
+Card eignet sich für verlinkte Inhaltsvorschauen, Feature für ein Icon mit kurzer Erklärung, ContentImage für ein Bild und Accordion für aufklappbare Antworten. Übernimm ein Beispiel aus dem [Showcase](/showcase/) und ersetze die Inhalte, statt Styling-Klassen in MDX zu ergänzen.
+
+Unterstützt werden dokumentierte Sproutsite-Komponenten und relative lokale Bilder. Beliebige eigene Astro-Komponenten sind noch keine unterstützte MDX-Erweiterung; [Deine eigenen Bausteine](/dokumentation/einstieg/deine-website/eigene-bausteine/) hält diesen offenen Punkt fest. Prüfe geänderte Layouts immer auf einem schmalen und einem breiten Bildschirm.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

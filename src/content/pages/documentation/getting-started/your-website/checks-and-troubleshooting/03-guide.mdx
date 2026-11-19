@@ -1,0 +1,38 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Check your changes before publishing
+
+The prerequisite and generator details above are here when you need more help than the quick start. For everyday changes, use the scripts in your own generated website:
+
+```sh
+npm run check
+npm run build
+npm run preview
+```
+
+`check` reports Astro and TypeScript diagnostics. `build` validates content and generates the deployable website. `preview` serves that result locally. A successful build is not a substitute for checking the content yourself.
+
+### Common setup problems
+
+- **A Node or npm command is missing:** install a supported Node LTS version, then reopen your terminal.
+- **A script or package cannot be found:** check that the terminal is inside the generated website folder, beside its `package.json`; run `npm install` if installation was skipped.
+- **The usual port is busy:** open the actual address printed by Astro. It may choose a different port.
+- **Your change is not visible:** save the file and confirm its language suffix. A German starter uses files such as `hero.de.md`.
+- **Content validation fails:** read the named file and field. Check required metadata, frontmatter separators, section numbers and page associations.
+- **A link fails after building:** confirm the destination page and fragment exist. Keep source links root-relative and do not add the deployment base yourself.
+
+### Check the result as a visitor
+
+Preview a narrow mobile screen and a desktop screen. Follow navigation, action links and language links. Use Tab to check focus and operate interactive components without a mouse. Look for cropped images, unreadable text and horizontal overflow.
+
+The Sproutsite framework repository has additional unit, package, accessibility and Storybook checks. Those scripts are for [contributors](/documentation/getting-started/contributing/); they are not all included in your generated website.
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

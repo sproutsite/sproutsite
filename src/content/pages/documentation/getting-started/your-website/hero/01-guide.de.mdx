@@ -1,0 +1,56 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Einleitung und Hintergrund ändern
+
+<Alert variant="info" style="soft">
+    Teilweise möglich. Die folgenden Schritte unterscheiden vorhandene
+    Funktionen von noch offenen Erweiterungen.
+</Alert>
+
+Bearbeite für die Startseite `src/content/pages/hero.de.md`, für andere Seiten die jeweilige `hero.de.md` im Seitenordner. Die englische Variante heißt `hero.md`. Der Hero enthält die sichtbare H1; `page.yaml` beziehungsweise `page.de.yaml` liefern weiterhin Browsertitel und Beschreibung.
+
+```yaml
+---
+title: Willkommen in meiner Werkstatt
+eyebrow: Handwerk aus Dresden
+type: big
+classes: null
+background-image: ./_assets/werkstatt.jpg
+---
+Möbel, Reparaturen und die Geschichten dahinter.
+```
+
+Lege neben dem Hero den Ordner `_assets` mit deinem Bild `werkstatt.jpg` an. `background-image` unterstützt lokale Rasterbilder; Astro bereitet sie für die Website auf. Der Hintergrund ist dekorativ. Wichtige Informationen gehören deshalb in den Text oder in reguläre Inhaltsbilder. Das Theme legt eine Überblendung für die Lesbarkeit darüber.
+
+`classes: null` entfernt die global eingestellte Hero-Dekoration und damit auch die voreingestellte Wellenklasse. Ohne diese Angabe gelten weiterhin die globalen `hero-classes`. Eine lokale Liste unter `classes` ersetzt die globale Liste vollständig. Prüfe das Ergebnis auf schmalen und breiten Bildschirmen.
+
+### Größe und Aktionen
+
+Mit `type: small` erhältst du eine kompakte Einleitung; ohne Angabe gilt ebenfalls `small`. `big` vergrößert den Abstand wie auf der Startseite, mit einem geringeren Zuschlag auf Mobilgeräten. Über `claim`, `actions` und `tagline` kannst du eine ergänzende Aussage, ein oder zwei Links und einen kurzen Schlusssatz hinzufügen. Beispiel:
+
+```yaml
+actions:
+    - label: Arbeiten ansehen
+      href: /galerie/
+      variant: primary
+    - label: Kontakt aufnehmen
+      href: /kontakt/
+      variant: secondary
+```
+
+Lege die verlinkten Seiten zuerst an. Alle Hero-Felder findest du in der [Inhaltsreferenz](/dokumentation/inhalte/).
+
+### Noch offen
+
+`fullscreen` ist als Typ und CSS-Klasse vorbereitet, aber noch kein fertiges Layout über die gesamte Bildschirmhöhe. Auch das Austauschen der mitgelieferten SVG-Wellen über eine eigene Website-Einstellung ist nicht umgesetzt. Ein lokales Rasterbild funktioniert bereits; eine unterstützte SVG-Hintergrundoption und das bildschirmfüllende Layout bleiben zukünftige Erweiterungen.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

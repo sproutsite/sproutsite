@@ -2,6 +2,7 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { extname, join, relative, resolve } from 'node:path';
 import GithubSlugger from 'github-slugger';
 import type { Root } from 'mdast';
+import type { Expression, Program, SpreadElement } from 'estree';
 import { z } from 'zod';
 import { parse as parseYaml } from 'yaml';
 import { unified } from 'unified';
@@ -12,6 +13,12 @@ import { visit } from 'unist-util-visit';
 import { loadSiteConfig } from './site-config.js';
 import { heroTypes, sectionSpacings, tones } from './types.js';
 import { isHexColor } from './colors.js';
+import {
+    badgeVariants,
+    badgeStyles,
+    badgeSizes,
+    normalizeCardBadges,
+} from './badges.js';
 import { routeFromPageId } from './urls.js';
 
 const pageSchema = z.object({
@@ -132,7 +139,65 @@ interface MdxNode {
 interface MdxAttribute {
     type: string;
     name?: string;
-    value?: string | { type: string; value?: string } | null;
+    value?:
+        | string
+        | { type: string; value?: string; data?: { estree?: Program } }
+        | null;
+}
+
+/** Read only literal badge descriptors from MDX's existing ESTree; never evaluate code. */
+function cardBadgesFromAttribute(attribute: MdxAttribute): unknown {
+    const value = attribute.value;
+    const body =
+        value && typeof value === 'object'
+            ? value.data?.estree?.body
+            : undefined;
+    const statement = body?.length === 1 ? body[0] : undefined;
+    const expression =
+        statement?.type === 'ExpressionStatement'
+            ? statement.expression
+            : undefined;
+    const descriptor = (
+        node: Expression | SpreadElement | null,
+    ): Record<string, string> => {
+        if (node?.type !== 'ObjectExpression')
+            throw new Error('Expected a literal badge object.');
+        const entries: [string, string][] = [];
+        for (const property of node.properties) {
+            if (
+                property.type !== 'Property' ||
+                property.computed ||
+                property.method ||
+                property.shorthand ||
+                property.kind !== 'init'
+            )
+                throw new Error(
+                    'Badge properties must be literal text fields.',
+                );
+            const key =
+                property.key.type === 'Identifier'
+                    ? property.key.name
+                    : property.key.type === 'Literal' &&
+                        typeof property.key.value === 'string'
+                      ? property.key.value
+                      : undefined;
+            if (
+                !key ||
+                property.value.type !== 'Literal' ||
+                typeof property.value.value !== 'string' ||
+                entries.some(([name]) => name === key)
+            )
+                throw new Error(
+                    'Badge fields must have unique names and literal string values.',
+                );
+            entries.push([key, property.value.value]);
+        }
+        return Object.fromEntries(entries);
+    };
+    if (expression?.type === 'ObjectExpression') return descriptor(expression);
+    if (expression?.type === 'ArrayExpression')
+        return expression.elements.map(descriptor);
+    throw new Error('Expected a literal badge object or array.');
 }
 
 function filesIn(directory: string): string[] {
@@ -940,25 +1005,15 @@ function validateMdxLayout(
                     new Set(attributes.map((attribute) => attribute.name))
                         .size !== attributes.length ||
                     (variant &&
-                        ![
-                            'default',
-                            'primary',
-                            'secondary',
-                            'accent',
-                            'neutral',
-                            'info',
-                            'success',
-                            'warning',
-                            'error',
-                        ].includes(String(variant.value))) ||
+                        !badgeVariants.some(
+                            (option) => option === variant.value,
+                        )) ||
                     (style &&
-                        !['solid', 'outline', 'soft', 'dash'].includes(
-                            String(style.value),
+                        !badgeStyles.some(
+                            (option) => option === style.value,
                         )) ||
                     (size &&
-                        !['xs', 'sm', 'md', 'lg', 'xl'].includes(
-                            String(size.value),
-                        ))
+                        !badgeSizes.some((option) => option === size.value))
                 )
                     fail(
                         contentRoot,
@@ -1113,6 +1168,20 @@ function validateMdxLayout(
             } else if (mdxNode.name === 'Card') {
                 cardCount += 1;
                 const attributes = mdxNode.attributes ?? [];
+                const badges = attributes.find(
+                    (attribute) => attribute.name === 'badges',
+                );
+                if (badges) {
+                    try {
+                        normalizeCardBadges(cardBadgesFromAttribute(badges));
+                    } catch (error) {
+                        fail(
+                            contentRoot,
+                            path,
+                            `Card badges: ${error instanceof Error ? error.message : 'Invalid badge descriptors.'}`,
+                        );
+                    }
+                }
                 const image = attributes.find(
                     (attribute) =>
                         attribute.type === 'mdxJsxAttribute' &&
@@ -1140,13 +1209,16 @@ function validateMdxLayout(
                 );
                 actions.forEach((action) => validatedCardActions.add(action));
                 if (
-                    attributes.length > 3 ||
+                    attributes.length > 4 ||
+                    new Set(attributes.map((attribute) => attribute.name))
+                        .size !== attributes.length ||
                     attributes.some(
                         (attribute) =>
                             attribute.type !== 'mdxJsxAttribute' ||
                             (attribute.name !== 'image' &&
                                 attribute.name !== 'imageAlt' &&
-                                attribute.name !== 'shadow'),
+                                attribute.name !== 'shadow' &&
+                                attribute.name !== 'badges'),
                     ) ||
                     Boolean(image) !== Boolean(imageAlt) ||
                     (image && !localImageImports.has(imageImport ?? '')) ||
@@ -1163,7 +1235,7 @@ function validateMdxLayout(
                     fail(
                         contentRoot,
                         path,
-                        'Card accepts image and imageAlt together, or neither; optional shadow is none, sm, md, lg, or xl; it may contain one direct CardActions component',
+                        'Card accepts image and imageAlt together, or neither; optional shadow is none, sm, md, lg, or xl; badges is a literal object or list with text and optional Badge variant, style and hover text; it may contain one direct CardActions component',
                     );
             } else if (mdxNode.name === 'CardActions') {
                 if (

@@ -1668,6 +1668,45 @@ try {
                 }
                 await page.evaluate(() => window.scrollTo(0, 0));
             }
+            const cardHints = page.locator('main .ss-card__badge-hint');
+            if ((await cardHints.count()) > 0) {
+                const firstHint = cardHints.first();
+                await page.mouse.move(0, 0);
+                await page.evaluate(() =>
+                    window.scrollTo({
+                        top: document.body.scrollHeight,
+                        behavior: 'instant',
+                    }),
+                );
+                await firstHint.focus();
+                const hintId = await firstHint.getAttribute('aria-describedby');
+                assert.ok(
+                    hintId,
+                    'A card hint needs an accessible description.',
+                );
+                const tooltip = page.locator(`[id="${hintId}"]`);
+                // Focusing from a distant scroll position must not close the hint.
+                await tooltip.waitFor({ state: 'visible' });
+                await page.keyboard.press('Escape');
+                await tooltip.waitFor({ state: 'hidden' });
+                assert.ok(
+                    await firstHint.evaluate(
+                        (element) => element === document.activeElement,
+                    ),
+                );
+                await page.keyboard.press('Shift+Tab');
+                await page.keyboard.press('Tab');
+                assert.ok(
+                    await firstHint.evaluate(
+                        (element) =>
+                            element === document.activeElement &&
+                            element.matches(':focus-visible'),
+                    ),
+                );
+                await tooltip.waitFor({ state: 'visible' });
+                await page.keyboard.press('Escape');
+                await tooltip.waitFor({ state: 'hidden' });
+            }
             const canScroll = await page.evaluate(
                 () =>
                     document.documentElement.scrollHeight -

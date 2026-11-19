@@ -1,0 +1,39 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Adjust the colours of individual components
+
+<Alert variant="info" style="soft">
+    Partly available. The steps below distinguish existing features from
+    extensions that remain open.
+</Alert>
+
+Several components already accept semantic colours such as `primary` and `secondary`. Feature also accepts a hex colour. Without an explicit background, it derives a subtle icon background from that colour.
+
+```mdx
+import { Feature } from 'sproutsite/components';
+
+<Feature icon="Leaf" title="Made with care" color="#527b37" headingLevel={3}>
+    Materials selected for everyday use.
+</Feature>
+```
+
+Use this in an `.mdx` section below an H2. To choose both colours yourself, add `backgroundColor="#eef3e8"`. In `layout="card"`, this background applies to the entire feature card. A custom hex `color` takes precedence over semantic variant styling.
+
+Choose colours that keep text and icons readable on their actual background. The [feature showcase](/showcase/features/) demonstrates horizontal, vertical and card layouts.
+
+### A site-wide palette remains open
+
+The default theme has central colour tokens, but the installed library does not yet expose a supported, update-safe palette override through `site.yaml`. There is no `colors` configuration block to paste into your website.
+
+The goal is to let your website team change brand, text, surface and interaction colours together while preserving contrast. Until that extension is available, limit editorial colour changes to supported component parameters. Do not edit `node_modules` or generated `dist` files: those changes are replaced by installs and builds.
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

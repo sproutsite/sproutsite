@@ -1,0 +1,63 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Publish your own contact details
+
+A contact page can contain ordinary Markdown with an email link. Create its `page.yaml` and a numbered section as described under [pages and sections](/documentation/getting-started/your-website/pages-and-sections/). For example:
+
+```md
+## Get in touch
+
+Tell me briefly what you have in mind.
+
+[Email the workshop](mailto:hello@example.com)
+```
+
+Replace the example address. This opens the visitor's email application; it is not a contact form and does not store submissions in Sproutsite.
+
+### Reuse the operator component
+
+If you want the supplied postal-address and contact cards, use `LegalIdentity` in an `.mdx` section:
+
+```mdx
+import { LegalIdentity } from 'sproutsite/components';
+
+## Contact information
+
+<LegalIdentity part="contact" />
+```
+
+Create your own local `.env` in the website root; the starter does not generate one automatically. Put these keys in it with your actual details:
+
+```dotenv
+LEGAL_NAME="Your real name"
+LEGAL_STREET="Your street and number"
+LEGAL_POSTAL_CODE="Your postal code"
+LEGAL_CITY="Your city"
+LEGAL_COUNTRY="GB"
+LEGAL_EMAIL="hello@example.com"
+LEGAL_LINKEDIN="https://www.linkedin.com/in/your-profile/"
+```
+
+These are examples, not production-ready values. Use the two-letter country code for your address. The current component requires all seven fields, including LinkedIn, even when a selected display part does not show every value. If you do not have a LinkedIn profile, use your own Markdown contact information rather than inventing one.
+
+### Keep configuration and publication separate
+
+Exclude `.env` from Git and create a separate `.env.dist` with example data if your team needs a template. Restart the local server after changing environment values. Development can show placeholders, but a production build using this component requires complete valid details and rejects known example values.
+
+The values rendered into `dist` become public website content. An ignored `.env` keeps them out of source control, not out of the published contact page.
+
+### Legal and privacy pages
+
+Prepare the information required for your own operator, audience and actual hosting. `LegalIdentity` also supports `part="name"`, `part="email"` and `part="controller"`; these output selected operator information. They do not generate a complete legal notice or privacy policy.
+
+If you use `PrivacyInfrastructure`, configure it from your real server and email arrangements. Its output describes those settings; it does not configure logging, deletion or hosting. Do not copy Sproutsite's demo host or retention claims unless they are true for your website.
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

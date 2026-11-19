@@ -1,0 +1,35 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Schriftfamilien und Gewichte wählen
+
+Stelle die Schriften für Überschriften und Eyebrows in `src/content/site.yaml` ein. Pflege bei einem übersetzten Projekt die entsprechenden Werte auch in `site.de.yaml`. Ändere vorhandene Felder, statt einen zweiten `typography`-Block hinzuzufügen.
+
+```yaml
+typography:
+    headings:
+        family: serif
+        weight: 500
+    eyebrow:
+        family: sans-serif
+        weight: 600
+```
+
+`serif` wählt die lokal mitgelieferte EB Garamond, `sans-serif` die Nunito. Beide benötigen keinen externen Schriftdienst. EB Garamond unterstützt Gewichte von 400 bis 800, Nunito von 200 bis 1000. Wähle ein Gewicht, das die ausgewählte Familie unterstützt.
+
+`headings` gilt für Seitenüberschriften und Kartentitel. Auch die Wortmarken in Header und Footer folgen dieser Familie und ihrem Gewicht. `eyebrow` steuert die kurzen einleitenden Zeilen sowie die Schriftfamilie der Beitragsdaten in der Blogübersicht.
+
+Fließtext und Bedienelemente behalten ihre bisherigen Schriften. Fette Hervorhebungen im Fließtext bleiben bei 600. Die Zeilenhöhen der Überschriften setzt das Default-Theme zentral; dafür gibt es keine eigenen YAML-Optionen.
+
+Speichere die Einstellung und prüfe eine zweizeilige Überschrift, einen Kartentitel und die mobile Navigation. Erkennt dein installiertes Paket diese Konfiguration nicht, prüfe seine Version und folge [Updates und Sicherung](/dokumentation/einstieg/deine-website/updates-und-sicherung/).
+
+Weitere Schriftfamilien lassen sich derzeit nicht über die Konfiguration hinzufügen. Für diesen größeren Anpassungswunsch siehe [kleine Designänderungen](/dokumentation/einstieg/deine-website/theme-anpassen/).
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

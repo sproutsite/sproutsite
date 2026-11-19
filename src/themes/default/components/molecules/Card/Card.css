@@ -4,10 +4,87 @@
         border: 1px solid var(--color-base-300);
 
         .ss-card__figure {
-            @apply overflow-hidden;
+            @apply relative overflow-hidden;
+            /* Override DaisyUI's figure display to keep a growing overlay row. */
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr);
+            min-height: 14rem;
+
+            &.ss-card__figure--placeholder {
+                @apply w-full;
+                background: color-mix(
+                    in srgb,
+                    var(--color-primary) 6%,
+                    var(--color-base-100)
+                );
+            }
 
             .ss-card__image {
-                @apply h-56 w-full object-cover;
+                @apply absolute inset-0 h-full w-full object-cover;
+            }
+
+            .ss-card__badges {
+                position: relative;
+                z-index: 1;
+                align-self: end;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 0.5rem;
+                margin: 1rem;
+                padding: 0;
+                list-style: none;
+
+                > li {
+                    display: flex;
+                    align-items: center;
+                    min-width: 0;
+                    max-width: 100%;
+                }
+
+                .ss-badge {
+                    margin: 0;
+                    max-width: 100%;
+                    /* Badge size utilities set a fixed height; allow text wrapping here. */
+                    height: auto !important;
+                    min-height: 1.5rem;
+                    padding-block: 0.125rem;
+                    line-height: 1.25;
+                    white-space: normal;
+                    overflow-wrap: anywhere;
+                }
+
+                .ss-card__badge-hint {
+                    display: inline-flex;
+                    min-width: 0;
+                    max-width: 100%;
+                    border-radius: var(--radius-selector);
+                    cursor: help;
+                    scroll-margin-block: 8rem 2rem;
+                }
+
+                .ss-card__badge-tooltip {
+                    @apply shadow-md;
+                    position: fixed;
+                    inset: auto;
+                    margin: 0;
+                    width: max-content;
+                    max-width: min(20rem, calc(100vw - 2rem));
+                    max-height: calc(100dvh - 2rem);
+                    overflow: auto;
+                    padding: 0.625rem 0.875rem;
+                    border: 1px solid var(--color-neutral);
+                    border-radius: 0.5rem;
+                    background: var(--color-neutral);
+                    color: var(--color-neutral-content);
+                    font-size: 0.875rem;
+                    font-weight: 400;
+                    line-height: 1.5;
+                    text-align: start;
+                    white-space: normal;
+                    overflow-wrap: anywhere;
+                }
             }
         }
 

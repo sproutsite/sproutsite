@@ -1,0 +1,38 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Deinen Website-Namen verwenden
+
+<Alert variant="info" style="soft">
+    Teilweise möglich. Die folgenden Schritte unterscheiden vorhandene
+    Funktionen von noch offenen Erweiterungen.
+</Alert>
+
+Ändere `name` in `src/content/site.yaml` und gegebenenfalls den Sprachkonfigurationen. Bei einem anderen Namen als `Sproutsite` zeigt BrandLogo deine Wortmarke ohne das Sproutsite-Sprösslingssymbol. Die Schrift folgt der Einstellung für Überschriften.
+
+```yaml
+name: Werkstatt Weide
+footer:
+    text: Möbel und Reparaturen aus Dresden.
+    showVersion: false
+```
+
+Übernimm die Werte in deine bestehende Konfiguration und erhalte die übrigen Footer-Felder. Der sichtbare Name ist unabhängig von Titel und Beschreibung einzelner Seiten. Prüfe Header und Footer auf Desktop und Mobilgeräten.
+
+### Eigene Bildlogos und Icons sind noch offen
+
+Eine Änderung von `name` ersetzt weder Favicon noch App-Icons aus dem Paket. Für eigene Header- und Footer-Logos, einen Favicon-Satz und das Vorschaubild beim Teilen gibt es noch keine öffentliche Konfiguration.
+
+Bereite ein sauberes Vektorlogo, ein gut erkennbares quadratisches Icon und ein Vorschaubild im Querformat vor. Eine zukünftige unterstützte Einbindung soll diese Dateien mit den betreffenden Metadaten und Komponenten verbinden. Sinnvolle Alternativtexte und ausreichender Kontrast gehören dazu.
+
+Überschreibe dafür keine Branding-Dateien in `node_modules` und verwende `dist` nicht als dauerhafte Quelle. Diese Dateien werden ersetzt. Halte den Bedarf mit deinem Website-Team fest, bevor du unter einer anderen Marke veröffentlichst.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

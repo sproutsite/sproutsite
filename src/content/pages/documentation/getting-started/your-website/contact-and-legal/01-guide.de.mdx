@@ -1,0 +1,63 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Deine eigenen Kontaktdaten veröffentlichen
+
+Eine Kontaktseite kann aus normalem Markdown mit einem E-Mail-Link bestehen. Lege dafür `page.yaml` und einen nummerierten Abschnitt an, wie unter [Seiten und Abschnitte](/dokumentation/einstieg/deine-website/seiten-und-abschnitte/) beschrieben. Beispiel:
+
+```md
+## Kontakt aufnehmen
+
+Schreibe mir kurz, was du vorhast.
+
+[Der Werkstatt schreiben](mailto:hallo@example.com)
+```
+
+Ersetze die Beispieladresse. Der Link öffnet das E-Mail-Programm des Besuchers; er ist kein Kontaktformular und speichert keine Nachrichten in Sproutsite.
+
+### Die Betreiberkomponente nutzen
+
+Für die vorhandenen Karten mit Postanschrift und Kontakt verwendest du `LegalIdentity` in einer `.mdx`-Section:
+
+```mdx
+import { LegalIdentity } from 'sproutsite/components';
+
+## Kontaktinformationen
+
+<LegalIdentity part="contact" />
+```
+
+Lege im Hauptverzeichnis deiner Website eine eigene lokale `.env` an; der Starter erzeugt diese Datei nicht automatisch. Trage dort die folgenden Schlüssel mit deinen tatsächlichen Angaben ein:
+
+```dotenv
+LEGAL_NAME="Dein vollständiger Name"
+LEGAL_STREET="Deine Straße mit Hausnummer"
+LEGAL_POSTAL_CODE="Deine Postleitzahl"
+LEGAL_CITY="Dein Ort"
+LEGAL_COUNTRY="DE"
+LEGAL_EMAIL="hallo@example.com"
+LEGAL_LINKEDIN="https://www.linkedin.com/in/dein-profil/"
+```
+
+Das sind Beispiele, keine fertigen Produktionsangaben. Verwende den zweistelligen Ländercode deiner Anschrift. Die aktuelle Komponente benötigt alle sieben Felder einschließlich LinkedIn, auch wenn ein gewählter Ausgabeteil nicht alle Werte zeigt. Wenn du kein LinkedIn-Profil hast, verwende eigene Markdown-Kontaktdaten, statt eines zu erfinden.
+
+### Konfiguration und Veröffentlichung unterscheiden
+
+Schließe `.env` über Git aus. Für dein Team kannst du eine getrennte `.env.dist` mit Beispieldaten anlegen. Starte nach Änderungen an Umgebungswerten den lokalen Server neu. Die Entwicklung kann Platzhalter anzeigen; ein Produktionsbuild mit dieser Komponente benötigt vollständige gültige Angaben und lehnt bekannte Musterwerte ab.
+
+Die in `dist` ausgegebenen Werte werden öffentlich auf deiner Website sichtbar. Eine ausgeschlossene `.env` hält sie aus der Versionsverwaltung heraus, nicht aus der veröffentlichten Kontaktseite.
+
+### Impressum und Datenschutz
+
+Erstelle die Angaben passend zu deinem eigenen Betreiber, Publikum und tatsächlichen Hosting. `LegalIdentity` unterstützt auch `part="name"`, `part="email"` und `part="controller"` für einzelne Betreiberangaben. Daraus entsteht kein vollständiges Impressum und keine vollständige Datenschutzerklärung.
+
+Wenn du `PrivacyInfrastructure` verwendest, müssen dessen Einstellungen deinen tatsächlichen Server- und E-Mail-Betrieb beschreiben. Die Ausgabe richtet weder Protokollierung noch Löschung oder Hosting ein. Übernimm die Hoster- oder Aufbewahrungsangaben der Sproutsite-Demo nur, wenn sie für deine Website stimmen.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

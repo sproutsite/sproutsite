@@ -1,0 +1,111 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import image0 from './_assets/deployment.png';
+import image1 from './_assets/seo.png';
+import image2 from './_assets/contact-and-legal.png';
+import image3 from './_assets/checks-and-troubleshooting.png';
+import image4 from './_assets/updates-and-backups.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>What's next?</Eyebrow>
+
+## Veröffentlichen und dauerhaft betreiben
+
+Wenn die Inhalte stehen, prüfst du das Ergebnis, veröffentlichst den Build und sicherst einen funktionierenden Stand deiner Website.
+
+<Columns>
+    <Column span={4}>
+        <Card image={image0} imageAlt="Website mit Upload-Pfeil zu Server und Weltkugel">
+
+            ### Deine Website veröffentlichen
+
+            Dateien bauen und beim Webhoster bereitstellen.
+
+            <CardActions>
+                [Website veröffentlichen](/dokumentation/einstieg/deine-website/veroeffentlichen/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image1}
+            imageAlt="Seitenvorschau mit einer Lupe"
+            badges={{
+                text: "Teilweise möglich",
+                variant: "info",
+                style: "soft",
+                hover: "Seitentitel, Beschreibungen, kanonische URLs und Sitemap werden unterstützt. Eine Einstellung für ein eigenes Vorschaubild beim Teilen fehlt noch.",
+            }}
+        >
+
+            ### Auffindbarkeit und Seitenvorschau
+
+
+
+            Titel, Beschreibungen und Produktions-URLs pflegen.
+
+            <CardActions>
+                [Metadaten pflegen](/dokumentation/einstieg/deine-website/auffindbarkeit/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={image2} imageAlt="Kontaktkarte mit Briefumschlag und Standortmarkierung">
+
+            ### Kontakt und Betreiberangaben
+
+            Kontaktdaten aus deiner lokalen Konfiguration ausgeben.
+
+            <CardActions>
+                [Kontaktdaten einbinden](/dokumentation/einstieg/deine-website/kontakt-und-betreiberangaben/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={image3} imageAlt="Website-Vorschau neben Prüfliste und Diagnosesymbol">
+
+            ### Prüfen und Fehler beheben
+
+            Änderungen prüfen und Startprobleme lösen.
+
+            <CardActions>
+                [Fehler beheben](/dokumentation/einstieg/deine-website/pruefen-und-fehler-beheben/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image4}
+            imageAlt="Website-Versionen mit Archiv und Aktualisierungspfeil"
+            badges={{
+                text: "Teilweise möglich",
+                variant: "info",
+                style: "soft",
+                hover: "Pakete kannst du manuell aktualisieren und deine Dateien selbst sichern. Sproutsite bietet noch keinen automatischen Updater oder Sicherungsdienst.",
+            }}
+        >
+
+            ### Updates und Sicherung
+
+
+
+            Arbeitsstand sichern und kontrolliert aktualisieren.
+
+            <CardActions>
+                [Updates planen](/dokumentation/einstieg/deine-website/updates-und-sicherung/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

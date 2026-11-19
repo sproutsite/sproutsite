@@ -1,0 +1,46 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import cardImage from '../_assets/cards.png';
+import { Card } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Labels kombinieren</Eyebrow>
+
+## Mehrere Badges in einer Zeile
+
+Übergebe eine Liste, um mehrere Labels nebeneinander zu zeigen. Die Gruppe ist rechtsbündig. Reicht die Breite nicht aus, bricht sie in weitere Zeilen um; auch längere Texte dürfen innerhalb eines Badges umbrechen. Bei vielen Zeilen wächst die Medienfläche mit, damit alle Labels sichtbar bleiben.
+
+<Tabs label="Mehrere Badges: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+<Card image={cardImage} imageAlt="Dreidimensionale Illustration modularer Inhaltskarten" badges={[{text: 'Vorschau', variant: 'info', style: 'solid'}, {text: 'Offen', variant: 'warning', style: 'soft'}]}>
+
+### Mehrere Hinweise auf einen Blick
+
+Die Reihenfolge folgt der Liste. Zwischen den Badges liegen 0,5 rem Abstand.
+
+</Card>
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import cardImage from '../_assets/cards.png';
+import { Card } from 'sproutsite/components';
+
+<Card image={cardImage} imageAlt="Dreidimensionale Illustration modularer Inhaltskarten" badges={[{text: 'Vorschau', variant: 'info', style: 'solid'}, {text: 'Offen', variant: 'warning', style: 'soft'}]}>
+
+### Mehrere Hinweise auf einen Blick
+
+Die Reihenfolge folgt der Liste. Zwischen den Badges liegen 0,5 rem Abstand.
+
+</Card>
+```
+
+    </Tab>
+
+</Tabs>

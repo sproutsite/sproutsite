@@ -1,0 +1,52 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Set your name, address and navigation
+
+Open `src/content/site.yaml` in your website project. Edit the existing file rather than replacing it with a partial example. For a German starter, also maintain `site.de.yaml`; for a multilingual website, keep the shared domain, base path and locale list consistent.
+
+### Name and production address
+
+```yaml
+name: My website
+url: https://example.com
+base: /
+```
+
+Replace the example domain with your own production address. Keep `base: /` when publishing at the domain root. Use a base such as `/website/` only when the host actually serves the site below that path. Your preview may still run on localhost; `url` identifies production, not the development server.
+
+### Navigation and a contact action
+
+First create an About page using the [page guide](/documentation/getting-started/your-website/pages-and-sections/). Its root-relative URL can then appear in `header.links`:
+
+```yaml
+header:
+    links:
+        - label: Home
+          href: /
+        - label: About
+          href: /about/
+        - type: separator
+        - type: cta
+          label: Contact
+          href: mailto:hello@example.com
+          icon: Mail
+          variant: primary
+```
+
+Replace the email address. `separator` draws the dividing line; `cta` renders a button. Ordinary entries remain links. Icon names use Lucide PascalCase. Do not add the deployment base or language prefix to internal content links; Sproutsite handles those.
+
+### Footer and external links
+
+Edit the existing `footer.text` and `footer.links`. Optional `footer.groups` adds titled columns; `footer.showVersion: false` hides the library version. Supported social platforms are GitHub, Instagram and Facebook. The [configuration reference](/documentation/content/) shows the full fields and language-switcher setup.
+
+Save and review the header and footer on mobile as well as desktop. Restart `npm run dev` after changing production URL, base or language setup, or if a configuration change is not reflected. Changing the website name does not replace the bundled favicon; see [your branding](/documentation/getting-started/your-website/branding/).
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

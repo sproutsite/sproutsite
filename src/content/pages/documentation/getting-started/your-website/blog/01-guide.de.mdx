@@ -1,0 +1,58 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Deinen ersten Beitrag veröffentlichen
+
+Der Blog ist optional. Lege ihn an, wenn du einen datierten Beitrag veröffentlichen möchtest; eine normale Website-Seite muss kein Blogbeitrag werden.
+
+### Dateien für einen Beitrag
+
+Lege in deinem Website-Projekt diese Struktur an:
+
+```text
+src/content/blog/
+    _assets/
+        erster-beitrag.png
+    2026-11-19.erster-beitrag/
+        page.yaml
+        page.de.yaml
+        hero.de.md
+        01-story.de.md
+```
+
+Ergänze das tatsächliche Titelbild und pflege die Metadaten beim deutschen Starter in beiden YAML-Dateien:
+
+```yaml
+title: Unser erstes Update
+description: Woran wir arbeiten und wie es weitergeht.
+pubDate: 2026-11-19
+image: ../_assets/erster-beitrag.png
+imageAlt: Unser Team plant das nächste Projekt
+```
+
+Alle fünf Metadatenfelder sind erforderlich. `hero.de.md` enthält einen nicht leeren `title` zwischen den Frontmatter-Trennern und darunter eine kurze Einleitung. In `01-story.de.md` beginnt der Beitrag mit H2; die übrigen Abschnittsregeln gelten wie auf normalen Seiten.
+
+### Übersicht und Navigation
+
+Der Datumsteil ordnet die Quellverzeichnisse; nur `erster-beitrag` wird zum URL-Segment unter `/blog/`. Sproutsite erzeugt die Übersicht automatisch und sortiert absteigend nach Veröffentlichungsdatum. Lege dafür keine zusätzliche normale Seite `pages/blog/page.yaml` an.
+
+Die Übersichtstexte änderst du mit allen vier Feldern gemeinsam in der vorhandenen Website-Konfiguration:
+
+```yaml
+blog:
+    title: Neuigkeiten
+    eyebrow: Aus unserem Team
+    description: Aktuelles aus unserer Arbeit.
+    heading: Neue Beiträge
+```
+
+Ergänze `/blog/` im Menü, wenn der Bereich dort erscheinen soll. Prüfe Übersichtsbild und Beitrag auf Mobilgeräten und führe die üblichen Prüfungen und den Build aus. Für Übersetzungen bleibt es bei einem Artikelverzeichnis mit sprachbezogenen Metadaten, Hero und Abschnitten; siehe [Weitere Sprachen](/dokumentation/einstieg/deine-website/sprachen/).
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

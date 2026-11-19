@@ -1,0 +1,85 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Card } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+
+<Eyebrow>Options and defaults</Eyebrow>
+
+## Badge descriptors
+
+`badges` is optional and accepts one object or an array of objects. Each object has these fields:
+
+| Field     | Meaning                                          | Default   |
+| --------- | ------------------------------------------------ | --------- |
+| `text`    | Visible, non-empty text                          | Required  |
+| `variant` | Semantic Badge colour                            | `default` |
+| `style`   | Badge appearance                                 | `solid`   |
+| `hover`   | Additional text shown on hover or keyboard focus | None      |
+
+The supported `variant` values are `default`, `primary`, `secondary`, `accent`, `neutral`, `info`, `success`, `warning`, `error`. The supported `style` values are `solid`, `outline`, `soft`, `dash`.
+
+Labels use the normal Badge size, `md`. Additional fields, such as `size`, are not supported in Card badge descriptors. In content MDX, write a literal object or array directly in the prop; variables, function calls and spread expressions are not allowed.
+
+Omitting `badges` or passing `badges={[]}` renders no labels. An image card retains its image; without an image, no extra surface is created. Choose label colours that remain readable on the actual image.
+
+<Tabs label="Defaults and an empty array: Preview and code" variant="border">
+    <Tab title="Preview">
+<Columns>
+<Column span={6}>
+<Card badges={{text: 'Status'}}>
+
+### Provide only the text
+
+Without additional options, variant="default" and style="solid" apply, just as with Badge.
+
+</Card>
+</Column>
+<Column span={6}>
+<Card badges={[]}>
+
+### An empty array
+
+With neither an image nor labels, the Card remains a plain text card.
+
+</Card>
+</Column>
+</Columns>
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Card } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+
+<Columns>
+<Column span={6}>
+<Card badges={{text: 'Status'}}>
+
+### Provide only the text
+
+Without additional options, variant="default" and style="solid" apply, just as with Badge.
+
+</Card>
+</Column>
+<Column span={6}>
+<Card badges={[]}>
+
+### An empty array
+
+With neither an image nor labels, the Card remains a plain text card.
+
+</Card>
+</Column>
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>

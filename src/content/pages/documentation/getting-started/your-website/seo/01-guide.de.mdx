@@ -1,0 +1,42 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Jede Seite mit passenden Metadaten versehen
+
+<Alert variant="info" style="soft">
+    Teilweise möglich. Die folgenden Schritte unterscheiden vorhandene
+    Funktionen von noch offenen Erweiterungen.
+</Alert>
+
+Die `page.yaml` einer Seite liefert Browsertitel und Meta-Beschreibung. Verwende einen konkreten Titel und beschreibe kurz, was Besucher dort finden. Der Hero-Titel ist die sichtbare H1 und darf anders formuliert sein.
+
+```yaml
+title: Möbelreparaturen in Dresden | Werkstatt Weide
+description: Reparatur und Aufarbeitung von Holzmöbeln für den Alltag. Aktuelle Arbeiten ansehen und dein Möbelstück anfragen.
+```
+
+Für die deutsche Übersetzung bearbeitest du `page.de.yaml`. Gib jeder Seite einen eigenen Titel. Verwende im Inhalt aussagekräftige H2- und H3-Überschriften, verständliche Linktexte und passende Bildalternativtexte.
+
+### URLs und Sitemap
+
+Setze vor dem Build die echte Produktionsadresse `url` und den passenden `base` in der Website-Konfiguration. Sproutsite leitet daraus kanonische Adressen ab und erzeugt `sitemap.xml` mit Seitenadressen, Änderungsdaten und Sprachalternativen bei vorhandenen Übersetzungen. Veröffentliche sie zusammen mit dem übrigen `dist`-Inhalt.
+
+Ein optionales `url` einer Seite ändert genau deren eigenes URL-Segment. Eine nachträgliche Änderung kann bestehende Links unterbrechen; richte dafür Weiterleitungen beim Hoster ein. Eine Sitemap beschreibt deine Seiten, garantiert aber keine Indexierung oder Platzierung.
+
+### Die tatsächliche Veröffentlichung prüfen
+
+Kontrolliere im Quelltext der gebauten Seite Titel, Beschreibung, kanonische Adresse und Sprachlinks. Entferne einen Vorschau-Zugriffsschutz erst, wenn die Website öffentlich werden soll. `robots.txt` ist kein Zugriffsschutz.
+
+### Vorschaubilder beim Teilen bleiben offen
+
+Für ein eigenes globales Vorschaubild beim Teilen gibt es noch keine allgemeine Consumer-Einstellung. Ein Bild in einer Blogkarte konfiguriert nicht automatisch jede Social-Vorschau. Dafür fehlen eine unterstützte Metadatenoption und Prüfungen für absolute Bildadressen und Abmessungen.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

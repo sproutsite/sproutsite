@@ -1,0 +1,44 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Vor Updates einen funktionierenden Stand sichern
+
+<Alert variant="info" style="soft">
+    Teilweise möglich. Die folgenden Schritte unterscheiden vorhandene
+    Funktionen von noch offenen Erweiterungen.
+</Alert>
+
+Sichere deine Website-Dateien und `package-lock.json` in der Versionsverwaltung oder einer getrennten Sicherung. Ein Repository hilft beim Prüfen von Änderungen; eine zusätzliche Kopie schützt vor dem Verlust dieses Repositorys. Sichere deine lokale `.env` getrennt und beschränke den Zugriff darauf.
+
+### Verfügbare Versionen prüfen
+
+Führe diese Befehle im Ordner deiner eigenen Website aus:
+
+```sh
+npm ls sproutsite
+npm outdated
+```
+
+Lies vor einem Update das [Sproutsite-Changelog](https://github.com/sproutsite/sproutsite/blob/main/CHANGELOG.md). Prüfe auch benötigte Peer-Versionen von Astro und MDX. `npm outdated` zeigt neuere Veröffentlichungen an; daraus folgt nicht, dass du alle Abhängigkeiten gleichzeitig aktualisieren solltest.
+
+### Aktualisieren und kontrollieren
+
+`npm update sproutsite` aktualisiert innerhalb des Versionsbereichs deiner `package.json`. Für einen Wechsel außerhalb dieses Bereichs wählst und installierst du bewusst eine geprüfte Version, etwa mit `npm install sproutsite@<version>` nach Ersetzen des Platzhalters.
+
+Führe danach `npm run check`, `npm run build` und `npm run preview` aus. Kontrolliere Navigation, Inhalte, Bilder, Fehlerseiten und Sprachvarianten. Sichere Paketmanifest und Lockfile gemeinsam, sobald das Ergebnis funktioniert.
+
+Bei Problemen stellst du Inhalte, Manifest und Lockfile aus dem gesicherten funktionierenden Stand wieder her und führst `npm ci` aus. Halte das fehlgeschlagene Update getrennt, damit du es untersuchen kannst.
+
+### Automatisierung bleibt offen
+
+Sproutsite bietet derzeit keinen automatischen Updater, Sicherungsdienst oder verwalteten Rollback. Diese Anleitung beschreibt einen manuellen Ablauf. Eine zukünftige Lösung braucht einen klaren Wiederherstellungsweg und Kompatibilitätsprüfungen statt stiller Änderungen an einer veröffentlichten Website.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

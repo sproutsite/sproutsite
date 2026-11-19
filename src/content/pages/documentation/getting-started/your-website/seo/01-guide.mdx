@@ -1,0 +1,42 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Give every page useful metadata
+
+<Alert variant="info" style="soft">
+    Partly available. The steps below distinguish existing features from
+    extensions that remain open.
+</Alert>
+
+Each page's `page.yaml` supplies the browser title and meta description. Write a specific title and a short description of what visitors can find there. The hero title is the visible H1 and may be worded differently.
+
+```yaml
+title: Furniture repairs in Bristol | Willow Workshop
+description: Repairs and restoration for everyday wooden furniture. See recent work and ask about your piece.
+```
+
+For a German translation, edit `page.de.yaml`. Keep page titles distinct. Use meaningful H2 and H3 headings, descriptive links and accurate image alternative text throughout the content.
+
+### URLs and sitemap
+
+Set the real production `url` and `base` in your site configuration before building. Sproutsite derives canonical addresses and produces `sitemap.xml` with page locations, modification dates and language alternatives where translations exist. The output must be deployed with the rest of `dist`.
+
+An optional page `url` changes its own single URL segment. Changing a published address can break existing links, so arrange redirects at your host. A sitemap helps describe your pages; it does not guarantee indexing or ranking.
+
+### Check what is actually public
+
+Inspect the built page source for the title, description, canonical URL and language links. Confirm that staging protection is removed only when the website should become public. `robots.txt` is not access control.
+
+### Sharing images are still open
+
+There is no general consumer setting for a custom site-wide social sharing image yet. Do not assume that a blog card image also configures every social preview. This needs a supported metadata option and checks for absolute image URLs and image dimensions.
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

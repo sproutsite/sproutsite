@@ -1,0 +1,122 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import image0 from './_assets/coding-agents.png';
+import image1 from './_assets/manual-setup.png';
+import image2 from './_assets/custom-components.png';
+import image3 from './_assets/forms.png';
+import image4 from './_assets/search.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>What's next?</Eyebrow>
+
+## Explore further possibilities
+
+These topics cover agent workflows, existing Astro projects and capabilities that still need a supported implementation.
+
+<Columns>
+    <Column span={4}>
+        <Card image={image0} imageAlt="Terminal prompt beside a content page">
+
+            ### Work with coding agents
+
+            Set up an agent and give useful instructions.
+
+            <CardActions>
+                [Work with an agent](/documentation/getting-started/your-website/coding-agents/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={image1} imageAlt="Website connected to package and configuration blocks">
+
+            ### Use an existing Astro project
+
+            Connect Sproutsite manually when you need to.
+
+            <CardActions>
+                [Set up manually](/documentation/getting-started/your-website/manual-setup/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image2}
+            imageAlt="A puzzle piece added to a website panel"
+            badges={{
+                text: "Open",
+                variant: "warning",
+                style: "soft",
+                hover: "Planned: add your own reusable components through a documented, validated extension point.",
+            }}
+        >
+
+            ### Your own components
+
+
+
+            Describe reusable blocks your website still needs.
+
+            <CardActions>
+                [Plan components](/documentation/getting-started/your-website/custom-components/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image3}
+            imageAlt="Form fields with a send button and envelope"
+            badges={{
+                text: "Open",
+                variant: "warning",
+                style: "soft",
+                hover: "There is no built-in form submission backend. The future integration needs message delivery, validation and clear feedback.",
+            }}
+        >
+
+            ### Contact forms
+
+
+
+            Plan how visitors submit messages.
+
+            <CardActions>
+                [Plan forms](/documentation/getting-started/your-website/forms/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image4}
+            imageAlt="Search field above result cards and a magnifying glass"
+            badges={{
+                text: "Open",
+                variant: "warning",
+                style: "soft",
+                hover: "Planned: a searchable index of published content with a keyboard-accessible search interface.",
+            }}
+        >
+
+            ### Search your website
+
+
+
+            Help visitors find content across your pages.
+
+            <CardActions>
+                [Plan search](/documentation/getting-started/your-website/search/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

@@ -1,0 +1,31 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Help visitors find a page
+
+<Alert variant="warning" style="soft">
+    Open – future capability. This page describes the goal; a supported
+    implementation for your website is still missing.
+</Alert>
+
+A site search would become useful as your pages and articles grow. There is currently no bundled search component, generated search index or search configuration in Sproutsite.
+
+### The intended experience
+
+Visitors should be able to search published titles and content, see useful excerpts and open the matching page. Results must respect the selected language and work with deployment subpaths.
+
+### What remains to be built
+
+The solution needs a build-time index, a keyboard-accessible search interface, clear empty states and a way to exclude content that should not appear. It must define whether data stays in the browser or is sent to another service; an external search provider is not assumed.
+
+This is recorded as future work. Until then, use clear navigation, descriptive page titles, topic overviews and links between related pages. Those are available now and remain useful even after search is introduced.
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

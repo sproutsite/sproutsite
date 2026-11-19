@@ -1,0 +1,50 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Eine Seite anlegen und ihre Abschnitte ordnen
+
+Nach den ersten Änderungen an der Startseite kannst du eine eigene Unterseite ergänzen, etwa für dein Team oder dein Angebot.
+
+### Ein neues Seitenverzeichnis
+
+Erstelle `src/content/pages/ueber-uns/page.yaml` und beim deutschen Starter die zugehörige `page.de.yaml` mit denselben Metadaten:
+
+```yaml
+title: Über unser Team
+description: Die Menschen und Ideen hinter unserer Arbeit.
+```
+
+Ergänze `src/content/pages/ueber-uns/01-profile.de.md`:
+
+```markdown
+---
+tone:
+    odd: default
+    even: muted
+---
+
+## Unser Team kennenlernen
+
+Beschreibe, wer ihr seid und wozu Besucher euch kontaktieren können.
+```
+
+Speichere und öffne `/ueber-uns/` in der laufenden Vorschau. Ohne Hero wird der Metadatentitel zur sichtbaren H1. Für einen Hero ergänzt du `hero.de.md` im selben Verzeichnis; siehe [Dein Hero](/dokumentation/einstieg/deine-website/hero/). Nimm einen Menülink erst auf, wenn die Seite existiert.
+
+### Abschnitte und URLs
+
+Beginne die Abschnittsnummerierung mit `01` und zähle lückenlos weiter. Beim Einfügen eines Abschnitts nummerierst du spätere Dateien entsprechend um; übersetzte Dateien behalten jeweils dieselbe Nummer. Dateien in einem Unterverzeichnis gehören zur dortigen Seite.
+
+`tone` erlaubt die festen Werte `default`, `muted` und `brand` oder eine `odd`/`even`-Zuordnung anhand der Dateinummer. `spacing: small`, `default` oder `large` verändert den Desktop-Abstand der Section; auf Mobilgeräten bleibt der Abstand gleich. Mit `fullWidth: true` steht die verfügbare Inhaltsbreite für Layouts bereit.
+
+Ein optionales `url` in `page.yaml` beziehungsweise `page.de.yaml` ersetzt nur das URL-Segment dieses Verzeichnisses. Verwende Kleinbuchstaben, Ziffern und Bindestriche. Interne Links beginnen an der Website-Wurzel, etwa `/ueber-uns/`, ohne Basispfad. Passe Menülinks an, wenn du eine URL änderst.
+
+Die Hauptüberschrift eines Abschnitts ist H2, Unterüberschriften folgen ab H3. Die Seite liefert bereits ihre H1. Für MDX siehe [Layouts und Bausteine](/dokumentation/einstieg/deine-website/layouts-und-bausteine/), für Übersetzungen [Weitere Sprachen](/dokumentation/einstieg/deine-website/sprachen/).
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

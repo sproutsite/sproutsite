@@ -1,4 +1,5 @@
 import { Accordion, AccordionItem } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
 
 ## Installierte Komponenten
 
@@ -7,3 +8,17 @@ import { Accordion, AccordionItem } from 'sproutsite/components';
         Ja. Diese Komponente stammt aus dem npm-Archiv.
     </AccordionItem>
 </Accordion>
+
+<Card badges={{ text: 'Installierte Karte', variant: 'info', style: 'soft', hover: 'Hinweise aus dem installierten Paket.' }}>
+    ### Card ohne Bild
+
+    Die installierte Komponente erzeugt für das Badge eine Fläche in Theme-Farben.
+
+</Card>
+
+<Card badges={[{ text: 'Vorschau', variant: 'primary', style: 'solid' }, { text: 'Offen', variant: 'warning', style: 'outline' }]}>
+    ### Mehrere installierte Badges
+
+    Auch statische Objektlisten funktionieren im Inhalts-MDX einer eigenen Website.
+
+</Card>

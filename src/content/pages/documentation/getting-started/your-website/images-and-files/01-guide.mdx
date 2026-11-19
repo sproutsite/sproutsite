@@ -1,0 +1,48 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Add your own pictures and downloads
+
+Place images that belong to a page in its `_assets/` directory. The leading underscore marks support files; this directory does not become a page. Use a descriptive filename such as `team.png`.
+
+### An image in Markdown
+
+Add the actual image file before referencing it:
+
+```markdown
+![Our team preparing the next workshop](./_assets/team.png)
+```
+
+Choose alternative text that describes what your own image conveys. The path is relative to the content file. Local raster images are processed through Astro; do not paste a private computer path into published content.
+
+### An image component in MDX
+
+```mdx
+import teamImage from './_assets/team.png';
+import { ContentImage } from 'sproutsite/components';
+
+## Our team
+
+<ContentImage src={teamImage} alt="Our team preparing a workshop" fullWidth />
+```
+
+`width` and `height` can request a particular display size or crop; `shape` accepts `rounded` or `square`, and `border` accepts `default` or `none`. Check the full [image examples](/showcase/images/) before choosing a crop that could remove important details.
+
+### Downloadable files
+
+Put files that should be delivered unchanged, such as a PDF, in `public/downloads/`. A file named `overview.pdf` is linked like this:
+
+```markdown
+[Download the overview as a PDF](/downloads/overview.pdf)
+```
+
+Internal public-file links receive the configured deployment base. Deploy the whole `dist/` directory so both optimized images and public downloads are included. Video players and an asset-management interface are not implied by this image workflow.
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

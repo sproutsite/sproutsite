@@ -1,0 +1,52 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Eigene Bilder und Downloads einbinden
+
+Lege Bilder einer Seite in deren `_assets/`-Verzeichnis. Der Unterstrich kennzeichnet Hilfsdateien; daraus wird keine eigene Seite. Verwende einen verständlichen Dateinamen wie `team.png`.
+
+### Ein Bild in Markdown
+
+Lege die tatsächliche Bilddatei an, bevor du sie verlinkst:
+
+```markdown
+![Unser Team bereitet den nächsten Workshop vor](./_assets/team.png)
+```
+
+Beschreibe im Alternativtext die Aussage deines eigenen Bildes. Der Pfad ist relativ zur Inhaltsdatei. Lokale Rasterbilder werden über Astro verarbeitet; private Computerpfade gehören nicht in veröffentlichte Inhalte.
+
+### Eine Bildkomponente in MDX
+
+```mdx
+import teamImage from './_assets/team.png';
+import { ContentImage } from 'sproutsite/components';
+
+## Unser Team
+
+<ContentImage
+    src={teamImage}
+    alt="Unser Team bereitet einen Workshop vor"
+    fullWidth
+/>
+```
+
+`width` und `height` erlauben eine gewünschte Darstellungsgröße beziehungsweise einen Ausschnitt; `shape` erlaubt `rounded` oder `square`, `border` die Werte `default` oder `none`. Prüfe die [Bildbeispiele](/showcase/images/), bevor du einen Ausschnitt wählst, der wichtige Details entfernen könnte.
+
+### Dateien zum Herunterladen
+
+Dateien, die unverändert ausgeliefert werden sollen, etwa ein PDF, kommen nach `public/downloads/`. Eine Datei `ueberblick.pdf` verlinkst du so:
+
+```markdown
+[Überblick als PDF herunterladen](/downloads/ueberblick.pdf)
+```
+
+Interne Links auf öffentliche Dateien erhalten den konfigurierten Basispfad. Veröffentliche den vollständigen `dist/`-Inhalt, damit optimierte Bilder und Downloads mitkommen. Ein Videoplayer oder eine Medienverwaltung gehört damit noch nicht zum beschriebenen Bild-Workflow.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

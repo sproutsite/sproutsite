@@ -1,0 +1,52 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Name, Adresse und Navigation einstellen
+
+Öffne `src/content/site.yaml` in deinem Website-Projekt. Bearbeite die vorhandene Datei, statt sie durch ein unvollständiges Beispiel zu ersetzen. Beim deutschen Starter pflegst du auch `site.de.yaml`; bei mehreren Sprachen bleiben Domain, Basispfad und Sprachliste in den Konfigurationen gleich.
+
+### Name und Produktionsadresse
+
+```yaml
+name: Meine Website
+url: https://example.com
+base: /
+```
+
+Ersetze die Beispieldomain durch deine eigene Produktionsadresse. Bei Veröffentlichung direkt unter der Domain bleibt `base: /`. Ein Basispfad wie `/website/` passt nur, wenn dein Hosting die Website tatsächlich darunter ausliefert. Die Vorschau darf weiter auf localhost laufen; `url` bezeichnet die Produktionsadresse.
+
+### Menü und Kontaktaktion
+
+Lege zuerst mit der [Seitenanleitung](/dokumentation/einstieg/deine-website/seiten-und-abschnitte/) eine Über-uns-Seite an. Deren URL kannst du anschließend in `header.links` aufnehmen:
+
+```yaml
+header:
+    links:
+        - label: Startseite
+          href: /
+        - label: Über uns
+          href: /ueber-uns/
+        - type: separator
+        - type: cta
+          label: Kontakt
+          href: mailto:hallo@example.com
+          icon: Mail
+          variant: primary
+```
+
+Ersetze die E-Mail-Adresse. `separator` zeichnet die Trennlinie, `cta` erzeugt einen Button. Normale Einträge bleiben Links. Icons verwenden den Lucide-Namen in PascalCase. Ergänze bei internen Inhaltslinks weder den Basispfad noch ein Sprachpräfix; Sproutsite übernimmt das.
+
+### Footer und externe Links
+
+Bearbeite `footer.text` und `footer.links`. Optional ergänzt `footer.groups` Spalten mit eigenen Überschriften; `footer.showVersion: false` blendet die Bibliotheksversion aus. Unterstützte Social-Plattformen sind GitHub, Instagram und Facebook. Die [Konfigurationsreferenz](/dokumentation/inhalte/) zeigt sämtliche Felder und den Sprachumschalter.
+
+Speichere und prüfe Header und Footer auf Mobilgeräten und Desktop. Starte `npm run dev` nach Änderungen an Produktionsadresse, Basispfad oder Sprachaufbau neu, ebenso wenn eine Einstellungsänderung nicht erscheint. Ein neuer Website-Name ersetzt das mitgelieferte Favicon nicht; siehe [Dein Markenauftritt](/dokumentation/einstieg/deine-website/markenauftritt/).
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

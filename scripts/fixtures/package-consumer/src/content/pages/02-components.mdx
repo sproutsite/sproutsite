@@ -1,4 +1,5 @@
 import { Accordion, AccordionItem } from 'sproutsite/components';
+import { Card } from 'sproutsite/components';
 
 ## Packaged components
 
@@ -7,3 +8,17 @@ import { Accordion, AccordionItem } from 'sproutsite/components';
         Yes. This component comes from the npm tarball.
     </AccordionItem>
 </Accordion>
+
+<Card badges={{ text: 'Packaged card', variant: 'info', style: 'soft', hover: 'Details from the installed package.' }}>
+    ### Card without an image
+
+    The installed component creates a theme-coloured surface for its badge.
+
+</Card>
+
+<Card badges={[{ text: 'Preview', variant: 'primary', style: 'solid' }, { text: 'Open', variant: 'warning', style: 'outline' }]}>
+    ### Multiple packaged badges
+
+    Static descriptor arrays also work in consumer MDX.
+
+</Card>

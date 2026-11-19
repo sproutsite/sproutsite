@@ -1,0 +1,33 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Deiner Website eine eigenständige Gestaltung geben
+
+<Alert variant="warning" style="soft">
+    Offen – zukünftige Erweiterung. Diese Seite beschreibt das Ziel; eine
+    unterstützte Umsetzung für deine Website steht noch aus.
+</Alert>
+
+Ein eigenes Theme würde die Inhaltsdateien von Sproutsite erhalten und ihre Darstellung austauschen: Seitenlayout, Header, Footer, Typografie und visuelle Bausteine. Das ist eine Aufgabe für das Team, das deine Website technisch umsetzt, keine Voraussetzung zum Schreiben von Inhalten.
+
+### Aktuelle Grenze
+
+Sproutsite trennt Inhaltsaufbereitung und Default-Theme intern. Das ist eine Grundlage, aber noch keine fertige Theme-Plattform für installierte Website-Projekte. Es gibt keinen öffentlichen Theme-Loader und keinen einfachen Konfigurationsschalter für ein eigenes Theme.
+
+### Angestrebtes Ergebnis
+
+Deine Website soll später eine eigene Darstellung wählen können, ohne Markdown-Inhalte migrieren zu müssen. Dafür braucht es dokumentierte Importe und Exporte, kompatible Inhaltskomponenten und eine klare Zuständigkeit für Styles.
+
+Das Website-Team muss Überschriftenstruktur, Navigationszustand, Sprachlinks, Basispfade, Metadaten, responsives Verhalten und Barrierefreiheit erhalten. Bestehende Inhalte sollen weiterhin die Validierung bestehen.
+
+Nutze bis dahin das Default-Theme mit seinen dokumentierten Einstellungen. Wenn du diese Möglichkeit in Sproutsite selbst mitentwickeln möchtest, folge der getrennten [Anleitung für Mitwirkende](/dokumentation/einstieg/mitarbeiten/).
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

@@ -1,11 +1,12 @@
 # Illustration style and asset records
 
-The maintainer approved the getting-started and refreshed showcase illustrations on 2026-11-18. Use this visual style for future Sproutsite overview and card illustrations unless a different direction is explicitly requested. Keep new images consistent with this family rather than developing a new style for each topic.
+The maintainer approved the getting-started and refreshed showcase illustrations on 2026-11-18 and confirmed the closer, light-background website-guide series on 2026-11-19. That latest series is the current approved standard: prominent foreground subjects, a pale upper wall around `#d9e3eb`, and a defined navy-to-teal wave fading softly into the floor. Use this style for future Sproutsite overview and card illustrations unless a different direction is explicitly requested. Keep new images consistent with this family rather than developing a new style for each topic.
 
 This guidance concerns editorial illustrations. It does not replace the existing SVG logo, Lucide icons, screenshots or photographs, and does not authorize unrelated asset replacements.
 
 ## Approved references
 
+- [Buttons](../../src/content/pages/showcase/_assets/buttons.png): the primary reference for the pale upper wall, defined wave crest and close foreground composition, clarified by the maintainer on 2026-11-19. These brightness and framing rules take precedence over darker or more distant examples below.
 - [Your website](../../src/content/pages/documentation/getting-started/_assets/your-website.png) and [contributing](../../src/content/pages/documentation/getting-started/_assets/contributing.png): the original approved pair.
 - [Cards](../../src/content/pages/showcase/_assets/cards.png), [icons](../../src/content/pages/showcase/_assets/icons.png) and [navigation](../../src/content/pages/showcase/_assets/navigation.png): examples of the coordinated showcase family.
 - [Typography](../../src/content/pages/showcase/_assets/typography.png): an example with additional room around the subject for responsive cropping.
@@ -17,8 +18,8 @@ Inspect these actual images before generating another illustration. Earlier brig
 - Use soft, polished 3D illustrations with rounded white UI panels, gently beveled edges and smooth matte surfaces resembling clay or ceramic.
 - Build a clear subject around the page topic: a browser, content cards, modular layers or a recognizable component. Prefer one compact group over scattered decorative objects.
 - Use soft studio light from the upper left, delicate contact shadows and restrained depth. Avoid harsh reflections, chrome, heavy shadows, neon, glow and glassmorphism.
-- Use a pale cool-gray studio background with a broad, softly flowing navy-to-teal wave. A low rounded white plinth connects the object group to the scene.
-- Match the showcase background: the wave is a broad landscape-like color field below a soft organic crest and fades gradually into the lit studio floor. Avoid narrow floating ribbons with a second hard lower outline. The maintainer confirmed this distinction on 2026-11-18.
+- Use a light cool-gray-blue studio wall around `#d9e3eb` above the wave, with a subtle pale gradient. Do not fill the upper background with dark navy. A low rounded white plinth connects the object group to the scene.
+- Match the [buttons illustration](../../src/content/pages/showcase/_assets/buttons.png): a broad navy-to-teal wave has a clear organic upper crest against the pale wall and fades softly downward into the light studio floor. The upper edge may be more defined than the lower fade. Avoid narrow floating ribbons with a second hard lower outline. The maintainer clarified this reference on 2026-11-19.
 - Keep the mood calm, professional and approachable. Avoid people, robots, confetti and unrelated floating shapes.
 - Keep images language-neutral: use placeholder bars instead of words. Isolated letterforms are appropriate for typography illustrations. Do not generate product wordmarks or substitute artwork for existing logos or icon components.
 
@@ -41,8 +42,8 @@ The semantic palette is maintained in [theme.css](../../src/themes/default/style
 ## Composition and responsive crops
 
 - Generate landscape overview illustrations at approximately 16:9. Preserve portrait source images where a format demonstration needs them.
-- Leave enough room around the subject. The current Card component uses a fixed-height cover crop; a wide, single-column tablet card can crop much more vertically than a desktop card.
-- For crop-sensitive subjects, keep essential symbols and complete letterforms within roughly the central 45–50% of image height. Treat this as a starting point and check the actual card, rather than relying on prompt percentages alone.
+- Show the topic prominently and close to the camera, like the buttons reference, rather than as a small object in a large empty studio. As a starting point, the foreground group occupies roughly 76–83% of image width and 67–73% of height, with a small breathing margin. Enlarge the actual topic, not just its plinth.
+- The current Card component uses a fixed-height cover crop; a wide, single-column tablet card can crop much more vertically than a desktop card. Keep essential symbols in the central crop and inspect the actual result. The earlier 45–50% whole-subject framing made the illustrations too distant and is superseded by the closer composition requested on 2026-11-19.
 - Review desktop, tablet and mobile at 1440, 768 and 375 pixels. Check clarity at thumbnail size, unintended clipping and horizontal overflow. Prefer reframing an illustration over changing the shared card layout to accommodate it.
 - Keep related illustrations consistent in palette, lighting, material and perspective. They should depict distinct subjects without becoming identical copies.
 
@@ -55,6 +56,7 @@ The semantic palette is maintained in [theme.css](../../src/themes/default/style
 
 ## Generation records
 
+- [Your-website guide illustrations](your-website-images.md)
 - [Documentation and blog background refinements](background-wave-refinements.md)
 - [Blog illustrations](blog-images.md)
 - [Documentation overview illustrations](documentation-images.md)

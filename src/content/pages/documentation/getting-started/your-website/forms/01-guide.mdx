@@ -1,0 +1,33 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Let visitors send a message
+
+<Alert variant="warning" style="soft">
+    Open – future capability. This page describes the goal; a supported
+    implementation for your website is still missing.
+</Alert>
+
+A contact form would let visitors write without opening an email application. Sproutsite currently generates static pages and provides no form submission endpoint or inbox.
+
+### What you can use now
+
+Publish an email link on your [contact page](/documentation/getting-started/your-website/contact-and-legal/). It uses the visitor's email application. Do not present a decorative form or submit button as a working message service.
+
+### What a future solution needs
+
+A supported form needs an explicitly chosen backend or external service, server-side validation, delivery handling and protection against abuse. The page also needs clear success and failure states, accessible field labels and useful error messages.
+
+The website operator must know which information is transmitted, who receives it and how long it is retained. Any privacy text must reflect that actual setup.
+
+The integration remains open. Before choosing a service, define the smallest required fields and who will respond. Adding the form's appearance alone will not make a static website receive messages.
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

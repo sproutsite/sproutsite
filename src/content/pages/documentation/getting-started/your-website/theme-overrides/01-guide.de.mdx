@@ -1,0 +1,33 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Das Theme behalten und einzelne Details ändern
+
+<Alert variant="warning" style="soft">
+    Offen – zukünftige Erweiterung. Diese Seite beschreibt das Ziel; eine
+    unterstützte Umsetzung für deine Website steht noch aus.
+</Alert>
+
+Vielleicht gefällt dir die mitgelieferte Gestaltung, aber du möchtest andere Rundungen, schmalere Karten oder anders gestaltete Buttons. Dieses Thema hält das Ziel fest, solche Änderungen in deiner eigenen Website vorzunehmen, ohne das komplette Default-Theme kopieren zu müssen.
+
+### Was bereits funktioniert
+
+Nutze die vorhandenen [Schrifteinstellungen](/dokumentation/einstieg/deine-website/schriften/), [Hero-Optionen](/dokumentation/einstieg/deine-website/hero/), Section-Töne und Komponentenparameter. Das sind die unterstützten redaktionellen Gestaltungsmöglichkeiten.
+
+### Was noch fehlt
+
+Das installierte Paket bietet noch keinen öffentlichen CSS-Einstieg für Überschreibungen, keine Child-Theme-Konfiguration und keinen Mechanismus zum Ersetzen einzelner Default-Theme-Komponenten. `createSproutsiteConfig()` besitzt keine Option für Theme-Vererbung.
+
+Ein zukünftiger Ablauf soll festlegen, wo lokale CSS-Dateien und Komponenten liegen, wie sie nach den Default-Styles geladen werden und wie sie Paketupdates überstehen. Dazu gehören Beispiele und Prüfungen für Tastaturfokus, responsive Layouts und Farbkontrast.
+
+Beschreibe vorerst die konkrete gewünschte Änderung und halte sie bei den Aufgaben deiner Website fest. Eine Änderung in `node_modules` ist keine dauerhaft gepflegte Lösung. Soll sich die gesamte Gestaltung ändern, siehe [dein eigenes Theme](/dokumentation/einstieg/deine-website/eigenes-theme/).
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

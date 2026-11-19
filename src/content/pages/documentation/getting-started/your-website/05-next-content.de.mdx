@@ -1,0 +1,114 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import image0 from './_assets/settings.png';
+import image1 from './_assets/pages-and-sections.png';
+import image2 from './_assets/layouts-and-components.png';
+import image3 from './_assets/images-and-files.png';
+import image4 from './_assets/blog.png';
+import image5 from './_assets/languages.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>What's next?</Eyebrow>
+
+## Inhalte und Seiten gestalten
+
+Deine Website läuft. Wähle jetzt den nächsten Schritt, der zu deinem Vorhaben passt. Die Anleitungen bauen auf dem Starter auf; du musst sie nicht der Reihe nach lesen.
+
+<Columns>
+    <Column span={4}>
+        <Card image={image0} imageAlt="Website-Einstellungen mit Schaltern und Weltkugel">
+
+            ### Website-Einstellungen
+
+            Name, Domain, Navigation und Footer einstellen.
+
+            <CardActions>
+                [Einstellungen ändern](/dokumentation/einstieg/deine-website/einstellungen/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={image1} imageAlt="Drei verbundene Seiten in einem Seitenbaum">
+
+            ### Seiten und Abschnitte
+
+            Weitere Seiten anlegen und Inhalte gliedern.
+
+            <CardActions>
+                [Seite anlegen](/dokumentation/einstieg/deine-website/seiten-und-abschnitte/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={image2} imageAlt="Browserlayout mit modularen Inhaltskarten">
+
+            ### Layouts und Bausteine
+
+            Spalten, Karten und Features kombinieren.
+
+            <CardActions>
+                [Bausteine nutzen](/dokumentation/einstieg/deine-website/layouts-und-bausteine/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={image3} imageAlt="Landschaftsbild neben einem Dokument zum Herunterladen">
+
+            ### Bilder und Dateien
+
+            Eigene Bilder und Downloads einbinden.
+
+            <CardActions>
+                [Bilder einbinden](/dokumentation/einstieg/deine-website/bilder-und-dateien/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={image4} imageAlt="Beitragsvorschau neben einem Kalender">
+
+            ### Dein Blog
+
+            Beiträge mit Datum und Titelbild veröffentlichen.
+
+            <CardActions>
+                [Blog anlegen](/dokumentation/einstieg/deine-website/blog/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image5}
+            imageAlt="Zwei Seiten mit Sprachwechsel um eine Weltkugel"
+            badges={{
+                text: "Teilweise möglich",
+                variant: "info",
+                style: "soft",
+                hover: "Übersetzungen und Sprachwechsel funktionieren mit Englisch als Standardsprache. Ein geprüfter Ablauf für andere Standardsprachen steht noch aus.",
+            }}
+        >
+
+            ### Weitere Sprachen
+
+
+
+            Übersetzte Seiten und Sprachwechsel einrichten.
+
+            <CardActions>
+                [Sprachen einrichten](/dokumentation/einstieg/deine-website/sprachen/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

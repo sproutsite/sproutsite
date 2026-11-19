@@ -1,0 +1,33 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Keep the theme and change selected details
+
+<Alert variant="warning" style="soft">
+    Open – future capability. This page describes the goal; a supported
+    implementation for your website is still missing.
+</Alert>
+
+You may like the supplied design but want different border radii, narrower cards or a different button treatment. This topic records the goal of making those changes in your own website without maintaining a complete copy of the default theme.
+
+### What works today
+
+Use the existing [font settings](/documentation/getting-started/your-website/typography/), [hero options](/documentation/getting-started/your-website/hero/), section tones and component parameters. These are the supported editorial controls.
+
+### What is still missing
+
+The installed package does not yet provide a public CSS override entry, a child-theme configuration or a mechanism for replacing selected default-theme components. `createSproutsiteConfig()` has no theme inheritance option.
+
+A future workflow should define where local CSS and component replacements live, how they load after the default styles, and how they survive package updates. It also needs examples and checks for keyboard focus, responsive layouts and colour contrast.
+
+For now, describe the exact change you need and keep it with your website's tasks. Do not treat an edit inside `node_modules` as a maintained solution. If the whole design needs to change, see [your own theme](/documentation/getting-started/your-website/custom-theme/).
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

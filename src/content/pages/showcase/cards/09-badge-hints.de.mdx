@@ -1,0 +1,120 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import cardImage from '../_assets/cards.png';
+import { Card } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Zusätzlicher Kontext</Eyebrow>
+
+## Hinweise bei Hover und Tastaturfokus
+
+Ergänze im Badge-Objekt optional `hover` mit einem kurzen, nicht leeren Hinweistext. Der Hinweis erscheint beim Darüberfahren und beim Tastaturfokus. Er funktioniert mit Bild und auf der Fläche ohne Bild.
+
+Mit Tab erreichst du Badges, die einen Hinweis enthalten. Der Fokus bleibt sichtbar. Escape schließt den Hinweis, ohne den Fokus zu verschieben. Du kannst den Mauszeiger auf den Hinweis bewegen und ihn dort weiterlesen. Ohne `hover` bleibt das Badge ein normales Label ohne zusätzlichen Tab-Stopp.
+
+Hinweise enthalten normalen Text, keine Links oder weiteren Bedienelemente. Schreibe wesentliche Informationen weiterhin in den Karteninhalt.
+
+<Tabs label="Hinweise bei Hover und Tastaturfokus: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+
+<Columns>
+    <Column span={6}>
+        <Card
+            image={cardImage}
+            imageAlt="Dreidimensionale Illustration modularer Inhaltskarten"
+            badges={{
+                text: 'Teilweise möglich',
+                variant: 'info',
+                style: 'soft',
+                hover: 'Die dokumentierten Optionen funktionieren bereits. Weitere Anpassungen sind noch offen.',
+            }}
+        >
+
+            ### Ein Hinweis zum Status
+
+            Bewege den Mauszeiger auf das Badge oder steuere es mit Tab an.
+
+        </Card>
+    </Column>
+    <Column span={6}>
+        <Card
+            badges={[
+                {
+                    text: 'Offen',
+                    variant: 'warning',
+                    style: 'soft',
+                    hover: 'Diese Funktion ist für eine zukünftige Version vorgesehen.',
+                },
+                { text: 'Vorschau', variant: 'neutral' },
+            ]}
+        >
+
+            ### Mit und ohne Zusatztext
+
+            Nur das Badge mit hover erhält einen eigenen Tab-Stopp.
+
+        </Card>
+    </Column>
+
+</Columns>
+
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import cardImage from '../_assets/cards.png';
+import { Card } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+
+<Columns>
+    <Column span={6}>
+        <Card
+            image={cardImage}
+            imageAlt="Dreidimensionale Illustration modularer Inhaltskarten"
+            badges={{
+                text: 'Teilweise möglich',
+                variant: 'info',
+                style: 'soft',
+                hover: 'Die dokumentierten Optionen funktionieren bereits. Weitere Anpassungen sind noch offen.',
+            }}
+        >
+
+            ### Ein Hinweis zum Status
+
+            Bewege den Mauszeiger auf das Badge oder steuere es mit Tab an.
+
+        </Card>
+    </Column>
+    <Column span={6}>
+        <Card
+            badges={[
+                {
+                    text: 'Offen',
+                    variant: 'warning',
+                    style: 'soft',
+                    hover: 'Diese Funktion ist für eine zukünftige Version vorgesehen.',
+                },
+                { text: 'Vorschau', variant: 'neutral' },
+            ]}
+        >
+
+            ### Mit und ohne Zusatztext
+
+            Nur das Badge mit hover erhält einen eigenen Tab-Stopp.
+
+        </Card>
+    </Column>
+
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>

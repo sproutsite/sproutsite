@@ -402,6 +402,13 @@ function verifyBuild(base: string) {
     }
     const home = readFileSync(join(output, 'index.html'), 'utf8');
     assert.ok(home.includes('ss-accordion-item'));
+    assert.ok(home.includes('ss-card__figure--placeholder'));
+    assert.equal((home.match(/class="ss-card__badges"/g) ?? []).length, 2);
+    assert.ok(home.includes('Packaged card'));
+    assert.ok(home.includes('role="tooltip"'));
+    assert.ok(home.includes('aria-describedby="ss-card-hint-'));
+    assert.ok(home.includes('Details from the installed package.'));
+    assert.ok(home.includes('badge-info badge-soft'));
     assert.ok(home.includes('lucide-bot'));
     assert.ok(home.includes('ss-footer__group'));
     assert.ok(home.includes('ss-footer__social'));

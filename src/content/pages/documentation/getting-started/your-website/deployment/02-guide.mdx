@@ -1,0 +1,25 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Configure the production address and error pages
+
+### Use your production address
+
+Set your real domain in `site.yaml` under `url`, and keep `base: /` for a domain-root deployment. Use a deployment subpath such as `/studio/` only when the website is actually hosted there. Keep the same values in every language configuration. Restart the development server after global URL changes.
+
+Upload the entire contents of `dist` to your host's document root, including `_astro`, the manifest, sitemap and error pages. Never upload just the HTML files: the pages also need the generated CSS, images and fonts.
+
+### Configure the web server
+
+The [Apache and Nginx guide](/documentation/deployment/) includes server examples and error-page configuration. Generated errors are flat files such as `404.html` and `500.html`; configured additional languages add files such as `404-de.html` and `500-de.html`. Preview routes like `/500/` are not production content pages.
+
+A static host serves these files without running Astro or a CMS server. HTTPS, redirects, actual HTTP error status codes and server logs remain the host's responsibility. After deployment, check a normal page, a missing URL and the language links on the live domain.
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

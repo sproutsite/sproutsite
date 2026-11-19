@@ -1,0 +1,38 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Use your website name
+
+<Alert variant="info" style="soft">
+    Partly available. The steps below distinguish existing features from
+    extensions that remain open.
+</Alert>
+
+Change `name` in `src/content/site.yaml` and any locale configuration. With a name other than `Sproutsite`, the default BrandLogo displays your own wordmark instead of the Sproutsite sprout symbol. Its font follows the heading typography.
+
+```yaml
+name: Willow Workshop
+footer:
+    text: Furniture and repairs from Bristol.
+    showVersion: false
+```
+
+Merge these values into your existing configuration; keep the other footer fields. The visible name is separate from each page's title and description. Review the header and footer on desktop and mobile.
+
+### Graphic logos and icons are still open
+
+Changing `name` does not replace the package's favicon or app icons. There is not yet a public configuration for your own header logo, footer logo, favicon set and social sharing image.
+
+Prepare a clean vector logo, a legible square icon and a landscape sharing image for your brand. A future supported integration should connect those files to all relevant metadata and components. It must also keep meaningful alternative text and adequate contrast.
+
+Do not overwrite bundled branding in `node_modules` or use generated `dist` as the permanent source. Those files will be replaced. Track this requirement with your website team before publishing under a different brand.
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

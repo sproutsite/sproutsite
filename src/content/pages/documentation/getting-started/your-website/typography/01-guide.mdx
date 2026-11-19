@@ -1,0 +1,35 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Choose fonts and weights
+
+Set the heading and eyebrow fonts in `src/content/site.yaml`. In a translated project, set the corresponding values in `site.de.yaml` as well. Change the existing fields rather than adding a second `typography` block.
+
+```yaml
+typography:
+    headings:
+        family: serif
+        weight: 500
+    eyebrow:
+        family: sans-serif
+        weight: 600
+```
+
+`serif` selects the locally bundled EB Garamond; `sans-serif` selects Nunito. Both work without an external font service. EB Garamond supports weights from 400 to 800, Nunito from 200 to 1000. Use a weight supported by the selected family.
+
+`headings` applies to page headings and card titles. The header and footer wordmarks follow that family and weight too. `eyebrow` controls the short introductory labels and the family used for article dates in the blog overview.
+
+Body text and controls keep their existing fonts. Bold emphasis in running text remains 600. Heading line heights are set centrally by the default theme and are not separate YAML options.
+
+Save the configuration and preview a heading that wraps onto two lines, a card title and the mobile navigation. If your installed package does not recognise this configuration, check its version and follow [updates and backups](/documentation/getting-started/your-website/updates-and-backups/).
+
+Adding another font family through configuration is not currently supported. For that wider requirement, see [small design changes](/documentation/getting-started/your-website/theme-overrides/).
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

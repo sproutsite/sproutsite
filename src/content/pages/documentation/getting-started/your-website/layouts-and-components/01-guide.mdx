@@ -1,0 +1,52 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Build a page with supplied components
+
+Keep ordinary text in `.md` files. Rename a section to `.mdx` when it needs a documented Sproutsite layout or component. Its frontmatter and position in the numbered sequence stay the same.
+
+### Two columns
+
+```mdx
+---
+tone: default
+fullWidth: true
+---
+
+import { Column, Columns } from 'sproutsite/components';
+import { Feature } from 'sproutsite/components';
+
+## What you can find here
+
+<Columns gap="lg">
+    <Column span={8}>
+        Describe your work and the next useful step for visitors.
+    </Column>
+    <Column span={4}>
+        <Feature icon="Mail" title="Get in touch" color="primary">
+            Explain how people can contact you.
+        </Feature>
+    </Column>
+</Columns>
+```
+
+`Columns` uses twelve grid units. `8 + 4`, `6 + 6` and `4 + 4 + 4` are common arrangements; columns stack on smaller screens. `fullWidth` gives the section room inside the site's existing outer edges.
+
+### Spacing and separators
+
+Use `gap="xs"`, `sm`, `md`, `lg` or `xl` for plain column spacing. Use `divider` and `dividerGap` for dividing lines; `separator="MoveRight"` places a Lucide arrow between columns instead. `dividerGapMobile` controls the stacked spacing. These settings do not add two independent gaps on top of each other.
+
+### Pick a component by its purpose
+
+Use Card for a linked content preview, Feature for an icon with a short explanation, ContentImage for an image, and Accordion for answers visitors can expand. Copy an example from the [showcase](/showcase/) and replace its content rather than adding styling classes to MDX.
+
+Only documented Sproutsite component imports and relative local images are supported. An arbitrary local Astro component is not yet a supported MDX extension; [your own components](/documentation/getting-started/your-website/custom-components/) records that open topic. Preview both narrow and wide screens after changing a layout.
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

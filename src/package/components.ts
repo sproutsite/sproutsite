@@ -4,6 +4,7 @@ export { default as FoundationSample } from '../themes/default/components/molecu
 export { default as Tabs } from '../themes/default/components/molecules/Tabs/Tabs.astro';
 export { default as Tab } from '../themes/default/components/atoms/Tab/Tab.astro';
 export { default as Card } from '../themes/default/components/molecules/Card/Card.astro';
+export type { CardBadge } from '../lib/sproutsite/badges.js';
 export { default as CardActions } from '../themes/default/components/molecules/CardActions/CardActions.astro';
 export { default as ContentImage } from '../themes/default/components/atoms/ContentImage/ContentImage.astro';
 export { default as Eyebrow } from '../themes/default/components/atoms/Eyebrow/Eyebrow.astro';

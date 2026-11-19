@@ -1,0 +1,158 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import image0 from './_assets/hero.png';
+import image1 from './_assets/typography.png';
+import image2 from './_assets/colors.png';
+import image3 from './_assets/branding.png';
+import image4 from './_assets/theme-overrides.png';
+import image5 from './_assets/custom-theme.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>What's next?</Eyebrow>
+
+## Make the design your own
+
+Start with the settings that already exist. Cards marked “Partly available” or “Open” explain the current limits and the intended next capability.
+
+<Columns>
+    <Column span={4}>
+        <Card
+            image={image0}
+            imageAlt="Wide page introduction with image and action buttons"
+            badges={{
+                text: "Partly available",
+                variant: "info",
+                style: "soft",
+                hover: "Text, size and local raster backgrounds are configurable. Fullscreen layout and replacing the SVG waves through settings are still open.",
+            }}
+        >
+
+            ### Your hero
+
+
+
+            Change the introduction, size and background.
+
+            <CardActions>
+                [Adjust the hero](/documentation/getting-started/your-website/hero/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={image1} imageAlt="Serif and sans-serif letterforms beside a weight slider">
+
+            ### Fonts and weights
+
+            Choose type for headings and eyebrows.
+
+            <CardActions>
+                [Choose fonts](/documentation/getting-started/your-website/typography/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image2}
+            imageAlt="Palette with navy, blue, teal, cyan and white swatches"
+            badges={{
+                text: "Partly available",
+                variant: "info",
+                style: "soft",
+                hover: "You can set colours on supported components. A supported site-wide palette override is not available yet.",
+            }}
+        >
+
+            ### Your colours
+
+
+
+            Understand the palette and customisation gaps.
+
+            <CardActions>
+                [Choose colours](/documentation/getting-started/your-website/colors/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image3}
+            imageAlt="Website preview beside square leaf icons"
+            badges={{
+                text: "Partly available",
+                variant: "info",
+                style: "soft",
+                hover: "You can change the website name and wordmark font. Settings for your own graphic logo, favicon set and sharing image are still missing.",
+            }}
+        >
+
+            ### Your branding
+
+
+
+            Plan your logo, favicon and sharing image.
+
+            <CardActions>
+                [Plan your branding](/documentation/getting-started/your-website/branding/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image4}
+            imageAlt="A page with controls for individual design adjustments"
+            badges={{
+                text: "Open",
+                variant: "warning",
+                style: "soft",
+                hover: "Planned: keep the default theme and override individual styles or components without editing installed package files.",
+            }}
+        >
+
+            ### Small design changes
+
+
+
+            Keep the default theme and adapt details.
+
+            <CardActions>
+                [Plan design changes](/documentation/getting-started/your-website/theme-overrides/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image5}
+            imageAlt="Three website templates with different layouts"
+            badges={{
+                text: "Open",
+                variant: "warning",
+                style: "soft",
+                hover: "Planned: replace the default presentation with your own theme while keeping your content files.",
+            }}
+        >
+
+            ### Your own theme
+
+
+
+            Define a completely independent design.
+
+            <CardActions>
+                [Plan a theme](/documentation/getting-started/your-website/custom-theme/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

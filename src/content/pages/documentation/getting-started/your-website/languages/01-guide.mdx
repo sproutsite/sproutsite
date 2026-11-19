@@ -1,0 +1,43 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Set up translated pages deliberately
+
+<Alert variant="info" style="soft">
+    Partly available. The steps below distinguish existing features from
+    extensions that remain open.
+</Alert>
+
+A single-language English starter serves English at `/`; the German starter serves German at `/`. A translated website adds files for the same page identity, rather than creating unrelated copies of each page.
+
+### The documented bilingual setup
+
+The existing bilingual setup uses English as the default language at `/` and German below `/de/`. In `site.yaml`, keep `language: en` and `locales: [en, de]`. In `site.de.yaml`, set `language: de` and keep the same locale order, production URL and base.
+
+Add German files beside their English counterparts: `page.de.yaml`, `hero.de.md` and sections such as `01-introduction.de.md`. Match section numbers and base filenames. A German `url` value may translate the page's own URL segment, for example `about` to `ueber-uns`; it does not change the shared source directory.
+
+### Language selection
+
+Add this entry to the existing `header.links` array:
+
+```yaml
+- type: language-switcher
+```
+
+The switcher lists configured languages, links to the matching translated page and falls back to that language's homepage when a counterpart is absent. Optional `footer.languageSwitcher: true` uses the same behavior in the footer. Sproutsite does not translate text automatically.
+
+### Starting from a German-only website
+
+Keeping German at `/` while adding English is not covered by a verified consumer workflow: the current configuration loader reserves `site.yaml` for English lookups. This needs a dedicated solution before it can be recommended as a general multilingual-default setup.
+
+If you intentionally choose English as the new default, create the English files and metadata, keep the existing German variants, and use the bilingual configuration above. German URLs move below `/de/`; plan any redirects on your host before changing an already published website. Check every translation and switcher target before deployment.
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

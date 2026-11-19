@@ -1,0 +1,46 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import cardImage from '../_assets/cards.png';
+import { Card } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Combine labels</Eyebrow>
+
+## Multiple badges in one row
+
+Pass an array to display several labels side by side. The group is right-aligned. If space is limited, it wraps onto additional rows; longer text can also wrap inside a badge. With many rows, the media area grows to keep all labels visible.
+
+<Tabs label="Multiple badges: Preview and code" variant="border">
+    <Tab title="Preview">
+<Card image={cardImage} imageAlt="Three-dimensional illustration of modular content cards" badges={[{text: 'Preview', variant: 'info', style: 'solid'}, {text: 'Open', variant: 'warning', style: 'soft'}]}>
+
+### Several labels at a glance
+
+Labels follow the order of the array, with a 0.5 rem gap between them.
+
+</Card>
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import cardImage from '../_assets/cards.png';
+import { Card } from 'sproutsite/components';
+
+<Card image={cardImage} imageAlt="Three-dimensional illustration of modular content cards" badges={[{text: 'Preview', variant: 'info', style: 'solid'}, {text: 'Open', variant: 'warning', style: 'soft'}]}>
+
+### Several labels at a glance
+
+Labels follow the order of the array, with a 0.5 rem gap between them.
+
+</Card>
+```
+
+    </Tab>
+
+</Tabs>

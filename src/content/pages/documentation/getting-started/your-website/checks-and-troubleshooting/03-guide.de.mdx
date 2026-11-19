@@ -1,0 +1,38 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Änderungen vor der Veröffentlichung prüfen
+
+Die Voraussetzungen und Generator-Details oben helfen dir, wenn der kurze Einstieg nicht ausreicht. Für normale Änderungen nutzt du die Skripte deiner eigenen erzeugten Website:
+
+```sh
+npm run check
+npm run build
+npm run preview
+```
+
+`check` meldet Astro- und TypeScript-Diagnosen. `build` validiert Inhalte und erzeugt die veröffentlichbare Website. `preview` zeigt dieses Ergebnis lokal. Ein erfolgreicher Build ersetzt nicht die eigene Inhaltskontrolle.
+
+### Häufige Startprobleme
+
+- **Node oder npm wird nicht gefunden:** Installiere eine unterstützte Node-LTS-Version und öffne das Terminal anschließend neu.
+- **Ein Skript oder Paket fehlt:** Prüfe, ob du im erzeugten Website-Ordner neben dessen `package.json` arbeitest. Führe `npm install` aus, falls du die Installation übersprungen hast.
+- **Der übliche Port ist belegt:** Öffne die tatsächlich von Astro ausgegebene Adresse. Sie kann einen anderen Port verwenden.
+- **Eine Änderung erscheint nicht:** Speichere die Datei und prüfe ihre Sprachendung. Der deutsche Starter verwendet beispielsweise `hero.de.md`.
+- **Die Inhaltsvalidierung schlägt fehl:** Lies die genannte Datei und das betroffene Feld. Prüfe Pflichtangaben, Frontmatter-Trenner, Abschnittsnummern und die Zuordnung zur Seite.
+- **Ein Link funktioniert nach dem Build nicht:** Prüfe, ob Zielseite und Sprungmarke existieren. Quelllinks beginnen an der Website-Wurzel; ergänze den Deployment-Basispfad nicht selbst.
+
+### Das Ergebnis aus Besuchersicht ansehen
+
+Prüfe eine schmale Mobilansicht und eine Desktopansicht. Folge Navigation, Aktionslinks und Sprachlinks. Kontrolliere mit Tab den Tastaturfokus und bediene interaktive Komponenten ohne Maus. Achte auf abgeschnittene Bilder, schlecht lesbaren Text und horizontales Scrollen.
+
+Das Sproutsite-Framework-Repository besitzt zusätzliche Unit-, Paket-, Barrierefreiheits- und Storybook-Prüfungen. Diese Skripte richten sich an [Mitwirkende](/dokumentation/einstieg/mitarbeiten/); sie sind nicht vollständig Teil deiner erzeugten Website.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

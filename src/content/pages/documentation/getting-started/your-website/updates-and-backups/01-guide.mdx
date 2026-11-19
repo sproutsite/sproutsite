@@ -1,0 +1,44 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Save a working version before updating
+
+<Alert variant="info" style="soft">
+    Partly available. The steps below distinguish existing features from
+    extensions that remain open.
+</Alert>
+
+Keep your website files and `package-lock.json` under version control or in a separate backup. A repository is useful for reviewing changes, but an additional copy protects against losing that repository. Back up your local `.env` separately and restrict access to it.
+
+### Inspect available versions
+
+Run these commands inside your own website folder:
+
+```sh
+npm ls sproutsite
+npm outdated
+```
+
+Read the [Sproutsite changelog](https://github.com/sproutsite/sproutsite/blob/main/CHANGELOG.md) before updating. Review any required Astro and MDX peer dependency versions. `npm outdated` reports newer releases; it does not mean every dependency should be upgraded at once.
+
+### Update and verify
+
+`npm update sproutsite` updates within the version range recorded in your `package.json`. To move outside that range, choose and install a reviewed version deliberately, for example with `npm install sproutsite@<version>` after replacing the placeholder.
+
+Then run `npm run check`, `npm run build` and `npm run preview`. Check your navigation, content, images, error pages and language variants. Save the changed package manifest and lockfile together when the result works.
+
+If a problem appears, restore the previous content, manifest and lockfile from your saved working version, then run `npm ci`. Keep the failed update separate so you can investigate it.
+
+### Automation is still open
+
+Sproutsite does not currently provide an automatic updater, backup service or managed rollback. This page describes a manual workflow. A future solution needs a clear recovery process and compatibility checks rather than silent updates to a published website.
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

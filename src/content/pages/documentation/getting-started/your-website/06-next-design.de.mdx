@@ -1,0 +1,158 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import image0 from './_assets/hero.png';
+import image1 from './_assets/typography.png';
+import image2 from './_assets/colors.png';
+import image3 from './_assets/branding.png';
+import image4 from './_assets/theme-overrides.png';
+import image5 from './_assets/custom-theme.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>What's next?</Eyebrow>
+
+## Das Design an deine Website anpassen
+
+Beginne mit den bereits vorhandenen Einstellungen. Karten mit „Teilweise möglich“ oder „Offen“ erklären die aktuellen Grenzen und die angestrebte Erweiterung.
+
+<Columns>
+    <Column span={4}>
+        <Card
+            image={image0}
+            imageAlt="Breite Seiteneinleitung mit Bild und Aktionsbuttons"
+            badges={{
+                text: "Teilweise möglich",
+                variant: "info",
+                style: "soft",
+                hover: "Text, Größe und lokale Rasterbilder als Hintergrund sind einstellbar. Ein fertiges Fullscreen-Layout und der SVG-Wellentausch über Einstellungen sind noch offen.",
+            }}
+        >
+
+            ### Dein Hero
+
+
+
+            Einleitung, Größe und Hintergrund ändern.
+
+            <CardActions>
+                [Hero anpassen](/dokumentation/einstieg/deine-website/hero/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={image1} imageAlt="Serifen- und serifenlose Buchstaben neben einem Schriftgewicht-Regler">
+
+            ### Schriften und Gewichte
+
+            Schrift für Titel und Eyebrows auswählen.
+
+            <CardActions>
+                [Schrift wählen](/dokumentation/einstieg/deine-website/schriften/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image2}
+            imageAlt="Palette mit Farbmustern in Navy, Blau, Petrol, Cyan und Weiß"
+            badges={{
+                text: "Teilweise möglich",
+                variant: "info",
+                style: "soft",
+                hover: "Bei unterstützten Komponenten kannst du Farben einstellen. Eine globale Farbpalette lässt sich noch nicht über eine unterstützte Website-Einstellung überschreiben.",
+            }}
+        >
+
+            ### Deine Farben
+
+
+
+            Farbpalette und Anpassungsmöglichkeiten verstehen.
+
+            <CardActions>
+                [Farben anpassen](/dokumentation/einstieg/deine-website/farben/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image3}
+            imageAlt="Website-Vorschau neben quadratischen Blatt-Icons"
+            badges={{
+                text: "Teilweise möglich",
+                variant: "info",
+                style: "soft",
+                hover: "Website-Name und Wortmarken-Schrift sind einstellbar. Einstellungen für eigene Bildlogos, Favicons und Vorschaubilder beim Teilen fehlen noch.",
+            }}
+        >
+
+            ### Dein Markenauftritt
+
+
+
+            Logo, Favicon und Vorschaubild vorbereiten.
+
+            <CardActions>
+                [Marke einrichten](/dokumentation/einstieg/deine-website/markenauftritt/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image4}
+            imageAlt="Eine Seite mit Reglern für einzelne Designanpassungen"
+            badges={{
+                text: "Offen",
+                variant: "warning",
+                style: "soft",
+                hover: "Geplant: Das Default-Theme behalten und einzelne Styles oder Komponenten anpassen, ohne installierte Paketdateien zu bearbeiten.",
+            }}
+        >
+
+            ### Kleine Designänderungen
+
+
+
+            Das Default-Theme behalten und Details ändern.
+
+            <CardActions>
+                [Design anpassen](/dokumentation/einstieg/deine-website/theme-anpassen/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image5}
+            imageAlt="Drei Website-Vorlagen mit unterschiedlichen Layouts"
+            badges={{
+                text: "Offen",
+                variant: "warning",
+                style: "soft",
+                hover: "Geplant: Die mitgelieferte Darstellung durch ein eigenes Theme ersetzen und die bestehenden Inhaltsdateien weiterverwenden.",
+            }}
+        >
+
+            ### Dein eigenes Theme
+
+
+
+            Eine eigenständige Gestaltung entwickeln.
+
+            <CardActions>
+                [Theme planen](/dokumentation/einstieg/deine-website/eigenes-theme/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

@@ -7,6 +7,17 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Added
+
+- Added single or multiple Card badge descriptors sharing Badge variants and styles, with bottom-right image placement, a theme-coloured fallback surface, optional hover/focus hints dismissible with Escape, strict literal MDX validation, bilingual showcase examples and Storybook variants.
+- Added 22 illustrated next-step topics to the English and German website quick start, with detailed child guides for supported workflows and explicit alerts for partial or future capabilities.
+
+### Changed
+
+- Added topic-specific hover/focus explanations to the status badges in the bilingual website quick start and kept hints open when keyboard focus scrolls between distant cards.
+- Replaced the 22 website-guide card illustrations with close foreground compositions, a pale gray-blue upper wall and a defined navy-to-teal wave fading into the floor, following the maintainer's buttons reference.
+- Reduced the website quick start to prerequisites, generating and starting a website, a first edit and one optional agent task; moved all previous detailed instructions to linked child pages without removing existing page routes.
+
 ## [0.5.21] - 2026-11-19
 
 ### Changed

@@ -1,0 +1,85 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Card } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+
+<Eyebrow>Optionen und Standardwerte</Eyebrow>
+
+## Die Badge-Angaben
+
+`badges` ist optional und akzeptiert ein Objekt oder eine Liste solcher Objekte. Jedes Objekt hat diese Felder:
+
+| Feld      | Bedeutung                                      | Standard     |
+| --------- | ---------------------------------------------- | ------------ |
+| `text`    | Angezeigter, nicht leerer Text                 | Erforderlich |
+| `variant` | Semantische Badge-Farbe                        | `default`    |
+| `style`   | Darstellung des Badges                         | `solid`      |
+| `hover`   | Zusätzlicher Text bei Hover oder Tastaturfokus | Keiner       |
+
+Für `variant` gelten `default`, `primary`, `secondary`, `accent`, `neutral`, `info`, `success`, `warning`, `error`. Für `style` gelten `solid`, `outline`, `soft`, `dash`.
+
+Die Labels verwenden die normale Badge-Größe `md`. Weitere Felder, etwa `size`, sind für Card-Badge-Objekte nicht vorgesehen. In Inhalts-MDX stehen die Angaben direkt als literales Objekt oder Array in der Prop; Variablen, Funktionsaufrufe und Spread-Ausdrücke sind nicht erlaubt.
+
+Ohne `badges` oder mit `badges={[]}` werden keine Labels ausgegeben. Eine vorhandene Bildkarte behält ihr Bild; ohne Bild entsteht keine zusätzliche Fläche. Wähle Label-Farben, die auf dem tatsächlichen Bild gut lesbar bleiben.
+
+<Tabs label="Standardwerte und leere Liste: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+<Columns>
+<Column span={6}>
+<Card badges={{text: 'Status'}}>
+
+### Nur den Text angeben
+
+Ohne weitere Angaben gelten variant="default" und style="solid", wie bei Badge.
+
+</Card>
+</Column>
+<Column span={6}>
+<Card badges={[]}>
+
+### Eine leere Liste
+
+Ohne Bild und ohne Labels bleibt die Card eine reine Textkarte.
+
+</Card>
+</Column>
+</Columns>
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Card } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+
+<Columns>
+<Column span={6}>
+<Card badges={{text: 'Status'}}>
+
+### Nur den Text angeben
+
+Ohne weitere Angaben gelten variant="default" und style="solid", wie bei Badge.
+
+</Card>
+</Column>
+<Column span={6}>
+<Card badges={[]}>
+
+### Eine leere Liste
+
+Ohne Bild und ohne Labels bleibt die Card eine reine Textkarte.
+
+</Card>
+</Column>
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>

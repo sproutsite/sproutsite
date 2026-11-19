@@ -1,0 +1,72 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Card } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+
+<Eyebrow>No image file required</Eyebrow>
+
+## Badges on a theme surface
+
+When badges are present without `image` and `imageAlt`, the card creates a coloured, otherwise empty surface. It has the normal image area’s height and follows the active theme. No placeholder image is loaded.
+
+<Tabs label="Badges without an image: Preview and code" variant="border">
+    <Tab title="Preview">
+<Columns>
+<Column span={6}>
+<Card badges={{text: 'New', variant: 'success', style: 'outline'}}>
+
+### One label without an image
+
+The empty media area uses a subtle colour derived from the active theme.
+
+</Card>
+</Column>
+<Column span={6}>
+<Card badges={[{text: 'Documentation', variant: 'secondary', style: 'solid'}, {text: 'In progress', variant: 'neutral', style: 'dash'}]}>
+
+### Several labels without an image
+
+The label position and media height match an image card.
+
+</Card>
+</Column>
+</Columns>
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Card } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+
+<Columns>
+<Column span={6}>
+<Card badges={{text: 'New', variant: 'success', style: 'outline'}}>
+
+### One label without an image
+
+The empty media area uses a subtle colour derived from the active theme.
+
+</Card>
+</Column>
+<Column span={6}>
+<Card badges={[{text: 'Documentation', variant: 'secondary', style: 'solid'}, {text: 'In progress', variant: 'neutral', style: 'dash'}]}>
+
+### Several labels without an image
+
+The label position and media height match an image card.
+
+</Card>
+</Column>
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>

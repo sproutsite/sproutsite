@@ -1,0 +1,33 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Give your website an independent design
+
+<Alert variant="warning" style="soft">
+    Open – future capability. This page describes the goal; a supported
+    implementation for your website is still missing.
+</Alert>
+
+A custom theme would retain Sproutsite's content files while replacing the presentation: page layout, header, footer, typography and visual components. This is work for the team implementing your website, not a prerequisite for writing content.
+
+### Current boundary
+
+Sproutsite separates content assembly from the default theme internally. That separation is useful groundwork, but it is not a finished consumer-facing theme platform. There is no public theme loader or one-line switch for a custom theme.
+
+### Intended outcome
+
+Your website should eventually be able to select its own presentation without migrating its Markdown content. The implementation needs documented imports and exports, compatible content components, and clear ownership of styles.
+
+The website team must preserve heading structure, navigation state, language links, base paths, metadata, responsive behaviour and accessibility. Existing content should still pass validation.
+
+Until that workflow exists, use the default theme and its documented settings. If you want to help implement this capability in Sproutsite itself, follow the separate [contributor guide](/documentation/getting-started/contributing/).
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

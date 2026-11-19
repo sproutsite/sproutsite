@@ -1,0 +1,43 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Übersetzte Seiten bewusst einrichten
+
+<Alert variant="info" style="soft">
+    Teilweise möglich. Die folgenden Schritte unterscheiden vorhandene
+    Funktionen von noch offenen Erweiterungen.
+</Alert>
+
+Der einsprachige englische Starter liefert Englisch unter `/`, der deutsche Starter Deutsch unter `/`. Eine Übersetzung ergänzt Dateien derselben Seitenidentität, statt unabhängige Kopien jeder Seite anzulegen.
+
+### Der dokumentierte zweisprachige Aufbau
+
+Der vorhandene zweisprachige Aufbau verwendet Englisch als Standardsprache unter `/` und Deutsch unter `/de/`. In `site.yaml` stehen `language: en` und `locales: [en, de]`. In `site.de.yaml` steht `language: de`; Reihenfolge der Sprachen, Produktionsadresse und Basispfad bleiben gleich.
+
+Ergänze deutsche Dateien neben ihren englischen Gegenstücken: `page.de.yaml`, `hero.de.md` und Abschnitte wie `01-introduction.de.md`. Nummern und Grundnamen der Abschnitte stimmen überein. Ein deutsches `url` darf das URL-Segment der Seite übersetzen, etwa `about` in `ueber-uns`; das gemeinsame Quellverzeichnis bleibt bestehen.
+
+### Die Sprache auswählen
+
+Ergänze diesen Eintrag im bestehenden Array `header.links`:
+
+```yaml
+- type: language-switcher
+```
+
+Der Schalter zeigt die konfigurierten Sprachen, verlinkt auf die passende Übersetzung und verwendet bei fehlendem Gegenstück die Startseite dieser Sprache. Optional nutzt `footer.languageSwitcher: true` dasselbe Verhalten im Footer. Sproutsite übersetzt Texte nicht automatisch.
+
+### Ausgehend von einer rein deutschen Website
+
+Deutsch unter `/` zu behalten und Englisch zu ergänzen ist noch kein geprüfter Consumer-Workflow: Der Konfigurationslader verwendet `site.yaml` fest für englische Aufrufe. Dafür ist eine eigene Lösung erforderlich, bevor dieser Aufbau allgemein empfohlen werden kann.
+
+Entscheidest du dich bewusst für Englisch als neue Standardsprache, legst du englische Inhalte und Metadaten an, behältst die deutschen Varianten und verwendest den beschriebenen zweisprachigen Aufbau. Deutsche URLs wechseln dann nach `/de/`; plane bei einer bereits veröffentlichten Website vorher die nötigen Weiterleitungen beim Hoster. Prüfe alle Übersetzungen und Umschaltziele vor der Veröffentlichung.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

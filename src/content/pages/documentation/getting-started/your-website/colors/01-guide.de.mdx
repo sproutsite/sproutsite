@@ -1,0 +1,44 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Farben einzelner Bausteine anpassen
+
+<Alert variant="info" style="soft">
+    Teilweise möglich. Die folgenden Schritte unterscheiden vorhandene
+    Funktionen von noch offenen Erweiterungen.
+</Alert>
+
+Mehrere Komponenten unterstützen semantische Farben wie `primary` und `secondary`. Bei Feature kannst du auch einen Hex-Wert angeben. Ohne expliziten Hintergrund entsteht daraus eine dezente Hintergrundfarbe für das Icon.
+
+```mdx
+import { Feature } from 'sproutsite/components';
+
+<Feature
+    icon="Leaf"
+    title="Sorgfältig gefertigt"
+    color="#527b37"
+    headingLevel={3}
+>
+    Materialien, die sich im Alltag bewähren.
+</Feature>
+```
+
+Verwende das Beispiel in einer `.mdx`-Section unter einer H2. Mit `backgroundColor="#eef3e8"` bestimmst du beide Farben selbst. Bei `layout="card"` gilt dieser Hintergrund für die gesamte Feature-Karte. Ein eigener Hex-Wert bei `color` hat Vorrang vor der semantischen Variantengestaltung.
+
+Wähle Farben so, dass Text und Icons auf ihrem tatsächlichen Hintergrund gut erkennbar bleiben. Der [Feature-Showcase](/showcase/features/) zeigt horizontale, vertikale und Kartenlayouts.
+
+### Eine globale Farbpalette bleibt offen
+
+Das Default-Theme besitzt zentrale Farb-Tokens. Die installierte Bibliothek bietet aber noch keine unterstützte, updatesichere Anpassung der gesamten Palette über `site.yaml`. Es gibt keinen `colors`-Konfigurationsblock, den du dafür in deine Website kopieren könntest.
+
+Ziel ist, dass dein Website-Team Marken-, Text-, Flächen- und Interaktionsfarben gemeinsam anpassen kann und dabei den Kontrast erhält. Nutze für redaktionelle Änderungen vorerst die vorhandenen Komponentenparameter. Bearbeite weder `node_modules` noch erzeugte `dist`-Dateien: Installation und Build überschreiben solche Änderungen.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

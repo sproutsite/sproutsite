@@ -1,0 +1,46 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import cardImage from '../_assets/cards.png';
+import { Card } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+
+<Eyebrow>Status im Bild</Eyebrow>
+
+## Ein einzelnes Badge
+
+Mit `badges` erhält eine Card ein Status- oder Themenlabel. Für ein einzelnes Badge genügt ein Objekt mit `text`; `variant` und `style` entsprechen der Badge-Komponente. Zum Bildrand bleiben 1 rem Abstand.
+
+<Tabs label="Ein einzelnes Badge: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+<Card image={cardImage} imageAlt="Dreidimensionale Illustration modularer Inhaltskarten" badges={{text: 'Teilweise möglich', variant: 'info', style: 'soft'}}>
+
+### Ein klarer Status
+
+Das Badge gehört zur Bildfläche und bleibt unten rechts, unabhängig vom Text der Karte.
+
+</Card>
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import cardImage from '../_assets/cards.png';
+import { Card } from 'sproutsite/components';
+
+<Card image={cardImage} imageAlt="Dreidimensionale Illustration modularer Inhaltskarten" badges={{text: 'Teilweise möglich', variant: 'info', style: 'soft'}}>
+
+### Ein klarer Status
+
+Das Badge gehört zur Bildfläche und bleibt unten rechts, unabhängig vom Text der Karte.
+
+</Card>
+```
+
+    </Tab>
+
+</Tabs>

@@ -1,0 +1,56 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Change the introduction and background
+
+<Alert variant="info" style="soft">
+    Partly available. The steps below distinguish existing features from
+    extensions that remain open.
+</Alert>
+
+Edit `src/content/pages/hero.md` for the homepage, or the `hero.md` in another page directory. The German counterpart is `hero.de.md`. The hero owns the visible H1; `page.yaml` still supplies the browser title and description.
+
+```yaml
+---
+title: Welcome to my workshop
+eyebrow: Handmade in Bristol
+type: big
+classes: null
+background-image: ./_assets/workshop.jpg
+---
+Furniture, repairs and the stories behind them.
+```
+
+Create the `_assets` directory beside this hero and add your own `workshop.jpg`. `background-image` accepts a local raster image; Astro prepares it for the website. It is decorative, so keep meaningful information in text or regular content images. The theme adds an overlay to protect contrast.
+
+`classes: null` removes the globally configured hero decoration, including the default wave class. Without it, global `hero-classes` still apply. A local `classes` list replaces that global list entirely. Test the result on narrow screens as well as desktop.
+
+### Size and actions
+
+Use `type: small` for a compact introduction; omission also means `small`. `big` adds the homepage spacing, with a smaller increase on mobile. Optional `claim`, `actions` and `tagline` fields let you add a supporting line, one or two links and a final short statement. For example:
+
+```yaml
+actions:
+    - label: See my work
+      href: /gallery/
+      variant: primary
+    - label: Get in touch
+      href: /contact/
+      variant: secondary
+```
+
+Create these target pages before adding their links. Use the [content reference](/documentation/content/) for the complete hero fields.
+
+### Still open
+
+`fullscreen` is a prepared type and CSS class, not a completed full-viewport layout. Replacing the bundled SVG waves through a dedicated consumer setting is also not implemented. A local raster background works today; a supported SVG-background setting and full-height layout remain future work.
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

@@ -1,0 +1,50 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Add a page and order its sections
+
+After your first homepage edits, add a separate page for your team or services.
+
+### A new page directory
+
+Create `src/content/pages/about/page.yaml`:
+
+```yaml
+title: About our team
+description: The people and ideas behind our work.
+```
+
+Add `src/content/pages/about/01-profile.md`:
+
+```markdown
+---
+tone:
+    odd: default
+    even: muted
+---
+
+## Meet our team
+
+Describe who you are and what visitors can contact you about.
+```
+
+Save and open `/about/` in the running preview. The metadata title becomes the visible H1 because this page has no hero. To add a hero, create `hero.md` in the same directory and follow the [hero guide](/documentation/getting-started/your-website/hero/). Add a menu entry only after the page exists.
+
+### Sections and URLs
+
+Start section numbering at `01` and continue without gaps. Insert a new section by renumbering the later files; keep translated filenames numbered alike. Files inside a child directory belong to that child page, not the parent.
+
+`tone` may be a fixed `default`, `muted` or `brand`, or an `odd`/`even` mapping based on the filename number. `spacing: small`, `default` or `large` changes desktop section padding; mobile padding stays unchanged. `fullWidth: true` uses the available content width when you need a layout.
+
+An optional `url` in `page.yaml` changes only that directory's URL segment. Use lowercase letters, digits and hyphens. Write internal links from the website root, for example `/about/`, without a deployment subpath. Update menu links when changing a URL.
+
+Use H2 for the main section heading, then H3 for its subsections. The page already supplies H1. See [layouts and components](/documentation/getting-started/your-website/layouts-and-components/) for MDX and [languages](/documentation/getting-started/your-website/languages/) for translated pages.
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

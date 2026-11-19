@@ -1,0 +1,72 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import { Card } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+import { Tabs, Tab } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+
+<Eyebrow>Ohne Bilddatei</Eyebrow>
+
+## Badges auf einer Theme-Fläche
+
+Ohne `image` und `imageAlt` erzeugen angegebene Badges automatisch eine farbige, sonst leere Fläche. Sie ist genauso hoch wie der normale Bildbereich und verwendet die Farben des aktiven Themes. Es wird kein Platzhalterbild geladen.
+
+<Tabs label="Badges ohne Bild: Vorschau und Code" variant="border">
+    <Tab title="Vorschau">
+<Columns>
+<Column span={6}>
+<Card badges={{text: 'Neu', variant: 'success', style: 'outline'}}>
+
+### Ein Label ohne Bild
+
+Die leere Medienfläche übernimmt eine dezente Farbe aus dem aktuellen Theme.
+
+</Card>
+</Column>
+<Column span={6}>
+<Card badges={[{text: 'Dokumentation', variant: 'secondary', style: 'solid'}, {text: 'In Arbeit', variant: 'neutral', style: 'dash'}]}>
+
+### Mehrere Labels ohne Bild
+
+Die Position und die Höhe der Fläche entsprechen einer Karte mit Bild.
+
+</Card>
+</Column>
+</Columns>
+    </Tab>
+    <Tab title="Code">
+
+```mdx
+import { Card } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+
+<Columns>
+<Column span={6}>
+<Card badges={{text: 'Neu', variant: 'success', style: 'outline'}}>
+
+### Ein Label ohne Bild
+
+Die leere Medienfläche übernimmt eine dezente Farbe aus dem aktuellen Theme.
+
+</Card>
+</Column>
+<Column span={6}>
+<Card badges={[{text: 'Dokumentation', variant: 'secondary', style: 'solid'}, {text: 'In Arbeit', variant: 'neutral', style: 'dash'}]}>
+
+### Mehrere Labels ohne Bild
+
+Die Position und die Höhe der Fläche entsprechen einer Karte mit Bild.
+
+</Card>
+</Column>
+</Columns>
+```
+
+    </Tab>
+
+</Tabs>

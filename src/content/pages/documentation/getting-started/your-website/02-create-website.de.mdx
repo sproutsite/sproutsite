@@ -6,11 +6,11 @@ tone:
 
 import { Eyebrow } from 'sproutsite/components';
 
-<Eyebrow>Einmalig einrichten</Eyebrow>
+<Eyebrow>Schritt 2</Eyebrow>
 
-## Deine Website anlegen
+## Deine Website anlegen und öffnen
 
-Der veröffentlichte Generator `create-sproutsite` richtet eine Website mit dem vorhandenen Design und den vorhandenen Komponenten ein. Wähle einen Ordnernamen und die Inhaltssprache:
+Führe diese Befehle aus und bestätige die Installation der Abhängigkeiten, wenn der Assistent danach fragt:
 
 ```sh
 npm create sproutsite@latest meine-website -- --language de
@@ -18,14 +18,6 @@ cd meine-website
 npm run dev
 ```
 
-Der Assistent fragt nach dem Website-Namen und der Installation der Abhängigkeiten. Stimme der Installation zu oder führe vor dem Vorschau-Start selbst `npm install` aus. Für eine englische Website verwendest du `--language en`. Der Generator überschreibt keine belegten Zielordner. Schlägt die Installation fehl, bleiben die erzeugten Dateien erhalten; mit `npm install` im neuen Projekt kannst du sie wiederholen.
+Öffne die lokale Adresse aus dem Terminal. Deine Website läuft jetzt. Lass dieses Terminal während der Arbeit geöffnet; mit Strg+C beendest du die Vorschau. Öffne den erzeugten Ordner `meine-website` in deinem Editor.
 
-Öffne die lokale Adresse, die das Terminal ausgibt. Lass dieses Terminal während der Arbeit laufen; gespeicherte Inhaltsänderungen erscheinen in der Vorschau. Mit Strg+C beendest du den Server, wenn du fertig bist.
-
-Du erhältst eine kleine Startseite mit Hero, Markdown und einem Feature-Beispiel, die nötige Astro-Konfiguration und eine redaktionelle `AGENTS.md`. Deine Website nutzt `sproutsite` als installierte Abhängigkeit. Du musst keine Theme-Dateien kopieren oder das Framework-Repository klonen.
-
-Die deutsche Startseite liegt direkt unter `/`. Der Starter verwendet `site.yaml` und `site.de.yaml` sowie `page.yaml` und `page.de.yaml` für Konfiguration und Metadaten. Halte die jeweiligen Paare synchron. Die sichtbaren deutschen Inhalte stehen in `hero.de.md` und den nummerierten `.de.md`-/`.de.mdx`-Sections. Setze vor der Veröffentlichung die echte Produktionsadresse in beiden Website-Konfigurationen. Die mitgelieferte README erklärt diese Dateistruktur.
-
-Das [Generator-Repository](https://github.com/sproutsite/create-sproutsite) beschreibt die Optionen. Ergänze `--yes`, wenn der Generator ohne Rückfragen mit Standardwerten arbeiten soll. Mit `--yes --no-install` legt er nur die Dateien an.
-
-[create-sproutsite auf npm](https://www.npmjs.com/package/create-sproutsite)
+Hast du die Installation übersprungen, führe im neuen Ordner zuerst `npm install` aus. Weitere [Generatoroptionen und Einrichtungshilfe](/dokumentation/einstieg/deine-website/pruefen-und-fehler-beheben/) findest du bei Bedarf auf der Unterseite.

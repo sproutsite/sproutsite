@@ -1,0 +1,33 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Plan a reusable block for your website
+
+<Alert variant="warning" style="soft">
+    Open – future capability. This page describes the goal; a supported
+    implementation for your website is still missing.
+</Alert>
+
+You may need a price list, event schedule or product detail block that the supplied components do not cover. First check the [showcase](/showcase/): combining existing Columns, Cards and Features may already solve the layout.
+
+### Current boundary
+
+Content MDX accepts documented Sproutsite components and relative image imports. Arbitrary local Astro component imports are not part of the current content contract. Simply adding a file to your website does not make it an approved content component.
+
+### Intended extension
+
+A future supported workflow should let your website team build a typed Astro component, expose it through a validated integration point and document its content parameters. It needs predictable styles, mobile behaviour and accessibility checks.
+
+Describe the block's content, examples, required interactions and reuse before implementation. Keep it independent of specific demo pages. The component should not require editorial users to write arbitrary markup or scripts.
+
+This is a future capability, not a requirement for starting your website. If an existing block is missing a generally useful option, your website team can also propose it through the [contributor workflow](/documentation/getting-started/contributing/).
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)
