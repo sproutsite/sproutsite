@@ -96,7 +96,6 @@
                     var(--color-primary-content) 72%,
                     transparent
                 );
-                font-family: var(--font-heading);
                 font-size: 0.9375rem;
                 font-style: italic;
             }
