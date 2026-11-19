@@ -7,6 +7,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.22] - 2026-11-20
+
 ### Added
 
 - Added 18 illustrated contributor topics in English and German, with detailed child guides, contextual status badges and alerts for partial or future capabilities.
@@ -15,6 +17,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
+- Added introductory heroes to the bilingual getting-started, website-owner and contributor guides.
 - Reworked the contributor entry into four short steps from a local checkout to a first checked edit, preserving all previous detailed sections on linked child pages.
 - Added topic-specific hover/focus explanations to the status badges in the bilingual website quick start and kept hints open when keyboard focus scrolls between distant cards.
 - Replaced the 22 website-guide card illustrations with close foreground compositions, a pale gray-blue upper wall and a defined navy-to-teal wave fading into the floor, following the maintainer's buttons reference.
