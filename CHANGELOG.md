@@ -7,6 +7,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Fixed
+
+- Kept cards in the same Columns row aligned by ignoring Astro-injected scripts when trimming column content margins.
+
 ## [0.5.22] - 2026-11-20
 
 ### Added
