@@ -7,6 +7,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.21] - 2026-11-19
+
 ### Changed
 
 - Set the homepage hero tagline in the body font while retaining its italic styling.
