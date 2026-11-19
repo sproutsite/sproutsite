@@ -1,0 +1,35 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Contribute to Sproutsite</Eyebrow>
+
+## Keep the example useful for website authors
+
+Explain the user-visible result first, then the source or parameter needed to achieve it. Distinguish a website author’s project from this framework checkout. Framework contribution instructions belong in this section, not in the editorial quick start.
+
+### Update both languages
+
+The demo content lives under `src/content/`. Keep the English file and its `.de` counterpart numbered identically and technically consistent. Translate headings, instructions, links and alternative text; do not leave English UI copy in the German examples without a reason.
+
+Use the existing Markdown and documented MDX components. New sections start at `01` and remain consecutive. Prefer the alternating `odd`/`even` tone mapping for a normal sequence of sections.
+
+### Add examples that can be copied
+
+Show imports, required props and any local asset paths. Use existing Preview/Code tabs in the showcase. A documented prop must be accepted by validation and work in a consumer project; a Storybook-only example is not enough.
+
+### Use the approved illustration style
+
+Read `docs/assets/README.md` and inspect its reference images before generating or replacing card artwork. The current style uses close matte 3D subjects, a pale upper wall around `#d9e3eb` and a navy-to-teal wave fading into the floor.
+
+Store images in the relevant `_assets/` directory, give them accurate alternative text and inspect the real card crop on desktop, tablet and mobile. Keep full prompts, inputs and output paths in a generation record under `docs/assets/`.
+
+Preserve image provenance and existing license notices. A generation record does not itself grant rights. Record unresolved rights rather than silently licensing someone else’s material under the project license.
+
+Run content validation and a build to catch broken local assets, internal links and metadata.
+
+[Back to the quick start and more topics](/documentation/getting-started/contributing/)

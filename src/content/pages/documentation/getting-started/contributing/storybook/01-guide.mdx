@@ -1,0 +1,37 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Contribute to Sproutsite</Eyebrow>
+
+## Preview a component without the whole page
+
+Storybook provides isolated examples for existing default-theme components. Start it in a separate terminal while keeping the repository preview available:
+
+```sh
+npm run storybook
+```
+
+Open the address printed by Storybook; its configured development port is 6006. Stories live in `stories/components/`, grouped by the same component categories used in the theme.
+
+### Extend an existing story
+
+Inspect a nearby `.stories.ts` file, such as `Card.stories.ts` in `stories/components/molecules/`. Provide a useful state through its args and slots. For a new prop, show the default and the state that makes the change visible.
+
+Use real local assets and the theme’s existing styling. Check narrow and wide viewports. Verify hover, keyboard focus and dismissal where the component has those interactions. A static visual example does not demonstrate that keyboard behaviour works.
+
+### Build and connect the documentation
+
+```sh
+npm run build:storybook
+```
+
+The output is written to `storybook-static/`. This build verifies the workshop, not the website’s content contract. Also add copyable examples in the bilingual [showcase](/showcase/) and keep their allowed imports and props valid.
+
+For changes to installed usage, continue with the [package test](/documentation/getting-started/contributing/package-compatibility/). Preserve the single theme stylesheet entry rather than building a separate workshop-only design.
+
+[Back to the quick start and more topics](/documentation/getting-started/contributing/)

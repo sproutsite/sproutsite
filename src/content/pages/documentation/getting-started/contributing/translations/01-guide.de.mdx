@@ -1,0 +1,39 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>An Sproutsite mitarbeiten</Eyebrow>
+
+## Die vorhandene englische und deutsche Website pflegen
+
+<Alert variant="info" style="soft">
+    Teilweise möglich. Englisch und Deutsch funktionieren; weitere Sprachen und
+    ein flexibler Ablauf für die Standardsprache sind noch offen.
+</Alert>
+
+Das Repository zeigt Englisch unter `/` und Deutsch unter `/de/`. Zugehörige Dateien teilen sich ein Seitenverzeichnis: `page.yaml` und `page.de.yaml`, `hero.md` und `hero.de.md` sowie gleich nummerierte Abschnittspaare.
+
+### Die Seitenidentität erhalten
+
+Ein lokalisiertes `url` ändert das eigene URL-Segment der Seite; die Segmente der Elternseiten gelten weiterhin. Erhalte die gemeinsame Verzeichnisidentität, damit der Sprachschalter das Gegenstück findet. Prüfe verschachtelte Routen statt einer bloßen Textersetzung.
+
+Halte `site.yaml` und `site.de.yaml` bei Produktionsadresse, Basispfad und Sprachliste konsistent. Übersetze Navigationsbezeichnungen, Metadaten, Inhalt, Alternativtexte und Badge-Hinweise gemeinsam.
+
+### Die vollständige Route prüfen
+
+Wechsle von einer Unterseite die Sprache und prüfe das Gegenstück. Ohne passende Übersetzung soll der Schalter die Startseite dieser Sprache verwenden. Kontrolliere auch kanonische URLs, Sitemap-Alternativen und sprachbezogene Fehlerdateien.
+
+Die [Sprachanleitung für eigene Websites](/dokumentation/einstieg/deine-website/sprachen/) beschreibt den unterstützten Consumer-Aufbau und seine Grenzen. Zu den Quelltests gehören `localized-content.test.ts` und `language-links.test.ts`.
+
+### Weitere Sprachen bleiben offen
+
+Eine zusätzliche Sprache benötigt mehr als kopierte Markdown-Dateien: Prüfe Konfigurationsschema, sprachabhängige UI, Routen, Rückfallregeln, Flaggen, Metadaten und die Erzeugung von Fehlerdokumenten.
+
+Auch ein vollständig flexibler Ablauf für die Standardsprache ist noch nicht fertig. Der Konfigurationslader behandelt die englische `site.yaml` gesondert. Erhalte bei der Erweiterung vorhandene Routen und dokumentiere nötige Migrationen oder Weiterleitungen.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)

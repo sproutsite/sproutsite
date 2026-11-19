@@ -1,0 +1,22 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Step 4</Eyebrow>
+
+## Check the result
+
+Keep the preview running and open a second terminal in the same repository:
+
+```sh
+npm run check
+git diff
+```
+
+Resolve any reported errors and read the diff. Your local website is running, your first change is visible and you know which file changed.
+
+Before submitting a contribution, follow [checks and pull requests](/documentation/getting-started/contributing/quality-checks/). That guide covers the complete checks and the additional configuration required for a production demo build.

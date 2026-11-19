@@ -1,0 +1,37 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>An Sproutsite mitarbeiten</Eyebrow>
+
+## Die lokal vorhandenen Prüfungen automatisieren
+
+<Alert variant="warning" style="soft">
+    Offen – zukünftige Erweiterung. Diese Seite beschreibt das Ziel; eine
+    unterstützte Umsetzung steht noch aus.
+</Alert>
+
+In diesem Repository ist unter `.github/workflows/` noch kein CI-Workflow eingecheckt. Die npm-Befehle stellen die Prüfungen bereit; dieses Thema hält ihre automatische Ausführung für Beiträge als Ziel fest.
+
+### Den Repository-Ablauf wiederverwenden
+
+Ein zukünftiger Job soll die unterstützte Node-LTS-Version wählen, aus dem Lockfile installieren und dieselben Format-, Quell-, Typ-, Unit-, Build- und Paketprüfungen wie lokal ausführen. Storybook und Barrierefreiheitskontrollen kommen nach vereinbartem Prüfumfang hinzu.
+
+### Die Umgebungsvoraussetzung klären
+
+Ein Produktionsbuild der Demo benötigt Betreiber- und Datenschutzkonfiguration. CI braucht dafür einen abgestimmten Aufbau mit nicht geheimen Testdaten oder eine andere ausdrücklich unterstützte Teststrategie. Private Betreiberangaben dürfen nicht veröffentlicht und Validierung nicht still deaktiviert werden. `.env.dist` ist keine fertige Produktionskonfiguration.
+
+Der Pakettest erzeugt bereits temporäre Nutzer-Testprojekte. Prüfe Wiederverwendungsmöglichkeiten, ohne Consumer-Prüfungen mit dem Demo-Build gleichzusetzen.
+
+### Veröffentlichung getrennt halten
+
+Ein automatischer Prüfablauf ist keine Freigabe zum Veröffentlichen von npm-Paketen, Pushen von Tags oder Anlegen von Releases. Dafür wären ein gesondert freigegebener Prozess und passende Authentifizierung nötig.
+
+Als Abnahme gelten nachvollziehbare Ergebnisse, verständliche Fehlerprotokolle und dokumentierte Voraussetzungen. Externe Dienste können unabhängig existieren; diese Seite beschreibt nur den fehlenden Workflow im Repository.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)

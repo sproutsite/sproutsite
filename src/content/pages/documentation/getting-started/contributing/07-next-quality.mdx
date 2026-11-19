@@ -1,0 +1,87 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import image0 from './_assets/quality-checks.png';
+import image1 from './_assets/storybook.png';
+import image2 from './_assets/accessibility.png';
+import image3 from './_assets/package-compatibility.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>What's next?</Eyebrow>
+
+## Verify and submit your change
+
+Use the checks that cover your change, review the result and give reviewers enough context.
+
+<Columns>
+    <Column span={4}>
+        <Card
+            image={image0}
+            imageAlt="Checklist beside a test terminal and checkmarks"
+        >
+
+            ### Checks and pull requests
+
+            Select the checks and describe the effect of your change.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/quality-checks/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image1}
+            imageAlt="Component workshop with a button, toggle and previews"
+        >
+
+            ### Component work in Storybook
+
+            Preview props, states and responsive behaviour in isolation.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/storybook/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image2}
+            imageAlt="Browser focus target beside keyboard arrow keys"
+        >
+
+            ### Accessibility and keyboard checks
+
+            Check focus, reading order, contrast and overflow.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/accessibility/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image3}
+            imageAlt="Software package connected to two browser previews"
+        >
+
+            ### Test the installed package
+
+            Verify exports, assets and a fresh consumer website.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/package-compatibility/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

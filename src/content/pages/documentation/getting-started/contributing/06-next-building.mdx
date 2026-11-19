@@ -1,0 +1,110 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import image0 from './_assets/components.png';
+import image1 from './_assets/theme-and-styles.png';
+import image2 from './_assets/content-and-routing.png';
+import image3 from './_assets/docs-and-images.png';
+import image4 from './_assets/translations.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>What's next?</Eyebrow>
+
+## Improve components and content
+
+Choose the part you want to work on. Follow the existing boundaries and document changes that affect website projects.
+
+<Columns>
+    <Column span={4}>
+        <Card
+            image={image0}
+            imageAlt="Interface panel with modular tiles and a puzzle piece"
+        >
+
+            ### Components and public props
+
+            Extend a building block together with its validation and examples.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/components/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image1}
+            imageAlt="Design panel with colour swatches, a corner sample and slider"
+        >
+
+            ### Theme and component styles
+
+            Work with tokens, the CSS cascade and responsive layouts.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/theme-and-styles/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image2}
+            imageAlt="Folder and page tree connected by a routing arrow"
+        >
+
+            ### Content and routing
+
+            Change schemas, page assembly and links safely.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/content-and-routing/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image3}
+            imageAlt="Open manual beside a landscape illustration"
+        >
+
+            ### Documentation and illustrations
+
+            Maintain examples, translations and approved image assets.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/docs-and-images/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image4}
+            imageAlt="Two pages linked around a globe"
+            badges={{
+                text: "Partly available",
+                variant: "info",
+                style: "soft",
+                hover: "English and German are supported. Further locales and a fully flexible default-language workflow still need work.",
+            }}
+        >
+
+            ### Languages and translations
+
+            Keep English and German aligned and plan further locales.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/translations/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

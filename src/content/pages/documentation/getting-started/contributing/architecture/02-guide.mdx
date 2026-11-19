@@ -1,0 +1,29 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Contribute to Sproutsite</Eyebrow>
+
+## Decide which layer owns your change
+
+Use the source-tree map above before editing. The same visible problem can have different causes: a wrong paragraph belongs to demo content, a misplaced icon to the theme component, and an incorrectly resolved page link to shared URL handling.
+
+### Content, presentation and core
+
+`src/content/` is the demo and documentation, not fixed framework content. The installed library must work with another website’s files. `src/themes/default/` owns the supplied design, Astro components, page layouts and CSS. `src/lib/sproutsite/` owns reusable page assembly, schemas, links and validation.
+
+`src/package/` connects these boundaries to the public imports and Astro integration. Read the package’s existing exports before introducing another entry point. Files under `src/pages/` are the small Astro route adapters; do not add a hand-written route for each demo page.
+
+### Trace a change end to end
+
+For a new Card prop, inspect `Card.astro`, its shared data validation, the MDX checks in `validation.ts`, the public component export, stories and showcase examples. A successful Astro render alone does not prove that the content contract accepts the new syntax.
+
+For routing changes, follow `pages.ts`, `urls.ts` and `language-links.ts`, then check canonical URLs and `sitemap.ts`. Keep base-path application consistent. A theme change should not require rewriting content files.
+
+The [component guide](/documentation/getting-started/contributing/components/), [content and routing guide](/documentation/getting-started/contributing/content-and-routing/) and [package test](/documentation/getting-started/contributing/package-compatibility/) cover those cases in detail.
+
+[Back to the quick start and more topics](/documentation/getting-started/contributing/)

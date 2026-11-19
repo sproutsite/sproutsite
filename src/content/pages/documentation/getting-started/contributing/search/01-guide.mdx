@@ -1,0 +1,35 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Contribute to Sproutsite</Eyebrow>
+
+## Search published website content
+
+<Alert variant="warning" style="soft">
+    Open – future extension. This page describes the goal; a supported
+    implementation is not yet available.
+</Alert>
+
+The goal is a search experience for visitors who need a page or article without knowing its navigation path. Sproutsite does not yet include a search index, search component or public search setting.
+
+### Start with the static content
+
+Consider an index generated from published titles and page content at build time. Define which content is included and excluded. Never index private environment files or unpublished source material.
+
+### Respect routes and languages
+
+Results need correct localized URLs and deployment bases. Decide whether searches stay within the active language and how missing translations are handled. The index must match the generated website after content changes.
+
+### Build an accessible interaction
+
+Provide an explicit search label, keyboard operation, useful excerpts and clear empty or no-result states. Choose the smallest interaction that helps visitors; do not assume an external provider or send queries to another service without a deliberate decision.
+
+The implementation needs content/index tests, a consumer fixture and browser checks. Until it is available, clear navigation, page titles and related links remain the supported way to help visitors find content.
+
+[Back to the quick start and more topics](/documentation/getting-started/contributing/)

@@ -1,0 +1,35 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Contribute to Sproutsite</Eyebrow>
+
+## Design a form integration with a real delivery path
+
+<Alert variant="warning" style="soft">
+    Open – future extension. This page describes the goal; a supported
+    implementation is not yet available.
+</Alert>
+
+Sproutsite currently produces static files and has no built-in form submission endpoint. The goal is to let website teams add message submission without presenting a non-functional form as a working service.
+
+### Define the boundary first
+
+Decide whether a selected external service or a separately operated backend receives messages. Do not place service credentials in public content or browser code. Adding a server dependency would need an explicit architectural decision rather than silently changing the static-site model.
+
+### User-visible behaviour
+
+The form needs accessible labels, appropriate validation, a clear submission state, a useful success message and recoverable errors. Visitors must be able to complete it with the keyboard.
+
+### Data and verification
+
+Define required fields, delivery ownership, abuse protection and the actual data handling. Documentation must describe the chosen arrangement rather than copying the demo’s hosting facts.
+
+Test the UI and the real integration boundary, including failed delivery. Until this feature exists, ordinary email links are the available contact mechanism. This page records future work, not an implemented backend.
+
+[Back to the quick start and more topics](/documentation/getting-started/contributing/)

@@ -1,0 +1,35 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>An Sproutsite mitarbeiten</Eyebrow>
+
+## Eine Formulareinbindung mit echter Zustellung entwerfen
+
+<Alert variant="warning" style="soft">
+    Offen – zukünftige Erweiterung. Diese Seite beschreibt das Ziel; eine
+    unterstützte Umsetzung steht noch aus.
+</Alert>
+
+Sproutsite erzeugt derzeit statische Dateien und enthält keinen Endpunkt zum Absenden von Formularen. Ziel ist eine Nachrichteneinbindung für Website-Teams, ohne eine funktionslose Formularansicht als Nachrichtendienst darzustellen.
+
+### Zuerst die Zuständigkeit klären
+
+Lege fest, ob ein ausgewählter externer Dienst oder ein getrennt betriebenes Backend Nachrichten empfängt. Zugangsdaten gehören weder in öffentliche Inhalte noch in Browser-Code. Eine Serverabhängigkeit benötigt eine bewusste Architekturentscheidung statt einer stillen Änderung des statischen Modells.
+
+### Sichtbares Verhalten
+
+Das Formular benötigt zugängliche Beschriftungen, passende Validierung, einen verständlichen Absendezustand, eine klare Erfolgsmeldung und behebbare Fehler. Besucher müssen es vollständig mit der Tastatur bedienen können.
+
+### Daten und Prüfung
+
+Definiere Pflichtfelder, Zustellungsverantwortung, Missbrauchsschutz und den tatsächlichen Umgang mit Angaben. Die Dokumentation beschreibt diesen Aufbau und übernimmt keine pauschalen Hosting-Angaben aus der Demo.
+
+Prüfe Oberfläche und echte Anbindung einschließlich fehlgeschlagener Zustellung. Bis die Funktion existiert, stehen normale E-Mail-Links zur Kontaktaufnahme bereit. Diese Seite beschreibt zukünftige Arbeit, kein implementiertes Backend.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)

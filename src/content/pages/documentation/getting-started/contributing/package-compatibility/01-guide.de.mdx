@@ -1,0 +1,35 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>An Sproutsite mitarbeiten</Eyebrow>
+
+## Das tatsächlich installierte Archiv prüfen
+
+Eine lokale Quell-Arbeitskopie kann fehlende Exporte, Dateien oder Style-Erkennung verdecken. Der Pakettest erstellt das echte npm-Archiv und installiert es in einem frischen temporären Astro-Nutzerprojekt:
+
+```sh
+npm run test:package
+```
+
+Der Test benötigt Zugriff auf npm-Abhängigkeiten oder einen geeigneten Cache. Er veröffentlicht nichts. Erfolgreiche temporäre Projekte werden entfernt; bei Fehlern bleibt ihr Verzeichnis zur Untersuchung erhalten.
+
+### Was der vorhandene Test abdeckt
+
+`scripts/test-package.ts` prüft erlaubten Archivinhalt, Lizenzdateien und Version und baut das installierte Paket anschließend für `/` und `/demo/`. Dabei werden Nutzer-Routen, MDX, Assets, lokale Schriften, Metadaten, Manifest, Sitemap und Fehlerdokumente kontrolliert.
+
+Außerdem prüft er den optionalen Blog und einen Dev-Server, in dem der erste Beitrag ohne Neustart angelegt, geändert und entfernt wird. Betreiber- und Datenschutzprüfungen nutzen temporäre Testdaten statt der privaten `.env` des Maintainers.
+
+### Das Nutzer-Testprojekt bei Bedarf erweitern
+
+Die Vorlage liegt unter `scripts/fixtures/package-consumer/`. Ergänze dort bei einer neuen öffentlichen Prop oder einem geänderten verarbeiteten Browser-Modul ein realistisches Beispiel und prüfe das installierte Ergebnis. Halte die Vorlage klein und unabhängig von den Demo-Inhalten.
+
+Aktualisiere öffentliche Imports in `src/package/components.ts` oder dem passenden vorhandenen Einstieg. Prüfe auch die `files`-Liste und Exporte in `package.json`. Demo-Seiten, private Umgebungswerte, Build-Ausgaben und `node_modules` gehören nicht ins Archiv.
+
+Ein bestandener Pakettest ist ein Teil der Durchsicht. Die [Prüfungsanleitung](/dokumentation/einstieg/mitarbeiten/qualitaetspruefungen/) nennt die übrigen Kontrollen. Paketveröffentlichung oder Release benötigen weiterhin eine getrennte ausdrückliche Anweisung.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)

@@ -1,0 +1,38 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>An Sproutsite mitarbeiten</Eyebrow>
+
+## Theme-Anpassungen in einem Website-Projekt ermöglichen
+
+<Alert variant="warning" style="soft">
+    Offen – zukünftige Erweiterung. Diese Seite beschreibt das Ziel; eine
+    unterstützte Umsetzung steht noch aus.
+</Alert>
+
+Ziel ist ein unterstützter Weg, mit dem das eigene Website-Team das Default-Theme behält und einzelne Styles oder Komponenten anpasst oder eine unabhängige Darstellung ohne Inhaltsmigration auswählt.
+
+### Was bereits vorhanden ist
+
+Core und Default-Theme sind im Quellcode getrennt. Mitwirkende können diese Quellen in der Arbeitskopie bearbeiten. Vorhandene Einstellungen für Typografie, Hero und Komponenten decken einzelne Wünsche ab. Eine öffentliche Consumer-Theme-API entsteht daraus noch nicht.
+
+### Offene Entscheidungen
+
+Definiere einen kleinen öffentlichen Einstieg für lokale Styles oder den Austausch von Komponenten sowie Ladefolge und Kompatibilitätszusagen. Kläre, welche Tokens und Inhaltskomponenten unterstützt werden. Dokumentiere keinen Theme-Loader oder Konfigurationsschalter, bevor er existiert.
+
+### Abnahmekriterien
+
+- Vorhandene Website-Inhalte bleiben gültig und darstellbar.
+- Nutzer des Default-Themes benötigen für eine optionale Erweiterung keine Migration.
+- Basispfade, Sprachlinks, Metadaten und Fehlerseiten funktionieren weiterhin.
+- Die Erweiterung besitzt gezielte Quelltests, ein Beispiel im installierten Nutzerprojekt und zugängliche responsive Ausgabe.
+
+Die [Theme-Quellanleitung](/dokumentation/einstieg/mitarbeiten/theme-und-styles/) erklärt die heute möglichen Arbeiten. Diese Seite hält ein Umsetzungsziel fest. Sie ist weder eine funktionierende Überschreibungsanleitung noch eine Release-Zusage.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)

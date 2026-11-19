@@ -1,0 +1,37 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Contribute to Sproutsite</Eyebrow>
+
+## Check how visitors actually use the change
+
+Sproutsite targets WCAG 2.2 AA. Automated checks are useful evidence, but they do not establish full conformance. Start with the affected component and page, then widen the review when shared behaviour changes.
+
+### Manual checks
+
+- Follow the reading order and heading structure.
+- Use Tab and Shift+Tab; verify visible focus and that the header does not cover it.
+- Operate the relevant controls without a mouse; check Escape where a dismissible hint or menu uses it.
+- Inspect narrow screens for horizontal page overflow and clipped content.
+- Check text and icon contrast in every supported tone and state.
+
+Do not rely on colour alone for status. Keep alternative text meaningful and avoid unnecessary ARIA when native HTML already provides the interaction.
+
+### Run the existing browser checks
+
+```sh
+npm run test:a11y
+```
+
+This command builds the demo first, so its environment prerequisites apply. The existing `scripts/test-a11y.ts` uses Playwright and axe to inspect generated routes on mobile and desktop, including focus and overflow checks.
+
+A regression check should recreate the real failure. For example, a Card hint must stay visible when keyboard focus jumps from a distant scroll position; checking only its class names would miss that behaviour.
+
+Describe manual observations alongside automated results. If a contrast issue depends on an actual image, review that image rather than assuming a generic surface test covers it.
+
+[Back to the quick start and more topics](/documentation/getting-started/contributing/)

@@ -1,0 +1,29 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>An Sproutsite mitarbeiten</Eyebrow>
+
+## Einen überschaubaren Beitrag wählen
+
+Ein nachvollziehbarer Dokumentationsfehler, ein fehlendes Beispiel für eine vorhandene Prop oder ein kleiner Fehler mit eindeutigem Sollverhalten eignen sich zum Einstieg. Halte das aktuelle und das gewünschte Verhalten fest, bevor du Code änderst.
+
+### Auf einem Branch arbeiten
+
+Der kurze Einstieg legt in einer neuen Arbeitskopie `docs/first-change` an. Wähle für deine tatsächliche Aufgabe einen aussagekräftigen Branchnamen. Kannst du nicht in das Projekt-Repository pushen, arbeitest du in einem eigenen GitHub-Fork und schlägst den Branch als Pull Request vor.
+
+Halte den Diff auf die Aufgabe begrenzt. Erzeugtes `dist`, installierte Abhängigkeiten, npm-Archive und eine private `.env` gehören nicht hinein. Vermeide nebenbei geänderte Formatierungen. `git diff` soll auch für jemanden verständlich sein, der deine lokale Arbeit nicht verfolgt hat.
+
+### Ergebnis prüfen und beschreiben
+
+Wähle mit der [Prüfungsanleitung](/dokumentation/einstieg/mitarbeiten/qualitaetspruefungen/) die nötige Kontrolle. Zeige bei einer visuellen Änderung die betroffene Ansicht auf einer repräsentativen Desktop- und Mobilbreite. Beschreibe Problem, neues Verhalten und Prüfungen im Pull Request.
+
+Ändert sich eine öffentliche Prop, ein Inhaltsschema oder ein Import, erläutere die Auswirkungen auf bestehende Websites. Besprich das Konzept, bevor du eine große Erweiterung mit noch offener API baust.
+
+Erhalte zutreffende Copyright-, Lizenz- und NOTICE-Hinweise. Paketveröffentlichung, Versionsanpassung und Releases bleiben getrennte Aufgaben mit ausdrücklicher Freigabe.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)

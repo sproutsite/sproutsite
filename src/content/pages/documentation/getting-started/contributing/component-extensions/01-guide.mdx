@@ -1,0 +1,35 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Contribute to Sproutsite</Eyebrow>
+
+## Support website-owned content components deliberately
+
+<Alert variant="warning" style="soft">
+    Open – future extension. This page describes the goal; a supported
+    implementation is not yet available.
+</Alert>
+
+The goal is to let a website team supply a reusable local component through a documented extension point while preserving the content contract and predictable validation.
+
+### Current boundary
+
+Content MDX permits documented package components and local raster-image imports. Arbitrary local Astro components are not currently accepted just because a file exists in the website.
+
+Contributors can add a reusable component to Sproutsite itself using the [existing component workflow](/documentation/getting-started/contributing/components/). A supported consumer-local extension is a separate feature.
+
+### Questions to resolve
+
+Decide how a component is registered, which props and children are allowed, how errors identify its source file and how the installed package resolves it. Keep TypeScript, Astro processing and static output intact.
+
+The goal is not an unrestricted template language or a general plugin registry. A narrow extension needs clear rules for imports, content safety, style ownership and public compatibility.
+
+Before implementation, describe one real component use case and the smallest API that supports it. Verification must cover valid usage, invalid syntax, consumer installation, base paths and documented examples.
+
+[Back to the quick start and more topics](/documentation/getting-started/contributing/)

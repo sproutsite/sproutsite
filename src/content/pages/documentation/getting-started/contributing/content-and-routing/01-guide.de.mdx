@@ -1,0 +1,33 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>An Sproutsite mitarbeiten</Eyebrow>
+
+## Dem vorhandenen Inhaltsablauf folgen
+
+Ein Seitenverzeichnis enthält seine `page.yaml`, die optionale `hero.md` und fortlaufend nummerierte Abschnitte. Unterverzeichnisse definieren getrennte Seiten. Die [Inhaltsreferenz](/dokumentation/inhalte/) beschreibt die unterstützten Felder.
+
+### Schemas und Seitenaufbau
+
+`validation.ts` prüft Projektregeln wie Nummerierung, Seitenzuordnung und erlaubte MDX-Komponenten. `pages.ts` setzt Inhalte zu Seiten zusammen. Der öffentliche Inhaltseinstieg liegt unter `src/package/`; lies vor einer geänderten Collection-Anbindung die vorhandenen Exporte.
+
+Nutze Astro Content Collections und die bestehenden Transformationen des Markdown-AST. Ergänze weder einen eigenen Markdown-Parser noch einen parallelen Router oder zusätzlichen Build-Runner für einen einzelnen Inhaltsfall.
+
+### Links, Sprachen und Veröffentlichungswege
+
+`urls.ts`, `language-links.ts` und vorhandene Link-Transformationen verarbeiten URL-Segmente, Übersetzungen und Basispfade. Quelllinks beginnen an der Website-Wurzel; der konfigurierte Basispfad wird genau einmal angewendet. Erhalte externe URLs, E-Mail-, Telefon-, Query- und Fragment-Links.
+
+Prüfe bei einer Routenänderung Navigationsmarkierung, kanonische URLs, Sprachalternativen, interne Sprungmarken und `sitemap.ts`. Auch erzeugte Fehlerdokumente und das Web-App-Manifest benötigen konsistente Adressen.
+
+### Den betroffenen Grenzfall nachweisen
+
+Ergänze eine gezielte Testdatei für eine tiefe Unterseite, ein ungültiges Feld oder den geänderten Linkfall. Prüfe Erfolgs- und Fehlerfall. Übersetzte Dateinamen und Abschnittsnummern bleiben aufeinander abgestimmt.
+
+Führe nach gezielten Tests `npm run check`, `npm test` und `npm run build` aus. Der [Pakettest](/dokumentation/einstieg/mitarbeiten/paket-kompatibilitaet/) prüft installierte Verwendung unter `/` und `/demo/`. Öffentliche Schema-Änderungen benötigen Dokumentation und eine Kompatibilitätsbeschreibung.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)

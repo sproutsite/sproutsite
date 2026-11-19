@@ -1,0 +1,22 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Schritt 4</Eyebrow>
+
+## Das Ergebnis prüfen
+
+Lass die Vorschau laufen und öffne ein zweites Terminal im selben Repository:
+
+```sh
+npm run check
+git diff
+```
+
+Behebe gemeldete Fehler und lies den Diff. Deine lokale Website läuft, die erste Änderung ist sichtbar und du weißt, welche Datei betroffen ist.
+
+Vor dem Einreichen eines Beitrags folgst du [Prüfungen und Pull Requests](/dokumentation/einstieg/mitarbeiten/qualitaetspruefungen/). Dort stehen die vollständigen Prüfungen und die zusätzliche Konfiguration für einen Produktionsbuild der Demo.

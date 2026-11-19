@@ -1,0 +1,42 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>An Sproutsite mitarbeiten</Eyebrow>
+
+## Die passenden Prüfungen vorbereiten
+
+Oben bleibt die bisherige Checkliste zum Einreichen erhalten. Für eine erste Textkorrektur ist `npm run check` ein hilfreiches frühes Ergebnis. Ein Beitrag ist erst dann bereit zur Durchsicht, wenn die für seinen Umfang nötigen Prüfungen und die Repository-Vorgaben erfüllt sind.
+
+### Formatierung, Quellregeln und Tests
+
+```sh
+npm run format:check
+npm run test:source
+npm run check
+npm test
+```
+
+Nutze `npm run format`, wenn Formatierung korrigiert werden muss. Prüfe den Diff danach auf unbeteiligte Dateien. Die Quellprüfung lehnt projekteigene JavaScript-Dateien ab; Implementierung und Helfer werden in TypeScript geschrieben.
+
+### Produktionsbuilds der Demo benötigen Konfiguration
+
+`npm run build` validiert Inhalte, baut die Demo und prüft erzeugte Links und Metadaten. Seiten mit Betreiber- oder Datenschutzkomponenten benötigen gültige Umgebungswerte. Kopiere `.env.dist` als Ausgangsvorlage in eine lokale ausgeschlossene `.env` und ergänze die für deinen Build passende Konfiguration.
+
+Die Musteridentität der Vorlage wird bewusst als Produktionsangabe abgelehnt. Deaktiviere dafür keine Validierung und checke keine privaten Werte ein. Benenne eine fehlende Umgebungsvoraussetzung in deinen Prüfhilfen. Entwicklungsvorschau und Quellprüfungen sind von dieser Produktionsanforderung getrennt.
+
+Der [Pakettest](/dokumentation/einstieg/mitarbeiten/paket-kompatibilitaet/) verwendet eigene temporäre Consumer-Testdateien einschließlich synthetischer Testkonfiguration für die installierte Verwendung. Er ersetzt nicht die Kontrolle geänderter Demo-Inhalte.
+
+### Prüfungen passend zum Umfang ergänzen
+
+Für sichtbare Komponenten kommen [Storybook](/dokumentation/einstieg/mitarbeiten/storybook/) und [Tastatur-/Viewport-Prüfungen](/dokumentation/einstieg/mitarbeiten/barrierefreiheit/) hinzu. Für Paketänderungen verwendest du `npm run test:package`. Mit `npm run build:demo` prüfst du die Demo unter einem Basispfad und stellst danach wieder den normalen Build her.
+
+Vor einem Release führt `npm run prepublishOnly` die Veröffentlichungsprüfungen des Repositorys aus. Das ist ein manueller Prüfbefehl, keine Freigabe für `npm publish`, ein Tag oder einen GitHub-Release.
+
+Nenne bestandene Prüfungen, Fehler und manuelle Einschränkungen. Nicht ausgeführte Prüfungen gelten nicht als erfolgreich.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)

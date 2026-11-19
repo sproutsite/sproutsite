@@ -1,0 +1,87 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import image0 from './_assets/local-setup.png';
+import image1 from './_assets/architecture.png';
+import image2 from './_assets/first-contribution.png';
+import image3 from './_assets/coding-agents.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>What's next?</Eyebrow>
+
+## Find your way in the repository
+
+Use these guides when you need setup details, a map of the source tree or a small first task.
+
+<Columns>
+    <Column span={4}>
+        <Card
+            image={image0}
+            imageAlt="Terminal window beside a folder and download arrow"
+        >
+
+            ### Set up your checkout
+
+            Install dependencies and resolve local setup problems.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/local-setup/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image1}
+            imageAlt="Three connected layers beside a browser panel"
+        >
+
+            ### Repository architecture
+
+            Find the core, default theme and demo content.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/architecture/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image2}
+            imageAlt="Two documents with a branch and checkmark"
+        >
+
+            ### Your first contribution
+
+            Choose a small task and prepare a clear pull request.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/first-contribution/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image3}
+            imageAlt="Terminal prompt next to a document and cursor"
+        >
+
+            ### Coding agents in the repository
+
+            Scope framework tasks and review the changes.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/coding-agents/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

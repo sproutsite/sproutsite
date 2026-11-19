@@ -1,0 +1,134 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import image0 from './_assets/theme-extensions.png';
+import image1 from './_assets/component-extensions.png';
+import image2 from './_assets/forms.png';
+import image3 from './_assets/search.png';
+import image4 from './_assets/continuous-integration.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>What's next?</Eyebrow>
+
+## Zukünftige Erweiterungen mitgestalten
+
+Diese Möglichkeiten sind noch offen. Die Unterseiten beschreiben ihr Ziel und die technischen Fragen, die vorher geklärt werden müssen.
+
+<Columns>
+    <Column span={4}>
+        <Card
+            image={image0}
+            imageAlt="Website-Fläche mit einer zusätzlichen Kachel für Designoptionen"
+            badges={{
+                text: "Offen",
+                variant: "warning",
+                style: "soft",
+                hover: "Eine öffentliche API für Theme-Anpassungen oder die Theme-Auswahl fehlt noch. Die interne Trennung von Core und Theme bildet die Grundlage.",
+            }}
+        >
+
+            ### Öffentliche Theme-Erweiterungen
+
+            Unterstützte Anpassungen und eigene Themes planen.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/theme-erweiterungen/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image1}
+            imageAlt="Ein Puzzleteil ergänzt eine Komponentenfläche"
+            badges={{
+                text: "Offen",
+                variant: "warning",
+                style: "soft",
+                hover: "Inhalts-MDX erlaubt derzeit dokumentierte Paketkomponenten. Eine unterstützte Erweiterung für lokale Komponenten fehlt noch.",
+            }}
+        >
+
+            ### Eigene Komponenten anbinden
+
+            Eine geprüfte Anbindung für eigene Website-Bausteine entwerfen.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/komponenten-erweiterungen/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image2}
+            imageAlt="Formularfläche mit Absende-Button und Briefumschlag"
+            badges={{
+                text: "Offen",
+                variant: "warning",
+                style: "soft",
+                hover: "Sproutsite enthält keinen Endpunkt zum Absenden. Eine zukünftige Einbindung benötigt ein festgelegtes Backend und einen passenden Umgang mit Daten.",
+            }}
+        >
+
+            ### Formulare absenden
+
+            Zustellung, Validierung und zugängliche Rückmeldungen planen.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/formulare/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image3}
+            imageAlt="Suchfeld über Ergebnisflächen mit einer Lupe"
+            badges={{
+                text: "Offen",
+                variant: "warning",
+                style: "soft",
+                hover: "Eine Suchkomponente und ein Suchindex fehlen noch. Sprache, Basispfade und Tastaturbedienung müssen berücksichtigt werden.",
+            }}
+        >
+
+            ### Eine interne Suche entwickeln
+
+            Index, Suchoberfläche und sprachbezogene Ergebnisse planen.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/suche/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image4}
+            imageAlt="Verbundene Kacheln für Terminal, Prüfung, Paket und Browser"
+            badges={{
+                text: "Offen",
+                variant: "warning",
+                style: "soft",
+                hover: "Im Repository ist noch kein CI-Workflow hinterlegt. Die vorhandenen npm-Prüfungen laufen lokal; ihre Automatisierung ist offen.",
+            }}
+        >
+
+            ### Repository-Prüfungen automatisieren
+
+            Einen CI-Ablauf mit den vorhandenen Prüfungen vorbereiten.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/kontinuierliche-integration/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

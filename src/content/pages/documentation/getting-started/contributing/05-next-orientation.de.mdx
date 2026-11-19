@@ -1,0 +1,87 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import image0 from './_assets/local-setup.png';
+import image1 from './_assets/architecture.png';
+import image2 from './_assets/first-contribution.png';
+import image3 from './_assets/coding-agents.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>What's next?</Eyebrow>
+
+## Im Repository zurechtfinden
+
+Hier findest du Details zur Einrichtung, die Orientierung im Quellcode und Hilfe für einen ersten Beitrag.
+
+<Columns>
+    <Column span={4}>
+        <Card
+            image={image0}
+            imageAlt="Terminalfenster neben einem Ordner und Download-Pfeil"
+        >
+
+            ### Arbeitskopie einrichten
+
+            Abhängigkeiten installieren und lokale Startprobleme lösen.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/lokal-einrichten/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image1}
+            imageAlt="Drei verbundene Ebenen neben einem Browserfenster"
+        >
+
+            ### Architektur des Repositorys
+
+            Core, Default-Theme und Demo-Inhalte zuordnen.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/architektur/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image2}
+            imageAlt="Zwei Dokumente mit einer Verzweigung und einem Häkchen"
+        >
+
+            ### Dein erster Beitrag
+
+            Eine kleine Aufgabe wählen und den Pull Request vorbereiten.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/erster-beitrag/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image3}
+            imageAlt="Terminal-Eingabe neben einem Dokument und Mauszeiger"
+        >
+
+            ### Coding-Agenten im Repository
+
+            Framework-Aufgaben eingrenzen und Änderungen prüfen.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/coding-agenten/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

@@ -1,0 +1,35 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Contribute to Sproutsite</Eyebrow>
+
+## Verify the archive users actually install
+
+A local source checkout can hide missing exports, files or style scanning. The package check creates the real npm archive and installs it into a fresh temporary Astro consumer:
+
+```sh
+npm run test:package
+```
+
+The test needs npm dependency access or an appropriate cache. It does not publish. Successful temporary projects are removed; failed runs keep their directory for inspection.
+
+### What the existing test covers
+
+`scripts/test-package.ts` checks the archive’s allowed contents, licensing files and version, then builds the installed package for `/` and `/demo/`. It verifies consumer routes, MDX, assets, local fonts, metadata, manifest, sitemap and error documents.
+
+It also checks optional blog behaviour and a dev server where the first article is added, edited and removed without a restart. Operator/privacy tests use temporary fixtures rather than the maintainer’s private `.env`.
+
+### Extend the consumer fixture when needed
+
+The fixture lives under `scripts/fixtures/package-consumer/`. If a public prop or a processed browser module changes, add a realistic example there and verify the installed result. Keep the fixture small and independent of the demo’s content.
+
+Update public imports in `src/package/components.ts` or the relevant existing entry, and review the `files` list and exports in `package.json`. Do not include demo pages, private environment values, generated output or `node_modules` in the archive.
+
+A passing package test is one part of review. Use the [checks guide](/documentation/getting-started/contributing/quality-checks/) for the remaining tests. Publishing a package or creating a release still requires a separate explicit request.
+
+[Back to the quick start and more topics](/documentation/getting-started/contributing/)

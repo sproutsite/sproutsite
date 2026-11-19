@@ -1,0 +1,39 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Contribute to Sproutsite</Eyebrow>
+
+## Maintain the existing English and German website
+
+<Alert variant="info" style="soft">
+    Partly available. English and German work; further locales and a flexible
+    default-language workflow remain open.
+</Alert>
+
+The repository demonstrates English at `/` and German below `/de/`. Matching files share one page directory: `page.yaml` and `page.de.yaml`, `hero.md` and `hero.de.md`, and identically numbered section pairs.
+
+### Translate identity, not just text
+
+A localized `url` changes the page’s own URL segment; the parent page segments still apply. Preserve the shared directory identity so the language switcher can find the corresponding page. Check nested routes instead of assuming a simple string replacement.
+
+Keep `site.yaml` and `site.de.yaml` consistent for production URL, base and configured locales. Translate navigation labels, metadata, content, alternative text and badge hints together.
+
+### Test the complete route
+
+Switch language from a child page and verify the counterpart. When no translated counterpart exists, the switcher should use that language’s homepage. Check canonical URLs, sitemap alternatives and localized error files too.
+
+The [website language guide](/documentation/getting-started/your-website/languages/) records the supported consumer setup and its limits. Source tests include `localized-content.test.ts` and `language-links.test.ts`.
+
+### Further languages remain open
+
+Adding another locale needs more than copied Markdown: review the configuration schema, locale-specific UI, route handling, fallback rules, flags, metadata and error-document generation.
+
+A completely flexible default-language workflow is not finished either. The current configuration loader treats English’s `site.yaml` specially. Preserve existing routes while designing that extension, and document any migration or redirect requirement.
+
+[Back to the quick start and more topics](/documentation/getting-started/contributing/)

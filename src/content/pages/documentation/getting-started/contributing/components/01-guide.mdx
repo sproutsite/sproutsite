@@ -1,0 +1,37 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Contribute to Sproutsite</Eyebrow>
+
+## Extend an existing component first
+
+Find the smallest suitable building block under `src/themes/default/components/`: atoms, molecules, organisms or technical layout primitives. Keep its `.astro` and `.css` together in its own PascalCase directory.
+
+### Props, presentation and behaviour
+
+Use typed Astro props and preserve existing defaults where possible. Keep presentation in the component CSS. Browser behaviour belongs in an Astro-processed TypeScript script or imported `.ts` module, not an inline handler.
+
+The Card badge implementation is a useful existing example: the component renders semantic markup, shared descriptors are validated, and its browser module handles hover and focus. Inspect the source rather than copying an unrelated demo page.
+
+### Update the content contract
+
+A public component or prop also needs support in `src/lib/sproutsite/validation.ts`. Content MDX uses an allowlist; a component that renders in Storybook can still be rejected by the content validator.
+
+Export reusable components through `src/package/components.ts`. Update the [showcase](/showcase/), both language versions and the relevant [Storybook stories](/documentation/getting-started/contributing/storybook/). Add tests for the intended behaviour and useful invalid inputs; avoid tests that only copy implementation strings.
+
+### Verify compatibility
+
+For Card badge validation, an existing focused check is:
+
+```sh
+node --import tsx --test tests/card-badges.test.ts
+```
+
+Choose the test that matches your own change. Before submitting, run the broader [checks](/documentation/getting-started/contributing/quality-checks/); if exports or installed usage change, also run the [package test](/documentation/getting-started/contributing/package-compatibility/). A public API change needs an explicit compatibility explanation.
+
+[Back to the quick start and more topics](/documentation/getting-started/contributing/)

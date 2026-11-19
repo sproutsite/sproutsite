@@ -1,0 +1,134 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import image0 from './_assets/theme-extensions.png';
+import image1 from './_assets/component-extensions.png';
+import image2 from './_assets/forms.png';
+import image3 from './_assets/search.png';
+import image4 from './_assets/continuous-integration.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>What's next?</Eyebrow>
+
+## Help shape future extensions
+
+These capabilities are still open. Their pages describe the goal and the technical questions that need to be resolved first.
+
+<Columns>
+    <Column span={4}>
+        <Card
+            image={image0}
+            imageAlt="Website panel with an additional design-control tile"
+            badges={{
+                text: "Open",
+                variant: "warning",
+                style: "soft",
+                hover: "A public override or theme-selection API is not implemented. Internal separation of core and theme is the starting point.",
+            }}
+        >
+
+            ### Public theme extension points
+
+            Plan supported overrides and independent themes.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/theme-extensions/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image1}
+            imageAlt="Puzzle piece added to a component board"
+            badges={{
+                text: "Open",
+                variant: "warning",
+                style: "soft",
+                hover: "Content MDX currently permits documented package components. A supported extension for arbitrary local components is still missing.",
+            }}
+        >
+
+            ### Local component extensions
+
+            Define a validated extension for website-owned components.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/component-extensions/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image2}
+            imageAlt="Form panel with a send control and envelope"
+            badges={{
+                text: "Open",
+                variant: "warning",
+                style: "soft",
+                hover: "Sproutsite has no built-in submission endpoint. A future integration needs a defined backend and privacy-conscious handling.",
+            }}
+        >
+
+            ### Form submission
+
+            Plan delivery, validation and accessible feedback.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/forms/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image3}
+            imageAlt="Search field above result panels with a magnifying glass"
+            badges={{
+                text: "Open",
+                variant: "warning",
+                style: "soft",
+                hover: "There is no bundled search component or index yet. The solution must account for language, base paths and keyboard use.",
+            }}
+        >
+
+            ### Build a site search
+
+            Plan an index, a search interface and language-aware results.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/search/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image4}
+            imageAlt="Connected terminal, check, package and browser tiles"
+            badges={{
+                text: "Open",
+                variant: "warning",
+                style: "soft",
+                hover: "No CI workflow is committed in this repository. Existing npm checks can run locally; automation is a future task.",
+            }}
+        >
+
+            ### Automate repository checks
+
+            Prepare a CI workflow using the existing checks.
+
+            <CardActions>
+                [Read the guide](/documentation/getting-started/contributing/continuous-integration/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

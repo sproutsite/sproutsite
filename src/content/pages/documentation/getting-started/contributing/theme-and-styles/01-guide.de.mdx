@@ -1,0 +1,31 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>An Sproutsite mitarbeiten</Eyebrow>
+
+## Das Default-Theme in seiner Arbeitskopie ändern
+
+Diese Anleitung richtet sich an Sproutsite-Mitwirkende, die `src/themes/default/` bearbeiten. Sie beschreibt keine Consumer-API für eigene Überschreibungen. Der getrennte [Erweiterungsbedarf](/dokumentation/einstieg/mitarbeiten/theme-erweiterungen/) hält diesen fehlenden öffentlichen Ablauf fest.
+
+### Den Style-Einstieg erhalten
+
+`src/themes/default/styles/theme.css` ist der einzige Style-Einstieg des Default-Themes. Er lädt Framework, globale Grundlagen, semantische Töne und Komponenten-Styles in dokumentierter Reihenfolge. Erhalte diese Kaskade, solange du eine Änderung nicht bewusst überprüfst.
+
+Globale Grundlagen liegen in `styles/foundation/`, semantische Section-Töne in `styles/themes/section-tones.css`. Die konkrete Darstellung einer Komponente gehört in ihre eigene CSS-Datei, nicht in eine wachsende globale Sammlung von Überschreibungen.
+
+### Die vorhandene Gestaltung weiterverwenden
+
+Nutze die aktuelle Palette aus Navy, Blau, Petrol und sparsamem Grün. Erhalte die gemeinsame `site-shell`-Kante, die Überschriftenhierarchie und das responsive Verhalten. Lies vorhandene Tokens und Theme-Zuordnungen, bevor du weitere Farben oder Abstände ergänzt.
+
+Theme-Klassen beginnen mit `ss-` und verwenden natives CSS-Nesting. Elemente und Varianten bleiben im Block ihrer Komponente. Inhaltsdateien nehmen keine beliebigen Styling-Klassen oder Inline-Styles auf.
+
+### Die relevanten Zustände prüfen
+
+Kontrolliere passende Kontexte mit default, muted und brand. Eine kleine Abstandsänderung darf weder Fokus verdecken noch Hinweise abschneiden oder horizontale Überläufe erzeugen. Prüfe Desktop und Mobilgeräte und nutze danach [Storybook](/dokumentation/einstieg/mitarbeiten/storybook/) sowie die [Barrierefreiheitsprüfung](/dokumentation/einstieg/mitarbeiten/barrierefreiheit/) für den betroffenen Baustein.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)

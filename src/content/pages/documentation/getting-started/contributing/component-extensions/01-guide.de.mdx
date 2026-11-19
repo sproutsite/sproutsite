@@ -1,0 +1,35 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>An Sproutsite mitarbeiten</Eyebrow>
+
+## Eigene Website-Bausteine bewusst unterstützen
+
+<Alert variant="warning" style="soft">
+    Offen – zukünftige Erweiterung. Diese Seite beschreibt das Ziel; eine
+    unterstützte Umsetzung steht noch aus.
+</Alert>
+
+Ziel ist, dass ein Website-Team eine lokale wiederverwendbare Komponente über eine dokumentierte Anbindung bereitstellen kann und dabei Inhaltsvertrag und nachvollziehbare Validierung erhält.
+
+### Aktuelle Grenze
+
+Inhalts-MDX erlaubt dokumentierte Paketkomponenten und lokale Rasterbild-Imports. Eine beliebige lokale Astro-Komponente wird nicht bereits dadurch akzeptiert, dass ihre Datei in der Website liegt.
+
+Mitwirkende können über den [vorhandenen Komponentenablauf](/dokumentation/einstieg/mitarbeiten/komponenten/) einen wiederverwendbaren Baustein zu Sproutsite selbst hinzufügen. Eine unterstützte lokale Erweiterung im Nutzerprojekt ist eine getrennte Funktion.
+
+### Zu klärende Fragen
+
+Lege fest, wie eine Komponente bekannt gemacht wird, welche Props und Kinder erlaubt sind, wie Fehler die Quelldatei benennen und wie das installierte Paket sie auflöst. TypeScript, Astro-Verarbeitung und statische Ausgabe bleiben erhalten.
+
+Ziel ist weder eine unbegrenzte Templatesprache noch eine allgemeine Plugin-Registry. Eine schmale Erweiterung benötigt klare Regeln für Imports, sichere Inhalte, Style-Zuständigkeit und öffentliche Kompatibilität.
+
+Beschreibe vor der Implementierung einen echten Komponentenfall und die kleinste dafür nötige API. Die Prüfung muss gültige Verwendung, ungültige Syntax, Nutzerinstallation, Basispfade und dokumentierte Beispiele abdecken.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)

@@ -1,0 +1,110 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import image0 from './_assets/components.png';
+import image1 from './_assets/theme-and-styles.png';
+import image2 from './_assets/content-and-routing.png';
+import image3 from './_assets/docs-and-images.png';
+import image4 from './_assets/translations.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>What's next?</Eyebrow>
+
+## Komponenten und Inhalte weiterentwickeln
+
+Wähle den Bereich für deine Änderung. Beachte die vorhandenen Zuständigkeiten und dokumentiere Auswirkungen auf Website-Projekte.
+
+<Columns>
+    <Column span={4}>
+        <Card
+            image={image0}
+            imageAlt="Oberfläche mit modularen Kacheln und einem Puzzleteil"
+        >
+
+            ### Komponenten und öffentliche Props
+
+            Einen Baustein samt Validierung und Beispielen erweitern.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/komponenten/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image1}
+            imageAlt="Designfläche mit Farbmustern, einer Rundung und einem Regler"
+        >
+
+            ### Theme und Komponenten-Styles
+
+            Mit Tokens, CSS-Kaskade und responsiven Layouts arbeiten.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/theme-und-styles/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image2}
+            imageAlt="Ordner- und Seitenbaum mit einem Routing-Pfeil"
+        >
+
+            ### Inhalte und Routing
+
+            Schemas, Seitenaufbau und Links gezielt ändern.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/inhalte-und-routing/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image3}
+            imageAlt="Aufgeschlagenes Handbuch neben einer Landschaftsillustration"
+        >
+
+            ### Dokumentation und Bilder
+
+            Beispiele, Übersetzungen und passende Bilddateien pflegen.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/dokumentation-und-bilder/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image4}
+            imageAlt="Zwei Seiten mit Sprachwechsel um eine Weltkugel"
+            badges={{
+                text: "Teilweise möglich",
+                variant: "info",
+                style: "soft",
+                hover: "Englisch und Deutsch werden unterstützt. Weitere Sprachen und ein vollständig flexibler Ablauf für die Standardsprache stehen noch aus.",
+            }}
+        >
+
+            ### Sprachen und Übersetzungen
+
+            Englisch und Deutsch abstimmen und weitere Sprachen vorbereiten.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/uebersetzungen/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

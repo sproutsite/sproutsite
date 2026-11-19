@@ -1,0 +1,31 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>An Sproutsite mitarbeiten</Eyebrow>
+
+## Start- und Umgebungsprobleme lösen
+
+Die Einrichtung oben enthält die bisherigen Repository-Anweisungen. Verwende die Version aus `.nvmrc`, das eingecheckte `package-lock.json` und `npm ci` für eine nachvollziehbare Installation. Aktualisiere keine Abhängigkeiten nebenbei, während du einen anderen Fehler untersuchst.
+
+### Ordner und Laufzeit prüfen
+
+Führe `node --version` und `npm --version` in der Arbeitskopie aus. Die Befehle gehören neben die `package.json` dieses Repositorys. `npm run dev` zeigt die tatsächliche Vorschauadresse; ist ein Port belegt, öffnest du die ausgegebene Alternative.
+
+Lies bei Installationsfehlern zuerst die erste npm-Fehlermeldung, bevor du das Lockfile änderst. Prüfe Node-Version und Zugriff auf die npm-Registry. Ein fehlendes Paket ist kein Anlass, eine weitere installierte Kopie von `sproutsite` in dieses Framework-Repository aufzunehmen.
+
+### Lokale Vorschau und Produktionskonfiguration
+
+Die Entwicklungsvorschau kann ohne private `.env` beispielhafte Betreiberangaben anzeigen. Ein Produktionsbuild der Demo benötigt bewusst vollständige Betreiber- und Datenschutzkonfiguration. `.env.dist` führt die Schlüssel auf; ihre Musteridentität wird als Produktionsangabe nicht akzeptiert.
+
+Halte `.env` aus Git heraus. Kopiere keine privaten Angaben des Maintainers in Issues, Pull Requests oder öffentliche Testdateien. Die [Prüfungsanleitung](/dokumentation/einstieg/mitarbeiten/qualitaetspruefungen/) erklärt die Build-Voraussetzung und die getrennten temporären Consumer-Tests.
+
+### Die erste Änderung klein halten
+
+Beginne auf einem eigenen Branch und erhalte einen funktionierenden Ausgangsstand. Eine Korrektur in einem Demo-Absatz benötigt weder eine neue Komponente noch eine Abhängigkeit oder zusätzliche Inhaltssyntax. Größere Änderungen behandeln die passenden Unterseiten.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)

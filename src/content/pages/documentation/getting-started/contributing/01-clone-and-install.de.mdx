@@ -1,0 +1,27 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Schritt 1</Eyebrow>
+
+## Deine Arbeitskopie anlegen
+
+Du benötigst Git, npm und die in `.nvmrc` hinterlegte Node.js-LTS-Version. Klone das Sproutsite-Framework-Repository:
+
+```sh
+git clone https://github.com/sproutsite/sproutsite.git
+cd sproutsite
+```
+
+Nutzt du nvm, führe hier `nvm use` aus. Andernfalls wählst du die Version aus `.nvmrc` mit deiner bevorzugten Node-Verwaltung. Installiere danach die festgelegten Abhängigkeiten und lege einen Branch an:
+
+```sh
+npm ci
+git switch -c docs/first-change
+```
+
+Bei Startproblemen hilft die [lokale Einrichtung](/dokumentation/einstieg/mitarbeiten/lokal-einrichten/). Für eine eigene Website verwendest du stattdessen den [Website-Einstieg](/dokumentation/einstieg/deine-website/).

@@ -1,0 +1,37 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>An Sproutsite mitarbeiten</Eyebrow>
+
+## Zuerst einen vorhandenen Baustein erweitern
+
+Suche unter `src/themes/default/components/` die kleinste passende Ebene: Atoms, Molecules, Organisms oder technische Layout-Bausteine. `.astro` und `.css` bleiben zusammen in einem eigenen PascalCase-Verzeichnis.
+
+### Props, Darstellung und Verhalten
+
+Verwende typisierte Astro-Props und erhalte bestehende Standardwerte, soweit möglich. Die Darstellung gehört in die Komponenten-CSS. Browser-Verhalten steht in einem von Astro verarbeiteten TypeScript-Skript oder importierten `.ts`-Modul, nicht in einem Inline-Handler.
+
+Die Card-Badges sind ein vorhandenes Beispiel: Die Komponente rendert semantisches Markup, gemeinsame Angaben werden validiert, und ein Browser-Modul verarbeitet Hover und Fokus. Lies die Quellen, statt eine beliebige Demoseite zu kopieren.
+
+### Den Inhaltsvertrag ergänzen
+
+Eine öffentliche Komponente oder Prop benötigt auch Unterstützung in `src/lib/sproutsite/validation.ts`. Inhalts-MDX verwendet eine Freigabeliste. Eine in Storybook sichtbare Komponente kann deshalb von der Inhaltsvalidierung noch abgewiesen werden.
+
+Exportiere wiederverwendbare Komponenten über `src/package/components.ts`. Aktualisiere den [Showcase](/showcase/), beide Sprachfassungen und die passenden [Storybook-Stories](/dokumentation/einstieg/mitarbeiten/storybook/). Prüfe gewünschtes Verhalten und sinnvolle ungültige Eingaben; vermeide Tests, die nur Implementierungsstrings nachbauen.
+
+### Kompatibilität prüfen
+
+Für die Card-Badge-Validierung gibt es beispielsweise diesen gezielten Test:
+
+```sh
+node --import tsx --test tests/card-badges.test.ts
+```
+
+Wähle für deine Änderung den tatsächlich passenden Test. Vor dem Einreichen folgen die breiteren [Prüfungen](/dokumentation/einstieg/mitarbeiten/qualitaetspruefungen/). Ändern sich Exporte oder installierte Verwendung, kommt der [Pakettest](/dokumentation/einstieg/mitarbeiten/paket-kompatibilitaet/) hinzu. Eine öffentliche API-Änderung benötigt eine ausdrückliche Kompatibilitätsbeschreibung.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)

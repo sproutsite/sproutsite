@@ -1,0 +1,27 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Step 1</Eyebrow>
+
+## Get your working copy
+
+You need Git, npm and the Node.js LTS version recorded in `.nvmrc`. Clone the Sproutsite framework repository:
+
+```sh
+git clone https://github.com/sproutsite/sproutsite.git
+cd sproutsite
+```
+
+If you use nvm, run `nvm use` here. Otherwise select the version from `.nvmrc` with your preferred Node manager. Then install the locked dependencies and create a branch:
+
+```sh
+npm ci
+git switch -c docs/first-change
+```
+
+If setup fails, use the [local setup guide](/documentation/getting-started/contributing/local-setup/). To build your own website instead, follow the [website quick start](/documentation/getting-started/your-website/).

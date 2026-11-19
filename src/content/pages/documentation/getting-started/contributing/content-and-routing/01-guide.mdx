@@ -1,0 +1,33 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Contribute to Sproutsite</Eyebrow>
+
+## Follow the existing content pipeline
+
+A page directory owns its `page.yaml`, optional `hero.md` and consecutively numbered sections. Child directories define separate pages. The documentation’s [content reference](/documentation/content/) describes the supported fields.
+
+### Schemas and page assembly
+
+`validation.ts` checks the project’s content conventions, including numbering, page association and the allowed MDX components. `pages.ts` assembles content into pages. The public content entry is under `src/package/`; read its existing exports before changing collection wiring.
+
+Use Astro Content Collections and the existing Markdown AST transforms. Do not add a custom Markdown parser, a parallel router or a separate build runner to solve one content case.
+
+### Links, languages and deployment paths
+
+`urls.ts`, `language-links.ts` and the existing link transforms handle route segments, translations and deployment bases. Source links are website-root-relative; the configured base must be applied exactly once. Preserve external URLs, email, telephone, query strings and fragments.
+
+When changing a route, check navigation state, canonical URLs, language alternatives, internal fragments and `sitemap.ts`. The generated error documents and web app manifest also need consistent URLs.
+
+### Prove the edge case
+
+Add a focused fixture for a deep child page, an invalid field or the specific link case you are changing. Test the successful path as well as the failure. Keep translated filenames and section numbers aligned.
+
+Run `npm run check`, `npm test` and `npm run build` after the focused tests. The [package test](/documentation/getting-started/contributing/package-compatibility/) verifies installed usage at `/` and `/demo/`. Public schema changes need documentation and a compatibility explanation.
+
+[Back to the quick start and more topics](/documentation/getting-started/contributing/)

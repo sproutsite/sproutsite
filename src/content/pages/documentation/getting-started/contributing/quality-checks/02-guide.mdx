@@ -1,0 +1,42 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Contribute to Sproutsite</Eyebrow>
+
+## Prepare the checks for your change
+
+The instructions above preserve the original submission checklist. For a first text edit, `npm run check` is a useful early result. A contribution is ready for review only after the checks relevant to its scope and the repository requirements are complete.
+
+### Formatting, source rules and tests
+
+```sh
+npm run format:check
+npm run test:source
+npm run check
+npm test
+```
+
+Use `npm run format` when formatting needs correction, then inspect the diff for unrelated files. Source checks reject project-owned JavaScript files; implementation and helpers are TypeScript.
+
+### Production demo builds need configuration
+
+`npm run build` validates content, builds the demo and verifies generated links and metadata. Pages using operator or privacy components require valid environment settings. Copy `.env.dist` to a local ignored `.env` as a starting template, then supply the configuration appropriate to your build.
+
+The template’s example identity is deliberately rejected as production data; do not turn off validation or commit private values to make a build pass. Explain a missing environment prerequisite in your review notes. Development preview and source checks remain separate from that production requirement.
+
+The [package test](/documentation/getting-started/contributing/package-compatibility/) uses its own temporary consumer fixtures, including synthetic test configuration, to verify installed behaviour. It is not a substitute for checking changed demo content.
+
+### Add the checks your scope requires
+
+For visible components, include [Storybook](/documentation/getting-started/contributing/storybook/) and [keyboard/viewport checks](/documentation/getting-started/contributing/accessibility/). For package changes, include `npm run test:package`. Use `npm run build:demo` when testing the demo below a base path and restore the normal build afterwards.
+
+Before a release, `npm run prepublishOnly` runs the repository’s publication checks. That is a manual check command, not permission to run `npm publish`, create a tag or publish a GitHub release.
+
+Report which checks passed, any failure and any manual limitation. Do not label an unperformed check as successful.
+
+[Back to the quick start and more topics](/documentation/getting-started/contributing/)

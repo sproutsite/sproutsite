@@ -1,0 +1,33 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Contribute to Sproutsite</Eyebrow>
+
+## Give the agent the framework context
+
+Open the Sproutsite checkout in the external coding agent you already use. Its workspace should contain this repository’s `AGENTS.md`, `package.json`, `src/lib/` and `src/themes/`. This is different from an editorial task in a generated website.
+
+Start with an inspection task:
+
+```text
+Read AGENTS.md and README. Inspect Card and its badge hints. Explain the
+current keyboard behaviour and point out the tests that cover it.
+Do not change files or publish anything yet.
+```
+
+### Turn a finding into a scoped change
+
+Provide a reproducible issue, the expected behaviour and the relevant page or story. Ask for the smallest suitable change, a meaningful regression check and updated documentation when usage changes.
+
+Review the diff yourself. Core logic, theme presentation and demo content have different responsibilities; an agent should not move styles into core or bypass validation to make an example render.
+
+Run the [appropriate checks](/documentation/getting-started/contributing/quality-checks/) and inspect the browser result. Keep secrets and private environment values out of prompts. An agent’s explanation does not replace a test result.
+
+Sproutsite includes no AI agent. Tool installation, accounts and any subscription are separate from this repository.
+
+[Back to the quick start and more topics](/documentation/getting-started/contributing/)

@@ -1,0 +1,37 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>An Sproutsite mitarbeiten</Eyebrow>
+
+## Eine Komponente ohne die gesamte Seite prüfen
+
+Storybook zeigt isolierte Beispiele der vorhandenen Default-Theme-Komponenten. Starte es in einem eigenen Terminal, während die Repository-Vorschau verfügbar bleibt:
+
+```sh
+npm run storybook
+```
+
+Öffne die von Storybook ausgegebene Adresse; der konfigurierte Entwicklungsport ist 6006. Stories liegen unter `stories/components/` und verwenden dieselben Kategorien wie das Theme.
+
+### Eine vorhandene Story erweitern
+
+Lies eine passende `.stories.ts`, etwa `Card.stories.ts` im Ordner `stories/components/molecules/`. Zeige über Args und Slots einen nützlichen Zustand. Bei einer neuen Prop gehören der Standard und ein Zustand dazu, der die Änderung sichtbar macht.
+
+Nutze echte lokale Assets und die vorhandene Theme-Gestaltung. Prüfe schmale und breite Ansichten. Kontrolliere gegebenenfalls Hover, Tastaturfokus und das Schließen von Hinweisen. Ein statisches Bildbeispiel belegt noch kein funktionierendes Tastaturverhalten.
+
+### Bauen und mit der Dokumentation verbinden
+
+```sh
+npm run build:storybook
+```
+
+Das Ergebnis liegt in `storybook-static/`. Dieser Build prüft die Komponenten-Werkstatt, nicht den Inhaltsvertrag der Website. Ergänze außerdem kopierbare Beispiele im zweisprachigen [Showcase](/showcase/) und erhalte gültige Imports und Props.
+
+Für geänderte installierte Verwendung folgt der [Pakettest](/dokumentation/einstieg/mitarbeiten/paket-kompatibilitaet/). Erhalte den einzigen Theme-Style-Einstieg, statt eine separate Gestaltung nur für Storybook aufzubauen.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)

@@ -1,0 +1,31 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Contribute to Sproutsite</Eyebrow>
+
+## Resolve setup and environment problems
+
+The setup above contains the original repository instructions. Use the version in `.nvmrc`, the committed `package-lock.json` and `npm ci` for a reproducible dependency installation. Avoid updating dependencies while investigating an unrelated issue.
+
+### Check the folder and runtime
+
+Run `node --version` and `npm --version` in the checkout. Commands should run beside this repository’s `package.json`. `npm run dev` prints the actual preview address; if a port is busy, open the alternative address it reports.
+
+If installation fails, read the first npm error before changing the lockfile. Check your Node version and access to the npm registry. A missing package is not a reason to add another installed copy of `sproutsite` to this framework repository.
+
+### Local preview and production configuration
+
+The development preview can show example operator details without a private `.env`. A production demo build deliberately requires complete operator and privacy configuration. `.env.dist` lists those keys, but its example identity is not accepted as production data.
+
+Keep `.env` out of Git. Do not copy the maintainer’s private details into an issue, pull request or public fixture. The [checks guide](/documentation/getting-started/contributing/quality-checks/) explains the build prerequisite and the separate temporary consumer tests.
+
+### Keep your first change small
+
+Start on your own branch and preserve a working baseline. A correction to a demo paragraph needs no new component, dependency or content syntax. Broader changes belong in the relevant guide below.
+
+[Back to the quick start and more topics](/documentation/getting-started/contributing/)

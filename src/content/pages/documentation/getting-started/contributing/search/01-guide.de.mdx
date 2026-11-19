@@ -1,0 +1,35 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>An Sproutsite mitarbeiten</Eyebrow>
+
+## Veröffentlichte Website-Inhalte durchsuchen
+
+<Alert variant="warning" style="soft">
+    Offen – zukünftige Erweiterung. Diese Seite beschreibt das Ziel; eine
+    unterstützte Umsetzung steht noch aus.
+</Alert>
+
+Ziel ist eine Suche für Besucher, die eine Seite oder einen Beitrag ohne bekannten Navigationsweg finden möchten. Sproutsite enthält noch keinen Suchindex, keine Suchkomponente und keine öffentliche Sucheinstellung.
+
+### Bei den statischen Inhalten beginnen
+
+Betrachte einen beim Build erzeugten Index aus veröffentlichten Titeln und Seiteninhalten. Lege Ein- und Ausschlüsse fest. Private Umgebungsdateien und unveröffentlichte Quellen dürfen nicht indexiert werden.
+
+### Routen und Sprachen berücksichtigen
+
+Ergebnisse benötigen korrekte lokalisierte URLs und Basispfade. Entscheide, ob die Suche in der aktiven Sprache bleibt und wie fehlende Übersetzungen behandelt werden. Der Index muss nach Inhaltsänderungen zur erzeugten Website passen.
+
+### Eine zugängliche Bedienung entwickeln
+
+Sorge für eine eindeutige Suchbeschriftung, Tastaturbedienung, hilfreiche Auszüge und verständliche Zustände ohne Eingabe oder Treffer. Wähle die kleinste nützliche Interaktion. Setze weder einen externen Anbieter voraus noch übertrage Suchanfragen ohne bewusste Entscheidung an einen Dienst.
+
+Die Umsetzung benötigt Inhalts-/Indextests, ein Nutzer-Testprojekt und Browserkontrollen. Bis dahin helfen die vorhandenen Möglichkeiten: klare Navigation, Seitentitel und verwandte Links.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)

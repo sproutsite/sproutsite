@@ -1,0 +1,29 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>An Sproutsite mitarbeiten</Eyebrow>
+
+## Die zuständige Ebene bestimmen
+
+Nutze vor einer Änderung die Verzeichnisübersicht oben. Ein sichtbares Problem kann unterschiedliche Ursachen haben: Ein falscher Absatz gehört zu den Demo-Inhalten, ein verrutschtes Icon zur Theme-Komponente und ein falsch aufgelöster Seitenlink zur gemeinsamen URL-Verarbeitung.
+
+### Inhalt, Darstellung und Core
+
+`src/content/` enthält Demo und Dokumentation, keine fest eingebauten Framework-Inhalte. Die installierte Bibliothek muss mit den Dateien einer anderen Website arbeiten. `src/themes/default/` enthält Gestaltung, Astro-Komponenten, Seitenlayouts und CSS. `src/lib/sproutsite/` übernimmt wiederverwendbaren Seitenaufbau, Schemas, Links und Validierung.
+
+`src/package/` verbindet diese Bereiche mit öffentlichen Imports und Astro-Integration. Lies vor einem zusätzlichen Einstieg die vorhandenen Paketexporte. Die Dateien unter `src/pages/` sind kleine Astro-Routenadapter; lege keine handgeschriebene Route für jede Demoseite an.
+
+### Eine Änderung vollständig verfolgen
+
+Prüfe bei einer neuen Card-Prop `Card.astro`, die gemeinsame Datenvalidierung, die MDX-Prüfung in `validation.ts`, den öffentlichen Export, Stories und Showcase-Beispiele. Erfolgreiches Astro-Rendering allein beweist nicht, dass der Inhaltsvertrag die neue Syntax erlaubt.
+
+Verfolge bei Routing-Änderungen `pages.ts`, `urls.ts` und `language-links.ts`. Prüfe danach kanonische URLs und `sitemap.ts`. Der Basispfad muss überall gleich angewendet werden. Eine Theme-Änderung soll keine Migration der Inhaltsdateien erfordern.
+
+Die [Komponentenanleitung](/dokumentation/einstieg/mitarbeiten/komponenten/), [Inhalte und Routing](/dokumentation/einstieg/mitarbeiten/inhalte-und-routing/) und der [Pakettest](/dokumentation/einstieg/mitarbeiten/paket-kompatibilitaet/) behandeln diese Fälle genauer.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)

@@ -1,0 +1,87 @@
+---
+tone:
+    odd: default
+    even: muted
+fullWidth: true
+---
+
+import image0 from './_assets/quality-checks.png';
+import image1 from './_assets/storybook.png';
+import image2 from './_assets/accessibility.png';
+import image3 from './_assets/package-compatibility.png';
+import { Card, CardActions } from 'sproutsite/components';
+import { Column, Columns } from 'sproutsite/components';
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>What's next?</Eyebrow>
+
+## Änderungen prüfen und einreichen
+
+Wähle passende Prüfungen, kontrolliere das Ergebnis und gib Mitwirkenden genug Kontext für die Durchsicht.
+
+<Columns>
+    <Column span={4}>
+        <Card
+            image={image0}
+            imageAlt="Prüfliste neben einem Test-Terminal und Häkchen"
+        >
+
+            ### Prüfungen und Pull Requests
+
+            Passende Prüfungen wählen und die Änderung beschreiben.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/qualitaetspruefungen/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image1}
+            imageAlt="Komponenten-Werkstatt mit Button, Schalter und Vorschauen"
+        >
+
+            ### Komponenten in Storybook prüfen
+
+            Props, Zustände und responsives Verhalten einzeln prüfen.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/storybook/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image2}
+            imageAlt="Tastaturfokus im Browser neben Pfeiltasten"
+        >
+
+            ### Barrierefreiheit und Tastatur
+
+            Fokus, Lesereihenfolge, Kontrast und Überläufe prüfen.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/barrierefreiheit/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card
+            image={image3}
+            imageAlt="Softwarepaket mit zwei verbundenen Browser-Vorschauen"
+        >
+
+            ### Das installierte Paket testen
+
+            Exporte, Assets und eine frisch installierte Website prüfen.
+
+            <CardActions>
+                [Zur Anleitung](/dokumentation/einstieg/mitarbeiten/paket-kompatibilitaet/)
+            </CardActions>
+        </Card>
+    </Column>
+
+</Columns>

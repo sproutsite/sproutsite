@@ -1,0 +1,37 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+import { Alert } from 'sproutsite/components';
+
+<Eyebrow>Contribute to Sproutsite</Eyebrow>
+
+## Automate the checks already available locally
+
+<Alert variant="warning" style="soft">
+    Open – future extension. This page describes the goal; a supported
+    implementation is not yet available.
+</Alert>
+
+There is no CI workflow committed under `.github/workflows/` in this repository. Existing npm commands provide the checks; this topic records the goal of running them automatically for contributions.
+
+### Reuse the repository workflow
+
+A future job should select the supported Node LTS version, install from the lockfile and run the same formatting, source, type, unit, build and package checks used locally. Add Storybook and accessibility checks according to the agreed review scope.
+
+### Resolve the environment prerequisite
+
+A production demo build needs operator and privacy configuration. CI must use an agreed non-secret test setup or another explicitly supported fixture strategy. Do not expose private operator details, silently disable validation or pretend `.env.dist` is production-ready.
+
+The package test already creates temporary consumer fixtures; review what can be reused without confusing consumer tests with the demo build.
+
+### Keep publication separate
+
+An automated check workflow is not permission to publish npm packages, push tags or create releases. Publishing would need a separately approved process and an appropriate authentication setup.
+
+Acceptance means reproducible results, clear failure logs and documented requirements. External services may exist independently; this page only describes the missing workflow in the repository.
+
+[Back to the quick start and more topics](/documentation/getting-started/contributing/)

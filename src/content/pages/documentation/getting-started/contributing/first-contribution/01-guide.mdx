@@ -1,0 +1,29 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Contribute to Sproutsite</Eyebrow>
+
+## Choose a contribution you can finish and verify
+
+Good starting points include a reproducible documentation error, a missing example for an existing prop, or a small bug with a clear expected result. Record the current behaviour and the intended result before changing code.
+
+### Work on a branch
+
+The quick start creates `docs/first-change` in a new checkout. Choose a descriptive branch name for the task you actually take on. If you cannot push to the project repository, work in your own GitHub fork and propose the branch as a pull request.
+
+Keep the diff focused. Do not include generated `dist`, installed dependencies, npm archives or a private `.env`. Avoid unrelated formatting changes. `git diff` should be understandable to someone who has not followed your local work.
+
+### Verify and describe the result
+
+Use the [checks guide](/documentation/getting-started/contributing/quality-checks/) to choose the required verification. For a visual change, show the affected view at a representative desktop and mobile width. Explain the problem, resulting behaviour and tests in the pull request.
+
+If a public prop, content schema or import changes, describe its effect on existing websites. Ask for design discussion before building a large extension whose API is still open.
+
+Preserve applicable copyright, license and NOTICE information. Package publication, version bumps and releases remain separate tasks that require explicit authorisation.
+
+[Back to the quick start and more topics](/documentation/getting-started/contributing/)
