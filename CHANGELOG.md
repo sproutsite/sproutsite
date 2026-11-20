@@ -7,6 +7,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.24] - 2026-11-20
+
 ### Added
 
 - Added a copyable Apache-2.0 neutral starter asset set, a public manifest export with file hashes and ready-to-merge branding, reproducible generation and installed-package checks for copied branding and hero images.
