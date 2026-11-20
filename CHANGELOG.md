@@ -7,6 +7,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.26] - 2026-11-21
+
 ### Added
 
 - Added optional website-wide colour configuration with inherited locale overrides, opaque-hex validation, default-theme CSS mappings and contrast checks for known colour pairs.
