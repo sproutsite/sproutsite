@@ -7,10 +7,18 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.25] - 2026-11-21
+
 ### Changed
 
+- Grouped language, external-link and blog settings into structured configuration, with recursive locale overrides, complete list replacement and compatibility for existing language, link and blog keys.
+- Reordered the site settings by setup priority and updated English and German guides, keeping the demo configuration and all existing routes unchanged.
 - Moved the demo hero waves into public assets and replaced the fixed CSS image with global `hero.background-image`, per-page overrides and explicit opt-out, shared by heroes, title fallbacks, blog and error pages.
 - Grouped global hero classes under `hero.classes` in site configuration, preserving per-page overrides and reporting the former `hero-classes` setting with a migration hint.
+
+### Fixed
+
+- Kept localized URLs, Markdown links, sitemap alternates and error documents aligned with the explicit default locale, independently of locale-list order; verified English and German defaults in installed-package builds.
 
 ## [0.5.24] - 2026-11-20
 
