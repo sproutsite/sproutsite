@@ -149,7 +149,7 @@
                     color: var(--color-hero-cyan);
                     background: color-mix(
                         in srgb,
-                        var(--color-primary-content) 10%,
+                        var(--color-brand-content) 10%,
                         transparent
                     );
                 }

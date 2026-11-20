@@ -5,18 +5,102 @@ tone:
 ---
 
 import { Eyebrow } from 'sproutsite/components';
-import { Alert } from 'sproutsite/components';
 
 <Eyebrow>Deine Website</Eyebrow>
 
-## Farben einzelner Bausteine anpassen
+## Die Farben deiner Website zentral einstellen
 
-<Alert variant="info" style="soft">
-    Teilweise möglich. Die folgenden Schritte unterscheiden vorhandene
-    Funktionen von noch offenen Erweiterungen.
-</Alert>
+Bearbeite `src/content/site.yaml` im Ordner deiner Website. Mit dem optionalen Block `colors` passt du das Default-Theme an, ohne CSS oder Dateien in `node_modules` zu bearbeiten. Beginne mit der Hauptfarbe für primäre Buttons, Links und Eyebrows:
 
-Mehrere Komponenten unterstützen semantische Farben wie `primary` und `secondary`. Bei Feature kannst du auch einen Hex-Wert angeben. Ohne expliziten Hintergrund entsteht daraus eine dezente Hintergrundfarbe für das Icon.
+```yaml
+colors:
+    primary:
+        color: '#527b37'
+        content: '#ffffff'
+```
+
+`color` ist die Hauptfarbe dieser Rolle. `content` bestimmt die Text- und Iconfarbe auf ihrer gefüllten Fläche. Verwende deckende Hex-Werte in Anführungszeichen: `#RGB` oder `#RRGGBB`. Farbnamen, Alphakanäle, CSS-Funktionen und beliebige CSS-Variablen sind hier nicht erlaubt.
+
+Wenn bereits ein `colors`-Block vorhanden ist, ergänze dort die Angaben. Lege keinen zweiten gleichnamigen YAML-Schlüssel an. Nicht angegebene Felder behalten die mitgelieferten Theme-Farben. Ohne `colors` bleibt die bisherige Palette erhalten. Eine neue Farbe wählt nicht automatisch eine andere `content`-Farbe.
+
+### Flächen und Markenfarben festlegen
+
+Dieses Beispiel enthält die aktuellen Standardfarben:
+
+```yaml
+colors:
+    surfaces:
+        default: '#ffffff'
+        muted: '#f5f7fa'
+        border: '#e2e8f0'
+        text: '#0b1f3a'
+    primary:
+        color: '#134b70'
+        content: '#ffffff'
+    secondary:
+        color: '#0f766e'
+        content: '#ffffff'
+    brand:
+        background: '#071a36'
+        backgroundEnd: '#0d2b50'
+        gradient: '#125b86'
+        content: '#ffffff'
+        highlight: '#70c6df'
+        accent: '#74e33d'
+```
+
+| Einstellung           | Verwendung                                                                    |
+| --------------------- | ----------------------------------------------------------------------------- |
+| `surfaces.default`    | Normale Inhaltsflächen und Cards                                              |
+| `surfaces.muted`      | Abgesetzte Sections und weitere Hintergrundflächen                            |
+| `surfaces.border`     | Gemeinsame Rahmen und Trenner, die die Rahmenfarbe des Themes nutzen          |
+| `surfaces.text`       | Fließtext und Überschriften auf Inhaltsflächen                                |
+| `primary`             | Primäre Buttons, Links, Eyebrows und primäre Komponentenvarianten             |
+| `secondary`           | Sekundäre Buttons und Komponentenvarianten                                    |
+| `brand.background`    | Grundfläche des Wellen-Heros, Footers und mobilen Menüs; Bildüberlagerungen   |
+| `brand.backgroundEnd` | Zweite Hintergrundfarbe des Markenverlaufs                                    |
+| `brand.gradient`      | Weitere Farbe in den Verläufen von Hero und Footer                            |
+| `brand.content`       | Text in Markenbereichen, unabhängig von Buttontexten                          |
+| `brand.highlight`     | Hervorgehobene Hero-Titel, Wortmarken und Navigationsakzente im Markenbereich |
+| `brand.accent`        | Farbe des Fokusrahmens im Footer                                              |
+
+Auch die Rollen `accent`, `neutral`, `info`, `success`, `warning` und `error` unterstützen `color` und `content` wie bei `primary`. Sie wirken auf Komponenten mit der entsprechenden semantischen Variante. Eine Section mit `tone: brand` nutzt `primary` mit dessen `content`; der Wellen-Hero und Footer verwenden die getrennte Palette `brand`.
+
+### Farben für alle Sprachen beibehalten
+
+`site.de.yaml` erbt die Farben aus der Basis. Normalerweise brauchst du dort keinen eigenen `colors`-Block. Falls eine Sprache tatsächlich einen anderen Wert benötigt, überschreibst du nur dieses Feld:
+
+```yaml
+# site.de.yaml
+colors:
+    primary:
+        color: '#3d5b32'
+```
+
+`primary.content` aus der Basis und alle weiteren Felder bleiben erhalten. Dasselbe gilt, wenn Deutsch deine Standardsprache ist und Englisch eine eigene Überschreibungsdatei hat.
+
+### Textkontrast und Darstellung prüfen
+
+Führe `npm run check` und `npm run build` aus und betrachte die Website mit `npm run dev` oder `npm run preview`. Unbekannte Felder und ungültige Werte führen zu einem Konfigurationsfehler. Beim Rendern werden geänderte Text-/Flächenpaare einschließlich geerbter Standardwerte geprüft: Normaler Text benötigt mindestens 4,5:1. Die Primärfarbe wird auch als Link- und Eyebrow-Text auf normalen und abgesetzten Flächen geprüft. Für den Fokusakzent im Footer werden 3:1 zum Markenhintergrund geprüft. Ein Fehler nennt die Felder und das gemessene Verhältnis und stoppt das Rendern beziehungsweise den Build. Passe dann die Farben an.
+
+Diese Prüfung bestätigt nicht die Lesbarkeit aller gemischten Hintergründe, Hover-Zustände oder eigenen Komponentenfarben. Kontrolliere Links, Buttons, Cards, Formularelemente, die angedockte Navigation und das mobile Menü auf der tatsächlichen Seite. Dekorative Rahmen müssen nicht automatisch denselben Kontrast wie Text erfüllen. Die Konfiguration ändert Farben, nicht das Layout oder den Farbschemamodus der Website.
+
+Starte `npm run dev` nach geänderten globalen Einstellungen neu, falls die Vorschau die Änderung noch nicht übernommen hat.
+
+### Wellen und Bilder separat anpassen
+
+SVG-Wellen, Logos, Fotos und Illustrationen behalten die in den Dateien gespeicherten Farben. Passe nach einer Farbänderung deine Wellen selbst an oder ersetze die Grafik. Verweise anschließend mit `hero.background-image` auf die passende Datei:
+
+```yaml
+hero:
+    background-image: /backgrounds/meine-wellen.svg
+```
+
+Lege die Datei unter `public/backgrounds/meine-wellen.svg` ab. Unter [dein Hero](/dokumentation/einstieg/deine-website/hero/) sind globale und seitenspezifische Bilder erklärt. Auch die mitgelieferte Footer-Grafik behält ihre eingebetteten Farben; die Farbkonfiguration verändert ihren CSS-Hintergrund, nicht die Illustration selbst.
+
+### Komponentenfarben weiterverwenden
+
+Komponenten mit semantischen Farben folgen deiner Palette. Explizite Hex-Werte an einer Komponente bleiben dagegen lokale Angaben und werden nicht automatisch umgefärbt:
 
 ```mdx
 import { Feature } from 'sproutsite/components';
@@ -24,21 +108,23 @@ import { Feature } from 'sproutsite/components';
 <Feature
     icon="Leaf"
     title="Sorgfältig gefertigt"
-    color="#527b37"
+    color="primary"
     headingLevel={3}
 >
-    Materialien, die sich im Alltag bewähren.
+    Dieses Icon folgt der Primärfarbe deiner Website.
+</Feature>
+
+<Feature
+    icon="Leaf"
+    title="Ein lokaler Akzent"
+    color="#527b37"
+    backgroundColor="#eef3e8"
+    headingLevel={3}
+>
+    Diese ausdrücklich gesetzten Farben bleiben erhalten.
 </Feature>
 ```
 
-Verwende das Beispiel in einer `.mdx`-Section unter einer H2. Mit `backgroundColor="#eef3e8"` bestimmst du beide Farben selbst. Bei `layout="card"` gilt dieser Hintergrund für die gesamte Feature-Karte. Ein eigener Hex-Wert bei `color` hat Vorrang vor der semantischen Variantengestaltung.
-
-Wähle Farben so, dass Text und Icons auf ihrem tatsächlichen Hintergrund gut erkennbar bleiben. Der [Feature-Showcase](/showcase/features/) zeigt horizontale, vertikale und Kartenlayouts.
-
-### Eine globale Farbpalette bleibt offen
-
-Das Default-Theme besitzt zentrale Farb-Tokens. Die installierte Bibliothek bietet aber noch keine unterstützte, updatesichere Anpassung der gesamten Palette über `site.yaml`. Es gibt keinen `colors`-Konfigurationsblock, den du dafür in deine Website kopieren könntest.
-
-Ziel ist, dass dein Website-Team Marken-, Text-, Flächen- und Interaktionsfarben gemeinsam anpassen kann und dabei den Kontrast erhält. Nutze für redaktionelle Änderungen vorerst die vorhandenen Komponentenparameter. Bearbeite weder `node_modules` noch erzeugte `dist`-Dateien: Installation und Build überschreiben solche Änderungen.
+Verwende die Beispiele in einer `.mdx`-Section unterhalb einer H2. Der [Feature-Showcase](/showcase/features/) zeigt die verfügbaren Layouts und Farboptionen.
 
 [Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

@@ -6,6 +6,7 @@ import Footer from '../../components/organisms/Footer/Footer.astro';
 import type { SiteConfig } from '../../../../lib/sproutsite/types.js';
 import { canonicalUrl, withBase } from '../../../../lib/sproutsite/urls.js';
 import { resolveBranding } from '../../branding.js';
+import { colorStyles } from '../../colors.js';
 interface Props {
     site: SiteConfig;
     title: string;
@@ -28,10 +29,14 @@ const canonical = noindex
     : canonicalUrl(route, site);
 const branding = await resolveBranding(site);
 const socialImage = branding.sharingImage;
+const paletteStyles = colorStyles(
+    site.colors,
+    `site configuration (${site.i18n.locale})`,
+);
 ---
 
 <!doctype html>
-<html lang={site.i18n.locale} data-theme="sproutsite">
+<html lang={site.i18n.locale} data-theme="sproutsite" style={paletteStyles}>
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

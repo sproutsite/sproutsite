@@ -58,6 +58,19 @@ typography:
 
 `family: serif` wählt EB Garamond, `family: sans-serif` wählt Nunito. `weight` erlaubt ganze Zahlen von 400 bis 800 für EB Garamond und von 200 bis 1000 für Nunito. Fehlt eine Angabe, gilt `family: serif` mit `weight: 500`. Sprachdateien erben diese Einstellungen, solange sie keine eigenen Werte setzen. Das Default-Theme lädt die Schriften lokal. Überschriften, Titel und die Wortmarke in Header und Footer folgen `headings`, Eyebrows folgen `eyebrow`. Fließtext, Navigation, Buttons und Hervorhebungen im Text behalten ihre bisherige Typografie.
 
+### Farben der Website
+
+Mit dem optionalen Block `colors` stellst du die Palette zentral ein. `surfaces` enthält Inhaltsflächen, Rahmen und Text; die Rollen `primary`, `secondary`, `accent`, `neutral`, `info`, `success`, `warning` und `error` verwenden jeweils `color` und `content`. `brand` steuert die CSS-Farben von Wellen-Hero, Footer und Navigation im Markenbereich. Nicht angegebene Felder behalten die Theme-Standards; Sprachdateien erben einzelne Werte.
+
+```yaml
+colors:
+    primary:
+        color: '#527b37'
+        content: '#ffffff'
+```
+
+Die [Anleitung zu eigenen Farben](/dokumentation/einstieg/deine-website/farben/) erklärt alle Felder und die Kontrastprüfung. SVG-Wellen und Bilder behalten ihre eingebetteten Farben und müssen bei Bedarf separat angepasst werden.
+
 ### Globale Hero-Klassen
 
 Mit `hero.classes` können Theme-Klassen für alle Heroes und die kompakte H1-Fallback-Ansicht ohne `hero.md` gesetzt werden. Die Klassen beginnen mit `ss-` und bleiben damit Theme-Details statt Inhaltslayout.

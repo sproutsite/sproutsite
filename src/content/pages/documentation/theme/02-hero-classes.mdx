@@ -10,9 +10,9 @@ import { Eyebrow } from 'sproutsite/components';
 
 ## Hero variants in the theme
 
-Hero class names start with `ss-` and are styled in the theme. `ss-hero--theme-1` adds a deep navy background with organic blue and teal waves. The left side stays quiet for text, and the waves become more subdued on small screens. The semantic tone stays unchanged. The homepage inherits this global hero class from `site.yaml` without adding a background image.
+Hero class names start with `ss-` and are styled in the theme. `ss-hero--theme-1` adds a deep navy background with organic blue and teal waves. The left side stays quiet for text, and the waves become more subdued on small screens. The semantic tone stays unchanged. The homepage inherits this global hero class from `site.yaml` together with its global background image.
 
-The styling lives in `components/organisms/Hero/Hero.css`, and the vector shapes live in `assets/hero-waves.svg`. The `--color-hero-*` tokens are defined in `styles/foundation/tokens.css`; the standalone SVG uses the same palette for its gradients. Update both when changing wave colors. The waves are decorative and contain no additional text or logos.
+The styles live in `components/organisms/Hero/Hero.css`. The demo loads `public/backgrounds/hero-waves.svg` through `hero.background-image` in `site.yaml`. Use `colors.brand` to change CSS backgrounds, text and accents. SVG colours stay embedded in the file; edit your waves yourself or replace the background image after changing your palette. The waves are decorative and contain no additional text or logos.
 
 The upper wave follows a broad Bézier curve with a localized radial green gradient. Differently curved blue layers sit underneath. On desktop, the SVG fills the hero proportionally with `cover` and is aligned to the top. The waves extend toward the center, with the green gradient positioned for this crop. Soft dark overlays protect the left text area and navigation. On tablets and phones, the SVG scales to the hero's full height with reduced opacity. The wave paths remain unchanged at every screen size.
 

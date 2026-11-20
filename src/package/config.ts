@@ -19,11 +19,18 @@ import { validateSproutsiteContent } from '../lib/sproutsite/validation.js';
 import { createSitemapMetadata } from '../lib/sproutsite/sitemap.js';
 import { validateBrandingImages } from '../lib/sproutsite/branding.js';
 import { validateHeroBackgroundImage } from '../lib/sproutsite/hero-background.js';
+import { colorStyles } from '../themes/default/colors.js';
 
 /** Returns the Astro configuration required by the default Sproutsite theme. */
 export function createSproutsiteConfig() {
     validateSproutsiteContent();
     const site = loadSiteConfig();
+    for (const locale of site.i18n.locales) {
+        colorStyles(
+            loadSiteConfig(locale).colors,
+            `src/content/site.yaml / site.${locale}.yaml`,
+        );
+    }
     let sitemapMetadata: ReturnType<typeof createSitemapMetadata> | undefined;
 
     return {

@@ -8,7 +8,7 @@
                 var(--color-hero-ocean) 55%,
                 var(--color-hero-navy)
             );
-        color: var(--color-primary-content);
+        color: var(--color-brand-content);
         background-color: var(--color-hero-navy);
         background-image:
             url('../../../assets/footer-waves.svg'),

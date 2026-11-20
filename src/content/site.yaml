@@ -34,6 +34,44 @@ branding:
         src: /branding/sharing-image.png
         alt: Sproutsite — The Agent-Ready Static CMS
 
+colors:
+    surfaces:
+        default: '#ffffff'
+        muted: '#f5f7fa'
+        border: '#e2e8f0'
+        text: '#0b1f3a'
+    primary:
+        color: '#134b70'
+        content: '#ffffff'
+    secondary:
+        color: '#0f766e'
+        content: '#ffffff'
+    accent:
+        color: '#b45309'
+        content: '#ffffff'
+    neutral:
+        color: '#26334a'
+        content: '#ffffff'
+    info:
+        color: '#1769aa'
+        content: '#ffffff'
+    success:
+        color: '#19764b'
+        content: '#ffffff'
+    warning:
+        color: '#9a5b00'
+        content: '#ffffff'
+    error:
+        color: '#b42318'
+        content: '#ffffff'
+    brand:
+        background: '#071a36'
+        backgroundEnd: '#0d2b50'
+        gradient: '#125b86'
+        content: '#ffffff'
+        highlight: '#70c6df'
+        accent: '#74e33d'
+
 typography:
     headings:
         family: serif

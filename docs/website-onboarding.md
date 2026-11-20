@@ -16,7 +16,7 @@ Status describes the documented workflow, not a guarantee that every possible va
 | languages                  | sprachen                     | partial   |
 | hero                       | hero                         | partial   |
 | typography                 | schriften                    | available |
-| colors                     | farben                       | partial   |
+| colors                     | farben                       | available |
 | branding                   | markenauftritt               | available |
 | theme-overrides            | theme-anpassen               | open      |
 | custom-theme               | eigenes-theme                | open      |

@@ -5,6 +5,7 @@ import { parse } from 'yaml';
 import type { SiteConfig } from './types.js';
 import { publicHeroImage, validateHeroBackground } from './hero-background.js';
 import { brandingSchema, validateBrandingFiles } from './branding.js';
+import { siteColorsSchema } from './site-colors.js';
 
 const linkSchema = z.object({
     label: z.string().trim().min(1),
@@ -60,6 +61,7 @@ const fontSelectionSchema = z
 
 const siteSchema = z.object({
     branding: brandingSchema.optional(),
+    colors: siteColorsSchema.optional(),
     typography: z
         .object({
             headings: fontSelectionSchema,

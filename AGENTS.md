@@ -69,6 +69,8 @@ These rules apply to content primarily intended for prospective users or users, 
 
 ## Brand, Design, and Product Experience
 
+- Default-theme website colours are configured through the optional semantic `colors` block in `site.yaml`; locale files inherit partial overrides. Accept opaque hex colours only. Preserve no-config defaults, validate known colour pairs and keep CSS mappings in the default theme. Brand-area foregrounds use `brand.content` independently of button foregrounds. SVGs, logos and raster artwork retain their own colours; users edit or replace them separately.
+
 - Default-theme links are underlined only on hover. Keep native `<a>` elements; use the shared external-link attributes helper where needed. `site.yaml` controls `links.external.newTab` (defaults to true) and `links.external.icon` (defaults to false). Both are enabled for this demo. The trailing Lucide arrow is added only through CSS, including for email and telephone links; do not append duplicate icons or rewrite anchors into components.
 - Links previously styled with medium weight use font-weight 600; unweighted links retain their existing weight. Every `target="_blank"` anchor requires both `noopener` and `noreferrer` in `rel`, including same-origin links. The build verifies this in rendered HTML.
 - Inline emphasis in body text (`b` and `strong`, including Markdown bold text and text within components) uses font-weight 600. Preserve the existing weights of headings, logos, navigation, component labels and syntax highlighting; do not override the global bold-weight token for this rule.

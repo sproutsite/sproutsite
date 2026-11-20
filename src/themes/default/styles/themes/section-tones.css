@@ -10,16 +10,20 @@
     }
     .tone-brand {
         @apply bg-primary text-primary-content;
-        --ss-eyebrow-color: var(--color-primary-content);
+        --ss-eyebrow-color: var(
+            --ss-tone-content,
+            var(--color-primary-content)
+        );
 
         .content-prose {
             &,
             :where(h2, h3, h4, p, li, strong, code):not(:where(.ss-tabs *)) {
-                @apply text-primary-content;
+                color: var(--ss-tone-content, var(--color-primary-content));
             }
 
             a:not(:where(.ss-tabs *)) {
-                @apply text-primary-content decoration-current;
+                @apply decoration-current;
+                color: var(--ss-tone-content, var(--color-primary-content));
             }
 
             :not(pre) > code:not(:where(.ss-tabs *)) {

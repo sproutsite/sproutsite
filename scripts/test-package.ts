@@ -682,13 +682,13 @@ try {
             writeFileSync(
                 configuration,
                 readFileSync(configuration, 'utf8') +
-                    '\nbranding:\n    logo:\n        src: /branding/logo.svg\n        srcOnDark: /branding/favicon.svg\n        width: 180\n        height: 48\n    icons:\n        favicon: /branding/favicon.svg\n        appleTouch: /branding/apple-touch-icon.png\n        app192: /branding/icon-192.png\n        app512: /branding/icon-512.png\n    sharingImage:\n        src: /branding/icon-512.png\n        alt: Independent website preview\n',
+                    '\ncolors:\n    primary:\n        color: "#234e52"\n        content: "#ffffff"\n    surfaces:\n        muted: "#f2f6f4"\n    brand:\n        background: "#102a30"\n        backgroundEnd: "#173f43"\n        gradient: "#245c64"\n        highlight: "#9cdbda"\n        accent: "#b6e36c"\nbranding:\n    logo:\n        src: /branding/logo.svg\n        srcOnDark: /branding/favicon.svg\n        width: 180\n        height: 48\n    icons:\n        favicon: /branding/favicon.svg\n        appleTouch: /branding/apple-touch-icon.png\n        app192: /branding/icon-192.png\n        app512: /branding/icon-512.png\n    sharingImage:\n        src: /branding/icon-512.png\n        alt: Independent website preview\n',
             );
             const localized = join(consumer, 'src/content/site.de.yaml');
             writeFileSync(
                 localized,
                 readFileSync(localized, 'utf8') +
-                    '\nbranding:\n    sharingImage:\n        alt: Eigene Website-Vorschau\n',
+                    '\ncolors:\n    primary:\n        color: "#3d5b32"\nbranding:\n    sharingImage:\n        alt: Eigene Website-Vorschau\n',
             );
             const assets = join(consumer, 'src/content/blog/_assets');
             mkdirSync(assets, { recursive: true });
@@ -705,6 +705,17 @@ try {
         assert.ok(home.includes('ss-package-global'));
         assert.ok(german.includes('ss-package-global-de'));
         if (base === '/demo/') {
+            assert.match(home, /--color-primary:\s*#234e52/);
+            assert.match(german, /--color-primary:\s*#3d5b32/);
+            assert.match(german, /--color-primary-content:\s*#ffffff/);
+            assert.match(german, /--color-base-200:\s*#f2f6f4/);
+            assert.match(german, /--color-hero-navy:\s*#102a30/);
+            for (const file of ['blog/index.html', '404.html', '500-de.html']) {
+                assert.match(
+                    readFileSync(join(consumer, 'dist', file), 'utf8'),
+                    /--color-hero-navy:\s*#102a30/,
+                );
+            }
             assert.ok(home.includes('src="/demo/branding/logo.svg"'));
             assert.ok(german.includes('src="/demo/branding/logo.svg"'));
             assert.ok(

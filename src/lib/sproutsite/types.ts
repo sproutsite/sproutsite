@@ -1,4 +1,5 @@
 import type { Branding } from './branding.js';
+import type { SiteColors } from './site-colors.js';
 
 export const tones = ['default', 'muted', 'brand'] as const;
 export type Tone = (typeof tones)[number];
@@ -31,6 +32,7 @@ export type HeaderItem =
 
 export interface SiteConfig {
     branding?: Branding;
+    colors?: SiteColors;
     name: string;
     url: string;
     base: string;

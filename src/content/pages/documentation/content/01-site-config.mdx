@@ -58,6 +58,19 @@ typography:
 
 For each area, `family: serif` selects EB Garamond and `family: sans-serif` selects Nunito. `weight` accepts integers from 400 to 800 for EB Garamond and 200 to 1000 for Nunito. Omitted fields default to `family: serif` and `weight: 500`. Locale files inherit these settings unless they override them. The default theme loads the fonts locally. Headings, titles and the header/footer wordmark follow `headings`; eyebrow text follows `eyebrow`. Body text, navigation, buttons and inline emphasis keep their existing typography.
 
+### Website colours
+
+The optional `colors` block configures the shared palette. `surfaces` contains content backgrounds, borders and text. The `primary`, `secondary`, `accent`, `neutral`, `info`, `success`, `warning` and `error` roles each accept `color` and `content`. `brand` controls the CSS colours of the wave-style hero, footer and brand navigation. Omitted fields keep theme defaults; locale files inherit individual values.
+
+```yaml
+colors:
+    primary:
+        color: '#527b37'
+        content: '#ffffff'
+```
+
+The [website colours guide](/documentation/getting-started/your-website/colors/) explains every field and contrast checks. SVG waves and images retain their embedded colours and need separate editing when required.
+
 ### Global hero classes
 
 Use `hero.classes` to set theme classes for all heroes and compact H1 fallbacks on pages without `hero.md`. Class names start with `ss-`; they remain theme details rather than a content-layout API.

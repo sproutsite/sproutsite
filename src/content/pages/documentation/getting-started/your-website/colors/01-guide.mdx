@@ -5,35 +5,121 @@ tone:
 ---
 
 import { Eyebrow } from 'sproutsite/components';
-import { Alert } from 'sproutsite/components';
 
 <Eyebrow>Your website</Eyebrow>
 
-## Adjust the colours of individual components
+## Set your website colours in one place
 
-<Alert variant="info" style="soft">
-    Partly available. The steps below distinguish existing features from
-    extensions that remain open.
-</Alert>
+Edit `src/content/site.yaml` in your website folder. The optional `colors` block changes the default theme without editing CSS or files in `node_modules`. Start with the main colour used for primary buttons, links and eyebrows:
 
-Several components already accept semantic colours such as `primary` and `secondary`. Feature also accepts a hex colour. Without an explicit background, it derives a subtle icon background from that colour.
+```yaml
+colors:
+    primary:
+        color: '#527b37'
+        content: '#ffffff'
+```
+
+`color` is the role's main colour; `content` is the text and icon colour on its solid background. Use quoted, opaque hex values: `#RGB` or `#RRGGBB`. Colour names, alpha channels, CSS functions and arbitrary CSS variables are not accepted here.
+
+Add these fields to the existing `colors` block if one is already present. Do not create a second YAML key. Omitted fields retain the supplied theme colours; omitting `colors` entirely preserves the existing palette. Changing a colour does not automatically choose a new `content` colour.
+
+### Choose surfaces and brand colours
+
+This example uses the current default colours:
+
+```yaml
+colors:
+    surfaces:
+        default: '#ffffff'
+        muted: '#f5f7fa'
+        border: '#e2e8f0'
+        text: '#0b1f3a'
+    primary:
+        color: '#134b70'
+        content: '#ffffff'
+    secondary:
+        color: '#0f766e'
+        content: '#ffffff'
+    brand:
+        background: '#071a36'
+        backgroundEnd: '#0d2b50'
+        gradient: '#125b86'
+        content: '#ffffff'
+        highlight: '#70c6df'
+        accent: '#74e33d'
+```
+
+| Setting               | Where it is used                                                               |
+| --------------------- | ------------------------------------------------------------------------------ |
+| `surfaces.default`    | Standard content surfaces and cards                                            |
+| `surfaces.muted`      | Muted sections and secondary surfaces                                          |
+| `surfaces.border`     | Shared borders and separators that use the theme border colour                 |
+| `surfaces.text`       | Body text and headings on content surfaces                                     |
+| `primary`             | Primary buttons, links, eyebrows and primary component variants                |
+| `secondary`           | Secondary buttons and component variants                                       |
+| `brand.background`    | Base background of the wave-style hero, footer and mobile menu; image overlays |
+| `brand.backgroundEnd` | Second background colour in the brand gradient                                 |
+| `brand.gradient`      | Additional colour in the hero and footer gradients                             |
+| `brand.content`       | Text in brand areas, independently of button text                              |
+| `brand.highlight`     | Hero title highlights, wordmark highlights and brand navigation accents        |
+| `brand.accent`        | Footer focus outline colour                                                    |
+
+The `accent`, `neutral`, `info`, `success`, `warning` and `error` roles accept the same `color` and `content` fields as `primary`. They affect components using those semantic variants. A section with `tone: brand` uses `primary` and its `content`; the wave-style hero and footer use the separate `brand` palette.
+
+### Keep colours shared across languages
+
+`site.de.yaml` inherits the base colours. Usually it needs no `colors` block. If a language genuinely needs a different value, override only that field:
+
+```yaml
+# site.de.yaml
+colors:
+    primary:
+        color: '#3d5b32'
+```
+
+The base `primary.content` and every other field remain inherited. The same rules apply when German is your default language and English has its own override file.
+
+### Check text contrast and the actual page
+
+Run `npm run check` and `npm run build`, then inspect the website with `npm run dev` or `npm run preview`. Unknown fields and invalid values fail configuration validation. Rendering checks changed solid text/background pairs, including inherited defaults: normal text needs at least 4.5:1. The primary colour is also checked as link and eyebrow text on the default and muted surfaces. The footer focus accent is checked at 3:1 against the brand background. A failed check names the fields and measured ratio and stops rendering/building; adjust the colours rather than disabling it.
+
+These checks do not prove that every mixed background, hover state or custom component colour is accessible. Check links, buttons, cards, form controls, the scrolled navigation and the mobile menu in the actual page. Decorative borders are not automatically required to contrast like text. This configuration changes colours, not the website's layout or colour-scheme mode.
+
+Restart `npm run dev` after editing global settings if the preview has not picked up the change.
+
+### Adjust your waves and images separately
+
+SVG wave files, logos, photographs and illustrations keep the colours stored in those files. After changing your palette, edit or replace your wave artwork yourself and point `hero.background-image` to the matching file:
+
+```yaml
+hero:
+    background-image: /backgrounds/my-waves.svg
+```
+
+Place that file at `public/backgrounds/my-waves.svg`. See [your hero](/documentation/getting-started/your-website/hero/) for global and page-specific image settings. The default footer artwork also keeps its embedded colours; the colour configuration changes its CSS backdrop, not the illustration itself.
+
+### Continue using component colours
+
+Components that use semantic colours follow your palette. Explicit component hex values remain local choices; they are not recoloured automatically:
 
 ```mdx
 import { Feature } from 'sproutsite/components';
 
-<Feature icon="Leaf" title="Made with care" color="#527b37" headingLevel={3}>
-    Materials selected for everyday use.
+<Feature icon="Leaf" title="Made with care" color="primary" headingLevel={3}>
+    This icon follows the website's primary colour.
+</Feature>
+
+<Feature
+    icon="Leaf"
+    title="A local accent"
+    color="#527b37"
+    backgroundColor="#eef3e8"
+    headingLevel={3}
+>
+    These explicit colours stay as written.
 </Feature>
 ```
 
-Use this in an `.mdx` section below an H2. To choose both colours yourself, add `backgroundColor="#eef3e8"`. In `layout="card"`, this background applies to the entire feature card. A custom hex `color` takes precedence over semantic variant styling.
-
-Choose colours that keep text and icons readable on their actual background. The [feature showcase](/showcase/features/) demonstrates horizontal, vertical and card layouts.
-
-### A site-wide palette remains open
-
-The default theme has central colour tokens, but the installed library does not yet expose a supported, update-safe palette override through `site.yaml`. There is no `colors` configuration block to paste into your website.
-
-The goal is to let your website team change brand, text, surface and interaction colours together while preserving contrast. Until that extension is available, limit editorial colour changes to supported component parameters. Do not edit `node_modules` or generated `dist` files: those changes are replaced by installs and builds.
+Use these examples in an `.mdx` section below an H2. The [feature showcase](/showcase/features/) demonstrates the available layouts and colour options.
 
 [Back to the quick start and more topics](/documentation/getting-started/your-website/)

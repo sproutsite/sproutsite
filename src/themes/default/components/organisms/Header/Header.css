@@ -3,20 +3,22 @@
         --ss-logo-light-visibility: hidden;
         --ss-logo-dark-visibility: visible;
         --ss-header-active-underline: var(--color-hero-cyan);
-        --ss-header-cta-outline: var(--color-primary-content);
+        --ss-header-cta-outline: var(--color-brand-content);
         --ss-header-dropdown-bg: var(--color-hero-navy);
         --ss-header-dropdown-border: color-mix(
             in srgb,
             currentColor 35%,
             transparent
         );
-        @apply absolute inset-x-0 top-0 z-40 border-b border-transparent bg-transparent text-primary-content transition-[background-color,border-color,box-shadow,backdrop-filter] duration-200;
+        color: var(--color-brand-content);
+        @apply absolute inset-x-0 top-0 z-40 border-b border-transparent bg-transparent transition-[background-color,border-color,box-shadow,backdrop-filter] duration-200;
 
         .ss-header__inner {
             @apply flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-[2.1875rem] transition-[padding] duration-200;
 
             .ss-header__brand {
-                @apply inline-flex items-center gap-3 text-lg font-bold text-primary-content no-underline hover:underline;
+                @apply inline-flex items-center gap-3 text-lg font-bold no-underline hover:underline;
+                color: inherit;
             }
 
             .ss-header__link,
@@ -47,7 +49,8 @@
         }
 
         .ss-header__link {
-            @apply relative !gap-2.5 !text-lg !text-primary-content no-underline;
+            @apply relative !gap-2.5 !text-lg no-underline;
+            color: var(--color-brand-content) !important;
             border-color: transparent !important;
             box-shadow: none !important;
 
@@ -100,7 +103,7 @@
                 }
 
                 .ss-header__brand {
-                    color: var(--color-brand-navy) !important;
+                    color: var(--color-base-content) !important;
                 }
             }
         }
@@ -133,7 +136,7 @@
             --ss-logo-dark-visibility: visible;
             --ss-brand-highlight: var(--color-hero-cyan);
             --ss-header-active-underline: var(--color-hero-cyan);
-            --ss-header-cta-outline: var(--color-primary-content);
+            --ss-header-cta-outline: var(--color-brand-content);
             --ss-header-dropdown-bg: var(--color-hero-navy);
             --ss-header-dropdown-border: color-mix(
                 in srgb,
@@ -149,7 +152,7 @@
             margin: 0;
             padding: 0;
             border: 0;
-            color: var(--color-primary-content);
+            color: var(--color-brand-content);
             background: linear-gradient(
                 145deg,
                 var(--color-hero-midnight),

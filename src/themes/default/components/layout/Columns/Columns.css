@@ -5,7 +5,7 @@
         &.ss-columns--divider,
         &.ss-columns--separator,
         &.ss-columns--spaced {
-            --ss-columns-divider-color: rgb(226, 232, 240);
+            --ss-columns-divider-color: var(--color-base-300);
             --ss-columns-divider-gap: 6rem;
             --ss-columns-divider-gap-mobile: calc(
                 var(--ss-columns-divider-gap) / 2

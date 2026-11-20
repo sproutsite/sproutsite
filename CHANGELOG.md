@@ -7,6 +7,15 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Added
+
+- Added optional website-wide colour configuration with inherited locale overrides, opaque-hex validation, default-theme CSS mappings and contrast checks for known colour pairs.
+
+### Changed
+
+- Separated hero, footer and brand-navigation foregrounds from button text colours; connected default column dividers to the shared border colour.
+- Documented global palettes and manual wave/image recolouring in English and German, removed the resolved colour-customisation status badges and extended installed-package checks.
+
 ## [0.5.25] - 2026-11-21
 
 ### Changed

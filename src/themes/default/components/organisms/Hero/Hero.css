@@ -44,7 +44,7 @@
             .ss-hero__claim {
                 margin-top: clamp(1rem, 1.5vw, 1.25rem);
                 max-width: 42rem;
-                color: var(--color-primary-content);
+                color: var(--ss-hero-content, var(--color-primary-content));
                 font-family: var(--font-heading);
                 font-size: clamp(1.75rem, 2.5vw, 2.25rem);
                 font-weight: var(--ss-heading-weight, 500);
@@ -73,16 +73,23 @@
                 .btn-outline {
                     --btn-color: color-mix(
                         in srgb,
-                        var(--color-primary-content) 56%,
+                        var(--ss-hero-content, var(--color-primary-content)) 56%,
                         transparent
                     );
-                    --btn-rest-fg: var(--color-primary-content);
+                    --btn-rest-fg: var(
+                        --ss-hero-content,
+                        var(--color-primary-content)
+                    );
 
                     &:hover {
-                        --btn-color: var(--color-primary-content);
+                        --btn-color: var(
+                            --ss-hero-content,
+                            var(--color-primary-content)
+                        );
                         --btn-bg: color-mix(
                             in srgb,
-                            var(--color-primary-content) 12%,
+                            var(--ss-hero-content, var(--color-primary-content))
+                                12%,
                             transparent
                         );
                     }
@@ -93,7 +100,7 @@
                 margin-top: 1.5rem;
                 color: color-mix(
                     in srgb,
-                    var(--color-primary-content) 72%,
+                    var(--ss-hero-content, var(--color-primary-content)) 72%,
                     transparent
                 );
                 font-size: 0.9375rem;
@@ -102,7 +109,10 @@
         }
 
         &.ss-hero--has-background-image {
-            @apply text-primary-content;
+            --ss-hero-content: var(--color-brand-content);
+            --ss-tone-content: var(--color-brand-content);
+            --ss-eyebrow-color: var(--color-brand-content);
+            color: var(--color-brand-content);
 
             &:not(.ss-hero--background-svg)::before,
             &.ss-hero--background-svg:not(.ss-hero--theme-1)::before {
@@ -111,20 +121,47 @@
                 background:
                     linear-gradient(
                         90deg,
-                        rgb(2 21 67 / 90%) 0%,
-                        rgb(2 21 67 / 76%) 46%,
-                        rgb(2 21 67 / 42%) 100%
+                        color-mix(
+                                in srgb,
+                                var(--ss-hero-image-overlay, #021543) 90%,
+                                transparent
+                            )
+                            0%,
+                        color-mix(
+                                in srgb,
+                                var(--ss-hero-image-overlay, #021543) 76%,
+                                transparent
+                            )
+                            46%,
+                        color-mix(
+                                in srgb,
+                                var(--ss-hero-image-overlay, #021543) 42%,
+                                transparent
+                            )
+                            100%
                     ),
                     linear-gradient(
                         180deg,
-                        rgb(2 21 67 / 24%),
-                        rgb(2 21 67 / 56%)
+                        color-mix(
+                            in srgb,
+                            var(--ss-hero-image-overlay, #021543) 24%,
+                            transparent
+                        ),
+                        color-mix(
+                            in srgb,
+                            var(--ss-hero-image-overlay, #021543) 56%,
+                            transparent
+                        )
                     );
             }
         }
     }
 
     .ss-hero--theme-1 {
+        --ss-hero-content: var(--color-brand-content);
+        --ss-tone-content: var(--color-brand-content);
+        --ss-eyebrow-color: var(--color-brand-content);
+        color: var(--color-brand-content);
         background-color: var(--color-hero-navy);
         background-image:
             radial-gradient(
