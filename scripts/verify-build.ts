@@ -9,11 +9,11 @@ import {
 } from '../src/lib/sproutsite/urls.js';
 
 const site = loadSiteConfig();
-for (const locale of site.locales) {
+for (const locale of site.i18n.locales) {
     for (const status of [404, 500]) {
         if (existsSync(join('dist', String(status))))
             throw new Error(`Unexpected error page directory: dist/${status}`);
-        const suffix = locale === site.language ? '' : `-${locale}`;
+        const suffix = locale === site.i18n.locale ? '' : `-${locale}`;
         if (existsSync(join('dist', locale, String(status))))
             throw new Error(
                 `Unexpected localized error page directory: ${locale}/${status}`,
@@ -40,7 +40,7 @@ for (const locale of site.locales) {
             throw new Error(`Error page contract failed: ${file}`);
     }
 }
-const germanSite = site.locales.includes('de')
+const germanSite = site.i18n.locales.includes('de')
     ? loadSiteConfig('de')
     : undefined;
 const pages = [

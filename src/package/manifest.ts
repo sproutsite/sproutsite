@@ -11,7 +11,7 @@ export const GET: APIRoute = async () => {
         JSON.stringify({
             name: site.name,
             short_name: site.name,
-            lang: site.language,
+            lang: site.i18n.locale,
             start_url: site.base,
             scope: site.base,
             display: 'browser',

@@ -41,7 +41,7 @@ test('native anchors can opt out of automatic external tab attributes', () => {
     assert.deepEqual(
         externalLinkAttributes('https://other.test/', {
             ...site,
-            links: { externalNewTab: false },
+            links: { external: { newTab: false } },
         }),
         { 'data-external-link': '' },
     );

@@ -40,9 +40,9 @@ export function withBase(pathname: string, base: string): string {
 
 export function contentHref(href: string, site: SiteConfig): string {
     if (!href.startsWith('/') || href.startsWith('//')) return href;
-    const defaultLocale = site.locales[0];
+    const defaultLocale = site.i18n.defaultLocale;
     const localePrefix =
-        site.language === defaultLocale ? '' : `/${site.language}`;
+        site.i18n.locale === defaultLocale ? '' : `/${site.i18n.locale}`;
     const localizedHref =
         localePrefix === '' ||
         href === localePrefix ||
@@ -89,7 +89,7 @@ export function externalLinkAttributes(
     if (!isExternalWebLink(href, site.url)) return {};
     return {
         'data-external-link': '',
-        ...(site.links?.externalNewTab !== false
+        ...(site.links?.external?.newTab !== false
             ? { target: '_blank' as const, rel: 'noopener noreferrer' }
             : {}),
     };

@@ -20,7 +20,7 @@ Der einsprachige englische Starter liefert Englisch unter `/`, der deutsche Star
 
 ### Der dokumentierte zweisprachige Aufbau
 
-Der vorhandene zweisprachige Aufbau verwendet Englisch als Standardsprache unter `/` und Deutsch unter `/de/`. In `site.yaml` stehen `language: en` und `locales: [en, de]`. In `site.de.yaml` steht `language: de`; Reihenfolge der Sprachen, Produktionsadresse und Basispfad bleiben gleich.
+Die Demo verwendet Englisch unter `/` und Deutsch unter `/de/`. In `site.yaml` steht `i18n: { locale: en, defaultLocale: en, locales: [en, de] }`. `site.de.yaml` braucht nur `i18n.locale: de` und die deutschen Abweichungen, etwa Navigation und Footertexte. Objekte erben einzelne Felder; Listen ersetzen die gesamte Basisliste.
 
 Ergänze deutsche Dateien neben ihren englischen Gegenstücken: `page.de.yaml`, `hero.de.md` und Abschnitte wie `01-introduction.de.md`. Nummern und Grundnamen der Abschnitte stimmen überein. Ein deutsches `url` darf das URL-Segment der Seite übersetzen, etwa `about` in `ueber-uns`; das gemeinsame Quellverzeichnis bleibt bestehen.
 
@@ -36,8 +36,10 @@ Der Schalter zeigt die konfigurierten Sprachen, verlinkt auf die passende Übers
 
 ### Ausgehend von einer rein deutschen Website
 
-Deutsch unter `/` zu behalten und Englisch zu ergänzen ist noch kein geprüfter Consumer-Workflow: Der Konfigurationslader verwendet `site.yaml` fest für englische Aufrufe. Dafür ist eine eigene Lösung erforderlich, bevor dieser Aufbau allgemein empfohlen werden kann.
+Setze in der Basis `i18n: { locale: de, defaultLocale: de, locales: [de, en] }`. Englische Beschriftungen können in `site.en.yaml` mit `i18n.locale: en` stehen. Die Dateikonvention bleibt gleich: Dateien ohne Sprachsuffix sind englisch, `.de`-Dateien deutsch.
 
-Entscheidest du dich bewusst für Englisch als neue Standardsprache, legst du englische Inhalte und Metadaten an, behältst die deutschen Varianten und verwendest den beschriebenen zweisprachigen Aufbau. Deutsche URLs wechseln dann nach `/de/`; plane bei einer bereits veröffentlichten Website vorher die nötigen Weiterleitungen beim Hoster. Prüfe alle Übersetzungen und Umschaltziele vor der Veröffentlichung.
+Die normalen Astro-Routendateien müssen dazu passen: `src/pages/[...slug].astro` ruft `getSproutsiteStaticPaths()` für die Standardsprache auf; `src/pages/en/[...slug].astro` ruft `getSproutsiteStaticPaths('en')` auf. Beide verwenden `sproutsite/page`. Ersetze die bisherige Route unter `src/pages/de/`, wenn Deutsch nun unter `/` liegt. Die Konfiguration allein verschiebt keine Astro-Routendateien. Bei einer veröffentlichten Website müssen außerdem Weiterleitungen eingerichtet werden. Prüfe Sprachwechsel, Canonicals und Sitemap vor dem Deployment.
+
+Weitere Sprachen benötigen noch übersetzte Theme-Texte und eine Erweiterung der Inhaltszuordnung. Eine Sprachkennung in der Konfiguration übersetzt keine Inhalte.
 
 [Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

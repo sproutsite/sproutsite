@@ -34,22 +34,18 @@ export interface SiteConfig {
     name: string;
     url: string;
     base: string;
-    language: string;
-    locales: string[];
+    i18n: { locale: string; defaultLocale: string; locales: string[] };
     hero: { classes: string[]; 'background-image'?: string };
     typography: {
         headings: { family: 'serif' | 'sans-serif'; weight: number };
         eyebrow: { family: 'serif' | 'sans-serif'; weight: number };
     };
     links?: {
-        externalNewTab?: boolean;
-        externalIcon?: boolean;
+        external?: { newTab?: boolean; icon?: boolean };
     };
     blog?: {
-        title: string;
-        description: string;
-        eyebrow: string;
-        heading: string;
+        hero: { title: string; description: string; eyebrow: string };
+        articles: { heading: string };
     };
     header: { links: HeaderItem[] };
     footer: {

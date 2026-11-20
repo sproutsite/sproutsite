@@ -1,6 +1,16 @@
 name: Sproutsite
+
 url: https://sproutsite.dev
+
 base: /
+
+i18n:
+    locale: en
+    defaultLocale: en
+    locales:
+        - en
+        - de
+
 branding:
     logo:
         src: /branding/logo.svg
@@ -23,6 +33,7 @@ branding:
     sharingImage:
         src: /branding/sharing-image.png
         alt: Sproutsite — The Agent-Ready Static CMS
+
 typography:
     headings:
         family: serif
@@ -30,22 +41,17 @@ typography:
     eyebrow:
         family: serif
         weight: 500
-links:
-    externalNewTab: true
-    externalIcon: true
-language: en
-locales:
-    - en
-    - de
+
 hero:
     classes:
         - ss-hero--theme-1
     background-image: /backgrounds/hero-waves.svg
-blog:
-    title: Blog
-    eyebrow: Project journal
-    description: Project updates, decisions, and milestones in building Sproutsite, an agent-ready, Markdown-first static CMS.
-    heading: Sproutsite development journal
+
+links:
+    external:
+        newTab: true
+        icon: true
+
 header:
     links:
         - label: Home
@@ -63,6 +69,7 @@ header:
           variant: primary
           label: Contact
           href: /contact/
+
 footer:
     text: Agent-ready static CMS for Astro and TypeScript.
     copyright: © 2026 Sproutsite
@@ -110,3 +117,11 @@ footer:
           href: /privacy-policy/
         - label: Security checks
           href: /documentation/deployment/#06-security-checks-https-and-security-headers
+
+blog:
+    hero:
+        title: Blog
+        eyebrow: Project journal
+        description: Project updates, decisions, and milestones in building Sproutsite, an agent-ready, Markdown-first static CMS.
+    articles:
+        heading: Sproutsite development journal

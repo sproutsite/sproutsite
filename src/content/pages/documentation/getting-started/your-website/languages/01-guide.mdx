@@ -20,7 +20,7 @@ A single-language English starter serves English at `/`; the German starter serv
 
 ### The documented bilingual setup
 
-The existing bilingual setup uses English as the default language at `/` and German below `/de/`. In `site.yaml`, keep `language: en` and `locales: [en, de]`. In `site.de.yaml`, set `language: de` and keep the same locale order, production URL and base.
+The demo uses English at `/` and German below `/de/`. In `site.yaml`, set `i18n: { locale: en, defaultLocale: en, locales: [en, de] }`. `site.de.yaml` needs only `i18n.locale: de` and German overrides such as navigation and footer copy. Objects inherit individual fields; arrays replace entire base lists.
 
 Add German files beside their English counterparts: `page.de.yaml`, `hero.de.md` and sections such as `01-introduction.de.md`. Match section numbers and base filenames. A German `url` value may translate the page's own URL segment, for example `about` to `ueber-uns`; it does not change the shared source directory.
 
@@ -36,8 +36,10 @@ The switcher lists configured languages, links to the matching translated page a
 
 ### Starting from a German-only website
 
-Keeping German at `/` while adding English is not covered by a verified consumer workflow: the current configuration loader reserves `site.yaml` for English lookups. This needs a dedicated solution before it can be recommended as a general multilingual-default setup.
+Set `i18n: { locale: de, defaultLocale: de, locales: [de, en] }` in the base. Put English labels in `site.en.yaml` with `i18n.locale: en`. Source conventions stay unchanged: unsuffixed files are English; `.de` files are German.
 
-If you intentionally choose English as the new default, create the English files and metadata, keep the existing German variants, and use the bilingual configuration above. German URLs move below `/de/`; plan any redirects on your host before changing an already published website. Check every translation and switcher target before deployment.
+The standard Astro route files must match: `src/pages/[...slug].astro` calls `getSproutsiteStaticPaths()` for the default locale; `src/pages/en/[...slug].astro` calls `getSproutsiteStaticPaths('en')`. Both use `sproutsite/page`. Replace the previous route under `src/pages/de/` when German moves to `/`. Configuration alone does not move Astro route files. Published websites also need redirects. Check language selection, canonicals and sitemap before deployment.
+
+Further languages still require translated theme messages and extended content-locale handling. A locale identifier in configuration does not translate content.
 
 [Back to the quick start and more topics](/documentation/getting-started/your-website/)

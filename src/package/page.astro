@@ -16,8 +16,10 @@ type Locale = 'en' | 'de';
 
 export { localeOf, logicalId };
 
-export async function getSproutsiteStaticPaths(locale: Locale = 'en') {
-    if (!loadSiteConfig().locales.includes(locale)) return [];
+export async function getSproutsiteStaticPaths(
+    locale: Locale = loadSiteConfig().i18n.defaultLocale as Locale,
+) {
+    if (!loadSiteConfig().i18n.locales.includes(locale)) return [];
     const pages = assemblePages(
         (await getCollection('pages')).filter(
             (entry) => localeOf(entry.id) === locale,

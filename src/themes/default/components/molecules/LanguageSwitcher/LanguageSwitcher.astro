@@ -24,8 +24,8 @@ const flags: Record<string, string> = { en: englishFlag, de: germanFlag };
 const options = languageLinks(
     pages,
     posts,
-    site.locales,
-    site.language,
+    site.i18n.locales,
+    site.i18n.locale,
     route,
 ).map((option) => ({
     ...option,
@@ -35,7 +35,7 @@ const options = languageLinks(
         ) ?? option.locale,
     flag: flags[option.locale],
     href:
-        site.locales.length > 1
+        site.i18n.locales.length > 1
             ? getRelativeLocaleUrl(option.locale, option.route.slice(1))
             : withBase(option.route, site.base),
 }));
@@ -48,14 +48,17 @@ const options = languageLinks(
     ]}
 >
     <summary
-        aria-label={t(site.language === 'de' ? 'de' : 'en', 'languageSwitcher')}
+        aria-label={t(
+            site.i18n.locale === 'de' ? 'de' : 'en',
+            'languageSwitcher',
+        )}
     >
         <Icon
             name="Globe"
             size={20}
             strokeWidth={placement === 'footer' ? 1.5 : 2}
         />
-        <span>{site.language.toUpperCase()}</span>
+        <span>{site.i18n.locale.toUpperCase()}</span>
         <Icon name="ChevronDown" size={16} />
     </summary>
     <ul class="ss-language-switcher__options">

@@ -43,7 +43,7 @@ export function createSitemapMetadata(root = process.cwd()) {
         files: string[];
         directory?: string;
     }[] = [];
-    for (const locale of site.locales) {
+    for (const locale of site.i18n.locales) {
         const localizedSite = loadSiteConfig(locale, root);
         const siteFiles = [
             join(root, 'src/content/site.yaml'),
@@ -147,7 +147,7 @@ export function createSitemapMetadata(root = process.cwd()) {
             url: candidate.url,
         }));
         const defaultEntry = equivalents.find(
-            (candidate) => candidate.locale === site.language,
+            (candidate) => candidate.locale === site.i18n.defaultLocale,
         );
         if (defaultEntry)
             links.push({ lang: 'x-default', url: defaultEntry.url });

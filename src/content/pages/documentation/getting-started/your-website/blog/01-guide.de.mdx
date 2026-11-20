@@ -43,14 +43,16 @@ Alle fünf Metadatenfelder sind erforderlich. `hero.de.md` enthält einen nicht 
 
 Der Datumsteil ordnet die Quellverzeichnisse; nur `erster-beitrag` wird zum URL-Segment unter `/blog/`. Sproutsite erzeugt die Übersicht automatisch und sortiert absteigend nach Veröffentlichungsdatum. Lege dafür keine zusätzliche normale Seite `pages/blog/page.yaml` an.
 
-Die Übersichtstexte änderst du mit allen vier Feldern gemeinsam in der vorhandenen Website-Konfiguration:
+Lege die drei Hero-Texte und die Artikelüberschrift in der Basiskonfiguration fest. Sprachdateien können einzelne Felder überschreiben:
 
 ```yaml
 blog:
-    title: Neuigkeiten
-    eyebrow: Aus unserem Team
-    description: Aktuelles aus unserer Arbeit.
-    heading: Neue Beiträge
+    hero:
+        title: Neuigkeiten
+        description: Aktuelles aus unserer Arbeit.
+        eyebrow: Aus unserem Team
+    articles:
+        heading: Neue Beiträge
 ```
 
 Ergänze `/blog/` im Menü, wenn der Bereich dort erscheinen soll. Prüfe Übersichtsbild und Beitrag auf Mobilgeräten und führe die üblichen Prüfungen und den Build aus. Für Übersetzungen bleibt es bei einem Artikelverzeichnis mit sprachbezogenen Metadaten, Hero und Abschnitten; siehe [Weitere Sprachen](/dokumentation/einstieg/deine-website/sprachen/).

@@ -10,11 +10,12 @@ interface Props {
 }
 const { status } = Astro.props;
 const defaultSite = loadSiteConfig();
-const german =
-    defaultSite.locales.includes('de') &&
-    (Astro.url.pathname.startsWith(`${defaultSite.base}de/`) ||
-        defaultSite.language === 'de');
-const site = german ? loadSiteConfig('de') : defaultSite;
+const locale =
+    defaultSite.i18n.locales.find((candidate) =>
+        Astro.url.pathname.startsWith(`${defaultSite.base}${candidate}/`),
+    ) ?? defaultSite.i18n.defaultLocale;
+const site = loadSiteConfig(locale);
+const german = site.i18n.locale === 'de';
 const introduction = german
     ? status === 404
         ? 'Diese Adresse führt gerade ins Grüne.'
@@ -70,7 +71,7 @@ const copy = german
     site={site}
     title={copy.eyebrow}
     description={copy.description}
-    route={`/${status}${site.language === defaultSite.language ? '' : `-${site.language}`}.html`}
+    route={`/${status}${site.i18n.locale === defaultSite.i18n.defaultLocale ? '' : `-${site.i18n.locale}`}.html`}
     noindex
 >
     <Hero

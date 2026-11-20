@@ -16,7 +16,7 @@ interface Props {
     route: string;
 }
 const { site, route } = Astro.props;
-const language = site.language === 'de' ? 'de' : 'en';
+const language = site.i18n.locale === 'de' ? 'de' : 'en';
 const socialIcons = {
     github: siGithub,
     instagram: siInstagram,

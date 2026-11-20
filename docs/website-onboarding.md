@@ -31,6 +31,8 @@ Status describes the documented workflow, not a guarantee that every possible va
 | forms                      | formulare                    | open      |
 | search                     | suche                        | open      |
 
+The language guide covers English or German as default, explicit `i18n` settings and inherited locale overrides. Further UI/content locales remain open; changing the default requires matching standard Astro route files.
+
 ## Preserved detailed instructions
 
 The original numbered quick-start sections were moved to the destinations below in both languages. Their original content was retained. These sections remain the detailed reference, while the entry page only covers a first successful edit. Existing page routes, including manual setup, remain unchanged.

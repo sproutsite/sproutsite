@@ -58,9 +58,6 @@ Lege für Name, Adresse und Navigation `src/content/site.yaml` an. Dieses Minima
 name: My website
 url: https://example.com
 base: /
-language: en
-locales:
-    - en
 header:
     links:
         - label: Home
@@ -68,6 +65,11 @@ header:
 footer:
     text: My website with Sproutsite.
     links: []
+i18n:
+    locale: en
+    defaultLocale: en
+    locales:
+        - en
 ```
 
 Lege anschließend die Seitendateien nach der [Anleitung für deine Website](/dokumentation/einstieg/deine-website/) an. Behalte die strikte TypeScript-Konfiguration des Astro-Projekts bei. Für mehrere Sprachen gibt es die [Anleitung zu Inhalten](/dokumentation/inhalte/).

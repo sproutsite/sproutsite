@@ -5,8 +5,10 @@ hero:
     classes:
         - ss-package-global
     background-image: /backgrounds/global.svg
-language: en
-locales: [en, de]
+i18n:
+    locale: en
+    defaultLocale: en
+    locales: [en, de]
 header:
     links:
         - label: Home

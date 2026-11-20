@@ -87,10 +87,11 @@ test('blog overview copy is configured separately for English and German', () =>
     const english = loadSiteConfig().blog;
     const german = loadSiteConfig('de').blog;
     assert.ok(english && german);
-    for (const field of ['eyebrow', 'description', 'heading'] as const) {
-        assert.ok(english[field].trim() && german[field].trim());
-        assert.notEqual(english[field], german[field]);
+    for (const field of ['eyebrow', 'description'] as const) {
+        assert.ok(english.hero[field].trim() && german.hero[field].trim());
+        assert.notEqual(english.hero[field], german.hero[field]);
     }
+    assert.notEqual(english.articles.heading, german.articles.heading);
 });
 
 test('localized Markdown links preserve language, base, queries, and fragments', async () => {
@@ -125,5 +126,26 @@ test('localized Markdown links preserve language, base, queries, and fragments',
             code.replaceAll('&amp;', '&').includes(`href="${expected}"`),
             `${path}: ${code}`,
         );
+    }
+});
+
+test('Markdown source language stays independent of the default locale', async () => {
+    const base = loadSiteConfig();
+    const site = {
+        ...base,
+        base: '/demo/',
+        i18n: { ...base.i18n, locale: 'de', defaultLocale: 'de' },
+    };
+    const renderer = await unified({
+        remarkPlugins: [[remarkContentLinks, site]],
+    }).createRenderer({});
+    for (const [path, expected] of [
+        ['01-links.md', '/demo/en/about/'],
+        ['01-links.de.md', '/demo/about/'],
+    ]) {
+        const { code } = await renderer.render('[About](/about/)', {
+            fileURL: new URL(`file:///tmp/${path}`),
+        });
+        assert.ok(code.includes(`href="${expected}"`));
     }
 });

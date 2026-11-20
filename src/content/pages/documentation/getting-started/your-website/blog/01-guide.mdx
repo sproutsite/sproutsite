@@ -42,14 +42,16 @@ All five article metadata fields are required. In `hero.md`, add a non-empty `ti
 
 The date prefix orders source directories; only `first-article` becomes the URL segment below `/blog/`. Sproutsite generates the overview and lists articles by publication date, newest first. Do not create a separate ordinary `pages/blog/page.yaml` for that automatic overview.
 
-To change overview copy, add all four fields together to your existing site configuration:
+To change overview copy, set the three hero fields and the article heading in your base configuration. Locale files can override individual fields:
 
 ```yaml
 blog:
-    title: News
-    eyebrow: From our team
-    description: Updates from our work.
-    heading: Latest articles
+    hero:
+        title: News
+        description: Updates from our work.
+        eyebrow: From our team
+    articles:
+        heading: Latest articles
 ```
 
 Add `/blog/` to navigation when you want it visible there. Review the overview image and the article on mobile, then run your normal checks and build. For translations, keep a single article directory and add localized metadata, hero and sections as described under [languages](/documentation/getting-started/your-website/languages/).

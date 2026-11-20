@@ -21,6 +21,7 @@ test('global hero.classes validates grouped settings, defaults, locale values an
                 url: 'https://example.com',
                 base: '/',
                 language: locale,
+                locales: ['en', 'de'],
                 header: { links: [{ label: 'Home', href: '/' }] },
                 footer: { text: 'Footer', links: [] },
                 ...extra,

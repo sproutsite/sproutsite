@@ -20,7 +20,7 @@ interface Props {
 }
 
 const { post, site, HeroContent, sections } = Astro.props;
-const dateFormatter = new Intl.DateTimeFormat(site.language, {
+const dateFormatter = new Intl.DateTimeFormat(site.i18n.locale, {
     day: '2-digit',
     month: 'long',
     year: 'numeric',

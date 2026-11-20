@@ -45,20 +45,6 @@ export const brandingSchema = z
 export type Branding = z.infer<typeof brandingSchema>;
 export type BrandLogoConfig = z.infer<typeof logoSchema>;
 
-/** Merge only branding: other locale settings retain their existing contract. */
-export function inheritBranding(primary: unknown, localized: unknown): unknown {
-    if (localized === undefined) return primary;
-    const record = (value: unknown): value is Record<string, unknown> =>
-        typeof value === 'object' && value !== null && !Array.isArray(value);
-    if (!record(primary) || !record(localized)) return localized;
-    const merged = { ...primary, ...localized };
-    for (const key of ['logo', 'footerLogo', 'icons', 'sharingImage']) {
-        if (record(primary[key]) && record(localized[key]))
-            merged[key] = { ...primary[key], ...localized[key] };
-    }
-    return merged;
-}
-
 function assets(branding: Branding) {
     return [
         ...(['logo', 'footerLogo'] as const).flatMap((key) => {

@@ -760,23 +760,23 @@ try {
                 assert.ok(settings);
                 assert.equal(
                     await page.locator('h1').innerText(),
-                    settings.title,
+                    settings.hero.title,
                 );
                 assert.equal(
                     await page
                         .locator('.ss-page-title__description')
                         .innerText(),
-                    settings.description,
+                    settings.hero.description,
                 );
                 assert.equal(
                     (
                         await page.locator('.ss-hero .ss-eyebrow').textContent()
                     )?.trim(),
-                    settings.eyebrow,
+                    settings.hero.eyebrow,
                 );
                 assert.equal(
                     await page.locator('#blog-overview').innerText(),
-                    settings.heading,
+                    settings.articles.heading,
                 );
                 const posts = await expectedBlogPosts(german);
                 const cards = page.locator('.ss-blog-index__grid > .ss-card');

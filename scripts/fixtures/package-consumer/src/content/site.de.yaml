@@ -1,12 +1,8 @@
-name: Consumer fixture
-url: https://example.com
-base: /
+i18n:
+    locale: de
 hero:
     classes:
         - ss-package-global-de
-    background-image: /backgrounds/global.svg
-language: de
-locales: [en, de]
 header:
     links:
         - label: Startseite
@@ -14,6 +10,12 @@ header:
         - type: language-switcher
 footer:
     text: Eigenständige Website-Inhalte.
+    groups:
+        - title: Entdecken
+          links:
+              - label: Über uns
+                href: /ueber/
+                icon: BookOpen
     links:
         - label: Über uns
           href: /ueber/

@@ -31,7 +31,7 @@ const socialImage = branding.sharingImage;
 ---
 
 <!doctype html>
-<html lang={site.language} data-theme="sproutsite">
+<html lang={site.i18n.locale} data-theme="sproutsite">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -95,11 +95,11 @@ const socialImage = branding.sharingImage;
         }}
         class:list={{
             'ss-page--landing': layout === 'landing',
-            'ss-links--external-icons': site.links?.externalIcon === true,
+            'ss-links--external-icons': site.links?.external?.icon === true,
         }}
     >
         <a class="ss-skip-link" href="#main-content">
-            {t(site.language === 'de' ? 'de' : 'en', 'skipToContent')}
+            {t(site.i18n.locale === 'de' ? 'de' : 'en', 'skipToContent')}
         </a>
         {layout !== 'landing' && <Header site={site} route={route} />}
         <main id="main-content">

@@ -16,12 +16,35 @@ import { Eyebrow } from 'sproutsite/components';
 name: Sproutsite
 url: https://sproutsite.dev
 base: /
-language: de
+i18n:
+    locale: de
+    defaultLocale: de
+    locales:
+        - de
 ```
+
+### Sprachen und Vererbung
+
+`site.yaml` enthält die gemeinsamen Einstellungen. In `site.de.yaml` stehen nur die deutschen Abweichungen:
+
+```yaml
+i18n:
+    locale: de
+header:
+    links:
+        - label: Startseite
+          href: /
+```
+
+Aktiviere dafür in der Basis `i18n.locales: [en, de]`. `i18n.defaultLocale` bestimmt die Sprache ohne URL-Präfix; die Reihenfolge der Liste ist dafür unerheblich. In der Basis müssen `locale` und `defaultLocale` übereinstimmen. Objekte werden feldweise geerbt, Listen vollständig ersetzt. Ein einzelner deutscher Typografie-Wert ersetzt somit nur diesen Wert; eine deutsche Linkliste ersetzt die ganze Liste. Ohne Sprachdatei gelten die Basiswerte mit der angefragten Sprache. Produktionsadresse, Basispfad, Standardsprache und Sprachliste bleiben für alle Sprachen gleich.
+
+Ältere Angaben wie `language`, `locales`, `links.externalNewTab`, `links.externalIcon` und flache Blog-Felder bleiben lesbar. Verwende für neue Einstellungen die gruppierte Schreibweise; alte und neue Schreibweise dürfen innerhalb derselben Datei nicht für dieselbe Gruppe gemischt werden.
+
+Nach Änderungen an Sprachliste, Standardsprache, Produktionsadresse, Basispfad oder automatischer Linkverarbeitung starte `npm run dev` neu. Diese Angaben werden auch beim Laden der Astro-Konfiguration eingelesen.
 
 ### Schrift für Titel und Eyebrows
 
-Die beiden Schriften wählst du getrennt in `site.yaml` und `site.de.yaml`:
+Titel- und Eyebrow-Schrift wählst du getrennt in `site.yaml`. Bei Bedarf überschreibt `site.de.yaml` einzelne Werte:
 
 ```yaml
 typography:
@@ -33,7 +56,7 @@ typography:
         weight: 500
 ```
 
-`family: serif` wählt EB Garamond, `family: sans-serif` wählt Nunito. `weight` erlaubt ganze Zahlen von 400 bis 800 für EB Garamond und von 200 bis 1000 für Nunito. Fehlt eine Angabe, gilt `family: serif` mit `weight: 500`. Jede Sprache verwendet ihre eigene Konfiguration. Das Default-Theme lädt die Schriften lokal. Überschriften, Titel und die Wortmarke in Header und Footer folgen `headings`, Eyebrows folgen `eyebrow`. Fließtext, Navigation, Buttons und Hervorhebungen im Text behalten ihre bisherige Typografie.
+`family: serif` wählt EB Garamond, `family: sans-serif` wählt Nunito. `weight` erlaubt ganze Zahlen von 400 bis 800 für EB Garamond und von 200 bis 1000 für Nunito. Fehlt eine Angabe, gilt `family: serif` mit `weight: 500`. Sprachdateien erben diese Einstellungen, solange sie keine eigenen Werte setzen. Das Default-Theme lädt die Schriften lokal. Überschriften, Titel und die Wortmarke in Header und Footer folgen `headings`, Eyebrows folgen `eyebrow`. Fließtext, Navigation, Buttons und Hervorhebungen im Text behalten ihre bisherige Typografie.
 
 ### Globale Hero-Klassen
 
@@ -60,11 +83,12 @@ Externe Links lassen sich unabhängig vom Footer-Layout einstellen:
 
 ```yaml
 links:
-    externalNewTab: true
-    externalIcon: true
+    external:
+        newTab: true
+        icon: true
 ```
 
-`externalNewTab` ist standardmäßig `true` und ergänzt bei externen Weblinks automatisch `target="_blank"` und `rel="noopener noreferrer"`. Mit `false` öffnen diese Links regulär im selben Tab. `externalIcon` ist standardmäßig `false`; mit `true` erscheint ein nachgestellter CSS-Pfeil bei externen Weblinks, E-Mail- und Telefonlinks. Für diese Demo sind beide Optionen aktiviert. Im Theme bleiben native `<a>`-Elemente erhalten; eine Link-Komponente ist nicht erforderlich.
+`links.external.newTab` ist standardmäßig `true` und ergänzt bei externen Weblinks automatisch `target="_blank"` und `rel="noopener noreferrer"`. Mit `false` öffnen diese Links regulär im selben Tab. `links.external.icon` ist standardmäßig `false`; mit `true` erscheint ein nachgestellter CSS-Pfeil bei externen Weblinks, E-Mail- und Telefonlinks. Für diese Demo sind beide Optionen aktiviert. Im Theme bleiben native `<a>`-Elemente erhalten; eine Link-Komponente ist nicht erforderlich.
 
 Den Footer jeder Sprache pflegst du in `site.yaml` beziehungsweise `site.de.yaml`. `text` beschreibt deine Website; `groups` legt Navigationsspalten mit eigenen Titeln an. Der optionale Wert `icon` verwendet einen Lucide-Namen in PascalCase. Auf Mobilgeräten stehen die Spalten untereinander; Icons und Pfeile ergänzen die Links.
 

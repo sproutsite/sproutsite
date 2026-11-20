@@ -12,8 +12,8 @@ import { Alert } from 'sproutsite/components';
 ## Die vorhandene englische und deutsche Website pflegen
 
 <Alert variant="info" style="soft">
-    Teilweise möglich. Englisch und Deutsch funktionieren; weitere Sprachen und
-    ein flexibler Ablauf für die Standardsprache sind noch offen.
+    Teilweise möglich. Englisch und Deutsch funktionieren mit beiden
+    Standardsprachen; weitere Sprachen sind noch offen.
 </Alert>
 
 Das Repository zeigt Englisch unter `/` und Deutsch unter `/de/`. Zugehörige Dateien teilen sich ein Seitenverzeichnis: `page.yaml` und `page.de.yaml`, `hero.md` und `hero.de.md` sowie gleich nummerierte Abschnittspaare.
@@ -34,6 +34,6 @@ Die [Sprachanleitung für eigene Websites](/dokumentation/einstieg/deine-website
 
 Eine zusätzliche Sprache benötigt mehr als kopierte Markdown-Dateien: Prüfe Konfigurationsschema, sprachabhängige UI, Routen, Rückfallregeln, Flaggen, Metadaten und die Erzeugung von Fehlerdokumenten.
 
-Auch ein vollständig flexibler Ablauf für die Standardsprache ist noch nicht fertig. Der Konfigurationslader behandelt die englische `site.yaml` gesondert. Erhalte bei der Erweiterung vorhandene Routen und dokumentiere nötige Migrationen oder Weiterleitungen.
+`i18n.defaultLocale` legt die Standardsprache unabhängig von der Reihenfolge der Sprachliste fest. Halte die nativen Astro-Routendateien dazu passend. Sprachdateien erben die Basis rekursiv; Listen ersetzen die gesamte Liste. Tests prüfen Englisch und Deutsch als Standardsprache, auch unter einem Basispfad. Dokumentiere Weiterleitungen bei Änderungen veröffentlichter URLs.
 
 [Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)

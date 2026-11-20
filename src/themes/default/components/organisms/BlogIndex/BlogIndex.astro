@@ -17,14 +17,16 @@ interface Props {
 }
 
 const { posts, site } = Astro.props;
-const locale = site.language === 'de' ? 'de' : 'en';
+const locale = site.i18n.locale === 'de' ? 'de' : 'en';
 const blog = site.blog ?? {
-    title: 'Blog',
-    description: t(locale, 'blogDescription'),
-    eyebrow: t(locale, 'blogEyebrow'),
-    heading: t(locale, 'blogHeading'),
+    hero: {
+        title: 'Blog',
+        description: t(locale, 'blogDescription'),
+        eyebrow: t(locale, 'blogEyebrow'),
+    },
+    articles: { heading: t(locale, 'blogHeading') },
 };
-const dateFormatter = new Intl.DateTimeFormat(site.language, {
+const dateFormatter = new Intl.DateTimeFormat(site.i18n.locale, {
     day: '2-digit',
     month: 'long',
     year: 'numeric',
@@ -34,15 +36,15 @@ const dateFormatter = new Intl.DateTimeFormat(site.language, {
 
 <PageLayout
     site={site}
-    title={blog.title}
-    description={blog.description}
+    title={blog.hero.title}
+    description={blog.hero.description}
     route="/blog/"
 >
     <PageTitle
         site={site}
-        title={blog.title}
-        eyebrow={blog.eyebrow}
-        description={blog.description}
+        title={blog.hero.title}
+        eyebrow={blog.hero.eyebrow}
+        description={blog.hero.description}
         classes={site.hero.classes}
         variant="hero"
     />
@@ -52,7 +54,7 @@ const dateFormatter = new Intl.DateTimeFormat(site.language, {
     >
         <div class="ss-section__inner site-shell">
             <div class="content-prose ss-blog-index__content">
-                <h2 id="blog-overview">{blog.heading}</h2>
+                <h2 id="blog-overview">{blog.articles.heading}</h2>
                 <div class="ss-blog-index__grid">
                     {posts.map((post) => (
                         <Card

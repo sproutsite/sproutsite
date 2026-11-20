@@ -17,7 +17,7 @@ interface Props {
     route: string;
 }
 const { site, route } = Astro.props;
-const language = site.language === 'de' ? 'de' : 'en';
+const language = site.i18n.locale === 'de' ? 'de' : 'en';
 const hasLanguageSwitcher = site.header.links.some(
     (link) => link.type === 'language-switcher',
 );
@@ -51,7 +51,7 @@ const hasLanguageSwitcher = site.header.links.some(
         <nav
             class="ss-header__nav"
             aria-label={t(
-                site.language === 'de' ? 'de' : 'en',
+                site.i18n.locale === 'de' ? 'de' : 'en',
                 'primaryNavigation',
             )}
         >

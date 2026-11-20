@@ -20,6 +20,7 @@ import {
 import { tmpdir } from 'node:os';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { parse, stringify } from 'yaml';
 
 interface PackageManifest {
     name: string;
@@ -779,6 +780,100 @@ try {
     );
     verifyLegalIdentityBuilds();
     await verifyDevBlogLifecycle();
+    rmSync(join(consumer, 'src/content/pages/legal-fixture'), {
+        recursive: true,
+    });
+    // The default is explicit, independent of list order and source suffixes.
+    const germanDefault = parse(readFileSync(configuration, 'utf8')) as Record<
+        string,
+        unknown
+    >;
+    germanDefault.i18n = {
+        locale: 'de',
+        defaultLocale: 'de',
+        locales: ['en', 'de'],
+    };
+    writeFileSync(configuration, stringify(germanDefault));
+    renameSync(join(consumer, 'src/pages/de'), join(consumer, 'src/pages/en'));
+    const englishRoute = join(consumer, 'src/pages/en/[...slug].astro');
+    writeFileSync(
+        englishRoute,
+        readFileSync(englishRoute, 'utf8').replace(
+            "getSproutsiteStaticPaths('de')",
+            "getSproutsiteStaticPaths('en')",
+        ),
+    );
+    const englishDetails = join(
+        consumer,
+        'src/content/pages/about/01-details.md',
+    );
+    writeFileSync(
+        englishDetails,
+        readFileSync(englishDetails, 'utf8') + '\n[Back home](/)\n',
+    );
+    npm(['run', 'build'], consumer, false, '/demo/');
+    const output = join(consumer, 'dist');
+    for (const [file, locale, route] of [
+        ['index.html', 'de', ''],
+        ['en/index.html', 'en', 'en/'],
+        ['ueber/index.html', 'de', 'ueber/'],
+        ['en/about/index.html', 'en', 'en/about/'],
+    ]) {
+        const html = readFileSync(join(output, file!), 'utf8');
+        assert.ok(html.includes(`lang="${locale}"`));
+        assert.ok(html.includes(`href="https://example.com/demo/${route}"`));
+    }
+    assert.ok(
+        readFileSync(join(output, 'ueber/index.html'), 'utf8').includes(
+            'href="/demo/en/about/"',
+        ),
+    );
+    assert.ok(
+        readFileSync(join(output, 'en/about/index.html'), 'utf8').includes(
+            'href="/demo/ueber/"',
+        ),
+    );
+    assert.ok(
+        readFileSync(join(output, 'en/about/index.html'), 'utf8').includes(
+            'href="/demo/en/">Back home</a>',
+        ),
+    );
+    for (const code of ['404', '500']) {
+        assert.ok(
+            readFileSync(join(output, `${code}.html`), 'utf8').includes(
+                'lang="de"',
+            ),
+        );
+        assert.ok(
+            readFileSync(join(output, `${code}-en.html`), 'utf8').includes(
+                'lang="en"',
+            ),
+        );
+    }
+    const germanSitemap = readFileSync(join(output, 'sitemap.xml'), 'utf8');
+    assert.ok(
+        germanSitemap.includes(
+            'hreflang="x-default" href="https://example.com/demo/"',
+        ),
+    );
+    assert.ok(
+        germanSitemap.includes('<loc>https://example.com/demo/en/about/</loc>'),
+    );
+    assert.equal(
+        germanSitemap.includes('<loc>https://example.com/demo/de/'),
+        false,
+    );
+    assert.equal(
+        (
+            JSON.parse(
+                readFileSync(join(output, 'site.webmanifest'), 'utf8'),
+            ) as { lang: string }
+        ).lang,
+        'de',
+    );
+    console.log(
+        'PASS grouped configuration: inherited locale settings and German default under /demo/.',
+    );
     rmSync(temporary, { recursive: true, force: true });
     console.log(
         'Package installation checks passed. Temporary files removed. Nothing was published.',

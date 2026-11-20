@@ -12,8 +12,8 @@ import { Alert } from 'sproutsite/components';
 ## Maintain the existing English and German website
 
 <Alert variant="info" style="soft">
-    Partly available. English and German work; further locales and a flexible
-    default-language workflow remain open.
+    Partly available. English and German work with either as default; further
+    locales remain open.
 </Alert>
 
 The repository demonstrates English at `/` and German below `/de/`. Matching files share one page directory: `page.yaml` and `page.de.yaml`, `hero.md` and `hero.de.md`, and identically numbered section pairs.
@@ -34,6 +34,6 @@ The [website language guide](/documentation/getting-started/your-website/languag
 
 Adding another locale needs more than copied Markdown: review the configuration schema, locale-specific UI, route handling, fallback rules, flags, metadata and error-document generation.
 
-A completely flexible default-language workflow is not finished either. The current configuration loader treats English’s `site.yaml` specially. Preserve existing routes while designing that extension, and document any migration or redirect requirement.
+`i18n.defaultLocale` controls the default independently of locale-list order. Keep native Astro route files aligned with it. Locale files inherit the base configuration recursively; lists replace entirely. Tests cover both English and German defaults, including a deployment subpath. Document redirects when changing published URLs.
 
 [Back to the quick start and more topics](/documentation/getting-started/contributing/)

@@ -69,7 +69,7 @@ These rules apply to content primarily intended for prospective users or users, 
 
 ## Brand, Design, and Product Experience
 
-- Default-theme links are underlined only on hover. Keep native `<a>` elements; use the shared external-link attributes helper where needed. `site.yaml` controls `links.externalNewTab` (defaults to true) and `links.externalIcon` (defaults to false). Both are enabled for this demo. The trailing Lucide arrow is added only through CSS, including for email and telephone links; do not append duplicate icons or rewrite anchors into components.
+- Default-theme links are underlined only on hover. Keep native `<a>` elements; use the shared external-link attributes helper where needed. `site.yaml` controls `links.external.newTab` (defaults to true) and `links.external.icon` (defaults to false). Both are enabled for this demo. The trailing Lucide arrow is added only through CSS, including for email and telephone links; do not append duplicate icons or rewrite anchors into components.
 - Links previously styled with medium weight use font-weight 600; unweighted links retain their existing weight. Every `target="_blank"` anchor requires both `noopener` and `noreferrer` in `rel`, including same-origin links. The build verifies this in rendered HTML.
 - Inline emphasis in body text (`b` and `strong`, including Markdown bold text and text within components) uses font-weight 600. Preserve the existing weights of headings, logos, navigation, component labels and syntax highlighting; do not override the global bold-weight token for this rule.
 - Describe Sproutsite accurately: it is an agent-ready, Markdown-first Static CMS for Astro and TypeScript. External coding agents edit content and pages; Sproutsite does not include an AI agent.
@@ -154,7 +154,6 @@ At a minimum:
 name: Sproutsite
 url: https://sproutsite.dev
 base: /
-language: de
 hero:
     classes:
         - ss-hero--theme-1
@@ -180,9 +179,14 @@ footer:
     links:
         - label: Kontakt
           href: /kontakt/
+i18n:
+    locale: de
+    defaultLocale: de
+    locales:
+        - de
 ```
 
-Website name, language, production URL, base path, global `hero.classes`, navigation, and footer are maintained here. `hero.classes` is optional, contains at most eight theme classes with the `ss-` prefix, and applies to every hero and H1 fallback view without `hero.md`; `classes` in an individual `hero.md` overrides this value completely. Use the same validated values for Astro configuration, links, canonicals, and the sitemap; do not duplicate configuration. Astro configuration must not import Content APIs that are only available within the Astro runtime. Use a small Node-compatible loader for singleton configuration needed in more than one place.
+Website name, `i18n`, production URL, base path, global `hero.classes`, navigation, and footer are maintained here. `i18n.locale` identifies the active configuration; the base locale must match `i18n.defaultLocale`. `i18n.locales` lists enabled languages; its order does not determine the default. Optional `site.<locale>.yaml` files inherit the base recursively: objects merge by field, arrays replace entirely, omitted fields inherit. Production URL, base, default locale and enabled languages remain shared. Group external-link options under `links.external` (`newTab`, `icon`) and blog copy under `blog.hero` and `blog.articles.heading`. Legacy language/link/blog keys remain readable for existing consumers; never mix legacy and grouped spellings within one layer. `hero.classes` is optional, contains at most eight theme classes with the `ss-` prefix, and applies to every hero and H1 fallback view without `hero.md`; `classes` in an individual `hero.md` overrides this value completely. Use the same validated values for Astro configuration, links, canonicals, and the sitemap; do not duplicate configuration. Astro configuration must not import Content APIs that are only available within the Astro runtime. Use a small Node-compatible loader for singleton configuration needed in more than one place.
 
 `https://sproutsite.dev` is the canonical product website. Consumer sites configure their own production URL. The demo does not require external fonts, tracking, or services. Use the approved Sproutsite sprout-and-layers logo in `src/themes/default/assets/branding/`; do not reintroduce an obsolete logo. Brand colors are separate tokens in `foundation/tokens.css`. Reproduce derived assets with `npm run branding:generate`; keep SVGs standalone and preserve the local font's license. The shared `BrandLogo` atom adapts to header and footer text colors. The default theme registers a static web app manifest via Astro's `injectRoute()` API; this is a metadata endpoint, not a content page or a custom router.
 

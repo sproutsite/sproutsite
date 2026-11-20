@@ -131,8 +131,6 @@ export async function getStaticPaths() {
 name: My website
 url: https://example.com
 base: /
-language: en
-locales: [en]
 header:
     links:
         - label: Home
@@ -142,6 +140,11 @@ footer:
     links:
         - label: Home
           href: /
+i18n:
+    locale: en
+    defaultLocale: en
+    locales:
+        - en
 ```
 
 Replace `name`, `url`, and the footer copy with your own details. `url` is your production origin, even during local development. A visible Sproutsite attribution is optional. Set `base` if the website will be hosted under a subpath, for example `/demo/`.
@@ -296,7 +299,9 @@ tagline: A short supporting claim.
 ---
 ```
 
-English and German content can be maintained in the same project. Configure `locales: [en, de]` in `site.yaml`, add `site.de.yaml` with German navigation and the same production URL/base, and add translated `page.de.yaml`, `hero.de.md`, and numbered `.de.md`/`.de.mdx` sections. Add `src/pages/de/[...slug].astro` using the same page component and an async `getStaticPaths()` wrapper that calls `getSproutsiteStaticPaths('de')`. Each locale uses its own copy and optional URL segments; translations are not generated automatically. Keep section numbers aligned between languages.
+`site.yaml` is the shared base. Optional `site.<locale>.yaml` files override individual object fields; arrays replace the entire inherited list. Omitted fields inherit the base values. Production URL, base path, default locale and enabled locale list remain shared. The base `i18n.locale` matches `i18n.defaultLocale`; locale files may set their own `i18n.locale`. The default locale is explicit and does not depend on list order. Legacy `language`/`locales`, `links.externalNewTab`/`externalIcon` and flat blog settings remain readable, but do not mix old and new spellings within a configuration layer.
+
+English and German content can be maintained in the same project. Configure `i18n: { locale: en, defaultLocale: en, locales: [en, de] }` in `site.yaml`, add `site.de.yaml` with `i18n.locale: de` and German navigation, and add translated `page.de.yaml`, `hero.de.md`, and numbered `.de.md`/`.de.mdx` sections. Add `src/pages/de/[...slug].astro` using the same page component and an async `getStaticPaths()` wrapper that calls `getSproutsiteStaticPaths('de')`. Each locale uses its own copy and optional URL segments; translations are not generated automatically. Keep section numbers aligned between languages.
 
 To deliberately remove global hero classes, use:
 
@@ -466,7 +471,7 @@ Use `class="ss-link--icon-only"` on links that display only an icon, together wi
 
 Any link with `target="_blank"` must include both `noopener` and `noreferrer` in `rel`, even for same-origin destinations. Button and Markdown rendering preserve other relationship tokens while adding these protections. The repository's `npm run build` verifies all generated HTML pages and reports unsafe native anchors with their file and destination. This requirement also applies when automatic external new tabs are disabled and a new tab is explicitly requested.
 
-Theme components use native `<a>` elements. External HTTP(S) links receive `target="_blank"` and `rel="noopener noreferrer"` by default, including Markdown reference/autolinks and header/footer links. Set `links.externalNewTab: false` in `site.yaml` to retain native same-tab behavior for automatically handled links. Explicit Button `target`/`rel` props remain available. External means a different origin from the validated production URL, including in preview builds. Internal/same-origin links, fragments, `mailto:` and `tel:` retain their normal behavior. Links are underlined only on hover. Set `links.externalIcon: true` to add a compact CSS-only Lucide arrow to external, email and telephone links; omission means no arrows. The two settings are independent and both are enabled in this demo's English and German site files. No Link component or browser-side anchor rewriting is needed.
+Theme components use native `<a>` elements. External HTTP(S) links receive `target="_blank"` and `rel="noopener noreferrer"` by default, including Markdown reference/autolinks and header/footer links. Set `links.external.newTab: false` in `site.yaml` to retain native same-tab behavior for automatically handled links. Explicit Button `target`/`rel` props remain available. External means a different origin from the validated production URL, including in preview builds. Internal/same-origin links, fragments, `mailto:` and `tel:` retain their normal behavior. Links are underlined only on hover. Set `links.external.icon: true` to add a compact CSS-only Lucide arrow to external, email and telephone links; omission means no arrows. The two settings are independent and both are enabled in this demo's base configuration and inherited by German. No Link component or browser-side anchor rewriting is needed.
 
 `ContentTable` wraps exactly one Markdown table in an MDX section. Its required `caption` becomes a native table caption. Optional props are `variant="plain|striped"`, `density="comfortable|compact"`, a boolean `wide` flag, and a one-based `highlight={2}` body-row index. Keep blank lines between the component tags and Markdown table. Column alignment uses standard Markdown colons. `wide` preserves a minimum table width of 60rem inside a keyboard-focusable horizontal scroll region.
 
@@ -591,7 +596,7 @@ The dev server deliberately starts with `--force`, so changes to Content Collect
 The running demo documents itself at `/documentation/` (German: `/de/dokumentation/`): it contains setup, the content contract, layout components, theme, checks, and local package use. The visible [showcase](https://sproutsite.dev/showcase/) instead collects component examples.
 The [blog](https://sproutsite.dev/blog/) is a small, file-based project journal. Each article lives in a `YYYY-MM-DD.article-slug/` directory in `src/content/blog/` and uses the same `page.yaml`, `hero.md`, and numbered sections as a normal page. `page.yaml` validates the title, description, date, local card image, and alternative text; the date prefix orders source directories while the URL only uses `article-slug`. Astro generates the overview and article routes from the collection, and every section supports the usual tones and documented MDX components.
 
-The optional `blog` setting in `site.yaml` accepts `title`, `eyebrow`, `description`, and `heading` (all non-empty strings) to customize the blog overview. The demo configures English overview copy in `site.yaml` and German copy in `site.de.yaml`. Without this setting, the theme supplies neutral, localized fallback text. Article links use “Learn more” or “Mehr erfahren” and include the article title in their accessible name.
+The optional `blog` setting in `site.yaml` accepts `hero.title`, `hero.eyebrow`, `hero.description`, and `articles.heading` (all non-empty strings) to customize the blog overview. The demo configures English overview copy in `site.yaml` and German copy in `site.de.yaml`. Without this setting, the theme supplies neutral, localized fallback text. Article links use “Learn more” or “Mehr erfahren” and include the article title in their accessible name.
 
 English articles use `page.yaml`, `hero.md`, and numbered sections; their German counterparts use `page.de.yaml`, `hero.de.md`, and `.de.mdx` sections in the same article directory. Each pair keeps its publication date, image, and slug; titles, descriptions, alternative text, heroes, and body copy are maintained separately. `/blog/` and `/de/blog/` list their respective language versions. Dates use the site's language and UTC so a date-only publication value does not shift on hosts in another time zone.
 

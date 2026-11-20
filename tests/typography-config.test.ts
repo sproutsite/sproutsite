@@ -22,6 +22,7 @@ test('validates independent heading and eyebrow families, defaults and locale se
                 url: 'https://example.com',
                 base: '/',
                 language: locale,
+                locales: ['en', 'de'],
                 header: { links: [{ label: 'Home', href: '/' }] },
                 footer: { text: 'Footer', links: [] },
                 ...(typography === undefined ? {} : { typography }),

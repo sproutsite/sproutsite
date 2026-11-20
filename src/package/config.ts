@@ -30,8 +30,8 @@ export function createSproutsiteConfig() {
         site: site.url,
         base: site.base,
         i18n: {
-            locales: site.locales,
-            defaultLocale: site.language,
+            locales: site.i18n.locales,
+            defaultLocale: site.i18n.defaultLocale,
             routing: { prefixDefaultLocale: false },
         },
         integrations: [
@@ -61,15 +61,15 @@ export function createSproutsiteConfig() {
                 name: 'sproutsite/default-routes',
                 hooks: {
                     'astro:config:setup': async ({ injectRoute }) => {
-                        for (const locale of site.locales) {
+                        for (const locale of site.i18n.locales) {
                             await validateHeroBackgroundImage(
-                                (locale === site.language
+                                (locale === site.i18n.defaultLocale
                                     ? site
                                     : loadSiteConfig(locale)
                                 ).hero['background-image'],
                             );
                             await validateBrandingImages(
-                                (locale === site.language
+                                (locale === site.i18n.defaultLocale
                                     ? site
                                     : loadSiteConfig(locale)
                                 ).branding,
@@ -85,8 +85,8 @@ export function createSproutsiteConfig() {
                             entrypoint: new URL('./500.astro', import.meta.url),
                             prerender: true,
                         });
-                        for (const locale of site.locales.filter(
-                            (locale) => locale !== site.language,
+                        for (const locale of site.i18n.locales.filter(
+                            (locale) => locale !== site.i18n.defaultLocale,
                         )) {
                             for (const status of [404, 500]) {
                                 injectRoute({
@@ -122,8 +122,8 @@ export function createSproutsiteConfig() {
                         );
                         // Astro owns error-page rendering. Flatten localized output
                         // for web servers that select their error documents by locale.
-                        for (const locale of site.locales.filter(
-                            (locale) => locale !== site.language,
+                        for (const locale of site.i18n.locales.filter(
+                            (locale) => locale !== site.i18n.defaultLocale,
                         )) {
                             for (const status of [404, 500]) {
                                 const flat = new URL(
@@ -173,7 +173,8 @@ export function createSproutsiteConfig() {
                         rehypeExternalLinks,
                         {
                             url: site.url,
-                            externalNewTab: site.links?.externalNewTab ?? true,
+                            externalNewTab:
+                                site.links?.external?.newTab ?? true,
                         },
                     ],
                 ],
