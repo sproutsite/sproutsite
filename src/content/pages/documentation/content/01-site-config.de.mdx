@@ -37,12 +37,22 @@ typography:
 
 ### Globale Hero-Klassen
 
-Mit `hero-classes` können Theme-Klassen für alle Heroes und die kompakte H1-Fallback-Ansicht ohne `hero.md` gesetzt werden. Die Klassen beginnen mit `ss-` und bleiben damit Theme-Details statt Inhaltslayout.
+Mit `hero.classes` können Theme-Klassen für alle Heroes und die kompakte H1-Fallback-Ansicht ohne `hero.md` gesetzt werden. Die Klassen beginnen mit `ss-` und bleiben damit Theme-Details statt Inhaltslayout.
 
 ```yaml
-hero-classes:
-    - ss-hero--theme-1
+hero:
+    classes:
+        - ss-hero--theme-1
+    background-image: /backgrounds/hero-waves.svg
 ```
+
+In älteren Konfigurationen hieß diese Einstellung `hero-classes`. Verschiebe die Liste nach `hero.classes`; die alte Schreibweise wird mit einem Migrationshinweis abgelehnt. In `hero.md` bleibt die lokale Angabe `classes` unverändert.
+
+### Globales Hero-Hintergrundbild
+
+Lege dein Bild unter `public/` ab und verwende in `hero.background-image` den Pfad ab Website-Wurzel, etwa `/backgrounds/hero-waves.svg`. SVG, PNG, JPEG, WebP und AVIF werden unterstützt; `base` und Sprachpräfixe gehören nicht in den Dateipfad. Öffentliche Bilder werden unverändert ausgeliefert.
+
+Eine eigene Angabe `background-image` in `hero.md` oder `hero.de.md` ersetzt den globalen Standard. Dort sind auch relative lokale Bilder möglich, etwa `./_assets/hero.jpg`. Mit `background-image: null` schaltest du das globale Bild auf einer Seite aus. Fehlen beide Angaben, wird kein Bild gerendert; CSS-Verläufe und andere Klassenstile bleiben bestehen. Seiten ohne `hero.md`, die Blogübersicht und Fehlerseiten verwenden ebenfalls den globalen Standard.
 
 ### Footer-Bereiche
 

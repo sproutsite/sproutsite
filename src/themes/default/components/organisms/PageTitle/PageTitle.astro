@@ -1,8 +1,12 @@
 ---
 import Eyebrow from '../../atoms/Eyebrow/Eyebrow.astro';
+import HeroBackground from '../../atoms/HeroBackground/HeroBackground.astro';
+import type { SiteConfig } from '../../../../../lib/sproutsite/types.js';
+import { isSvgHeroImage } from '../../../../../lib/sproutsite/hero-background.js';
 
 interface Props {
     title: string;
+    site: SiteConfig;
     classes: string[];
     eyebrow?: string;
     description?: string;
@@ -11,6 +15,7 @@ interface Props {
 
 const {
     title,
+    site,
     classes,
     eyebrow,
     description,
@@ -25,10 +30,24 @@ const {
         'ss-hero--small',
         'ss-page-title',
         `ss-page-title--${variant}`,
+        {
+            'ss-hero--has-background-image': Boolean(
+                site.hero['background-image'],
+            ),
+            'ss-hero--background-svg': isSvgHeroImage(
+                site.hero['background-image'],
+            ),
+        },
         ...classes,
     ]}
     aria-labelledby="page-title"
 >
+    {site.hero['background-image'] && (
+        <HeroBackground
+            source={site.hero['background-image']}
+            base={site.base}
+        />
+    )}
     <div class="ss-hero__inner ss-page-title__inner site-shell">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
         <h1 id="page-title" class="ss-hero__title ss-page-title__title">

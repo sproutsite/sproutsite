@@ -29,9 +29,22 @@ background-image: ./_assets/workshop.jpg
 Furniture, repairs and the stories behind them.
 ```
 
-Create the `_assets` directory beside this hero and add your own `workshop.jpg`. `background-image` accepts a local raster image; Astro prepares it for the website. It is decorative, so keep meaningful information in text or regular content images. The theme adds an overlay to protect contrast.
+Create the `_assets` directory beside this hero and add your own `workshop.jpg`. This local setting overrides `hero.background-image` in `site.yaml`. Astro optimizes relative raster images; SVGs and public files remain unchanged. You can alternatively use a public path such as `/backgrounds/hero-waves.svg`. The background is decorative, so keep meaningful information in text or regular content images.
 
-`classes: null` removes the globally configured hero decoration, including the default wave class. Without it, global `hero-classes` still apply. A local `classes` list replaces that global list entirely. Test the result on narrow screens as well as desktop.
+`classes: null` removes the global hero classes; the background image is selected independently. Without a local image setting, the global default applies. Set `background-image: null` to remove it on one page. With neither a global nor local image, no image is rendered; CSS gradients remain. Test narrow screens as well as desktop.
+
+### One background for all pages
+
+Place the file at a path such as `public/backgrounds/hero-waves.svg`. Add this to the relevant site configuration:
+
+```yaml
+hero:
+    classes:
+        - ss-hero--theme-1
+    background-image: /backgrounds/hero-waves.svg
+```
+
+The image also applies to title areas without `hero.md`, the blog overview and error pages. Omit `public`, language prefixes and deployment subpaths from the URL. The theme applies `base` once. The file belongs to your website, rather than being loaded from a fixed package location.
 
 ### Size and actions
 
@@ -51,6 +64,6 @@ Create these target pages before adding their links. Use the [content reference]
 
 ### Still open
 
-`fullscreen` is a prepared type and CSS class, not a completed full-viewport layout. Replacing the bundled SVG waves through a dedicated consumer setting is also not implemented. A local raster background works today; a supported SVG-background setting and full-height layout remain future work.
+`fullscreen` is a prepared type and CSS class, not a completed full-viewport layout. That layout remains open. Global background images and replacing SVG waves are already supported through `hero.background-image`.
 
 [Back to the quick start and more topics](/documentation/getting-started/your-website/)

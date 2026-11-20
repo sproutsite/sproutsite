@@ -105,8 +105,9 @@ const postSections = post
             <Hero hero={page.hero!} site={site} Content={hero.Content} />
         ) : page.entry.data.layout !== 'landing' ? (
             <PageTitle
+                site={site}
                 title={page.entry.data.title}
-                classes={site.heroClasses}
+                classes={site.hero.classes}
             />
         ) : null}
         {sections.map(({ section, rendered }) => (

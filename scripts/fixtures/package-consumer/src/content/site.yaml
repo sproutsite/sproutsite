@@ -1,6 +1,10 @@
 name: Consumer fixture
 url: https://example.com
 base: /
+hero:
+    classes:
+        - ss-package-global
+    background-image: /backgrounds/global.svg
 language: en
 locales: [en, de]
 header:

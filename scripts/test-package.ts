@@ -383,6 +383,17 @@ function verifyBuild(base: string) {
         );
         assert.equal((html.match(/<main\b/g) ?? []).length, 1);
         assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
+        if (
+            file.endsWith('about/index.html') ||
+            file.endsWith('ueber/index.html')
+        )
+            assert.ok(
+                html.includes(
+                    file.startsWith('de/')
+                        ? 'ss-package-global-de'
+                        : 'ss-package-global',
+                ),
+            );
         assert.ok(html.includes(`Version ${manifest.version}`));
         assert.equal(
             html.includes('sproutsite.dev'),
@@ -403,6 +414,41 @@ function verifyBuild(base: string) {
         }
     }
     const home = readFileSync(join(output, 'index.html'), 'utf8');
+    for (const file of [
+        'about/index.html',
+        'blog/index.html',
+        '404.html',
+        '500.html',
+    ]) {
+        assert.ok(
+            readFileSync(join(output, file), 'utf8').includes(
+                `src="${base}backgrounds/global.svg"`,
+            ),
+            `Missing global background: ${file}`,
+        );
+    }
+    const disabledBackground = readFileSync(
+        join(output, 'no-background/index.html'),
+        'utf8',
+    );
+    assert.equal(disabledBackground.includes('ss-hero-background'), false);
+    assert.ok(disabledBackground.includes('ss-package-global'));
+    const localBackground = readFileSync(
+        join(output, 'local-background/index.html'),
+        'utf8',
+    );
+    assert.ok(
+        localBackground.includes(`src="${base}backgrounds/override.svg"`),
+    );
+    assert.equal(
+        localBackground.includes(`src="${base}backgrounds/global.svg"`),
+        false,
+    );
+    assert.ok(
+        readFileSync(join(output, 'blog/index.html'), 'utf8').includes(
+            'ss-package-global',
+        ),
+    );
     assert.ok(home.includes('ss-accordion-item'));
     assert.ok(home.includes('ss-card__figure--placeholder'));
     assert.equal((home.match(/class="ss-card__badges"/g) ?? []).length, 2);
@@ -485,7 +531,6 @@ try {
         'LICENSE',
         'NOTICE',
         'THIRD_PARTY_NOTICES.md',
-        'src/themes/default/assets/hero-waves.svg',
         'src/package/starter-assets/public/branding/favicon.svg',
         'src/package/starter-assets/public/branding/apple-touch-icon.png',
         'src/package/starter-assets/public/branding/icon-192.png',
@@ -656,6 +701,8 @@ try {
             join(consumer, 'dist/de/index.html'),
             'utf8',
         );
+        assert.ok(home.includes('ss-package-global'));
+        assert.ok(german.includes('ss-package-global-de'));
         if (base === '/demo/') {
             assert.ok(home.includes('src="/demo/branding/logo.svg"'));
             assert.ok(german.includes('src="/demo/branding/logo.svg"'));
@@ -722,6 +769,11 @@ try {
         ),
     );
     assert.ok(starterHtml.includes('ss-hero--has-background-image'));
+    assert.equal(
+        starterHtml.includes('ss-package-global'),
+        false,
+        'Local classes: null must remove the global hero classes.',
+    );
     console.log(
         `PASS starter assets: ${starter.files.length} archived files verified, public copy, branding, notices and local hero image built under /demo/.`,
     );

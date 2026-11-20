@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { z } from 'zod';
 import { parse } from 'yaml';
 import type { SiteConfig } from './types.js';
+import { publicHeroImage, validateHeroBackground } from './hero-background.js';
 import {
     brandingSchema,
     inheritBranding,
@@ -92,7 +93,13 @@ const siteSchema = z.object({
         .array(z.string().regex(/^[a-z]{2}$/))
         .min(1)
         .default(['en']),
-    'hero-classes': z.array(heroClass).max(8).default([]),
+    hero: z
+        .object({
+            classes: z.array(heroClass).max(8).default([]),
+            'background-image': publicHeroImage.optional(),
+        })
+        .strict()
+        .default({ classes: [] }),
     blog: z
         .object({
             title: z.string().trim().min(1),
@@ -180,6 +187,11 @@ export function loadSiteConfig(
         locale && locale !== 'en' ? `site.${locale}.yaml` : 'site.yaml';
     const source = resolve(root, 'src/content', filename);
     const raw = parse(readFileSync(source, 'utf8'));
+    if (typeof raw === 'object' && raw !== null && 'hero-classes' in raw) {
+        throw new Error(
+            `Invalid src/content/${filename}: hero-classes has moved to hero.classes. Use hero: { classes: [...] }.`,
+        );
+    }
     if (
         filename !== 'site.yaml' &&
         typeof raw === 'object' &&
@@ -195,8 +207,12 @@ export function loadSiteConfig(
             `Invalid src/content/${filename}: ${parsed.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join('; ')}`,
         );
     }
-    const { 'hero-classes': heroClasses, ...site } = parsed.data;
-    const config: SiteConfig = { ...site, heroClasses };
+    const config: SiteConfig = parsed.data;
+    validateHeroBackground(
+        config.hero['background-image'],
+        `src/content/${filename}`,
+        root,
+    );
     validateBrandingFiles(config.branding, root, `src/content/${filename}`);
     const environmentBase = process.env.SPROUTSITE_BASE;
     if (environmentBase === undefined) return config;

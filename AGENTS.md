@@ -155,8 +155,10 @@ name: Sproutsite
 url: https://sproutsite.dev
 base: /
 language: de
-hero-classes:
-    - ss-hero--theme-1
+hero:
+    classes:
+        - ss-hero--theme-1
+    background-image: /backgrounds/hero-waves.svg
 header:
     links:
         - label: Startseite
@@ -180,7 +182,7 @@ footer:
           href: /kontakt/
 ```
 
-Website name, language, production URL, base path, global `hero-classes`, navigation, and footer are maintained here. `hero-classes` is optional, contains at most eight theme classes with the `ss-` prefix, and applies to every hero and H1 fallback view without `hero.md`; `classes` in an individual `hero.md` overrides this value completely. Use the same validated values for Astro configuration, links, canonicals, and the sitemap; do not duplicate configuration. Astro configuration must not import Content APIs that are only available within the Astro runtime. Use a small Node-compatible loader for singleton configuration needed in more than one place.
+Website name, language, production URL, base path, global `hero.classes`, navigation, and footer are maintained here. `hero.classes` is optional, contains at most eight theme classes with the `ss-` prefix, and applies to every hero and H1 fallback view without `hero.md`; `classes` in an individual `hero.md` overrides this value completely. Use the same validated values for Astro configuration, links, canonicals, and the sitemap; do not duplicate configuration. Astro configuration must not import Content APIs that are only available within the Astro runtime. Use a small Node-compatible loader for singleton configuration needed in more than one place.
 
 `https://sproutsite.dev` is the canonical product website. Consumer sites configure their own production URL. The demo does not require external fonts, tracking, or services. Use the approved Sproutsite sprout-and-layers logo in `src/themes/default/assets/branding/`; do not reintroduce an obsolete logo. Brand colors are separate tokens in `foundation/tokens.css`. Reproduce derived assets with `npm run branding:generate`; keep SVGs standalone and preserve the local font's license. The shared `BrandLogo` atom adapts to header and footer text colors. The default theme registers a static web app manifest via Astro's `injectRoute()` API; this is a metadata endpoint, not a content page or a custom router.
 
@@ -219,11 +221,11 @@ Eine kurze Einführung in die Inhalte dieser Seite.
 
 - The presence of the file activates the hero. Do not add another activation option to `page.yaml`.
 - `title` is a non-empty required field rendered as the visible `h1`; `titleHighlight` is an optional text fragment from `title` rendered with the theme highlight class; `eyebrow` is optional; `tone` has a documented default.
-- `classes` is optional and contains at most eight additional theme classes for the outer hero `section` element. Each class starts with `ss-` and may only contain lowercase letters, digits, `_`, and `-`, for example `ss-hero--visual`. When `classes` is supplied as a list, it completely overrides global `hero-classes` from `site.yaml`. `classes: null` deliberately removes global classes; when the field is absent, global classes apply. This lets theme developers add gradients, overlays, or textures without copying the hero. These classes are only intended for `hero.md`, not for sections.
-- `background-image` is optional and names a local raster image relative to `hero.md`, for example `./_assets/hero-visual.png`. Astro validates and optimizes it; the theme renders it as a decorative background with a contrast-preserving overlay. Do not use it for information that needs alternative text; place meaningful images in regular content instead.
+- `classes` is optional and contains at most eight additional theme classes for the outer hero `section` element. Each class starts with `ss-` and may only contain lowercase letters, digits, `_`, and `-`, for example `ss-hero--visual`. When `classes` is supplied as a list, it completely overrides global `hero.classes` from `site.yaml`. `classes: null` deliberately removes global classes; when the field is absent, global classes apply. This lets theme developers add gradients, overlays, or textures without copying the hero. These classes are only intended for `hero.md`, not for sections.
+- Global `hero.background-image` in `site.yaml` is an optional safe public-root image path, e.g. `/backgrounds/hero-waves.svg`. It also applies to H1 fallbacks, the blog overview and error heroes. Local `background-image` in `hero.md` overrides it; omission inherits it and `null` disables the image. Local values support public-root SVG/raster paths and relative images through Astro's image schema. Raster imports are optimized, public files and SVGs are preserved. Without either image setting only the configured CSS backgrounds remain. Classes and background-image are independent; `classes: null` does not disable a global image. Decorative images have empty alternatives; meaningful images belong in content.
 - `claim` is an optional prominent line rendered below the H1. `actions` is optional and contains one or two `{ label, href, variant }` entries. `variant` is `primary` or `secondary`; the shared hero renders them with the existing Button component. `tagline` is an optional short line rendered below the actions.
 - The shared hero component renders the title and Markdown content entirely from `hero.md`.
-- Without a hero, the layout renders `page.yaml.title` as a compact visible H1 fallback before the sections. It receives global `hero-classes` from `site.yaml`; without `hero.md`, there is no local override. This is the only intended visible fallback for pages without a hero.
+- Without a hero, the layout renders `page.yaml.title` as a compact visible H1 fallback before the sections. It receives global `hero.classes` from `site.yaml`; without `hero.md`, there is no local override. This is the only intended visible fallback for pages without a hero.
 - The homepage, FAQ, and Info use the same hero component with their own content. Do not create three copied implementations.
 
 ### Blog: `src/content/blog/YYYY-MM-DD.article-slug/`

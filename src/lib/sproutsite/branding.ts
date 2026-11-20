@@ -1,18 +1,13 @@
-import { readFileSync, realpathSync, statSync } from 'node:fs';
-import { extname, relative, resolve, sep } from 'node:path';
-import { imageMetadata } from 'astro/assets/utils';
+import { extname } from 'node:path';
 import { z } from 'zod';
+import {
+    publicAssetPath as assetPath,
+    publicAssetFile as publicBrandingFile,
+    publicImageMetadata as brandingImageMetadata,
+} from './public-assets.js';
+export { brandingImageMetadata };
 
 // Paths refer to Astro's standard public directory, without a deployment base.
-const assetPath = z.string().refine(
-    (value) =>
-        /^\/(?!\/)[A-Za-z0-9_./-]+$/.test(value) &&
-        value
-            .slice(1)
-            .split('/')
-            .every((part) => part && part !== '.' && part !== '..'),
-    'must be a root-relative public file path without a base, query, fragment or traversal',
-);
 const logoSchema = z
     .object({
         src: assetPath,
@@ -62,21 +57,6 @@ export function inheritBranding(primary: unknown, localized: unknown): unknown {
             merged[key] = { ...primary[key], ...localized[key] };
     }
     return merged;
-}
-
-export function publicBrandingFile(src: string, root = process.cwd()): string {
-    if (!assetPath.safeParse(src).success)
-        throw new Error(`Unsafe branding path: ${src}`);
-    const directory = realpathSync(resolve(root, 'public'));
-    const file = realpathSync(resolve(directory, `.${src}`));
-    const within = relative(directory, file);
-    if (
-        within.startsWith(`..${sep}`) ||
-        within === '..' ||
-        !statSync(file).isFile()
-    )
-        throw new Error(`Branding asset must be a file inside public/: ${src}`);
-    return file;
 }
 
 function assets(branding: Branding) {
@@ -145,10 +125,6 @@ export function validateBrandingFiles(
             );
         }
     }
-}
-
-export async function brandingImageMetadata(src: string, root = process.cwd()) {
-    return imageMetadata(readFileSync(publicBrandingFile(src, root)), src);
 }
 
 /** Astro's image reader verifies file contents and required app-icon dimensions. */

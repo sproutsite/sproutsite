@@ -29,7 +29,7 @@ tagline: A short supporting tagline.
 ---
 ```
 
-`background-image` references a local image relative to `hero.md`. Astro validates and optimizes the file. The default theme treats it as decoration and adds an overlay to preserve text contrast. Images that convey information belong in a regular section with alternative text instead.
+`background-image` overrides the global `hero.background-image` from `site.yaml`. Use a public SVG/raster path such as `/backgrounds/hero-waves.svg` or a relative local image such as `./_assets/hero-visual.png`. Astro optimizes imported raster images; public files and SVGs are preserved. Omission inherits the global default; `background-image: null` disables it. With neither setting, only existing CSS backgrounds remain. Meaningful images belong in regular sections with alternative text.
 
 ### Prepare the hero type
 
@@ -39,7 +39,7 @@ The `big` variant adds more space above the hero content. Other variant-specific
 
 ### Override or remove classes for one page
 
-A `classes` list replaces `hero-classes` from `site.yaml`. Set `classes: null` to deliberately remove the global classes on one page.
+A `classes` list replaces `hero.classes` from `site.yaml`. Set `classes: null` to deliberately remove the global classes on one page.
 
 ### Hero actions
 

@@ -101,14 +101,11 @@
             }
         }
 
-        .ss-hero__background {
-            @apply pointer-events-none absolute inset-0 z-0 size-full object-cover object-center;
-        }
-
         &.ss-hero--has-background-image {
             @apply text-primary-content;
 
-            &::before {
+            &:not(.ss-hero--background-svg)::before,
+            &.ss-hero--background-svg:not(.ss-hero--theme-1)::before {
                 content: '';
                 @apply pointer-events-none absolute inset-0 z-[1];
                 background:
@@ -143,7 +140,7 @@
 
         &::before {
             content: '';
-            @apply pointer-events-none absolute inset-0;
+            @apply pointer-events-none absolute inset-0 z-[1];
             background-image:
                 linear-gradient(
                     90deg,
@@ -160,27 +157,19 @@
                     color-mix(in srgb, var(--color-hero-navy) 35%, transparent)
                         5rem,
                     transparent 10rem
-                ),
-                url('../../../assets/hero-waves.svg');
-            /* Fill wide heroes proportionally so the lower blue contours
-             * reach the middle; bottom alignment preserves their layering. */
+                );
             background-size: cover;
             background-position:
                 right bottom,
-                right bottom,
-                right top;
+                right bottom;
             background-repeat: no-repeat;
         }
 
-        /* Keep waves quiet behind the wider text and wrapping navigation on
-         * tablets and phones; preserve the full SVG height to avoid seams. */
+        /* Keep the overlay subtle on tablets and phones. SVG sizing lives
+         * in the shared HeroBackground atom, independently of this class. */
         @media (max-width: 63.999rem) {
             &::before {
                 opacity: 0.5;
-                background-size:
-                    cover,
-                    cover,
-                    auto 100%;
             }
         }
     }

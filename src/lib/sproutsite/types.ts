@@ -36,7 +36,7 @@ export interface SiteConfig {
     base: string;
     language: string;
     locales: string[];
-    heroClasses: string[];
+    hero: { classes: string[]; 'background-image'?: string };
     typography: {
         headings: { family: 'serif' | 'sans-serif'; weight: number };
         eyebrow: { family: 'serif' | 'sans-serif'; weight: number };

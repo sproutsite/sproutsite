@@ -2,6 +2,7 @@ import { defineCollection, type ImageFunction } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { heroTypes, sectionSpacings, tones } from '../lib/sproutsite/types.js';
+import { publicHeroImage } from '../lib/sproutsite/hero-background.js';
 import { optionalBlogLoader } from './optional-blog-loader.js';
 import { createBlogReadinessLoader } from './blog-state.js';
 
@@ -80,7 +81,30 @@ export function createSproutsiteCollections(
             titleHighlight: z.string().trim().min(1).optional(),
             eyebrow: z.string().trim().min(1).optional(),
             classes: z.array(heroClass).max(8).nullable().optional(),
-            'background-image': image().optional(),
+            'background-image': z
+                .union([
+                    z
+                        .string()
+                        .refine(
+                            (src) => publicHeroImage.safeParse(src).success,
+                            'must be a public image path',
+                        ),
+                    z.preprocess((value, context) => {
+                        if (
+                            typeof value !== 'string' ||
+                            !(value.startsWith('./') || value.startsWith('../'))
+                        ) {
+                            context.addIssue({
+                                code: 'custom',
+                                message: 'must be a relative local image path',
+                            });
+                            return z.NEVER;
+                        }
+                        return value;
+                    }, image()),
+                ])
+                .nullable()
+                .optional(),
             actions: z.array(heroAction).min(1).max(2).optional(),
             claim: z.string().trim().min(1).optional(),
             tagline: z.string().trim().min(1).optional(),

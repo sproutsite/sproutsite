@@ -7,6 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Changed
+
+- Moved the demo hero waves into public assets and replaced the fixed CSS image with global `hero.background-image`, per-page overrides and explicit opt-out, shared by heroes, title fallbacks, blog and error pages.
+- Grouped global hero classes under `hero.classes` in site configuration, preserving per-page overrides and reporting the former `hero-classes` setting with a migration hint.
+
 ## [0.5.24] - 2026-11-20
 
 ### Added

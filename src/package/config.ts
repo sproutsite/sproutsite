@@ -18,6 +18,7 @@ import { loadSiteConfig } from '../lib/sproutsite/site-config.js';
 import { validateSproutsiteContent } from '../lib/sproutsite/validation.js';
 import { createSitemapMetadata } from '../lib/sproutsite/sitemap.js';
 import { validateBrandingImages } from '../lib/sproutsite/branding.js';
+import { validateHeroBackgroundImage } from '../lib/sproutsite/hero-background.js';
 
 /** Returns the Astro configuration required by the default Sproutsite theme. */
 export function createSproutsiteConfig() {
@@ -61,6 +62,12 @@ export function createSproutsiteConfig() {
                 hooks: {
                     'astro:config:setup': async ({ injectRoute }) => {
                         for (const locale of site.locales) {
+                            await validateHeroBackgroundImage(
+                                (locale === site.language
+                                    ? site
+                                    : loadSiteConfig(locale)
+                                ).hero['background-image'],
+                            );
                             await validateBrandingImages(
                                 (locale === site.language
                                     ? site

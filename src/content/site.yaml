@@ -37,8 +37,10 @@ language: en
 locales:
     - en
     - de
-hero-classes:
-    - ss-hero--theme-1
+hero:
+    classes:
+        - ss-hero--theme-1
+    background-image: /backgrounds/hero-waves.svg
 blog:
     title: Blog
     eyebrow: Project journal

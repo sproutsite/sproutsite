@@ -29,9 +29,22 @@ background-image: ./_assets/werkstatt.jpg
 Möbel, Reparaturen und die Geschichten dahinter.
 ```
 
-Lege neben dem Hero den Ordner `_assets` mit deinem Bild `werkstatt.jpg` an. `background-image` unterstützt lokale Rasterbilder; Astro bereitet sie für die Website auf. Der Hintergrund ist dekorativ. Wichtige Informationen gehören deshalb in den Text oder in reguläre Inhaltsbilder. Das Theme legt eine Überblendung für die Lesbarkeit darüber.
+Lege neben dem Hero den Ordner `_assets` mit deinem Bild `werkstatt.jpg` an. Diese lokale Angabe überschreibt `hero.background-image` aus `site.yaml`. Astro optimiert relative Rasterbilder; SVGs und öffentliche Dateien bleiben unverändert. Alternativ kannst du einen öffentlichen Pfad wie `/backgrounds/hero-waves.svg` verwenden. Der Hintergrund ist dekorativ; wichtige Informationen gehören in den Text oder in reguläre Inhaltsbilder.
 
-`classes: null` entfernt die global eingestellte Hero-Dekoration und damit auch die voreingestellte Wellenklasse. Ohne diese Angabe gelten weiterhin die globalen `hero-classes`. Eine lokale Liste unter `classes` ersetzt die globale Liste vollständig. Prüfe das Ergebnis auf schmalen und breiten Bildschirmen.
+`classes: null` entfernt die globalen Hero-Klassen; das Hintergrundbild wird unabhängig davon gewählt. Ohne lokale Bildangabe gilt der globale Standard. Mit `background-image: null` entfernst du diesen auf einer einzelnen Seite. Ohne globale und lokale Bildangabe wird kein Bild ausgegeben; CSS-Verläufe bleiben bestehen. Prüfe schmale und breite Bildschirme.
+
+### Ein Hintergrund für alle Seiten
+
+Lege die Datei etwa unter `public/backgrounds/hero-waves.svg` ab. Ergänze in der jeweiligen Website-Konfiguration:
+
+```yaml
+hero:
+    classes:
+        - ss-hero--theme-1
+    background-image: /backgrounds/hero-waves.svg
+```
+
+Das Bild gilt auch für Titelbereiche ohne `hero.md`, die Blogübersicht und Fehlerseiten. Der Dateipfad enthält weder `public`, Sprachpräfix noch Deployment-Unterpfad. Das Theme ergänzt `base` genau einmal. Die Einstellung lädt keine Datei aus dem Sproutsite-Paket: Deine Website besitzt ihre Hintergrunddatei selbst.
 
 ### Größe und Aktionen
 
@@ -51,6 +64,6 @@ Lege die verlinkten Seiten zuerst an. Alle Hero-Felder findest du in der [Inhalt
 
 ### Noch offen
 
-`fullscreen` ist als Typ und CSS-Klasse vorbereitet, aber noch kein fertiges Layout über die gesamte Bildschirmhöhe. Auch das Austauschen der mitgelieferten SVG-Wellen über eine eigene Website-Einstellung ist nicht umgesetzt. Ein lokales Rasterbild funktioniert bereits; eine unterstützte SVG-Hintergrundoption und das bildschirmfüllende Layout bleiben zukünftige Erweiterungen.
+`fullscreen` ist als Typ und CSS-Klasse vorbereitet, aber noch kein fertiges Layout über die gesamte Bildschirmhöhe. Diese Layout-Variante bleibt offen. Globale Hintergrundbilder und der Austausch der SVG-Wellen funktionieren bereits über `hero.background-image`.
 
 [Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

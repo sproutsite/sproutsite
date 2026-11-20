@@ -29,7 +29,7 @@ tagline: Ein kurzer unterstützender Claim.
 ---
 ```
 
-`background-image` verweist auf ein lokales Bild relativ zu `hero.md`. Astro validiert und optimiert die Datei; das Standard-Theme behandelt sie als dekorativen Hintergrund und legt automatisch ein kontrastreiches Overlay für die Hero-Typografie darüber. Inhalte, die inhaltlich erklärt werden müssen, gehören stattdessen als reguläres Bild mit Alternativtext in eine Section.
+`background-image` überschreibt den globalen Standard `hero.background-image` aus `site.yaml`. Du kannst einen öffentlichen SVG- oder Rasterbildpfad wie `/backgrounds/hero-waves.svg` oder ein relatives lokales Bild wie `./_assets/hero-visual.png` verwenden. Lokale Rasterbilder optimiert Astro; öffentliche Dateien und SVGs bleiben unverändert. Ohne lokale Angabe gilt der globale Standard, mit `background-image: null` erscheint kein Bild. Fehlen beide Angaben, bleiben nur die vorhandenen CSS-Hintergründe. Aussagekräftige Bilder gehören mit Alternativtext in reguläre Sections.
 
 ### Hero-Typ vorbereiten
 
@@ -39,7 +39,7 @@ Die Variante `big` ergänzt mehr Abstand oberhalb des Hero-Inhalts. Weitere Form
 
 ### Klassen lokal überschreiben oder entfernen
 
-`classes` als Liste überschreibt `hero-classes` aus `site.yaml`. Mit `classes: null` entfernt eine Seite die globalen Klassen bewusst.
+`classes` als Liste überschreibt `hero.classes` aus `site.yaml`. Mit `classes: null` entfernt eine Seite die globalen Klassen bewusst.
 
 ### Aktionen im Hero
 

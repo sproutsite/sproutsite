@@ -50,8 +50,10 @@ privater Theme-Pfade. Prüfe README und Manifest, bevor du die Kopierlogik anpas
 
 5. Binde das neutrale Hero-Beispiel über manifest.heroExample ein. Kopiere das
    Bild zusätzlich an contentDestination und übernimm die angegebenen
-   Frontmatter-Werte. Astro erwartet für background-image ein relatives lokales
-   Inhaltsbild, keine /images/-URL. Behalte die bisherigen Texte, Aktionen und
+   Frontmatter-Werte. Dieses Rezept nutzt ein relatives lokales
+   Inhaltsbild für Astros Bildoptimierung. Alternativ kann das inzwischen
+   unterstützte globale hero.background-image auf /images/hero.jpg zeigen;
+   diese öffentliche Datei wird unverändert ausgeliefert. Behalte die bisherigen Texte, Aktionen und
    Hero-Größen bei. Für die Sprachvarianten genügt dasselbe Bild.
 
 6. Prüfe das gepackte Generator-Archiv: Alle Assets, Hinweise und Vorlagen

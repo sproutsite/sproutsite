@@ -37,12 +37,22 @@ For each area, `family: serif` selects EB Garamond and `family: sans-serif` sele
 
 ### Global hero classes
 
-Use `hero-classes` to set theme classes for all heroes and compact H1 fallbacks on pages without `hero.md`. Class names start with `ss-`; they remain theme details rather than a content-layout API.
+Use `hero.classes` to set theme classes for all heroes and compact H1 fallbacks on pages without `hero.md`. Class names start with `ss-`; they remain theme details rather than a content-layout API.
 
 ```yaml
-hero-classes:
-    - ss-hero--theme-1
+hero:
+    classes:
+        - ss-hero--theme-1
+    background-image: /backgrounds/hero-waves.svg
 ```
+
+Older configurations used `hero-classes`. Move that list to `hero.classes`; the old key is rejected with a migration hint. The local `classes` field in `hero.md` stays unchanged.
+
+### Global hero background image
+
+Place your image under `public/` and set `hero.background-image` to its website-root-relative path, such as `/backgrounds/hero-waves.svg`. SVG, PNG, JPEG, WebP and AVIF are supported; omit deployment and language prefixes. Public images are delivered unchanged.
+
+A local `background-image` in `hero.md` or `hero.de.md` replaces the global default. Relative local images such as `./_assets/hero.jpg` also work there. Set `background-image: null` to disable the global image on one page. With neither setting, no image is rendered; CSS gradients and other class styles remain. Pages without `hero.md`, the blog overview and error pages also use the global default.
 
 ### Footer areas
 

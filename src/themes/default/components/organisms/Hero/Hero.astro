@@ -1,6 +1,10 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { Image } from 'astro:assets';
+import HeroBackground from '../../atoms/HeroBackground/HeroBackground.astro';
+import {
+    selectHeroBackground,
+    isSvgHeroImage,
+} from '../../../../../lib/sproutsite/hero-background.js';
 import { toneOf } from '../../../../../lib/sproutsite/pages.js';
 import type { SiteConfig } from '../../../../../lib/sproutsite/types.js';
 import Button from '../../atoms/Button/Button.astro';
@@ -21,9 +25,12 @@ const toneClass = {
 }[toneOf(hero)];
 const heroClasses =
     hero.data.classes === undefined
-        ? site.heroClasses
+        ? site.hero.classes
         : (hero.data.classes ?? []);
-const backgroundImage = hero.data['background-image'];
+const backgroundImage = selectHeroBackground(
+    hero.data['background-image'],
+    site.hero['background-image'],
+);
 const heroTitle = hero.data.title;
 if (!heroTitle) throw new Error('Sproutsite Hero requires a title.');
 const titleHighlight = hero.data.titleHighlight;
@@ -47,21 +54,13 @@ const titleLines = heroTitle.split('\n').map((line) => {
         'ss-hero',
         `ss-hero--${hero.data.type ?? 'small'}`,
         { 'ss-hero--has-background-image': Boolean(backgroundImage) },
+        { 'ss-hero--background-svg': isSvgHeroImage(backgroundImage) },
         ...heroClasses,
     ]}
     aria-labelledby="page-title"
 >
     {backgroundImage && (
-        <Image
-            class="ss-hero__background"
-            src={backgroundImage}
-            alt=""
-            format="webp"
-            quality={82}
-            loading="eager"
-            decoding="async"
-            aria-hidden="true"
-        />
+        <HeroBackground source={backgroundImage} base={site.base} />
     )}
     <div class="ss-hero__inner site-shell">
         {hero.data.eyebrow && <Eyebrow>{hero.data.eyebrow}</Eyebrow>}

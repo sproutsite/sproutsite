@@ -35,9 +35,12 @@ Manifest schema version 1 contains:
   image files.
 - `heroExample`: an optional existing-API integration. Copy its `source` to
   `contentDestination` and merge `frontmatter` into the homepage hero. Use the
-  same local asset for both languages. The hero's `image()` schema expects a
-  relative content image, not a public URL. Set `classes: null` to remove the
-  default decorative waves when enabling the raster example.
+  same local asset for both languages. This recipe uses Astro's
+  local image schema for optimization. Alternatively set the global
+  `hero.background-image` to `/images/hero.jpg` after copying public files;
+  public images are delivered unchanged. Set `classes: null` to remove the
+  default theme classes. The local image independently replaces any global
+  background image.
 
 Do not merge a second duplicate `branding` YAML key. Keep the existing name,
 URL, locale, typography and navigation configuration. Locale files inherit the

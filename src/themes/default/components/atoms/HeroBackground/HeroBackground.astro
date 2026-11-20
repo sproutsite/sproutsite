@@ -1,0 +1,52 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { publicImageMetadata } from '../../../../../lib/sproutsite/public-assets.js';
+import {
+    validateHeroBackground,
+    validateHeroBackgroundImage,
+} from '../../../../../lib/sproutsite/hero-background.js';
+import { withBase } from '../../../../../lib/sproutsite/urls.js';
+
+interface Props {
+    source: ImageMetadata | string;
+    base: string;
+}
+const { source, base } = Astro.props;
+if (typeof source === 'string')
+    validateHeroBackground(source, 'hero background');
+if (typeof source === 'string') await validateHeroBackgroundImage(source);
+const image =
+    typeof source === 'string'
+        ? {
+              ...(await publicImageMetadata(source)),
+              src: withBase(source, base),
+          }
+        : source;
+const svg = image.format === 'svg';
+const classes = ['ss-hero-background', { 'ss-hero-background--svg': svg }];
+---
+
+{typeof source === 'string' || svg ? (
+    <img
+        class:list={classes}
+        src={image.src}
+        width={image.width}
+        height={image.height}
+        alt=""
+        loading="eager"
+        decoding="async"
+        aria-hidden="true"
+    />
+) : (
+    <Image
+        class:list={classes}
+        src={source}
+        alt=""
+        format="webp"
+        quality={82}
+        loading="eager"
+        decoding="async"
+        aria-hidden="true"
+    />
+)}
