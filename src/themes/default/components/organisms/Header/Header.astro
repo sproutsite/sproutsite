@@ -26,7 +26,7 @@ const hasLanguageSwitcher = site.header.links.some(
 <header class="ss-header">
     <div class="ss-header__inner site-shell">
         <a class="ss-header__brand" href={contentHref('/', site)}>
-            <BrandLogo name={site.name} />
+            <BrandLogo site={site} />
         </a>
         <div class="ss-header__mobile-tools">
             {hasLanguageSwitcher && (
@@ -126,7 +126,7 @@ const hasLanguageSwitcher = site.header.links.some(
     >
         <div class="ss-header__dialog-top site-shell">
             <a class="ss-header__dialog-brand" href={contentHref('/', site)}>
-                <BrandLogo name={site.name} />
+                <BrandLogo site={site} />
             </a>
             <button
                 type="button"

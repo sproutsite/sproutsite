@@ -636,9 +636,42 @@ Leave `PRIVACY_LOG_RETENTION_DAYS` empty until a time-based policy is implemente
 
 ### Logo and icons
 
-The reference-based sprout and three-layer symbol lives in `src/themes/default/assets/branding/`. `logo.svg` (navy wordmark), `logo-dark.svg` (white wordmark), `logo-monochrome.svg`, `icon.svg`, and `icon-monochrome.svg` are standalone vector assets with transparent backgrounds and outlined Nunito lettering. They need no external font. The shared `BrandLogo` atom follows the configured heading family and weight, inherits the light/dark text color, and is used in the header and footer. Consumer sites with a different `site.name` retain their own text wordmark.
+Keep your own prepared branding files under `public/branding/` and configure them in `src/content/site.yaml`. This follows [Astro's public-file conventions](https://docs.astro.build/en/guides/images/#images-in-public): files are copied unchanged, not optimised. Do not edit installed package files.
 
-`favicon.svg` uses flat colors for small displays. The ICO contains native 16, 32, and 48 pixel frames; separate PNGs provide those sizes too. The Apple touch icon is 180 pixels; web app icons are 192 and 512 pixels, with navy backgrounds and safe internal padding. `PageLayout` links the icons and the static `/site.webmanifest` endpoint registered by `createSproutsiteConfig()` through Astro's standard `injectRoute()` API. Imported asset URLs and the configured base are respected; no CMS runtime or service worker is added. These are the default theme's icons; a differently branded consumer should replace them when replacing the theme. The Sproutsite social card is emitted only for the product site (`site.name: Sproutsite`).
+```yaml
+branding:
+    logo:
+        src: /branding/logo.svg
+        srcOnDark: /branding/logo-light.svg
+        width: 180
+        height: 48
+        showName: false
+    icons:
+        favicon: /branding/favicon.svg
+        shortcut: /branding/favicon.ico
+        appleTouch: /branding/apple-touch-icon.png
+        app192: /branding/icon-192.png
+        app512: /branding/icon-512.png
+    sharingImage:
+        src: /branding/sharing-image.png
+        alt: A description of your website preview
+```
+
+All branding sections are optional. Logos accept SVG, PNG, JPEG or WebP; `width` and `height` define the intended display box in pixels, scaled proportionally on narrow screens. `showName: true` places the configured website name beside a symbol using the heading typography; false displays a complete image wordmark with the website name as its accessible name. Without a logo, the name appears as text. `srcOnDark` is optional and used on the hero navbar, mobile menu and footer; the docked navbar uses `src`. Optional `branding.footerLogo` accepts the same fields and otherwise inherits `logo`.
+
+`favicon` accepts SVG, PNG or ICO; `shortcut` accepts ICO. Apple touch and app icons require PNGs of exactly 180×180, 192×192 and 512×512 respectively. Omitted icon fields use neutral document icons, independently of the website name. `sharingImage` accepts PNG, JPEG or WebP and a non-empty alternative text; its real dimensions and absolute URL are emitted in Open Graph and Twitter metadata for any website. Without it, no sharing image is advertised. Per-page sharing-image overrides are not implemented.
+
+Paths are public-root-relative, with no `public`, language or deployment prefix. Sproutsite applies `base` once. Configured paths must be existing files within `public/`; remote URLs, traversal, query strings and fragments are rejected. Astro verifies image formats and icon dimensions during startup/build. Localized `site.*.yaml` files inherit branding from `site.yaml` and may override individual nested fields, including image paths and translated `sharingImage.alt`. The shared `/site.webmanifest` uses the main configuration. Restart the dev server after configuration or branding-file changes. No runtime service, offline mode or consumer asset generator is added.
+
+The Sproutsite demo uses the same configuration with its own files in `public/branding/`. Source artwork remains in `src/themes/default/assets/branding/`; `npm run branding:generate` reproduces it and synchronizes the demo's public copies, then regenerates the neutral starter set.
+
+### Copyable starter assets
+
+`src/package/starter-assets/public/` is the single neutral source for new websites and the theme's fallback icons. It contains a document-symbol logo, light/dark-compatible variant, SVG/ICO/PNG favicons, Apple/app icons, a 1200×630 sharing image and a 1920×1080 hero example. These first-party SVG sources and their deterministic raster derivatives are licensed under Apache-2.0, with the unchanged full license and an attribution notice included in the copyable directory. The product demo assets are separate.
+
+Resolve the public `sproutsite/starter-assets` package export to find `manifest.json`. Its version-1 contract includes `publicDirectory`, exact file paths and SHA-256 hashes, a ready-to-merge `branding` object, English/German sharing-image alternative text, and an optional hero-image copy mapping for Astro's local `image()` schema. See [the starter asset contract](src/package/starter-assets/README.md) for a Node/TypeScript example. The asset set is included in the npm archive; no additional package or runtime service is needed.
+
+Run `npm run starter-assets:generate` after editing `public/branding/logo.svg` or `sources/*.svg` within the starter directory. Generation requires the repository's development dependencies and is not part of a consumer build. The separate `create-sproutsite` generator must vendor a reviewed snapshot before its release, copy binaries unchanged, preserve LICENSE.txt/NOTICE.txt and fill in the site's configuration. It must not fetch assets at user generation time, so `--no-install` remains functional. That generator update is maintained by its own agent; this repository does not claim that the published initializer already ships these files. See [the handoff](docs/create-sproutsite-starter-handoff.md).
 
 Brand colors are separate `--color-brand-*` tokens in `styles/foundation/tokens.css`; the existing semantic UI palette is unchanged. Run `npm run branding:generate` after changing the vector geometry or brand tokens, then `npm run format`. The TypeScript generator uses `fontkit` and `sharp` only during development. Its local source font is `scripts/assets/nunito-variable.ttf` from the [official Nunito distribution](https://github.com/google/fonts/tree/main/ofl/nunito), covered by the adjacent SIL Open Font License. Generated assets are committed and ordinary builds do not regenerate or download them.
 

@@ -5,16 +5,10 @@ tone:
 ---
 
 import { Eyebrow } from 'sproutsite/components';
-import { Alert } from 'sproutsite/components';
 
 <Eyebrow>Your website</Eyebrow>
 
 ## Give every page useful metadata
-
-<Alert variant="info" style="soft">
-    Partly available. The steps below distinguish existing features from
-    extensions that remain open.
-</Alert>
 
 Each page's `page.yaml` supplies the browser title and meta description. Write a specific title and a short description of what visitors can find there. The hero title is the visible H1 and may be worded differently.
 
@@ -35,8 +29,10 @@ An optional page `url` changes its own single URL segment. Changing a published 
 
 Inspect the built page source for the title, description, canonical URL and language links. Confirm that staging protection is removed only when the website should become public. `robots.txt` is not access control.
 
-### Sharing images are still open
+### Choose a sharing image
 
-There is no general consumer setting for a custom site-wide social sharing image yet. Do not assume that a blog card image also configures every social preview. This needs a supported metadata option and checks for absolute image URLs and image dimensions.
+Set `branding.sharingImage.src` and `branding.sharingImage.alt` in `src/content/site.yaml`. Use a local PNG, JPEG or WebP from `public/`, for example `/branding/sharing-image.png`. Sproutsite reads its dimensions and generates absolute Open Graph and Twitter image URLs from the production URL and deployment base. A language configuration can override the image or its alternative text.
+
+This is a website-wide default. A blog card image does not automatically replace it; per-page image overrides are not part of this setting. See [your branding](/documentation/getting-started/your-website/branding/) for the complete configuration.
 
 [Back to the quick start and more topics](/documentation/getting-started/your-website/)

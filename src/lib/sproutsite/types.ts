@@ -1,3 +1,5 @@
+import type { Branding } from './branding.js';
+
 export const tones = ['default', 'muted', 'brand'] as const;
 export type Tone = (typeof tones)[number];
 export type SectionTone = Tone | { odd: Tone; even: Tone };
@@ -28,6 +30,7 @@ export type HeaderItem =
     | { type: 'language-switcher' };
 
 export interface SiteConfig {
+    branding?: Branding;
     name: string;
     url: string;
     base: string;

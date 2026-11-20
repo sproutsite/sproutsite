@@ -5,13 +5,7 @@ import { t } from '../../i18n/index.js';
 import Footer from '../../components/organisms/Footer/Footer.astro';
 import type { SiteConfig } from '../../../../lib/sproutsite/types.js';
 import { canonicalUrl, withBase } from '../../../../lib/sproutsite/urls.js';
-import favicon from '../../assets/branding/favicon.svg?url&no-inline';
-import faviconIco from '../../assets/branding/favicon.ico?url&no-inline';
-import favicon16 from '../../assets/branding/favicon-16x16.png';
-import favicon32 from '../../assets/branding/favicon-32x32.png';
-import favicon48 from '../../assets/branding/favicon-48x48.png';
-import appleIcon from '../../assets/branding/apple-touch-icon.png';
-import socialCard from '../../assets/branding/social-card.png';
+import { resolveBranding } from '../../branding.js';
 interface Props {
     site: SiteConfig;
     title: string;
@@ -32,8 +26,8 @@ const documentTitle = `${title} | ${site.name}`;
 const canonical = noindex
     ? new URL(withBase(route, site.base), site.url).href
     : canonicalUrl(route, site);
-const productSite = site.name === 'Sproutsite';
-const socialImage = new URL(socialCard.src, site.url).href;
+const branding = await resolveBranding(site);
+const socialImage = branding.sharingImage;
 ---
 
 <!doctype html>
@@ -50,47 +44,44 @@ const socialImage = new URL(socialCard.src, site.url).href;
             type="application/xml"
             href={withBase('/sitemap.xml', site.base)}
         />
-        <link rel="icon" type="image/svg+xml" href={favicon} />
         <link
             rel="icon"
-            type="image/x-icon"
-            sizes="16x16 32x32 48x48"
-            href={faviconIco}
+            type={branding.favicon.type}
+            href={branding.favicon.src}
         />
-        {[favicon16, favicon32, favicon48].map((icon) => (
-            <link
-                rel="icon"
-                type="image/png"
-                sizes={`${icon.width}x${icon.height}`}
-                href={icon.src}
-            />
-        ))}
-        <link rel="apple-touch-icon" sizes="180x180" href={appleIcon.src} />
+        {branding.shortcut && (
+            <link rel="icon" type="image/x-icon" href={branding.shortcut} />
+        )}
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href={branding.appleTouch}
+        />
         <link rel="manifest" href={withBase('/site.webmanifest', site.base)} />
         <meta property="og:title" content={documentTitle} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={canonical} />
         <meta property="og:site_name" content={site.name} />
         <meta property="og:type" content="website" />
-        {productSite && (
+        {socialImage && (
             <>
-                <meta property="og:image" content={socialImage} />
-                <meta property="og:image:width" content="1200" />
-                <meta property="og:image:height" content="630" />
+                <meta property="og:image" content={socialImage.src} />
                 <meta
-                    property="og:image:alt"
-                    content="Sproutsite — The Agent-Ready Static CMS"
+                    property="og:image:width"
+                    content={String(socialImage.width)}
                 />
-                <meta name="twitter:image" content={socialImage} />
                 <meta
-                    name="twitter:image:alt"
-                    content="Sproutsite — The Agent-Ready Static CMS"
+                    property="og:image:height"
+                    content={String(socialImage.height)}
                 />
+                <meta property="og:image:alt" content={socialImage.alt} />
+                <meta name="twitter:image" content={socialImage.src} />
+                <meta name="twitter:image:alt" content={socialImage.alt} />
             </>
         )}
         <meta
             name="twitter:card"
-            content={productSite ? 'summary_large_image' : 'summary'}
+            content={socialImage ? 'summary_large_image' : 'summary'}
         />
         <meta name="twitter:title" content={documentTitle} />
         <meta name="twitter:description" content={description} />

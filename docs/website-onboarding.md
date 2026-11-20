@@ -17,11 +17,11 @@ Status describes the documented workflow, not a guarantee that every possible va
 | hero                       | hero                         | partial   |
 | typography                 | schriften                    | available |
 | colors                     | farben                       | partial   |
-| branding                   | markenauftritt               | partial   |
+| branding                   | markenauftritt               | available |
 | theme-overrides            | theme-anpassen               | open      |
 | custom-theme               | eigenes-theme                | open      |
 | deployment                 | veroeffentlichen             | available |
-| seo                        | auffindbarkeit               | partial   |
+| seo                        | auffindbarkeit               | available |
 | contact-and-legal          | kontakt-und-betreiberangaben | available |
 | checks-and-troubleshooting | pruefen-und-fehler-beheben   | available |
 | updates-and-backups        | updates-und-sicherung        | partial   |

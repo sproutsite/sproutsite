@@ -18,5 +18,33 @@
         .ss-brand-logo__highlight {
             color: var(--ss-brand-highlight, var(--color-hero-cyan));
         }
+
+        &.ss-brand-logo--custom {
+            max-width: 100%;
+
+            .ss-brand-logo__image {
+                display: grid;
+                flex-shrink: 1;
+                width: var(--ss-logo-width);
+                max-width: min(16rem, 45vw);
+                aspect-ratio: var(--ss-logo-ratio);
+
+                img {
+                    grid-area: 1 / 1;
+                    width: 100%;
+                    height: 100%;
+                    min-height: 0;
+                    object-fit: contain;
+                }
+
+                &:has(.ss-brand-logo__dark) .ss-brand-logo__light {
+                    visibility: var(--ss-logo-light-visibility, visible);
+                }
+
+                .ss-brand-logo__dark {
+                    visibility: var(--ss-logo-dark-visibility, hidden);
+                }
+            }
+        }
     }
 }

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+    <defs>
+        <linearGradient id="wall" x2="0" y2="1"><stop stop-color="#d9e3eb"/><stop offset="1" stop-color="#f5f7fa"/></linearGradient>
+        <linearGradient id="wave"><stop stop-color="#134b70"/><stop offset="1" stop-color="#0f766e"/></linearGradient>
+        <linearGradient id="panel" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#edf2f6"/></linearGradient>
+    </defs>
+    <path fill="url(#wall)" d="M0 0h1200v630H0z"/>
+    <path fill="url(#wave)" d="M0 390c220-160 330-40 560-150s390-170 640-70v460H0z"/>
+    <ellipse cx="600" cy="544" rx="340" ry="25" fill="#071a36" opacity=".1"/>
+    <rect x="280" y="130" width="640" height="390" rx="30" fill="url(#panel)" stroke="#cbd5df" stroke-width="2"/>
+    <path d="M280 195h640" stroke="#d9e3eb" stroke-width="2"/>
+    <g fill="#94a3b8"><circle cx="315" cy="165" r="6"/><circle cx="339" cy="165" r="6"/><circle cx="363" cy="165" r="6"/></g>
+    <rect x="325" y="240" width="230" height="225" rx="16" fill="#d9e8e9"/>
+    <path d="M325 394c70-90 130-30 230-65v120q0 16-16 16H341q-16 0-16-16z" fill="#3f8b99"/>
+    <g fill="#475569"><rect x="600" y="250" width="235" height="16" rx="8"/><rect x="600" y="284" width="180" height="16" rx="8"/></g>
+    <g fill="#cbd5df"><rect x="600" y="332" width="250" height="9" rx="4.5"/><rect x="600" y="357" width="220" height="9" rx="4.5"/><rect x="600" y="382" width="240" height="9" rx="4.5"/></g>
+    <rect x="600" y="425" width="125" height="38" rx="10" fill="#0f766e"/>
+</svg>

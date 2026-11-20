@@ -17,6 +17,7 @@ import { remarkContentLinks } from '../lib/sproutsite/remark-links.js';
 import { loadSiteConfig } from '../lib/sproutsite/site-config.js';
 import { validateSproutsiteContent } from '../lib/sproutsite/validation.js';
 import { createSitemapMetadata } from '../lib/sproutsite/sitemap.js';
+import { validateBrandingImages } from '../lib/sproutsite/branding.js';
 
 /** Returns the Astro configuration required by the default Sproutsite theme. */
 export function createSproutsiteConfig() {
@@ -58,7 +59,15 @@ export function createSproutsiteConfig() {
             {
                 name: 'sproutsite/default-routes',
                 hooks: {
-                    'astro:config:setup': ({ injectRoute }) => {
+                    'astro:config:setup': async ({ injectRoute }) => {
+                        for (const locale of site.locales) {
+                            await validateBrandingImages(
+                                (locale === site.language
+                                    ? site
+                                    : loadSiteConfig(locale)
+                                ).branding,
+                            );
+                        }
                         injectRoute({
                             pattern: '/404',
                             entrypoint: new URL('./404.astro', import.meta.url),

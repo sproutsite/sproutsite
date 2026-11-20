@@ -1,6 +1,9 @@
 name: Sproutsite
 url: https://sproutsite.dev
 base: /
+branding:
+    sharingImage:
+        alt: Sproutsite — The Agent-Ready Static CMS
 typography:
     headings:
         family: serif

@@ -1,6 +1,28 @@
 name: Sproutsite
 url: https://sproutsite.dev
 base: /
+branding:
+    logo:
+        src: /branding/logo.svg
+        srcOnDark: /branding/logo-light.svg
+        width: 40
+        height: 40
+        showName: true
+    footerLogo:
+        src: /branding/logo.svg
+        srcOnDark: /branding/logo-light.svg
+        width: 48
+        height: 48
+        showName: true
+    icons:
+        favicon: /branding/favicon.svg
+        shortcut: /branding/favicon.ico
+        appleTouch: /branding/apple-touch-icon.png
+        app192: /branding/icon-192.png
+        app512: /branding/icon-512.png
+    sharingImage:
+        src: /branding/sharing-image.png
+        alt: Sproutsite — The Agent-Ready Static CMS
 typography:
     headings:
         family: serif

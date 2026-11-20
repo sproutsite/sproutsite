@@ -5,34 +5,100 @@ tone:
 ---
 
 import { Eyebrow } from 'sproutsite/components';
-import { Alert } from 'sproutsite/components';
 
 <Eyebrow>Deine Website</Eyebrow>
 
-## Deinen Website-Namen verwenden
+## Logo, Icons und Vorschaubild einrichten
 
-<Alert variant="info" style="soft">
-    Teilweise möglich. Die folgenden Schritte unterscheiden vorhandene
-    Funktionen von noch offenen Erweiterungen.
-</Alert>
+Deine Branding-Dateien liegen in deinem eigenen Website-Projekt. Du bindest sie über `src/content/site.yaml` ein und musst keine Dateien in `node_modules` ändern. Paketupdates erhalten deine Dateien und Einstellungen.
 
-Ändere `name` in `src/content/site.yaml` und gegebenenfalls den Sprachkonfigurationen. Bei einem anderen Namen als `Sproutsite` zeigt BrandLogo deine Wortmarke ohne das Sproutsite-Sprösslingssymbol. Die Schrift folgt der Einstellung für Überschriften.
+### Dateien vorbereiten
+
+Lege `public/branding/` an und füge deine vorbereiteten Bilder hinzu. Astro kopiert Dateien aus `public/` unverändert, ohne Bildoptimierung. Verwende kompakte SVGs für Logos und PNG-Icons in der benötigten Endgröße. Die Icons werden dabei nicht automatisch erzeugt.
+
+Die folgende Grundstruktur verwenden sowohl der neutrale Starter-Bestand als auch die Sproutsite-Website. Die Motive unterscheiden sich: Der Starter enthält neutrale Beispiele, die Sproutsite-Website ihre eigenen Markenbilder. Der Starter bringt zusätzlich kleine PNG-Favicons und Lizenzhinweise mit. Eigene Dateinamen und unterstützte Bildformate sind erlaubt; die Pfade in `site.yaml` müssen zu deinen tatsächlichen Dateien passen.
+
+```text
+public/branding/
+├── logo.svg
+├── logo-light.svg
+├── favicon.svg
+├── favicon.ico
+├── apple-touch-icon.png
+├── icon-192.png
+├── icon-512.png
+└── sharing-image.png
+```
+
+Ergänze diesen Block in deiner bestehenden Konfiguration und erhalte die übrigen Einstellungen. Ersetze Beispielname und Dateien durch deine eigenen:
 
 ```yaml
 name: Werkstatt Weide
-footer:
-    text: Möbel und Reparaturen aus Dresden.
-    showVersion: false
+branding:
+    logo:
+        src: /branding/logo.svg
+        srcOnDark: /branding/logo-light.svg
+        width: 180
+        height: 48
+        showName: false
+    icons:
+        favicon: /branding/favicon.svg
+        shortcut: /branding/favicon.ico
+        appleTouch: /branding/apple-touch-icon.png
+        app192: /branding/icon-192.png
+        app512: /branding/icon-512.png
+    sharingImage:
+        src: /branding/sharing-image.png
+        alt: Werkstatt Weide – Möbel und Reparaturen
 ```
 
-Übernimm die Werte in deine bestehende Konfiguration und erhalte die übrigen Footer-Felder. Der sichtbare Name ist unabhängig von Titel und Beschreibung einzelner Seiten. Prüfe Header und Footer auf Desktop und Mobilgeräten.
+Pfade beginnen an der Website-Wurzel: `/branding/logo.svg`, ohne `public`, Sprachpräfix oder Deployment-Unterpfad. Sproutsite ergänzt `base` genau einmal. Externe URLs, übergeordnete Verzeichnisse, Query-Parameter und Fragmente sind nicht erlaubt. Jede angegebene Datei muss vorhanden sein.
 
-### Eigene Bildlogos und Icons sind noch offen
+### Die Logodarstellung wählen
 
-Eine Änderung von `name` ersetzt weder Favicon noch App-Icons aus dem Paket. Für eigene Header- und Footer-Logos, einen Favicon-Satz und das Vorschaubild beim Teilen gibt es noch keine öffentliche Konfiguration.
+`logo` gilt für Header, mobiles Menü und Footer. `src` wird auf hellen Flächen verwendet, etwa in der angedockten Navbar. Das optionale `srcOnDark` erscheint über dem Hero, im mobilen Menü und im Footer. Ohne diese Angabe wird überall dasselbe Bild verwendet.
 
-Bereite ein sauberes Vektorlogo, ein gut erkennbares quadratisches Icon und ein Vorschaubild im Querformat vor. Eine zukünftige unterstützte Einbindung soll diese Dateien mit den betreffenden Metadaten und Komponenten verbinden. Sinnvolle Alternativtexte und ausreichender Kontrast gehören dazu.
+Bei `showName: false` enthält das Bild bereits die vollständige Wortmarke. Der zugängliche Name stammt aus `name`. Bei `showName: true` steht das Bild als Symbol neben dem Website-Namen; dessen Schrift und Gewicht folgen der Einstellung für Überschriften. Ohne Logo-Konfiguration erscheint nur der Name als Text. Logobilder unterstützen SVG, PNG, JPEG und WebP.
 
-Überschreibe dafür keine Branding-Dateien in `node_modules` und verwende `dist` nicht als dauerhafte Quelle. Diese Dateien werden ersetzt. Halte den Bedarf mit deinem Website-Team fest, bevor du unter einer anderen Marke veröffentlichst.
+`width` und `height` sind positive Pixelwerte für die vorgesehene Darstellungsfläche. Gib passende Proportionen an, etwa 180 × 48 für eine Wortmarke oder 40 × 40 für ein Symbol. Das Theme erhält die Bildproportionen und begrenzt die Breite auf kleinen Bildschirmen.
+
+Für ein abweichendes Footer-Logo ergänzt du `branding.footerLogo` mit denselben Feldern. Ohne diese Angabe übernimmt der Footer `branding.logo`. Die Einstellung ist unabhängig möglich:
+
+```yaml
+branding:
+    footerLogo:
+        src: /branding/footer-symbol.svg
+        width: 48
+        height: 48
+        showName: true
+```
+
+Füge das Beispiel in denselben `branding`-Block ein, statt einen zweiten gleichnamigen YAML-Schlüssel anzulegen.
+
+### Browser- und App-Icons festlegen
+
+Alle Icon-Felder sind optional. `favicon` erlaubt SVG, PNG oder ICO; `shortcut` erlaubt ICO. `appleTouch` benötigt ein PNG mit 180 × 180 Pixeln, `app192` eines mit 192 × 192 und `app512` eines mit 512 × 512 Pixeln. Die letzten beiden stehen im vorhandenen `site.webmanifest`. Ein Service Worker oder Offline-Modus wird nicht hinzugefügt.
+
+Nicht angegebene Icon-Felder verwenden neutrale Dokument-Icons aus dem Theme, kein Sproutsite-Sprösslingslogo. Du kannst zunächst nur Logo und Favicon einrichten und die übrigen Dateien später ergänzen.
+
+### Vorschau beim Teilen festlegen
+
+`sharingImage` unterstützt lokale PNG-, JPEG- und WebP-Dateien mit einem nicht leeren `alt`. Als Ausgangsgröße eignen sich 1200 × 630 Pixel. Sproutsite liest die tatsächlichen Abmessungen und erzeugt absolute Open-Graph- und Twitter-Bildadressen aus `url` und `base`. Das Bild gilt websiteweit; ein Bild in einer Blogkarte ersetzt es nicht. Ohne diese Einstellung wird kein Standard-Vorschaubild angegeben.
+
+### Übersetzungen und Prüfung
+
+Sprachkonfigurationen übernehmen das Branding aus `site.yaml`. Überschreibe nur abweichende Werte, etwa diesen Eintrag in `site.de.yaml`:
+
+```yaml
+branding:
+    sharingImage:
+        alt: Werkstatt Weide – Möbel und Reparaturen
+```
+
+Der Bildpfad bleibt erhalten. Auch einzelne Logo-Felder oder Icon-Pfade lassen sich überschreiben. Das gemeinsame Webmanifest verwendet die Konfiguration der Hauptsprache.
+
+Starte den Dev-Server nach Änderungen an `site.yaml`, einer Sprachkonfiguration oder diesen öffentlichen Dateien neu. Führe `npm run check` und `npm run build` aus und kontrolliere mit `npm run preview`: Desktop und Mobil, Navbar vor und nach dem Scrollen, mobiles Menü, Footer und Seitenmetadaten. Fehlende Dateien, ungültige Formate und falsche App-Icon-Größen erzeugen Fehler. Browser und Plattformen können alte Icons oder Vorschauen zwischenspeichern.
+
+Die Sproutsite-Demo nutzt genau diese Konfiguration mit eigenen Dateien unter `public/branding/`. Die Bibliothek stellt über den öffentlichen Manifest-Export `sproutsite/starter-assets` außerdem einen kopierbaren neutralen Bestand bereit: Logos, Browser- und App-Icons, Vorschaubild, Hero-Beispiel und Lizenzhinweise. Das Manifest enthält die passende Branding-Konfiguration und Dateiprüfsummen. Der separate Generator `create-sproutsite` muss diesen Bestand noch übernehmen. Bis zu seiner Aktualisierung ergänzt du Dateien und Einstellungen selbst. Diese Anleitung setzt nicht voraus, dass der veröffentlichte Generator sie bereits mitliefert.
 
 [Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

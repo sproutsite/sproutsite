@@ -1,0 +1,95 @@
+{
+    "schemaVersion": 1,
+    "license": "Apache-2.0",
+    "publicDirectory": "public",
+    "branding": {
+        "logo": {
+            "src": "/branding/logo.svg",
+            "srcOnDark": "/branding/logo-light.svg",
+            "width": 40,
+            "height": 40,
+            "showName": true
+        },
+        "icons": {
+            "favicon": "/branding/favicon.svg",
+            "shortcut": "/branding/favicon.ico",
+            "appleTouch": "/branding/apple-touch-icon.png",
+            "app192": "/branding/icon-192.png",
+            "app512": "/branding/icon-512.png"
+        },
+        "sharingImage": {
+            "src": "/branding/sharing-image.png",
+            "alt": "Website preview"
+        }
+    },
+    "localizedSharingImageAlt": {
+        "en": "Website preview",
+        "de": "Website-Vorschau"
+    },
+    "heroExample": {
+        "source": "public/images/hero.jpg",
+        "contentDestination": "src/content/pages/_assets/hero.jpg",
+        "frontmatter": {
+            "background-image": "./_assets/hero.jpg",
+            "classes": null
+        }
+    },
+    "files": [
+        {
+            "path": "LICENSE.txt",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+            "path": "NOTICE.txt",
+            "sha256": "754e1fad287bf83ae88e5dc951cc49bbe36ccb0241f97399f889603126bbf50f"
+        },
+        {
+            "path": "branding/apple-touch-icon.png",
+            "sha256": "eb802c304b3efdf7c7ede139a82d32bbad336eff4c087c2a9c00ee284bec8b6a"
+        },
+        {
+            "path": "branding/favicon-16.png",
+            "sha256": "25167598ddb3386f6b61acc729c9e33dd9dbb00d7ac0241e94f143c0e271b9c1"
+        },
+        {
+            "path": "branding/favicon-32.png",
+            "sha256": "ba036d8493c80e7c6969c78627ebffc1afd2a1b72758744d7bb3cf507f30f77e"
+        },
+        {
+            "path": "branding/favicon-48.png",
+            "sha256": "cf17c47a2d989c22ce0e40b15a4bbaa0405a629a5b93d6e0c6d61892f975d9e7"
+        },
+        {
+            "path": "branding/favicon.ico",
+            "sha256": "f6586cc8917ecb6d5457665a3f5f75f77e0a798d2d56875e325d131691d2b152"
+        },
+        {
+            "path": "branding/favicon.svg",
+            "sha256": "9e5746bcfefe182d42a141e8898f0b2b14bb17f9bcdc92d5aa14b9202d99425b"
+        },
+        {
+            "path": "branding/icon-192.png",
+            "sha256": "6152c4f90c8c2588132b2fe7f06c7aa8ea21760ae80ae22990d729c78ba4291a"
+        },
+        {
+            "path": "branding/icon-512.png",
+            "sha256": "13c33d3d368697baffeb8538cb09a33a8401d5318963f29d6a8624af4d852ac7"
+        },
+        {
+            "path": "branding/logo-light.svg",
+            "sha256": "9e5746bcfefe182d42a141e8898f0b2b14bb17f9bcdc92d5aa14b9202d99425b"
+        },
+        {
+            "path": "branding/logo.svg",
+            "sha256": "9e5746bcfefe182d42a141e8898f0b2b14bb17f9bcdc92d5aa14b9202d99425b"
+        },
+        {
+            "path": "branding/sharing-image.png",
+            "sha256": "fc6092abc0a08976f9d3123c45ab2b631e22001f06ea0d9c26631d1c70ddd694"
+        },
+        {
+            "path": "images/hero.jpg",
+            "sha256": "05d1648cdf25a5463d849a3eb984caf8ca8705fccca5f333bc96c51b1c706948"
+        }
+    ]
+}

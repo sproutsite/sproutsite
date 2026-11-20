@@ -3,6 +3,11 @@ import { resolve } from 'node:path';
 import { z } from 'zod';
 import { parse } from 'yaml';
 import type { SiteConfig } from './types.js';
+import {
+    brandingSchema,
+    inheritBranding,
+    validateBrandingFiles,
+} from './branding.js';
 
 const linkSchema = z.object({
     label: z.string().trim().min(1),
@@ -57,6 +62,7 @@ const fontSelectionSchema = z
     .default({ family: 'serif', weight: 500 });
 
 const siteSchema = z.object({
+    branding: brandingSchema.optional(),
     typography: z
         .object({
             headings: fontSelectionSchema,
@@ -174,6 +180,15 @@ export function loadSiteConfig(
         locale && locale !== 'en' ? `site.${locale}.yaml` : 'site.yaml';
     const source = resolve(root, 'src/content', filename);
     const raw = parse(readFileSync(source, 'utf8'));
+    if (
+        filename !== 'site.yaml' &&
+        typeof raw === 'object' &&
+        raw !== null &&
+        !Array.isArray(raw)
+    ) {
+        const primary = loadSiteConfig(undefined, root);
+        raw.branding = inheritBranding(primary.branding, raw.branding);
+    }
     const parsed = siteSchema.safeParse(raw);
     if (!parsed.success) {
         throw new Error(
@@ -182,6 +197,7 @@ export function loadSiteConfig(
     }
     const { 'hero-classes': heroClasses, ...site } = parsed.data;
     const config: SiteConfig = { ...site, heroClasses };
+    validateBrandingFiles(config.branding, root, `src/content/${filename}`);
     const environmentBase = process.env.SPROUTSITE_BASE;
     if (environmentBase === undefined) return config;
     const base = siteSchema.shape.base.safeParse(environmentBase);

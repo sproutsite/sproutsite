@@ -7,6 +7,16 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Added
+
+- Added a copyable Apache-2.0 neutral starter asset set, a public manifest export with file hashes and ready-to-merge branding, reproducible generation and installed-package checks for copied branding and hero images.
+- Added validated public-file branding configuration for header/footer logos, light/dark variants, favicons, app icons and site-wide sharing images, with localized field inheritance and neutral theme defaults.
+
+### Changed
+
+- Reused the canonical starter icons as default-theme fallbacks and documented the handoff to the separate create-sproutsite generator.
+- Configured the Sproutsite demo through the same public branding workflow as consumer websites and documented setup in English and German, removing resolved branding and sharing-image status badges.
+
 ## [0.5.23] - 2026-11-20
 
 ### Fixed

@@ -30,6 +30,7 @@
         "./content": "./src/package/content.ts",
         "./config": "./src/package/config.ts",
         "./components": "./src/package/components.ts",
+        "./starter-assets": "./src/package/starter-assets/manifest.json",
         "./page": "./src/package/page.astro",
         "./package.json": "./package.json"
     },
@@ -40,7 +41,8 @@
         "postcss-selector-parser": "6.1.5"
     },
     "scripts": {
-        "branding:generate": "node --import tsx scripts/generate-branding.ts",
+        "branding:generate": "node --import tsx scripts/generate-branding.ts && npm run starter-assets:generate",
+        "starter-assets:generate": "node --import tsx scripts/generate-starter-assets.ts",
         "dev": "astro dev --force",
         "build": "npm run validate && astro build && node --import tsx scripts/verify-build.ts",
         "build:demo": "SPROUTSITE_BASE=/demo/ npm run build",

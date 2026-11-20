@@ -5,16 +5,10 @@ tone:
 ---
 
 import { Eyebrow } from 'sproutsite/components';
-import { Alert } from 'sproutsite/components';
 
 <Eyebrow>Deine Website</Eyebrow>
 
 ## Jede Seite mit passenden Metadaten versehen
-
-<Alert variant="info" style="soft">
-    Teilweise möglich. Die folgenden Schritte unterscheiden vorhandene
-    Funktionen von noch offenen Erweiterungen.
-</Alert>
 
 Die `page.yaml` einer Seite liefert Browsertitel und Meta-Beschreibung. Verwende einen konkreten Titel und beschreibe kurz, was Besucher dort finden. Der Hero-Titel ist die sichtbare H1 und darf anders formuliert sein.
 
@@ -35,8 +29,10 @@ Ein optionales `url` einer Seite ändert genau deren eigenes URL-Segment. Eine n
 
 Kontrolliere im Quelltext der gebauten Seite Titel, Beschreibung, kanonische Adresse und Sprachlinks. Entferne einen Vorschau-Zugriffsschutz erst, wenn die Website öffentlich werden soll. `robots.txt` ist kein Zugriffsschutz.
 
-### Vorschaubilder beim Teilen bleiben offen
+### Ein Vorschaubild beim Teilen wählen
 
-Für ein eigenes globales Vorschaubild beim Teilen gibt es noch keine allgemeine Consumer-Einstellung. Ein Bild in einer Blogkarte konfiguriert nicht automatisch jede Social-Vorschau. Dafür fehlen eine unterstützte Metadatenoption und Prüfungen für absolute Bildadressen und Abmessungen.
+Setze `branding.sharingImage.src` und `branding.sharingImage.alt` in `src/content/site.yaml`. Verwende ein lokales PNG, JPEG oder WebP aus `public/`, etwa `/branding/sharing-image.png`. Sproutsite liest die Abmessungen und erzeugt absolute Open-Graph- und Twitter-Bildadressen aus Produktionsadresse und Deployment-Basispfad. Eine Sprachkonfiguration kann das Bild oder seinen Alternativtext überschreiben.
+
+Das ist ein websiteweiter Standard. Ein Bild in einer Blogkarte ersetzt ihn nicht automatisch; seitenspezifische Bildüberschreibungen gehören nicht zu dieser Einstellung. Die vollständige Konfiguration findest du unter [dein Markenauftritt](/dokumentation/einstieg/deine-website/markenauftritt/).
 
 [Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

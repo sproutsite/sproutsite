@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { createRequire } from 'node:module';
 import { spawn, spawnSync } from 'node:child_process';
 import { createServer } from 'node:net';
 import { setTimeout as delay } from 'node:timers/promises';
@@ -16,7 +18,7 @@ import {
     writeFileSync,
 } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join, resolve } from 'node:path';
+import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 interface PackageManifest {
@@ -484,6 +486,10 @@ try {
         'NOTICE',
         'THIRD_PARTY_NOTICES.md',
         'src/themes/default/assets/hero-waves.svg',
+        'src/package/starter-assets/public/branding/favicon.svg',
+        'src/package/starter-assets/public/branding/apple-touch-icon.png',
+        'src/package/starter-assets/public/branding/icon-192.png',
+        'src/package/starter-assets/public/branding/icon-512.png',
         'src/themes/default/styles/foundation/fonts/OFL.txt',
         'src/themes/default/styles/foundation/fonts/eb-garamond-OFL.txt',
         'src/themes/default/styles/foundation/fonts/eb-garamond-latin-variable.woff2',
@@ -496,7 +502,7 @@ try {
         assert.ok(files.has(file), `Missing package file: ${file}`);
     for (const file of files)
         assert.ok(
-            !/^(?:dist|node_modules|scripts|tests|stories|\.git|\.codex|\.agents|\.aws|src\/content)(?:\/|$)|(?:^|\/)\.env(?:\.|$)/.test(
+            !/^(?:dist|public|node_modules|scripts|tests|stories|\.git|\.codex|\.agents|\.aws|src\/content)(?:\/|$)|(?:^|\/)\.env(?:\.|$)/.test(
                 file,
             ),
             `Unexpected package file: ${file}`,
@@ -562,6 +568,47 @@ try {
         'Expected a real tarball installation, not a symlink.',
     );
     assert.notEqual(realpathSync(installed), realpathSync(root));
+    const consumerRequire = createRequire(join(consumer, 'package.json'));
+    const starterEntry = consumerRequire.resolve('sproutsite/starter-assets');
+    assert.equal(
+        starterEntry,
+        join(installed, 'src/package/starter-assets/manifest.json'),
+    );
+    const starter = JSON.parse(readFileSync(starterEntry, 'utf8')) as {
+        schemaVersion: number;
+        publicDirectory: string;
+        files: { path: string; sha256: string }[];
+        branding: unknown;
+        heroExample: {
+            source: string;
+            contentDestination: string;
+            frontmatter: { 'background-image': string; classes: null };
+        };
+    };
+    assert.equal(starter.schemaVersion, 1);
+    const starterDirectory = dirname(starterEntry);
+    const starterPublic = join(starterDirectory, starter.publicDirectory);
+    for (const asset of starter.files) {
+        const path = resolve(starterPublic, asset.path);
+        assert.ok(!relative(starterPublic, path).startsWith('..'));
+        const data = readFileSync(path);
+        assert.equal(
+            createHash('sha256').update(data).digest('hex'),
+            asset.sha256,
+        );
+        assert.ok(
+            data.equals(
+                readFileSync(
+                    join(root, 'src/package/starter-assets/public', asset.path),
+                ),
+            ),
+        );
+    }
+    assert.ok(
+        readFileSync(join(starterPublic, 'LICENSE.txt')).equals(
+            readFileSync(join(root, 'LICENSE')),
+        ),
+    );
     assert.equal(
         (
             JSON.parse(
@@ -573,6 +620,30 @@ try {
     npm(['run', 'check'], consumer);
     for (const base of ['/', '/demo/']) {
         if (base === '/demo/') {
+            // The same archive must support a website's own public branding.
+            const branding = join(consumer, 'public/branding');
+            mkdirSync(branding, { recursive: true });
+            const defaults = join(
+                root,
+                'src/package/starter-assets/public/branding',
+            );
+            cpSync(defaults, branding, { recursive: true });
+            writeFileSync(
+                join(branding, 'logo.svg'),
+                '<svg xmlns="http://www.w3.org/2000/svg" width="180" height="48"><rect width="180" height="48" fill="#164e63"/></svg>',
+            );
+            const configuration = join(consumer, 'src/content/site.yaml');
+            writeFileSync(
+                configuration,
+                readFileSync(configuration, 'utf8') +
+                    '\nbranding:\n    logo:\n        src: /branding/logo.svg\n        srcOnDark: /branding/favicon.svg\n        width: 180\n        height: 48\n    icons:\n        favicon: /branding/favicon.svg\n        appleTouch: /branding/apple-touch-icon.png\n        app192: /branding/icon-192.png\n        app512: /branding/icon-512.png\n    sharingImage:\n        src: /branding/icon-512.png\n        alt: Independent website preview\n',
+            );
+            const localized = join(consumer, 'src/content/site.de.yaml');
+            writeFileSync(
+                localized,
+                readFileSync(localized, 'utf8') +
+                    '\nbranding:\n    sharingImage:\n        alt: Eigene Website-Vorschau\n',
+            );
             const assets = join(consumer, 'src/content/blog/_assets');
             mkdirSync(assets, { recursive: true });
             writeFileSync(join(assets, 'unused.txt'), 'No articles yet.');
@@ -580,7 +651,80 @@ try {
         }
         npm(['run', 'build'], consumer, false, base);
         verifyBuild(base);
+        const home = readFileSync(join(consumer, 'dist/index.html'), 'utf8');
+        const german = readFileSync(
+            join(consumer, 'dist/de/index.html'),
+            'utf8',
+        );
+        if (base === '/demo/') {
+            assert.ok(home.includes('src="/demo/branding/logo.svg"'));
+            assert.ok(german.includes('src="/demo/branding/logo.svg"'));
+            assert.ok(
+                home.includes(
+                    'content="https://example.com/demo/branding/icon-512.png"',
+                ),
+            );
+            assert.ok(home.includes('content="Independent website preview"'));
+            assert.ok(german.includes('content="Eigene Website-Vorschau"'));
+            const icons = JSON.parse(
+                readFileSync(join(consumer, 'dist/site.webmanifest'), 'utf8'),
+            ).icons as { src: string }[];
+            assert.ok(
+                icons.every((icon) => icon.src.startsWith('/demo/branding/')),
+            );
+        } else {
+            assert.equal(home.includes('og:image'), false);
+            const favicon = home.match(
+                /<link rel="icon"[^>]*href="([^"]+)"/,
+            )?.[1];
+            assert.ok(favicon);
+            assert.equal(
+                readFileSync(join(consumer, 'dist', favicon), 'utf8').includes(
+                    'Sproutsite',
+                ),
+                false,
+            );
+        }
     }
+    // Test the exact public copy and configuration handed to the initializer.
+    cpSync(starterPublic, join(consumer, 'public'), { recursive: true });
+    const configuration = join(consumer, 'src/content/site.yaml');
+    const configurationText = readFileSync(configuration, 'utf8');
+    writeFileSync(
+        configuration,
+        configurationText.slice(0, configurationText.indexOf('\nbranding:')) +
+            `\nbranding: ${JSON.stringify(starter.branding)}\n`,
+    );
+    const heroDestination = join(
+        consumer,
+        starter.heroExample.contentDestination,
+    );
+    mkdirSync(dirname(heroDestination), { recursive: true });
+    cpSync(join(starterDirectory, starter.heroExample.source), heroDestination);
+    for (const suffix of ['', '.de']) {
+        const hero = join(consumer, `src/content/pages/hero${suffix}.md`);
+        const content = readFileSync(hero, 'utf8');
+        writeFileSync(
+            hero,
+            content.replace(
+                '\n---\n',
+                '\nbackground-image: ./_assets/hero.jpg\nclasses: null\n---\n',
+            ),
+        );
+    }
+    npm(['run', 'build'], consumer, false, '/demo/');
+    verifyBuild('/demo/');
+    const starterHtml = readFileSync(join(consumer, 'dist/index.html'), 'utf8');
+    assert.ok(starterHtml.includes('src="/demo/branding/logo.svg"'));
+    assert.ok(
+        starterHtml.includes(
+            'https://example.com/demo/branding/sharing-image.png',
+        ),
+    );
+    assert.ok(starterHtml.includes('ss-hero--has-background-image'));
+    console.log(
+        `PASS starter assets: ${starter.files.length} archived files verified, public copy, branding, notices and local hero image built under /demo/.`,
+    );
     verifyLegalIdentityBuilds();
     await verifyDevBlogLifecycle();
     rmSync(temporary, { recursive: true, force: true });

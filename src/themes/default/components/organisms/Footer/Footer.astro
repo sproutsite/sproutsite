@@ -36,7 +36,7 @@ const linkAttributes = (href: string) => ({
                     href={contentHref('/', site)}
                     aria-label={`${site.name}: ${t(language, 'home')}`}
                 >
-                    <BrandLogo name={site.name} />
+                    <BrandLogo site={site} placement="footer" />
                 </a>
                 <p>{site.footer.text}</p>
             </div>

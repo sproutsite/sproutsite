@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { openSync } from 'fontkit';
 import sharp from 'sharp';
@@ -234,6 +234,20 @@ await sharp(
 )
     .png()
     .toFile(fileURLToPath(new URL('social-card.png', output)));
+// The demo uses the same public paths and configuration as consumer websites.
+const demoOutput = new URL('../public/branding/', import.meta.url);
+await mkdir(demoOutput, { recursive: true });
+for (const [source, destination] of [
+    ['icon.svg', 'logo.svg'],
+    ['icon.svg', 'logo-light.svg'],
+    ['favicon.svg', 'favicon.svg'],
+    ['favicon.ico', 'favicon.ico'],
+    ['apple-touch-icon.png', 'apple-touch-icon.png'],
+    ['icon-192x192.png', 'icon-192.png'],
+    ['icon-512x512.png', 'icon-512.png'],
+    ['social-card.png', 'sharing-image.png'],
+] as const)
+    await copyFile(new URL(source, output), new URL(destination, demoOutput));
 console.log(
     'Generated Sproutsite SVG logos, favicons, app icons, and social card.',
 );

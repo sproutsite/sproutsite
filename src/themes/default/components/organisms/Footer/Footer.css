@@ -1,5 +1,7 @@
 @layer components {
     .ss-footer {
+        --ss-logo-light-visibility: hidden;
+        --ss-logo-dark-visibility: visible;
         border-top: 1px solid
             color-mix(
                 in srgb,
@@ -71,7 +73,7 @@
                         @media (width < 72rem) {
                             gap: 0.5rem;
                         }
-                        img {
+                        &:not(.ss-brand-logo--custom) img {
                             width: 3rem;
                             height: 3rem;
                         }

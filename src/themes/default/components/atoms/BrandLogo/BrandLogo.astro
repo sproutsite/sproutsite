@@ -1,10 +1,18 @@
 ---
-import icon from '../../../assets/branding/icon.svg?url&no-inline';
+import type { SiteConfig } from '../../../../../lib/sproutsite/types.js';
+import { withBase } from '../../../../../lib/sproutsite/urls.js';
 
 interface Props {
-    name: string;
+    site: SiteConfig;
+    placement?: 'header' | 'footer';
 }
-const { name } = Astro.props;
+const { site, placement = 'header' } = Astro.props;
+const { name } = site;
+const logo =
+    placement === 'footer'
+        ? (site.branding?.footerLogo ?? site.branding?.logo)
+        : site.branding?.logo;
+const showName = logo?.showName ?? true;
 const highlight = name === 'Sproutsite' ? 'site' : undefined;
 const highlightStart = highlight ? name.indexOf(highlight) : -1;
 const hasHighlight = highlightStart >= 0 && highlight !== undefined;
@@ -14,13 +22,42 @@ const nameAfterHighlight = hasHighlight
     : undefined;
 ---
 
-<span class="ss-brand-logo">
-    {name === 'Sproutsite' && <img src={icon} width="40" height="40" alt="" />}
-    <span class="ss-brand-logo__name">
-        {nameBeforeHighlight}
-        {hasHighlight && (
-            <span class="ss-brand-logo__highlight">{highlight}</span>
-        )}
-        {nameAfterHighlight}
-    </span>
+<span class:list={['ss-brand-logo', { 'ss-brand-logo--custom': logo }]}>
+    {logo && (
+        <span
+            class="ss-brand-logo__image"
+            role={showName ? undefined : 'img'}
+            aria-label={showName ? undefined : name}
+            style={{
+                '--ss-logo-width': `${logo.width / 16}rem`,
+                '--ss-logo-ratio': `${logo.width} / ${logo.height}`,
+            }}
+        >
+            <img
+                class="ss-brand-logo__light"
+                src={withBase(logo.src, site.base)}
+                width={logo.width}
+                height={logo.height}
+                alt=""
+            />
+            {logo.srcOnDark && (
+                <img
+                    class="ss-brand-logo__dark"
+                    src={withBase(logo.srcOnDark, site.base)}
+                    width={logo.width}
+                    height={logo.height}
+                    alt=""
+                />
+            )}
+        </span>
+    )}
+    {showName && (
+        <span class="ss-brand-logo__name">
+            {nameBeforeHighlight}
+            {hasHighlight && (
+                <span class="ss-brand-logo__highlight">{highlight}</span>
+            )}
+            {nameAfterHighlight}
+        </span>
+    )}
 </span>
