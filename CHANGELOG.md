@@ -7,6 +7,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.27] - 2026-11-21
+
 ### Added
 
 - Added a validated project-owned CSS entry through `createSproutsiteConfig({ styles: [...] })`, loading the complete default theme before ordered site styles through Astro/Vite, with local imports, assets and development updates.
