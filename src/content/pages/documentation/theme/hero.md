@@ -5,4 +5,4 @@ type: small
 tone: brand
 ---
 
-Find the default theme's colour tokens, font settings and CSS structure. The reference distinguishes semantic content tones from presentation classes and shows where shared design values are defined.
+Find the default theme's color tokens, font settings and CSS structure. The reference distinguishes semantic content tones from presentation classes and shows where shared design values are defined.

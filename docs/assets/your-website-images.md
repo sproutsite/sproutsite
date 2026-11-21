@@ -186,7 +186,7 @@ Use case: stylized-concept. Original landscape editorial card illustration in th
 
 All 22 images were regenerated with OpenAI’s built-in image-generation tool. Each call used the maintainer-supplied `/mnt/d/_image.webp` as the sole visual style reference. It depicts the existing [buttons illustration](../../src/content/pages/showcase/_assets/buttons.png). The dark second example was inspected to understand the problem but was not supplied to generation calls. The reference controls materials, camera distance and background; each prompt specifies its own topic. There are no new third-party logo inputs. This provenance record does not add a separate artwork-license grant.
 
-The foreground is close and prominent. Above the wave is a pale gray-blue wall around `#d9e3eb`; the organic upper crest is defined, while the lower colour fades softly into the floor. Existing filenames and both language integrations are retained.
+The foreground is close and prominent. Above the wave is a pale gray-blue wall around `#d9e3eb`; the organic upper crest is defined, while the lower color fades softly into the floor. Existing filenames and both language integrations are retained.
 
 ### Replacement: settings
 

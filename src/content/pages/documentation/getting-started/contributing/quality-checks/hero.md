@@ -5,4 +5,4 @@ type: small
 tone: brand
 ---
 
-Select checks that cover the effect of your change and report their results in the pull request. Component work also needs visual review; changes to package behaviour need an installed-consumer check.
+Select checks that cover the effect of your change and report their results in the pull request. Component work also needs visual review; changes to package behavior need an installed-consumer check.

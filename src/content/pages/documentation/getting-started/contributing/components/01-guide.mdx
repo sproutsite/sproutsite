@@ -12,9 +12,9 @@ import { Eyebrow } from 'sproutsite/components';
 
 Find the smallest suitable building block under `src/themes/default/components/`: atoms, molecules, organisms or technical layout primitives. Keep its `.astro` and `.css` together in its own PascalCase directory.
 
-### Props, presentation and behaviour
+### Props, presentation and behavior
 
-Use typed Astro props and preserve existing defaults where possible. Keep presentation in the component CSS. Browser behaviour belongs in an Astro-processed TypeScript script or imported `.ts` module, not an inline handler.
+Use typed Astro props and preserve existing defaults where possible. Keep presentation in the component CSS. Browser behavior belongs in an Astro-processed TypeScript script or imported `.ts` module, not an inline handler.
 
 The Card badge implementation is a useful existing example: the component renders semantic markup, shared descriptors are validated, and its browser module handles hover and focus. Inspect the source rather than copying an unrelated demo page.
 
@@ -22,7 +22,7 @@ The Card badge implementation is a useful existing example: the component render
 
 A public component or prop also needs support in `src/lib/sproutsite/validation.ts`. Content MDX uses an allowlist; a component that renders in Storybook can still be rejected by the content validator.
 
-Export reusable components through `src/package/components.ts`. Update the [showcase](/showcase/), both language versions and the relevant [Storybook stories](/documentation/getting-started/contributing/storybook/). Add tests for the intended behaviour and useful invalid inputs; avoid tests that only copy implementation strings.
+Export reusable components through `src/package/components.ts`. Update the [showcase](/showcase/), both language versions and the relevant [Storybook stories](/documentation/getting-started/contributing/storybook/). Add tests for the intended behavior and useful invalid inputs; avoid tests that only copy implementation strings.
 
 ### Verify compatibility
 

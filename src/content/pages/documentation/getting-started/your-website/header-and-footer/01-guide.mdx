@@ -10,7 +10,7 @@ import { Eyebrow } from 'sproutsite/components';
 
 ## Replace only the area you need
 
-Use [your own CSS](/documentation/getting-started/your-website/theme-overrides/) for changes to colours, spacing or corner radii. If the navigation or footer needs different HTML or behavior, your website team or coding agent can create a local Astro component and register it through `components` in `astro.config.ts`.
+Use [your own CSS](/documentation/getting-started/your-website/theme-overrides/) for changes to colors, spacing or corner radii. If the navigation or footer needs different HTML or behavior, your website team or coding agent can create a local Astro component and register it through `components` in `astro.config.ts`.
 
 The supported entries are `Header` and `Footer`. Each is independent: replacing the header keeps the supplied footer unless you replace that too. With no `components` option, or `components: {}`, the website retains both defaults.
 
@@ -76,7 +76,7 @@ This technical integration belongs in `astro.config.ts`, not `site.yaml`. The sa
 
 `HeaderProps` and `FooterProps` are exported types. Use one as your component's `Props`; no additional required props or named slots are supplied. These types help you check your own component, but Sproutsite does not inspect its source to prove that it implements the contract.
 
-The shared layout still provides HTML metadata, fonts, colour variables, skip link, `main` and page content. Do not add a second `html`, `body`, `main` or page H1 to a header/footer replacement. All shared pages use these slots, including the blog and error pages. Error routes may be flat document paths such as `/404.html`. A page with `layout: landing` continues to omit the header, including a custom header; its footer still uses the selected component.
+The shared layout still provides HTML metadata, fonts, color variables, skip link, `main` and page content. Do not add a second `html`, `body`, `main` or page H1 to a header/footer replacement. All shared pages use these slots, including the blog and error pages. Error routes may be flat document paths such as `/404.html`. A page with `layout: landing` continues to omit the header, including a custom header; its footer still uses the selected component.
 
 ### Write your own markup when needed
 

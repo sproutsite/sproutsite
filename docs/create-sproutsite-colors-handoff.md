@@ -1,4 +1,4 @@
-# Generator handoff: website colours
+# Generator handoff: website colors
 
 The `colors` configuration is prepared in Sproutsite after 0.5.25. Use the
 actual next published version when updating the initializer; do not assume

@@ -9,7 +9,7 @@ export default {
         badges: {
             control: 'object',
             description:
-                'One badge descriptor or an array: text, optional variant, style and hover hint. Labels appear at the bottom right of the image or a theme-coloured surface.',
+                'One badge descriptor or an array: text, optional variant, style and hover hint. Labels appear at the bottom right of the image or a theme-colored surface.',
         },
         imageAlt: {
             control: 'text',
@@ -102,7 +102,7 @@ export const BadgesWithoutImage = {
         ],
         slots: {
             default:
-                '<h3>A theme-coloured media area</h3><p>When labels are present without an image, the card supplies a matching empty surface.</p>',
+                '<h3>A theme-colored media area</h3><p>When labels are present without an image, the card supplies a matching empty surface.</p>',
         },
     },
 };
@@ -116,7 +116,7 @@ export const HoverHints = {
                 text: 'Partly available',
                 variant: 'info',
                 style: 'soft',
-                hover: 'The documented options work today; further customisation is still open.',
+                hover: 'The documented options work today; further customization is still open.',
             },
             {
                 text: 'Open',

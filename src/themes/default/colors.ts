@@ -97,7 +97,7 @@ export function colorContrastIssues(input?: SiteColors): string[] {
         const ratio = contrastRatio(foreground, background);
         if (ratio < minimum)
             issues.push(
-                `${field} against ${against}: ${ratio.toFixed(2)}:1; expected at least ${minimum}:1. Choose a darker/lighter colour or adjust the matching content colour.`,
+                `${field} against ${against}: ${ratio.toFixed(2)}:1; expected at least ${minimum}:1. Choose a darker/lighter color or adjust the matching content color.`,
             );
     };
     for (const role of [

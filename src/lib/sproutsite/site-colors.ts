@@ -5,7 +5,7 @@ const hex = z
     .string()
     .regex(
         /^#(?:[\da-f]{3}|[\da-f]{6})$/i,
-        'must be an opaque hex colour (#RGB or #RRGGBB)',
+        'must be an opaque hex color (#RGB or #RRGGBB)',
     );
 const pair = z
     .object({ color: hex.optional(), content: hex.optional() })

@@ -11,7 +11,7 @@ import { Alert } from 'sproutsite/components';
 
 ## Select, extend or replace a theme
 
-Keep your content files and change how your website looks. For colour and typography changes, start with the existing settings or your own CSS. A theme is useful when your website team needs different markup, components or page composition. Editorial users continue editing the same Markdown files.
+Keep your content files and change how your website looks. For color and typography changes, start with the existing settings or your own CSS. A theme is useful when your website team needs different markup, components or page composition. Editorial users continue editing the same Markdown files.
 
 ### Select a local theme
 
@@ -51,7 +51,7 @@ export default {
 
 Create both referenced files before starting the preview. File URLs are relative to the descriptor, including when it extends a theme in another directory. Import only the TypeScript descriptor into the Astro configuration; the component files are compiled by Astro later.
 
-An inherited component is replaced only when you specify that entry. Unchanged components, styles and the default colour mapping remain inherited. This also applies inside inherited components: a replaced Button is used by the inherited Hero; a replaced Card is used by the blog overview.
+An inherited component is replaced only when you specify that entry. Unchanged components, styles and the default color mapping remain inherited. This also applies inside inherited components: a replaced Button is used by the inherited Hero; a replaced Card is used by the blog overview.
 
 A Header that initially delegates to the supplied implementation can look like this:
 
@@ -113,7 +113,7 @@ Required entries:
 
 `Layout, Header, Footer, Hero, PageTitle, Section, BlogIndex, BlogPost, ErrorPage, BrandLogo, HeroBackground, LanguageSwitcher, Alert, ContentTable, FoundationSample, Tabs, Tab, Card, CardActions, ContentImage, Eyebrow, Badge, Button, Icon, Feature, LegalIdentity, PrivacyInfrastructure, Accordion, AccordionItem, Column, Columns`
 
-`colors: 'none'` is the default for an independent theme. It disables the default CSS-variable mapping and its theme-specific contrast checks; `site.yaml` colours remain validated data available through `site`. Your theme must map them and verify its own contrast. Derived themes inherit `colors: 'default'`; this keeps the documented palette mapping and checks. Set `colors: 'none'` explicitly when replacing that system.
+`colors: 'none'` is the default for an independent theme. It disables the default CSS-variable mapping and its theme-specific contrast checks; `site.yaml` colors remain validated data available through `site`. Your theme must map them and verify its own contrast. Derived themes inherit `colors: 'default'`; this keeps the documented palette mapping and checks. Set `colors: 'none'` explicitly when replacing that system.
 
 ### Component contract and document structure
 
@@ -155,7 +155,7 @@ Run `npm run check` and `npm run build` in your website project. Test the homepa
 <Alert variant="info" style="soft">
     Theme files belong to your website and survive package updates. Review their
     compatibility after updating Sproutsite. An independently implemented theme
-    owns its responsive behaviour and accessibility.
+    owns its responsive behavior and accessibility.
 </Alert>
 
 [Back to the quick start and more topics](/documentation/getting-started/your-website/)

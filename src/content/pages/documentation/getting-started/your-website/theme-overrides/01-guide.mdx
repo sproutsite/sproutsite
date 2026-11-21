@@ -12,7 +12,7 @@ import { Eyebrow } from 'sproutsite/components';
 
 Use your own CSS files for changes such as rounder cards or different component spacing. They live in your website folder and load after Sproutsite's complete default theme. Package updates do not replace your files.
 
-For supported [colours](/documentation/getting-started/your-website/colors/), [fonts](/documentation/getting-started/your-website/typography/), branding and hero settings, keep using `site.yaml`. CSS is the next step when those options do not cover a visual detail. You can ask your coding agent to make the change in your local stylesheet.
+For supported [colors](/documentation/getting-started/your-website/colors/), [fonts](/documentation/getting-started/your-website/typography/), branding and hero settings, keep using `site.yaml`. CSS is the next step when those options do not cover a visual detail. You can ask your coding agent to make the change in your local stylesheet.
 
 ### Create your stylesheet
 
@@ -61,7 +61,7 @@ Alternatively, keep one entry and put standard CSS `@import` statements at the b
 
 The default theme loads first; your entries follow in list order. Regular cascade rules still apply: layer priority comes before specificity, and source order decides between rules of equal priority and specificity. The example deliberately uses an unlayered rule so it can override layered theme and DaisyUI rules. If you use `@layer components`, higher-priority utility or DaisyUI layers may still win. Match an existing selector's specificity when rules share a layer.
 
-Unlayered CSS normally outranks normal declarations inside layers. Inline settings and `!important` declarations have their own priority. Do not add `!important` everywhere to force a result. In particular, use `site.yaml` to change the supported colour and typography values that Sproutsite supplies through inline custom properties.
+Unlayered CSS normally outranks normal declarations inside layers. Inline settings and `!important` declarations have their own priority. Do not add `!important` everywhere to force a result. In particular, use `site.yaml` to change the supported color and typography values that Sproutsite supplies through inline custom properties.
 
 ### Preview and keep the change
 

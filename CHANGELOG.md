@@ -59,12 +59,12 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Added
 
-- Added optional website-wide colour configuration with inherited locale overrides, opaque-hex validation, default-theme CSS mappings and contrast checks for known colour pairs.
+- Added optional website-wide color configuration with inherited locale overrides, opaque-hex validation, default-theme CSS mappings and contrast checks for known color pairs.
 
 ### Changed
 
-- Separated hero, footer and brand-navigation foregrounds from button text colours; connected default column dividers to the shared border colour.
-- Documented global palettes and manual wave/image recolouring in English and German, removed the resolved colour-customisation status badges and extended installed-package checks.
+- Separated hero, footer and brand-navigation foregrounds from button text colors; connected default column dividers to the shared border color.
+- Documented global palettes and manual wave/image recoloring in English and German, removed the resolved color-customization status badges and extended installed-package checks.
 
 ## [0.5.25] - 2026-11-21
 
@@ -102,7 +102,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 ### Added
 
 - Added 18 illustrated contributor topics in English and German, with detailed child guides, contextual status badges and alerts for partial or future capabilities.
-- Added single or multiple Card badge descriptors sharing Badge variants and styles, with bottom-right image placement, a theme-coloured fallback surface, optional hover/focus hints dismissible with Escape, strict literal MDX validation, bilingual showcase examples and Storybook variants.
+- Added single or multiple Card badge descriptors sharing Badge variants and styles, with bottom-right image placement, a theme-colored fallback surface, optional hover/focus hints dismissible with Escape, strict literal MDX validation, bilingual showcase examples and Storybook variants.
 - Added 22 illustrated next-step topics to the English and German website quick start, with detailed child guides for supported workflows and explicit alerts for partial or future capabilities.
 
 ### Changed
