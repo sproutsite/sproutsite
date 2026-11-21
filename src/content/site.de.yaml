@@ -66,6 +66,6 @@ footer:
 blog:
     hero:
         eyebrow: Projektjournal
-        description: Projektfortschritt, Entscheidungen und Meilensteine bei der Entwicklung von Sproutsite – einem agent-ready, Markdown-first Static CMS.
+        description: Projektfortschritt, Entscheidungen und Meilensteine bei der Entwicklung von Sproutsite – einem agent-first, Markdown-first Static CMS.
     articles:
         heading: Sproutsite im Fortschritt

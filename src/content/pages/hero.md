@@ -2,7 +2,7 @@
 title: Sproutsite
 type: big
 titleHighlight: site
-eyebrow: AGENT-READY STATIC CMS
+eyebrow: Agent-first Static CMS
 tone: brand
 claim: Your ideas. Your agent. Your website.
 actions:

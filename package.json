@@ -3,7 +3,7 @@
     "version": "0.5.30",
     "license": "Apache-2.0",
     "author": "Björn Hempel",
-    "description": "Agent-ready, Markdown-first Static CMS powered by Astro and TypeScript.",
+    "description": "Agent-first Static CMS powered by Astro and TypeScript, with Markdown-first content.",
     "homepage": "https://sproutsite.dev",
     "repository": {
         "type": "git",

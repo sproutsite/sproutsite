@@ -5,9 +5,9 @@
 [![Node.js version](https://img.shields.io/node/v/sproutsite?logo=nodedotjs)](https://www.npmjs.com/package/sproutsite)
 [![Documentation](https://img.shields.io/badge/docs-sproutsite.dev-0875C9)](https://sproutsite.dev/documentation/)
 
-**Sproutsite — The Agent-Ready Static CMS**
+**Sproutsite — The Agent-first Static CMS**
 
-Agent-ready, Markdown-first Static CMS powered by Astro and TypeScript.
+Agent-first, Markdown-first Static CMS powered by Astro and TypeScript.
 
 Sproutsite is an npm-based developer tool for file-based content, page structures, and reusable components. External coding agents such as Codex or Claude Code can edit the repository; **Sproutsite itself contains no AI agent**. There is no traditional CMS administration backend. Astro generates a static website that needs no CMS server runtime, while Git keeps content changes reviewable.
 

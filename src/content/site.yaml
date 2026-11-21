@@ -32,7 +32,7 @@ branding:
         app512: /branding/icon-512.png
     sharingImage:
         src: /branding/sharing-image.png
-        alt: Sproutsite — The Agent-Ready Static CMS
+        alt: Sproutsite — The Agent-first Static CMS
 
 colors:
     surfaces:
@@ -109,7 +109,7 @@ header:
           href: /contact/
 
 footer:
-    text: Agent-ready static CMS for Astro and TypeScript.
+    text: Agent-first Static CMS for Astro and TypeScript.
     copyright: © 2026 Sproutsite
     showVersion: true
     languageSwitcher: true
@@ -160,6 +160,6 @@ blog:
     hero:
         title: Blog
         eyebrow: Project journal
-        description: Project updates, decisions, and milestones in building Sproutsite, an agent-ready, Markdown-first static CMS.
+        description: Project updates, decisions, and milestones in building Sproutsite, an agent-first, Markdown-first static CMS.
     articles:
         heading: Sproutsite development journal

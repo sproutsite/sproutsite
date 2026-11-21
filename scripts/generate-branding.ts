@@ -140,7 +140,7 @@ function lettering(
 }
 function lockup(ink: string, monochrome = false): string {
     const word = lettering('Sproutsite', 184, 350, 202, ink);
-    const text = 'THE AGENT-READY STATIC CMS';
+    const text = 'THE AGENT-FIRST STATIC CMS';
     const natural = lettering(text, 31, 363, 271, ink);
     const tracking = (word.width - 26 - natural.width) / (text.length - 1);
     const tagline = lettering(text, 31, 363, 271, ink, tracking);
@@ -216,7 +216,7 @@ for (const size of [180, 192, 512]) {
 }
 const socialWord = lettering('Sproutsite', 142, 390, 329, white);
 const socialTagline = lettering(
-    'THE AGENT-READY STATIC CMS',
+    'THE AGENT-FIRST STATIC CMS',
     23,
     400,
     387,

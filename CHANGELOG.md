@@ -7,6 +7,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Changed
+
+- Updated current product copy, package metadata, examples and generated branding from Agent-ready to Agent-first Static CMS, retaining historical changelog entries and the distinction from integrated AI services.
+
 ## [0.5.30] - 2026-11-21
 
 ### Added
