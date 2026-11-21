@@ -25,7 +25,7 @@ const {
 } = Astro.props;
 const documentTitle = title.toLowerCase().includes(site.name.toLowerCase())
     ? title
-    : `${title} | ${site.name}`;
+    : `${title} – ${site.name}`;
 const canonical = noindex
     ? new URL(withBase(route, site.base), site.url).href
     : canonicalUrl(route, site);
