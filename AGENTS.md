@@ -52,6 +52,12 @@ After installing its development dependencies, this repository must run immediat
 - Keep technical references precise, but explain their relevance to the editorial workflow first. Do not invent a graphical editor, installer, starter template, or command that does not exist.
 - When explicitly requested, documentation may describe the intended npm consumer-installation workflow. Keep actual publication status identifiable and do not install an unverified registry package, publish a release, or claim unperformed installation tests.
 
+## English Language Convention
+
+- Unless explicitly specified otherwise, all English content must use American English (`en-US`), including website copy, documentation, Markdown files and other user-facing content. Use American spellings such as `color`, `behavior` and `optimize`.
+- For existing content, correct spelling variants as needed without substantially rewriting the text solely to apply this rule.
+- Preserve proper names, technical identifiers, API names and code. German content is unaffected.
+
 ## Writing Style for User-Facing Content
 
 These rules apply to content primarily intended for prospective users or users, including the homepage, hero sections, product pages, the showcase, and comparable page copy. They do not apply to technical documentation, the README, API or configuration references, the changelog, validation errors, or code comments. For those, precision, completeness, and established technical writing conventions take precedence.
