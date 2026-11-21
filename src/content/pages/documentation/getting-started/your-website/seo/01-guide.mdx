@@ -51,6 +51,14 @@ The URL comes from the Astro configuration that Sproutsite derives from your web
 
 If you already have a robots.txt or matching endpoint, add the Sitemap entry there and preserve its existing rules. The example allows crawling; it does not protect private content or staging websites.
 
+### Offer a guide for coding agents
+
+An optional `llms.txt` can describe your website and link to its most useful pages. The Sproutsite website publishes a compact English guide and points to it from each page's HTML head using `rel="describedby"`. It also identifies the German documentation. This is a voluntary format, not an indexing requirement or a promise that an agent will use it.
+
+Your website does not inherit Sproutsite's guide. For a simple static version, create `public/llms.txt` with a Markdown H1, a short blockquote summary and grouped links with descriptions. Describe your own website and use its full production URLs, including any deployment subpath. An English guide is sufficient when both language versions provide equivalent information; include localized resources when their content differs.
+
+To announce it in Sproutsite's shared HTML document, declare an optional `llmsUrl?: string` property in `App.Locals` in `src/env.d.ts`, then set `locals.llmsUrl` to the absolute guide URL in native Astro middleware at `src/middleware.ts`. Preserve any existing middleware. Without that value, no discovery link is rendered. For a build-generated guide, a prerendered `src/pages/llms.txt.ts` endpoint can replace the public file; use one source only. The Sproutsite repository contains this endpoint and middleware as a working example. Deploy the generated file with the complete build and update it when your content changes.
+
 ### Check what is actually public
 
 Inspect the built page source for the title, description, canonical URL and language links. Confirm that staging protection is removed only when the website should become public. `robots.txt` is not access control.

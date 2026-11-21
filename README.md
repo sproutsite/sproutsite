@@ -580,6 +580,14 @@ When the generated URL list fits in one file, only `sitemap.xml` is emitted: the
 
 The demo's native Astro endpoint `src/pages/robots.txt.ts` generates `dist/robots.txt` with an absolute `Sitemap:` URL derived from Astro's `site` and `BASE_URL`. It allows crawling and requires no server runtime. Website projects can add the same endpoint as documented in the [SEO guide](https://sproutsite.dev/documentation/getting-started/your-website/seo/); the library does not override a website's crawl policy. Crawlers read robots.txt at the domain root. For a subpath deployment, add the sitemap URL to the host's root robots.txt; a file served only below that subpath is not sufficient.
 
+## LLM guide
+
+The demo's native Astro endpoint `src/pages/llms.txt.ts` prerenders a compact English Markdown guide to `dist/llms.txt`. It describes Sproutsite and links to selected English documentation, the showcase, contributor resources and the license. It also identifies the German documentation. All website links use the configured production URL and deployment base. The guide is maintained editorially; it is not a full documentation export and does not provide separate Markdown versions of the linked HTML pages.
+
+Website-owned `src/middleware.ts` sets the optional `App.Locals.llmsUrl` string to the absolute guide URL. The shared document renders `<link rel="describedby" href="…" type="text/markdown">` only when that value is supplied. Astro runs this middleware during prerendering, so the deployed site needs no middleware server. Installed library consumers receive neither this website's endpoint nor a discovery link by default. To publish your own guide, create your own endpoint or `public/llms.txt`, declare the optional `llmsUrl` property in `src/env.d.ts` and set it through your own Astro middleware; merge with existing middleware rather than replacing it.
+
+This follows the voluntary [llms.txt proposal](https://llmstxt.org/). It does not control crawler access or guarantee discovery, model usage or search ranking. Keep the guide's content and links up to date when documentation changes.
+
 ## Error Pages
 
 The default theme registers standard Astro custom 404 and 500 routes. In `npm run dev`, open `/404` or `/500` to preview the corresponding error page without triggering a server failure. Unknown URLs render the custom 404 page with HTTP status 404. Both pages reuse the small Hero, header, and footer. Agent references in their playful copy are fictional; Sproutsite contains no integrated agent.

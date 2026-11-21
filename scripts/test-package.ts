@@ -386,6 +386,11 @@ function verifyBuild(base: string) {
         );
         assert.equal((html.match(/<main\b/g) ?? []).length, 1);
         assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
+        assert.equal(
+            html.includes('rel="describedby"'),
+            false,
+            'Consumers without an LLM guide must not receive a discovery link.',
+        );
         if (
             file.endsWith('about/index.html') ||
             file.endsWith('ueber/index.html')

@@ -51,6 +51,14 @@ Die Adresse stammt aus der Astro-Konfiguration, die Sproutsite aus den Website-E
 
 Wenn bereits eine robots.txt oder ein entsprechender Endpunkt existiert, ergänze dort den Sitemap-Eintrag und erhalte die vorhandenen Regeln. Die gezeigte Vorgabe erlaubt Crawling; sie sperrt weder private Inhalte noch Vorschauseiten.
 
+### Einen Wegweiser für Coding-Agenten anbieten
+
+Eine optionale `llms.txt` kann deine Website kurz beschreiben und auf ihre wichtigsten Seiten verweisen. Die Sproutsite-Website veröffentlicht dafür einen kompakten englischen Wegweiser und verknüpft ihn im HTML-Kopf jeder Seite mit `rel="describedby"`. Er verweist auch auf die deutsche Dokumentation. Das Format ist freiwillig und weder Voraussetzung für die Indexierung noch eine Zusage, dass ein Agent die Datei verwendet.
+
+Deine Website übernimmt den Sproutsite-Wegweiser nicht. Für eine einfache statische Variante legst du `public/llms.txt` mit einer Markdown-H1, einer kurzen Zusammenfassung als Blockzitat und gruppierten Links mit Beschreibungen an. Beschreibe deine eigene Website und verwende ihre vollständigen Produktionsadressen einschließlich eines möglichen Unterpfads. Ein englischer Wegweiser genügt bei inhaltlich gleichwertigen Sprachversionen; verlinke zusätzliche Sprachfassungen, wenn sie andere Informationen enthalten.
+
+Für die Verknüpfung im gemeinsamen HTML-Dokument von Sproutsite deklarierst du in `src/env.d.ts` unter `App.Locals` die optionale Eigenschaft `llmsUrl?: string`. Setze dann `locals.llmsUrl` in der nativen Astro-Middleware unter `src/middleware.ts` auf die absolute Adresse des Wegweisers. Erhalte dabei vorhandene Middleware. Ohne diesen Wert wird keine Verknüpfung ausgegeben. Für eine beim Build erzeugte Datei kann ein vorgerenderter Endpunkt `src/pages/llms.txt.ts` die öffentliche Datei ersetzen; verwende nur eine Quelle. Im Sproutsite-Repository findest du Endpunkt und Middleware als funktionierendes Beispiel. Veröffentliche die erzeugte Datei mit dem vollständigen Build und aktualisiere sie bei Inhaltsänderungen.
+
 ### Die tatsächliche Veröffentlichung prüfen
 
 Kontrolliere im Quelltext der gebauten Seite Titel, Beschreibung, kanonische Adresse und Sprachlinks. Entferne einen Vorschau-Zugriffsschutz erst, wenn die Website öffentlich werden soll. `robots.txt` ist kein Zugriffsschutz.

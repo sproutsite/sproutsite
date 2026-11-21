@@ -85,6 +85,19 @@ const robots = readFileSync(join('dist', 'robots.txt'), 'utf8');
 const sitemapUrl = new URL(withBase('/sitemap.xml', site.base), site.url).href;
 if (!robots.split(/\r?\n/).includes(`Sitemap: ${sitemapUrl}`))
     throw new Error('robots.txt must reference the absolute sitemap URL');
+const llmsUrl = new URL(withBase('/llms.txt', site.base), site.url).href;
+const llms = readFileSync(join('dist', 'llms.txt'), 'utf8');
+if (!llms.startsWith('# Sproutsite\n\n> '))
+    throw new Error('llms.txt must contain the project title and summary');
+for (const match of llms.matchAll(/\]\((https?:\/\/[^)]+)\)/g)) {
+    const target = new URL(match[1]!);
+    if (target.origin !== new URL(site.url).origin) continue;
+    if (!target.pathname.startsWith(site.base))
+        throw new Error(`llms.txt link misses deployment base: ${target.href}`);
+    const relative = target.pathname.slice(site.base.length);
+    if (!existsSync(join('dist', relative, 'index.html')))
+        throw new Error(`llms.txt links to a missing page: ${target.href}`);
+}
 const home = readFileSync(join('dist', 'index.html'), 'utf8');
 // Metadata must point at emitted files, including after a subpath deployment.
 function emittedFile(url: string): string {
@@ -180,6 +193,12 @@ for (const entry of sitemapEntries) {
         throw new Error('Missing sitemap language links');
 }
 for (const [file, html] of htmlByFile) {
+    if (
+        !html.includes(
+            `<link rel="describedby" href="${llmsUrl}" type="text/markdown"`,
+        )
+    )
+        throw new Error(`${file}: missing llms.txt discovery link`);
     assertSafeNewTabLinks(html, file);
     const route = file.slice('dist/'.length).replace(/index\.html$/, '');
     const pageUrl = new URL(withBase(`/${route}`, site.base), site.url);

@@ -31,6 +31,10 @@ const canonical = noindex
     : canonicalUrl(route, site);
 const branding = await resolveBranding(site);
 const socialImage = branding.sharingImage;
+const llmsUrl =
+    'llmsUrl' in Astro.locals && typeof Astro.locals.llmsUrl === 'string'
+        ? Astro.locals.llmsUrl
+        : undefined;
 const paletteStyles = themePaletteStyles(
     site.colors,
     `site configuration (${site.i18n.locale})`,
@@ -46,6 +50,9 @@ const paletteStyles = themePaletteStyles(
         <meta name="description" content={description} />
         {noindex && <meta name="robots" content="noindex, follow" />}
         <link rel="canonical" href={canonical} />
+        {llmsUrl && (
+            <link rel="describedby" href={llmsUrl} type="text/markdown" />
+        )}
         <link
             rel="sitemap"
             type="application/xml"
