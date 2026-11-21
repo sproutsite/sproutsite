@@ -1,14 +1,14 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import HeroBackground from '../../atoms/HeroBackground/HeroBackground.astro';
+import HeroBackground from '#sproutsite/herobackground';
 import {
     selectHeroBackground,
     isSvgHeroImage,
 } from '../../../../../lib/sproutsite/hero-background.js';
 import { toneOf } from '../../../../../lib/sproutsite/pages.js';
 import type { SiteConfig } from '../../../../../lib/sproutsite/types.js';
-import Button from '../../atoms/Button/Button.astro';
-import Eyebrow from '../../atoms/Eyebrow/Eyebrow.astro';
+import Button from '#sproutsite/button';
+import Eyebrow from '#sproutsite/eyebrow';
 
 interface Props {
     hero: Pick<CollectionEntry<'documents' | 'blogDocuments'>, 'id' | 'data'>;

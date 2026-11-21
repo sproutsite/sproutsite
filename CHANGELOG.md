@@ -7,6 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Added
+
+- Added typed local theme descriptors with multilevel inheritance, individually replaceable presentation/content components, ordered CSS and independent themes without implicit default styles or fonts.
+- Added shared document ownership for metadata, main and localized error pages, explicit default-component exports, bilingual theme guides, installed-archive coverage and a generator-agent handoff.
+
 ## [0.5.28] - 2026-11-21
 
 ### Added

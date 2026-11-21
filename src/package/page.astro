@@ -4,12 +4,12 @@ import { assemblePages, type AssembledPage } from '../lib/sproutsite/pages.js';
 import { loadSiteConfig } from '../lib/sproutsite/site-config.js';
 import { blogRouteFromId } from '../lib/sproutsite/urls.js';
 import { localeOf, logicalId } from '../lib/sproutsite/language-links.js';
-import PageLayout from '../themes/default/layouts/PageLayout/PageLayout.astro';
-import BlogIndex from '../themes/default/components/organisms/BlogIndex/BlogIndex.astro';
-import BlogPost from '../themes/default/components/organisms/BlogPost/BlogPost.astro';
-import Hero from '../themes/default/components/organisms/Hero/Hero.astro';
-import PageTitle from '../themes/default/components/organisms/PageTitle/PageTitle.astro';
-import Section from '../themes/default/components/organisms/Section/Section.astro';
+import PageLayout from '#sproutsite/document';
+import BlogIndex from '#sproutsite/blogindex';
+import BlogPost from '#sproutsite/blogpost';
+import Hero from '#sproutsite/hero';
+import PageTitle from '#sproutsite/pagetitle';
+import Section from '#sproutsite/section';
 import { getBlogCollection } from './blog.js';
 
 type Locale = 'en' | 'de';
@@ -117,12 +117,31 @@ const postSections = post
         ))}
     </PageLayout>
 ) : blogIndex && posts ? (
-    <BlogIndex posts={posts} site={site} />
-) : post && postHero ? (
-    <BlogPost
-        post={post}
+    <PageLayout
         site={site}
-        HeroContent={postHero.Content}
-        sections={postSections}
-    />
+        title={site.blog?.hero.title ?? 'Blog'}
+        description={
+            site.blog?.hero.description ??
+            (locale === 'de'
+                ? 'Neuigkeiten, Entscheidungen und Meilensteine.'
+                : 'Updates, decisions, and milestones.')
+        }
+        route="/blog/"
+    >
+        <BlogIndex posts={posts} site={site} />
+    </PageLayout>
+) : post && postHero ? (
+    <PageLayout
+        site={site}
+        title={post.entry.data.title}
+        description={post.entry.data.description}
+        route={post.route}
+    >
+        <BlogPost
+            post={post}
+            site={site}
+            HeroContent={postHero.Content}
+            sections={postSections}
+        />
+    </PageLayout>
 ) : null}

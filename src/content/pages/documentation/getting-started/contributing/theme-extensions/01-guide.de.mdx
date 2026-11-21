@@ -5,34 +5,22 @@ tone:
 ---
 
 import { Eyebrow } from 'sproutsite/components';
-import { Alert } from 'sproutsite/components';
 
 <Eyebrow>An Sproutsite mitarbeiten</Eyebrow>
 
-## Theme-Anpassungen in einem Website-Projekt ermöglichen
+## Den Theme-Vertrag weiterentwickeln
 
-<Alert variant="warning" style="soft">
-    Offen – zukünftige Erweiterung. Diese Seite beschreibt das Ziel; eine
-    unterstützte Umsetzung steht noch aus.
-</Alert>
+Lokale CSS-Einstiege, Header-/Footer-Overrides und abgeleitete oder unabhängige Themes sind umgesetzt. Die Website-Anleitung erklärt ihre Nutzung:
 
-Ziel ist ein unterstützter Weg, mit dem das eigene Website-Team das Default-Theme behält und einzelne Styles oder Komponenten anpasst oder eine unabhängige Darstellung ohne Inhaltsmigration auswählt.
+- [Kleine Designänderungen](/dokumentation/einstieg/deine-website/theme-anpassen/)
+- [Ein eigenes Theme](/dokumentation/einstieg/deine-website/eigenes-theme/)
 
-### Was bereits vorhanden ist
+### Verantwortung der Implementierung
 
-Core und Default-Theme sind im Quellcode getrennt. Mitwirkende können diese Quellen in der Arbeitskopie bearbeiten. Vorhandene Einstellungen für Typografie, Hero und Komponenten decken einzelne Wünsche ab. Eine öffentliche Consumer-Theme-API entsteht daraus noch nicht.
+src/package/themes.ts validiert lokale Datei-URLs, Vererbung und den vollständigen Komponentenvertrag. Vite-Aliase wählen die Astro-Dateien beim Build aus. src/package/Document.astro behält Dokumentstruktur, Metadaten, Sprache und main. Die Darstellung von Blog- und Fehlerseiten liefert nur deren Inhalt. Die bisherigen Website-Overrides bleiben vorrangig.
 
-### Offene Entscheidungen
+### Änderungen absichern
 
-Definiere einen kleinen öffentlichen Einstieg für lokale Styles oder den Austausch von Komponenten sowie Ladefolge und Kompatibilitätszusagen. Kläre, welche Tokens und Inhaltskomponenten unterstützt werden. Dokumentiere keinen Theme-Loader oder Konfigurationsschalter, bevor er existiert.
+Erhalte Props und Slots bestehender Komponenten. Prüfe jede Änderung mit Typprüfung, Unit-Tests und dem Installationstest des npm-Archivs. Der Archivtest deckt mehrstufige Ableitung, verschachtelte Komponenten, CSS-Reihenfolge, unabhängiges CSS, Sprachpfade und Fehlerseiten ab. Ergänze bei neuen Slots beide Sprachversionen der Dokumentation und den vollständigen Default-Deskriptor.
 
-### Abnahmekriterien
-
-- Vorhandene Website-Inhalte bleiben gültig und darstellbar.
-- Nutzer des Default-Themes benötigen für eine optionale Erweiterung keine Migration.
-- Basispfade, Sprachlinks, Metadaten und Fehlerseiten funktionieren weiterhin.
-- Die Erweiterung besitzt gezielte Quelltests, ein Beispiel im installierten Nutzerprojekt und zugängliche responsive Ausgabe.
-
-Die [Theme-Quellanleitung](/dokumentation/einstieg/mitarbeiten/theme-und-styles/) erklärt die heute möglichen Arbeiten. Diese Seite hält ein Umsetzungsziel fest. Sie ist weder eine funktionierende Überschreibungsanleitung noch eine Release-Zusage.
-
-[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)
+[Zurück zu weiteren Themen](/dokumentation/einstieg/mitarbeiten/)

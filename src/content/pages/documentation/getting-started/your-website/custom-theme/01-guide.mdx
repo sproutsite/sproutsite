@@ -9,27 +9,153 @@ import { Alert } from 'sproutsite/components';
 
 <Eyebrow>Your website</Eyebrow>
 
-## Give your website an independent design
+## Select, extend or replace a theme
 
-<Alert variant="warning" style="soft">
-    Open – future capability. This page describes the goal; a supported
-    implementation for your website is still missing.
+Keep your content files and change how your website looks. For colour and typography changes, start with the existing settings or your own CSS. A theme is useful when your website team needs different markup, components or page composition. Editorial users continue editing the same Markdown files.
+
+### Select a local theme
+
+Create `src/themes/website/theme.ts` and select it in `astro.config.ts`:
+
+```ts
+import { defineConfig } from 'astro/config';
+import { createSproutsiteConfig } from 'sproutsite/config';
+import theme from './src/themes/website/theme';
+
+export default defineConfig(
+    createSproutsiteConfig({
+        theme,
+        styles: ['./src/styles/custom.css'],
+    }),
+);
+```
+
+Omit `theme` to use the supplied default theme. Theme selection is technical configuration, not a field in `site.yaml`. Restart the dev server when changing the descriptor, selected component paths or stylesheet list. Edits to the selected Astro and CSS files use normal Astro/Vite updates.
+
+### Extend the default theme
+
+In `src/themes/website/theme.ts`:
+
+```ts
+import { defaultTheme, type SproutsiteTheme } from 'sproutsite/themes';
+
+export default {
+    name: 'website',
+    extends: defaultTheme,
+    styles: [new URL('./styles/theme.css', import.meta.url)],
+    components: {
+        Header: new URL('./components/Header.astro', import.meta.url),
+    },
+} satisfies SproutsiteTheme;
+```
+
+Create both referenced files before starting the preview. File URLs are relative to the descriptor, including when it extends a theme in another directory. Import only the TypeScript descriptor into the Astro configuration; the component files are compiled by Astro later.
+
+An inherited component is replaced only when you specify that entry. Unchanged components, styles and the default colour mapping remain inherited. This also applies inside inherited components: a replaced Button is used by the inherited Hero; a replaced Card is used by the blog overview.
+
+A Header that initially delegates to the supplied implementation can look like this:
+
+```astro
+---
+import type { ThemeProps } from 'sproutsite/themes';
+import { Header as BaseHeader } from 'sproutsite/default-components';
+type Props = ThemeProps<'Header'>;
+---
+
+<BaseHeader {...Astro.props} />
+```
+
+Use `sproutsite/default-components` for explicit access to supplied components. Using the selected Header again inside its own replacement would recurse. Existing `DefaultHeader` and `DefaultFooter` exports also remain available.
+
+### Extend another local theme
+
+```ts
+import websiteTheme from '../website/theme';
+import type { SproutsiteTheme } from 'sproutsite/themes';
+
+export default {
+    name: 'campaign',
+    extends: websiteTheme,
+    styles: [new URL('./styles/theme.css', import.meta.url)],
+    components: {
+        Footer: new URL('./components/Footer.astro', import.meta.url),
+    },
+} satisfies SproutsiteTheme;
+```
+
+Styles load from the oldest ancestor to the selected theme, followed by website `styles` in their configured order. Lists of theme styles append; component entries replace individually. Existing website `components.Header` and `components.Footer` overrides take precedence over the selected theme. Remove those website entries when you want to manage the same areas through your theme instead.
+
+An empty child `styles: []` adds nothing; it does not remove inherited CSS. For a clean stylesheet start, create a theme without `extends`. Normal CSS layers, specificity and cascade still apply.
+
+### Start without inherited styles
+
+This example deliberately reuses supplied markup while choosing independent styles:
+
+```ts
+import { defaultTheme, type SproutsiteTheme } from 'sproutsite/themes';
+
+export default {
+    name: 'independent',
+    colors: 'none',
+    styles: [new URL('./styles/theme.css', import.meta.url)],
+    components: {
+        ...defaultTheme.components,
+        Header: new URL('./components/Header.astro', import.meta.url),
+        Footer: new URL('./components/Footer.astro', import.meta.url),
+        Hero: new URL('./components/Hero.astro', import.meta.url),
+    },
+} satisfies SproutsiteTheme;
+```
+
+There is no implicit default CSS when `extends` is absent. `...defaultTheme.components` is explicit reuse, not inheritance: supply styles for that markup or replace it. For a completely independent implementation, remove the spread and supply every required component with your own local file URL. Sproutsite reports missing entries instead of silently filling them from the default theme.
+
+Required entries:
+
+`Layout, Header, Footer, Hero, PageTitle, Section, BlogIndex, BlogPost, ErrorPage, BrandLogo, HeroBackground, LanguageSwitcher, Alert, ContentTable, FoundationSample, Tabs, Tab, Card, CardActions, ContentImage, Eyebrow, Badge, Button, Icon, Feature, LegalIdentity, PrivacyInfrastructure, Accordion, AccordionItem, Column, Columns`
+
+`colors: 'none'` is the default for an independent theme. It disables the default CSS-variable mapping and its theme-specific contrast checks; `site.yaml` colours remain validated data available through `site`. Your theme must map them and verify its own contrast. Derived themes inherit `colors: 'default'`; this keeps the documented palette mapping and checks. Set `colors: 'none'` explicitly when replacing that system.
+
+### Component contract and document structure
+
+Use `ThemeProps<'Hero'>`, `ThemeProps<'Section'>` and the corresponding names for typed props. `ThemeComponentProps` exposes the full map. Match the documented properties and slots; a file path alone cannot prove that a component renders them correctly.
+
+| Area               | Contract                                                                                                                                 |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Layout             | Receives site, logical route and layout mode; renders its default slot once.                                                             |
+| Header / Footer    | Receive site and the logical route without locale or deployment prefix.                                                                  |
+| Hero               | Receives hero data, site and optional rendered Content; supports default content and the meta slot for article dates.                    |
+| PageTitle          | Renders the H1 fallback or blog introduction from its supplied props.                                                                    |
+| Section            | Receives section data and optional rendered Content; also supports default-slot content on error pages.                                  |
+| BlogIndex          | Receives site and posts; renders the blog overview body.                                                                                 |
+| BlogPost           | Receives site, assembled post, HeroContent and rendered sections; renders the article body.                                              |
+| ErrorPage          | Receives status, site and localized copy, including introduction, title, eyebrow, description, detail, action and sectionTitle.          |
+| Content components | Preserve the props and slots documented in the showcase, including child composition such as Columns/Column and Accordion/AccordionItem. |
+
+A minimal Layout:
+
+```astro
+---
+import type { ThemeProps } from 'sproutsite/themes';
+type Props = ThemeProps<'Layout'>;
+---
+
+<div class="website-layout">
+    <slot />
+</div>
+```
+
+The shared document retains HTML/head metadata, canonical URLs, favicon and sharing metadata, language, skip link and exactly one main element. Layout wraps the header, main and footer; do not add another document or main. On a landing page the shared shell omits Header. Blog and error renderers supply body content only, so metadata and error noindex remain shared.
+
+The document exposes the existing typography data attributes and weight variables to all themes; an independent theme decides whether to use them and which local fonts to load. It receives no default font stylesheet automatically.
+
+### Check before publishing
+
+Run `npm run check` and `npm run build` in your website project. Test the homepage, a page without hero, MDX, blog overview and article, landing pages, both error previews, every locale and your deployment base. Check mobile navigation, keyboard operation, focus, contrast, heading hierarchy and responsive images. Theme selection is resolved at build time and adds no browser-side theme switcher.
+
+<Alert variant="info" style="soft">
+    Theme files belong to your website and survive package updates. Review their
+    compatibility after updating Sproutsite. An independently implemented theme
+    owns its responsive behaviour and accessibility.
 </Alert>
-
-A custom theme would retain Sproutsite's content files while replacing the presentation: page layout, header, footer, typography and visual components. This is work for the team implementing your website, not a prerequisite for writing content.
-
-### Current boundary
-
-Sproutsite separates content assembly from the default theme internally. That separation is useful groundwork, but it is not a finished consumer-facing theme platform. There is no public theme loader or one-line switch for a custom theme.
-
-You can already use [your own CSS](/documentation/getting-started/your-website/theme-overrides/) and [replace Header or Footer](/documentation/getting-started/your-website/header-and-footer/). These two fixed slots do not provide a complete theme loader.
-
-### Intended outcome
-
-Your website should eventually be able to select its own presentation without migrating its Markdown content. The implementation needs documented imports and exports, compatible content components, and clear ownership of styles.
-
-The website team must preserve heading structure, navigation state, language links, base paths, metadata, responsive behaviour and accessibility. Existing content should still pass validation.
-
-Until that workflow exists, use the default theme and its documented settings. If you want to help implement this capability in Sproutsite itself, follow the separate [contributor guide](/documentation/getting-started/contributing/).
 
 [Back to the quick start and more topics](/documentation/getting-started/your-website/)

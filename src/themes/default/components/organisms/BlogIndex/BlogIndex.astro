@@ -5,11 +5,10 @@ import {
     contentHref,
 } from '../../../../../lib/sproutsite/urls.js';
 import type { SiteConfig } from '../../../../../lib/sproutsite/types.js';
-import PageLayout from '../../../layouts/PageLayout/PageLayout.astro';
 import { t } from '../../../i18n/index.js';
-import Card from '../../molecules/Card/Card.astro';
-import CardActions from '../../molecules/CardActions/CardActions.astro';
-import PageTitle from '../PageTitle/PageTitle.astro';
+import Card from '#sproutsite/card';
+import CardActions from '#sproutsite/cardactions';
+import PageTitle from '#sproutsite/pagetitle';
 
 interface Props {
     posts: CollectionEntry<'blogPages'>[];
@@ -34,56 +33,46 @@ const dateFormatter = new Intl.DateTimeFormat(site.i18n.locale, {
 });
 ---
 
-<PageLayout
+<PageTitle
     site={site}
     title={blog.hero.title}
+    eyebrow={blog.hero.eyebrow}
     description={blog.hero.description}
-    route="/blog/"
+    classes={site.hero.classes}
+    variant="hero"
+/>
+<section
+    class="tone-default ss-section ss-blog-index"
+    aria-labelledby="blog-overview"
 >
-    <PageTitle
-        site={site}
-        title={blog.hero.title}
-        eyebrow={blog.hero.eyebrow}
-        description={blog.hero.description}
-        classes={site.hero.classes}
-        variant="hero"
-    />
-    <section
-        class="tone-default ss-section ss-blog-index"
-        aria-labelledby="blog-overview"
-    >
-        <div class="ss-section__inner site-shell">
-            <div class="content-prose ss-blog-index__content">
-                <h2 id="blog-overview">{blog.articles.heading}</h2>
-                <div class="ss-blog-index__grid">
-                    {posts.map((post) => (
-                        <Card
-                            image={post.data.image}
-                            imageAlt={post.data.imageAlt}
+    <div class="ss-section__inner site-shell">
+        <div class="content-prose ss-blog-index__content">
+            <h2 id="blog-overview">{blog.articles.heading}</h2>
+            <div class="ss-blog-index__grid">
+                {posts.map((post) => (
+                    <Card image={post.data.image} imageAlt={post.data.imageAlt}>
+                        <time
+                            class="ss-blog-index__date"
+                            datetime={post.data.pubDate.toISOString()}
                         >
-                            <time
-                                class="ss-blog-index__date"
-                                datetime={post.data.pubDate.toISOString()}
+                            {dateFormatter.format(post.data.pubDate)}
+                        </time>
+                        <h3>{post.data.title}</h3>
+                        <p>{post.data.description}</p>
+                        <CardActions>
+                            <a
+                                aria-label={`${t(locale, 'readMore')}: ${post.data.title}`}
+                                href={contentHref(
+                                    blogRouteFromId(post.id),
+                                    site,
+                                )}
                             >
-                                {dateFormatter.format(post.data.pubDate)}
-                            </time>
-                            <h3>{post.data.title}</h3>
-                            <p>{post.data.description}</p>
-                            <CardActions>
-                                <a
-                                    aria-label={`${t(locale, 'readMore')}: ${post.data.title}`}
-                                    href={contentHref(
-                                        blogRouteFromId(post.id),
-                                        site,
-                                    )}
-                                >
-                                    {t(locale, 'readMore')}
-                                </a>
-                            </CardActions>
-                        </Card>
-                    ))}
-                </div>
+                                {t(locale, 'readMore')}
+                            </a>
+                        </CardActions>
+                    </Card>
+                ))}
             </div>
         </div>
-    </section>
-</PageLayout>
+    </div>
+</section>

@@ -22,28 +22,45 @@ import { validateHeroBackgroundImage } from '../lib/sproutsite/hero-background.j
 import { colorStyles } from '../themes/default/colors.js';
 import { createStylesPlugin } from './styles.js';
 import {
+    resolveTheme,
+    themeAliases,
+    themeDataPlugin,
+    type SproutsiteTheme,
+} from './themes.js';
+import {
     resolveComponentAliases,
     type ComponentOverrides,
 } from './component-overrides.js';
 
 export interface SproutsiteConfigOptions {
-    /** Project-relative CSS files, loaded after the default theme in list order. */
+    /** Select a local complete or inherited theme; omission uses default. */
+    theme?: SproutsiteTheme;
+    /** Project-relative CSS files, loaded after the selected theme in list order. */
     styles?: readonly string[];
     /** Optional website-owned Header/Footer Astro components. */
     components?: ComponentOverrides;
 }
 
-/** Returns the Astro configuration required by the default Sproutsite theme. */
+/** Returns the Astro shared Astro configuration and selected presentation theme. */
 export function createSproutsiteConfig(options: SproutsiteConfigOptions = {}) {
-    const stylesPlugin = createStylesPlugin(options.styles);
-    const componentAliases = resolveComponentAliases(options.components);
+    const theme = resolveTheme(options.theme);
+    const stylesPlugin = createStylesPlugin(
+        options.styles,
+        process.cwd(),
+        theme.styles,
+    );
+    const componentAliases = [
+        ...resolveComponentAliases(options.components),
+        ...themeAliases(theme),
+    ];
     validateSproutsiteContent();
     const site = loadSiteConfig();
-    for (const locale of site.i18n.locales) {
-        colorStyles(
-            loadSiteConfig(locale).colors,
-            `src/content/site.yaml / site.${locale}.yaml`,
-        );
+    if (theme.colors === 'default') {
+        for (const locale of site.i18n.locales)
+            colorStyles(
+                loadSiteConfig(locale).colors,
+                `src/content/site.yaml / site.${locale}.yaml`,
+            );
     }
     let sitemapMetadata: ReturnType<typeof createSitemapMetadata> | undefined;
 
@@ -176,7 +193,11 @@ export function createSproutsiteConfig(options: SproutsiteConfigOptions = {}) {
             } satisfies AstroIntegration,
         ],
         vite: {
-            plugins: [stylesPlugin, tailwindcss()],
+            plugins: [
+                stylesPlugin,
+                themeDataPlugin(theme.colors),
+                tailwindcss(),
+            ],
             resolve: { alias: componentAliases },
         },
         markdown: {

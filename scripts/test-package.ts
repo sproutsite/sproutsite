@@ -1,3 +1,4 @@
+import { verifyPackageThemes } from './test-package-themes.js';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -1029,6 +1030,10 @@ const { site, route } = Astro.props;
     console.log(
         'PASS grouped configuration: inherited locale settings and German default under /demo/.',
     );
+    verifyPackageThemes(consumer, () => {
+        npm(['run', 'check'], consumer);
+        npm(['run', 'build'], consumer, false, '/demo/');
+    });
     rmSync(temporary, { recursive: true, force: true });
     console.log(
         'Package installation checks passed. Temporary files removed. Nothing was published.',

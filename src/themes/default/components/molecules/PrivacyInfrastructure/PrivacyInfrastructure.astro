@@ -2,8 +2,8 @@
 import { loadPrivacyInfrastructure } from '../../../../../lib/sproutsite/privacy-infrastructure.js';
 import { loadSiteConfig } from '../../../../../lib/sproutsite/site-config.js';
 import { externalLinkAttributes } from '../../../../../lib/sproutsite/urls.js';
-import Feature from '../Feature/Feature.astro';
-import Alert from '../Alert/Alert.astro';
+import Feature from '#sproutsite/feature';
+import Alert from '#sproutsite/alert';
 interface Props {
     part?: 'hosting' | 'email-retention' | 'log-size-limit' | 'log-retention';
 }

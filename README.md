@@ -504,7 +504,7 @@ export default defineConfig(
 );
 ```
 
-The optional list accepts existing project-relative `.css` files. The complete default theme loads first, followed by these files in list order, for all shared page layouts and locales. Missing files and invalid entries stop configuration. CSS imports, local assets and development updates use Astro/Vite; restart the dev server after changing the entry list. Omission or `styles: []` retains theme-only output. Use targeted unlayered rules for overrides such as `.ss-card { border-radius: 1.25rem; }`; normal cascade priorities and specificity still apply. Layered rules may lose to higher-priority DaisyUI or utility layers. Supported inline colour and typography settings remain in `site.yaml`. This option does not replace components or create theme inheritance. See the [small design changes guide](https://sproutsite.dev/documentation/getting-started/your-website/theme-overrides/).
+The optional list accepts existing project-relative `.css` files. The resolved theme styles load first, followed by these files in list order, for all shared page layouts and locales. Missing files and invalid entries stop configuration. CSS imports, local assets and development updates use Astro/Vite; restart the dev server after changing the entry list. Omission or `styles: []` retains theme-only output. Use targeted unlayered rules for overrides such as `.ss-card { border-radius: 1.25rem; }`; normal cascade priorities and specificity still apply. Layered rules may lose to higher-priority DaisyUI or utility layers. Supported inline colour and typography settings remain in `site.yaml`. This option does not replace components or create theme inheritance. See the [small design changes guide](https://sproutsite.dev/documentation/getting-started/your-website/theme-overrides/).
 
 A small build-time Vite CSS entry imports the unchanged theme entry followed by the configured files. Astro/Vite retain responsibility for compilation, asset URLs and HMR; no stylesheet registry or browser script is added.
 
@@ -522,15 +522,32 @@ export default defineConfig(
 );
 ```
 
-Only `Header` and `Footer` are supported. Paths must be existing project-relative `.astro` files; unknown keys and invalid paths fail configuration. Omitted slots retain their defaults independently. Both components receive `site` (the resolved active-locale configuration) and `route` (translated content path without locale/base prefixes). Use `HeaderProps` or `FooterProps` from `sproutsite` as the component's Props type; no other required props are supplied. Error pages also use these slots; landing pages still omit the header. The shared layout retains metadata, main content, fonts, colour variables and skip link.
+Only `Header` and `Footer` are supported. Paths must be existing project-relative `.astro` files; unknown keys and invalid paths fail configuration. Omitted slots retain the selected theme implementations independently. Both components receive `site` (the resolved active-locale configuration) and `route` (translated content path without locale/base prefixes). Use `HeaderProps` or `FooterProps` from `sproutsite` as the component's Props type; no other required props are supplied. Error pages also use these slots; landing pages still omit the header. The shared layout retains metadata, main content, fonts, colour variables and skip link.
 
 The public `DefaultHeader` and `DefaultFooter` exports from `sproutsite/components` always target the supplied implementations. A replacement can delegate to them without recursively resolving itself. Completely new markup requires the website team to implement responsive behavior, locale/base-aware links, active navigation and accessibility. Local files survive package updates, but their compatibility still needs review. This is not a general theme loader or an extension of the allowed MDX imports. See the [header/footer guide](https://sproutsite.dev/documentation/getting-started/your-website/header-and-footer/).
 
 Internally, the shared layout uses two private [Node package imports](https://nodejs.org/api/packages.html#subpath-imports) with default targets. Configured replacements use standard [Vite aliases](https://vite.dev/config/shared-options.html#resolve-alias), then Astro compiles the selected files normally. There is no browser-side resolver or component registry. Website components must use the public default exports rather than the private `#sproutsite/` aliases.
 
-The entry point for the default theme is `src/themes/default/styles/theme.css`. It documents the import order and remains the only central import. Global foundations live in `styles/foundation/`, semantic content variants in `styles/themes/`. Components follow Atomic Design: `atoms/`, `molecules/`, `organisms/`, and `layout/` for technical layout primitives. Every visible building block is organized locally as a pair, for example `components/organisms/Header/Header.astro` and `components/organisms/Header/Header.css`; `layouts/PageLayout/` follows the same pattern. Theme-owned classes begin with `ss-`, for example `ss-header` and `ss-header__inner`. The default theme is named `sproutsite`, intentionally light, and centrally defines semantic DaisyUI tokens, font sizes, spacing, radii, and shadows in its theme and foundation files.
+A local descriptor uses the public theme contract:
 
-Another theme can replace these components and the technical CSS integration without migrating Markdown or YAML. This is not yet a configurable theme loader and deliberately does not claim every UI library can be switched through a setting.
+```ts
+import { defaultTheme, type SproutsiteTheme } from 'sproutsite/themes';
+
+export default {
+    name: 'website',
+    extends: defaultTheme,
+    styles: [new URL('./styles/theme.css', import.meta.url)],
+    components: {
+        Header: new URL('./components/Header.astro', import.meta.url),
+    },
+} satisfies SproutsiteTheme;
+```
+
+Import that descriptor into astro.config.ts and pass it as theme. ThemeProps<'Header'> and the other documented names provide component prop types. Use sproutsite/default-components to explicitly delegate to the supplied markup without resolving your own replacement recursively. Ancestor styles precede descendant styles; website CSS loads last, and website Header/Footer overrides win over the selected theme. Changing the descriptor or selected paths requires a dev-server restart; edits to selected Astro/CSS files use Astro/Vite HMR. Unknown slots, missing independent-theme slots, invalid files and cyclic inheritance stop configuration.
+
+The entry point for the default theme is `src/themes/default/styles/theme.css`. It documents the import order and remains the only central import. Global foundations live in `styles/foundation/`, semantic content variants in `styles/themes/`. Components follow Atomic Design: `atoms/`, `molecules/`, `organisms/`, and `layout/` for technical layout primitives. Every visible building block is organized locally as a pair, for example `components/organisms/Header/Header.astro` and `components/organisms/Header/Header.css`; `layouts/PageLayout/` follows the same pattern. Theme-owned classes begin with `ss-`, for example `ss-header` and `ss-header__inner`. The default descriptor is named `default`; its DaisyUI theme is named `sproutsite`, is intentionally light, and centrally defines semantic DaisyUI tokens, font sizes, spacing, radii, and shadows in its theme and foundation files.
+
+Another theme can replace these components and the technical CSS integration without migrating Markdown or YAML. Select a typed local descriptor through createSproutsiteConfig({ theme }). Themes can extend defaultTheme or another local descriptor, overriding components individually and appending CSS. An independent theme must provide every documented component and loads no default CSS or fonts. The shared document retains metadata, language, main, skip link and error noindex. See the [theme guide](https://sproutsite.dev/documentation/getting-started/your-website/custom-theme/).
 
 ## Accordions
 

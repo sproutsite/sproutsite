@@ -5,34 +5,22 @@ tone:
 ---
 
 import { Eyebrow } from 'sproutsite/components';
-import { Alert } from 'sproutsite/components';
 
 <Eyebrow>Contribute to Sproutsite</Eyebrow>
 
-## Make theme changes possible in a website project
+## Maintain the theme contract
 
-<Alert variant="warning" style="soft">
-    Open – future extension. This page describes the goal; a supported
-    implementation is not yet available.
-</Alert>
+Local CSS entries, Header/Footer overrides and inherited or independent themes are implemented. The website guide explains their use:
 
-The goal is a supported way for a website’s own team to keep the default theme and adjust selected styles or components, or to choose an independent presentation without migrating content.
+- [Small design changes](/documentation/getting-started/your-website/theme-overrides/)
+- [Your own theme](/documentation/getting-started/your-website/custom-theme/)
 
-### What exists already
+### Implementation ownership
 
-Core and default-theme source are separated. Contributors can edit that source in this checkout, and existing typography, hero and component settings cover specific needs. This does not yet amount to a public consumer theme API.
+src/package/themes.ts validates local file URLs, inheritance and the complete component contract. Vite aliases select Astro files at build time. src/package/Document.astro retains document structure, metadata, language and main. Blog and error presentation supplies body content only. Existing website overrides remain highest priority.
 
-### Decisions still needed
+### Verify changes
 
-Define a small public entry for local styles or component replacement, its loading order and compatibility guarantees. Decide how supported tokens and content components are exposed. Do not invent a theme loader or configuration flag in documentation before it exists.
+Preserve existing component props and slots. Verify changes with type checking, unit tests and the npm-archive installation test. The archive test covers multilevel inheritance, nested components, CSS order, independent CSS, locale paths and error pages. New slots require both documentation locales and a complete default descriptor.
 
-### Acceptance criteria
-
-- Existing website content still validates and renders.
-- Default-theme users need no migration for an optional extension.
-- Base paths, language links, metadata and error pages still work.
-- The extension has focused source tests, an installed-consumer example and accessible responsive output.
-
-The [theme source guide](/documentation/getting-started/contributing/theme-and-styles/) covers work that is possible today. This page records an implementation goal; it is not a working override recipe or a release commitment.
-
-[Back to the quick start and more topics](/documentation/getting-started/contributing/)
+[Back to more topics](/documentation/getting-started/contributing/)

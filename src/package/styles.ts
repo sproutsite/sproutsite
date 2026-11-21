@@ -12,6 +12,7 @@ const entry = fileURLToPath(
 export function createStylesPlugin(
     styles: readonly string[] = [],
     root = process.cwd(),
+    themeStyles?: readonly string[],
 ) {
     if (!Array.isArray(styles))
         throw new Error(
@@ -51,10 +52,21 @@ export function createStylesPlugin(
         transform(code: string, id: string) {
             if (
                 id.split('?')[0]?.replaceAll('\\', '/') !== entry ||
-                paths.length === 0
+                (paths.length === 0 && themeStyles === undefined)
             )
                 return;
-            return code + '\n' + css;
+            const base =
+                themeStyles === undefined
+                    ? code
+                    : themeStyles
+                          .map(
+                              (path) =>
+                                  '@import ' +
+                                  JSON.stringify(path.replaceAll('\\', '/')) +
+                                  ';',
+                          )
+                          .join('\n');
+            return base + '\n' + css;
         },
     };
 }

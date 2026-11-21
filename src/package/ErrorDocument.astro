@@ -1,0 +1,28 @@
+---
+import Document from './Document.astro';
+import ErrorPage from '#sproutsite/errorpage';
+import { loadSiteConfig } from '../lib/sproutsite/site-config.js';
+import { errorCopy } from './error-copy.js';
+interface Props {
+    status: 404 | 500;
+}
+const { status } = Astro.props;
+const defaults = loadSiteConfig();
+const locale =
+    defaults.i18n.locales.find((candidate) =>
+        Astro.url.pathname.startsWith(`${defaults.base}${candidate}/`),
+    ) ?? defaults.i18n.defaultLocale;
+const site = loadSiteConfig(locale);
+const copy = errorCopy(status, locale === 'de');
+const route = `/${status}${locale === defaults.i18n.defaultLocale ? '' : `-${locale}`}.html`;
+---
+
+<Document
+    site={site}
+    title={copy.eyebrow}
+    description={copy.description}
+    route={route}
+    noindex
+>
+    <ErrorPage status={status} site={site} copy={copy} />
+</Document>

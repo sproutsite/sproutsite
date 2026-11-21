@@ -2,10 +2,10 @@
 import { loadLegalIdentity } from '../../../../../lib/sproutsite/legal-identity.js';
 import { loadSiteConfig } from '../../../../../lib/sproutsite/site-config.js';
 import { externalLinkAttributes } from '../../../../../lib/sproutsite/urls.js';
-import Column from '../../layout/Column/Column.astro';
-import Columns from '../../layout/Columns/Columns.astro';
-import Feature from '../Feature/Feature.astro';
-import Alert from '../Alert/Alert.astro';
+import Column from '#sproutsite/column';
+import Columns from '#sproutsite/columns';
+import Feature from '#sproutsite/feature';
+import Alert from '#sproutsite/alert';
 
 interface Props {
     part?: 'contact' | 'name' | 'email' | 'controller';

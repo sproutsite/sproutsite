@@ -2,9 +2,8 @@
 import type { CollectionEntry } from 'astro:content';
 import type { AssembledPage } from '../../../../../lib/sproutsite/pages.js';
 import type { SiteConfig } from '../../../../../lib/sproutsite/types.js';
-import PageLayout from '../../../layouts/PageLayout/PageLayout.astro';
-import Hero from '../Hero/Hero.astro';
-import Section from '../Section/Section.astro';
+import Hero from '#sproutsite/hero';
+import Section from '#sproutsite/section';
 
 type BlogPage = CollectionEntry<'blogPages'>;
 type BlogDocument = CollectionEntry<'blogDocuments'>;
@@ -28,24 +27,17 @@ const dateFormatter = new Intl.DateTimeFormat(site.i18n.locale, {
 });
 ---
 
-<PageLayout
-    site={site}
-    title={post.entry.data.title}
-    description={post.entry.data.description}
-    route={post.route}
->
-    <div class="ss-blog-post">
-        <Hero hero={post.hero!} site={site} Content={HeroContent}>
-            <time
-                slot="meta"
-                class="ss-hero__meta"
-                datetime={post.entry.data.pubDate.toISOString()}
-            >
-                {dateFormatter.format(post.entry.data.pubDate)}
-            </time>
-        </Hero>
-        {sections.map(({ section, Content }) => (
-            <Section section={section} Content={Content} />
-        ))}
-    </div>
-</PageLayout>
+<div class="ss-blog-post">
+    <Hero hero={post.hero!} site={site} Content={HeroContent}>
+        <time
+            slot="meta"
+            class="ss-hero__meta"
+            datetime={post.entry.data.pubDate.toISOString()}
+        >
+            {dateFormatter.format(post.entry.data.pubDate)}
+        </time>
+    </Hero>
+    {sections.map(({ section, Content }) => (
+        <Section section={section} Content={Content} />
+    ))}
+</div>

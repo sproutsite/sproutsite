@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { resolveBranding } from '../themes/default/branding.js';
+import { resolveBranding } from './branding.js';
 import { loadSiteConfig } from '../lib/sproutsite/site-config.js';
 
 // A native static Astro endpoint keeps bundled, hashed icon URLs correct for

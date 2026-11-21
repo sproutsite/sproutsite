@@ -9,27 +9,154 @@ import { Alert } from 'sproutsite/components';
 
 <Eyebrow>Deine Website</Eyebrow>
 
-## Deiner Website eine eigenständige Gestaltung geben
+## Ein Theme auswählen, ableiten oder ersetzen
 
-<Alert variant="warning" style="soft">
-    Offen – zukünftige Erweiterung. Diese Seite beschreibt das Ziel; eine
-    unterstützte Umsetzung für deine Website steht noch aus.
+Die Inhaltsdateien bleiben erhalten, während du die Darstellung deiner Website änderst. Für Farben und Schriftarten reichen häufig die Einstellungen oder eigenes CSS. Ein Theme ist sinnvoll, wenn das Team deiner Website anderes HTML, andere Komponenten oder einen anderen Seitenaufbau benötigt. Die Redaktion arbeitet weiterhin mit denselben Markdown-Dateien.
+
+### Ein lokales Theme auswählen
+
+Lege `src/themes/website/theme.ts` an und wähle es in `astro.config.ts` aus:
+
+```ts
+import { defineConfig } from 'astro/config';
+import { createSproutsiteConfig } from 'sproutsite/config';
+import theme from './src/themes/website/theme';
+
+export default defineConfig(
+    createSproutsiteConfig({
+        theme,
+        styles: ['./src/styles/custom.css'],
+    }),
+);
+```
+
+Ohne `theme` wird das mitgelieferte Default-Theme verwendet. Die Auswahl ist technische Konfiguration und kein Feld in `site.yaml`. Starte den Dev-Server neu, wenn du den Deskriptor, ausgewählte Komponentenpfade oder die CSS-Liste änderst. Änderungen an ausgewählten Astro- und CSS-Dateien übernimmt Astro/Vite wie gewohnt.
+
+### Vom Default-Theme ableiten
+
+In `src/themes/website/theme.ts`:
+
+```ts
+import { defaultTheme, type SproutsiteTheme } from 'sproutsite/themes';
+
+export default {
+    name: 'website',
+    extends: defaultTheme,
+    styles: [new URL('./styles/theme.css', import.meta.url)],
+    components: {
+        Header: new URL('./components/Header.astro', import.meta.url),
+    },
+} satisfies SproutsiteTheme;
+```
+
+Erstelle beide referenzierten Dateien, bevor du die Vorschau startest. Datei-URLs werden relativ zum Deskriptor aufgelöst, auch bei einer Ableitung aus einem anderen Verzeichnis. In die Astro-Konfiguration wird nur der TypeScript-Deskriptor importiert; die Komponenten kompiliert Astro später.
+
+Nur angegebene Komponenten werden ersetzt. Die übrigen Komponenten, Styles und die Standard-Farbzuordnung bleiben erhalten. Das gilt auch innerhalb geerbter Komponenten: Ein ersetzter Button wird im geerbten Hero verwendet, eine ersetzte Card in der Blogübersicht.
+
+Ein Header, der zunächst die mitgelieferte Implementierung weiterverwendet:
+
+```astro
+---
+import type { ThemeProps } from 'sproutsite/themes';
+import { Header as BaseHeader } from 'sproutsite/default-components';
+type Props = ThemeProps<'Header'>;
+---
+
+<BaseHeader {...Astro.props} />
+```
+
+Über `sproutsite/default-components` greifst du ausdrücklich auf mitgelieferte Komponenten zu. Den ausgewählten Header in seinem eigenen Ersatz erneut einzubinden würde eine Rekursion erzeugen. Die bisherigen Exporte `DefaultHeader` und `DefaultFooter` bleiben ebenfalls verfügbar.
+
+### Von einem anderen lokalen Theme ableiten
+
+```ts
+import websiteTheme from '../website/theme';
+import type { SproutsiteTheme } from 'sproutsite/themes';
+
+export default {
+    name: 'campaign',
+    extends: websiteTheme,
+    styles: [new URL('./styles/theme.css', import.meta.url)],
+    components: {
+        Footer: new URL('./components/Footer.astro', import.meta.url),
+    },
+} satisfies SproutsiteTheme;
+```
+
+Die Styles werden vom ältesten Basistheme bis zum ausgewählten Theme geladen. Danach folgen die Website-Dateien aus `styles` in ihrer angegebenen Reihenfolge. Theme-Styles werden angehängt; Komponenten werden einzeln ersetzt. Die bestehenden Website-Overrides `components.Header` und `components.Footer` haben Vorrang vor dem ausgewählten Theme. Entferne diese Website-Einträge, wenn du dieselben Bereiche stattdessen über dein Theme steuern möchtest.
+
+Ein leeres `styles: []` im abgeleiteten Theme ergänzt nichts und entfernt kein geerbtes CSS. Für einen unabhängigen CSS-Einstieg legst du ein Theme ohne `extends` an. CSS-Layer, Spezifität und Kaskade gelten weiterhin.
+
+### Ohne geerbte Styles beginnen
+
+Dieses Beispiel verwendet ausdrücklich mitgeliefertes HTML weiter, lädt aber ausschließlich eigene Styles:
+
+```ts
+import { defaultTheme, type SproutsiteTheme } from 'sproutsite/themes';
+
+export default {
+    name: 'independent',
+    colors: 'none',
+    styles: [new URL('./styles/theme.css', import.meta.url)],
+    components: {
+        ...defaultTheme.components,
+        Header: new URL('./components/Header.astro', import.meta.url),
+        Footer: new URL('./components/Footer.astro', import.meta.url),
+        Hero: new URL('./components/Hero.astro', import.meta.url),
+    },
+} satisfies SproutsiteTheme;
+```
+
+Ohne `extends` wird kein Default-CSS automatisch geladen. `...defaultTheme.components` ist eine bewusste Wiederverwendung, keine Vererbung: Gestalte dieses HTML mit eigenen Styles oder ersetze es. Für eine vollständig eigenständige Implementierung entfernst du den Spread und hinterlegst jeden erforderlichen Eintrag mit einer eigenen lokalen Datei-URL. Fehlende Komponenten werden gemeldet und nicht stillschweigend aus dem Default-Theme ergänzt.
+
+Erforderliche Einträge:
+
+`Layout, Header, Footer, Hero, PageTitle, Section, BlogIndex, BlogPost, ErrorPage, BrandLogo, HeroBackground, LanguageSwitcher, Alert, ContentTable, FoundationSample, Tabs, Tab, Card, CardActions, ContentImage, Eyebrow, Badge, Button, Icon, Feature, LegalIdentity, PrivacyInfrastructure, Accordion, AccordionItem, Column, Columns`
+
+`colors: 'none'` ist der Standard eines unabhängigen Themes. Damit entfallen die Standard-Zuordnung zu CSS-Variablen und deren themespezifische Kontrastprüfungen. Die Farben aus `site.yaml` stehen weiterhin als validierte Daten in `site` bereit. Dein Theme muss sie selbst zuordnen und die eigenen Kontraste prüfen. Abgeleitete Themes erben `colors: 'default'` und damit die dokumentierte Farbzuordnung samt Prüfungen. Setze ausdrücklich `colors: 'none'`, wenn du dieses System ersetzt.
+
+### Komponentenvertrag und Dokumentstruktur
+
+Verwende `ThemeProps<'Hero'>`, `ThemeProps<'Section'>` und die jeweiligen Namen für typisierte Props. `ThemeComponentProps` stellt die vollständige Zuordnung bereit. Halte die dokumentierten Eigenschaften und Slots ein; ein Dateipfad allein kann nicht nachweisen, dass die Komponente sie korrekt rendert.
+
+| Bereich            | Vertrag                                                                                                                       |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| Layout             | Erhält site, logische Route und Layoutmodus; gibt seinen Standardslot genau einmal aus.                                       |
+| Header / Footer    | Erhalten site und die logische Route ohne Sprach- oder Deployment-Präfix.                                                     |
+| Hero               | Erhält Hero-Daten, site und optional gerenderten Content; unterstützt Standardslot und meta-Slot für das Beitragsdatum.       |
+| PageTitle          | Rendert die H1-Ersatzansicht oder Blogeinleitung anhand der übergebenen Props.                                                |
+| Section            | Erhält Abschnittsdaten und optional gerenderten Content; unterstützt für Fehlerseiten auch Inhalt im Standardslot.            |
+| BlogIndex          | Erhält site und posts; rendert den Inhalt der Blogübersicht.                                                                  |
+| BlogPost           | Erhält site, den zusammengestellten Beitrag, HeroContent und gerenderte Sections; rendert den Beitragsinhalt.                 |
+| ErrorPage          | Erhält status, site und übersetzte copy-Daten mit introduction, title, eyebrow, description, detail, action und sectionTitle. |
+| Inhaltskomponenten | Behalten die im Showcase dokumentierten Props und Slots bei, einschließlich Columns/Column und Accordion/AccordionItem.       |
+
+Ein minimales Layout:
+
+```astro
+---
+import type { ThemeProps } from 'sproutsite/themes';
+type Props = ThemeProps<'Layout'>;
+---
+
+<div class="website-layout">
+    <slot />
+</div>
+```
+
+Das gemeinsame Dokument behält HTML-Kopf, Metadaten, Canonical-URLs, Favicon, Vorschaumetadaten, Sprache, Sprunglink und genau ein main-Element. Layout umschließt Header, main und Footer; füge kein weiteres Dokument oder main hinzu. Bei Landingpages entfällt Header. Blog- und Fehlerkomponenten liefern nur den Seiteninhalt, damit Metadaten und noindex für Fehlerseiten gemeinsam bleiben.
+
+Die bisherigen Typografie-Datenattribute und Gewichtsvariablen stehen allen Themes zur Verfügung. Ein unabhängiges Theme entscheidet selbst, ob es sie verwendet und welche lokalen Schriften es lädt. Es erhält kein Default-Schriftstylesheet automatisch.
+
+### Vor der Veröffentlichung prüfen
+
+Führe `npm run check` und `npm run build` im Website-Projekt aus. Prüfe Startseite, Seite ohne Hero, MDX, Blogübersicht und Beitrag, Landingpages, beide Fehlervorschauen, alle Sprachen und den Deployment-Basispfad. Kontrolliere mobile Navigation, Tastaturbedienung, Fokus, Kontraste, Überschriften und responsive Bilder. Die Theme-Auswahl wird beim Build aufgelöst und ergänzt keinen Theme-Umschalter im Browser.
+
+<Alert variant="info" style="soft">
+    Theme-Dateien gehören zu deiner Website und bleiben bei Paketupdates
+    erhalten. Prüfe ihre Kompatibilität nach einem Sproutsite-Update. Ein
+    eigenständig implementiertes Theme verantwortet sein responsives Verhalten
+    und seine Barrierefreiheit.
 </Alert>
 
-Ein eigenes Theme würde die Inhaltsdateien von Sproutsite erhalten und ihre Darstellung austauschen: Seitenlayout, Header, Footer, Typografie und visuelle Bausteine. Das ist eine Aufgabe für das Team, das deine Website technisch umsetzt, keine Voraussetzung zum Schreiben von Inhalten.
-
-### Aktuelle Grenze
-
-Sproutsite trennt Inhaltsaufbereitung und Default-Theme intern. Das ist eine Grundlage, aber noch keine fertige Theme-Plattform für installierte Website-Projekte. Es gibt keinen öffentlichen Theme-Loader und keinen einfachen Konfigurationsschalter für ein eigenes Theme.
-
-Mit [eigenem CSS](/dokumentation/einstieg/deine-website/theme-anpassen/) und dem [Austausch von Header und Footer](/dokumentation/einstieg/deine-website/header-und-footer/) kannst du das Default-Theme bereits anpassen. Diese beiden festen Komponentenplätze sind kein vollständiger Theme-Loader.
-
-### Angestrebtes Ergebnis
-
-Deine Website soll später eine eigene Darstellung wählen können, ohne Markdown-Inhalte migrieren zu müssen. Dafür braucht es dokumentierte Importe und Exporte, kompatible Inhaltskomponenten und eine klare Zuständigkeit für Styles.
-
-Das Website-Team muss Überschriftenstruktur, Navigationszustand, Sprachlinks, Basispfade, Metadaten, responsives Verhalten und Barrierefreiheit erhalten. Bestehende Inhalte sollen weiterhin die Validierung bestehen.
-
-Nutze bis dahin das Default-Theme mit seinen dokumentierten Einstellungen. Wenn du diese Möglichkeit in Sproutsite selbst mitentwickeln möchtest, folge der getrennten [Anleitung für Mitwirkende](/dokumentation/einstieg/mitarbeiten/).
-
-[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)
+[Zurück zum Schnellstart und zu weiteren Themen](/dokumentation/einstieg/deine-website/)
