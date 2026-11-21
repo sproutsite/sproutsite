@@ -50,7 +50,9 @@
                     outline-color: var(--color-hero-green);
                 }
             }
-            ul {
+            .ss-footer__group > ul,
+            .ss-footer__social > ul,
+            .ss-footer__links {
                 list-style: none;
                 margin: 0;
                 padding: 0;
