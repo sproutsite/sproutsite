@@ -76,10 +76,11 @@ for (const { route, site: pageSite } of pages) {
     )
         throw new Error(`Main/H1 contract failed for ${route}`);
 }
-const sitemap = readdirSync('dist').find(
-    (name) => name === 'sitemap-index.xml' || name === 'sitemap-0.xml',
+const sitemapFiles = readdirSync('dist').filter((name) =>
+    /^sitemap.*\.xml$/.test(name),
 );
-if (!sitemap) throw new Error('Sitemap output is missing');
+if (sitemapFiles.length !== 1 || sitemapFiles[0] !== 'sitemap.xml')
+    throw new Error('Expected exactly one sitemap file: dist/sitemap.xml');
 const home = readFileSync(join('dist', 'index.html'), 'utf8');
 // Metadata must point at emitted files, including after a subpath deployment.
 function emittedFile(url: string): string {

@@ -1,5 +1,5 @@
 import mdx from '@astrojs/mdx';
-import { copyFileSync, existsSync, renameSync, rmdirSync } from 'node:fs';
+import { existsSync, renameSync, rmdirSync, unlinkSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import type { AstroIntegration } from 'astro';
 import sitemap from '@astrojs/sitemap';
@@ -147,17 +147,19 @@ export function createSproutsiteConfig(options: SproutsiteConfigOptions = {}) {
                         });
                     },
                     'astro:build:done': ({ dir }) => {
-                        // Keep Astro's index/chunks; expose the single chunk at the
-                        // conventional URL, or the index if the site needs chunks.
-                        copyFileSync(
-                            new URL(
-                                existsSync(new URL('sitemap-1.xml', dir))
-                                    ? 'sitemap-index.xml'
-                                    : 'sitemap-0.xml',
-                                dir,
-                            ),
-                            new URL('sitemap.xml', dir),
-                        );
+                        // Keep Astro's XML generation; publish one file when no
+                        // splitting is needed, otherwise retain its required chunks.
+                        const sitemapIndex = new URL('sitemap-index.xml', dir);
+                        const publicSitemap = new URL('sitemap.xml', dir);
+                        if (existsSync(new URL('sitemap-1.xml', dir))) {
+                            renameSync(sitemapIndex, publicSitemap);
+                        } else {
+                            renameSync(
+                                new URL('sitemap-0.xml', dir),
+                                publicSitemap,
+                            );
+                            unlinkSync(sitemapIndex);
+                        }
                         // Astro owns error-page rendering. Flatten localized output
                         // for web servers that select their error documents by locale.
                         for (const locale of site.i18n.locales.filter(

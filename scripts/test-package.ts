@@ -474,6 +474,11 @@ function verifyBuild(base: string) {
         );
     }
     const sitemap = readFileSync(join(output, 'sitemap.xml'), 'utf8');
+    assert.deepEqual(
+        readdirSync(output).filter((name) => /^sitemap.*\.xml$/.test(name)),
+        ['sitemap.xml'],
+        'Small websites must emit only sitemap.xml without redundant index or chunk files.',
+    );
     for (const file of routeFiles)
         assert.ok(
             sitemap.includes(

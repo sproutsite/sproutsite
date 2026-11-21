@@ -576,7 +576,7 @@ The configured Astro build generates `dist/sitemap.xml` using the official Astro
 
 `lastmod` uses the latest Git commit touching a page's source directory or applicable site configuration. Local edits and untracked sources use their file modification timestamps when later. The blog overview considers article metadata. Without available Git history, source modification times are the fallback; preserve meaningful timestamps in exported source archives. These dates describe content/configuration changes, not every rebuild or a full dependency/theme change audit.
 
-The existing `sitemap-index.xml` and `sitemap-0.xml` remain valid. `sitemap.xml` exposes the generated URL list directly; if the integration splits a large site into multiple chunks, it exposes the sitemap index instead. The document head links to `/sitemap.xml`, respecting the configured deployment base. No custom XML serializer is used.
+When the generated URL list fits in one file, only `sitemap.xml` is emitted: the build renames Astro's `sitemap-0.xml` and removes the redundant index. If Astro splits a very large site into multiple chunks, `sitemap.xml` becomes the index and the required numbered files remain. The document head links to `/sitemap.xml`, respecting the configured deployment base. No custom XML serializer is used.
 
 ## Error Pages
 
