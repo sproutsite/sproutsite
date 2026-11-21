@@ -77,7 +77,13 @@ const options = languageLinks(
                         {option.current && <Icon name="Check" size={20} />}
                     </span>
                     {option.flag && (
-                        <img src={option.flag} width="24" height="18" alt="" />
+                        <img
+                            src={option.flag}
+                            width="24"
+                            height="18"
+                            alt=""
+                            aria-hidden="true"
+                        />
                     )}
                     <span>{option.name}</span>
                 </a>
