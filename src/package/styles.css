@@ -1,0 +1,4 @@
+/* Shared layout CSS entry. The styles option appends website imports here;
+ * the default theme's own import order remains in its unchanged entry file.
+ */
+@import '../themes/default/styles/theme.css';

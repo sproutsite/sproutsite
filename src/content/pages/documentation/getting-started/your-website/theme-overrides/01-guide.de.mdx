@@ -5,29 +5,70 @@ tone:
 ---
 
 import { Eyebrow } from 'sproutsite/components';
-import { Alert } from 'sproutsite/components';
 
 <Eyebrow>Deine Website</Eyebrow>
 
-## Das Theme behalten und einzelne Details ändern
+## Das Theme behalten und einzelne Details anpassen
 
-<Alert variant="warning" style="soft">
-    Offen – zukünftige Erweiterung. Diese Seite beschreibt das Ziel; eine
-    unterstützte Umsetzung für deine Website steht noch aus.
-</Alert>
+Mit eigenen CSS-Dateien änderst du zum Beispiel die Rundungen von Cards oder die Abstände einer Komponente. Die Dateien liegen im Ordner deiner Website und werden nach dem vollständigen Default-Theme geladen. Paketupdates ersetzen deine Dateien nicht.
 
-Vielleicht gefällt dir die mitgelieferte Gestaltung, aber du möchtest andere Rundungen, schmalere Karten oder anders gestaltete Buttons. Dieses Thema hält das Ziel fest, solche Änderungen in deiner eigenen Website vorzunehmen, ohne das komplette Default-Theme kopieren zu müssen.
+Für unterstützte [Farben](/dokumentation/einstieg/deine-website/farben/), [Schriften](/dokumentation/einstieg/deine-website/schriften/), Branding und Hero-Einstellungen verwendest du weiterhin `site.yaml`. CSS ist der nächste Schritt, wenn diese Optionen ein gestalterisches Detail nicht abdecken. Du kannst deinen Coding-Agenten beauftragen, die Änderung in deiner lokalen CSS-Datei vorzunehmen.
 
-### Was bereits funktioniert
+### Eine CSS-Datei anlegen
 
-Nutze die vorhandenen [Schrifteinstellungen](/dokumentation/einstieg/deine-website/schriften/), [Hero-Optionen](/dokumentation/einstieg/deine-website/hero/), Section-Töne und Komponentenparameter. Das sind die unterstützten redaktionellen Gestaltungsmöglichkeiten.
+Erstelle `src/styles/custom.css` in deinem Website-Projekt:
 
-### Was noch fehlt
+```css
+.ss-card {
+    border-radius: 1.25rem;
+}
+```
 
-Das installierte Paket bietet noch keinen öffentlichen CSS-Einstieg für Überschreibungen, keine Child-Theme-Konfiguration und keinen Mechanismus zum Ersetzen einzelner Default-Theme-Komponenten. `createSproutsiteConfig()` besitzt keine Option für Theme-Vererbung.
+Das Beispiel verändert den Eckenradius von Cards. Die Klassen mit `ss-` kennzeichnen Bausteine des Default-Themes. Halte Anpassungen klein, damit sie sich nach einem Paketupdate leicht prüfen lassen.
 
-Ein zukünftiger Ablauf soll festlegen, wo lokale CSS-Dateien und Komponenten liegen, wie sie nach den Default-Styles geladen werden und wie sie Paketupdates überstehen. Dazu gehören Beispiele und Prüfungen für Tastaturfokus, responsive Layouts und Farbkontrast.
+### Einmalig einbinden
 
-Beschreibe vorerst die konkrete gewünschte Änderung und halte sie bei den Aufgaben deiner Website fest. Eine Änderung in `node_modules` ist keine dauerhaft gepflegte Lösung. Soll sich die gesamte Gestaltung ändern, siehe [dein eigenes Theme](/dokumentation/einstieg/deine-website/eigenes-theme/).
+Bearbeite die vorhandene `astro.config.ts`. Behalte andere Optionen bei und übergib `styles` an `createSproutsiteConfig`:
+
+```ts
+import { defineConfig } from 'astro/config';
+import { createSproutsiteConfig } from 'sproutsite/config';
+
+export default defineConfig(
+    createSproutsiteConfig({
+        styles: ['./src/styles/custom.css'],
+    }),
+);
+```
+
+`styles` ist eine optionale Liste projektrelativer `.css`-Dateien. Die Pfade beziehen sich auf den Hauptordner deiner Website, nicht auf eine übersetzte Seite oder das installierte Paket. Eine fehlende Datei, ein Verzeichnis, eine externe URL, ein absoluter Pfad oder ein anderer Dateityp führen zu einem Konfigurationsfehler. Verwende `src/styles/` statt `public/`: Diese Dateien sollen verarbeitet und nicht unverändert ausgeliefert werden. Ohne Angabe oder mit `styles: []` wird nur das Default-Theme geladen.
+
+Die Einbindung gilt für alle gemeinsamen Seitenlayouts, einschließlich Übersetzungen, Blog und Fehlerseiten. Wiederhole sie nicht in `site.de.yaml`, einzelnen Seiten oder Markdown-Frontmattern.
+
+### Größere Änderungen aufteilen
+
+Bei Bedarf gibst du mehrere Dateien in der gewünschten Ladereihenfolge an:
+
+```ts
+createSproutsiteConfig({
+    styles: ['./src/styles/components.css', './src/styles/adjustments.css'],
+});
+```
+
+Alternativ bleibt es bei einer Einstiegsdatei, an deren Anfang normale CSS-`@import`-Angaben stehen. Relative Pfade in `@import` und `url(...)` beziehen sich auf die CSS-Datei, in der sie angegeben sind. Astro/Vite verarbeiten diese Importe und lokalen Assets für Entwicklung und Produktion, auch bei einem Deployment unter einem Unterverzeichnis. Ergänze den Basispfad deiner Website nicht in den Quelldateipfaden.
+
+### Welche Regel gewinnt?
+
+Zuerst wird das Default-Theme geladen, danach deine Dateien in Listenreihenfolge. Die normalen Regeln der CSS-Kaskade gelten weiterhin: Die Priorität einer Ebene kommt vor der Spezifität. Bei gleicher Priorität und Spezifität entscheidet die Reihenfolge. Das Beispiel nutzt bewusst eine Regel ohne Ebene, damit sie Regeln des Themes und von DaisyUI innerhalb von Ebenen überschreiben kann. Mit `@layer components` können höher priorisierte Utility- oder DaisyUI-Ebenen weiterhin gewinnen. Innerhalb derselben Ebene verwendest du bei Bedarf einen ebenso spezifischen Selektor wie die vorhandene Regel.
+
+CSS ohne Ebene hat bei normalen Deklarationen grundsätzlich Vorrang vor Regeln innerhalb von Ebenen. Inline-Angaben und `!important` haben eigene Prioritäten. Ergänze nicht pauschal `!important`, um ein Ergebnis zu erzwingen. Die unterstützten Farb- und Typografiewerte, die Sproutsite über Inline-CSS-Variablen bereitstellt, änderst du weiterhin in `site.yaml`.
+
+### Vorschau prüfen und Änderung behalten
+
+Starte `npm run dev` nach einer Änderung der Dateiliste neu. Änderungen innerhalb importierter CSS-Dateien nutzen die normale Aktualisierung der Entwicklungsvorschau: Datei speichern und das Ergebnis im Browser prüfen. Führe danach `npm run check` und `npm run build` aus und betrachte die gebaute Website mit `npm run preview`.
+
+Prüfe Desktop und Mobilansicht, Tastaturfokus und Hover-Zustände. Checke die CSS-Dateien zusammen mit der Astro-Konfiguration ein. Bearbeite weder `node_modules` noch erzeugte Dateien in `dist`. Deine Styles bleiben bei Updates getrennt erhalten. Lies trotzdem das Changelog und prüfe die Selektoren, wenn sich Sproutsite-Komponenten ändern.
+
+Dieser Einstieg verändert die Darstellung durch CSS. Er ersetzt keine Astro-Komponenten, deren HTML oder Verhalten. Der Austausch von Komponenten und ein vollständiges [eigenes Theme](/dokumentation/einstieg/deine-website/eigenes-theme/) bleiben eigene offene Erweiterungen. [Eigene Inhaltsbausteine](/dokumentation/einstieg/deine-website/eigene-bausteine/) sind ein weiteres Thema.
 
 [Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

@@ -71,6 +71,10 @@ colors:
 
 The [website colours guide](/documentation/getting-started/your-website/colors/) explains every field and contrast checks. SVG waves and images retain their embedded colours and need separate editing when required.
 
+### Your own CSS files
+
+Keep small design changes in your website project, for example in `src/styles/custom.css`. Register them through `createSproutsiteConfig({ styles: ['./src/styles/custom.css'] })` in `astro.config.ts`. They are processed after the complete default theme in list order. This technical integration belongs outside `site.yaml`. The [small design changes guide](/documentation/getting-started/your-website/theme-overrides/) explains cascade layers, previewing and package updates.
+
 ### Global hero classes
 
 Use `hero.classes` to set theme classes for all heroes and compact H1 fallbacks on pages without `hero.md`. Class names start with `ss-`; they remain theme details rather than a content-layout API.

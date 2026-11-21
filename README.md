@@ -496,6 +496,18 @@ This MDX component requires the Sproutsite configuration: a small rehype transfo
 
 The small reusable content and URL logic lives in `src/lib/sproutsite/`. It knows neither demo text nor Tailwind or DaisyUI classes. The default theme lives in `src/themes/default/` and includes the layout, header, hero, sections, and footer. DaisyUI is actively used there for navigation and theme elements.
 
+For website-owned CSS, pass `styles` to `createSproutsiteConfig` in `astro.config.ts`:
+
+```ts
+export default defineConfig(
+    createSproutsiteConfig({ styles: ['./src/styles/custom.css'] }),
+);
+```
+
+The optional list accepts existing project-relative `.css` files. The complete default theme loads first, followed by these files in list order, for all shared page layouts and locales. Missing files and invalid entries stop configuration. CSS imports, local assets and development updates use Astro/Vite; restart the dev server after changing the entry list. Omission or `styles: []` retains theme-only output. Use targeted unlayered rules for overrides such as `.ss-card { border-radius: 1.25rem; }`; normal cascade priorities and specificity still apply. Layered rules may lose to higher-priority DaisyUI or utility layers. Supported inline colour and typography settings remain in `site.yaml`. This option does not replace components or create theme inheritance. See the [small design changes guide](https://sproutsite.dev/documentation/getting-started/your-website/theme-overrides/).
+
+A small build-time Vite CSS entry imports the unchanged theme entry followed by the configured files. Astro/Vite retain responsibility for compilation, asset URLs and HMR; no stylesheet registry or browser script is added.
+
 The entry point for the default theme is `src/themes/default/styles/theme.css`. It documents the import order and remains the only central import. Global foundations live in `styles/foundation/`, semantic content variants in `styles/themes/`. Components follow Atomic Design: `atoms/`, `molecules/`, `organisms/`, and `layout/` for technical layout primitives. Every visible building block is organized locally as a pair, for example `components/organisms/Header/Header.astro` and `components/organisms/Header/Header.css`; `layouts/PageLayout/` follows the same pattern. Theme-owned classes begin with `ss-`, for example `ss-header` and `ss-header__inner`. The default theme is named `sproutsite`, intentionally light, and centrally defines semantic DaisyUI tokens, font sizes, spacing, radii, and shadows in its theme and foundation files.
 
 Another theme can replace these components and the technical CSS integration without migrating Markdown or YAML. This is not yet a configurable theme loader and deliberately does not claim every UI library can be switched through a setting.

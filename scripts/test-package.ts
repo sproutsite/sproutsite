@@ -499,6 +499,28 @@ function verifyBuild(base: string) {
         assets.some((file) => file.endsWith('.woff2')),
         'Local theme font was not emitted.',
     );
+    if (base === '/demo/') {
+        const order = [
+            ...css.matchAll(/--ss-package-style-order:\s*(\d+)/g),
+        ].map((match) => match[1]);
+        assert.equal(
+            order.at(-1),
+            '2',
+            'The last configured site stylesheet must win.',
+        );
+        assert.match(css, /border-radius:\s*2\.25rem/);
+        assert.ok(
+            css.includes('/demo/_astro/background.'),
+            'CSS assets must use the deployment base.',
+        );
+        assert.ok(assets.some((file) => /^background\..*\.svg$/.test(file)));
+    } else {
+        assert.equal(
+            css.includes('--ss-package-style-order'),
+            false,
+            'Omitted styles must preserve theme-only output.',
+        );
+    }
     console.log(
         `PASS installed package: ${base} routes, MDX, assets, font, version, errors, manifest, and sitemap.`,
     );
@@ -666,6 +688,40 @@ try {
     npm(['run', 'check'], consumer);
     for (const base of ['/', '/demo/']) {
         if (base === '/demo/') {
+            // Exercise public configuration from the installed tarball, with
+            // nested CSS imports, a path containing spaces and a bundled asset.
+            const styles = join(consumer, 'src/styles');
+            mkdirSync(join(styles, 'parts'), { recursive: true });
+            writeFileSync(
+                join(styles, 'parts/cards.css'),
+                ' .ss-card { --ss-package-style-order: 1; border-radius: 1.125rem; }\n',
+            );
+            writeFileSync(
+                join(styles, 'custom.css'),
+                '@import "./parts/cards.css";\n',
+            );
+            writeFileSync(
+                join(styles, 'last overrides.css'),
+                '.ss-card { --ss-package-style-order: 2; border-radius: 2.25rem; --ss-package-style-asset: url("./background.svg"); }\n',
+            );
+            // Dedicated CSS artwork above Vite's inline threshold, independent
+            // of Astro's separately tested optimised hero-image fixture.
+            writeFileSync(
+                join(styles, 'background.svg'),
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">' +
+                    '<rect width="16" height="16" fill="#eef3e8"/>'.repeat(
+                        150,
+                    ) +
+                    '</svg>',
+            );
+            const astroConfig = join(consumer, 'astro.config.ts');
+            writeFileSync(
+                astroConfig,
+                readFileSync(astroConfig, 'utf8').replace(
+                    'createSproutsiteConfig()',
+                    'createSproutsiteConfig({ styles: ["./src/styles/custom.css", "./src/styles/last overrides.css"] })',
+                ),
+            );
             // The same archive must support a website's own public branding.
             const branding = join(consumer, 'public/branding');
             mkdirSync(branding, { recursive: true });

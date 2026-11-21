@@ -1,4 +1,6 @@
 import { defineConfig } from 'astro/config';
 import { createSproutsiteConfig } from 'sproutsite/config';
 
-export default defineConfig(createSproutsiteConfig());
+export default defineConfig(
+    createSproutsiteConfig({ styles: ['./src/styles/custom.css'] }),
+);

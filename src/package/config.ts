@@ -20,9 +20,16 @@ import { createSitemapMetadata } from '../lib/sproutsite/sitemap.js';
 import { validateBrandingImages } from '../lib/sproutsite/branding.js';
 import { validateHeroBackgroundImage } from '../lib/sproutsite/hero-background.js';
 import { colorStyles } from '../themes/default/colors.js';
+import { createStylesPlugin } from './styles.js';
+
+export interface SproutsiteConfigOptions {
+    /** Project-relative CSS files, loaded after the default theme in list order. */
+    styles?: readonly string[];
+}
 
 /** Returns the Astro configuration required by the default Sproutsite theme. */
-export function createSproutsiteConfig() {
+export function createSproutsiteConfig(options: SproutsiteConfigOptions = {}) {
+    const stylesPlugin = createStylesPlugin(options.styles);
     validateSproutsiteContent();
     const site = loadSiteConfig();
     for (const locale of site.i18n.locales) {
@@ -161,7 +168,7 @@ export function createSproutsiteConfig() {
                 },
             } satisfies AstroIntegration,
         ],
-        vite: { plugins: [tailwindcss()] },
+        vite: { plugins: [stylesPlugin, tailwindcss()] },
         markdown: {
             // A high-contrast Shiki theme keeps code comments readable in the
             // documentation as well as in regular content.
