@@ -1,9 +1,17 @@
 import { fromHtml } from 'hast-util-from-html';
 import { visit } from 'unist-util-visit';
 
-/** Validate rendered anchors, including links from native Astro markup. */
+/** Reject duplicate HTML attributes and validate rendered new-tab anchors. */
 export function assertSafeNewTabLinks(html: string, source: string): void {
-    visit(fromHtml(html), 'element', (node) => {
+    const tree = fromHtml(html, {
+        onerror(error) {
+            if (error.ruleId === 'duplicate-attribute')
+                throw new Error(
+                    `${source}:${error.line ?? 1}:${error.column ?? 1}: duplicate HTML attribute.`,
+                );
+        },
+    });
+    visit(tree, 'element', (node) => {
         if (
             node.tagName !== 'a' ||
             String(node.properties.target ?? '').toLowerCase() !== '_blank'

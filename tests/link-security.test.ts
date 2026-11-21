@@ -6,6 +6,26 @@ import { assertSafeNewTabLinks } from '../scripts/check-link-security.js';
 import { secureLinkRel } from '../src/lib/sproutsite/urls.js';
 import { rehypeExternalLinks } from '../src/lib/sproutsite/rehype-links.js';
 
+test('rejects duplicate HTML attributes before the parser discards them', () => {
+    for (const html of [
+        '<a href="/" target="_blank" TARGET="_self" rel="noopener noreferrer">Link</a>',
+        '<a href="/" rel="noopener" rel="noreferrer">Link</a>',
+        '<div id="first" ID="second">Content</div>',
+    ])
+        assert.throws(
+            () => assertSafeNewTabLinks(html, 'dist/example/index.html'),
+            /dist\/example\/index.html:\d+:\d+: duplicate HTML attribute/,
+        );
+    assert.doesNotThrow(() =>
+        assertSafeNewTabLinks(
+            '<!-- <a target="_blank" target="_self"> -->' +
+                '<pre>&lt;a rel="noopener" rel="noreferrer"&gt;</pre>' +
+                '<a href="/" data-example=\'target="_blank" target="_self"\'>Example</a>',
+            'test.html',
+        ),
+    );
+});
+
 test('rejects unsafe new-tab links regardless of origin or attribute formatting', () => {
     for (const html of [
         '<a href="/internal/" target="_blank">Internal</a>',
