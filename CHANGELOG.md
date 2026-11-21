@@ -7,9 +7,23 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.31] - 2026-11-21
+
+### Added
+
+- Added safely serialized WebSite, WebPage and BlogPosting JSON-LD from existing content, optional public author metadata and visible bylines, with bilingual SEO documentation and installed-theme coverage.
+- Added website-owned static robots.txt and English llms.txt endpoints with configuration-derived URLs and optional HTML discovery, without imposing demo content or crawl policy on consumer websites.
+
 ### Changed
 
 - Updated current product copy, package metadata, examples and generated branding from Agent-ready to Agent-first Static CMS, retaining historical changelog entries and the distinction from integrated AI services.
+- Refined English and German homepage copy and metadata; page titles now use an en dash and omit the site-name suffix when the name already appears.
+
+### Fixed
+
+- Emit a single sitemap.xml when no splitting is required, retaining necessary chunks for large sites.
+- Explicitly hide decorative logo images and language flags from assistive technologies, preserve footer language-menu padding and use weight 600 for the selected language.
+- Prevent duplicate target and rel attributes on Button links and reject duplicate HTML attributes during build validation, with regression tests.
 
 ## [0.5.30] - 2026-11-21
 
