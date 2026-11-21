@@ -59,6 +59,22 @@ Deine Website übernimmt den Sproutsite-Wegweiser nicht. Für eine einfache stat
 
 Für die Verknüpfung im gemeinsamen HTML-Dokument von Sproutsite deklarierst du in `src/env.d.ts` unter `App.Locals` die optionale Eigenschaft `llmsUrl?: string`. Setze dann `locals.llmsUrl` in der nativen Astro-Middleware unter `src/middleware.ts` auf die absolute Adresse des Wegweisers. Erhalte dabei vorhandene Middleware. Ohne diesen Wert wird keine Verknüpfung ausgegeben. Für eine beim Build erzeugte Datei kann ein vorgerenderter Endpunkt `src/pages/llms.txt.ts` die öffentliche Datei ersetzen; verwende nur eine Quelle. Im Sproutsite-Repository findest du Endpunkt und Middleware als funktionierendes Beispiel. Veröffentliche die erzeugte Datei mit dem vollständigen Build und aktualisiere sie bei Inhaltsänderungen.
 
+### Seiten mit strukturierten Daten beschreiben
+
+Sproutsite ergänzt beim Build automatisch JSON-LD im HTML-Kopf. Normale Seiten beschreiben Titel, Beschreibung, kanonische Adresse und Sprache als `WebPage`. Die Startseite in der Standardsprache beschreibt zusätzlich die Website als `WebSite`; Übersetzungen verweisen auf dieselbe Website. Die Werte stammen aus deinen vorhandenen Seitenmetadaten und Website-Einstellungen. Du musst dafür keine zweite Liste pflegen.
+
+Blogbeiträge erhalten zusätzlich `BlogPosting` mit der sichtbaren Hero-Überschrift, dem Veröffentlichungsdatum und dem optimierten Beitragsbild. Wenn du die Autorin oder den Autor öffentlich nennen möchtest, ergänze dieses optionale Objekt in der `page.yaml` des Beitrags und seinen übersetzten Metadaten:
+
+```yaml
+author:
+    name: Beispielperson
+    url: https://example.org/ueber-mich/
+```
+
+Verwende den tatsächlichen Namen der Person und ihre Profilseite. Die Adresse ist optional und muss HTTP oder HTTPS verwenden. Das Standard-Theme zeigt dieselbe Autorenangabe neben dem Beitragsdatum. Ohne dieses Objekt lässt Sproutsite die Angabe weg, statt den Website-Betreiber aus den Impressumseinstellungen zu übernehmen. Änderungsdaten, Herausgeber oder Bewertungen werden nicht erfunden. Fehlerseiten erhalten keine strukturierten Daten.
+
+Prüfe das erzeugte JSON-LD nach dem Deployment mit dem Schema.org-Validator oder Googles Test für Rich-Suchergebnisse. Die Werkzeuge haben unterschiedliche Aufgaben: Gültige Schema.org-Daten erfüllen nicht automatisch die Voraussetzungen für ein Google-Rich-Suchergebnis. Eine bestimmte Darstellung in der Suche wird nicht zugesagt.
+
 ### Die tatsächliche Veröffentlichung prüfen
 
 Kontrolliere im Quelltext der gebauten Seite Titel, Beschreibung, kanonische Adresse und Sprachlinks. Entferne einen Vorschau-Zugriffsschutz erst, wenn die Website öffentlich werden soll. `robots.txt` ist kein Zugriffsschutz.

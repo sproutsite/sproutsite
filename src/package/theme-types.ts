@@ -1,5 +1,6 @@
 import type { ComponentProps } from 'astro/types';
 import type { SiteConfig } from '../lib/sproutsite/types.js';
+import type { ArticleMetadata } from '../lib/sproutsite/structured-data.js';
 
 export interface ThemeLayoutProps {
     site: SiteConfig;
@@ -13,6 +14,7 @@ export interface DocumentProps {
     route: string;
     layout?: 'default' | 'landing';
     noindex?: boolean;
+    article?: ArticleMetadata;
 }
 export interface ErrorPageProps {
     status: 404 | 500;

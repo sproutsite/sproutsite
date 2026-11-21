@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { assertSafeNewTabLinks } from './check-link-security.js';
+import { assertStructuredData } from './check-structured-data.js';
 import { loadSiteConfig } from '../src/lib/sproutsite/site-config.js';
 import {
     canonicalUrl,
@@ -193,6 +194,21 @@ for (const entry of sitemapEntries) {
         throw new Error('Missing sitemap language links');
 }
 for (const [file, html] of htmlByFile) {
+    const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+    const locale = html.match(/<html\b[^>]*lang="([^"]+)"/)?.[1];
+    if (!canonical || !locale)
+        throw new Error(`${file}: missing canonical or language`);
+    const graph = assertStructuredData(html, {
+        canonical,
+        locale,
+        website: new URL(withBase('/', site.base), site.url).href,
+        home: file === 'dist/index.html',
+        article: /\/blog\/[^/]+\/$/.test(new URL(canonical).pathname),
+        noindex: html.includes('name="robots" content="noindex, follow"'),
+    });
+    for (const node of graph) {
+        if (node['@type'] === 'BlogPosting') emittedFile(String(node.image));
+    }
     if (
         !html.includes(
             `<link rel="describedby" href="${llmsUrl}" type="text/markdown"`,

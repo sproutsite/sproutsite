@@ -580,6 +580,24 @@ When the generated URL list fits in one file, only `sitemap.xml` is emitted: the
 
 The demo's native Astro endpoint `src/pages/robots.txt.ts` generates `dist/robots.txt` with an absolute `Sitemap:` URL derived from Astro's `site` and `BASE_URL`. It allows crawling and requires no server runtime. Website projects can add the same endpoint as documented in the [SEO guide](https://sproutsite.dev/documentation/getting-started/your-website/seo/); the library does not override a website's crawl policy. Crawlers read robots.txt at the domain root. For a subpath deployment, add the sitemap URL to the host's root robots.txt; a file served only below that subpath is not sufficient.
 
+## Structured data
+
+The shared HTML document prerenders one JSON-LD graph from existing website and page data. Every indexable page has `WebPage` metadata with its title, description, canonical URL and active language. The default-language homepage also defines `WebSite` using the configured name, production URL, base and enabled languages. Translated pages reference the same website identity; they do not introduce separate websites.
+
+Blog articles additionally define `BlogPosting` with the visible hero headline, description, `pubDate`, language and an absolute URL for the generated article image. Its `mainEntityOfPage` points to the corresponding `WebPage`. The article image is optimized by Astro. No publisher, rating or modification date is inferred. Error documents marked `noindex` have no JSON-LD. This output is shared across themes and consumer installations and contains no fixed Sproutsite identity.
+
+Optionally add a public author to an article's `page.yaml` and translated `page.de.yaml`:
+
+```yaml
+author:
+    name: Example Author
+    url: https://example.org/about/
+```
+
+`name` must be non-empty; `url` is optional and must be an absolute HTTP(S) URL. This identifies a person, not an organization. The default theme shows the byline beside the article date and the JSON-LD includes that same author as `Person`. Without `author`, neither is added. Private legal-identity settings are never used to guess authorship. Custom BlogPost implementations should display any configured author too.
+
+JSON-LD is inert JSON in a `script` element with type `application/ld+json`, not an executable browser script. Its serializer escapes `<` so content cannot close the element. Check published markup with the [Schema.org validator](https://validator.schema.org/) and, for Google-supported result types, the [Rich Results Test](https://search.google.com/test/rich-results). Valid markup does not guarantee enhanced search results.
+
 ## LLM guide
 
 The demo's native Astro endpoint `src/pages/llms.txt.ts` prerenders a compact English Markdown guide to `dist/llms.txt`. It describes Sproutsite and links to selected English documentation, the showcase, contributor resources and the license. It also identifies the German documentation. All website links use the configured production URL and deployment base. The guide is maintained editorially; it is not a full documentation export and does not provide separate Markdown versions of the linked HTML pages.

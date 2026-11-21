@@ -1,4 +1,5 @@
 import { verifyPackageThemes } from './test-package-themes.js';
+import { assertStructuredData } from './check-structured-data.js';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -380,6 +381,13 @@ function verifyBuild(base: string) {
     for (const file of routeFiles) {
         const html = readFileSync(join(output, file), 'utf8');
         const route = file.replace(/index\.html$/, '');
+        assertStructuredData(html, {
+            canonical: `https://example.com${base}${route}`,
+            locale: file.startsWith('de/') ? 'de' : 'en',
+            website: `https://example.com${base}`,
+            home: file === 'index.html',
+            article: false,
+        });
         assert.ok(
             html.includes(`href="https://example.com${base}${route}"`),
             `Missing canonical for ${file}`,

@@ -59,6 +59,22 @@ Your website does not inherit Sproutsite's guide. For a simple static version, c
 
 To announce it in Sproutsite's shared HTML document, declare an optional `llmsUrl?: string` property in `App.Locals` in `src/env.d.ts`, then set `locals.llmsUrl` to the absolute guide URL in native Astro middleware at `src/middleware.ts`. Preserve any existing middleware. Without that value, no discovery link is rendered. For a build-generated guide, a prerendered `src/pages/llms.txt.ts` endpoint can replace the public file; use one source only. The Sproutsite repository contains this endpoint and middleware as a working example. Deploy the generated file with the complete build and update it when your content changes.
 
+### Describe your pages with structured data
+
+Sproutsite automatically adds JSON-LD to the HTML head at build time. Regular pages describe their title, description, canonical URL and language as `WebPage`. The homepage in the default language also describes the website as `WebSite`; translations reference that same website. Your existing page metadata and website settings supply these values, so there is no separate list to maintain.
+
+Blog articles additionally provide `BlogPosting` with their visible hero headline, publication date and optimized article image. If you want to identify the author publicly, add this optional object to the article's `page.yaml` and its translated metadata:
+
+```yaml
+author:
+    name: Example Author
+    url: https://example.org/about/
+```
+
+Use the actual person's name and profile page. The URL is optional and must use HTTP or HTTPS. The default theme displays the same author beside the article date. Without this object, Sproutsite omits the author instead of copying the website operator from legal settings. It does not invent modification dates, publishers or ratings, and error pages have no structured data.
+
+After deployment, check the generated JSON-LD with the Schema.org validator or Google's Rich Results Test. These tools serve different purposes: valid Schema.org data does not necessarily qualify for a Google rich result, and no search presentation is guaranteed.
+
 ### Check what is actually public
 
 Inspect the built page source for the title, description, canonical URL and language links. Confirm that staging protection is removed only when the website should become public. `robots.txt` is not access control.

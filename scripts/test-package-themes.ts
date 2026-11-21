@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { assertStructuredData } from './check-structured-data.js';
 
 /** Exercise the published contract from an installed archive, never source aliases. */
 export function verifyPackageThemes(consumer: string, build: () => void) {
@@ -79,7 +80,7 @@ export default defineConfig(createSproutsiteConfig({theme, styles:['./src/themes
     // Use the known neutral starter image and actual article structure.
     writeFileSync(
         join(blog, 'page.yaml'),
-        'title: Theme test\ndescription: Theme article\npubDate: 2026-01-01\nimage: ../../../..\/public/branding/sharing-image.png\nimageAlt: Theme image\n',
+        'title: Theme test\ndescription: Theme article\npubDate: 2026-01-01\nauthor:\n    name: Example Author\n    url: https://example.org/author/\nimage: ../../../..\/public/branding/sharing-image.png\nimageAlt: Theme image\n',
     );
     writeFileSync(
         join(blog, 'hero.md'),
@@ -134,7 +135,24 @@ export default defineConfig(createSproutsiteConfig({theme, styles:['./src/themes
         assert.equal((source.match(/<main\b/g) ?? []).length, 1);
         assert.equal((source.match(/<h1\b/g) ?? []).length, 1);
         assert.ok(source.includes('<link rel="canonical"'));
+        const canonical = source.match(
+            /<link rel="canonical" href="([^"]+)"/,
+        )![1]!;
+        assertStructuredData(source, {
+            canonical,
+            locale: 'en',
+            website: 'https://example.com/demo/',
+            home: false,
+            article: file === 'en/blog/theme-test/index.html',
+            noindex: /^(404|500)/.test(file!),
+        });
     }
+    assert.ok(
+        html('en/blog/theme-test/index.html')
+            .match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1]
+            ?.includes('Example Author'),
+        'Configured author must also appear in the article body, not only JSON-LD.',
+    );
     assert.ok(
         html('en/blog/index.html').includes('data-selected-theme="Card"'),
     );

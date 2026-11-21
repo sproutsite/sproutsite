@@ -11,6 +11,7 @@ import Hero from '#sproutsite/hero';
 import PageTitle from '#sproutsite/pagetitle';
 import Section from '#sproutsite/section';
 import { getBlogCollection } from './blog.js';
+import { getImage } from 'astro:assets';
 
 type Locale = 'en' | 'de';
 
@@ -85,6 +86,13 @@ const sections = page
       )
     : [];
 const postHero = post?.hero ? await render(post.hero) : undefined;
+const postImage = post
+    ? await getImage({
+          src: post.entry.data.image,
+          width: 1200,
+          format: 'webp',
+      })
+    : undefined;
 const postSections = post
     ? await Promise.all(
           post.sections.map(async (section) => ({
@@ -136,6 +144,12 @@ const postSections = post
         title={post.entry.data.title}
         description={post.entry.data.description}
         route={post.route}
+        article={{
+            headline: post.hero?.data.title ?? post.entry.data.title,
+            datePublished: post.entry.data.pubDate,
+            image: postImage!.src,
+            author: post.entry.data.author,
+        }}
     >
         <BlogPost
             post={post}

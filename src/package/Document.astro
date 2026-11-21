@@ -2,19 +2,16 @@
 import './styles.css';
 import Header from '#sproutsite/header';
 import Footer from '#sproutsite/footer';
-import type { SiteConfig } from '../lib/sproutsite/types.js';
+import type { DocumentProps } from './theme-types.js';
+import {
+    createStructuredData,
+    serializeStructuredData,
+} from '../lib/sproutsite/structured-data.js';
 import { canonicalUrl, withBase } from '../lib/sproutsite/urls.js';
 import { resolveBranding } from './branding.js';
 import Layout from '#sproutsite/layout';
 import { paletteStyles as themePaletteStyles } from 'virtual:sproutsite/theme';
-interface Props {
-    site: SiteConfig;
-    title: string;
-    description: string;
-    route: string;
-    layout?: 'default' | 'landing';
-    noindex?: boolean;
-}
+type Props = DocumentProps;
 const {
     site,
     title,
@@ -22,7 +19,16 @@ const {
     route,
     layout = 'default',
     noindex = false,
+    article,
 } = Astro.props;
+const structuredData = createStructuredData({
+    site,
+    title,
+    description,
+    route,
+    noindex,
+    article,
+});
 const documentTitle = title.toLowerCase().includes(site.name.toLowerCase())
     ? title
     : `${title} – ${site.name}`;
@@ -48,6 +54,12 @@ const paletteStyles = themePaletteStyles(
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{documentTitle}</title>
         <meta name="description" content={description} />
+        {structuredData && (
+            <script
+                type="application/ld+json"
+                set:html={serializeStructuredData(structuredData)}
+            />
+        )}
         {noindex && <meta name="robots" content="noindex, follow" />}
         <link rel="canonical" href={canonical} />
         {llmsUrl && (

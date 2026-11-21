@@ -5,6 +5,7 @@ import { heroTypes, sectionSpacings, tones } from '../lib/sproutsite/types.js';
 import { publicHeroImage } from '../lib/sproutsite/hero-background.js';
 import { optionalBlogLoader } from './optional-blog-loader.js';
 import { createBlogReadinessLoader } from './blog-state.js';
+import { blogAuthorSchema } from '../lib/sproutsite/blog-author.js';
 
 function blogDirectoryId(entry: string): string {
     const match = entry.match(
@@ -134,6 +135,7 @@ export function createSproutsiteCollections(
                 title: z.string().trim().min(1),
                 description: z.string().trim().min(1),
                 pubDate: z.coerce.date(),
+                author: blogAuthorSchema.optional(),
                 image: image(),
                 imageAlt: z.string().trim().min(1),
             }),
