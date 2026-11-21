@@ -1,0 +1,30 @@
+---
+tone: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Documentation for agents</Eyebrow>
+
+## Export documentation and showcase
+
+If you maintain a documentation service for Sproutsite, the framework repository can export its guides and component examples as a versioned JSON snapshot. Editorial users building their own website do not need this command. The separate `sproutsite-mcp` server can use the snapshot for search and document retrieval; this export does not start that server.
+
+### Create the artifact
+
+From a Sproutsite checkout containing the exporter, install development dependencies and run:
+
+```sh
+npm ci
+npm run export:mcp
+```
+
+The command validates the content, reads Astro's Content Collections and writes `artifacts/mcp/snapshot.json`, its `schema.json`, and unchanged LICENSE, NOTICE and third-party notice files. The export does not require private legal-identity settings or render the website. Your normal `dist/` build stays separate. The generated files are ignored by Git and are not included in the published library package.
+
+### What the server receives
+
+The snapshot includes English and German documentation and showcase pages with stable IDs, their actual translated URLs and ordered sections. It provides readable Markdown, search text, original imports, fenced examples, parameter tables and a documentation index for the public component exports. Duplicate previews are removed. Existing alerts and badge hints about open or partly available features are preserved. MDX expressions are never executed.
+
+The artifact records the Sproutsite version, Git revision, checkout status and content hashes. Use a committed, clean revision for release data; missing Git information is explicitly marked as unavailable. A server should validate the schema and verify the data version before answering questions about an installed Sproutsite version.
+
+Copy the complete artifact into the MCP server's Docker build or distribute it as a reviewed release artifact. The server owns the MCP endpoint, search and client configuration. No public endpoint or automated upload is created by this command. The [export contract and server handoff](https://github.com/sproutsite/sproutsite/blob/main/docs/mcp-export.md) describe every field, normalization rule and integrity check.

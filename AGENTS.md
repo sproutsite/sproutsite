@@ -367,6 +367,7 @@ Provide at least these commands:
 
 - `npm run dev`: local Astro preview from this repository.
 - `npm run build`: validated static output to `dist/`.
+- `npm run export:mcp`: separately validate and export documentation/showcase Content Collections as a versioned JSON artifact to ignored `artifacts/mcp/`, without rendering website pages or executing MDX. Keep schema compatibility, source provenance, localized URLs, code examples, capability notices and component-document mappings intact. The MCP server remains a separate project.
 - `npm run preview`: preview the build.
 - `npm run check`: Astro/TypeScript checking plus required content validation.
 - `npm test`: a few meaningful tests of project-owned conventions.
@@ -386,6 +387,6 @@ README in English: setup, Node version, commands, project structure, adding page
 
 Keep core and base layout separated so they can later be extracted into an npm package. Do not use absolute developer paths or core imports from demo content. Briefly document the planned public surface without implementing unused APIs now.
 
-Local archive installation testing is implemented through `npm run test:package`. The library is published; the minimal generator is a separate sibling project and has its own tests and publication lifecycle. Keep generator code and templates out of the framework package. A custom MCP server, extensions/marketplace, multisite, an administration backend, integrated AI agents, authentication, a form backend, automated deployment and a complex layout language remain outside the current scope.
+Local archive installation testing is implemented through `npm run test:package`. The library is published; the minimal generator is a separate sibling project and has its own tests and publication lifecycle. Keep generator code and templates out of the framework package. This repository owns the explicit documentation/showcase export for the separate sproutsite-mcp project; MCP server runtime and deployment remain outside this repository. Extensions/marketplace, multisite, an administration backend, integrated AI agents, authentication, a form backend, automated deployment and a complex layout language remain outside the current scope.
 
 Do not publish or deploy anything without the corresponding request. Do not treat an invented license or package-name availability as resolved.

@@ -1,0 +1,30 @@
+---
+tone: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Dokumentation für Agenten</Eyebrow>
+
+## Dokumentation und Showcase exportieren
+
+Wenn du einen Dokumentationsdienst für Sproutsite betreibst, kannst du die Anleitungen und Komponentenbeispiele aus dem Framework-Repository als versionierten JSON-Snapshot exportieren. Für die redaktionelle Arbeit an deiner eigenen Website brauchst du diesen Befehl nicht. Der separate Server `sproutsite-mcp` kann den Snapshot für Suche und Dokumentabruf nutzen; der Export startet diesen Server nicht.
+
+### Artefakt erzeugen
+
+Installiere in einer Sproutsite-Arbeitskopie mit dem Exporter die Entwicklungsabhängigkeiten und führe den Export aus:
+
+```sh
+npm ci
+npm run export:mcp
+```
+
+Der Befehl validiert die Inhalte, liest Astros Content Collections und erzeugt `artifacts/mcp/snapshot.json`, die zugehörige `schema.json` sowie unveränderte LICENSE-, NOTICE- und Drittanbieterhinweise. Er benötigt keine privaten Impressumsangaben und rendert die Website nicht. Der normale `dist/`-Build bleibt getrennt. Die erzeugten Dateien werden von Git ignoriert und sind nicht Teil des veröffentlichten Bibliothekspakets.
+
+### Welche Daten der Server erhält
+
+Der Snapshot enthält die deutsche und englische Dokumentation und den Showcase mit stabilen IDs, den tatsächlichen übersetzten URLs und geordneten Abschnitten. Er liefert lesbares Markdown, Suchtext, originale Imports, Codebeispiele, Parametertabellen und ein Dokumentationsverzeichnis für die öffentlich exportierten Komponenten. Doppelte Vorschauen entfallen. Vorhandene Alerts und Badge-Hinweise zu offenen oder teilweise verfügbaren Funktionen bleiben erhalten. MDX-Ausdrücke werden nicht ausgeführt.
+
+Das Artefakt nennt die Sproutsite-Version, den Git-Stand, den Status der Arbeitskopie und Inhaltsprüfsummen. Verwende für veröffentlichte Daten einen committeten, unveränderten Stand; fehlende Git-Informationen werden ausdrücklich als unbekannt gekennzeichnet. Der Server sollte das Schema und die Datenversion prüfen, bevor er Fragen zu einer installierten Sproutsite-Version beantwortet.
+
+Übernimm das vollständige Artefakt in den Docker-Build des MCP-Servers oder stelle es als geprüftes Release-Artefakt bereit. MCP-Endpunkt, Suche und Client-Konfiguration gehören zum Server-Projekt. Der Export richtet weder einen öffentlichen Endpunkt noch einen automatischen Upload ein. Der [Exportvertrag mit Übergabe an das Server-Projekt](https://github.com/sproutsite/sproutsite/blob/main/docs/mcp-export.md) beschreibt alle Felder, Normalisierungsregeln und Integritätsprüfungen.

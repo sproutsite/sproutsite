@@ -628,6 +628,12 @@ error_page 500 /500.html;
 
 These local error documents preserve the original error status. For a subpath deployment, prefix the error-document URLs with the deployment base (for example `/demo/404.html`). Error pages still load their shared CSS, logo, and scripts from the generated asset directory, so deploy the complete build. See the official [Astro error-page documentation](https://docs.astro.build/en/basics/astro-pages/), [Apache ErrorDocument reference](https://httpd.apache.org/docs/2.4/mod/core.html#errordocument), and [Nginx error_page reference](https://nginx.org/en/docs/http/ngx_http_core_module.html#error_page).
 
+## Documentation export for MCP
+
+From this framework checkout, run `npm run export:mcp` to validate and export documentation and showcase content to ignored `artifacts/mcp/`. The artifact contains `snapshot.json`, its generated `schema.json`, LICENSE, NOTICE and third-party notices. It includes configured English/German pages, normalized Markdown, examples, tables, capability notices, source hashes and a public component-to-document index. It records the Sproutsite version and Git provenance. MDX components and expressions are not executed, private legal settings are not required and `dist/` is untouched.
+
+This is an explicit content-export command, not an MCP server. The separate `sproutsite-mcp` project can validate and bundle a pinned artifact into its Docker image. No artifact is uploaded automatically, and neither the exporter nor its data is added to consumer npm packages. See the [data contract and server handoff](docs/mcp-export.md) and the bilingual [package guide](https://sproutsite.dev/documentation/package/).
+
 ## Validation and Limitations
 
 A website without blog articles does not need `src/content/blog/`. Missing, empty and asset-only blog directories are handled without missing-directory or empty-collection warnings. The existing empty blog overview remains available; no page URLs are removed. Once source files exist, Astro's glob loader performs the normal loading, schema validation and content watching. A small optional-blog loader waits for the first source file using Astro's public loader watcher API; it does not create placeholders or filter diagnostics for actual content. Page rendering and language navigation query optional collections only after Astro has stored their first entry. A small internal readiness collection records this state through the public loader store API, including watcher updates; files appearing on disk alone do not imply that parsing has finished. This avoids empty-collection warnings during first-article loading and also supports a custom blog directory. The package test checks both warning-free builds and adding, editing and removing the first article without restarting the dev server, with deliberately delayed parsing to exercise requests while loading is still in progress.
@@ -691,6 +697,7 @@ npm run build:demo  # builds once with base /demo/
 npm run storybook   # isolated Astro component workshop on port 6006
 npm run build:storybook # static Storybook output to storybook-static/
 npm run test:package # install and build the local archive in a fresh consumer
+npm run export:mcp  # validated documentation/showcase JSON artifact to artifacts/mcp/
 npm run prepublishOnly # run all publication checks without publishing
 ```
 
