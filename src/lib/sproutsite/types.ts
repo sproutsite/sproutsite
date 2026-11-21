@@ -30,6 +30,14 @@ export type HeaderItem =
     | { type: 'separator' }
     | { type: 'language-switcher' };
 
+/** Shared layout data. route has translated segments but no locale/base prefix. */
+export interface LayoutComponentProps {
+    site: SiteConfig;
+    route: string;
+}
+export type HeaderProps = LayoutComponentProps;
+export type FooterProps = LayoutComponentProps;
+
 export interface SiteConfig {
     branding?: Branding;
     colors?: SiteColors;

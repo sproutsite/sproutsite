@@ -11,6 +11,7 @@ import image2 from './_assets/colors.png';
 import image3 from './_assets/branding.png';
 import image4 from './_assets/theme-overrides.png';
 import image5 from './_assets/custom-theme.png';
+import image6 from './_assets/header-and-footer.png';
 import { Card, CardActions } from 'sproutsite/components';
 import { Column, Columns } from 'sproutsite/components';
 import { Eyebrow } from 'sproutsite/components';
@@ -109,6 +110,19 @@ Start with the settings that already exist. Cards marked “Partly available” 
 
             <CardActions>
                 [Adjust your design](/documentation/getting-started/your-website/theme-overrides/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={image6} imageAlt="Website navigation with a logo and menu areas">
+
+            ### Your own header and footer
+
+            Replace navigation or the footer with local Astro components.
+
+            <CardActions>
+                [Replace page areas](/documentation/getting-started/your-website/header-and-footer/)
             </CardActions>
         </Card>
     </Column>

@@ -7,6 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Added
+
+- Added independent Header/Footer replacements through validated local Astro paths, typed site/route props and public default components for delegation, using standard package imports and Vite aliases.
+- Added a bilingual header/footer guide and overview card, local demo entry components and a generator-agent handoff; other component replacements and complete custom themes remain separate.
+
 ## [0.5.27] - 2026-11-21
 
 ### Added

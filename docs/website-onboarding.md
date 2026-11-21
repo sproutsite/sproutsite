@@ -19,6 +19,7 @@ Status describes the documented workflow, not a guarantee that every possible va
 | colors                     | farben                       | available |
 | branding                   | markenauftritt               | available |
 | theme-overrides            | theme-anpassen               | available |
+| header-and-footer          | header-und-footer            | available |
 | custom-theme               | eigenes-theme                | open      |
 | deployment                 | veroeffentlichen             | available |
 | seo                        | auffindbarkeit               | available |
@@ -33,7 +34,7 @@ Status describes the documented workflow, not a guarantee that every possible va
 
 The language guide covers English or German as default, explicit `i18n` settings and inherited locale overrides. Further UI/content locales remain open; changing the default requires matching standard Astro route files.
 
-The small-design-changes guide now covers the supported CSS entry (`createSproutsiteConfig({ styles: [...] })`). Component replacement and a complete custom theme remain separate open capabilities.
+The small-design-changes guide now covers the supported CSS entry (`createSproutsiteConfig({ styles: [...] })`). Header/Footer replacement is documented separately through `components`; other component replacements and a complete custom theme remain open.
 
 ## Preserved detailed instructions
 

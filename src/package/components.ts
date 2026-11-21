@@ -18,3 +18,5 @@ export { default as Accordion } from '../themes/default/components/molecules/Acc
 export { default as AccordionItem } from '../themes/default/components/molecules/AccordionItem/AccordionItem.astro';
 export { default as Column } from '../themes/default/components/layout/Column/Column.astro';
 export { default as Columns } from '../themes/default/components/layout/Columns/Columns.astro';
+export { default as DefaultHeader } from '../themes/default/components/organisms/Header/Header.astro';
+export { default as DefaultFooter } from '../themes/default/components/organisms/Footer/Footer.astro';

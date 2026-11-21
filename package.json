@@ -34,6 +34,10 @@
         "./page": "./src/package/page.astro",
         "./package.json": "./package.json"
     },
+    "imports": {
+        "#sproutsite/header": "./src/themes/default/components/organisms/Header/Header.astro",
+        "#sproutsite/footer": "./src/themes/default/components/organisms/Footer/Footer.astro"
+    },
     "engines": {
         "node": ">=24.0.0"
     },

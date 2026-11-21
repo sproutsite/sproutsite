@@ -28,6 +28,7 @@ interface PackageManifest {
     private?: boolean;
     license: string;
     exports: Record<string, string>;
+    imports: Record<string, string>;
     publishConfig: { access: string; registry: string };
 }
 interface PackageLock {
@@ -566,6 +567,9 @@ try {
         ...Object.values(manifest.exports).map((file) =>
             file.replace(/^\.\//, ''),
         ),
+        ...Object.values(manifest.imports).map((file) =>
+            file.replace(/^\.\//, ''),
+        ),
     ])
         assert.ok(files.has(file), `Missing package file: ${file}`);
     for (const file of files)
@@ -715,11 +719,37 @@ try {
                     '</svg>',
             );
             const astroConfig = join(consumer, 'astro.config.ts');
+            const components = join(consumer, 'src/components');
+            mkdirSync(components, { recursive: true });
+            writeFileSync(
+                join(components, 'Header.astro'),
+                `---
+import { DefaultHeader } from 'sproutsite/components';
+import type { HeaderProps } from 'sproutsite';
+type Props = HeaderProps;
+const { site, route } = Astro.props;
+---
+<DefaultHeader {...Astro.props} />
+<span hidden data-custom-header-route={route} data-custom-header-locale={site.i18n.locale}></span>
+`,
+            );
+            writeFileSync(
+                join(components, 'Custom footer.astro'),
+                `---
+import { DefaultFooter } from 'sproutsite/components';
+import type { FooterProps } from 'sproutsite';
+type Props = FooterProps;
+const { site, route } = Astro.props;
+---
+<DefaultFooter {...Astro.props} />
+<span hidden data-custom-footer-route={route} data-custom-footer-locale={site.i18n.locale}></span>
+`,
+            );
             writeFileSync(
                 astroConfig,
                 readFileSync(astroConfig, 'utf8').replace(
                     'createSproutsiteConfig()',
-                    'createSproutsiteConfig({ styles: ["./src/styles/custom.css", "./src/styles/last overrides.css"] })',
+                    'createSproutsiteConfig({ styles: ["./src/styles/custom.css", "./src/styles/last overrides.css"], components: { Header: "./src/components/Header.astro" } })',
                 ),
             );
             // The same archive must support a website's own public branding.
@@ -761,6 +791,18 @@ try {
         assert.ok(home.includes('ss-package-global'));
         assert.ok(german.includes('ss-package-global-de'));
         if (base === '/demo/') {
+            assert.ok(home.includes('data-custom-header-route="/"'));
+            assert.ok(german.includes('data-custom-header-locale="de"'));
+            assert.equal(
+                home.includes('data-custom-footer-route'),
+                false,
+                'Replacing only Header must retain the default Footer.',
+            );
+            const about = readFileSync(
+                join(consumer, 'dist/de/ueber/index.html'),
+                'utf8',
+            );
+            assert.ok(about.includes('data-custom-header-route="/ueber/"'));
             assert.match(home, /--color-primary:\s*#234e52/);
             assert.match(german, /--color-primary:\s*#3d5b32/);
             assert.match(german, /--color-primary-content:\s*#ffffff/);
@@ -802,6 +844,14 @@ try {
         }
     }
     // Test the exact public copy and configuration handed to the initializer.
+    const componentConfig = join(consumer, 'astro.config.ts');
+    writeFileSync(
+        componentConfig,
+        readFileSync(componentConfig, 'utf8').replace(
+            'components: { Header: "./src/components/Header.astro" }',
+            'components: { Header: "./src/components/Header.astro", Footer: "./src/components/Custom footer.astro" }',
+        ),
+    );
     cpSync(starterPublic, join(consumer, 'public'), { recursive: true });
     const configuration = join(consumer, 'src/content/site.yaml');
     const configurationText = readFileSync(configuration, 'utf8');
@@ -829,6 +879,12 @@ try {
     }
     npm(['run', 'build'], consumer, false, '/demo/');
     verifyBuild('/demo/');
+    assert.ok(
+        readFileSync(
+            join(consumer, 'dist/de/ueber/index.html'),
+            'utf8',
+        ).includes('data-custom-footer-route="/ueber/"'),
+    );
     const starterHtml = readFileSync(join(consumer, 'dist/index.html'), 'utf8');
     assert.ok(starterHtml.includes('src="/demo/branding/logo.svg"'));
     assert.ok(
@@ -937,6 +993,38 @@ try {
             ) as { lang: string }
         ).lang,
         'de',
+    );
+    // A completely new footer replaces the default markup; Header falls back.
+    writeFileSync(
+        componentConfig,
+        readFileSync(componentConfig, 'utf8').replace(
+            'components: { Header: "./src/components/Header.astro", Footer: "./src/components/Custom footer.astro" }',
+            'components: { Footer: "./src/components/Custom footer.astro" }',
+        ),
+    );
+    writeFileSync(
+        join(consumer, 'src/components/Custom footer.astro'),
+        `---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import type { FooterProps } from 'sproutsite';
+type Props = FooterProps;
+const { site, route } = Astro.props;
+---
+<footer data-custom-footer-route={route} data-custom-footer-locale={site.i18n.locale}>
+    <a href={getRelativeLocaleUrl(site.i18n.locale, '')}>{site.name}</a>
+</footer>
+`,
+    );
+    npm(['run', 'check'], consumer);
+    npm(['run', 'build'], consumer, false, '/demo/');
+    const replacedFooter = readFileSync(join(output, 'index.html'), 'utf8');
+    assert.ok(replacedFooter.includes('data-custom-footer-locale="de"'));
+    assert.equal(replacedFooter.includes('data-custom-header-route'), false);
+    assert.equal(replacedFooter.includes('class="ss-footer"'), false);
+    assert.ok(replacedFooter.includes('class="ss-header"'));
+    assert.ok(replacedFooter.includes('href="/demo/"'));
+    console.log(
+        'PASS component overrides: defaults, Header-only, both slots, Footer-only, localized props and default delegation without recursion.',
     );
     console.log(
         'PASS grouped configuration: inherited locale settings and German default under /demo/.',

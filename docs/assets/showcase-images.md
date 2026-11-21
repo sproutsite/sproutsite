@@ -137,3 +137,12 @@ Output: `src/content/pages/showcase/_assets/layout-portrait.png`
 ```text
 Use case: stylized-concept. Asset: one original editorial thumbnail in a coordinated Sproutsite showcase series. Match this exact established visual family: high-end soft 3D clay/product rendering of rounded white UI panels, gently beveled edges, smooth matte ceramic-like surfaces, restrained depth, soft studio lighting from the upper left and delicate contact shadows. All objects sit on one simple low white sculptural plinth. Background is a pale cool-gray studio sweep with one large softly flowing dark-blue-to-teal wave behind the object group, like a calm natural landscape contour. Palette must be restrained: navy #0B1F3A and #071A36, muted deep blue #134B70, petrol/teal #0F766E, subtle muted cyan #70C6DF, pale surfaces #F5F7FA and #FFFFFF. Tiny leaf-green accent allowed sparingly, never a dominant surface. This palette and material treatment must match the supplied project's getting-started illustrations. No orange, coral, bright cobalt, neon, hard glow, shiny chrome, glassmorphism, confetti, floating random spheres, people, robots, branding or watermarks. No readable text or numbers, except explicitly permitted isolated typography glyphs. Subject: PORTRAIT CONTENT-CARD DEMONSTRATION: a tall upright rounded white content card standing on a compact rounded pedestal, with an abstract teal hill landscape at the top, a navy heading-placeholder bar, three gray body-text bars and a small teal button. Behind it, a second tall navy card is slightly offset to show modular layering. Build a genuinely vertical portrait composition suitable for image-format demonstrations, not a landscape image with side padding. Composition: Portrait 2:3 aspect ratio with a clearly upright composition. Fill the entire canvas, no frame, headings or title. The result must look calm, tactile, coherent and professionally art-directed, not like a flat screenshot.
 ```
+
+## Reuse in the website header/footer guide
+
+The overview card for the header/footer guide uses an unchanged local copy of
+`src/content/pages/showcase/_assets/navigation.png` at
+`src/content/pages/documentation/getting-started/your-website/_assets/header-and-footer.png`.
+The local copy follows the content contract's same-page image import convention.
+No new image was generated or edited; the source illustration's provenance and
+terms remain unchanged.

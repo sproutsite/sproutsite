@@ -1,0 +1,9 @@
+---
+import { DefaultHeader } from 'sproutsite/components';
+import type { HeaderProps } from 'sproutsite';
+
+type Props = HeaderProps;
+// This website owns this entry. Delegate initially to retain the supplied menu.
+---
+
+<DefaultHeader {...Astro.props} />

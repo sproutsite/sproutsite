@@ -1,0 +1,3 @@
+title: Eigener Header und Footer
+description: Header oder Footer durch lokale Astro-Komponenten ersetzen und dabei die Inhalte und das gemeinsame Seitenlayout von Sproutsite behalten.
+url: header-und-footer

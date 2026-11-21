@@ -75,6 +75,10 @@ The [website colours guide](/documentation/getting-started/your-website/colors/)
 
 Keep small design changes in your website project, for example in `src/styles/custom.css`. Register them through `createSproutsiteConfig({ styles: ['./src/styles/custom.css'] })` in `astro.config.ts`. They are processed after the complete default theme in list order. This technical integration belongs outside `site.yaml`. The [small design changes guide](/documentation/getting-started/your-website/theme-overrides/) explains cascade layers, previewing and package updates.
 
+### Your own header and footer
+
+Set `components: { Header: './src/components/Header.astro', Footer: './src/components/Footer.astro' }` in `createSproutsiteConfig()` inside `astro.config.ts` to select local replacement components. Unspecified areas keep their defaults. Both receive `site` and `route`; `HeaderProps` and `FooterProps` are exported from `sproutsite`. The [header and footer guide](/documentation/getting-started/your-website/header-and-footer/) covers examples and reusing `DefaultHeader` and `DefaultFooter`. This integration belongs outside `site.yaml`.
+
 ### Global hero classes
 
 Use `hero.classes` to set theme classes for all heroes and compact H1 fallbacks on pages without `hero.md`. Class names start with `ss-`; they remain theme details rather than a content-layout API.

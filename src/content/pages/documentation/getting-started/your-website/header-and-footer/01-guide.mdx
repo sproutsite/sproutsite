@@ -1,0 +1,124 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Your website</Eyebrow>
+
+## Replace only the area you need
+
+Use [your own CSS](/documentation/getting-started/your-website/theme-overrides/) for changes to colours, spacing or corner radii. If the navigation or footer needs different HTML or behavior, your website team or coding agent can create a local Astro component and register it through `components` in `astro.config.ts`.
+
+The supported entries are `Header` and `Footer`. Each is independent: replacing the header keeps the supplied footer unless you replace that too. With no `components` option, or `components: {}`, the website retains both defaults.
+
+### Start with the current behavior
+
+Create `src/components/Header.astro` in your website folder:
+
+```astro
+---
+import { DefaultHeader } from 'sproutsite/components';
+import type { HeaderProps } from 'sproutsite';
+
+type Props = HeaderProps;
+---
+
+<DefaultHeader {...Astro.props} />
+```
+
+For a footer entry, create `src/components/Footer.astro`:
+
+```astro
+---
+import { DefaultFooter } from 'sproutsite/components';
+import type { FooterProps } from 'sproutsite';
+
+type Props = FooterProps;
+---
+
+<DefaultFooter {...Astro.props} />
+```
+
+These files initially delegate to the supplied components. They preserve the existing navigation, mobile menu, language selection and configured footer areas. `DefaultHeader` and `DefaultFooter` always refer directly to the supplied components, so they can be used inside a replacement without calling that replacement again.
+
+### Register your components
+
+Keep the existing options in `astro.config.ts` and add the paths you need:
+
+```ts
+import { defineConfig } from 'astro/config';
+import { createSproutsiteConfig } from 'sproutsite/config';
+
+export default defineConfig(
+    createSproutsiteConfig({
+        styles: ['./src/styles/custom.css'],
+        components: {
+            Header: './src/components/Header.astro',
+            Footer: './src/components/Footer.astro',
+        },
+    }),
+);
+```
+
+Remove a single entry to restore that default. Paths are relative to your website project root. They must point to existing local `.astro` files. Unknown entry names, remote URLs, absolute paths, other file types and missing files fail configuration instead of silently falling back. Invalid Astro code is reported by Astro's normal compiler.
+
+This technical integration belongs in `astro.config.ts`, not `site.yaml`. The same components serve all languages and deployment subpaths. Use the active settings to choose localized copy.
+
+### The data your component receives
+
+| Prop    | Meaning                                                                                                                                 |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `site`  | The resolved `SiteConfig` for the current language, including inherited settings, navigation, branding and deployment base              |
+| `route` | The website-root-relative content route with translated segments, without the language prefix or deployment base; for example `/ueber/` |
+
+`HeaderProps` and `FooterProps` are exported types. Use one as your component's `Props`; no additional required props or named slots are supplied. These types help you check your own component, but Sproutsite does not inspect its source to prove that it implements the contract.
+
+The shared layout still provides HTML metadata, fonts, colour variables, skip link, `main` and page content. Do not add a second `html`, `body`, `main` or page H1 to a header/footer replacement. All shared pages use these slots, including the blog and error pages. Error routes may be flat document paths such as `/404.html`. A page with `layout: landing` continues to omit the header, including a custom header; its footer still uses the selected component.
+
+### Write your own markup when needed
+
+Once you replace the delegation, your component owns that area's markup. For example, this is a minimal alternative `Footer.astro`:
+
+```astro
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import type { FooterProps } from 'sproutsite';
+
+type Props = FooterProps;
+const { site } = Astro.props;
+const homeHref = getRelativeLocaleUrl(site.i18n.locale, '');
+const homeLabel = site.i18n.locale === 'de' ? 'Zur Startseite' : 'Back to home';
+---
+
+<footer class="site-footer">
+    <div class="site-shell">
+        <p>{site.name}</p>
+        <a href={homeHref}>{homeLabel}</a>
+    </div>
+</footer>
+```
+
+Use Astro's locale URL helper so the home link keeps the active language and deployment base. Add presentation in `src/styles/custom.css`, for example:
+
+```css
+.site-footer {
+    padding-block: 2rem;
+    color: var(--color-base-content);
+    background: var(--color-base-200);
+}
+```
+
+This minimal example does not reproduce the default footer's links, social icons, version or language selector. Add the features your website needs or retain `DefaultFooter`. Your website team owns responsive behavior, link handling, active navigation, labels, contrast and keyboard operation when writing completely new markup. Native Astro components, scoped styles, local imports and processed scripts remain available in these developer-owned files. This does not change the restrictions on editorial MDX imports.
+
+### Preview, test and update
+
+Restart `npm run dev` after changing the configured paths. Edits inside the selected Astro files use the normal development updates. Test both narrow and wide viewports, language variants, a nested page, the scrolled navigation and error pages. Run `npm run check` and `npm run build`, then inspect `npm run preview`; test your deployment subpath if one is configured.
+
+Commit the local components, any CSS and the Astro configuration together. Package updates do not replace these files. Review the changelog when updating and keep your component's props and behavior compatible. Do not import the internal `#sproutsite/` aliases or edit files in `node_modules`.
+
+Other component replacements, [your own content blocks](/documentation/getting-started/your-website/custom-components/) and a complete [custom theme](/documentation/getting-started/your-website/custom-theme/) are separate capabilities. This API exposes only the two documented page areas.
+
+[Back to the quick start and more topics](/documentation/getting-started/your-website/)

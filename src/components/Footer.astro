@@ -1,0 +1,9 @@
+---
+import { DefaultFooter } from 'sproutsite/components';
+import type { FooterProps } from 'sproutsite';
+
+type Props = FooterProps;
+// Replace this delegation when the website needs its own footer markup.
+---
+
+<DefaultFooter {...Astro.props} />

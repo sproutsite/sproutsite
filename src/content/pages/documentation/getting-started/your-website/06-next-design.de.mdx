@@ -11,6 +11,7 @@ import image2 from './_assets/colors.png';
 import image3 from './_assets/branding.png';
 import image4 from './_assets/theme-overrides.png';
 import image5 from './_assets/custom-theme.png';
+import image6 from './_assets/header-and-footer.png';
 import { Card, CardActions } from 'sproutsite/components';
 import { Column, Columns } from 'sproutsite/components';
 import { Eyebrow } from 'sproutsite/components';
@@ -109,6 +110,19 @@ Beginne mit den bereits vorhandenen Einstellungen. Karten mit „Teilweise mögl
 
             <CardActions>
                 [Design anpassen](/dokumentation/einstieg/deine-website/theme-anpassen/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={4}>
+        <Card image={image6} imageAlt="Website-Navigation mit Logo und Menübereichen">
+
+            ### Eigener Header und Footer
+
+            Ersetze Navigation oder Footer durch lokale Astro-Komponenten.
+
+            <CardActions>
+                [Seitenbereiche anpassen](/dokumentation/einstieg/deine-website/header-und-footer/)
             </CardActions>
         </Card>
     </Column>

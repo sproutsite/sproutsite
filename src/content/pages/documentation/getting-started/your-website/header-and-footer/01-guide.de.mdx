@@ -1,0 +1,124 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Deine Website</Eyebrow>
+
+## Nur den benötigten Bereich ersetzen
+
+Für andere Farben, Abstände oder Rundungen genügt [eigenes CSS](/dokumentation/einstieg/deine-website/theme-anpassen/). Wenn die Navigation oder der Footer anderes HTML oder Verhalten benötigt, kann dein Website-Team oder Coding-Agent eine lokale Astro-Komponente erstellen und über `components` in `astro.config.ts` einbinden.
+
+Unterstützt werden `Header` und `Footer`. Beide sind unabhängig: Ein eigener Header lässt den mitgelieferten Footer bestehen, solange du diesen nicht ebenfalls ersetzt. Ohne `components` oder mit `components: {}` bleiben beide Standardkomponenten aktiv.
+
+### Mit dem bisherigen Verhalten beginnen
+
+Erstelle `src/components/Header.astro` im Ordner deiner Website:
+
+```astro
+---
+import { DefaultHeader } from 'sproutsite/components';
+import type { HeaderProps } from 'sproutsite';
+
+type Props = HeaderProps;
+---
+
+<DefaultHeader {...Astro.props} />
+```
+
+Für einen eigenen Footer legst du `src/components/Footer.astro` an:
+
+```astro
+---
+import { DefaultFooter } from 'sproutsite/components';
+import type { FooterProps } from 'sproutsite';
+
+type Props = FooterProps;
+---
+
+<DefaultFooter {...Astro.props} />
+```
+
+Die Dateien reichen zunächst an die mitgelieferten Komponenten weiter. Dadurch bleiben Navigation, mobiles Menü, Sprachwahl und konfigurierte Footer-Bereiche erhalten. `DefaultHeader` und `DefaultFooter` verweisen immer direkt auf die mitgelieferten Komponenten. Du kannst sie innerhalb eines Ersatzes nutzen, ohne diesen erneut aufzurufen.
+
+### Eigene Komponenten einbinden
+
+Behalte die vorhandenen Optionen in `astro.config.ts` bei und ergänze die benötigten Pfade:
+
+```ts
+import { defineConfig } from 'astro/config';
+import { createSproutsiteConfig } from 'sproutsite/config';
+
+export default defineConfig(
+    createSproutsiteConfig({
+        styles: ['./src/styles/custom.css'],
+        components: {
+            Header: './src/components/Header.astro',
+            Footer: './src/components/Footer.astro',
+        },
+    }),
+);
+```
+
+Entferne einen einzelnen Eintrag, um wieder dessen Standardkomponente zu verwenden. Die Pfade beziehen sich auf den Hauptordner deiner Website und müssen auf vorhandene lokale `.astro`-Dateien zeigen. Unbekannte Namen, externe URLs, absolute Pfade, andere Dateitypen und fehlende Dateien führen zu einem Konfigurationsfehler statt zu einem stillen Fallback. Ungültigen Astro-Code meldet der normale Astro-Compiler.
+
+Diese technische Einbindung gehört in `astro.config.ts`, nicht in `site.yaml`. Dieselben Komponenten werden für alle Sprachen und Basispfade verwendet. Nutze die aktuellen Einstellungen für sprachabhängige Texte.
+
+### Diese Daten erhält deine Komponente
+
+| Prop    | Bedeutung                                                                                                                             |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `site`  | Die aufgelöste `SiteConfig` der aktuellen Sprache einschließlich geerbter Einstellungen, Navigation, Branding und Basispfad           |
+| `route` | Die Inhaltsroute mit übersetzten Segmenten, relativ zur Website-Wurzel und ohne Sprachpräfix oder Basispfad, beispielsweise `/ueber/` |
+
+`HeaderProps` und `FooterProps` sind exportierte Typen. Verwende einen davon als `Props` deiner Komponente. Weitere verpflichtende Props oder benannte Slots werden nicht übergeben. Die Typen helfen beim Prüfen deiner eigenen Komponente; Sproutsite untersucht ihren Quelltext aber nicht darauf, ob sie diesen Vertrag einhält.
+
+Das gemeinsame Layout stellt weiterhin HTML-Metadaten, Schriften, Farbvariablen, Sprunglink, `main` und Seiteninhalt bereit. Ergänze im Header oder Footer kein zweites `html`, `body`, `main` oder eine weitere Seiten-H1. Alle gemeinsamen Seiten nutzen diese Bereiche, einschließlich Blog und Fehlerseiten. Bei Fehlerseiten kann `route` einen flachen Dokumentpfad wie `/404.html` enthalten. Eine Seite mit `layout: landing` lässt weiterhin den Header weg, auch einen eigenen. Ihr Footer verwendet die ausgewählte Komponente.
+
+### Bei Bedarf eigenes HTML schreiben
+
+Ersetzt du die Weiterleitung, gehört das HTML dieses Bereichs deiner Komponente. Ein minimales Beispiel für eine alternative `Footer.astro`:
+
+```astro
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import type { FooterProps } from 'sproutsite';
+
+type Props = FooterProps;
+const { site } = Astro.props;
+const homeHref = getRelativeLocaleUrl(site.i18n.locale, '');
+const homeLabel = site.i18n.locale === 'de' ? 'Zur Startseite' : 'Back to home';
+---
+
+<footer class="site-footer">
+    <div class="site-shell">
+        <p>{site.name}</p>
+        <a href={homeHref}>{homeLabel}</a>
+    </div>
+</footer>
+```
+
+Astros Sprach-URL-Helfer berücksichtigt die aktuelle Sprache und den Basispfad. Die Gestaltung ergänzt du zum Beispiel in `src/styles/custom.css`:
+
+```css
+.site-footer {
+    padding-block: 2rem;
+    color: var(--color-base-content);
+    background: var(--color-base-200);
+}
+```
+
+Dieses minimale Beispiel bildet die Links, Social Icons, Versionsanzeige und Sprachwahl des Default-Footers nicht nach. Ergänze die benötigten Funktionen oder behalte `DefaultFooter`. Bei vollständig eigenem HTML ist dein Website-Team für mobile Darstellung, Linkverhalten, aktive Navigation, Beschriftungen, Kontrast und Tastaturbedienung verantwortlich. Normale Astro-Komponenten, lokale Styles und Importe sowie verarbeitete Skripte bleiben in diesen Entwicklerdateien nutzbar. Die Regeln für redaktionelle MDX-Importe ändern sich dadurch nicht.
+
+### Vorschau, Prüfungen und Updates
+
+Starte `npm run dev` nach einer Änderung der konfigurierten Pfade neu. Änderungen innerhalb der ausgewählten Astro-Dateien nutzen die normale Entwicklungsvorschau. Prüfe schmale und breite Ansichten, Sprachen, eine Unterseite, die angedockte Navigation und Fehlerseiten. Führe `npm run check` und `npm run build` aus und betrachte `npm run preview`. Prüfe bei Bedarf auch das Deployment unter einem Basispfad.
+
+Checke lokale Komponenten, CSS und Astro-Konfiguration gemeinsam ein. Paketupdates ersetzen diese Dateien nicht. Lies bei Updates das Changelog und halte Props und Verhalten deiner Komponente kompatibel. Importiere weder die internen `#sproutsite/`-Aliase noch bearbeite Dateien in `node_modules`.
+
+Andere Komponenten zu ersetzen, [eigene Inhaltsbausteine](/dokumentation/einstieg/deine-website/eigene-bausteine/) einzubinden oder ein vollständiges [eigenes Theme](/dokumentation/einstieg/deine-website/eigenes-theme/) zu erstellen sind separate Themen. Diese API unterstützt nur die beiden dokumentierten Seitenbereiche.
+
+[Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)
