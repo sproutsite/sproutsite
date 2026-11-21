@@ -23,7 +23,9 @@ const {
     layout = 'default',
     noindex = false,
 } = Astro.props;
-const documentTitle = `${title} | ${site.name}`;
+const documentTitle = title.toLowerCase().includes(site.name.toLowerCase())
+    ? title
+    : `${title} | ${site.name}`;
 const canonical = noindex
     ? new URL(withBase(route, site.base), site.url).href
     : canonicalUrl(route, site);
