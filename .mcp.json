@@ -1,0 +1,8 @@
+{
+    "mcpServers": {
+        "sproutsite": {
+            "type": "http",
+            "url": "https://mcp.sproutsite.dev/mcp"
+        }
+    }
+}

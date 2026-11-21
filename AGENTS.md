@@ -333,11 +333,13 @@ These requirements apply to implementation and content tasks, not only at the en
 
 During framework development, core, theme, and Astro configuration may be changed within the agreed scope.
 For content-only tasks, edit only content, approved website settings, and assets. Do not expand the content model or styles without being asked in order to force content to fit.
+Before creating, changing, moving, or removing website content, consult the Sproutsite documentation and showcase through the read-only MCP server at `https://mcp.sproutsite.dev/mcp`. Keep project content and edits local. If the server is unavailable, use the local documentation and report the fallback.
 These rules are behavior instructions, not a technical sandbox. Do not claim that an agent with full file access cannot change the layout.
 
-## Repository-Local Codex Skills and Versions
+## Repository-Local Skills and Versions
 
-- Repository-specific workflows are located in `.codex/skills/`. Use them when the user explicitly invokes their name or shortcut.
+- Use `sproutsite-edit-page` for matching editorial requests, including page creation, edits, moves, and removals. The skill lives in `.agents/skills/` for Codex and is linked from `.claude/skills/` for Claude Code. The project MCP connection is configured in `.codex/config.toml` for Codex and `.mcp.json` for Claude Code.
+- Commit-message and release workflows are located in `.codex/skills/`. Use them when the user explicitly invokes their name or shortcut.
 - Release workflows prepare a release; run `npm publish`, create a GitHub release, tag, or push only with an explicit request.
 - The publishable version must match in `package.json`, `VERSION`, and `CHANGELOG.md`. The changelog follows Keep a Changelog and SemVer.
 
