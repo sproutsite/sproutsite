@@ -7,6 +7,13 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.33] - 2026-11-22
+
+### Added
+
+- Added a validated, versioned MCP export of the English and German documentation and Showcase, with component imports, examples, and source links.
+- Added a shared page-editing skill for Codex and Claude Code that consults the Sproutsite MCP server before creating, editing, moving, or removing pages.
+
 ## [0.5.32] - 2026-11-21
 
 ### Changed

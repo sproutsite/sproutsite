@@ -1,12 +1,12 @@
 interface:
-    display_name: "Edit Sproutsite Pages"
-    short_description: "Create, edit, move, and remove Sproutsite pages"
-    default_prompt: "Use $sproutsite-edit-page to add a page using existing Sproutsite components."
+    display_name: 'Edit Sproutsite Pages'
+    short_description: 'Create, edit, move, and remove Sproutsite pages'
+    default_prompt: 'Use $sproutsite-edit-page to add a page using existing Sproutsite components.'
 
 dependencies:
     tools:
-        - type: "mcp"
-          value: "sproutsite"
-          description: "Sproutsite documentation and component showcase"
-          transport: "streamable_http"
-          url: "https://mcp.sproutsite.dev/mcp"
+        - type: 'mcp'
+          value: 'sproutsite'
+          description: 'Sproutsite documentation and component showcase'
+          transport: 'streamable_http'
+          url: 'https://mcp.sproutsite.dev/mcp'
