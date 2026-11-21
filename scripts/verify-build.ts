@@ -81,6 +81,10 @@ const sitemapFiles = readdirSync('dist').filter((name) =>
 );
 if (sitemapFiles.length !== 1 || sitemapFiles[0] !== 'sitemap.xml')
     throw new Error('Expected exactly one sitemap file: dist/sitemap.xml');
+const robots = readFileSync(join('dist', 'robots.txt'), 'utf8');
+const sitemapUrl = new URL(withBase('/sitemap.xml', site.base), site.url).href;
+if (!robots.split(/\r?\n/).includes(`Sitemap: ${sitemapUrl}`))
+    throw new Error('robots.txt must reference the absolute sitemap URL');
 const home = readFileSync(join('dist', 'index.html'), 'utf8');
 // Metadata must point at emitted files, including after a subpath deployment.
 function emittedFile(url: string): string {

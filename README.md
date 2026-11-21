@@ -578,6 +578,8 @@ The configured Astro build generates `dist/sitemap.xml` using the official Astro
 
 When the generated URL list fits in one file, only `sitemap.xml` is emitted: the build renames Astro's `sitemap-0.xml` and removes the redundant index. If Astro splits a very large site into multiple chunks, `sitemap.xml` becomes the index and the required numbered files remain. The document head links to `/sitemap.xml`, respecting the configured deployment base. No custom XML serializer is used.
 
+The demo's native Astro endpoint `src/pages/robots.txt.ts` generates `dist/robots.txt` with an absolute `Sitemap:` URL derived from Astro's `site` and `BASE_URL`. It allows crawling and requires no server runtime. Website projects can add the same endpoint as documented in the [SEO guide](https://sproutsite.dev/documentation/getting-started/your-website/seo/); the library does not override a website's crawl policy. Crawlers read robots.txt at the domain root. For a subpath deployment, add the sitemap URL to the host's root robots.txt; a file served only below that subpath is not sufficient.
+
 ## Error Pages
 
 The default theme registers standard Astro custom 404 and 500 routes. In `npm run dev`, open `/404` or `/500` to preview the corresponding error page without triggering a server failure. Unknown URLs render the custom 404 page with HTTP status 404. Both pages reuse the small Hero, header, and footer. Agent references in their playful copy are fictional; Sproutsite contains no integrated agent.

@@ -25,6 +25,32 @@ Set the real production `url` and `base` in your site configuration before build
 
 An optional page `url` changes its own single URL segment. Changing a published address can break existing links, so arrange redirects at your host. A sitemap helps describe your pages; it does not guarantee indexing or ranking.
 
+### Reference the sitemap in robots.txt
+
+Help crawlers find the sitemap by listing its full production URL in robots.txt at the domain root. The Sproutsite demo generates this file through a native Astro endpoint. You can add the same entry to your website project as src/pages/robots.txt.ts:
+
+```ts
+import type { APIRoute } from 'astro';
+
+export const prerender = true;
+
+export const GET: APIRoute = ({ site }) => {
+    if (!site) throw new Error('robots.txt requires the production site URL.');
+    const sitemap = new URL(
+        `${import.meta.env.BASE_URL.replace(/\/$/, '')}/sitemap.xml`,
+        site,
+    );
+    return new Response(
+        `User-agent: *\nAllow: /\n\nSitemap: ${sitemap.href}\n`,
+        { headers: { 'Content-Type': 'text/plain; charset=utf-8' } },
+    );
+};
+```
+
+The URL comes from the Astro configuration that Sproutsite derives from your website settings. The build writes robots.txt as a static file to dist. If your website uses a subpath such as /studio/, also list the sitemap in the domain-root robots.txt. A file served only at /studio/robots.txt is not sufficient.
+
+If you already have a robots.txt or matching endpoint, add the Sitemap entry there and preserve its existing rules. The example allows crawling; it does not protect private content or staging websites.
+
 ### Check what is actually public
 
 Inspect the built page source for the title, description, canonical URL and language links. Confirm that staging protection is removed only when the website should become public. `robots.txt` is not access control.

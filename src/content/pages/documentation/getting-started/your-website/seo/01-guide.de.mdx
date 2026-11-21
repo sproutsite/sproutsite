@@ -25,6 +25,32 @@ Setze vor dem Build die echte Produktionsadresse `url` und den passenden `base` 
 
 Ein optionales `url` einer Seite ändert genau deren eigenes URL-Segment. Eine nachträgliche Änderung kann bestehende Links unterbrechen; richte dafür Weiterleitungen beim Hoster ein. Eine Sitemap beschreibt deine Seiten, garantiert aber keine Indexierung oder Platzierung.
 
+### Die Sitemap in robots.txt angeben
+
+Damit Crawler die Sitemap finden, verweise in der robots.txt am Domain-Stamm auf ihre vollständige Produktionsadresse. Die Sproutsite-Demo erzeugt diese Datei mit einem normalen Astro-Endpunkt. Du kannst denselben Einstieg in deinem Website-Projekt als src/pages/robots.txt.ts anlegen:
+
+```ts
+import type { APIRoute } from 'astro';
+
+export const prerender = true;
+
+export const GET: APIRoute = ({ site }) => {
+    if (!site) throw new Error('robots.txt requires the production site URL.');
+    const sitemap = new URL(
+        `${import.meta.env.BASE_URL.replace(/\/$/, '')}/sitemap.xml`,
+        site,
+    );
+    return new Response(
+        `User-agent: *\nAllow: /\n\nSitemap: ${sitemap.href}\n`,
+        { headers: { 'Content-Type': 'text/plain; charset=utf-8' } },
+    );
+};
+```
+
+Die Adresse stammt aus der Astro-Konfiguration, die Sproutsite aus den Website-Einstellungen ableitet. Der Build schreibt robots.txt als statische Datei nach dist. Wenn deine Website unter einem Unterpfad wie /studio/ liegt, muss die Sitemap zusätzlich in der robots.txt am Domain-Stamm stehen. Eine nur unter /studio/robots.txt erreichbare Datei genügt dafür nicht.
+
+Wenn bereits eine robots.txt oder ein entsprechender Endpunkt existiert, ergänze dort den Sitemap-Eintrag und erhalte die vorhandenen Regeln. Die gezeigte Vorgabe erlaubt Crawling; sie sperrt weder private Inhalte noch Vorschauseiten.
+
 ### Die tatsächliche Veröffentlichung prüfen
 
 Kontrolliere im Quelltext der gebauten Seite Titel, Beschreibung, kanonische Adresse und Sprachlinks. Entferne einen Vorschau-Zugriffsschutz erst, wenn die Website öffentlich werden soll. `robots.txt` ist kein Zugriffsschutz.
