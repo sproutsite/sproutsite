@@ -7,6 +7,13 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.32] - 2026-11-21
+
+### Changed
+
+- Established American English (en-US) as the default for English content in the agent guidelines, preserving explicit language preferences, proper names, technical identifiers, code and German content.
+- Standardized American spelling across English website copy, documentation, metadata, Storybook labels and user-facing messages without substantive rewriting; preserved code blocks, original generation prompts and URLs.
+
 ## [0.5.31] - 2026-11-21
 
 ### Added

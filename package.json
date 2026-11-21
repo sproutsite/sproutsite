@@ -1,6 +1,6 @@
 {
     "name": "sproutsite",
-    "version": "0.5.31",
+    "version": "0.5.32",
     "license": "Apache-2.0",
     "author": "Björn Hempel",
     "description": "Agent-first Static CMS powered by Astro and TypeScript, with Markdown-first content.",
