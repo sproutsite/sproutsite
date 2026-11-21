@@ -7,6 +7,12 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.30] - 2026-11-21
+
+### Added
+
+- Added small heroes with contextual eyebrows and introductions to all documentation pages in English and German, distinguishing supported workflows from planned capabilities.
+
 ## [0.5.29] - 2026-11-21
 
 ### Added
