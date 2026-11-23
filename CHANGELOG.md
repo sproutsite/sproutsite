@@ -7,6 +7,17 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.34] - 2026-11-23
+
+### Added
+
+- Added local previews and builds for the English, German, and bilingual starter templates using the Sproutsite checkout.
+- Documented how to update, verify, and roll back the live MCP documentation snapshot.
+
+### Changed
+
+- Updated the English and German website guides and README for the bilingual option in the published `create-sproutsite` generator.
+
 ## [0.5.33] - 2026-11-22
 
 ### Added
