@@ -5,22 +5,30 @@ tone:
 ---
 
 import { Eyebrow } from 'sproutsite/components';
-import { Alert } from 'sproutsite/components';
 
 <Eyebrow>Your website</Eyebrow>
 
 ## Set up translated pages deliberately
 
-<Alert variant="info" style="soft">
-    Partly available. The steps below distinguish existing features from
-    extensions that remain open.
-</Alert>
+### Create a bilingual website
+
+Starting with `create-sproutsite` 0.2.0, you can generate a website with German at `/` and English at `/en/`:
+
+```sh
+npm create sproutsite@latest my-website -- --language de --bilingual
+cd my-website
+npm run dev
+```
+
+Accept the dependency installation when prompted. Open the address printed in the terminal. Use the language switcher on the homepage, then try it on the About page. It links `/ueber-uns/` to `/en/about/` and back.
+
+Edit both versions in the same directory under `src/content/pages/`. For the About page, edit `about/01-introduction.md` in English and `about/01-introduction.de.md` in German. The corresponding `page.yaml` and `page.de.yaml` hold their titles and descriptions. For navigation and footer copy, edit `src/content/site.yaml` for German and `src/content/site.en.yaml` for English.
 
 A single-language English starter serves English at `/`; the German starter serves German at `/`. A translated website adds files for the same page identity, rather than creating unrelated copies of each page.
 
-### The documented bilingual setup
+### Add German to an existing English website
 
-The demo uses English at `/` and German below `/de/`. In `site.yaml`, set `i18n: { locale: en, defaultLocale: en, locales: [en, de] }`. `site.de.yaml` needs only `i18n.locale: de` and German overrides such as navigation and footer copy. Objects inherit individual fields; arrays replace entire base lists.
+The demo uses English at `/` and German below `/de/`. In `site.yaml`, set `i18n: { locale: en, defaultLocale: en, locales: [en, de] }`. `site.de.yaml` needs only `i18n.locale: de` and German overrides such as navigation and footer copy. Objects inherit individual fields; arrays replace entire base lists. Add `src/pages/de/[...slug].astro` using `sproutsite/page` and `getSproutsiteStaticPaths('de')`.
 
 Add German files beside their English counterparts: `page.de.yaml`, `hero.de.md` and sections such as `01-introduction.de.md`. Match section numbers and base filenames. A German `url` value may translate the page's own URL segment, for example `about` to `ueber-uns`; it does not change the shared source directory.
 
@@ -38,7 +46,7 @@ The switcher lists configured languages, links to the matching translated page a
 
 Set `i18n: { locale: de, defaultLocale: de, locales: [de, en] }` in the base. Put English labels in `site.en.yaml` with `i18n.locale: en`. Source conventions stay unchanged: unsuffixed files are English; `.de` files are German.
 
-The standard Astro route files must match: `src/pages/[...slug].astro` calls `getSproutsiteStaticPaths()` for the default locale; `src/pages/en/[...slug].astro` calls `getSproutsiteStaticPaths('en')`. Both use `sproutsite/page`. Replace the previous route under `src/pages/de/` when German moves to `/`. Configuration alone does not move Astro route files. Published websites also need redirects. Check language selection, canonicals and sitemap before deployment.
+The standard Astro route files must match: `src/pages/[...slug].astro` calls `getSproutsiteStaticPaths()` for the default locale; `src/pages/en/[...slug].astro` calls `getSproutsiteStaticPaths('en')`. Both use `sproutsite/page`. If you move existing German routes from `/de/` to `/`, remove their old route file and configure redirects for published URLs. Check language selection, canonicals, and the sitemap before deployment.
 
 Further languages still require translated theme messages and extended content-locale handling. A locale identifier in configuration does not translate content.
 

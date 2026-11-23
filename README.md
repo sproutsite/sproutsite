@@ -17,7 +17,7 @@ Official website: [sproutsite.dev](https://sproutsite.dev) · [Documentation](ht
 
 ## Installation
 
-Use Sproutsite in your own Astro project. You maintain the content files; the package provides the content model, page assembly, and default theme. The published `create-sproutsite` generator prepares a minimal English or German website. Sproutsite has no administration interface.
+Use Sproutsite in your own Astro project. You maintain the content files; the package provides the content model, page assembly, and default theme. The published `create-sproutsite` generator prepares an English, German, or bilingual website. Sproutsite has no administration interface.
 
 Requires Node.js 24 or a newer supported LTS version, and npm. Create an English website:
 
@@ -29,7 +29,15 @@ npm run dev
 
 For German content, use `--language de`. The assistant asks for a website name and whether to install dependencies. If you skip installation, run `npm install` before `npm run dev`. The starter includes Astro configuration, content collections, a shared page route, a small homepage and editorial guidance in `AGENTS.md`. Edit the generated files under `src/content/`; the design stays in the installed Sproutsite package.
 
-The German starter serves German directly at `/`. It follows the existing locale convention with `site.de.yaml`, `page.de.yaml` and `.de.md`/`.de.mdx` content, plus base configuration and page metadata. Its README explains which configuration and metadata pairs to keep synchronized. It does not generate an English website.
+The single-language German starter serves German at `/`. It uses `site.de.yaml` for locale overrides and `page.de.yaml`, `.de.md`, and `.de.mdx` for German content alongside the base configuration and page metadata. The generated README explains which files to edit.
+
+For a bilingual website with German at `/` and English at `/en/`, use this generator command in the same workflow:
+
+```sh
+npm create sproutsite@latest my-website -- --language de --bilingual
+```
+
+The [bilingual starter guide](https://sproutsite.dev/documentation/getting-started/your-website/languages/) shows which files to edit in each language and how to check translated navigation.
 
 Set your production URL before deployment. The new website's README explains preview, content editing and building. The generator has its own [repository](https://github.com/sproutsite/create-sproutsite) and [npm package](https://www.npmjs.com/package/create-sproutsite); its version is independent of the library.
 
@@ -721,7 +729,7 @@ npm run build:starter -- --language de --bilingual
 
 The starter defaults to English and uses port 4322 for development. Follow the URL printed by Astro. Use `--port 4323` to run a second starter alongside it. Each command generates a fresh project under ignored `artifacts/starter/` and prints its path. The build writes to that project's `dist/`.
 
-The bilingual preview puts German at `/` and English at `/en/`. Use the header language switcher on the homepage or on the example About page, which has separate URLs at `/ueber-uns/` and `/en/about/`. The preview starts from the German starter, adds the English homepage files, and applies the configuration and files under `starters/minimal/de-en/`. The published `create-sproutsite` CLI currently offers the single-language starters.
+The bilingual preview puts German at `/` and English at `/en/`. Use the header language switcher on the homepage or on the example About page, which has separate URLs at `/ueber-uns/` and `/en/about/`. The preview starts from the German starter, adds the English homepage files, and applies the configuration and files under `starters/minimal/de-en/`. The published generator provides this setup with `--language de --bilingual`.
 
 Edit the shared and locale-specific files under `starters/minimal/`, then rerun the command to regenerate the starter. These templates were taken from `create-sproutsite@0.1.9`. The preview adds the neutral artwork from `src/package/starter-assets/` and copies the repository's agent instructions for Codex and Claude Code. The generated site's Sproutsite dependency points to this checkout for development, so theme and component updates use Astro's live reload with the repository's existing dependencies. The existing `npm run dev` serves the full demo and Showcase independently.
 

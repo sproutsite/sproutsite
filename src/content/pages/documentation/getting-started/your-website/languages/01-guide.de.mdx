@@ -5,22 +5,30 @@ tone:
 ---
 
 import { Eyebrow } from 'sproutsite/components';
-import { Alert } from 'sproutsite/components';
 
 <Eyebrow>Deine Website</Eyebrow>
 
 ## Übersetzte Seiten bewusst einrichten
 
-<Alert variant="info" style="soft">
-    Teilweise möglich. Die folgenden Schritte unterscheiden vorhandene
-    Funktionen von noch offenen Erweiterungen.
-</Alert>
+### Eine zweisprachige Website anlegen
+
+Ab `create-sproutsite` 0.2.0 kannst du eine Website mit Deutsch unter `/` und Englisch unter `/en/` erstellen:
+
+```sh
+npm create sproutsite@latest meine-website -- --language de --bilingual
+cd meine-website
+npm run dev
+```
+
+Bestätige die Installation der Abhängigkeiten, wenn der Assistent danach fragt. Öffne die Adresse aus dem Terminal. Probiere die Sprachwahl auf der Startseite und auf „Über uns“ aus. Dort führt sie von `/ueber-uns/` zu `/en/about/` und zurück.
+
+Bearbeite beide Sprachfassungen im selben Verzeichnis unter `src/content/pages/`. Für „Über uns“ stehen die deutschen Texte in `about/01-introduction.de.md` und die englischen in `about/01-introduction.md`. Titel und Beschreibungen pflegst du in den zugehörigen `page.de.yaml` und `page.yaml`. Navigation und Footertexte stehen für Deutsch in `src/content/site.yaml` und für Englisch in `src/content/site.en.yaml`.
 
 Der einsprachige englische Starter liefert Englisch unter `/`, der deutsche Starter Deutsch unter `/`. Eine Übersetzung ergänzt Dateien derselben Seitenidentität, statt unabhängige Kopien jeder Seite anzulegen.
 
-### Der dokumentierte zweisprachige Aufbau
+### Eine bestehende englische Website um Deutsch ergänzen
 
-Die Demo verwendet Englisch unter `/` und Deutsch unter `/de/`. In `site.yaml` steht `i18n: { locale: en, defaultLocale: en, locales: [en, de] }`. `site.de.yaml` braucht nur `i18n.locale: de` und die deutschen Abweichungen, etwa Navigation und Footertexte. Objekte erben einzelne Felder; Listen ersetzen die gesamte Basisliste.
+Die Demo verwendet Englisch unter `/` und Deutsch unter `/de/`. In `site.yaml` steht `i18n: { locale: en, defaultLocale: en, locales: [en, de] }`. `site.de.yaml` braucht nur `i18n.locale: de` und die deutschen Abweichungen, etwa Navigation und Footertexte. Objekte erben einzelne Felder; Listen ersetzen die gesamte Basisliste. Ergänze `src/pages/de/[...slug].astro` mit `sproutsite/page` und `getSproutsiteStaticPaths('de')`.
 
 Ergänze deutsche Dateien neben ihren englischen Gegenstücken: `page.de.yaml`, `hero.de.md` und Abschnitte wie `01-introduction.de.md`. Nummern und Grundnamen der Abschnitte stimmen überein. Ein deutsches `url` darf das URL-Segment der Seite übersetzen, etwa `about` in `ueber-uns`; das gemeinsame Quellverzeichnis bleibt bestehen.
 
@@ -38,7 +46,7 @@ Der Schalter zeigt die konfigurierten Sprachen, verlinkt auf die passende Übers
 
 Setze in der Basis `i18n: { locale: de, defaultLocale: de, locales: [de, en] }`. Englische Beschriftungen können in `site.en.yaml` mit `i18n.locale: en` stehen. Die Dateikonvention bleibt gleich: Dateien ohne Sprachsuffix sind englisch, `.de`-Dateien deutsch.
 
-Die normalen Astro-Routendateien müssen dazu passen: `src/pages/[...slug].astro` ruft `getSproutsiteStaticPaths()` für die Standardsprache auf; `src/pages/en/[...slug].astro` ruft `getSproutsiteStaticPaths('en')` auf. Beide verwenden `sproutsite/page`. Ersetze die bisherige Route unter `src/pages/de/`, wenn Deutsch nun unter `/` liegt. Die Konfiguration allein verschiebt keine Astro-Routendateien. Bei einer veröffentlichten Website müssen außerdem Weiterleitungen eingerichtet werden. Prüfe Sprachwechsel, Canonicals und Sitemap vor dem Deployment.
+Die Astro-Routendateien müssen dazu passen. `src/pages/[...slug].astro` ruft `getSproutsiteStaticPaths()` für die Standardsprache auf, `src/pages/en/[...slug].astro` ruft `getSproutsiteStaticPaths('en')` auf. Beide verwenden `sproutsite/page`. Wenn du deutsche Seiten von `/de/` nach `/` verschiebst, entferne die alte Routendatei und richte Weiterleitungen für veröffentlichte URLs ein. Prüfe Sprachwechsel, Canonicals und Sitemap vor dem Deployment.
 
 Weitere Sprachen benötigen noch übersetzte Theme-Texte und eine Erweiterung der Inhaltszuordnung. Eine Sprachkennung in der Konfiguration übersetzt keine Inhalte.
 

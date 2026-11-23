@@ -24,8 +24,10 @@ Der Assistent fragt nach dem Website-Namen und der Installation der Abhängigkei
 
 Du erhältst eine kleine Startseite mit Hero, Markdown und einem Feature-Beispiel, die nötige Astro-Konfiguration und eine redaktionelle `AGENTS.md`. Deine Website nutzt `sproutsite` als installierte Abhängigkeit. Du musst keine Theme-Dateien kopieren oder das Framework-Repository klonen.
 
-Die deutsche Startseite liegt direkt unter `/`. Der Starter verwendet `site.yaml` und `site.de.yaml` sowie `page.yaml` und `page.de.yaml` für Konfiguration und Metadaten. Halte die jeweiligen Paare synchron. Die sichtbaren deutschen Inhalte stehen in `hero.de.md` und den nummerierten `.de.md`-/`.de.mdx`-Sections. Setze vor der Veröffentlichung die echte Produktionsadresse in beiden Website-Konfigurationen. Die mitgelieferte README erklärt diese Dateistruktur.
+Die deutsche Startseite liegt direkt unter `/`. Der Starter verwendet `site.yaml` für die Basiskonfiguration und `site.de.yaml` für optionale deutsche Abweichungen. Halte die Metadaten in `page.yaml` und `page.de.yaml` synchron. Die sichtbaren deutschen Inhalte stehen in `hero.de.md` und den nummerierten `.de.md`-/`.de.mdx`-Sections. Setze vor der Veröffentlichung die Produktionsadresse in `src/content/site.yaml`. Die mitgelieferte README erklärt diese Dateistruktur.
 
 Das [Generator-Repository](https://github.com/sproutsite/create-sproutsite) beschreibt die Optionen. Ergänze `--yes`, wenn der Generator ohne Rückfragen mit Standardwerten arbeiten soll. Mit `--yes --no-install` legt er nur die Dateien an.
+
+Mit `--language de --bilingual` legst du eine Website mit Deutsch und Englisch an. Die [Anleitung für den zweisprachigen Starter](/dokumentation/einstieg/deine-website/sprachen/) zeigt dir die Schritte.
 
 [create-sproutsite auf npm](https://www.npmjs.com/package/create-sproutsite)
