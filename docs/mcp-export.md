@@ -97,7 +97,7 @@ The MCP project should:
 2. Validate `snapshot.json` against `schema.json`, require supported `schemaVersion`, check the expected `sproutsiteVersion` and inspect provenance.
 3. Build a local index over `searchText`; use `id` for document retrieval and `components[].documents` for component lookup.
 4. Return selected documents or sections with their source URL, locale, Sproutsite version and relevant notices. Do not put the complete bundle into every model response. Keep open/partly available capability statements attached to their context.
-5. Copy the five files into the Docker image, preserve the license/NOTICE information and serve them as read-only reference data. Never evaluate imports, snippets or unresolved expressions.
+5. Preserve the five files and mount the verified snapshot read-only when running the server. Never evaluate imports, snippets or unresolved expressions.
 
 A local transfer archive can be created after reviewing the export:
 
@@ -105,4 +105,4 @@ A local transfer archive can be created after reviewing the export:
 tar -czf artifacts/sproutsite-mcp-data.tar.gz -C artifacts/mcp .
 ```
 
-The current workflow does not upload an artifact, publish a container or configure `mcp.sproutsite.dev`. Deployment, the MCP transport, client setup, search implementation and optional support for multiple Sproutsite snapshots belong to the separate server project.
+The export command writes the local artifact. Follow the [live snapshot update guide](deployment/mcp-snapshot.md) to import it, verify it and switch the running MCP service.

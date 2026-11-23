@@ -632,7 +632,7 @@ These local error documents preserve the original error status. For a subpath de
 
 From this framework checkout, run `npm run export:mcp` to validate and export documentation and showcase content to ignored `artifacts/mcp/`. The artifact contains `snapshot.json`, its generated `schema.json`, LICENSE, NOTICE and third-party notices. It includes configured English/German pages, normalized Markdown, examples, tables, capability notices, source hashes and a public component-to-document index. It records the Sproutsite version and Git provenance. MDX components and expressions are not executed, private legal settings are not required and `dist/` is untouched.
 
-This is an explicit content-export command, not an MCP server. The separate `sproutsite-mcp` project can validate and bundle a pinned artifact into its Docker image. No artifact is uploaded automatically, and neither the exporter nor its data is added to consumer npm packages. See the [data contract and server handoff](docs/mcp-export.md) and the bilingual [package guide](https://sproutsite.dev/documentation/package/).
+The separate `sproutsite-mcp` project validates a pinned artifact and loads it from a read-only mount at startup. The export stays local, and consumer npm packages omit the exporter and its data. See the [export data contract](docs/mcp-export.md), [live snapshot update guide](docs/deployment/mcp-snapshot.md), and bilingual [package guide](https://sproutsite.dev/documentation/package/).
 
 ## Validation and Limitations
 
