@@ -30,3 +30,11 @@ npm run dev:starter -- --language de
 Jeder Befehl startet einen einsprachigen Starter. Der Server verwendet standardmäßig Port 4322 und zeigt seine Adresse im Terminal an. Du kannst ihn parallel zur Demo starten. Er nutzt die bereits installierten Abhängigkeiten des Repositorys und übernimmt lokale Änderungen am Theme und an Astro-Komponenten im Browser.
 
 Die Starter-Vorlagen liegen unter `starters/minimal/`. Starte nach Änderungen an den Vorlagen den Befehl erneut. Jeder Aufruf erzeugt ein frisches Projekt unter `artifacts/starter/`.
+
+### Zweisprachigen Starter ansehen
+
+```sh
+npm run dev:starter -- --language de --bilingual
+```
+
+Diese lokale Vorschau öffnet Deutsch unter `/` und bietet Englisch unter `/en/` an. Auf der Beispielseite „Über uns“ führt die Sprachwahl direkt von `/ueber-uns/` zu `/en/about/` und zurück. Die Variante steht in der Arbeitskopie des Frameworks zur Verfügung. Der veröffentlichte Generator bietet derzeit einsprachige Starter an.

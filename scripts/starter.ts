@@ -14,6 +14,7 @@ import {
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
+import { parseDocument } from 'yaml';
 import starterAssets from '../src/package/starter-assets/manifest.json' with { type: 'json' };
 
 const [mode, ...args] = process.argv.slice(2);
@@ -21,20 +22,24 @@ const { values } = parseArgs({
     args,
     options: {
         language: { type: 'string', default: 'en' },
+        bilingual: { type: 'boolean', default: false },
         port: { type: 'string', default: '4322' },
     },
 });
-const { language, port } = values;
+const { language, bilingual, port } = values;
 if (mode !== 'dev' && mode !== 'build')
     throw new Error('Expected the dev or build command.');
 if (language !== 'en' && language !== 'de')
     throw new Error('Use --language en or --language de.');
+if (bilingual && language !== 'de')
+    throw new Error('Use --language de --bilingual for the bilingual starter.');
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const templates = join(root, 'starters', 'minimal');
 const previewRoot = join(root, 'artifacts', 'starter');
 mkdirSync(previewRoot, { recursive: true });
-const project = mkdtempSync(join(previewRoot, `${language}-`));
+const variant = bilingual ? 'de-en' : language;
+const project = mkdtempSync(join(previewRoot, `${variant}-`));
 
 for (const layer of ['common', language]) {
     const source = join(templates, layer);
@@ -101,6 +106,36 @@ for (const file of [
     );
 }
 
+if (bilingual) {
+    const overlay = join(templates, 'de-en');
+    // Replace the German-only starter's base page metadata with real English
+    // content while preserving the matching .de files.
+    cpSync(
+        join(templates, 'en', 'src', 'content', 'pages'),
+        join(project, 'src', 'content', 'pages'),
+        { recursive: true },
+    );
+    cpSync(join(overlay, 'project'), project, { recursive: true });
+
+    const sitePath = join(project, 'src', 'content', 'site.yaml');
+    const site = parseDocument(readFileSync(sitePath, 'utf8'));
+    const overrides = parseDocument(
+        readFileSync(join(overlay, 'site-overrides.yaml'), 'utf8'),
+    );
+    for (const path of [
+        ['i18n', 'locales'],
+        ['header', 'links'],
+    ]) {
+        const value = overrides.getIn(path, true);
+        if (!value)
+            throw new Error(
+                `Missing bilingual starter setting: ${path.join('.')}`,
+            );
+        site.setIn(path, value);
+    }
+    writeFileSync(sitePath, site.toString());
+}
+
 // Keep the generated package.json identical to the published starter's.
 // Node resolves the development dependencies from the repository root.
 const modules = join(project, 'node_modules');
@@ -136,7 +171,7 @@ export default defineConfig({
     );
 }
 
-console.log(`Starter (${language}): ${relative(root, project)}`);
+console.log(`Starter (${variant}): ${relative(root, project)}`);
 const result = spawnSync(
     process.execPath,
     [

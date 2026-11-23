@@ -709,15 +709,19 @@ The product identity is consistently Sproutsite: package imports use `sproutsite
 
 ### Preview the default starter
 
-After installing the repository dependencies, run either language in its own Astro project:
+After installing the repository dependencies, preview a starter in its own Astro project:
 
 ```sh
 npm run dev:starter -- --language en
 npm run dev:starter -- --language de
+npm run dev:starter -- --language de --bilingual
 npm run build:starter -- --language de
+npm run build:starter -- --language de --bilingual
 ```
 
 The starter defaults to English and uses port 4322 for development. Follow the URL printed by Astro. Use `--port 4323` to run a second starter alongside it. Each command generates a fresh project under ignored `artifacts/starter/` and prints its path. The build writes to that project's `dist/`.
+
+The bilingual preview puts German at `/` and English at `/en/`. Use the header language switcher on the homepage or on the example About page, which has separate URLs at `/ueber-uns/` and `/en/about/`. The preview starts from the German starter, adds the English homepage files, and applies the configuration and files under `starters/minimal/de-en/`. The published `create-sproutsite` CLI currently offers the single-language starters.
 
 Edit the shared and locale-specific files under `starters/minimal/`, then rerun the command to regenerate the starter. These templates were taken from `create-sproutsite@0.1.9`. The preview adds the neutral artwork from `src/package/starter-assets/` and copies the repository's agent instructions for Codex and Claude Code. The generated site's Sproutsite dependency points to this checkout for development, so theme and component updates use Astro's live reload with the repository's existing dependencies. The existing `npm run dev` serves the full demo and Showcase independently.
 

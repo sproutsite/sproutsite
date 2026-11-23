@@ -30,3 +30,11 @@ npm run dev:starter -- --language de
 Each command opens a single-language starter. The server defaults to port 4322 and prints its address in the terminal, so you can run it alongside the demo. It uses the repository's installed dependencies and picks up local changes to the theme and Astro components in the browser.
 
 Edit the starter templates in `starters/minimal/`. Restart the command to apply template edits. Each run creates a fresh project under `artifacts/starter/`.
+
+### Preview a bilingual starter
+
+```sh
+npm run dev:starter -- --language de --bilingual
+```
+
+This local preview opens in German at `/` and offers English at `/en/`. On the About page, the language switcher takes you between `/ueber-uns/` and `/en/about/`. This variant is available in the framework checkout for development. The published generator currently offers single-language starters.

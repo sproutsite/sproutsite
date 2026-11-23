@@ -1,0 +1,17 @@
+i18n:
+    locale: en
+branding:
+    sharingImage:
+        alt: Website preview
+header:
+    links:
+        - label: Home
+          href: /
+        - label: About
+          href: /about/
+        - type: language-switcher
+footer:
+    text: Notes, updates, and ideas from our team.
+    links:
+        - label: Home
+          href: /
