@@ -1,0 +1,40 @@
+name: __SITE_NAME_YAML__
+url: https://example.com
+base: /
+i18n:
+    locale: de
+    defaultLocale: de
+    locales: [de]
+branding:
+    logo:
+        src: /branding/logo.svg
+        srcOnDark: /branding/logo-light.svg
+        width: 40
+        height: 40
+        showName: true
+    icons:
+        favicon: /branding/favicon.svg
+        shortcut: /branding/favicon.ico
+        appleTouch: /branding/apple-touch-icon.png
+        app192: /branding/icon-192.png
+        app512: /branding/icon-512.png
+    sharingImage:
+        src: /branding/sharing-image.png
+        alt: Website-Vorschau
+hero:
+    classes:
+        - ss-hero--theme-1
+    background-image: /images/hero.jpg
+links:
+    external:
+        newTab: true
+        icon: true
+header:
+    links:
+        - label: Startseite
+          href: /
+footer:
+    text: Einblicke, Neuigkeiten und Ideen aus unserem Team.
+    links:
+        - label: Startseite
+          href: /

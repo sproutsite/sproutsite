@@ -80,6 +80,8 @@
         "branding:generate": "node --import tsx scripts/generate-branding.ts && npm run starter-assets:generate",
         "starter-assets:generate": "node --import tsx scripts/generate-starter-assets.ts",
         "dev": "astro dev --force",
+        "dev:starter": "node --import tsx scripts/starter.ts dev",
+        "build:starter": "node --import tsx scripts/starter.ts build",
         "build": "npm run validate && astro build && node --import tsx scripts/verify-build.ts",
         "build:demo": "SPROUTSITE_BASE=/demo/ npm run build",
         "export:mcp": "npm run validate && astro build --config astro.mcp.config.ts && node --import tsx scripts/verify-mcp-export.ts",

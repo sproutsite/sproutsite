@@ -1,0 +1,3 @@
+# Die vollständige Basiskonfiguration steht in site.yaml.
+# Hier nur Abweichungen ergänzen: Objekte erben Felder, Listen werden ersetzt.
+{}

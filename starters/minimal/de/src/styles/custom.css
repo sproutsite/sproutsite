@@ -1,0 +1,10 @@
+/*
+Ergänze hier dein eigenes CSS. Aktiviere die Regel unten, um die Ecken von Card-Komponenten stärker abzurunden.
+Lass die Regel außerhalb einer CSS-Ebene, damit sie Vorrang vor Theme-Regeln in Ebenen hat.
+*/
+
+/*
+.ss-card {
+    border-radius: 1.5rem;
+}
+*/

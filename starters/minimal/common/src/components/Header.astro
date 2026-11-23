@@ -1,0 +1,8 @@
+---
+import { Header as DefaultHeader } from 'sproutsite/default-components';
+import type { ThemeProps } from 'sproutsite/themes';
+
+type Props = ThemeProps<'Header'>;
+---
+
+<DefaultHeader {...Astro.props} />

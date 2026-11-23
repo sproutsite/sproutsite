@@ -17,3 +17,16 @@ npm run dev
 ```
 
 Open the address printed in the terminal. You should see the Sproutsite demo website with its documentation and showcase. Keep the terminal running. There is no need to install another copy of `sproutsite` or configure a private `.env` for this first preview.
+
+### Preview the default starter
+
+To see how a newly generated website looks with your local theme changes, run one of these commands from the Sproutsite repository after `npm ci`:
+
+```sh
+npm run dev:starter -- --language en
+npm run dev:starter -- --language de
+```
+
+Each command opens a single-language starter. The server defaults to port 4322 and prints its address in the terminal, so you can run it alongside the demo. It uses the repository's installed dependencies and picks up local changes to the theme and Astro components in the browser.
+
+Edit the starter templates in `starters/minimal/`. Restart the command to apply template edits. Each run creates a fresh project under `artifacts/starter/`.
