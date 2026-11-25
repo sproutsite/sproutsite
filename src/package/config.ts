@@ -18,7 +18,7 @@ import { loadSiteConfig } from '../lib/sproutsite/site-config.js';
 import { validateSproutsiteContent } from '../lib/sproutsite/validation.js';
 import { createSitemapMetadata } from '../lib/sproutsite/sitemap.js';
 import { validateBrandingImages } from '../lib/sproutsite/branding.js';
-import { validateHeroBackgroundImage } from '../lib/sproutsite/hero-background.js';
+import { validatePublicBackgroundImage } from '../lib/sproutsite/hero-background.js';
 import { colorStyles } from '../themes/default/colors.js';
 import { createStylesPlugin } from './styles.js';
 import {
@@ -100,17 +100,20 @@ export function createSproutsiteConfig(options: SproutsiteConfigOptions = {}) {
                 hooks: {
                     'astro:config:setup': async ({ injectRoute }) => {
                         for (const locale of site.i18n.locales) {
-                            await validateHeroBackgroundImage(
-                                (locale === site.i18n.defaultLocale
+                            const localizedSite =
+                                locale === site.i18n.defaultLocale
                                     ? site
-                                    : loadSiteConfig(locale)
-                                ).hero['background-image'],
+                                    : loadSiteConfig(locale);
+                            await validatePublicBackgroundImage(
+                                localizedSite.hero['background-image'],
+                            );
+                            await validatePublicBackgroundImage(
+                                localizedSite.footer['background-image'],
+                                undefined,
+                                'footer.background-image',
                             );
                             await validateBrandingImages(
-                                (locale === site.i18n.defaultLocale
-                                    ? site
-                                    : loadSiteConfig(locale)
-                                ).branding,
+                                localizedSite.branding,
                             );
                         }
                         injectRoute({

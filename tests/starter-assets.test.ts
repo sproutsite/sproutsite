@@ -64,12 +64,19 @@ test('public starter export contains a licensed, complete, copyable asset set wi
         readFileSync(join(directory, 'LICENSE.txt'), 'utf8'),
         readFileSync('LICENSE', 'utf8'),
     );
+    const logo = readFileSync(join(directory, 'branding/logo.svg'));
+    for (const alias of ['branding/logo-light.svg', 'branding/favicon.svg']) {
+        assert.deepEqual(readFileSync(join(directory, alias)), logo, alias);
+    }
     const dimensions: Record<string, number[]> = {
+        'branding/favicon-16.png': [16, 16],
+        'branding/favicon-32.png': [32, 32],
         'branding/apple-touch-icon.png': [180, 180],
         'branding/icon-192.png': [192, 192],
         'branding/icon-512.png': [512, 512],
         'branding/sharing-image.png': [1200, 630],
-        'images/hero.jpg': [1920, 1080],
+        'images/hero.jpg': [1920, 645],
+        'images/footer.webp': [1920, 640],
     };
     for (const [file, expected] of Object.entries(dimensions)) {
         const metadata = await imageMetadata(

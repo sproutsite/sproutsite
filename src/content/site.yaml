@@ -109,6 +109,7 @@ header:
           href: /contact/
 
 footer:
+    background-image: /backgrounds/footer-waves.svg
     text: Agent-first Static CMS for Astro and TypeScript.
     copyright: © 2026 Sproutsite
     showVersion: true

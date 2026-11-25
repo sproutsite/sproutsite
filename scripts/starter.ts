@@ -31,14 +31,12 @@ if (mode !== 'dev' && mode !== 'build')
     throw new Error('Expected the dev or build command.');
 if (language !== 'en' && language !== 'de')
     throw new Error('Use --language en or --language de.');
-if (bilingual && language !== 'de')
-    throw new Error('Use --language de --bilingual for the bilingual starter.');
-
 const root = fileURLToPath(new URL('../', import.meta.url));
 const templates = join(root, 'starters', 'minimal');
 const previewRoot = join(root, 'artifacts', 'starter');
 mkdirSync(previewRoot, { recursive: true });
-const variant = bilingual ? 'de-en' : language;
+const secondary = language === 'de' ? 'en' : 'de';
+const variant = bilingual ? `${language}-${secondary}` : language;
 const project = mkdtempSync(join(previewRoot, `${variant}-`));
 
 for (const layer of ['common', language]) {
@@ -79,10 +77,6 @@ const assets = join(root, 'src', 'package', 'starter-assets');
 cpSync(join(assets, starterAssets.publicDirectory), join(project, 'public'), {
     recursive: true,
 });
-const hero = join(project, starterAssets.heroExample.contentDestination);
-mkdirSync(dirname(hero), { recursive: true });
-copyFileSync(join(assets, starterAssets.heroExample.source), hero);
-
 const name = language === 'de' ? 'Meine Website' : 'My website';
 const tokens = {
     PACKAGE_NAME: language === 'de' ? 'meine-website' : 'my-website',
@@ -107,14 +101,27 @@ for (const file of [
 }
 
 if (bilingual) {
-    const overlay = join(templates, 'de-en');
-    // Replace the German-only starter's base page metadata with real English
-    // content while preserving the matching .de files.
-    cpSync(
-        join(templates, 'en', 'src', 'content', 'pages'),
-        join(project, 'src', 'content', 'pages'),
-        { recursive: true },
+    const overlay = join(templates, variant);
+    const pages = join(project, 'src', 'content', 'pages');
+    const secondaryPages = join(
+        templates,
+        secondary,
+        'src',
+        'content',
+        'pages',
     );
+    cpSync(secondaryPages, pages, {
+        recursive: true,
+        // The German-only starter's unsuffixed page.yaml duplicates its German metadata.
+        filter: (source) =>
+            secondary !== 'de' || source !== join(secondaryPages, 'page.yaml'),
+    });
+    if (language === 'en')
+        cpSync(
+            join(templates, 'de-en/project/src/content/pages/about'),
+            join(pages, 'about'),
+            { recursive: true },
+        );
     cpSync(join(overlay, 'project'), project, { recursive: true });
 
     const sitePath = join(project, 'src', 'content', 'site.yaml');

@@ -8,7 +8,6 @@ i18n:
 branding:
     logo:
         src: /branding/logo.svg
-        srcOnDark: /branding/logo-light.svg
         width: 40
         height: 40
         showName: true
@@ -23,7 +22,7 @@ branding:
         alt: Website preview
 hero:
     classes:
-        - ss-hero--theme-1
+        - ss-hero--starter-waves
     background-image: /images/hero.jpg
 links:
     external:
@@ -34,6 +33,7 @@ header:
         - label: Home
           href: /
 footer:
+    background-image: /images/footer.webp
     text: Notes, updates, and ideas from our team.
     links:
         - label: Home

@@ -115,6 +115,7 @@ Configure each language's footer in `site.yaml` or `site.de.yaml`. `text` descri
 
 ```yaml
 footer:
+    background-image: /backgrounds/footer-waves.svg
     text: Your website description.
     copyright: © 2026 Your organisation
     showVersion: true
@@ -137,6 +138,8 @@ footer:
 ```
 
 `links` remains the lower link row and supports existing configurations unchanged. Omit `groups` or `social` to hide those areas. Social platforms currently supported are `github`, `instagram` and `facebook`, using local Simple Icons logos. `label` is the accessible name of each icon link. `showVersion` defaults to `true` and reads the installed library's `VERSION`; set it to `false` to hide it. `copyright` is literal text you maintain yourself. `languageSwitcher` defaults to `false`; enabling it reuses the header's language selection, including matching translated pages and homepage fallback. The dropdown opens upward in the footer. Internal links use the active language and deployment base; external links open in a new tab.
+
+Set `footer.background-image` to a file under `public/`, written as a website-root-relative path without a deployment or language prefix. SVG, PNG, JPEG, WebP and AVIF are supported. A language configuration can override the path or set it to `null` to hide the image. With no image configured, the footer shows its theme gradient.
 
 ### Private operator details in the legal notice
 

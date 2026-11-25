@@ -35,6 +35,9 @@ Edit the starter templates in `starters/minimal/`. Restart the command to apply 
 
 ```sh
 npm run dev:starter -- --language de --bilingual
+npm run dev:starter -- --language en --bilingual
 ```
 
-This local preview opens in German at `/` and offers English at `/en/`. On the About page, the language switcher takes you between `/ueber-uns/` and `/en/about/`. Use the [bilingual starter guide](/documentation/getting-started/your-website/languages/) to generate a standalone website with this setup.
+Use `--language de` for German at `/` and English at `/en/`, or `--language en` for English at `/` and German at `/de/`. The About page uses the same translations in both previews. The language switcher links `/ueber-uns/` with `/en/about/` in the first preview and `/about/` with `/de/ueber-uns/` in the second.
+
+The [bilingual starter guide](/documentation/getting-started/your-website/languages/) explains how to generate a standalone bilingual website with German as the default.

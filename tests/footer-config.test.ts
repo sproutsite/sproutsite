@@ -9,6 +9,11 @@ import { loadSiteConfig } from '../src/lib/sproutsite/site-config.js';
 test('footer preserves legacy links and validates optional groups, socials and controls', () => {
     const root = mkdtempSync(join(tmpdir(), 'sproutsite-footer-'));
     mkdirSync(join(root, 'src/content'), { recursive: true });
+    mkdirSync(join(root, 'public'));
+    writeFileSync(
+        join(root, 'public/footer.svg'),
+        '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"/>',
+    );
     const basic = {
         text: 'A website',
         links: [{ label: 'About', href: '/about/' }],
@@ -31,6 +36,7 @@ test('footer preserves legacy links and validates optional groups, socials and c
         assert.deepEqual(configure(basic), basic);
         const full = {
             ...basic,
+            'background-image': '/footer.svg',
             copyright: '© 2026 Example',
             showVersion: false,
             languageSwitcher: true,
@@ -58,7 +64,16 @@ test('footer preserves legacy links and validates optional groups, socials and c
             },
         };
         assert.deepEqual(configure(full), full);
+        assert.equal(
+            configure({ ...full, 'background-image': null })[
+                'background-image'
+            ],
+            null,
+        );
         for (const footer of [
+            { ...basic, 'background-image': '/missing.svg' },
+            { ...basic, 'background-image': 'https://example.com/footer.svg' },
+            { ...basic, 'background-image': '/../footer.svg' },
             { ...basic, groups: [{ title: '', links: basic.links }] },
             { ...basic, groups: [{ title: 'Product', links: [] }] },
             {

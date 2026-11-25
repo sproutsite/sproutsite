@@ -8,7 +8,7 @@ import { stringify } from 'yaml';
 import { loadSiteConfig } from '../src/lib/sproutsite/site-config.js';
 import {
     selectHeroBackground,
-    validateHeroBackgroundImage,
+    validatePublicBackgroundImage,
 } from '../src/lib/sproutsite/hero-background.js';
 
 test('hero background precedence distinguishes inherited, local, disabled and absent images', () => {
@@ -63,7 +63,7 @@ test('global hero images validate public paths, file content and SVG/raster form
             '/backgrounds/photo.jpg',
         ]) {
             assert.equal(configure(src).hero['background-image'], src);
-            await validateHeroBackgroundImage(src, root);
+            await validatePublicBackgroundImage(src, root);
         }
         for (const src of [
             '',
@@ -82,7 +82,7 @@ test('global hero images validate public paths, file content and SVG/raster form
             'not an SVG',
         );
         await assert.rejects(
-            validateHeroBackgroundImage('/backgrounds/corrupt.svg', root),
+            validatePublicBackgroundImage('/backgrounds/corrupt.svg', root),
         );
     } finally {
         rmSync(root, { recursive: true, force: true });

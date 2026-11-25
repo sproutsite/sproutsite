@@ -9,9 +9,10 @@
                 var(--color-hero-navy)
             );
         color: var(--color-brand-content);
+        position: relative;
+        isolation: isolate;
         background-color: var(--color-hero-navy);
         background-image:
-            url('../../../assets/footer-waves.svg'),
             radial-gradient(
                 ellipse at 88% 100%,
                 color-mix(in srgb, var(--color-hero-ocean) 32%, transparent),
@@ -23,14 +24,25 @@
                 var(--color-hero-midnight)
             );
         background-repeat: no-repeat;
-        background-position:
-            right bottom,
-            center,
-            center;
-        background-size:
-            max(100%, 100rem) auto,
-            cover,
-            cover;
+        background-position: center;
+        background-size: cover;
+
+        .ss-footer__background {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+
+            img {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                width: max(100%, 100rem);
+                max-width: none;
+                height: auto;
+            }
+        }
 
         .ss-footer__inner {
             padding-block: 4.5rem 9rem;

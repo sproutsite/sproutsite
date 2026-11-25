@@ -50,23 +50,33 @@ main configuration and can override `sharingImage.alt`.
 
 `public/branding/` contains logo.svg, logo-light.svg, favicon.svg, favicon.ico,
 16/32/48-pixel PNG favicon variants, a 180-pixel Apple touch icon, 192/512-pixel
-app icons and a 1200×630 sharing-image.png. `public/images/hero.jpg` is 1920×1080.
+app icons and a 1200×630 sharing-image.png. The starter templates configure
+`hero.background-image: /images/hero.jpg` (1920×645) and
+`footer.background-image: /images/footer.webp` (1920×640) in `site.yaml`.
 The optional PNG favicon variants are available for consumers needing them;
 the current branding API uses `favicon` for one preferred SVG, PNG or ICO.
 
-The SVG symbol in `public/branding/logo.svg` and the illustrations in `sources/`
-are first-party vector sources without third-party imagery, font dependencies
-or a Sproutsite wordmark. Raster images and ICO frames are derived locally with
-Sharp. There is no AI image-generation input or provider restriction to resolve
-for this set. All these assets follow Apache-2.0; see the unchanged full license
-and the attribution notice inside `public/`. No additional visible attribution
-or branding requirement is imposed.
+`public/branding/logo.svg` is the source for the document mark. The starter
+uses it in the header and footer on both light and dark backgrounds.
+`npm run starter-assets:generate` copies it to `favicon.svg` and the
+compatibility file `logo-light.svg` and generates the PNG and ICO icons.
+In a generated website, replace the files under `public/branding/` or set
+different paths under `branding.logo` and `branding.icons` in
+`src/content/site.yaml`. A separate dark-background logo is still
+configurable through `branding.logo.srcOnDark`.
+
+The document symbol and sharing illustration are first-party SVG sources.
+Sharp produces the derived icons and sharing image. The hero and footer
+backgrounds are generated raster artwork. See the
+[generation record](../../../docs/assets/starter-backgrounds.md), the unchanged
+Apache-2.0 license, and the notice inside `public/`.
 
 ## Maintenance
 
 Run `npm run starter-assets:generate` from the Sproutsite repository after
-editing the vector sources. This updates derivatives, copies the official
-project license unchanged and regenerates the file hashes. The command requires
+editing the vector sources or replacing either background in `public/images/`.
+This updates branding derivatives, copies the official project license unchanged
+and regenerates the file hashes. The command requires
 development dependencies; website builds and generation do not execute it.
 `npm run branding:generate` also calls it after regenerating the demo branding.
 

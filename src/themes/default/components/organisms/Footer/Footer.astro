@@ -10,9 +10,11 @@ import type { FooterProps } from '../../../../../lib/sproutsite/types.js';
 import {
     contentHref,
     externalLinkAttributes,
+    withBase,
 } from '../../../../../lib/sproutsite/urls.js';
 type Props = FooterProps;
 const { site, route } = Astro.props;
+const background = site.footer['background-image'];
 const language = site.i18n.locale === 'de' ? 'de' : 'en';
 const socialIcons = {
     github: siGithub,
@@ -26,6 +28,11 @@ const linkAttributes = (href: string) => ({
 ---
 
 <footer class="ss-footer">
+    {background && (
+        <div class="ss-footer__background" aria-hidden="true">
+            <img src={withBase(background, site.base)} alt="" loading="lazy" />
+        </div>
+    )}
     <div class="ss-footer__inner site-shell">
         <div class="ss-footer__top">
             <div class="ss-footer__brand">

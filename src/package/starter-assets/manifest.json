@@ -5,7 +5,6 @@
     "branding": {
         "logo": {
             "src": "/branding/logo.svg",
-            "srcOnDark": "/branding/logo-light.svg",
             "width": 40,
             "height": 40,
             "showName": true
@@ -41,55 +40,59 @@
         },
         {
             "path": "NOTICE.txt",
-            "sha256": "754e1fad287bf83ae88e5dc951cc49bbe36ccb0241f97399f889603126bbf50f"
+            "sha256": "8eaa2b36bc4e267fb11824e77fa11f59b49fece5caa8a6eb1d1bda106098e531"
         },
         {
             "path": "branding/apple-touch-icon.png",
-            "sha256": "eb802c304b3efdf7c7ede139a82d32bbad336eff4c087c2a9c00ee284bec8b6a"
+            "sha256": "1dc5b8538c2a1dc0b2e2bc1d570d9706dffb327ba013c01be474237da9d20634"
         },
         {
             "path": "branding/favicon-16.png",
-            "sha256": "25167598ddb3386f6b61acc729c9e33dd9dbb00d7ac0241e94f143c0e271b9c1"
+            "sha256": "1155ede5350d1b61d99d69111cd81654349fff5ee078649f4c86f5bc959cdc09"
         },
         {
             "path": "branding/favicon-32.png",
-            "sha256": "ba036d8493c80e7c6969c78627ebffc1afd2a1b72758744d7bb3cf507f30f77e"
+            "sha256": "de821ae272339ef46fec3c9eb7fa01028c4de1db42b340a0b26431e1589b159d"
         },
         {
             "path": "branding/favicon-48.png",
-            "sha256": "cf17c47a2d989c22ce0e40b15a4bbaa0405a629a5b93d6e0c6d61892f975d9e7"
+            "sha256": "7a109efb62c88f0a07ddd6054656448076ccf63b6b3a14fe4b30bbb54d7baec6"
         },
         {
             "path": "branding/favicon.ico",
-            "sha256": "f6586cc8917ecb6d5457665a3f5f75f77e0a798d2d56875e325d131691d2b152"
+            "sha256": "51b99a24ec2f28911e6a3956f721ef563672e24047c80f416449dfccd24671f8"
         },
         {
             "path": "branding/favicon.svg",
-            "sha256": "9e5746bcfefe182d42a141e8898f0b2b14bb17f9bcdc92d5aa14b9202d99425b"
+            "sha256": "be606320c538d34411182d55112007cf8fcffa3f07e23dc46fceebfaa787b3d1"
         },
         {
             "path": "branding/icon-192.png",
-            "sha256": "6152c4f90c8c2588132b2fe7f06c7aa8ea21760ae80ae22990d729c78ba4291a"
+            "sha256": "bcb4c820fc965551966f4447f9236225c6c2ea71eae85c48b6cf666691a53999"
         },
         {
             "path": "branding/icon-512.png",
-            "sha256": "13c33d3d368697baffeb8538cb09a33a8401d5318963f29d6a8624af4d852ac7"
+            "sha256": "fc79b197ca6d3095da0892546e00eaa484638a3cf31347eaf7621af7d0e82e81"
         },
         {
             "path": "branding/logo-light.svg",
-            "sha256": "9e5746bcfefe182d42a141e8898f0b2b14bb17f9bcdc92d5aa14b9202d99425b"
+            "sha256": "be606320c538d34411182d55112007cf8fcffa3f07e23dc46fceebfaa787b3d1"
         },
         {
             "path": "branding/logo.svg",
-            "sha256": "9e5746bcfefe182d42a141e8898f0b2b14bb17f9bcdc92d5aa14b9202d99425b"
+            "sha256": "be606320c538d34411182d55112007cf8fcffa3f07e23dc46fceebfaa787b3d1"
         },
         {
             "path": "branding/sharing-image.png",
             "sha256": "fc6092abc0a08976f9d3123c45ab2b631e22001f06ea0d9c26631d1c70ddd694"
         },
         {
+            "path": "images/footer.webp",
+            "sha256": "cccabd47c0ca2a1cb55bfff42781f7f9822e3732f7c3ec9ff4b750ecdda81cb0"
+        },
+        {
             "path": "images/hero.jpg",
-            "sha256": "05d1648cdf25a5463d849a3eb984caf8ca8705fccca5f333bc96c51b1c706948"
+            "sha256": "ebd5d2e913812ddf66a74dd2d083346706f99e4d116bfbb947369f21178be932"
         }
     ]
 }

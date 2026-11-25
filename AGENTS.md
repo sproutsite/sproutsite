@@ -365,6 +365,8 @@ Existing asset provenance exceptions and pending checks are documented in `THIRD
 
 ## Verification and Documentation
 
+Apply starter changes to every supported `npm run dev:starter` variant unless the request explicitly targets a specific variant. Reuse shared templates and assets where possible, and verify each supported variant after a starter change.
+
 Provide at least these commands:
 
 - `npm run dev`: local Astro preview from this repository.

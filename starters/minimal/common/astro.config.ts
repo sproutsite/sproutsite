@@ -3,5 +3,8 @@ import { createSproutsiteConfig } from 'sproutsite/config';
 import theme from './src/themes/website/theme';
 
 export default defineConfig(
-    createSproutsiteConfig({ theme, styles: ['./src/styles/custom.css'] }),
+    createSproutsiteConfig({
+        theme,
+        styles: ['./src/styles/backgrounds.css', './src/styles/custom.css'],
+    }),
 );

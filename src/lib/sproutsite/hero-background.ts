@@ -7,7 +7,7 @@ import {
 } from './public-assets.js';
 
 const formats = ['svg', 'png', 'jpg', 'jpeg', 'webp', 'avif'];
-export const publicHeroImage = publicAssetPath.refine(
+export const publicBackgroundImage = publicAssetPath.refine(
     (src) => formats.includes(extname(src).slice(1).toLowerCase()),
     'must be a public SVG, PNG, JPEG, WebP or AVIF image',
 );
@@ -28,25 +28,27 @@ export function selectHeroBackground(
     return local === undefined ? global : local;
 }
 
-export function validateHeroBackground(
+export function validatePublicBackground(
     src: string | null | undefined,
     source: string,
     root = process.cwd(),
+    field = 'hero.background-image',
 ): void {
     if (src == null) return;
     try {
-        publicHeroImage.parse(src);
+        publicBackgroundImage.parse(src);
         publicAssetFile(src, root);
     } catch (error) {
         throw new Error(
-            `Invalid ${source}: hero.background-image (${src}): ${error instanceof Error ? error.message : String(error)}`,
+            `Invalid ${source}: ${field} (${src}): ${error instanceof Error ? error.message : String(error)}`,
         );
     }
 }
 
-export async function validateHeroBackgroundImage(
+export async function validatePublicBackgroundImage(
     src: string | null | undefined,
     root = process.cwd(),
+    field = 'hero.background-image',
 ): Promise<void> {
     if (src == null) return;
     const metadata = await publicImageMetadata(src, root);
@@ -56,6 +58,6 @@ export async function validateHeroBackgroundImage(
         .replace('jpeg', 'jpg');
     if (metadata.format !== extension)
         throw new Error(
-            `Invalid hero.background-image (${src}): image content must match its SVG or raster extension`,
+            `Invalid ${field} (${src}): image content must match its SVG or raster extension`,
         );
 }

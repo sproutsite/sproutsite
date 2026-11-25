@@ -35,6 +35,9 @@ Die Starter-Vorlagen liegen unter `starters/minimal/`. Starte nach Änderungen a
 
 ```sh
 npm run dev:starter -- --language de --bilingual
+npm run dev:starter -- --language en --bilingual
 ```
 
-Diese lokale Vorschau öffnet Deutsch unter `/` und bietet Englisch unter `/en/` an. Auf der Beispielseite „Über uns“ führt die Sprachwahl von `/ueber-uns/` zu `/en/about/` und zurück. Die [Anleitung für den zweisprachigen Starter](/dokumentation/einstieg/deine-website/sprachen/) zeigt dir, wie du mit diesem Aufbau eine eigenständige Website erzeugst.
+Mit `--language de` liegt Deutsch unter `/` und Englisch unter `/en/`. Mit `--language en` liegt Englisch unter `/` und Deutsch unter `/de/`. Beide Vorschauen verwenden dieselben Übersetzungen. Auf der Beispielseite wechselt die Sprachwahl zwischen `/ueber-uns/` und `/en/about/` beziehungsweise zwischen `/about/` und `/de/ueber-uns/`.
+
+Die [Anleitung für den zweisprachigen Starter](/dokumentation/einstieg/deine-website/sprachen/) erklärt, wie du eine eigenständige Website mit Deutsch als Standardsprache erzeugst.

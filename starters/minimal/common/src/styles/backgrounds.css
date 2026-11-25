@@ -1,0 +1,22 @@
+.ss-hero--starter-waves.ss-hero--has-background-image {
+    .ss-hero-background {
+        object-position: center bottom;
+    }
+
+    &::before {
+        background: linear-gradient(
+            90deg,
+            rgb(6 24 47 / 38%),
+            rgb(6 24 47 / 20%)
+        );
+    }
+}
+
+.ss-footer {
+    .ss-footer__background img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center bottom;
+    }
+}

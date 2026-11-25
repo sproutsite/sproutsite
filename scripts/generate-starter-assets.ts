@@ -9,7 +9,7 @@ const root = fileURLToPath(
 );
 const publicRoot = join(root, 'public');
 const branding = join(publicRoot, 'branding');
-// The neutral document symbol has no fixed wordmark: the website supplies its name.
+// Keep the public aliases in sync with the single editable document mark.
 await copyFile(join(branding, 'logo.svg'), join(branding, 'favicon.svg'));
 await copyFile(join(branding, 'logo.svg'), join(branding, 'logo-light.svg'));
 const frames: Buffer[] = [];
@@ -45,9 +45,7 @@ await writeFile(
     join(branding, 'favicon.ico'),
     Buffer.concat([directory, ...frames]),
 );
-await sharp(join(root, 'sources/hero.svg'))
-    .jpeg({ quality: 90, mozjpeg: true })
-    .toFile(join(publicRoot, 'images/hero.jpg'));
+// Hero and footer backgrounds are maintained as ready-to-serve raster assets.
 await sharp(join(root, 'sources/sharing-image.svg'))
     .png()
     .toFile(join(branding, 'sharing-image.png'));
@@ -78,7 +76,6 @@ const manifest = {
     branding: {
         logo: {
             src: '/branding/logo.svg',
-            srcOnDark: '/branding/logo-light.svg',
             width: 40,
             height: 40,
             showName: true,

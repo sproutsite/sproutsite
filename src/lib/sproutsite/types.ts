@@ -60,6 +60,7 @@ export interface SiteConfig {
     header: { links: HeaderItem[] };
     footer: {
         text: string;
+        'background-image'?: string | null;
         links: Link[];
         groups?: { title: string; links: (Link & { icon?: string })[] }[];
         social?: {

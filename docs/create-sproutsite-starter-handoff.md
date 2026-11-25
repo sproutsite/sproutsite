@@ -1,5 +1,33 @@
 # Handoff: neutral assets for create-sproutsite
 
+## Import the shared hero and footer backgrounds
+
+Use this handoff for the next update of the existing pinned starter importer.
+
+```text
+Importiere einen geprüften Sproutsite-Commit mit den neuen Starter-Wellen über
+den bestehenden starter:import-Prozess. Verwende eine Sproutsite-Abhängigkeit,
+die footer.background-image unterstützt. Prüfe die Version vor der Freigabe.
+
+- Übernimm die kanonischen Vorlagen unter starters/minimal/ und kopiere
+  public/ aus dem Starter-Asset-Manifest bytegenau inklusive der Lizenzhinweise.
+- Übernimm src/styles/backgrounds.css aus der gemeinsamen Vorlage sowie die
+  Registrierung vor src/styles/custom.css in astro.config.ts.
+- Übernimm hero.background-image: /images/hero.jpg und
+  footer.background-image: /images/footer.webp aus der jeweiligen site.yaml.
+  Die Startseiten-Heros erben die globale Einstellung. Kopiere das Hero-Bild
+  für diese Vorlagen nicht zusätzlich über das optionale heroExample-Rezept.
+- Prüfe EN, DE, EN mit Deutsch unter /de/ und DE mit Englisch unter /en/.
+  Prüfe im gepackten Generator die Vorlagen samt --no-install, die Hashes
+  beider Bilder und ihre URLs im HTML für / und /demo/. Beim Erstellen
+  einer Website werden die Assets aus dem Generator-Archiv kopiert.
+- Übernimm das neutrale Dokument-Icon aus public/branding/ mit den erzeugten
+  Browser- und App-Icons. Beide Sprachen verwenden dieselbe Logodatei auf
+  hellem und dunklem Grund. Der Website-Name stammt weiterhin aus site.yaml.
+```
+
+## Original handoff for generators predating the pinned importer
+
 Sproutsite owns the canonical assets. The initializer has its own agent and
 release process. Only this repository was changed for the asset-set task.
 No npm publication, tag or Git push is implied. The current package version

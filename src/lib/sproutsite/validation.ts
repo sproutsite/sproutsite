@@ -13,7 +13,7 @@ import { visit } from 'unist-util-visit';
 import { loadSiteConfig } from './site-config.js';
 import { heroTypes, sectionSpacings, tones } from './types.js';
 import { isHexColor } from './colors.js';
-import { validateHeroBackground } from './hero-background.js';
+import { validatePublicBackground } from './hero-background.js';
 import {
     badgeVariants,
     badgeStyles,
@@ -1368,7 +1368,10 @@ export function validateSproutsiteContent(
         if (filename === 'hero.md') {
             const heroMetadata = heroSchema.parse(frontmatter);
             if (heroMetadata['background-image']?.startsWith('/'))
-                validateHeroBackground(heroMetadata['background-image'], path);
+                validatePublicBackground(
+                    heroMetadata['background-image'],
+                    path,
+                );
             for (const action of heroMetadata.actions ?? []) {
                 if (
                     /^(?:javascript:|data:)/i.test(action.href) ||

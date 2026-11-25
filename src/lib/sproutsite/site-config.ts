@@ -3,7 +3,10 @@ import { resolve } from 'node:path';
 import { z } from 'zod';
 import { parse } from 'yaml';
 import type { SiteConfig } from './types.js';
-import { publicHeroImage, validateHeroBackground } from './hero-background.js';
+import {
+    publicBackgroundImage,
+    validatePublicBackground,
+} from './hero-background.js';
 import { brandingSchema, validateBrandingFiles } from './branding.js';
 import { siteColorsSchema } from './site-colors.js';
 
@@ -119,7 +122,7 @@ const siteSchema = z.object({
     hero: z
         .object({
             classes: z.array(heroClass).max(8).default([]),
-            'background-image': publicHeroImage.optional(),
+            'background-image': publicBackgroundImage.optional(),
         })
         .strict()
         .default({ classes: [] }),
@@ -171,6 +174,7 @@ const siteSchema = z.object({
     }),
     footer: z.object({
         text: z.string().trim().min(1),
+        'background-image': publicBackgroundImage.nullable().optional(),
         links: z.array(linkSchema),
         groups: z
             .array(
@@ -318,10 +322,16 @@ function parseConfig(
             `Invalid src/content/${filename}: ${parsed.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join('; ')}`,
         );
     const config = parsed.data;
-    validateHeroBackground(
+    validatePublicBackground(
         config.hero['background-image'],
         `src/content/${filename}`,
         root,
+    );
+    validatePublicBackground(
+        config.footer['background-image'],
+        `src/content/${filename}`,
+        root,
+        'footer.background-image',
     );
     validateBrandingFiles(config.branding, root, `src/content/${filename}`);
     return config;

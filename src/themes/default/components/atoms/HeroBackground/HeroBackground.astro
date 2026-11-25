@@ -3,8 +3,8 @@ import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import { publicImageMetadata } from '../../../../../lib/sproutsite/public-assets.js';
 import {
-    validateHeroBackground,
-    validateHeroBackgroundImage,
+    validatePublicBackground,
+    validatePublicBackgroundImage,
 } from '../../../../../lib/sproutsite/hero-background.js';
 import { withBase } from '../../../../../lib/sproutsite/urls.js';
 
@@ -14,8 +14,8 @@ interface Props {
 }
 const { source, base } = Astro.props;
 if (typeof source === 'string')
-    validateHeroBackground(source, 'hero background');
-if (typeof source === 'string') await validateHeroBackgroundImage(source);
+    validatePublicBackground(source, 'hero background');
+if (typeof source === 'string') await validatePublicBackgroundImage(source);
 const image =
     typeof source === 'string'
         ? {

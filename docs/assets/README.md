@@ -56,8 +56,9 @@ The semantic palette is maintained in [theme.css](../../src/themes/default/style
 
 ## Generation records
 
-Neutral starter assets are a separate, first-party vector set rather than editorial card illustrations. Their SVG sources, deterministic Sharp generation, copy contract and Apache-2.0 notices are documented in [the starter asset README](../../src/package/starter-assets/README.md). No AI image-generation tool or third-party image source was used for that set.
+The neutral starter set includes vector-derived icons and sharing artwork, plus generated hero and footer backgrounds. See the [starter asset README](../../src/package/starter-assets/README.md) for the copy contract and notices.
 
+- [Starter hero and footer backgrounds](starter-backgrounds.md)
 - [Contributor-guide illustrations](contributing-images.md)
 - [Your-website guide illustrations](your-website-images.md)
 - [Documentation and blog background refinements](background-wave-refinements.md)

@@ -263,6 +263,8 @@ Below 72rem, the header uses a hamburger button and a fullscreen native `<dialog
 
 The footer supports optional `groups` (`title` and `links` with optional Lucide `icon`), `social` (`title` and icon links with `platform`, `label`, `href`), `copyright`, `showVersion` and `languageSwitcher`. Supported social platforms are `github`, `instagram` and `facebook`; logos are rendered locally from CC0-licensed Simple Icons. Existing `footer.text` and `footer.links` remain supported; `links` is the lower utility row. Version visibility defaults to `true`, language selection to `false`; omitting groups or socials hides those areas. The footer language dropdown opens upward and uses the same translated-page matching as the header. See [Global website settings](https://sproutsite.dev/documentation/content/) for a complete YAML example.
 
+Set `footer.background-image` in `src/content/site.yaml` to a decorative public image, for example `/images/footer.webp`. Locale settings can override it or disable it with `null`. The theme gradient remains visible when no image is configured.
+
 Every page is a directory under `src/content/pages/`:
 
 ```text
@@ -723,13 +725,14 @@ After installing the repository dependencies, preview a starter in its own Astro
 npm run dev:starter -- --language en
 npm run dev:starter -- --language de
 npm run dev:starter -- --language de --bilingual
+npm run dev:starter -- --language en --bilingual
 npm run build:starter -- --language de
 npm run build:starter -- --language de --bilingual
 ```
 
 The starter defaults to English and uses port 4322 for development. Follow the URL printed by Astro. Use `--port 4323` to run a second starter alongside it. Each command generates a fresh project under ignored `artifacts/starter/` and prints its path. The build writes to that project's `dist/`.
 
-The bilingual preview puts German at `/` and English at `/en/`. Use the header language switcher on the homepage or on the example About page, which has separate URLs at `/ueber-uns/` and `/en/about/`. The preview starts from the German starter, adds the English homepage files, and applies the configuration and files under `starters/minimal/de-en/`. The published generator provides this setup with `--language de --bilingual`.
+For bilingual previews, `--language` selects the default language at `/`. With `de`, the About page switches between `/ueber-uns/` and `/en/about/`. With `en`, it switches between `/about/` and `/de/ueber-uns/`. The preview combines both sets of content with the route and site settings in `starters/minimal/de-en/` or `starters/minimal/en-de/`. To generate a standalone bilingual website with `create-sproutsite@0.2.0`, use `--language de --bilingual`.
 
 Edit the shared and locale-specific files under `starters/minimal/`, then rerun the command to regenerate the starter. These templates were taken from `create-sproutsite@0.1.9`. The preview adds the neutral artwork from `src/package/starter-assets/` and copies the repository's agent instructions for Codex and Claude Code. The generated site's Sproutsite dependency points to this checkout for development, so theme and component updates use Astro's live reload with the repository's existing dependencies. The existing `npm run dev` serves the full demo and Showcase independently.
 
@@ -786,11 +789,11 @@ The Sproutsite demo uses the same configuration with its own files in `public/br
 
 ### Copyable starter assets
 
-`src/package/starter-assets/public/` is the single neutral source for new websites and the theme's fallback icons. It contains a document-symbol logo, light/dark-compatible variant, SVG/ICO/PNG favicons, Apple/app icons, a 1200×630 sharing image and a 1920×1080 hero example. These first-party SVG sources and their deterministic raster derivatives are licensed under Apache-2.0, with the unchanged full license and an attribution notice included in the copyable directory. The product demo assets are separate.
+`src/package/starter-assets/public/` is the single neutral source for new websites and the theme's fallback icons. It contains a document-symbol logo, light/dark-compatible variant, SVG/ICO/PNG favicons, Apple/app icons, a 1200×630 sharing image, and coordinated hero and footer backgrounds. The unchanged Apache-2.0 license and attribution notice are included in the copyable directory. The product demo assets are separate.
 
 Resolve the public `sproutsite/starter-assets` package export to find `manifest.json`. Its version-1 contract includes `publicDirectory`, exact file paths and SHA-256 hashes, a ready-to-merge `branding` object, English/German sharing-image alternative text, and an optional hero-image copy mapping for Astro's local `image()` schema. See [the starter asset contract](src/package/starter-assets/README.md) for a Node/TypeScript example. The asset set is included in the npm archive; no additional package or runtime service is needed.
 
-Run `npm run starter-assets:generate` after editing `public/branding/logo.svg` or `sources/*.svg` within the starter directory. Generation requires the repository's development dependencies and is not part of a consumer build. The separate `create-sproutsite` generator must vendor a reviewed snapshot before its release, copy binaries unchanged, preserve LICENSE.txt/NOTICE.txt and fill in the site's configuration. It must not fetch assets at user generation time, so `--no-install` remains functional. That generator update is maintained by its own agent; this repository does not claim that the published initializer already ships these files. See [the handoff](docs/create-sproutsite-starter-handoff.md).
+Run `npm run starter-assets:generate` after editing the starter's vector sources or replacing a background in `public/images/`. It regenerates the branding derivatives and refreshes the manifest hashes. The separate `create-sproutsite` generator imports the shared starter templates and copies the public files byte for byte, including LICENSE.txt and NOTICE.txt, from a reviewed Sproutsite commit. The initializer ships those copies, so creating a website with `--no-install` requires no asset downloads. See [the handoff](docs/create-sproutsite-starter-handoff.md) for the next import.
 
 Brand colors are separate `--color-brand-*` tokens in `styles/foundation/tokens.css`; the existing semantic UI palette is unchanged. Run `npm run branding:generate` after changing the vector geometry or brand tokens, then `npm run format`. The TypeScript generator uses `fontkit` and `sharp` only during development. Its local source font is `scripts/assets/nunito-variable.ttf` from the [official Nunito distribution](https://github.com/google/fonts/tree/main/ofl/nunito), covered by the adjacent SIL Open Font License. Generated assets are committed and ordinary builds do not regenerate or download them.
 
