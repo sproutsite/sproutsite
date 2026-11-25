@@ -7,6 +7,18 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.35] - 2026-11-25
+
+### Added
+
+- Added English as a default-language option for bilingual starter previews, with German routes under `/de/` alongside the German-first variant.
+- Added configurable footer backgrounds with locale overrides and local public-image validation.
+
+### Changed
+
+- Refreshed the shared starter artwork with coordinated hero and footer waves and a neutral document mark for logos, favicons, and app icons.
+- Updated the starter templates and generator handoff to share the same public assets across languages.
+
 ## [0.5.34] - 2026-11-23
 
 ### Added
