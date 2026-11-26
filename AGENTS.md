@@ -339,6 +339,7 @@ These rules are behavior instructions, not a technical sandbox. Do not claim tha
 ## Repository-Local Skills and Versions
 
 - Use `sproutsite-edit-page` for matching editorial requests, including page creation, edits, moves, and removals. The skill lives in `.agents/skills/` for Codex and is linked from `.claude/skills/` for Claude Code. The project MCP connection is configured in `.codex/config.toml` for Codex and `.mcp.json` for Claude Code.
+- Use `sproutsite-update-starter-docs` to align the English and German starter guides with changes to the templates or the generator. Codex and Claude Code use the shared skill in `.agents/skills/`.
 - Commit-message and release workflows are located in `.codex/skills/`. Use them when the user explicitly invokes their name or shortcut.
 - Release workflows prepare a release; run `npm publish`, create a GitHub release, tag, or push only with an explicit request.
 - The publishable version must match in `package.json`, `VERSION`, and `CHANGELOG.md`. The changelog follows Keep a Changelog and SemVer.
