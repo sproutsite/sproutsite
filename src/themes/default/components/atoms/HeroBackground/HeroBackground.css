@@ -7,16 +7,33 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: center;
+        --ss-background-current-position: var(--ss-background-position);
+        object-position: var(
+            --ss-background-current-position,
+            var(--ss-background-default-position, center)
+        );
+
+        @media (width < 64rem) {
+            --ss-background-current-position: var(
+                --ss-background-position-mobile,
+                var(--ss-background-position)
+            );
+        }
 
         &.ss-hero-background--svg {
-            object-position: right top;
+            object-position: var(
+                --ss-background-current-position,
+                var(--ss-background-default-position, right top)
+            );
 
             @media (width < 64rem) {
-                left: auto;
-                width: auto;
-                max-width: none;
                 opacity: 0.5;
+
+                &:not(.ss-hero-background--positioned) {
+                    left: auto;
+                    width: auto;
+                    max-width: none;
+                }
             }
         }
     }

@@ -37,6 +37,8 @@ test('footer preserves legacy links and validates optional groups, socials and c
         const full = {
             ...basic,
             'background-image': '/footer.svg',
+            'background-position': 'top',
+            'background-position-mobile': 'right',
             copyright: '© 2026 Example',
             showVersion: false,
             languageSwitcher: true,
@@ -74,6 +76,8 @@ test('footer preserves legacy links and validates optional groups, socials and c
             { ...basic, 'background-image': '/missing.svg' },
             { ...basic, 'background-image': 'https://example.com/footer.svg' },
             { ...basic, 'background-image': '/../footer.svg' },
+            { ...basic, 'background-position': '42% 60%' },
+            { ...basic, 'background-position-mobile': 'middle' },
             { ...basic, groups: [{ title: '', links: basic.links }] },
             { ...basic, groups: [{ title: 'Product', links: [] }] },
             {

@@ -5,6 +5,18 @@ export const tones = ['default', 'muted', 'brand'] as const;
 export type Tone = (typeof tones)[number];
 export type SectionTone = Tone | { odd: Tone; even: Tone };
 export const heroTypes = ['small', 'big', 'fullscreen'] as const;
+export const backgroundPositions = [
+    'center',
+    'top',
+    'bottom',
+    'left',
+    'right',
+] as const;
+type BackgroundPosition = (typeof backgroundPositions)[number];
+export interface BackgroundPositionSettings {
+    'background-position'?: BackgroundPosition;
+    'background-position-mobile'?: BackgroundPosition;
+}
 export const sectionSpacings = ['small', 'default', 'large'] as const;
 
 export interface Link {
@@ -45,7 +57,10 @@ export interface SiteConfig {
     url: string;
     base: string;
     i18n: { locale: string; defaultLocale: string; locales: string[] };
-    hero: { classes: string[]; 'background-image'?: string };
+    hero: BackgroundPositionSettings & {
+        classes: string[];
+        'background-image'?: string;
+    };
     typography: {
         headings: { family: 'serif' | 'sans-serif'; weight: number };
         eyebrow: { family: 'serif' | 'sans-serif'; weight: number };
@@ -58,7 +73,7 @@ export interface SiteConfig {
         articles: { heading: string };
     };
     header: { links: HeaderItem[] };
-    footer: {
+    footer: BackgroundPositionSettings & {
         text: string;
         'background-image'?: string | null;
         links: Link[];

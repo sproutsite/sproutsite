@@ -1,6 +1,6 @@
 .ss-hero--starter-waves.ss-hero--has-background-image {
     .ss-hero-background {
-        object-position: center bottom;
+        --ss-background-default-position: center bottom;
     }
 
     &::before {
@@ -17,6 +17,6 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: center bottom;
+        --ss-background-default-position: center bottom;
     }
 }

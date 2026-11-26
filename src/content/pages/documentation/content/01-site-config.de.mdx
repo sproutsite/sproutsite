@@ -98,6 +98,24 @@ Lege dein Bild unter `public/` ab und verwende in `hero.background-image` den Pf
 
 Eine eigene Angabe `background-image` in `hero.md` oder `hero.de.md` ersetzt den globalen Standard. Dort sind auch relative lokale Bilder möglich, etwa `./_assets/hero.jpg`. Mit `background-image: null` schaltest du das globale Bild auf einer Seite aus. Fehlen beide Angaben, wird kein Bild gerendert; CSS-Verläufe und andere Klassenstile bleiben bestehen. Seiten ohne `hero.md`, die Blogübersicht und Fehlerseiten verwenden ebenfalls den globalen Standard.
 
+### Bildausschnitt für Hero und Footer einstellen
+
+Ergänze `background-position` unter `hero` oder `footer`, damit der wichtige Teil eines Bildes beim Zuschneiden sichtbar bleibt. Möglich sind `center` (mittig), `top` (oben), `bottom` (unten), `left` (links) und `right` (rechts).
+
+```yaml
+hero:
+    background-image: /images/werkstatt.webp
+    background-position: center
+    background-position-mobile: left
+footer:
+    background-image: /images/werkstatt-footer.webp
+    background-position: bottom
+```
+
+Im Standard-Theme gilt `background-position-mobile` unterhalb von `64rem`. Fehlt die Angabe, gilt dort ebenfalls die allgemeine Position. Ohne beide Angaben bleibt der bisherige Ausschnitt des Themes oder Starters erhalten. Sprachdateien können beide Felder einzeln überschreiben. Für eine einzelne Seite kannst du die Hero-Position in `hero.md` oder `hero.de.md` anpassen.
+
+Steht für diese Bilder in `src/styles/backgrounds.css` noch `object-position: center bottom`, ersetze diese Angaben durch `--ss-background-default-position: center bottom`. So bleibt der bisherige Ausschnitt als Vorgabe erhalten und lässt sich über YAML überschreiben.
+
 ### Footer-Bereiche
 
 Externe Links lassen sich unabhängig vom Footer-Layout einstellen:

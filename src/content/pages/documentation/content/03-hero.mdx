@@ -20,6 +20,8 @@ titleHighlight: hero
 eyebrow: Context
 tone: brand
 background-image: ./_assets/hero-visual.png
+background-position: center
+background-position-mobile: right
 claim: A memorable statement.
 actions:
     - label: Get started
@@ -30,6 +32,8 @@ tagline: A short supporting tagline.
 ```
 
 `background-image` overrides the global `hero.background-image` from `site.yaml`. Use a public SVG/raster path such as `/backgrounds/hero-waves.svg` or a relative local image such as `./_assets/hero-visual.png`. Astro optimizes imported raster images; public files and SVGs are preserved. Omission inherits the global default; `background-image: null` disables it. With neither setting, only existing CSS backgrounds remain. Meaningful images belong in regular sections with alternative text.
+
+Set `background-position` or `background-position-mobile` to override the corresponding site-wide setting for this page. Omitted fields inherit individually. Below `64rem`, the default theme uses the resolved mobile position if set, otherwise the resolved general position. The values are `center`, `top`, `bottom`, `left`, and `right`.
 
 ### Prepare the hero type
 

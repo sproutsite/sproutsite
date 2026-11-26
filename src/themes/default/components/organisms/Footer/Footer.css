@@ -38,9 +38,34 @@
                 position: absolute;
                 right: 0;
                 bottom: 0;
-                width: max(100%, 100rem);
+                width: var(--ss-footer-image-width, max(100%, 100rem));
                 max-width: none;
-                height: auto;
+                height: var(--ss-footer-image-height, auto);
+                object-fit: cover;
+                --ss-background-current-position: var(--ss-background-position);
+                object-position: var(
+                    --ss-background-current-position,
+                    var(--ss-background-default-position, center)
+                );
+
+                @media (width < 64rem) {
+                    --ss-background-current-position: var(
+                        --ss-background-position-mobile,
+                        var(--ss-background-position)
+                    );
+                }
+            }
+
+            &.ss-footer__background--positioned {
+                --ss-footer-image-width: 100%;
+                --ss-footer-image-height: 100%;
+            }
+
+            @media (width < 64rem) {
+                &.ss-footer__background--positioned-mobile {
+                    --ss-footer-image-width: 100%;
+                    --ss-footer-image-height: 100%;
+                }
             }
         }
 

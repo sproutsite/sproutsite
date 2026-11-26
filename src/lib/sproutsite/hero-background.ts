@@ -1,5 +1,7 @@
 import { extname } from 'node:path';
 import type { ImageMetadata } from 'astro';
+import { z } from 'zod';
+import { backgroundPositions } from './types.js';
 import {
     publicAssetFile,
     publicAssetPath,
@@ -7,6 +9,11 @@ import {
 } from './public-assets.js';
 
 const formats = ['svg', 'png', 'jpg', 'jpeg', 'webp', 'avif'];
+const backgroundPosition = z.enum(backgroundPositions).optional();
+export const backgroundPositionFields = {
+    'background-position': backgroundPosition,
+    'background-position-mobile': backgroundPosition,
+};
 export const publicBackgroundImage = publicAssetPath.refine(
     (src) => formats.includes(extname(src).slice(1).toLowerCase()),
     'must be a public SVG, PNG, JPEG, WebP or AVIF image',

@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { parse } from 'yaml';
 import type { SiteConfig } from './types.js';
 import {
+    backgroundPositionFields,
     publicBackgroundImage,
     validatePublicBackground,
 } from './hero-background.js';
@@ -123,6 +124,7 @@ const siteSchema = z.object({
         .object({
             classes: z.array(heroClass).max(8).default([]),
             'background-image': publicBackgroundImage.optional(),
+            ...backgroundPositionFields,
         })
         .strict()
         .default({ classes: [] }),
@@ -175,6 +177,7 @@ const siteSchema = z.object({
     footer: z.object({
         text: z.string().trim().min(1),
         'background-image': publicBackgroundImage.nullable().optional(),
+        ...backgroundPositionFields,
         links: z.array(linkSchema),
         groups: z
             .array(

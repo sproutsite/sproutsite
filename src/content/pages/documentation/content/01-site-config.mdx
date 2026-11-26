@@ -98,6 +98,24 @@ Place your image under `public/` and set `hero.background-image` to its website-
 
 A local `background-image` in `hero.md` or `hero.de.md` replaces the global default. Relative local images such as `./_assets/hero.jpg` also work there. Set `background-image: null` to disable the global image on one page. With neither setting, no image is rendered; CSS gradients and other class styles remain. Pages without `hero.md`, the blog overview and error pages also use the global default.
 
+### Position hero and footer images
+
+Add `background-position` under `hero` or `footer` to keep the relevant part of an image in view as it fills the space. Available values are `center`, `top`, `bottom`, `left`, and `right`.
+
+```yaml
+hero:
+    background-image: /images/workshop.webp
+    background-position: center
+    background-position-mobile: left
+footer:
+    background-image: /images/workshop-footer.webp
+    background-position: bottom
+```
+
+In the default theme, `background-position-mobile` applies below `64rem`. If omitted, the general position applies there too. If neither position is set, the theme or starter keeps its existing crop. Locale files can override either field, and a page can override either hero position in `hero.md` or `hero.de.md`.
+
+If your starter's `src/styles/backgrounds.css` sets `object-position: center bottom` for these images, change those declarations to `--ss-background-default-position: center bottom`. The original crop then serves as the fallback for the YAML settings.
+
 ### Footer areas
 
 Control external links independently of the footer layout:

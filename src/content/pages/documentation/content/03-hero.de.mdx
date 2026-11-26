@@ -20,6 +20,8 @@ titleHighlight: Hero
 eyebrow: Einordnung
 tone: brand
 background-image: ./_assets/hero-visual.png
+background-position: center
+background-position-mobile: right
 claim: Eine einprägsame Aussage.
 actions:
     - label: Einstieg öffnen
@@ -30,6 +32,8 @@ tagline: Ein kurzer unterstützender Claim.
 ```
 
 `background-image` überschreibt den globalen Standard `hero.background-image` aus `site.yaml`. Du kannst einen öffentlichen SVG- oder Rasterbildpfad wie `/backgrounds/hero-waves.svg` oder ein relatives lokales Bild wie `./_assets/hero-visual.png` verwenden. Lokale Rasterbilder optimiert Astro; öffentliche Dateien und SVGs bleiben unverändert. Ohne lokale Angabe gilt der globale Standard, mit `background-image: null` erscheint kein Bild. Fehlen beide Angaben, bleiben nur die vorhandenen CSS-Hintergründe. Aussagekräftige Bilder gehören mit Alternativtext in reguläre Sections.
+
+Mit `background-position` oder `background-position-mobile` überschreibst du für diese Seite die jeweilige globale Einstellung. Felder ohne Angabe werden einzeln geerbt. Unterhalb von `64rem` verwendet das Standard-Theme die so ermittelte mobile Position, falls vorhanden, sonst die allgemeine Position. Möglich sind `center`, `top`, `bottom`, `left` und `right`.
 
 ### Hero-Typ vorbereiten
 

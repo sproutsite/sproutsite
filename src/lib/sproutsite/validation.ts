@@ -13,7 +13,10 @@ import { visit } from 'unist-util-visit';
 import { loadSiteConfig } from './site-config.js';
 import { heroTypes, sectionSpacings, tones } from './types.js';
 import { isHexColor } from './colors.js';
-import { validatePublicBackground } from './hero-background.js';
+import {
+    backgroundPositionFields,
+    validatePublicBackground,
+} from './hero-background.js';
 import {
     badgeVariants,
     badgeStyles,
@@ -80,6 +83,7 @@ const heroSchema = markdownSchema
             .optional(),
         classes: z.array(heroClass).max(8).nullable().optional(),
         'background-image': z.string().trim().min(1).nullable().optional(),
+        ...backgroundPositionFields,
         actions: z.array(heroAction).min(1).max(2).optional(),
         claim: z.string().trim().min(1).optional(),
         tagline: z.string().trim().min(1).optional(),

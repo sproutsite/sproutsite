@@ -15,6 +15,8 @@ import {
 type Props = FooterProps;
 const { site, route } = Astro.props;
 const background = site.footer['background-image'];
+const position = site.footer['background-position'];
+const mobilePosition = site.footer['background-position-mobile'];
 const language = site.i18n.locale === 'de' ? 'de' : 'en';
 const socialIcons = {
     github: siGithub,
@@ -29,7 +31,21 @@ const linkAttributes = (href: string) => ({
 
 <footer class="ss-footer">
     {background && (
-        <div class="ss-footer__background" aria-hidden="true">
+        <div
+            class:list={[
+                'ss-footer__background',
+                {
+                    'ss-footer__background--positioned': Boolean(position),
+                    'ss-footer__background--positioned-mobile':
+                        Boolean(mobilePosition),
+                },
+            ]}
+            style={{
+                '--ss-background-position': position,
+                '--ss-background-position-mobile': mobilePosition,
+            }}
+            aria-hidden="true"
+        >
             <img src={withBase(background, site.base)} alt="" loading="lazy" />
         </div>
     )}

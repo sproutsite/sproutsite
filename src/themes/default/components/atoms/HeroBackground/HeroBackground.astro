@@ -7,12 +7,18 @@ import {
     validatePublicBackgroundImage,
 } from '../../../../../lib/sproutsite/hero-background.js';
 import { withBase } from '../../../../../lib/sproutsite/urls.js';
+import type { BackgroundPositionSettings } from '../../../../../lib/sproutsite/types.js';
 
-interface Props {
+interface Props extends BackgroundPositionSettings {
     source: ImageMetadata | string;
     base: string;
 }
-const { source, base } = Astro.props;
+const {
+    source,
+    base,
+    'background-position': position,
+    'background-position-mobile': mobilePosition,
+} = Astro.props;
 if (typeof source === 'string')
     validatePublicBackground(source, 'hero background');
 if (typeof source === 'string') await validatePublicBackgroundImage(source);
@@ -24,12 +30,23 @@ const image =
           }
         : source;
 const svg = image.format === 'svg';
-const classes = ['ss-hero-background', { 'ss-hero-background--svg': svg }];
+const classes = [
+    'ss-hero-background',
+    {
+        'ss-hero-background--svg': svg,
+        'ss-hero-background--positioned': Boolean(position || mobilePosition),
+    },
+];
+const positionStyle = {
+    '--ss-background-position': position,
+    '--ss-background-position-mobile': mobilePosition,
+};
 ---
 
 {typeof source === 'string' || svg ? (
     <img
         class:list={classes}
+        style={positionStyle}
         src={image.src}
         width={image.width}
         height={image.height}
@@ -41,6 +58,7 @@ const classes = ['ss-hero-background', { 'ss-hero-background--svg': svg }];
 ) : (
     <Image
         class:list={classes}
+        style={positionStyle}
         src={source}
         alt=""
         format="webp"

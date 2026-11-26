@@ -4,12 +4,37 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
 import type { ImageMetadata } from 'astro';
+import { z } from 'zod';
 import { stringify } from 'yaml';
 import { loadSiteConfig } from '../src/lib/sproutsite/site-config.js';
 import {
+    backgroundPositionFields,
     selectHeroBackground,
     validatePublicBackgroundImage,
 } from '../src/lib/sproutsite/hero-background.js';
+
+test('background positions are optional and accept only supported presets', () => {
+    const schema = z.object(backgroundPositionFields);
+    assert.deepEqual(schema.parse({}), {});
+    assert.deepEqual(
+        schema.parse({
+            'background-position': 'center',
+            'background-position-mobile': 'left',
+        }),
+        {
+            'background-position': 'center',
+            'background-position-mobile': 'left',
+        },
+    );
+    assert.equal(
+        schema.safeParse({ 'background-position': 'center bottom' }).success,
+        false,
+    );
+    assert.equal(
+        schema.safeParse({ 'background-position-mobile': null }).success,
+        false,
+    );
+});
 
 test('hero background precedence distinguishes inherited, local, disabled and absent images', () => {
     const global = '/backgrounds/default.svg';

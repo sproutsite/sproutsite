@@ -60,7 +60,18 @@ const titleLines = heroTitle.split('\n').map((line) => {
     aria-labelledby="page-title"
 >
     {backgroundImage && (
-        <HeroBackground source={backgroundImage} base={site.base} />
+        <HeroBackground
+            source={backgroundImage}
+            base={site.base}
+            background-position={
+                hero.data['background-position'] ??
+                site.hero['background-position']
+            }
+            background-position-mobile={
+                hero.data['background-position-mobile'] ??
+                site.hero['background-position-mobile']
+            }
+        />
     )}
     <div class="ss-hero__inner site-shell">
         {hero.data.eyebrow && <Eyebrow>{hero.data.eyebrow}</Eyebrow>}

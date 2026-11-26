@@ -22,10 +22,14 @@ header:
 footer:
     text: Notes from our workshop.
     background-image: /images/workshop-footer.webp
+    background-position: center
+    background-position-mobile: left
     links:
         - label: Home
           href: /
 ```
+
+Here the footer photo stays centered on wider screens and keeps its left side in view on narrow screens. Leave out the mobile field to use the same position at both widths.
 
 Keep your existing links when adding another. On a bilingual site, use `site.de.yaml` or `site.en.yaml` for the second language. Fields such as the image path are inherited unless overridden. If you override a link list, include every link you want in that language, including the header language switcher if you use it.
 

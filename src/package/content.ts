@@ -2,7 +2,10 @@ import { defineCollection, type ImageFunction } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { heroTypes, sectionSpacings, tones } from '../lib/sproutsite/types.js';
-import { publicBackgroundImage } from '../lib/sproutsite/hero-background.js';
+import {
+    backgroundPositionFields,
+    publicBackgroundImage,
+} from '../lib/sproutsite/hero-background.js';
 import { optionalBlogLoader } from './optional-blog-loader.js';
 import { createBlogReadinessLoader } from './blog-state.js';
 import { blogAuthorSchema } from '../lib/sproutsite/blog-author.js';
@@ -107,6 +110,7 @@ export function createSproutsiteCollections(
                 ])
                 .nullable()
                 .optional(),
+            ...backgroundPositionFields,
             actions: z.array(heroAction).min(1).max(2).optional(),
             claim: z.string().trim().min(1).optional(),
             tagline: z.string().trim().min(1).optional(),
