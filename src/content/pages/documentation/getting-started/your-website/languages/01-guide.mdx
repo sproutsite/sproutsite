@@ -12,17 +12,26 @@ import { Eyebrow } from 'sproutsite/components';
 
 ### Create a bilingual website
 
-Starting with `create-sproutsite` 0.2.0, you can generate a website with German at `/` and English at `/en/`:
+Choose one command. The value of `--language` sets the default language at `/`.
 
 ```sh
+# German at /, English at /en/
 npm create sproutsite@latest my-website -- --language de --bilingual
+
+# English at /, German at /de/
+npm create sproutsite@latest my-website -- --language en --bilingual
+```
+
+Accept the dependency installation when prompted, then start the website.
+
+```sh
 cd my-website
 npm run dev
 ```
 
-Accept the dependency installation when prompted. Open the address printed in the terminal. Use the language switcher on the homepage, then try it on the About page. It links `/ueber-uns/` to `/en/about/` and back.
+Open the address printed in the terminal. Try the language switcher on the homepage and on the About page. With German as the default, it links `/ueber-uns/` and `/en/about/`. With English as the default, it links `/about/` and `/de/ueber-uns/`.
 
-Edit both versions in the same directory under `src/content/pages/`. For the About page, edit `about/01-introduction.md` in English and `about/01-introduction.de.md` in German. The corresponding `page.yaml` and `page.de.yaml` hold their titles and descriptions. For navigation and footer copy, edit `src/content/site.yaml` for German and `src/content/site.en.yaml` for English.
+Edit both versions in the same directory under `src/content/pages/`. For the About page, edit `about/01-introduction.md` in English and `about/01-introduction.de.md` in German. The corresponding `page.yaml` and `page.de.yaml` hold their titles and descriptions. Edit navigation and footer copy for the default language in `src/content/site.yaml`. For the other language, use `site.en.yaml` in the German-first starter or `site.de.yaml` in the English-first starter.
 
 A single-language English starter serves English at `/`; the German starter serves German at `/`. A translated website adds files for the same page identity, rather than creating unrelated copies of each page.
 

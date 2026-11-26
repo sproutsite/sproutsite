@@ -31,10 +31,14 @@ For German content, use `--language de`. The assistant asks for a website name a
 
 The single-language German starter serves German at `/`. It uses `site.de.yaml` for locale overrides and `page.de.yaml`, `.de.md`, and `.de.mdx` for German content alongside the base configuration and page metadata. The generated README explains which files to edit.
 
-For a bilingual website with German at `/` and English at `/en/`, use this generator command in the same workflow:
+For a bilingual website, choose the command for the language you want at `/`:
 
 ```sh
+# German at /, English at /en/
 npm create sproutsite@latest my-website -- --language de --bilingual
+
+# English at /, German at /de/
+npm create sproutsite@latest my-website -- --language en --bilingual
 ```
 
 The [bilingual starter guide](https://sproutsite.dev/documentation/getting-started/your-website/languages/) shows which files to edit in each language and how to check translated navigation.
@@ -732,9 +736,9 @@ npm run build:starter -- --language de --bilingual
 
 The starter defaults to English and uses port 4322 for development. Follow the URL printed by Astro. Use `--port 4323` to run a second starter alongside it. Each command generates a fresh project under ignored `artifacts/starter/` and prints its path. The build writes to that project's `dist/`.
 
-For bilingual previews, `--language` selects the default language at `/`. With `de`, the About page switches between `/ueber-uns/` and `/en/about/`. With `en`, it switches between `/about/` and `/de/ueber-uns/`. The preview combines both sets of content with the route and site settings in `starters/minimal/de-en/` or `starters/minimal/en-de/`. To generate a standalone bilingual website with `create-sproutsite@0.2.0`, use `--language de --bilingual`.
+For bilingual previews, `--language` selects the default language at `/`. With `de`, the About page switches between `/ueber-uns/` and `/en/about/`. With `en`, it switches between `/about/` and `/de/ueber-uns/`. The preview combines both sets of content with the route and site settings in `starters/minimal/de-en/` or `starters/minimal/en-de/`. The published generator supports the same options through `npm create sproutsite@latest`.
 
-Edit the shared and locale-specific files under `starters/minimal/`, then rerun the command to regenerate the starter. These templates were taken from `create-sproutsite@0.1.9`. The preview adds the neutral artwork from `src/package/starter-assets/` and copies the repository's agent instructions for Codex and Claude Code. The generated site's Sproutsite dependency points to this checkout for development, so theme and component updates use Astro's live reload with the repository's existing dependencies. The existing `npm run dev` serves the full demo and Showcase independently.
+Edit the shared and locale-specific files under `starters/minimal/`, then rerun the command to regenerate the starter. Sproutsite maintains these templates and the neutral artwork in `src/package/starter-assets/`. The generator imports both from a pinned Sproutsite commit. The preview copies the repository's agent instructions for Codex and Claude Code. Its Sproutsite dependency points to this checkout, so theme and component updates use Astro's live reload with the repository's existing dependencies. The existing `npm run dev` serves the full demo and Showcase independently.
 
 The starter templates and generated previews are excluded from the Sproutsite npm package.
 

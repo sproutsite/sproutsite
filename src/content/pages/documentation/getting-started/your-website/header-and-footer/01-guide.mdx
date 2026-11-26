@@ -8,13 +8,36 @@ import { Eyebrow } from 'sproutsite/components';
 
 <Eyebrow>Your website</Eyebrow>
 
-## Replace only the area you need
+## Edit navigation and footer settings
+
+Open `src/content/site.yaml` in your website project. Edit `header.links` for the main navigation, `footer.links` for the lower row of links, and `footer.text` for the short introduction under your website name. Use paths such as `/` for your pages, without the language or deployment prefix.
+
+The starter uses `public/images/footer.webp`. To use your own image, save it in `public/images/` and update the path in `footer.background-image`. The URL starts at `/images/`, so leave out `public`. Set the value to `null` to show the theme gradient on its own.
+
+```yaml
+header:
+    links:
+        - label: Home
+          href: /
+footer:
+    text: Notes from our workshop.
+    background-image: /images/workshop-footer.webp
+    links:
+        - label: Home
+          href: /
+```
+
+Keep your existing links when adding another. On a bilingual site, use `site.de.yaml` or `site.en.yaml` for the second language. Fields such as the image path are inherited unless overridden. If you override a link list, include every link you want in that language, including the header language switcher if you use it.
+
+Restart `npm run dev` after editing the site configuration and check the result on a narrow screen. The [site configuration reference](/documentation/content/) also covers link groups, social links, and version display.
+
+### Replace only the area you need
 
 Use [your own CSS](/documentation/getting-started/your-website/theme-overrides/) for changes to colors, spacing or corner radii. If the navigation or footer needs different HTML or behavior, your website team or coding agent can create a local Astro component and register it through `components` in `astro.config.ts`.
 
 The supported entries are `Header` and `Footer`. Each is independent: replacing the header keeps the supplied footer unless you replace that too. With no `components` option, or `components: {}`, the website retains both defaults.
 
-### Start with the current behavior
+#### Start with the current behavior
 
 Create `src/components/Header.astro` in your website folder:
 
@@ -44,7 +67,7 @@ type Props = FooterProps;
 
 These files initially delegate to the supplied components. They preserve the existing navigation, mobile menu, language selection and configured footer areas. `DefaultHeader` and `DefaultFooter` always refer directly to the supplied components, so they can be used inside a replacement without calling that replacement again.
 
-### Register your components
+#### Register your components
 
 Keep the existing options in `astro.config.ts` and add the paths you need:
 
@@ -67,7 +90,7 @@ Remove a single entry to restore that default. Paths are relative to your websit
 
 This technical integration belongs in `astro.config.ts`, not `site.yaml`. The same components serve all languages and deployment subpaths. Use the active settings to choose localized copy.
 
-### The data your component receives
+#### The data your component receives
 
 | Prop    | Meaning                                                                                                                                 |
 | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
@@ -78,7 +101,7 @@ This technical integration belongs in `astro.config.ts`, not `site.yaml`. The sa
 
 The shared layout still provides HTML metadata, fonts, color variables, skip link, `main` and page content. Do not add a second `html`, `body`, `main` or page H1 to a header/footer replacement. All shared pages use these slots, including the blog and error pages. Error routes may be flat document paths such as `/404.html`. A page with `layout: landing` continues to omit the header, including a custom header; its footer still uses the selected component.
 
-### Write your own markup when needed
+#### Write your own markup when needed
 
 Once you replace the delegation, your component owns that area's markup. For example, this is a minimal alternative `Footer.astro`:
 
@@ -113,7 +136,7 @@ Use Astro's locale URL helper so the home link keeps the active language and dep
 
 This minimal example does not reproduce the default footer's links, social icons, version or language selector. Add the features your website needs or retain `DefaultFooter`. Your website team owns responsive behavior, link handling, active navigation, labels, contrast and keyboard operation when writing completely new markup. Native Astro components, scoped styles, local imports and processed scripts remain available in these developer-owned files. This does not change the restrictions on editorial MDX imports.
 
-### Preview, test and update
+#### Preview, test and update
 
 Restart `npm run dev` after changing the configured paths. Edits inside the selected Astro files use the normal development updates. Test both narrow and wide viewports, language variants, a nested page, the scrolled navigation and error pages. Run `npm run check` and `npm run build`, then inspect `npm run preview`; test your deployment subpath if one is configured.
 

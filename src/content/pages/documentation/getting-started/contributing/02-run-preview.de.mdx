@@ -29,7 +29,7 @@ npm run dev:starter -- --language de
 
 Jeder Befehl startet einen einsprachigen Starter. Der Server verwendet standardmäßig Port 4322 und zeigt seine Adresse im Terminal an. Du kannst ihn parallel zur Demo starten. Er nutzt die bereits installierten Abhängigkeiten des Repositorys und übernimmt lokale Änderungen am Theme und an Astro-Komponenten im Browser.
 
-Die Starter-Vorlagen liegen unter `starters/minimal/`. Starte nach Änderungen an den Vorlagen den Befehl erneut. Jeder Aufruf erzeugt ein frisches Projekt unter `artifacts/starter/`.
+Die Starter-Vorlagen liegen unter `starters/minimal/`, die gemeinsamen Bilder unter `src/package/starter-assets/public/`. Starte nach Änderungen an den Vorlagen oder Bildern den Befehl erneut. Jeder Aufruf erzeugt ein frisches Projekt unter `artifacts/starter/`. Der Generator übernimmt Vorlagen und Dateien aus einem festgelegten Sproutsite-Commit.
 
 ### Zweisprachigen Starter ansehen
 
@@ -40,4 +40,4 @@ npm run dev:starter -- --language en --bilingual
 
 Mit `--language de` liegt Deutsch unter `/` und Englisch unter `/en/`. Mit `--language en` liegt Englisch unter `/` und Deutsch unter `/de/`. Beide Vorschauen verwenden dieselben Übersetzungen. Auf der Beispielseite wechselt die Sprachwahl zwischen `/ueber-uns/` und `/en/about/` beziehungsweise zwischen `/about/` und `/de/ueber-uns/`.
 
-Die [Anleitung für den zweisprachigen Starter](/dokumentation/einstieg/deine-website/sprachen/) erklärt, wie du eine eigenständige Website mit Deutsch als Standardsprache erzeugst.
+Die [Anleitung für den zweisprachigen Starter](/dokumentation/einstieg/deine-website/sprachen/) zeigt die passenden Generator-Befehle für beide Standardsprachen.

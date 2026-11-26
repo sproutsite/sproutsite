@@ -29,7 +29,7 @@ npm run dev:starter -- --language de
 
 Each command opens a single-language starter. The server defaults to port 4322 and prints its address in the terminal, so you can run it alongside the demo. It uses the repository's installed dependencies and picks up local changes to the theme and Astro components in the browser.
 
-Edit the starter templates in `starters/minimal/`. Restart the command to apply template edits. Each run creates a fresh project under `artifacts/starter/`.
+Edit the starter templates in `starters/minimal/` and shared images in `src/package/starter-assets/public/`. Rerun the command to pick up template or image changes. Each run creates a fresh project under `artifacts/starter/`. The generator imports the templates and assets from a pinned Sproutsite commit.
 
 ### Preview a bilingual starter
 
@@ -40,4 +40,4 @@ npm run dev:starter -- --language en --bilingual
 
 Use `--language de` for German at `/` and English at `/en/`, or `--language en` for English at `/` and German at `/de/`. The About page uses the same translations in both previews. The language switcher links `/ueber-uns/` with `/en/about/` in the first preview and `/about/` with `/de/ueber-uns/` in the second.
 
-The [bilingual starter guide](/documentation/getting-started/your-website/languages/) explains how to generate a standalone bilingual website with German as the default.
+The [bilingual starter guide](/documentation/getting-started/your-website/languages/) shows the equivalent generator commands for either default language.

@@ -4,4 +4,4 @@ eyebrow: Dein Seitenrahmen
 type: small
 ---
 
-Wähle lokale Astro-Komponenten für deine Navigation oder deinen Footer. Sie erhalten die aktuellen Website-Einstellungen und die Inhaltsroute. Der übrige Seitenaufbau bleibt erhalten.
+Pflege Navigationslinks, Footertext und Footerbild in `site.yaml`. Für einen anderen Aufbau kannst du lokale Astro-Komponenten verwenden.

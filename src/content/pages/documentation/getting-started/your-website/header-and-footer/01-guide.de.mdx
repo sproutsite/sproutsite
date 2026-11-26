@@ -8,13 +8,36 @@ import { Eyebrow } from 'sproutsite/components';
 
 <Eyebrow>Deine Website</Eyebrow>
 
-## Nur den benötigten Bereich ersetzen
+## Navigation und Footer einstellen
+
+Öffne `src/content/site.yaml` im Ordner deiner Website. Unter `header.links` pflegst du die Hauptnavigation, unter `footer.links` die untere Linkzeile und unter `footer.text` den kurzen Text unter dem Website-Namen. Gib Seitenpfade wie `/` ohne Sprachpräfix oder Deployment-Unterordner an.
+
+Der Starter verwendet `public/images/footer.webp`. Speichere ein eigenes Bild unter `public/images/` und ändere den Pfad in `footer.background-image`. Die URL beginnt mit `/images/`. Mit `null` blendest du das Bild aus und der Farbverlauf des Themes bleibt sichtbar.
+
+```yaml
+header:
+    links:
+        - label: Startseite
+          href: /
+footer:
+    text: Einblicke aus unserer Werkstatt.
+    background-image: /images/werkstatt-footer.webp
+    links:
+        - label: Startseite
+          href: /
+```
+
+Ergänze neue Links in der bestehenden Liste. Bei einer zweisprachigen Website pflegst du die zweite Sprache in `site.de.yaml` oder `site.en.yaml`. Felder wie der Bildpfad werden geerbt, bis du sie dort überschreibst. Wenn du eine Linkliste überschreibst, nimm alle gewünschten Links und bei Bedarf die Sprachwahl im Header mit auf.
+
+Starte `npm run dev` nach Änderungen an der Website-Konfiguration neu und prüfe das Ergebnis auch auf einem schmalen Bildschirm. Die [Referenz zur Website-Konfiguration](/dokumentation/inhalte/) beschreibt auch Linkgruppen, Social Links und die Versionsanzeige.
+
+### Nur den benötigten Bereich ersetzen
 
 Für andere Farben, Abstände oder Rundungen genügt [eigenes CSS](/dokumentation/einstieg/deine-website/theme-anpassen/). Wenn die Navigation oder der Footer anderes HTML oder Verhalten benötigt, kann dein Website-Team oder Coding-Agent eine lokale Astro-Komponente erstellen und über `components` in `astro.config.ts` einbinden.
 
 Unterstützt werden `Header` und `Footer`. Beide sind unabhängig: Ein eigener Header lässt den mitgelieferten Footer bestehen, solange du diesen nicht ebenfalls ersetzt. Ohne `components` oder mit `components: {}` bleiben beide Standardkomponenten aktiv.
 
-### Mit dem bisherigen Verhalten beginnen
+#### Mit dem bisherigen Verhalten beginnen
 
 Erstelle `src/components/Header.astro` im Ordner deiner Website:
 
@@ -44,7 +67,7 @@ type Props = FooterProps;
 
 Die Dateien reichen zunächst an die mitgelieferten Komponenten weiter. Dadurch bleiben Navigation, mobiles Menü, Sprachwahl und konfigurierte Footer-Bereiche erhalten. `DefaultHeader` und `DefaultFooter` verweisen immer direkt auf die mitgelieferten Komponenten. Du kannst sie innerhalb eines Ersatzes nutzen, ohne diesen erneut aufzurufen.
 
-### Eigene Komponenten einbinden
+#### Eigene Komponenten einbinden
 
 Behalte die vorhandenen Optionen in `astro.config.ts` bei und ergänze die benötigten Pfade:
 
@@ -67,7 +90,7 @@ Entferne einen einzelnen Eintrag, um wieder dessen Standardkomponente zu verwend
 
 Diese technische Einbindung gehört in `astro.config.ts`, nicht in `site.yaml`. Dieselben Komponenten werden für alle Sprachen und Basispfade verwendet. Nutze die aktuellen Einstellungen für sprachabhängige Texte.
 
-### Diese Daten erhält deine Komponente
+#### Diese Daten erhält deine Komponente
 
 | Prop    | Bedeutung                                                                                                                             |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
@@ -78,7 +101,7 @@ Diese technische Einbindung gehört in `astro.config.ts`, nicht in `site.yaml`. 
 
 Das gemeinsame Layout stellt weiterhin HTML-Metadaten, Schriften, Farbvariablen, Sprunglink, `main` und Seiteninhalt bereit. Ergänze im Header oder Footer kein zweites `html`, `body`, `main` oder eine weitere Seiten-H1. Alle gemeinsamen Seiten nutzen diese Bereiche, einschließlich Blog und Fehlerseiten. Bei Fehlerseiten kann `route` einen flachen Dokumentpfad wie `/404.html` enthalten. Eine Seite mit `layout: landing` lässt weiterhin den Header weg, auch einen eigenen. Ihr Footer verwendet die ausgewählte Komponente.
 
-### Bei Bedarf eigenes HTML schreiben
+#### Bei Bedarf eigenes HTML schreiben
 
 Ersetzt du die Weiterleitung, gehört das HTML dieses Bereichs deiner Komponente. Ein minimales Beispiel für eine alternative `Footer.astro`:
 
@@ -113,7 +136,7 @@ Astros Sprach-URL-Helfer berücksichtigt die aktuelle Sprache und den Basispfad.
 
 Dieses minimale Beispiel bildet die Links, Social Icons, Versionsanzeige und Sprachwahl des Default-Footers nicht nach. Ergänze die benötigten Funktionen oder behalte `DefaultFooter`. Bei vollständig eigenem HTML ist dein Website-Team für mobile Darstellung, Linkverhalten, aktive Navigation, Beschriftungen, Kontrast und Tastaturbedienung verantwortlich. Normale Astro-Komponenten, lokale Styles und Importe sowie verarbeitete Skripte bleiben in diesen Entwicklerdateien nutzbar. Die Regeln für redaktionelle MDX-Importe ändern sich dadurch nicht.
 
-### Vorschau, Prüfungen und Updates
+#### Vorschau, Prüfungen und Updates
 
 Starte `npm run dev` nach einer Änderung der konfigurierten Pfade neu. Änderungen innerhalb der ausgewählten Astro-Dateien nutzen die normale Entwicklungsvorschau. Prüfe schmale und breite Ansichten, Sprachen, eine Unterseite, die angedockte Navigation und Fehlerseiten. Führe `npm run check` und `npm run build` aus und betrachte `npm run preview`. Prüfe bei Bedarf auch das Deployment unter einem Basispfad.
 
