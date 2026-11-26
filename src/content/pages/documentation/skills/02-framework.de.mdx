@@ -1,0 +1,32 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>Für Mitwirkende</Eyebrow>
+
+## Am Sproutsite-Framework mitarbeiten
+
+### `sproutsite-update-starter-docs`
+
+Nutze den Skill im Sproutsite-Repository mit Codex oder Claude Code. Er gleicht die deutschen und englischen Anleitungen sowie die README mit den lokalen Starter-Vorlagen und bei Bedarf mit dem veröffentlichten Generator ab. Dazu gehören Befehle, Sprachpfade, mitgelieferte Dateien und Einstellungen in `site.yaml`.
+
+> Nutze `sproutsite-update-starter-docs` und dokumentiere die neue Footer-Option auf Deutsch und Englisch. Prüfe, welche Schritte für die lokale Vorschau und welche für den veröffentlichten Generator gelten.
+
+### Commit-Nachrichten und Releases
+
+Diese Abläufe stehen im Framework-Repository unter `.codex/skills/`. Öffne die Arbeitskopie in Codex und rufe den Skill über seinen Namen oder Kurzbefehl auf.
+
+| Skill           | Kurzbefehl | Ergebnis                                                                             |
+| --------------- | ---------- | ------------------------------------------------------------------------------------ |
+| `ocm`           | `ocm`      | Schlägt eine einzeilige englische Commit-Nachricht für die aktuellen Änderungen vor. |
+| `release-patch` | `rpu`      | Bereitet den nächsten Patch-Release vor.                                             |
+| `release-minor` | `rmu`      | Bereitet den nächsten Minor-Release vor.                                             |
+| `release-major` | `rmaj`     | Bereitet den nächsten Major-Release vor.                                             |
+
+Die Release-Skills aktualisieren Versionsdateien und Changelog lokal. Die Veröffentlichung ist ein eigener Schritt.
+
+[Das Framework-Repository einrichten](/dokumentation/einstieg/mitarbeiten/)

@@ -8,6 +8,7 @@ fullWidth: true
 import gettingStartedImage from './_assets/getting-started.png';
 import contentImage from './_assets/content.png';
 import layoutImage from './_assets/layout.png';
+import skillsImage from './_assets/skills.png';
 import { Card, CardActions } from 'sproutsite/components';
 import { Column, Columns } from 'sproutsite/components';
 import { Eyebrow } from 'sproutsite/components';
@@ -19,7 +20,7 @@ import { Eyebrow } from 'sproutsite/components';
 Lege deine Website an, finde die passenden Inhaltsdateien und stelle Seiten mit den vorhandenen Komponenten zusammen.
 
 <Columns>
-    <Column span={4}>
+    <Column span={3}>
         <Card image={gettingStartedImage} imageAlt="Dreidimensionale Darstellung eines Browserfensters, eines kompakten Editors und eines Startpfeils in Navy und Petrol.">
             ### Einstieg
 
@@ -31,7 +32,7 @@ Lege deine Website an, finde die passenden Inhaltsdateien und stelle Seiten mit 
         </Card>
     </Column>
 
-    <Column span={4}>
+    <Column span={3}>
         <Card image={contentImage} imageAlt="Dreidimensionale Inhaltsdateien in einem Ordner mit Textzeilen, Bildbereich und einer Konfigurationskachel.">
             ### Inhalte
 
@@ -43,7 +44,7 @@ Lege deine Website an, finde die passenden Inhaltsdateien und stelle Seiten mit 
         </Card>
     </Column>
 
-    <Column span={4}>
+    <Column span={3}>
         <Card image={layoutImage} imageAlt="Dreidimensionales Layout-Raster mit unterschiedlich breiten Spalten und wiederverwendbaren Bausteinen.">
             ### Layout und Komponenten
 
@@ -51,6 +52,18 @@ Lege deine Website an, finde die passenden Inhaltsdateien und stelle Seiten mit 
 
             <CardActions>
                 [Seiten zusammenstellen](/dokumentation/layout/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={3}>
+        <Card image={skillsImage} imageAlt="Dreidimensionale Anleitungskarte mit Terminalsymbol und türkisfarbenem Häkchen.">
+            ### Sproutsite-Skills
+
+            Nutze Codex oder Claude Code für die Seitenpflege und wiederkehrende Aufgaben am Framework.
+
+            <CardActions>
+                [Skills ansehen](/dokumentation/skills/)
             </CardActions>
         </Card>
     </Column>

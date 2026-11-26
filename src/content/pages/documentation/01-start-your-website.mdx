@@ -8,6 +8,7 @@ fullWidth: true
 import gettingStartedImage from './_assets/getting-started.png';
 import contentImage from './_assets/content.png';
 import layoutImage from './_assets/layout.png';
+import skillsImage from './_assets/skills.png';
 import { Card, CardActions } from 'sproutsite/components';
 import { Column, Columns } from 'sproutsite/components';
 import { Eyebrow } from 'sproutsite/components';
@@ -19,7 +20,7 @@ import { Eyebrow } from 'sproutsite/components';
 Create your website, find the files you edit and assemble pages with the supplied components.
 
 <Columns>
-    <Column span={4}>
+    <Column span={3}>
         <Card image={gettingStartedImage} imageAlt="Three-dimensional illustration of a browser window, compact editor and start arrow in navy and teal.">
             ### Getting started
 
@@ -31,7 +32,7 @@ Create your website, find the files you edit and assemble pages with the supplie
         </Card>
     </Column>
 
-    <Column span={4}>
+    <Column span={3}>
         <Card image={contentImage} imageAlt="Three-dimensional content files in a folder with text lines, an image area and a configuration tile.">
             ### Content
 
@@ -43,7 +44,7 @@ Create your website, find the files you edit and assemble pages with the supplie
         </Card>
     </Column>
 
-    <Column span={4}>
+    <Column span={3}>
         <Card image={layoutImage} imageAlt="Three-dimensional layout grid with unequal columns and reusable components.">
             ### Layout and components
 
@@ -51,6 +52,18 @@ Create your website, find the files you edit and assemble pages with the supplie
 
             <CardActions>
                 [Build your pages](/documentation/layout/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={3}>
+        <Card image={skillsImage} imageAlt="Three-dimensional instruction card with a terminal symbol and a teal checkmark.">
+            ### Sproutsite skills
+
+            Use Codex or Claude Code to edit pages and handle recurring framework tasks.
+
+            <CardActions>
+                [Explore the skills](/documentation/skills/)
             </CardActions>
         </Card>
     </Column>

@@ -1,0 +1,32 @@
+---
+tone:
+    odd: default
+    even: muted
+---
+
+import { Eyebrow } from 'sproutsite/components';
+
+<Eyebrow>For contributors</Eyebrow>
+
+## Maintain the Sproutsite framework
+
+### `sproutsite-update-starter-docs`
+
+Use this skill in the Sproutsite framework repository with Codex or Claude Code. It checks the English and German guides and README against the local starter templates and, where relevant, the published generator. It covers commands, language routes, bundled files, and settings in `site.yaml`.
+
+> Use `sproutsite-update-starter-docs` to document the new footer option in English and German. Check which instructions apply to the local preview and which apply to the published generator.
+
+### Commit messages and releases
+
+The framework repository provides these workflows in `.codex/skills/`. Open the framework checkout in Codex and invoke the skill by name or shortcut.
+
+| Skill           | Shortcut | Result                                                             |
+| --------------- | -------- | ------------------------------------------------------------------ |
+| `ocm`           | `ocm`    | Suggest a one-line English commit message for the current changes. |
+| `release-patch` | `rpu`    | Prepare the next patch release.                                    |
+| `release-minor` | `rmu`    | Prepare the next minor release.                                    |
+| `release-major` | `rmaj`   | Prepare the next major release.                                    |
+
+The release skills update the version files and changelog locally. Publishing is a separate step.
+
+[Set up the framework repository](/documentation/getting-started/contributing/)

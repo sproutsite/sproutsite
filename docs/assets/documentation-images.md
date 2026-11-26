@@ -2,6 +2,22 @@
 
 All output paths are relative to the repository root. Generated on 2026-11-18 using the built-in OpenAI image-generation tool. The maintainer requested replacement of the eight documentation-overview images in the approved getting-started/showcase style. Approved first-party images were inspected to describe the palette, materials and safe framing; no image files were supplied to the generator. Each asset was generated independently from the text-only prompt below. Existing filenames are retained so English and German content share the same assets. These are illustrative UI motifs, not screenshots, product logos or certification marks.
 
+## skills
+
+Generated on 2026-11-26 using the built-in OpenAI image-generation tool. The first-party `src/content/pages/showcase/_assets/buttons.png` and `src/content/pages/documentation/getting-started/_assets/your-website.png` were supplied as style references.
+
+Output: `src/content/pages/documentation/_assets/skills.png`
+
+```text
+Use case: stylized-concept. Original 16:9 landscape illustration for the Sproutsite documentation card about coding-agent skills. Use both input illustrations only as first-party style and composition references; the buttons illustration is primary for its close framing and pale upper wall. Scene: a pale cool-gray-blue upper studio wall around #d9e3eb, with a broad navy-to-petrol wave rising behind the subject. The upper crest has a clean organic edge against the wall and the bottom of the wave fades softly into the light floor. Subject: a single large matte white instruction card with three navy placeholder lines, a navy terminal tile with a simple white chevron-and-cursor glyph, and a small teal check tile, fitted together as one clear foreground group on a low rounded white plinth. The actual objects fill about 78% of image width and 68% of height, centered, close to the camera. Keep the three essential motifs near mid-height to read in a wide card crop. Match the softly beveled matte ceramic surfaces, muted navy, blue and teal palette, subtle upper-left studio light and the references' gentle contact shadows. No words, numerals, logos, people, robots, neon, floating decoration or watermark.
+```
+
+The illustration was reframed on 2026-11-26 with the built-in tool. The original Skills illustration was the edit target. The adjacent `src/content/pages/documentation/_assets/layout.png` and `content.png` illustrations were the scale and style references. The revised output replaces `skills.png` in both locales.
+
+```text
+Edit image 1, the current Skills illustration. Images 2 and 3 (Layout and Content) are style and exact framing references from the same card row. Keep the Skills concept: a white instruction card with three navy bars, a terminal chevron and cursor, and one teal checkmark, on a rounded white pedestal. Recompose the artwork to match the other cards side by side at the SAME display size. Pull the camera back substantially and make the instruction board more compact and less wide. On the full 16:9 canvas, the entire white board and symbols must fit within x=27% to 73%, and y=29% to 72%. The entire plinth must fit within x=23% to 77% and end around y=81%. Set the wave crest toward the left, about x=39%, y=13%, dip at right of center, then rise toward the far right like images 2 and 3. Match their light cool blue-gray wall, softly fading navy-to-petrol wave, cool floor, material and shadows. A centered 1.1:1 cover crop should show the whole board and plinth with a clear margin on both sides, in balance with the neighboring cards. No words, logos, frames or new objects.
+```
+
 ## getting-started
 
 Output: `src/content/pages/documentation/_assets/getting-started.png`
