@@ -41,3 +41,7 @@ npm run dev:starter -- --language en --bilingual
 Use `--language de` for German at `/` and English at `/en/`, or `--language en` for English at `/` and German at `/de/`. The About page uses the same translations in both previews. The language switcher links `/ueber-uns/` with `/en/about/` in the first preview and `/about/` with `/de/ueber-uns/` in the second.
 
 The [bilingual starter guide](/documentation/getting-started/your-website/languages/) shows the equivalent generator commands for either default language.
+
+### Check all starter variants
+
+Run `npm run test:starter` to build and check all four variants from this checkout. The terminal shows `PASS` or `FAIL` for each variant. The test checks language routes, translated links, the logo, favicon, and hero and footer images. Use `npm run dev:starter` to review the design in a browser.

@@ -41,3 +41,7 @@ npm run dev:starter -- --language en --bilingual
 Mit `--language de` liegt Deutsch unter `/` und Englisch unter `/en/`. Mit `--language en` liegt Englisch unter `/` und Deutsch unter `/de/`. Beide Vorschauen verwenden dieselben Übersetzungen. Auf der Beispielseite wechselt die Sprachwahl zwischen `/ueber-uns/` und `/en/about/` beziehungsweise zwischen `/about/` und `/de/ueber-uns/`.
 
 Die [Anleitung für den zweisprachigen Starter](/dokumentation/einstieg/deine-website/sprachen/) zeigt die passenden Generator-Befehle für beide Standardsprachen.
+
+### Alle Starter-Varianten prüfen
+
+Mit `npm run test:starter` baust und prüfst du alle vier Varianten aus dieser Arbeitskopie. Im Terminal steht für jede Variante `PASS` oder `FAIL`. Der Test prüft Sprachpfade, Links im Sprachwähler, Logo, Favicon sowie Hero- und Footer-Bilder. Für die optische Prüfung im Browser nutzt du `npm run dev:starter`.

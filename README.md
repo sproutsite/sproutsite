@@ -742,6 +742,8 @@ Edit the shared and locale-specific files under `starters/minimal/`, then rerun 
 
 The starter templates and generated previews are excluded from the Sproutsite npm package.
 
+Run `npm run test:starter` to build all four local starter variants and check their HTML and files. The command prints `PASS` or `FAIL` for each variant. It checks the homepage languages, bilingual links on the home and About pages, and the logo, favicon, and hero and footer images. Build output stays under `artifacts/starter/`. Use `npm run dev:starter` when you want to inspect the design in a browser.
+
 ### Legal details for the demo website
 
 The legal-notice pages read operator details from a local `.env`. Copy `.env.dist` to `.env` and enter your details before running `npm run build`. `.env` is ignored by Git; `.env.dist` contains example values for version control. Without `.env`, `npm run dev` displays clearly marked sample details. Builds of pages using `LegalIdentity` reject a missing file, incomplete/invalid fields, or the sample name, email and LinkedIn profile. Consumer websites without this component do not require these variables. Generated HTML intentionally contains the legal details for publication.
