@@ -7,6 +7,19 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.36] - 2026-11-26
+
+### Added
+
+- Added responsive background positioning for hero and footer images. Site settings support separate mobile positions, and individual heroes can override either setting.
+- Added `npm run test:starter` to build all four local variants and verify language routes, switcher links, branding, and background images.
+- Added a bilingual skills overview and a shared Codex and Claude Code skill for keeping starter documentation current.
+
+### Changed
+
+- Updated the English and German starter guides for both bilingual defaults and for configuring navigation, branding, and footer backgrounds.
+- Preserved the starter's wave crops as CSS fallbacks and documented how to update the stylesheet in existing starter projects.
+
 ## [0.5.35] - 2026-11-25
 
 ### Added
