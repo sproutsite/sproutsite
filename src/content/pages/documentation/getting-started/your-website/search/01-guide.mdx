@@ -11,21 +11,48 @@ import { Alert } from 'sproutsite/components';
 
 ## Help visitors find a page
 
-<Alert variant="warning" style="soft">
-    Open – future capability. This page describes the goal; a supported
-    implementation for your website is still missing.
+<Alert variant="info" style="soft">
+    These steps assume that your website starter includes the Pagefind build
+    integration and the search button in the header. Try the working example in
+    this site’s navigation. It searches the documentation and Showcase.
 </Alert>
 
-A site search would become useful as your pages and articles grow. There is currently no bundled search component, generated search index or search configuration in Sproutsite.
+### Turn on search
 
-### The intended experience
+Open `src/content/site.yaml` in your website project and add or update this top-level setting:
 
-Visitors should be able to search published titles and content, see useful excerpts and open the matching page. Results must respect the selected language and work with deployment subpaths.
+```yaml
+search:
+    enabled: true
+```
 
-### What remains to be built
+In a bilingual project, set it in the shared `site.yaml`. The prepared header adds a magnifying glass on desktop and mobile. Click it to open the search dialog. Set `enabled: false` to turn search off.
 
-The solution needs a build-time index, a keyboard-accessible search interface, clear empty states and a way to exclude content that should not appear. It must define whether data stays in the browser or is sent to another service; an external search provider is not assumed.
+### Build the search index and test it locally
 
-This is recorded as future work. Until then, use clear navigation, descriptive page titles, topic overviews and links between related pages. Those are available now and remain useful even after search is introduced.
+From your website project folder, run:
+
+```sh
+npm run build
+npm run dev
+```
+
+Astro generates the HTML first. The prepared integration then passes the main content of the selected pages to Pagefind, which writes the index and browser files to `dist/pagefind/`. The search dialog loads that bundle from your own site when someone searches. The integration connects the dialog to the bundle and accounts for the site’s base path, including deployments under a subpath such as `/demo/`.
+
+Open the URL printed by the dev server and search for a phrase from one of your pages. The dev server reads the most recent built index, so rebuild and reload the page after editing searchable content. To check the exact files you will deploy, run `npm run preview` after the build.
+
+### Read and open results
+
+The dialog searches in the active language. It shows an excerpt with matching words highlighted, a rank badge, the Pagefind relevance score, and the exact destination URL. The highest score appears first. The score compares results for the current query. It is not a percentage. When a match has a suitable section link, the result opens that section.
+
+From the search field, press `↓` to focus the first result. Use `↑` and `↓` to move through results, `Enter` to open one, and `Esc` to close the dialog. You can also use `Tab` to navigate the controls.
+
+### Publish the search with your website
+
+Publish the full `dist/` directory, including `dist/pagefind/`, from the same build. Keep the generated index out of Git. Searches run in the visitor’s browser using files served by your website.
+
+If the search reports that it is unavailable, first check that `pagefind/pagefind.js` is served under the same base path as your pages. If the server sets a Content Security Policy, allow `'wasm-unsafe-eval'` in `script-src` for Pagefind’s WebAssembly. [Pagefind hosting documentation](https://pagefind.app/docs/hosting/)
+
+[Publish with Apache or Nginx](/documentation/deployment/)
 
 [Back to the quick start and more topics](/documentation/getting-started/your-website/)

@@ -91,6 +91,13 @@
         .ss-card__body {
             @apply flex flex-1 flex-col;
 
+            > :where(h1, h2, h3, h4, h5, h6):first-child[id] {
+                scroll-margin-block-start: calc(
+                    var(--ss-header-anchor-offset, 1rem) +
+                        var(--ss-card-title-offset, 0px)
+                );
+            }
+
             a:not(.ss-button) {
                 @apply font-semibold;
             }

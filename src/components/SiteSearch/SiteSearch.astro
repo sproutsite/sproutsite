@@ -1,0 +1,132 @@
+---
+import { Badge, Icon } from 'sproutsite/components';
+import type { SiteConfig } from '../../lib/sproutsite/types.js';
+import { contentHref, withBase } from '../../lib/sproutsite/urls.js';
+import './SiteSearch.css';
+
+interface Props {
+    site: SiteConfig;
+    title: string;
+}
+const { site, title } = Astro.props;
+const german = site.i18n.locale === 'de';
+const copy = german
+    ? {
+          input: 'Suchbegriff eingeben',
+          placeholder: 'Dokumentation und Showcase durchsuchen',
+          hint: 'Suche nach einem Thema oder einer Komponente.',
+          searching: 'Suche läuft …',
+          result: 'für',
+          singular: 'Treffer',
+          plural: 'Treffer',
+          score: 'Trefferscore',
+          error: 'Die Suche ist gerade nicht verfügbar.',
+          missingIndex:
+              'Erzeuge den Suchindex mit npm run build und lade die Seite neu.',
+          documentation: 'Dokumentation',
+          showcase: 'Showcase',
+          clear: 'Suchbegriff löschen',
+          close: 'Schließen',
+          more: 'Weitere Treffer laden',
+          keyboard:
+              'Mit Pfeil hoch und runter Treffer auswählen. Mit Enter öffnen.',
+      }
+    : {
+          input: 'Enter a search term',
+          placeholder: 'Search documentation and showcase',
+          hint: 'Search for a topic or component.',
+          searching: 'Searching…',
+          result: 'for',
+          singular: 'result',
+          plural: 'results',
+          score: 'Relevance score',
+          error: 'Search is currently unavailable.',
+          missingIndex:
+              'Run npm run build to generate the search index, then reload this page.',
+          documentation: 'Documentation',
+          showcase: 'Showcase',
+          clear: 'Clear search',
+          close: 'Close',
+          more: 'Load more results',
+          keyboard:
+              'Use Up and Down to select a result, then press Enter to open it.',
+      };
+---
+
+<dialog
+    id="ss-site-search"
+    class="ss-site-search"
+    aria-labelledby="ss-site-search-title"
+    data-module={withBase('/pagefind/pagefind.js', site.base)}
+    data-showcase={contentHref('/showcase/', site)}
+    data-locale={site.i18n.locale}
+    data-copy={JSON.stringify(copy)}
+    data-development={import.meta.env.DEV ? 'true' : undefined}
+>
+    <div class="ss-site-search__panel">
+        <div class="ss-site-search__header">
+            <h2 id="ss-site-search-title">{title}</h2>
+            <button
+                type="button"
+                class="ss-site-search__icon-button"
+                aria-label={copy.close}
+                data-search-close
+            >
+                <Icon name="X" size={24} />
+            </button>
+        </div>
+
+        <form class="ss-site-search__form" role="search">
+            <Icon name="Search" size={22} />
+            <input
+                type="text"
+                role="searchbox"
+                inputmode="search"
+                aria-label={copy.input}
+                aria-describedby="ss-site-search-keyboard"
+                placeholder={copy.placeholder}
+                autocomplete="off"
+                maxlength="200"
+                autofocus
+            />
+            <button
+                type="button"
+                class="ss-site-search__icon-button"
+                aria-label={copy.clear}
+                data-search-clear
+                hidden
+            >
+                <Icon name="X" size={20} />
+            </button>
+        </form>
+
+        <p class="ss-site-search__status" role="status" aria-atomic="true">
+            {copy.hint}
+        </p>
+        <ol
+            class="ss-site-search__results"
+            role="list"
+            aria-label={german ? 'Suchergebnisse' : 'Search results'}
+        ></ol>
+        <template data-search-rank>
+            <Badge variant="primary" size="sm" />
+        </template>
+        <button type="button" class="btn btn-outline" data-search-more hidden>
+            {copy.more}
+        </button>
+
+        <div class="ss-site-search__footer">
+            <span aria-hidden="true">
+                <kbd>Esc</kbd> {copy.close}
+            </span>
+            <span id="ss-site-search-keyboard">{copy.keyboard}</span>
+        </div>
+    </div>
+</dialog>
+
+<script>
+    import { setupSiteSearch } from './search.js';
+
+    const dialog = document.querySelector<HTMLDialogElement>('#ss-site-search');
+    if (dialog) setupSiteSearch(dialog);
+</script>

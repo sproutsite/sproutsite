@@ -90,6 +90,9 @@ links:
         newTab: true
         icon: true
 
+search:
+    enabled: true
+
 header:
     links:
         - label: Home

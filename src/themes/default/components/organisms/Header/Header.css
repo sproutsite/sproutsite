@@ -1,4 +1,8 @@
 @layer components {
+    html:has(.ss-header) {
+        --ss-header-anchor-offset: 7rem;
+    }
+
     .ss-header {
         --ss-logo-light-visibility: hidden;
         --ss-logo-dark-visibility: visible;

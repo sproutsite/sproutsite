@@ -721,6 +721,14 @@ Storybook is a local developer tool and not part of the published website. It re
 
 The product identity is consistently Sproutsite: package imports use `sproutsite/*`, public helpers use `createSproutsiteCollections()`, `createSproutsiteConfig()` and `getSproutsiteStaticPaths()`, and theme classes use the `ss-` prefix. Update local consumers' dependency, imports, environment variables and custom theme overrides together.
 
+### Search the Sproutsite documentation and Showcase
+
+The Sproutsite website enables search with `search.enabled: true` in `src/content/site.yaml`. Click the magnifying glass in the navigation to search the documentation and Showcase in the active language. The build creates the Pagefind bundle in `dist/pagefind/`. Deploy it with the rest of `dist/`.
+
+If the production server sets a Content Security Policy, include `'wasm-unsafe-eval'` in `script-src` so Pagefind can run WebAssembly. [Pagefind hosting requirements](https://pagefind.app/docs/hosting/)
+
+For local testing, run `npm run build`, then `npm run dev` or `npm run preview`. The dev server reads the most recent index from the build directory. After editing indexed content, rebuild and reload the page. Use the same base path for the build and preview. The index is generated and can be rebuilt from the source and lockfile.
+
 ### Preview the default starter
 
 After installing the repository dependencies, preview a starter in its own Astro project:

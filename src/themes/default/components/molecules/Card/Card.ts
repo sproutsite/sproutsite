@@ -6,6 +6,37 @@ interface ActiveHint {
 
 let activeHint: ActiveHint | undefined;
 
+const cardTitleSelector =
+    ':scope > .ss-card__body > :is(h1, h2, h3, h4, h5, h6):first-child[id]';
+
+function updateCardTitleOffset(card: Element, title: HTMLElement) {
+    const offset =
+        title.getBoundingClientRect().top - card.getBoundingClientRect().top;
+    title.style.setProperty('--ss-card-title-offset', `${offset}px`);
+}
+
+const cardAnchorObserver = new ResizeObserver((entries) => {
+    for (const { target } of entries) {
+        const card = target.closest('.ss-card');
+        const title = card?.querySelector<HTMLElement>(cardTitleSelector);
+        if (card && title) updateCardTitleOffset(card, title);
+    }
+});
+
+function initializeCardAnchors() {
+    let target: HTMLElement | undefined;
+    for (const card of document.querySelectorAll('.ss-card')) {
+        const title = card.querySelector<HTMLElement>(cardTitleSelector);
+        if (!title) continue;
+        updateCardTitleOffset(card, title);
+        if (title.matches(':target')) target = title;
+        cardAnchorObserver.observe(card);
+        const figure = card.querySelector(':scope > .ss-card__figure');
+        if (figure) cardAnchorObserver.observe(figure);
+    }
+    return target;
+}
+
 function initializeCardHints() {
     if (activeHint && !activeHint.element.isConnected) activeHint.close();
     for (const hint of document.querySelectorAll<HTMLElement>(
@@ -88,7 +119,17 @@ document.addEventListener('keydown', (event) => {
 window.addEventListener('resize', () => activeHint?.position());
 window.addEventListener('scroll', () => activeHint?.position(), true);
 document.addEventListener('astro:before-swap', () => activeHint?.close());
+document.addEventListener('astro:page-load', initializeCardAnchors);
 document.addEventListener('astro:page-load', initializeCardHints);
+const initialTarget = initializeCardAnchors();
+// A direct fragment can scroll before the card script has measured its offset.
+if (
+    initialTarget &&
+    initialTarget.getBoundingClientRect().top <
+        parseFloat(getComputedStyle(initialTarget).scrollMarginBlockStart)
+) {
+    initialTarget.scrollIntoView({ block: 'start', behavior: 'instant' });
+}
 initializeCardHints();
 // Match the existing component workshop lifecycle when Storybook replaces a story.
 new MutationObserver(initializeCardHints).observe(document.body, {

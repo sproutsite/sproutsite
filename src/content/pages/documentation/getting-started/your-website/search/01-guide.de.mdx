@@ -11,21 +11,48 @@ import { Alert } from 'sproutsite/components';
 
 ## Besuchern das Finden einer Seite erleichtern
 
-<Alert variant="warning" style="soft">
-    Offen – zukünftige Erweiterung. Diese Seite beschreibt das Ziel; eine
-    unterstützte Umsetzung für deine Website steht noch aus.
+<Alert variant="info" style="soft">
+    Diese Anleitung setzt voraus, dass dein Starter Pagefind bereits in den
+    Build einbindet und die Suche in der Navigation vorbereitet ist. Die Lupe
+    auf dieser Website zeigt dir die Suche in Dokumentation und Showcase.
 </Alert>
 
-Mit mehr Seiten und Beiträgen wird eine interne Suche interessant. Sproutsite enthält derzeit weder eine Suchkomponente noch einen erzeugten Suchindex oder eine Suchkonfiguration.
+### Suche aktivieren
 
-### Das angestrebte Erlebnis
+Öffne `src/content/site.yaml` in deinem Website-Projekt und ergänze oder ändere diese Einstellung auf oberster Ebene:
 
-Besucher sollen veröffentlichte Titel und Inhalte durchsuchen, hilfreiche Auszüge sehen und die passende Seite öffnen können. Ergebnisse müssen die gewählte Sprache berücksichtigen und auch bei einer Veröffentlichung in Unterpfaden funktionieren.
+```yaml
+search:
+    enabled: true
+```
 
-### Was noch umgesetzt werden muss
+Bei einer zweisprachigen Website setzt du die Einstellung in der gemeinsamen `site.yaml`. Der vorbereitete Header zeigt die Lupe auf Desktop und Mobilgeräten an. Ein Klick öffnet den Suchdialog. Mit `enabled: false` schaltest du die Suche aus.
 
-Benötigt werden ein beim Build erzeugter Index, eine tastaturbedienbare Suchoberfläche, verständliche Meldungen ohne Treffer und eine Möglichkeit, Inhalte auszuschließen. Dabei muss feststehen, ob Daten im Browser bleiben oder an einen Dienst übertragen werden. Ein externer Suchanbieter ist nicht vorausgesetzt.
+### Suchindex erstellen und lokal testen
 
-Das Thema ist als zukünftige Arbeit festgehalten. Nutze vorerst klare Navigation, aussagekräftige Seitentitel, Themenübersichten und Links zwischen verwandten Seiten. Diese Möglichkeiten bestehen bereits und bleiben auch mit einer späteren Suche sinnvoll.
+Führe diese Befehle im Ordner deines Website-Projekts aus:
+
+```sh
+npm run build
+npm run dev
+```
+
+Astro erzeugt zuerst die HTML-Seiten. Danach übergibt die vorbereitete Integration den Hauptinhalt der ausgewählten Seiten an Pagefind. Pagefind legt den Index und die Browserdateien in `dist/pagefind/` ab. Sobald jemand sucht, lädt der Dialog diese Dateien von deiner Website. Die Integration verbindet den Dialog mit dem Index und berücksichtigt dabei auch einen Unterpfad wie `/demo/`.
+
+Öffne die Adresse, die der Dev-Server ausgibt, und suche nach einem Begriff aus einer deiner Seiten. Der Dev-Server verwendet den Index aus dem letzten Build. Führe nach Änderungen an durchsuchbaren Inhalten erneut `npm run build` aus und lade die Seite neu. Mit `npm run preview` kannst du nach dem Build genau die Dateien testen, die du veröffentlichen wirst.
+
+### Treffer lesen und öffnen
+
+Der Dialog sucht in der gewählten Sprache. Er zeigt einen Textauszug mit hervorgehobenen Suchbegriffen, ein Badge mit der Platzierung, den Pagefind-Trefferscore und die genaue Ziel-URL. Der höchste Score steht zuerst. Der Score vergleicht die Treffer für den aktuellen Suchbegriff und ist keine Prozentangabe. Gibt es eine passende Sprungmarke, führt der Treffer direkt zum Abschnitt.
+
+Mit `↓` wechselst du aus dem Suchfeld zum ersten Treffer. Mit `↑` und `↓` gehst du durch die Liste, mit `Enter` öffnest du den Treffer und mit `Esc` schließt du den Dialog. Du kannst die Bedienelemente auch mit `Tab` erreichen.
+
+### Suche mit der Website veröffentlichen
+
+Veröffentliche den vollständigen Ordner `dist/` einschließlich `dist/pagefind/` aus demselben Build. Der generierte Index bleibt außerhalb von Git. Die Suche läuft im Browser deiner Besucher und verwendet Dateien von deiner Website.
+
+Falls die Suche nicht verfügbar ist, prüfe zuerst, ob `pagefind/pagefind.js` unter demselben Basispfad wie deine Seiten erreichbar ist. Wenn dein Server eine Content Security Policy setzt, erlaube für Pagefind-WebAssembly den Wert `'wasm-unsafe-eval'` in `script-src`. [Pagefind-Dokumentation zum Hosting](https://pagefind.app/docs/hosting/)
+
+[Mit Apache oder Nginx veröffentlichen](/dokumentation/veroeffentlichen/)
 
 [Zurück zum Einstieg und zu weiteren Themen](/dokumentation/einstieg/deine-website/)

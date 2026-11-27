@@ -73,6 +73,7 @@ export interface SiteConfig {
         articles: { heading: string };
     };
     header: { links: HeaderItem[] };
+    search?: { enabled: boolean };
     footer: BackgroundPositionSettings & {
         text: string;
         'background-image'?: string | null;

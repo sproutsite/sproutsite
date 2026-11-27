@@ -18,6 +18,9 @@ const language = site.i18n.locale === 'de' ? 'de' : 'en';
 const hasLanguageSwitcher = site.header.links.some(
     (link) => link.type === 'language-switcher',
 );
+const firstSeparator = site.header.links.findIndex(
+    (link) => link.type === 'separator',
+);
 ---
 
 <header class="ss-header">
@@ -26,6 +29,7 @@ const hasLanguageSwitcher = site.header.links.some(
             <BrandLogo site={site} />
         </a>
         <div class="ss-header__mobile-tools">
+            <slot name="mobile-tools" />
             {hasLanguageSwitcher && (
                 <>
                     <LanguageSwitcher site={site} route={route} />
@@ -53,7 +57,7 @@ const hasLanguageSwitcher = site.header.links.some(
             )}
         >
             <ul class="ss-header__links">
-                {site.header.links.map((link) => {
+                {site.header.links.map((link, index) => {
                     if (link.type === 'language-switcher') {
                         return (
                             <li>
@@ -63,10 +67,15 @@ const hasLanguageSwitcher = site.header.links.some(
                     }
                     if (link.type === 'separator') {
                         return (
-                            <li
-                                class="ss-header__separator"
-                                aria-hidden="true"
-                            />
+                            <>
+                                {index === firstSeparator && (
+                                    <slot name="before-separator" />
+                                )}
+                                <li
+                                    class="ss-header__separator"
+                                    aria-hidden="true"
+                                />
+                            </>
                         );
                     }
                     const externalAttributes = externalLinkAttributes(
@@ -113,6 +122,7 @@ const hasLanguageSwitcher = site.header.links.some(
                         </li>
                     );
                 })}
+                {firstSeparator === -1 && <slot name="before-separator" />}
             </ul>
         </nav>
     </div>
@@ -209,8 +219,16 @@ const hasLanguageSwitcher = site.header.links.some(
                 window.scrollY >= scrollThreshold,
             );
         };
+        const updateAnchorOffset = () => {
+            document.documentElement.style.setProperty(
+                '--ss-header-anchor-offset',
+                `calc(${header.offsetHeight}px + 1rem)`,
+            );
+        };
 
         updateHeaderState();
+        updateAnchorOffset();
+        new ResizeObserver(updateAnchorOffset).observe(header);
         window.addEventListener('scroll', updateHeaderState, {
             passive: true,
         });

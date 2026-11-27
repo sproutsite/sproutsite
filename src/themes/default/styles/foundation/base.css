@@ -11,6 +11,10 @@
 
     main {
         @apply flex-1;
+
+        :where(h1, h2, h3, h4, h5, h6)[id] {
+            scroll-margin-block-start: var(--ss-header-anchor-offset, 1rem);
+        }
     }
 
     b,

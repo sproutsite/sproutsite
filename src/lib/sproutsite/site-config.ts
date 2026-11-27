@@ -174,6 +174,7 @@ const siteSchema = z.object({
                 message: 'must contain at least one navigation link',
             }),
     }),
+    search: z.object({ enabled: z.boolean() }).strict().optional(),
     footer: z.object({
         text: z.string().trim().min(1),
         'background-image': publicBackgroundImage.nullable().optional(),
