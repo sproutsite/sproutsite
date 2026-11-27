@@ -7,6 +7,17 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.37] - 2026-11-28
+
+### Added
+
+- Added bilingual Pagefind search for the Sproutsite documentation and Showcase. The navigation opens a keyboard-accessible dialog with ranked results, highlighted excerpts, relevance scores, and direct links to matching sections.
+- Added build-time search index generation, local preview using the built index, and English and German setup guides for websites with a prepared Pagefind integration.
+
+### Fixed
+
+- Keep heading anchors below the sticky navigation and bring card images into view when opening links to card headings.
+
 ## [0.5.36] - 2026-11-26
 
 ### Added
