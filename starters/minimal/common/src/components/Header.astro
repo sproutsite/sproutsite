@@ -1,8 +1,27 @@
 ---
 import { Header as DefaultHeader } from 'sproutsite/default-components';
 import type { ThemeProps } from 'sproutsite/themes';
+import SearchTrigger from './SiteSearch/SearchTrigger.astro';
+import SiteSearch from './SiteSearch/SiteSearch.astro';
 
-type Props = ThemeProps<'Header'>;
+type Props = ThemeProps<'Header'> & { showcasePath?: string };
+const { site, route, showcasePath } = Astro.props;
+const searchLabel =
+    site.i18n.locale === 'de' ? 'Website durchsuchen' : 'Search the website';
 ---
 
-<DefaultHeader {...Astro.props} />
+<DefaultHeader {site} {route}>
+    <Fragment slot="before-separator">
+        {site.search?.enabled && (
+            <li>
+                <SearchTrigger label={searchLabel} />
+            </li>
+        )}
+    </Fragment>
+    <Fragment slot="mobile-tools">
+        {site.search?.enabled && <SearchTrigger label={searchLabel} />}
+    </Fragment>
+</DefaultHeader>
+{site.search?.enabled && (
+    <SiteSearch {site} title={searchLabel} {showcasePath} />
+)}

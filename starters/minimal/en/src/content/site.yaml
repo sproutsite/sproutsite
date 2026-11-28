@@ -28,6 +28,8 @@ links:
     external:
         newTab: true
         icon: true
+search:
+    enabled: false
 header:
     links:
         - label: Home

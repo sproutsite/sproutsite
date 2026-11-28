@@ -25,6 +25,7 @@ export function verifyStarter(
     project: string,
     language: 'en' | 'de',
     bilingual: boolean,
+    searchEnabled: boolean,
 ): void {
     const dist = join(project, 'dist');
     const base = process.env.SPROUTSITE_BASE ?? '/';
@@ -49,6 +50,26 @@ export function verifyStarter(
         );
     }
 
+    const index = join(dist, 'pagefind');
+    assert.equal(
+        existsSync(index),
+        searchEnabled,
+        'Unexpected Pagefind bundle state.',
+    );
+    if (searchEnabled) {
+        const manifest = JSON.parse(
+            readFileSync(join(index, 'pagefind-entry.json'), 'utf8'),
+        ) as { languages: Record<string, { page_count: number }> };
+        assert.deepEqual(
+            Object.keys(manifest.languages).sort(),
+            (bilingual ? [language, secondary] : [language]).sort(),
+        );
+        for (const { page_count: count } of Object.values(manifest.languages))
+            assert.equal(count, bilingual ? 3 : 2);
+        assert.ok(existsSync(join(index, 'pagefind.js')));
+        assert.ok(existsSync(join(index, 'licenses')));
+    }
+
     for (const { route, locale, alternate } of pages) {
         const url = withBase(route, base);
         const file = join(dist, route, 'index.html');
@@ -60,6 +81,26 @@ export function verifyStarter(
             locale,
             `${url}: expected lang="${locale}".`,
         );
+        const searchTriggers = elements(
+            tree,
+            (node) =>
+                node.tagName === 'button' &&
+                Object.hasOwn(node.properties, 'dataSiteSearchOpen'),
+        );
+        const searchDialogs = elements(
+            tree,
+            (node) =>
+                node.tagName === 'dialog' &&
+                node.properties.id === 'ss-site-search',
+        );
+        assert.equal(searchTriggers.length, searchEnabled ? 2 : 0, url);
+        assert.equal(searchDialogs.length, searchEnabled ? 1 : 0, url);
+        if (searchEnabled)
+            assert.equal(
+                searchDialogs[0]?.properties.dataModule,
+                withBase('/pagefind/pagefind.js', base),
+                url,
+            );
 
         const logo = '/branding/logo.svg';
         const favicon = '/branding/favicon.svg';

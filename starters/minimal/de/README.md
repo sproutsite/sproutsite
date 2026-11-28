@@ -52,3 +52,9 @@ Sproutsite bleibt eine installierte Abhängigkeit; das Theme wird nicht kopiert.
 Das Website-Paket ist privat, um eine versehentliche npm-Veröffentlichung zu verhindern. Über die Lizenz deiner eigenen Inhalte entscheidest du selbst. Sproutsite und die ursprünglichen Startervorlagen stehen unter Apache-2.0; für die mitgelieferten Dateien liegen LICENSE-SPROUTSITE und NOTICE-SPROUTSITE bei. Lizenzen von Abhängigkeiten und Markenrechte bleiben getrennt.
 
 [Dokumentation](https://sproutsite.dev/de/dokumentation/) · [Komponenten](https://sproutsite.dev/de/showcase/)
+
+## Website-Suche aktivieren
+
+Setze `search.enabled: true` in `src/content/site.yaml`. Führe `npm run build` aus, damit der Index in `dist/pagefind/` entsteht. Starte dann `npm run dev` oder `npm run preview` und klicke auf die Lupe. Erzeuge den Index nach Inhaltsänderungen neu und veröffentliche den vollständigen Ordner `dist/`. Der Dialog sucht in der gewählten Sprache.
+
+[Anleitung zur Website-Suche und Veröffentlichung](https://sproutsite.dev/de/dokumentation/einstieg/deine-website/suche/)

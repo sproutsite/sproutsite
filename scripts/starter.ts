@@ -190,34 +190,46 @@ export default defineConfig({
 const astro = join(root, 'node_modules', 'astro', 'bin', 'astro.mjs');
 
 if (mode === 'test') {
-    for (const language of ['de', 'en'] as const) {
-        for (const bilingual of [false, true]) {
-            const label = bilingual
-                ? `${language} + ${language === 'en' ? 'de' : 'en'}`
-                : language;
-            let project: string | undefined;
-            try {
-                project = prepareStarter(language, bilingual);
-                const result = spawnSync(process.execPath, [astro, 'build'], {
-                    cwd: project,
-                    encoding: 'utf8',
-                });
-                if (result.error) throw result.error;
-                if (result.status !== 0) {
-                    process.stderr.write(result.stdout + result.stderr);
-                    throw new Error(
-                        `Astro build failed (${result.status ?? result.signal}).`,
-                    );
-                }
-                verifyStarter(project, language, bilingual);
-                console.log(`PASS  ${label}`);
-            } catch (error) {
-                process.exitCode = 1;
-                const message =
-                    error instanceof Error ? error.message : String(error);
-                console.error(`FAIL  ${label} — ${message}`);
-                if (project) console.error(`      ${relative(root, project)}`);
+    for (const [language, bilingual, searchEnabled] of [
+        ['de', false, true],
+        ['de', true, true],
+        ['en', false, true],
+        ['en', true, true],
+        ['en', false, false],
+    ] as const) {
+        const label = bilingual
+            ? `${language} + ${language === 'en' ? 'de' : 'en'}`
+            : language;
+        let project: string | undefined;
+        try {
+            project = prepareStarter(language, bilingual);
+            if (searchEnabled) {
+                const sitePath = join(project, 'src/content/site.yaml');
+                const site = parseDocument(readFileSync(sitePath, 'utf8'));
+                site.setIn(['search', 'enabled'], true);
+                writeFileSync(sitePath, site.toString());
             }
+            const result = spawnSync(process.execPath, [astro, 'build'], {
+                cwd: project,
+                encoding: 'utf8',
+            });
+            if (result.error) throw result.error;
+            if (result.status !== 0) {
+                process.stderr.write(result.stdout + result.stderr);
+                throw new Error(
+                    `Astro build failed (${result.status ?? result.signal}).`,
+                );
+            }
+            verifyStarter(project, language, bilingual, searchEnabled);
+            console.log(
+                `PASS  ${label} (search ${searchEnabled ? 'on' : 'off'}) — ${relative(root, project)}`,
+            );
+        } catch (error) {
+            process.exitCode = 1;
+            const message =
+                error instanceof Error ? error.message : String(error);
+            console.error(`FAIL  ${label} — ${message}`);
+            if (project) console.error(`      ${relative(root, project)}`);
         }
     }
 } else {

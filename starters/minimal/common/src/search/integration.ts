@@ -3,11 +3,7 @@ import { extname, join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { AstroIntegration, AstroConfig } from 'astro';
 import { createIndex, close } from 'pagefind';
-import type { SiteConfig } from '../lib/sproutsite/types.js';
-import { contentHref, withBase } from '../lib/sproutsite/urls.js';
-import { loadSiteConfig } from '../lib/sproutsite/site-config.js';
 
-const indexPath = '/pagefind/';
 const pagefindLicenses = new URL(
     '../LICENSE/',
     import.meta.resolve('pagefind'),
@@ -18,8 +14,9 @@ const types: Record<string, string> = {
     '.wasm': 'application/wasm',
 };
 
-/** The Sproutsite documentation website owns this static search index. */
-export function siteSearch(site: SiteConfig): AstroIntegration {
+export function siteSearch(
+    includePage: (url: string) => boolean = () => true,
+): AstroIntegration {
     let config: AstroConfig;
     return {
         name: 'sproutsite/site-search',
@@ -31,8 +28,9 @@ export function siteSearch(site: SiteConfig): AstroIntegration {
                 const directory = fileURLToPath(
                     new URL('pagefind/', config.outDir),
                 );
+                // Astro strips the configured base before these middlewares run.
                 server.middlewares.use(
-                    withBase(indexPath, site.base).slice(0, -1),
+                    '/pagefind',
                     async (request, response, next) => {
                         if (
                             request.method !== 'GET' &&
@@ -90,53 +88,37 @@ export function siteSearch(site: SiteConfig): AstroIntegration {
                     if (!index || errors.length)
                         throw new Error(errors.join('\n'));
 
-                    for (const locale of site.i18n.locales) {
-                        const localized =
-                            locale === site.i18n.defaultLocale
-                                ? site
-                                : loadSiteConfig(locale);
-                        const documentation =
-                            locale === 'de'
-                                ? '/dokumentation/'
-                                : '/documentation/';
-                        for (const section of [documentation, '/showcase/']) {
-                            const prefix = contentHref(section, localized);
-                            const root = join(
-                                output,
-                                prefix.slice(site.base.length),
+                    const files = await readdir(output, {
+                        recursive: true,
+                        withFileTypes: true,
+                    });
+                    const pages = files
+                        .filter(
+                            (file) =>
+                                file.isFile() && file.name === 'index.html',
+                        )
+                        .map((file) => join(file.parentPath, file.name))
+                        .sort();
+                    for (const page of pages) {
+                        // Pagefind adds the base of its own bundle to result URLs.
+                        const url =
+                            '/' +
+                            relative(output, page)
+                                .split(sep)
+                                .join('/')
+                                .replace(/index\.html$/, '');
+                        if (/\/(?:404|500)\/$/.test(url) || !includePage(url))
+                            continue;
+                        const content = await readFile(page, 'utf8');
+                        const result = await index.addHTMLFile({
+                            url,
+                            content,
+                        });
+                        if (result.errors.length)
+                            throw new Error(
+                                `${url}: ${result.errors.join('\n')}`,
                             );
-                            const files = await readdir(root, {
-                                recursive: true,
-                                withFileTypes: true,
-                            });
-                            const pages = files
-                                .filter(
-                                    (file) =>
-                                        file.isFile() &&
-                                        file.name === 'index.html',
-                                )
-                                .map((file) => join(file.parentPath, file.name))
-                                .sort();
-                            for (const page of pages) {
-                                // Pagefind adds the base of its own bundle to result URLs.
-                                const url =
-                                    '/' +
-                                    relative(output, page)
-                                        .split(sep)
-                                        .join('/')
-                                        .replace(/index\.html$/, '');
-                                const content = await readFile(page, 'utf8');
-                                const result = await index.addHTMLFile({
-                                    url,
-                                    content,
-                                });
-                                if (result.errors.length)
-                                    throw new Error(
-                                        `${url}: ${result.errors.join('\n')}`,
-                                    );
-                                count++;
-                            }
-                        }
+                        count++;
                     }
                     const written = await index.writeFiles({
                         outputPath: join(output, 'pagefind'),
@@ -148,9 +130,7 @@ export function siteSearch(site: SiteConfig): AstroIntegration {
                         join(output, 'pagefind', 'licenses'),
                         { recursive: true },
                     );
-                    logger.info(
-                        `Indexed ${count} documentation and showcase pages.`,
-                    );
+                    logger.info(`Indexed ${count} pages.`);
                 } finally {
                     await close();
                 }

@@ -111,7 +111,7 @@ export function setupSiteSearch(dialog: HTMLDialogElement) {
     const triggers = document.querySelectorAll<HTMLButtonElement>(
         '[data-site-search-open]',
     );
-    const showcase = dialog.dataset.showcase ?? '';
+    const showcase = dialog.dataset.showcase;
     let opener: HTMLButtonElement | undefined;
     let pagefind: Pagefind | undefined;
     let loading: Promise<Pagefind> | undefined;
@@ -131,7 +131,6 @@ export function setupSiteSearch(dialog: HTMLDialogElement) {
         if (url.origin !== location.origin || !rankTemplate) return;
         const item = document.createElement('li');
         const link = document.createElement('a');
-        const category = document.createElement('span');
         const heading = document.createElement('span');
         const badge = rankTemplate.cloneNode(true) as HTMLElement;
         const title = document.createElement('span');
@@ -153,10 +152,14 @@ export function setupSiteSearch(dialog: HTMLDialogElement) {
                 dialog.close();
             }
         });
-        category.className = 'ss-site-search__category';
-        category.textContent = url.pathname.startsWith(showcase)
-            ? copy.showcase
-            : copy.documentation;
+        if (showcase) {
+            const category = document.createElement('span');
+            category.className = 'ss-site-search__category';
+            category.textContent = url.pathname.startsWith(showcase)
+                ? copy.showcase
+                : copy.documentation;
+            link.append(category);
+        }
         title.className = 'ss-site-search__title';
         heading.className = 'ss-site-search__heading';
         badge.classList.add('ss-site-search__rank');
@@ -177,7 +180,7 @@ export function setupSiteSearch(dialog: HTMLDialogElement) {
         destination.textContent = url.href;
         heading.append(badge, title);
         details.append(scoreLabel, destination);
-        link.append(category, heading, excerpt, details);
+        link.append(heading, excerpt, details);
         item.append(link);
         return item;
     }

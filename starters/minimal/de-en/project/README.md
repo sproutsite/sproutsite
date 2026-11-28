@@ -19,3 +19,9 @@ Falls die Abhängigkeiten bereits installiert sind, genügt `npm run dev`.
 Setze vor der Veröffentlichung deine Domain in `src/content/site.yaml` und überprüfe beide Sprachfassungen mit `npm run check` und `npm run build`. Veröffentliche anschließend den Inhalt von `dist/`.
 
 [Anleitung für mehrsprachige Websites](https://sproutsite.dev/de/dokumentation/einstieg/deine-website/sprachen/)
+
+## Website-Suche aktivieren
+
+Setze `search.enabled: true` in `src/content/site.yaml`. Führe `npm run build` aus, damit der Index in `dist/pagefind/` entsteht. Starte dann `npm run dev` oder `npm run preview` und klicke auf die Lupe. Erzeuge den Index nach Inhaltsänderungen neu und veröffentliche den vollständigen Ordner `dist/`. Der Dialog sucht in der gewählten Sprache.
+
+[Anleitung zur Website-Suche und Veröffentlichung](https://sproutsite.dev/de/dokumentation/einstieg/deine-website/suche/)

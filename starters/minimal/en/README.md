@@ -52,3 +52,9 @@ Sproutsite remains an installed dependency, not a copied theme. Commit `package-
 The website package is private to prevent accidental npm publication. Your own content remains yours; choose its licensing separately. Sproutsite and the original starter templates are Apache-2.0; see LICENSE-SPROUTSITE and NOTICE-SPROUTSITE for the supplied starter files. Dependency licenses and trademark rights remain separate.
 
 [Documentation](https://sproutsite.dev/documentation/) · [Components](https://sproutsite.dev/showcase/)
+
+## Enable site search
+
+Set `search.enabled: true` in `src/content/site.yaml`. Run `npm run build` to generate `dist/pagefind/`, then start `npm run dev` or `npm run preview` and click the magnifying glass. Rebuild after changing searchable content and deploy the complete `dist/` directory. The dialog searches in the active language.
+
+[Site search setup and hosting](https://sproutsite.dev/documentation/getting-started/your-website/search/)

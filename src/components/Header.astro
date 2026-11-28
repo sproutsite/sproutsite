@@ -1,25 +1,10 @@
 ---
-import { DefaultHeader } from 'sproutsite/components';
 import type { HeaderProps } from 'sproutsite';
-import SearchTrigger from './SiteSearch/SearchTrigger.astro';
-import SiteSearch from './SiteSearch/SiteSearch.astro';
+import Header from '../../starters/minimal/common/src/components/Header.astro';
+import { contentHref } from '../lib/sproutsite/urls.js';
 
 type Props = HeaderProps;
 const { site } = Astro.props;
-const searchLabel =
-    site.i18n.locale === 'de' ? 'Website durchsuchen' : 'Search the website';
 ---
 
-<DefaultHeader {...Astro.props}>
-    <Fragment slot="before-separator">
-        {site.search?.enabled && (
-            <li>
-                <SearchTrigger label={searchLabel} />
-            </li>
-        )}
-    </Fragment>
-    <Fragment slot="mobile-tools">
-        {site.search?.enabled && <SearchTrigger label={searchLabel} />}
-    </Fragment>
-</DefaultHeader>
-{site.search?.enabled && <SiteSearch site={site} title={searchLabel} />}
+<Header {...Astro.props} showcasePath={contentHref('/showcase/', site)} />
