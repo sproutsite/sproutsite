@@ -1,8 +1,8 @@
 ---
-title: Eine interne Suche entwickeln
-eyebrow: Geplante Suchfunktion
+title: Die Website-Suche pflegen
+eyebrow: Pagefind-Integration
 type: small
 tone: brand
 ---
 
-Sproutsite erzeugt bislang keinen Suchindex und stellt keine Suchoberfläche bereit. Diese Anleitung hält die nötigen Entscheidungen zu erfassten Inhalten, übersetzten Ergebnissen, Deployment-Pfaden und Tastaturbedienung fest.
+Die Sproutsite-Website und neue Starter verwenden dieselbe Suchoberfläche und Build-Integration. Hier erfährst du, wie du sie prüfst, anpasst oder in ein bestehendes Projekt übernimmst.

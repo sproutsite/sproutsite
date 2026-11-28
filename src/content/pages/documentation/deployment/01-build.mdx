@@ -24,6 +24,8 @@ Copy the **contents** of `dist/` into the server's document root, for example `/
 
 Upload the complete output, including `_astro/`, localized page directories, the sitemap, the manifest, and all error documents. CSS, JavaScript, fonts, and optimized images are part of this output. Do not upload only the HTML files.
 
+If [Pagefind search](/documentation/getting-started/your-website/search/) is enabled, upload `dist/pagefind/` from the same build and test search on the server. If your server sets a Content Security Policy, allow `'wasm-unsafe-eval'` in `script-src` for Pagefind’s WebAssembly.
+
 English is served at `/`, German at `/de/`. Regular pages use directory indexes, such as `blog/index.html`. No application server, `npm run dev`, or `npm run preview` is required on the production host.
 
 Upload to a new release directory and switch the document root or release symlink after the upload completes, if your hosting setup supports this. Keep the previous release available for rollback.

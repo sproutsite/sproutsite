@@ -5,31 +5,24 @@ tone:
 ---
 
 import { Eyebrow } from 'sproutsite/components';
-import { Alert } from 'sproutsite/components';
 
 <Eyebrow>Contribute to Sproutsite</Eyebrow>
 
 ## Search published website content
 
-<Alert variant="warning" style="soft">
-    Open – future extension. This page describes the goal; a supported
-    implementation is not yet available.
-</Alert>
+The shared implementation lives in `starters/minimal/common/src/`. The Sproutsite documentation website uses the same dialog and Astro integration, with an index limited to documentation and Showcase. The starter indexes the main content of published pages and blog posts. Pagefind uses the language of each HTML document. Result links preserve the deployment base and link to a section when possible.
 
-The goal is a search experience for visitors who need a page or article without knowing its navigation path. Sproutsite does not yet include a search index, search component or public search setting.
+### Add the integration to an existing project
 
-### Start with the static content
+1. Create a reference project with `npm create sproutsite@latest search-reference` in a separate directory. Use `create-sproutsite@0.4.0` or later. Check that the target project uses `sproutsite@0.5.37` or later. Use the Pagefind and YAML development dependencies from the reference project's `package.json`.
+2. Copy `src/search/integration.ts` and `src/components/SiteSearch/` from the reference. Merge the search changes from its `astro.config.ts` into yours. Preserve the existing Sproutsite settings, Astro integrations, and Vite options.
+3. Merge the search trigger slots and dialog from the reference `src/components/Header.astro` into your website header. If your project uses the default header directly, register the reference wrapper through the [Header override](/documentation/getting-started/your-website/header-and-footer/).
+4. Install dependencies, set `search.enabled: true` in `src/content/site.yaml`, and run `npm run check` and `npm run build`. Inspect the search in `npm run preview` before [publishing the index](/documentation/getting-started/your-website/search/).
 
-Consider an index generated from published titles and page content at build time. Define which content is included and excluded. Never index private environment files or unpublished source material.
+### Verify changes to the shared implementation
 
-### Respect routes and languages
+Run `npm run test:starter` in the Sproutsite repository. To repeat it with a deployment base, run `SPROUTSITE_BASE=/demo/ npm run test:starter`. The tests check the header, the index languages, and a fresh build with search disabled.
 
-Results need correct localized URLs and deployment bases. Decide whether searches stay within the active language and how missing translations are handled. The index must match the generated website after content changes.
-
-### Build an accessible interaction
-
-Provide an explicit search label, keyboard operation, useful excerpts and clear empty or no-result states. Choose the smallest interaction that helps visitors; do not assume an external provider or send queries to another service without a deliberate decision.
-
-The implementation needs content/index tests, a consumer fixture and browser checks. Until it is available, clear navigation, page titles and related links remain the supported way to help visitors find content.
+In a browser, check the search in each enabled language. Open a result with the keyboard, including a link to the page you are already on. Verify the destination and that the dialog closes. Also check the empty and no-results states.
 
 [Back to the quick start and more topics](/documentation/getting-started/contributing/)

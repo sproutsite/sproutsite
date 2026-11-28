@@ -1,8 +1,8 @@
 ---
-title: Build a site search
-eyebrow: Planned search implementation
+title: Maintain site search
+eyebrow: Pagefind integration
 type: small
 tone: brand
 ---
 
-Sproutsite does not yet generate a search index or provide a search interface. This guide records the decisions needed for indexed content, translated results, deployment paths and keyboard operation.
+The Sproutsite website and new starters share the search dialog and build integration. Learn how to verify, adapt, or add those pieces to an existing project.

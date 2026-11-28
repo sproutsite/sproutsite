@@ -5,17 +5,12 @@ tone:
 ---
 
 import { Eyebrow } from 'sproutsite/components';
-import { Alert } from 'sproutsite/components';
 
 <Eyebrow>Your website</Eyebrow>
 
 ## Help visitors find a page
 
-<Alert variant="info" style="soft">
-    These steps assume that your website starter includes the Pagefind build
-    integration and the search button in the header. Try the working example in
-    this site’s navigation. It searches the documentation and Showcase.
-</Alert>
+The starter includes Pagefind search as of `create-sproutsite@0.4.0` for single-language and bilingual websites. Search starts disabled on new websites. Try it on sproutsite.dev to search the documentation and Showcase.
 
 ### Turn on search
 
@@ -26,7 +21,7 @@ search:
     enabled: true
 ```
 
-In a bilingual project, set it in the shared `site.yaml`. The prepared header adds a magnifying glass on desktop and mobile. Click it to open the search dialog. Set `enabled: false` to turn search off.
+In a bilingual project, set it in the shared `site.yaml`. The header adds a magnifying glass on desktop and mobile. Click it to open the search dialog. Set `enabled: false` to turn search off.
 
 ### Build the search index and test it locally
 
@@ -37,9 +32,13 @@ npm run build
 npm run dev
 ```
 
-Astro generates the HTML first. The prepared integration then passes the main content of the selected pages to Pagefind, which writes the index and browser files to `dist/pagefind/`. The search dialog loads that bundle from your own site when someone searches. The integration connects the dialog to the bundle and accounts for the site’s base path, including deployments under a subpath such as `/demo/`.
+Astro generates the HTML first. Pagefind then indexes the main content of your published pages and blog posts, excluding error pages. It writes the index and browser files to `dist/pagefind/`. The search dialog loads that bundle from your own site when someone searches. The integration connects the dialog to the bundle and accounts for the site’s base path, including deployments under a subpath such as `/demo/`.
 
 Open the URL printed by the dev server and search for a phrase from one of your pages. The dev server reads the most recent built index, so rebuild and reload the page after editing searchable content. To check the exact files you will deploy, run `npm run preview` after the build.
+
+### Add search to an existing website
+
+Updating the npm package leaves your website files as they are. If `src/search/integration.ts` is missing, create a reference website with the current generator in a separate directory. Ask your website team or coding agent to merge the search files and header changes into your project. The [Pagefind integration guide](/documentation/getting-started/contributing/search/) lists the files and checks.
 
 ### Read and open results
 

@@ -5,17 +5,12 @@ tone:
 ---
 
 import { Eyebrow } from 'sproutsite/components';
-import { Alert } from 'sproutsite/components';
 
 <Eyebrow>Deine Website</Eyebrow>
 
 ## Besuchern das Finden einer Seite erleichtern
 
-<Alert variant="info" style="soft">
-    Diese Anleitung setzt voraus, dass dein Starter Pagefind bereits in den
-    Build einbindet und die Suche in der Navigation vorbereitet ist. Die Lupe
-    auf dieser Website zeigt dir die Suche in Dokumentation und Showcase.
-</Alert>
+Der Starter enthält die Pagefind-Suche ab `create-sproutsite@0.4.0` für ein- und zweisprachige Websites. Sie ist bei neuen Websites standardmäßig ausgeschaltet. Auf sproutsite.dev kannst du sie in Dokumentation und Showcase ausprobieren.
 
 ### Suche aktivieren
 
@@ -26,7 +21,7 @@ search:
     enabled: true
 ```
 
-Bei einer zweisprachigen Website setzt du die Einstellung in der gemeinsamen `site.yaml`. Der vorbereitete Header zeigt die Lupe auf Desktop und Mobilgeräten an. Ein Klick öffnet den Suchdialog. Mit `enabled: false` schaltest du die Suche aus.
+Bei einer zweisprachigen Website setzt du die Einstellung in der gemeinsamen `site.yaml`. Der Header zeigt die Lupe auf Desktop und Mobilgeräten an. Ein Klick öffnet den Suchdialog. Mit `enabled: false` schaltest du die Suche aus.
 
 ### Suchindex erstellen und lokal testen
 
@@ -37,9 +32,13 @@ npm run build
 npm run dev
 ```
 
-Astro erzeugt zuerst die HTML-Seiten. Danach übergibt die vorbereitete Integration den Hauptinhalt der ausgewählten Seiten an Pagefind. Pagefind legt den Index und die Browserdateien in `dist/pagefind/` ab. Sobald jemand sucht, lädt der Dialog diese Dateien von deiner Website. Die Integration verbindet den Dialog mit dem Index und berücksichtigt dabei auch einen Unterpfad wie `/demo/`.
+Astro erzeugt zuerst die HTML-Seiten. Danach indexiert Pagefind den Hauptinhalt deiner veröffentlichten Seiten und Blogbeiträge. Fehlerseiten bleiben ausgenommen. Pagefind legt den Index und die Browserdateien in `dist/pagefind/` ab. Sobald jemand sucht, lädt der Dialog diese Dateien von deiner Website. Die Integration verbindet den Dialog mit dem Index und berücksichtigt dabei auch einen Unterpfad wie `/demo/`.
 
 Öffne die Adresse, die der Dev-Server ausgibt, und suche nach einem Begriff aus einer deiner Seiten. Der Dev-Server verwendet den Index aus dem letzten Build. Führe nach Änderungen an durchsuchbaren Inhalten erneut `npm run build` aus und lade die Seite neu. Mit `npm run preview` kannst du nach dem Build genau die Dateien testen, die du veröffentlichen wirst.
+
+### Sucheinbindung in einer bestehenden Website ergänzen
+
+Ein Update des npm-Pakets allein ergänzt keine Dateien in deinem Website-Projekt. Wenn `src/search/integration.ts` fehlt, erstelle mit dem aktuellen Generator eine Referenz-Website in einem separaten Ordner. Bitte dein Website-Team oder deinen Coding-Agenten, die Suchdateien und die Header-Anpassung aus der Referenz in dein Projekt zu übernehmen. Der [Leitfaden zur Pagefind-Integration](/dokumentation/einstieg/mitarbeiten/suche/) nennt die Dateien und Prüfschritte.
 
 ### Treffer lesen und öffnen
 

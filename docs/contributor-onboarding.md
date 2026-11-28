@@ -1,6 +1,6 @@
 # Contributor onboarding documentation
 
-The English and German entry pages contain four short steps followed by four topic groups with 18 child pages. The original hero and existing page route are retained. New child pages are below `documentation/getting-started/contributing/`; translated URL segments use their own `page.de.yaml`. This is a documentation restructure, not implementation of the future features.
+The English and German entry pages contain four short steps followed by four topic groups with 18 child pages. The original hero and existing page route are retained. New child pages are below `documentation/getting-started/contributing/`; translated URL segments use their own `page.de.yaml`. The status table records which workflows are supported.
 
 ## Topic status
 
@@ -21,10 +21,10 @@ Partial and open topics use Card status badges with contextual `hover` hints and
 | storybook              | storybook                   | available |
 | accessibility          | barrierefreiheit            | available |
 | package-compatibility  | paket-kompatibilitaet       | available |
-| theme-extensions       | theme-erweiterungen         | open      |
+| theme-extensions       | theme-erweiterungen         | available |
 | component-extensions   | komponenten-erweiterungen   | open      |
 | forms                  | formulare                   | open      |
-| search                 | suche                       | open      |
+| search                 | suche                       | available |
 | continuous-integration | kontinuierliche-integration | open      |
 
 ## Preserved content

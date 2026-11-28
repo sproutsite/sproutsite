@@ -660,7 +660,7 @@ The validator checks directory association, YAML fields, file names, tones, dupl
 
 Accessibility testing automates axe, visible keyboard focus, and mobile overflow checks. It does not replace a complete WCAG 2.2 AA conformance assessment or editorial review of headings and link text.
 
-Both the library and the separate `create-sproutsite` initializer are published to npm. The generator is maintained in its own repository with its own version and publication workflow. It creates the documented Astro setup and starter content rather than copying the framework or theme. It supports English or German, optional dependency installation, and localized editorial guidance. Optional extensions remain outside the current scope.
+Both the library and the separate `create-sproutsite` initializer are published to npm. The generator is maintained in its own repository with its own version and publication workflow. It creates the documented Astro setup and starter content rather than copying the framework or theme. It supports English or German, optional dependency installation, and localized editorial guidance. Bilingual starters support either language as the default, and Pagefind search is available as an opt-in feature.
 
 ## Testing a Local Package
 
@@ -723,6 +723,8 @@ The product identity is consistently Sproutsite: package imports use `sproutsite
 
 ### Search the Sproutsite documentation and Showcase
 
+For a website created with create-sproutsite 0.4.0 or later, see the [website search guide](https://sproutsite.dev/documentation/getting-started/your-website/search/) to enable search and publish its index.
+
 The Sproutsite website enables search with `search.enabled: true` in `src/content/site.yaml`. Click the magnifying glass in the navigation to search the documentation and Showcase in the active language. The build creates the Pagefind bundle in `dist/pagefind/`. Deploy it with the rest of `dist/`.
 
 If the production server sets a Content Security Policy, include `'wasm-unsafe-eval'` in `script-src` so Pagefind can run WebAssembly. [Pagefind hosting requirements](https://pagefind.app/docs/hosting/)
@@ -750,7 +752,7 @@ Edit the shared and locale-specific files under `starters/minimal/`, then rerun 
 
 The starter templates and generated previews are excluded from the Sproutsite npm package.
 
-Run `npm run test:starter` to build all four local starter variants and check their HTML and files. The command prints `PASS` or `FAIL` for each variant. It checks the homepage languages, bilingual links on the home and About pages, and the logo, favicon, and hero and footer images. Build output stays under `artifacts/starter/`. Use `npm run dev:starter` when you want to inspect the design in a browser.
+Run `npm run test:starter` to build all four local starter variants and check their HTML and files. The command prints `PASS` or `FAIL` for each variant. It checks the homepage languages, bilingual links on the home and About pages, the logo, favicon, and hero and footer images, and the search controls and index. It also checks a build with search disabled. Build output stays under `artifacts/starter/`. Use `npm run dev:starter` when you want to inspect the design in a browser.
 
 ### Legal details for the demo website
 

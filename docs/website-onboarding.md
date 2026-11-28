@@ -20,7 +20,7 @@ Status describes the documented workflow, not a guarantee that every possible va
 | branding                   | markenauftritt               | available |
 | theme-overrides            | theme-anpassen               | available |
 | header-and-footer          | header-und-footer            | available |
-| custom-theme               | eigenes-theme                | open      |
+| custom-theme               | eigenes-theme                | available |
 | deployment                 | veroeffentlichen             | available |
 | seo                        | auffindbarkeit               | available |
 | contact-and-legal          | kontakt-und-betreiberangaben | available |
@@ -30,11 +30,13 @@ Status describes the documented workflow, not a guarantee that every possible va
 | manual-setup               | manuell-einrichten           | available |
 | custom-components          | eigene-bausteine             | open      |
 | forms                      | formulare                    | open      |
-| search                     | suche                        | open      |
+| search                     | suche                        | available |
 
 The language guide covers English or German as default, explicit `i18n` settings and inherited locale overrides. Further UI/content locales remain open; changing the default requires matching standard Astro route files.
 
-The small-design-changes guide now covers the supported CSS entry (`createSproutsiteConfig({ styles: [...] })`). Header/Footer replacement is documented separately through `components`; other component replacements and a complete custom theme remain open.
+The small-design-changes guide now covers the supported CSS entry (`createSproutsiteConfig({ styles: [...] })`). Header/Footer replacement is documented separately through `components`; typed descriptors support derived and independent themes. Importing website-owned components into content MDX remains open.
+
+The published starter includes opt-in Pagefind search as of create-sproutsite 0.4.0. The guide covers activation, preview, deployment, and links to the retrofit steps for existing websites.
 
 ## Preserved detailed instructions
 
