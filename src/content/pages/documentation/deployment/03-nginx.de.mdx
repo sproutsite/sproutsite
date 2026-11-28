@@ -34,3 +34,13 @@ location /de/ {
 Vorhandene Dateien und Verzeichnisse werden direkt ausgeliefert. Unbekannte URLs liefern 404; ersetze `=404` nicht durch `/index.html`. Prüfe die Konfiguration mit `nginx -t`, bevor du sie neu lädst.
 
 Referenz: [Nginx Core Module: error_page und try_files](https://nginx.org/en/docs/http/ngx_http_core_module.html#error_page).
+
+### Dauerhafte Weiterleitungen
+
+Kopiere `artifacts/redirects/nginx.conf` außerhalb des Webroots auf den Server und binde die Datei im selben `server`-Block ein. Verwende die Datei aus dem Build für deinen Deployment-Basispfad.
+
+```nginx
+include /etc/nginx/sproutsite/redirects.conf;
+```
+
+Prüfe die Konfiguration mit `nginx -t`, bevor du sie neu lädst.

@@ -21,6 +21,7 @@ import { validateBrandingImages } from '../lib/sproutsite/branding.js';
 import { validatePublicBackgroundImage } from '../lib/sproutsite/hero-background.js';
 import { colorStyles } from '../themes/default/colors.js';
 import { createStylesPlugin } from './styles.js';
+import { redirectIntegration } from './redirects.js';
 import {
     resolveTheme,
     themeAliases,
@@ -196,6 +197,7 @@ export function createSproutsiteConfig(options: SproutsiteConfigOptions = {}) {
                     },
                 },
             } satisfies AstroIntegration,
+            redirectIntegration(site.base),
         ],
         vite: {
             plugins: [

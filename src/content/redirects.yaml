@@ -1,0 +1,5 @@
+redirects:
+    - from: /redirect-test
+      to: /
+    - from: /de/redirect-test
+      to: /de/

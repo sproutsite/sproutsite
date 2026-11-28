@@ -29,3 +29,17 @@ Ist die [Pagefind-Suche](/dokumentation/einstieg/deine-website/suche/) aktiviert
 Englisch liegt unter `/`, Deutsch unter `/de/`. Reguläre Seiten verwenden Verzeichnisindizes wie `blog/index.html`. Auf dem Produktionsserver sind weder ein Anwendungsserver noch `npm run dev` oder `npm run preview` erforderlich.
 
 Falls dein Hosting es unterstützt, lade die Dateien in ein neues Release-Verzeichnis und schalte erst nach vollständiger Übertragung das Webroot oder den Release-Symlink um. Halte die vorherige Version für eine Rückkehr bereit.
+
+### Verschobene Seiten weiterleiten
+
+Pflege alte und neue öffentliche Pfade in `src/content/redirects.yaml`. Gib Sprachpräfixe mit an. Den Deployment-Basispfad ergänzt der Build auf beiden Seiten.
+
+```yaml
+redirects:
+    - from: /redirect-test
+      to: /
+    - from: /de/redirect-test
+      to: /de/
+```
+
+Der Quellpfad muss exakt übereinstimmen, auch beim abschließenden Schrägstrich. Der voreingestellte und derzeit unterstützte Status ist `301`. Ziele müssen veröffentlichte Seiten sein. `npm run dev` wendet dieselben Regeln an. Ein Build mit dieser Datei erzeugt `artifacts/redirects/nginx.conf` und `artifacts/redirects/apache.conf`. Übertrage die passende Datei getrennt von `dist/` und binde sie in die Serverkonfiguration ein. Prüfe die alte URL mit `curl -I` auf den Status und das Ziel im `Location`-Header.

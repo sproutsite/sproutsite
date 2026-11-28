@@ -37,3 +37,13 @@ ErrorDocument 500 /500.html
 Prüfe die Konfiguration vor dem Neuladen mit dem Konfigurationstest deiner Apache-Installation, beispielsweise `apachectl configtest`. Bei Shared Hosting verwendest du stattdessen die Domaineinstellungen des Anbieters und erlaubte `.htaccess`-Direktiven; `DocumentRoot` und `Location` gehören nicht in eine `.htaccess`.
 
 Referenzen: [Apache-Verzeichnisindizes](https://httpd.apache.org/docs/2.4/mod/mod_dir.html) und [ErrorDocument](https://httpd.apache.org/docs/2.4/mod/core.html#errordocument).
+
+### Dauerhafte Weiterleitungen
+
+Kopiere `artifacts/redirects/apache.conf` außerhalb des Webroots auf den Server. Aktiviere `mod_alias` und binde die Datei im `VirtualHost` ein.
+
+```apache
+Include /etc/apache2/sproutsite/redirects.conf
+```
+
+Prüfe die Serverkonfiguration, bevor du sie neu lädst.

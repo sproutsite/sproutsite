@@ -29,3 +29,17 @@ If [Pagefind search](/documentation/getting-started/your-website/search/) is ena
 English is served at `/`, German at `/de/`. Regular pages use directory indexes, such as `blog/index.html`. No application server, `npm run dev`, or `npm run preview` is required on the production host.
 
 Upload to a new release directory and switch the document root or release symlink after the upload completes, if your hosting setup supports this. Keep the previous release available for rollback.
+
+### Set up redirects for moved pages
+
+Keep the old and new public paths in `src/content/redirects.yaml`. Include language prefixes and omit the deployment base. The build adds it to both paths.
+
+```yaml
+redirects:
+    - from: /redirect-test
+      to: /
+    - from: /de/redirect-test
+      to: /de/
+```
+
+Each source matches the exact path, including whether it ends in a slash. The default and currently supported status is `301`. Targets must be published pages. `npm run dev` applies the same rules. A build with this file writes `artifacts/redirects/nginx.conf` and `artifacts/redirects/apache.conf`. Deploy the matching file separately from `dist/` and include it in your server configuration. Check the old URL with `curl -I` and confirm the status and `Location`.

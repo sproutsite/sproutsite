@@ -37,3 +37,13 @@ ErrorDocument 500 /500.html
 Validate the configuration with your server's Apache configuration test, such as `apachectl configtest`, before reloading it. On shared hosting, use the provider's domain settings and permitted `.htaccess` directives instead; `DocumentRoot` and `Location` are not `.htaccess` directives.
 
 References: [Apache directory indexes](https://httpd.apache.org/docs/2.4/mod/mod_dir.html) and [ErrorDocument](https://httpd.apache.org/docs/2.4/mod/core.html#errordocument).
+
+### Permanent redirects
+
+Copy `artifacts/redirects/apache.conf` outside your document root. With `mod_alias` enabled, include it inside your `VirtualHost`.
+
+```apache
+Include /etc/apache2/sproutsite/redirects.conf
+```
+
+Check the server configuration before reloading it.

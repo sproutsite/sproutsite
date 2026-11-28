@@ -34,3 +34,13 @@ location /de/ {
 Existing files and directories are served directly. Unknown URLs return 404; do not replace `=404` with `/index.html`. Run `nginx -t` before reloading the configuration.
 
 Reference: [Nginx core module: error_page and try_files](https://nginx.org/en/docs/http/ngx_http_core_module.html#error_page).
+
+### Permanent redirects
+
+Copy `artifacts/redirects/nginx.conf` outside your document root and include it inside the same `server` block. Use the file generated for the deployment's base path.
+
+```nginx
+include /etc/nginx/sproutsite/redirects.conf;
+```
+
+Run `nginx -t` before reloading.
