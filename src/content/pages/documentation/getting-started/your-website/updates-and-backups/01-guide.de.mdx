@@ -16,6 +16,8 @@ import { Alert } from 'sproutsite/components';
     Funktionen von noch offenen Erweiterungen.
 </Alert>
 
+Führe das Update im Ordner deiner bestehenden Website aus. Dort aktualisierst du die Abhängigkeit `sproutsite`. Der Befehl `npm create sproutsite@latest` legt ein neues Projekt an. Wenn du Dateien aus einem neueren Starter vergleichen möchtest, erstelle dafür ein Referenzprojekt in einem separaten Ordner und übernimm gezielt die benötigten Änderungen.
+
 Sichere deine Website-Dateien und `package-lock.json` in der Versionsverwaltung oder einer getrennten Sicherung. Ein Repository hilft beim Prüfen von Änderungen; eine zusätzliche Kopie schützt vor dem Verlust dieses Repositorys. Sichere deine lokale `.env` getrennt und beschränke den Zugriff darauf.
 
 ### Verfügbare Versionen prüfen
@@ -33,9 +35,17 @@ Lies vor einem Update das [Sproutsite-Changelog](https://github.com/sproutsite/s
 
 `npm update sproutsite` aktualisiert innerhalb des Versionsbereichs deiner `package.json`. Für einen Wechsel außerhalb dieses Bereichs wählst und installierst du bewusst eine geprüfte Version, etwa mit `npm install sproutsite@<version>` nach Ersetzen des Platzhalters.
 
+Steht beispielsweise in deiner `package.json` der Bereich `~0.5.36`, ist das Patchrelease `0.5.38` mit `npm update sproutsite` erreichbar. Der Befehl aktualisiert die Lockdatei auf die Version, die npm innerhalb dieses Bereichs auswählt.
+
 Führe danach `npm run check`, `npm run build` und `npm run preview` aus. Kontrolliere Navigation, Inhalte, Bilder, Fehlerseiten und Sprachvarianten. Sichere Paketmanifest und Lockfile gemeinsam, sobald das Ergebnis funktioniert.
 
 Bei Problemen stellst du Inhalte, Manifest und Lockfile aus dem gesicherten funktionierenden Stand wieder her und führst `npm ci` aus. Halte das fehlgeschlagene Update getrennt, damit du es untersuchen kannst.
+
+### Funktionen in deiner bestehenden Website ergänzen
+
+- **Suche.** Wenn `src/search/integration.ts` vorhanden und die Suche im Header eingebunden ist, setze `search.enabled: true` in `src/content/site.yaml`. Führe `npm run build` aus und öffne die Lupe in `npm run preview`. Veröffentliche den vollständigen Ordner `dist/` mit dem Unterordner `pagefind/`. Bei älteren Projekten übernimmst du zuerst die Suchintegration, die Header-Anpassungen und die Abhängigkeiten aus einem Referenzstarter. [Suche einschalten oder nachrüsten](/dokumentation/einstieg/deine-website/suche/)
+- **Footerbild.** Ab Sproutsite 0.5.35, legst du dein Bild unter `public/images/` ab und setzt `footer.background-image` in der `site.yaml` auf den öffentlichen Pfad, etwa `/images/footer.webp`. In der URL entfällt `public`. [Footer-Hintergrund ändern](/dokumentation/einstieg/deine-website/header-und-footer/)
+- **Zweite Sprache.** Behalte die vorhandene Standardsprache und ihre URLs. Ergänze die zweite Sprache in `i18n.locales` und füge die Sprachkonfiguration, übersetzte Inhalte, die Astro-Route und die Sprachwahl hinzu. [Bestehende Website um eine Sprache ergänzen](/dokumentation/einstieg/deine-website/sprachen/)
 
 ### Automatisierung bleibt offen
 

@@ -16,6 +16,8 @@ import { Alert } from 'sproutsite/components';
     extensions that remain open.
 </Alert>
 
+Run the update in your existing website folder. `sproutsite` is the dependency you update. The `npm create sproutsite@latest` command creates a new project. Use a separate reference folder if you need to compare newer starter files, then copy only the changes you need.
+
 Keep your website files and `package-lock.json` under version control or in a separate backup. A repository is useful for reviewing changes, but an additional copy protects against losing that repository. Back up your local `.env` separately and restrict access to it.
 
 ### Inspect available versions
@@ -33,9 +35,17 @@ Read the [Sproutsite changelog](https://github.com/sproutsite/sproutsite/blob/ma
 
 `npm update sproutsite` updates within the version range recorded in your `package.json`. To move outside that range, choose and install a reviewed version deliberately, for example with `npm install sproutsite@<version>` after replacing the placeholder.
 
+For example, a project that specifies `~0.5.36` can move to patch release `0.5.38` with `npm update sproutsite`. The command updates the lockfile to the version it resolves within that range.
+
 Then run `npm run check`, `npm run build` and `npm run preview`. Check your navigation, content, images, error pages and language variants. Save the changed package manifest and lockfile together when the result works.
 
 If a problem appears, restore the previous content, manifest and lockfile from your saved working version, then run `npm ci`. Keep the failed update separate so you can investigate it.
+
+### Add features to your existing website
+
+- **Search.** If `src/search/integration.ts` already exists and your header has search wired in, set `search.enabled: true` in `src/content/site.yaml`. Run `npm run build`, then open the magnifying glass in `npm run preview`. Deploy the full `dist/` directory with its `pagefind/` bundle. For older projects, merge the search integration, header changes, and dependencies from a reference starter. [Activate or retrofit search](/documentation/getting-started/your-website/search/)
+- **Footer image.** With Sproutsite 0.5.35 or later, put your image in `public/images/` and set `footer.background-image` in `site.yaml` to its public path, for example `/images/footer.webp`. The `public` directory is omitted from the URL. [Change the footer background](/documentation/getting-started/your-website/header-and-footer/)
+- **Second language.** Keep the existing default language and its URLs. Add the second language to `i18n.locales`, then add its configuration, translated content, Astro route, and language switcher. [Add a language to an existing website](/documentation/getting-started/your-website/languages/)
 
 ### Automation is still open
 
