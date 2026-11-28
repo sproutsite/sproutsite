@@ -1,43 +1,62 @@
 ---
-tone:
-    odd: default
-    even: muted
+tone: muted
 fullWidth: true
 ---
 
-import checksImage from './_assets/checks.png';
+import contentImage from './_assets/content.png';
+import updatesImage from './getting-started/your-website/_assets/updates-and-backups.png';
+import searchImage from './getting-started/your-website/_assets/search.png';
 import deploymentImage from './_assets/deployment.png';
 import { Card, CardActions } from 'sproutsite/components';
 import { Column, Columns } from 'sproutsite/components';
-import { Eyebrow } from 'sproutsite/components';
 
-<Eyebrow>Von der Vorschau zum Webhosting</Eyebrow>
-
-## Prüfen und veröffentlichen
-
-Prüfe deine Änderungen vor der Veröffentlichung und übertrage anschließend die fertigen statischen Dateien auf dein Webhosting.
+## Du hast schon eine Website?
 
 <Columns>
-    <Column span={6}>
-        <Card image={checksImage} imageAlt="Dreidimensionale Website-Prüfung mit Fokusrahmen, Checkliste und einem Schild mit Häkchen.">
-            ### Prüfen
+    <Column span={3}>
+        <Card image={contentImage} imageAlt="Inhaltsdateien neben einer Konfigurationskachel">
+            ### Inhalte bearbeiten
 
-            Kontrolliere deine Änderungen in der Vorschau und lerne die verfügbaren Projektprüfungen kennen.
+            Finde die Dateien für Seiten, Texte und Navigation.
 
             <CardActions>
-                [Änderungen prüfen](/dokumentation/pruefen/)
+                [Inhalte bearbeiten](/dokumentation/inhalte/)
             </CardActions>
         </Card>
     </Column>
 
-    <Column span={6}>
-        <Card image={deploymentImage} imageAlt="Dreidimensionale Veröffentlichung einer Website mit Serverstapel, Dokument, Upload-Pfeil und Browserfenster.">
-            ### Deine Website veröffentlichen
+    <Column span={3}>
+        <Card image={updatesImage} imageAlt="Website-Versionen mit Archiv und Update-Pfeil">
+            ### Website aktualisieren
 
-            Baue deine Website und veröffentliche den Inhalt von `dist/`. Die Anleitung zeigt die Einrichtung mit Apache oder Nginx einschließlich Fehlerseiten.
+            Aktualisiere Sproutsite und ergänze Funktionen in deinem Projekt.
 
             <CardActions>
-                [Website veröffentlichen](/dokumentation/veroeffentlichen/)
+                [Zur Update-Anleitung](/dokumentation/einstieg/deine-website/updates-und-sicherung/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={3}>
+        <Card image={searchImage} imageAlt="Suchfeld mit Ergebniskarten">
+            ### Suche einrichten
+
+            Aktiviere den Suchdialog und erstelle den Index für deine Seiten.
+
+            <CardActions>
+                [Pagefind einrichten](/dokumentation/einstieg/deine-website/suche/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={3}>
+        <Card image={deploymentImage} imageAlt="Website beim Hochladen auf einen Server">
+            ### Veröffentlichen und URLs pflegen
+
+            Veröffentliche deinen Build und richte Weiterleitungen für verschobene Seiten ein.
+
+            <CardActions>
+                [Veröffentlichen](/dokumentation/veroeffentlichen/)
             </CardActions>
         </Card>
     </Column>

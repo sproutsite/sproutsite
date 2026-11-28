@@ -1,43 +1,62 @@
 ---
-tone:
-    odd: default
-    even: muted
+tone: muted
 fullWidth: true
 ---
 
-import checksImage from './_assets/checks.png';
+import contentImage from './_assets/content.png';
+import updatesImage from './getting-started/your-website/_assets/updates-and-backups.png';
+import searchImage from './getting-started/your-website/_assets/search.png';
 import deploymentImage from './_assets/deployment.png';
 import { Card, CardActions } from 'sproutsite/components';
 import { Column, Columns } from 'sproutsite/components';
-import { Eyebrow } from 'sproutsite/components';
 
-<Eyebrow>From preview to your web host</Eyebrow>
-
-## Check and publish
-
-Review your changes before putting them online, then publish the finished static files on your web host.
+## Already have a website?
 
 <Columns>
-    <Column span={6}>
-        <Card image={checksImage} imageAlt="Three-dimensional website review with a focus outline, checklist and shield bearing a check mark.">
-            ### Checks
+    <Column span={3}>
+        <Card image={contentImage} imageAlt="Content files and a configuration tile">
+            ### Edit content
 
-            Review changes in the preview and learn which project checks to run for your work.
+            Find the files for pages, text, and navigation.
 
             <CardActions>
-                [Review your changes](/documentation/checks/)
+                [Edit your content](/documentation/content/)
             </CardActions>
         </Card>
     </Column>
 
-    <Column span={6}>
-        <Card image={deploymentImage} imageAlt="Three-dimensional website publishing illustration with a server stack, document, upload arrow and browser window.">
-            ### Publish your website
+    <Column span={3}>
+        <Card image={updatesImage} imageAlt="Website versions with an archive and an update arrow">
+            ### Update your website
 
-            Build your site and deploy the contents of `dist/`. Find Apache and Nginx configuration examples, including error pages.
+            Update Sproutsite and add features to an existing project.
 
             <CardActions>
-                [Publish your website](/documentation/deployment/)
+                [Follow the update guide](/documentation/getting-started/your-website/updates-and-backups/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={3}>
+        <Card image={searchImage} imageAlt="Search field and result cards">
+            ### Set up search
+
+            Enable the search dialog and build the index for your pages.
+
+            <CardActions>
+                [Set up Pagefind](/documentation/getting-started/your-website/search/)
+            </CardActions>
+        </Card>
+    </Column>
+
+    <Column span={3}>
+        <Card image={deploymentImage} imageAlt="A website being uploaded to a server">
+            ### Publish and manage URLs
+
+            Deploy your build and set up redirects for moved pages.
+
+            <CardActions>
+                [Publish](/documentation/deployment/)
             </CardActions>
         </Card>
     </Column>
