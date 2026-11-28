@@ -7,6 +7,17 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.5.38] - 2026-11-28
+
+### Added
+
+- Added optional Pagefind search to the shared starter for all four language variants. Enable it with `search.enabled: true` to show the search dialog and generate a language-specific index in `dist/pagefind/` during the build.
+- Extended starter verification to check the search controls, localized indexes, and disabled builds.
+
+### Fixed
+
+- Serve the built Pagefind index in development when the site uses a subpath such as `/demo/`.
+
 ## [0.5.37] - 2026-11-28
 
 ### Added
